@@ -177,7 +177,9 @@ JSON with a published schema and `uf ops` for every param. No project, no build,
 
   * Your video is built from React components you already have.
   * You need Remotion's embeddable web Player.
-  * You want the largest community: 74,000 GitHub stars.
+  * You want a mature React ecosystem: in development since 2020, with about 75,000 GitHub stars.
+
+If neither fits, the roundup of [open-source Remotion alternatives](<https://ultrafast.mov/alternatives/remotion/>) covers seven more tools and when each one is the better choice.
 
 Questions
 

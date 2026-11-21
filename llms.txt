@@ -9,6 +9,7 @@ Facts an agent needs:
 - The CLI is `ultrafast`, or `uf` for short. Install: `curl -fsSL https://ultrafast.mov/install.sh | sh` (macOS on Apple silicon and Linux x86_64, prebuilt: unpacks into ~/.ultrafast and links `ultrafast` and `uf` into ~/.local/bin), `brew install ultrafastmov/tap/ultrafast`, `cargo install ultrafast` (builds from source), prebuilt archives on https://github.com/ultrafastmov/ultrafast/releases, or the Docker image `ghcr.io/ultrafastmov/ultrafast`. Python SDK: `pip install ultrafastmov`. TypeScript SDK: `npm i ultrafastmov`. The SDKs talk to a `uf serve` you run; set `ULTRAFAST_BASE_URL`.
 - A video is one JSON document: `{"version": 1, "format": {...}, "nodes": {...}, "output": "<node id>"}`. `uf ops` prints every op (70) with its params as JSON.
 - The loop: `uf new` → `uf check` (finds mistakes without rendering) → `uf sheet` (contact sheet) → `uf review` (unreadable, clipped or too-brief text, seizure-risk flashing) → `uf export`.
+- What it takes in and puts out: Lottie animations (`lottie` node, or `uf import-lottie` to edit them as paths and keyframes); SVG files (`svg` node or `uf import-svg`, static SVG); video and images; word-timed transcripts as animated captions (`captions` node; `uf voiceover` speaks a script with word times); one template rendered per row of a CSV or JSON file (`uf batch doc.json --data rows.csv`). Exports: H.264, HEVC and AV1 MP4, ProRes up to 4444 XQ, transparent video (`--alpha`: ProRes 4444 or VP9 WebM), GIF, PNG and EXR sequences, sound alone; any size and frame rate. `uf estimate` reports render time before you export. The document format is a JSON Schema at https://ultrafast.mov/schema/v1.json (`uf schema`).
 - MCP: local `uf mcp` (stdio, 20 tools), or remote over Streamable HTTP at `/mcp` on your own `ultrafast serve`, with its API key as a bearer token.
 - Skill: `npx skills add ultrafastmov/ultrafast` (the document format and the check, look, review, export loop). Claude Code plugin (the skill and `uf mcp`): `claude plugin marketplace add ultrafastmov/ultrafast`, then `claude plugin install ultrafast@ultrafast`.
 - HTTP: `uf serve` (or the Docker image's `serve`) answers `POST /v1/render`, `/v1/frame`, `/v1/sheet`, `/v1/check`, `/v1/review`, `/v1/estimate` and `/v1/uploads` on one machine with a GPU, with `Authorization: Bearer $ULTRAFAST_API_KEY`.
@@ -38,6 +39,7 @@ Facts an agent needs:
 - [ultrafast vs Remotion vs HyperFrames](https://ultrafast.mov/compare/index.md): ultrafast, Remotion and HyperFrames side by side
 - [ultrafast vs Remotion](https://ultrafast.mov/compare/remotion/index.md): ultrafast vs Remotion
 - [ultrafast vs HyperFrames](https://ultrafast.mov/compare/hyperframes/index.md): ultrafast vs HyperFrames
+- [Open source Remotion alternatives, compared](https://ultrafast.mov/alternatives/remotion/index.md): eight open-source tools with their licences, renderers, agent tooling and release dates, and when to choose each
 
 ## Optional
 
