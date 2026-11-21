@@ -157,15 +157,26 @@ img, video { max-width: 100%; }
 .bill > .deboss, .poster > .deboss { position: relative; inset: auto; }
 .set { display: flex; flex-direction: column; align-items: center; }
 .ln { white-space: nowrap; line-height: 1; }
-.l1 { font-family: "Archivo Black", sans-serif; letter-spacing: -.005em; }
-.rule2 { width: 100%; height: 9px; border-top: 3px solid; border-bottom: 3px solid; }
-.l2 { font-family: var(--wood); font-weight: 900; letter-spacing: -.01em; }
-.l2 .w { display: inline-block; }
-.l3 { display: flex; align-items: center; gap: 22px; width: 100%; font-family: "Archivo Black", sans-serif; }
-.l3 .flank { flex: 1; position: relative; height: 18px; border-top: 5px solid; border-bottom: 5px solid; }
-.l3 .flank .st { position: absolute; left: 50%; top: 50%; width: 38px; height: 38px; translate: -50% -50%; }
+/* SHOT ON THE / GPU / a strip of film: wood type, a screened blue plate printed off-register behind the pink */
+.s1 { display: flex; align-items: center; gap: .32em; width: 100%; font-family: "Archivo Black", sans-serif; letter-spacing: .04em; }
+.s1 .flank { flex: 1; position: relative; height: .2em; border-top: .055em solid; border-bottom: .055em solid; }
+.s1 .flank .st { position: absolute; left: 50%; top: 50%; width: .46em; height: .46em; translate: -50% -50%; }
+.s2 { position: relative; font-family: var(--wood); font-weight: 900; line-height: .78; letter-spacing: -.01em; }
+.s2 .w { display: inline-block; }
+.s2 .gs { position: absolute; left: 0; top: 0; translate: .045em .05em;
+  -webkit-mask: radial-gradient(circle at center, #000 0 46%, transparent 52%) 0 0 / .052em .052em;
+          mask: radial-gradient(circle at center, #000 0 46%, transparent 52%) 0 0 / .052em .052em; }
+/* the blue plate is cut away under the letters, so the pink prints on paper */
+.s2 .gk { position: absolute; left: 0; top: 0; }
+.ink .s2 .gk { color: var(--cotton); }
+.deboss .gs, .deboss .gk { visibility: hidden; }
+.strip { --sh: 40px; width: 100%; height: var(--sh); background-color: currentColor;
+  background-image: repeating-linear-gradient(90deg, var(--cotton) 0 calc(var(--sh) * .2), transparent 0 calc(var(--sh) * .42)),
+                    repeating-linear-gradient(90deg, var(--cotton) 0 calc(var(--sh) * .2), transparent 0 calc(var(--sh) * .42));
+  background-size: 100% calc(var(--sh) * .18); background-repeat: no-repeat;
+  background-position: calc(var(--sh) * .12) calc(var(--sh) * .13), calc(var(--sh) * .12) calc(var(--sh) * .69); }
 .deboss { color: rgba(96, 74, 44, .075); text-shadow: 0 1.5px 0 rgba(255, 255, 255, .85), 0 -1px 0 rgba(70, 50, 25, .2); }
-.deboss .rule2, .deboss .flank { opacity: .5; }
+.deboss .flank, .deboss .strip { opacity: .5; }
 .deboss .st { opacity: .35; }
 .reveal { position: absolute; inset: 0; overflow: hidden; mix-blend-mode: multiply; will-change: transform; visibility: hidden; }
 .armed .reveal { visibility: visible; }
@@ -727,7 +738,8 @@ html:has(.lightbox[open]) { overflow: hidden; }
   .chip.big { font-size: 15px; padding: 0 14px; }
 }
 
-/* the install line is long: on narrow screens it wraps inside its chip */
+/* the install line is long: smaller where the hero column narrows, then it wraps inside its chip */
+@media (max-width: 1240px) { .herocopy .chip.big { font-size: 15px; padding: 0 16px; } }
 @media (max-width: 600px) {
   .chip.big { height: auto; min-height: 52px; padding: 10px 14px; font-size: 14px; line-height: 1.35; white-space: normal; text-align: left; align-items: flex-start; }
   .chip.big code { overflow-wrap: normal; }

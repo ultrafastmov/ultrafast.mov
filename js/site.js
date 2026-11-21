@@ -69,7 +69,7 @@ function forme(band, plates) {
   const deb = $('.deboss', band), host = deb.parentElement;
   const F = { band, deb, host, plates: {}, H: 1 };
   for (const p of plates) {
-    const rv = document.createElement('div'); rv.className = 'reveal';
+    const rv = document.createElement('div'); rv.className = `reveal r-${p}`;
     const ly = deb.cloneNode(true); ly.className = `layer ink ${p}`;
     rv.appendChild(ly); host.appendChild(rv);
     const P = { rv, ly };
@@ -136,23 +136,17 @@ if (bill) {
   layouts.push(() => {
     const sets = $$('.set', hero), set = $('.set', H.deb);
     const W = set.getBoundingClientRect().width;
-    // sizes in proportion to the measure, as the engine poster sets them
-    const s1 = 0.093 * W, s2 = 0.21 * W, s3 = 0.118 * W;
+    // GPU takes the whole measure: widest on the width axis, then sized to fit
+    const word = $('.s2 .g', set);
+    for (const s of sets) $('.s2', s).style.fontSize = (0.3 * W) + 'px';
+    let wd = wdthFor(word, W), fs2 = 0.3 * W;
+    if (wd > 149) { wd = 150; setWdth([word], wd); fs2 = 0.3 * W * W / word.getBoundingClientRect().width; }
+    const s1 = 0.082 * W, sh = Math.max(22, 0.066 * W), g = W * 0.016;
     for (const s of sets) {
-      $('.l1', s).style.fontSize = s1 + 'px';
-      $('.l2', s).style.fontSize = s2 + 'px';
-      $('.l3', s).style.fontSize = s3 + 'px';
-    }
-    const fs1 = s1 * W / $('.l1', set).getBoundingClientRect().width;
-    const word = $('.l2 .w', set);
-    let wd = wdthFor(word, W), fs2 = s2;
-    if (wd > 149) { fs2 = s2 * W / word.getBoundingClientRect().width; wd = 150; }
-    const g = W * 0.016;
-    for (const s of sets) {
-      $('.l1', s).style.fontSize = fs1 + 'px';
-      $('.l2', s).style.fontSize = fs2 + 'px';
-      $('.rule2', s).style.margin = `${g * 0.9}px 0 ${g * 1.2}px`;
-      $('.l3', s).style.margin = `${g * 0.6}px 0 0`;
+      $('.s1', s).style.fontSize = s1 + 'px';
+      $('.s2', s).style.fontSize = fs2 + 'px';
+      $('.s2', s).style.margin = `${g * 1.4}px 0 ${g * 1.6}px`;
+      $('.strip', s).style.setProperty('--sh', sh + 'px');
     }
     setWdth(H.words, wd);
     arm(H);

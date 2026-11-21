@@ -1,4 +1,4 @@
-# ultrafast · The video engine agents can see
+# ultrafast · Shot on the GPU
 
 > Open-source GPU video engine. Videos are JSON your agent writes, checks and renders at hundreds of frames a second. Install it and connect Claude Code, Codex, Cursor or Gemini CLI.
 
@@ -6,7 +6,7 @@ URL: https://ultrafast.mov/
 
 Open source · Apache-2.0 or MIT
 
-# ultrafast: the video engine agents can see
+# ultrafast: video shot on the GPU
 
 Shaders, 3D, motion type and real camera optics, written by your agent in up to [80% fewer tokens](<https://ultrafast.mov/compare/#tokens>) and rendered at GPU speed.
 
