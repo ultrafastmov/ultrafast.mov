@@ -152,7 +152,7 @@ Podcasters, interviewers, conference teams
 
 Pull the best 25 seconds from this episode. Captions on, vertical, our colours.
 
-26 s · 1080×1920 · captions timed to each word, his own voice
+27.5 s · 1080×1920 · cut out of the station on every frame, his own voice
 
 For builders
 

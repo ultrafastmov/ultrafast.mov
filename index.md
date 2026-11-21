@@ -102,7 +102,7 @@ Cut the Apollo 11 and Artemis I launches together on the 1969 countdown. Make it
 
 Pull the best 25 seconds from this episode. Captions on, vertical, our colours.
 
-9:16 · 1080×1920 · 26 s · exported in 6.00 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/podcast.json>)
+9:16 · 1080×1920 · 27.5 s · exported in 4.07 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/podcast.json>)
 
 How it works
 

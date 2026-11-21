@@ -28,9 +28,9 @@ Apollo 11 and Artemis I lift off in alternating shots, cut to the 1969 launch co
 
 ### Podcast clip
 
-A vertical clip of NASA astronaut Mark Vande Hei aboard the space station, with word-timed captions, a waveform driven by his voice, and Earth cut in on the words that name it.
+A vertical clip of NASA astronaut Mark Vande Hei aboard the space station, cut out of the station on every frame and set over Earth's limb, cloud tops and stars, with four words set huge behind him and captions timed to his voice.
 
-9:16 · 1080×1920 · 26 s · exported in 6.00 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/podcast.json>)
+9:16 · 1080×1920 · 27.5 s · exported in 4.07 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/podcast.json>)
 
 Data
 

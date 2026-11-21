@@ -115,28 +115,26 @@
    "id": "podcast",
    "section": "footage",
    "title": "Podcast clip",
-   "description": "A vertical clip of NASA astronaut Mark Vande Hei aboard the space station, with word-timed captions, a waveform driven by his voice, and Earth cut in on the words that name it.",
+   "description": "A vertical clip of NASA astronaut Mark Vande Hei aboard the space station, cut out of the station on every frame and set over Earth's limb, cloud tops and stars, with four words set huge behind him and captions timed to his voice.",
    "width": 1080,
    "height": 1920,
    "aspect": "9:16",
    "fps": 30,
-   "duration": 26.0,
-   "export_seconds": 6.0,
-   "export_frames": 780,
+   "duration": 27.5,
+   "export_seconds": 4.07,
+   "export_frames": 825,
    "review_findings": 0,
    "ops_used": [
     "adjust",
     "audio",
     "blend",
-    "bloom",
     "blur",
-    "crop",
+    "drop_shadow",
     "gradient",
     "grain",
     "lut",
     "mask",
     "mix",
-    "noise",
     "opacity",
     "over",
     "path",
@@ -144,17 +142,25 @@
     "shape",
     "solid",
     "text",
-    "video",
-    "vignette"
+    "transform",
+    "video"
    ],
    "footage": [
     {
-     "clip": "podcast_earth_dusk.mp4",
+     "clip": "podcast_orbit_clouds.mp4",
      "nasa_id": "jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_ 2021_210422-4KMP4"
     },
     {
-     "clip": "podcast_earth_limb.mp4",
+     "clip": "podcast_orbit_home.mp4",
      "nasa_id": "jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_ 2021_210422-4KMP4"
+    },
+    {
+     "clip": "podcast_orbit_limb.mp4",
+     "nasa_id": "jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_ 2021_210422-4KMP4"
+    },
+    {
+     "clip": "podcast_vande_hei_matte.mp4",
+     "nasa_id": "jsc2022m000083_NTV-VideoFile_Mark_Vande_Hei_Social_Media_Questions_220314-MP4"
     },
     {
      "clip": "podcast_vande_hei_tight.mp4",
@@ -167,31 +173,31 @@
    "files": {
     "av1": {
      "url": "/media/examples/podcast.av1.mp4",
-     "bytes": 3055038
+     "bytes": 3469893
     },
     "hevc": {
      "url": "/media/examples/podcast.hevc.mp4",
-     "bytes": 3135561
+     "bytes": 3516739
     },
     "mp4": {
      "url": "/media/examples/podcast.mp4",
-     "bytes": 6528783
+     "bytes": 5925146
     },
     "full_av1": {
      "url": "/media/examples/podcast.full.av1.mp4",
-     "bytes": 4949687
+     "bytes": 6029700
     },
     "full_hevc": {
      "url": "/media/examples/podcast.full.hevc.mp4",
-     "bytes": 5717585
+     "bytes": 6851469
     },
     "poster": {
      "url": "/media/examples/podcast.jpg",
-     "bytes": 96081
+     "bytes": 70129
     },
     "og": {
      "url": "/media/examples/podcast.og.jpg",
-     "bytes": 80622
+     "bytes": 40369
     }
    }
   },
