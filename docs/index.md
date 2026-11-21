@@ -39,7 +39,13 @@ Install it, make your first video, then hand the loop to your agent.
 
 ## Install
 
-One binary, `ultrafast`, with `uf` as its short name. Pick one:
+One binary, `ultrafast`, with `uf` as its short name. On macOS (Apple silicon) or Linux x86_64:
+
+```
+curl -fsSL https://ultrafast.mov/install.sh | sh
+``` 
+
+[The script](<https://ultrafast.mov/install.sh>) downloads the prebuilt release for your machine from [GitHub releases](<https://github.com/ultrafastmov/ultrafast/releases>), checks its SHA-256, unpacks it into `~/.ultrafast` and links `ultrafast` and `uf` into `~/.local/bin`. Or pick one of these:
 
 ```
 brew install ultrafastmov/tap/ultrafast    # macOS and Linux, prebuilt
@@ -47,7 +53,9 @@ cargo install ultrafast                    # from crates.io, Rust 1.91 or later
 docker run --gpus all ghcr.io/ultrafastmov/ultrafast:latest info
 ``` 
 
-Or download a prebuilt archive for macOS (Apple silicon) or Linux x86_64 from [GitHub releases](<https://github.com/ultrafastmov/ultrafast/releases>). It renders with **Metal** on macOS and **Vulkan** on Linux, and on Windows through WSL2 ([WINDOWS.md](<https://github.com/ultrafastmov/ultrafast/blob/main/docs/WINDOWS.md>)). Exports on Vulkan use ffmpeg, and on Linux voiceover and OCR use eSpeak NG and Tesseract. The Docker image includes all of them; the prebuilt binaries include everything else. No GPU? [ultrafast Cloud](<https://ultrafast.mov/cloud/>) is coming soon.
+Or tell your agent “Use ultrafast.mov”: it reads [llms.txt](<https://ultrafast.mov/llms.txt>), installs ultrafast and works from there.
+
+It renders with **Metal** on macOS and **Vulkan** on Linux, and on Windows through WSL2 ([WINDOWS.md](<https://github.com/ultrafastmov/ultrafast/blob/main/docs/WINDOWS.md>)). Exports on Vulkan use ffmpeg, and on Linux voiceover and OCR use eSpeak NG and Tesseract. The Docker image includes all of them; the prebuilt binaries include everything else. No GPU? [ultrafast Cloud](<https://ultrafast.mov/cloud/>) is coming soon.
 
 ```
 $ uf info

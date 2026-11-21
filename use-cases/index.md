@@ -201,6 +201,6 @@ Yes. The video is a JSON document file, so ask for changes any time: new words, 
 
 Free and open source. Install it, connect your agent, and ask.
 
-`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
 Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).

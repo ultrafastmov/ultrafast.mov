@@ -163,6 +163,6 @@ The documents read footage and data from local files. To render one, download th
 
 Install ultrafast, connect your agent, and give it a brief like one of these.
 
-`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
 Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).

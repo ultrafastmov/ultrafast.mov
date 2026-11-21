@@ -214,6 +214,6 @@ For anyone who can describe a video. They render on ultrafast Cloud, so they ope
 
 Every integration renders the same documents with the same engine.
 
-`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
 Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).

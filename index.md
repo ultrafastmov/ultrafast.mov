@@ -10,7 +10,11 @@ Open source · Apache-2.0 or MIT
 
 Videos are JSON your agent writes, checks and renders on the GPU.
 
-`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+macOS (Apple silicon) and Linux. [Other ways to install](<https://ultrafast.mov/docs/#install>)
+
+Or tell your agent `“Use ultrafast.mov”`
 
 clay.json · excerpt
 
@@ -245,7 +249,7 @@ in the box
 costs
     nothing, at any scale
 
-`cargo install ultrafast`
+`curl -fsSL https://ultrafast.mov/install.sh | sh`
 
 docket Bultrafast Cloud · coming soon
 
@@ -302,8 +306,8 @@ Is there a hosted version?
 
 Not yet. ultrafast Cloud will run the same engine on our GPUs with one API key, and the ChatGPT app and the Claude connector will run on it. [Join the waitlist](<https://ultrafast.mov/cloud/>) and we'll email you when it opens.
 
-## cargo install ultrafast
+## curl -fsSL https://ultrafast.mov/install.sh | sh
 
-`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
 Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).

@@ -410,7 +410,9 @@ if (poster) {
   layouts.push(() => {
     const sets = $$('.fset', fin), set = $('.fset', FN.deb);
     const W = set.getBoundingClientRect().width;
-    for (const s of sets) { $('.f1', s).style.fontSize = (W * 0.13) + 'px'; $('.f2', s).style.fontSize = (W * 0.25) + 'px'; }
+    // the big word is set for nine letters; a longer one gets a smaller size, then widens to fill
+    const big = W * 0.25 * Math.min(1, 9 / $('.f2 .w', set).textContent.trim().length);
+    for (const s of sets) { $('.f1', s).style.fontSize = (W * 0.13) + 'px'; $('.f2', s).style.fontSize = big + 'px'; }
     const k = W / $('.f1', set).getBoundingClientRect().width;
     const wd = wdthFor($('.f2 .w', set), W);
     for (const s of sets) $('.f1', s).style.fontSize = (W * 0.13 * Math.min(k, 1.4) * 0.98) + 'px';

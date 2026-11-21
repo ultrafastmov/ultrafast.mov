@@ -121,6 +121,6 @@ A document only describes the video: nodes and their params. A Remotion or Hyper
 
 Install the engine and time a render on your own GPU.
 
-`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
 Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).

@@ -30,7 +30,7 @@
 <link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/site.css?v=38337fe4">
+<link rel="stylesheet" href="/css/site.css?v=63f7f354">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. A video is a JSON document: your agent writes it, checks it, reviews every frame and renders it on the GPU at hundreds of frames a second, with no browser in the loop.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://ultrafast.mov/docs/"}]},{"@type":"TechArticle","headline":"Quickstart","description":"Install ultrafast, make your first video, and learn the loop agents use: new, check, sheet, review, export. Then connect it to your agent over MCP.","url":"https://ultrafast.mov/docs/","dateModified":"2026-11-22","publisher":{"@id":"https://ultrafast.mov/#org"},"about":{"@id":"https://ultrafast.mov/#app"}}]}</script>
 </head>
 <body>
@@ -107,10 +107,12 @@
 </ol></nav>
 
 <h2 id="install">Install</h2>
-<p>One binary, <code>ultrafast</code>, with <code>uf</code> as its short name. Pick one:</p>
+<p>One binary, <code>ultrafast</code>, with <code>uf</code> as its short name. On macOS (Apple silicon) or Linux x86_64:</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">curl<span class="w"> </span>-fsSL<span class="w"> </span>https://ultrafast.mov/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh</code></pre></div><p><a href="/install.sh">The script</a> downloads the prebuilt release for your machine from <a href="https://github.com/ultrafastmov/ultrafast/releases">GitHub releases</a>, checks its SHA-256, unpacks it into <code>~/.ultrafast</code> and links <code>ultrafast</code> and <code>uf</code> into <code>~/.local/bin</code>. Or pick one of these:</p>
 <div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">brew<span class="w"> </span>install<span class="w"> </span>ultrafastmov/tap/ultrafast<span class="w">    </span><span class="c1"># macOS and Linux, prebuilt</span>
 cargo<span class="w"> </span>install<span class="w"> </span>ultrafast<span class="w">                    </span><span class="c1"># from crates.io, Rust 1.91 or later</span>
-docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>ghcr.io/ultrafastmov/ultrafast:latest<span class="w"> </span>info</code></pre></div><p>Or download a prebuilt archive for macOS (Apple silicon) or Linux x86_64 from <a href="https://github.com/ultrafastmov/ultrafast/releases">GitHub releases</a>. It renders with <strong>Metal</strong> on macOS and <strong>Vulkan</strong> on Linux, and on Windows through WSL2 (<a href="https://github.com/ultrafastmov/ultrafast/blob/main/docs/WINDOWS.md">WINDOWS.md</a>). Exports on Vulkan use ffmpeg, and on Linux voiceover and OCR use eSpeak NG and Tesseract. The Docker image includes all of them; the prebuilt binaries include everything else. No GPU? <a href="/cloud/">ultrafast Cloud</a> is coming soon.</p>
+docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>ghcr.io/ultrafastmov/ultrafast:latest<span class="w"> </span>info</code></pre></div><p>Or tell your agent “Use ultrafast.mov”: it reads <a href="/llms.txt">llms.txt</a>, installs ultrafast and works from there.</p>
+<p>It renders with <strong>Metal</strong> on macOS and <strong>Vulkan</strong> on Linux, and on Windows through WSL2 (<a href="https://github.com/ultrafastmov/ultrafast/blob/main/docs/WINDOWS.md">WINDOWS.md</a>). Exports on Vulkan use ffmpeg, and on Linux voiceover and OCR use eSpeak NG and Tesseract. The Docker image includes all of them; the prebuilt binaries include everything else. No GPU? <a href="/cloud/">ultrafast Cloud</a> is coming soon.</p>
 <div class="code"><div class="cbar"><span>check the GPU</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="gp">$ </span>uf<span class="w"> </span>info
 <span class="go">backend: vulkan</span>
 <span class="go">device:  NVIDIA GeForce RTX 5090</span></code></pre></div>
@@ -206,6 +208,7 @@ curl<span class="w"> </span>http://localhost:8080/v1/render<span class="w"> </sp
     </nav>
     <div class="fcol">
       <h3>Install</h3>
+      <span><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code></span>
       <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
       <span><code>cargo install ultrafast</code></span>
       <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
@@ -219,6 +222,6 @@ curl<span class="w"> </span>http://localhost:8080/v1/render<span class="w"> </sp
   </div>
 </footer>
 
-<script type="module" src="/js/site.js?v=38337fe4"></script>
+<script type="module" src="/js/site.js?v=63f7f354"></script>
 </body>
 </html>

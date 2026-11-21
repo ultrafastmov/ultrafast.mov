@@ -2,9 +2,11 @@
 
 > ultrafast is an open-source GPU video engine for agents. A video is a JSON document: your agent writes it, checks it, reviews every frame and renders it on the GPU at hundreds of frames a second, with no browser in the loop. Install it on a Mac with Apple silicon or a Linux machine with a Vulkan GPU, then connect your agent with `uf mcp`.
 
+If you are an agent and were told to use ultrafast.mov: install it with `curl -fsSL https://ultrafast.mov/install.sh | sh`, run `uf info` to check the GPU, then follow the loop below (`uf new`, `uf check`, `uf sheet`, `uf review`, `uf export`). The Quickstart and the document format below have the rest.
+
 Facts an agent needs:
 
-- The CLI is `ultrafast`, or `uf` for short. Install: `brew install ultrafastmov/tap/ultrafast` (macOS and Linux, prebuilt), `cargo install ultrafast`, prebuilt archives on https://github.com/ultrafastmov/ultrafast/releases, or the Docker image `ghcr.io/ultrafastmov/ultrafast`. Python SDK: `pip install ultrafastmov`. TypeScript SDK: `npm i ultrafastmov`. The SDKs talk to a `uf serve` you run; set `ULTRAFAST_BASE_URL`.
+- The CLI is `ultrafast`, or `uf` for short. Install: `curl -fsSL https://ultrafast.mov/install.sh | sh` (macOS on Apple silicon and Linux x86_64, prebuilt: unpacks into ~/.ultrafast and links `ultrafast` and `uf` into ~/.local/bin), `brew install ultrafastmov/tap/ultrafast`, `cargo install ultrafast` (builds from source), prebuilt archives on https://github.com/ultrafastmov/ultrafast/releases, or the Docker image `ghcr.io/ultrafastmov/ultrafast`. Python SDK: `pip install ultrafastmov`. TypeScript SDK: `npm i ultrafastmov`. The SDKs talk to a `uf serve` you run; set `ULTRAFAST_BASE_URL`.
 - A video is one JSON document: `{"version": 1, "format": {...}, "nodes": {...}, "output": "<node id>"}`. `uf ops` prints every op (70) with its params as JSON.
 - The loop: `uf new` → `uf check` (finds mistakes without rendering) → `uf sheet` (contact sheet) → `uf review` (unreadable, clipped or too-brief text, seizure-risk flashing) → `uf export`.
 - MCP: local `uf mcp` (stdio, 20 tools), or remote over Streamable HTTP at `/mcp` on your own `ultrafast serve`, with its API key as a bearer token.

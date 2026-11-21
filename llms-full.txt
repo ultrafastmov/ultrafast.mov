@@ -14,7 +14,11 @@ Open source · Apache-2.0 or MIT
 
 Videos are JSON your agent writes, checks and renders on the GPU.
 
-`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+macOS (Apple silicon) and Linux. [Other ways to install](<https://ultrafast.mov/docs/#install>)
+
+Or tell your agent `“Use ultrafast.mov”`
 
 clay.json · excerpt
 
@@ -249,7 +253,7 @@ in the box
 costs
     nothing, at any scale
 
-`cargo install ultrafast`
+`curl -fsSL https://ultrafast.mov/install.sh | sh`
 
 docket Bultrafast Cloud · coming soon
 
@@ -306,9 +310,9 @@ Is there a hosted version?
 
 Not yet. ultrafast Cloud will run the same engine on our GPUs with one API key, and the ChatGPT app and the Claude connector will run on it. [Join the waitlist](<https://ultrafast.mov/cloud/>) and we'll email you when it opens.
 
-## cargo install ultrafast
+## curl -fsSL https://ultrafast.mov/install.sh | sh
 
-`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
 Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
 
@@ -356,7 +360,13 @@ Install it, make your first video, then hand the loop to your agent.
 
 ## Install
 
-One binary, `ultrafast`, with `uf` as its short name. Pick one:
+One binary, `ultrafast`, with `uf` as its short name. On macOS (Apple silicon) or Linux x86_64:
+
+```
+curl -fsSL https://ultrafast.mov/install.sh | sh
+``` 
+
+[The script](<https://ultrafast.mov/install.sh>) downloads the prebuilt release for your machine from [GitHub releases](<https://github.com/ultrafastmov/ultrafast/releases>), checks its SHA-256, unpacks it into `~/.ultrafast` and links `ultrafast` and `uf` into `~/.local/bin`. Or pick one of these:
 
 ```
 brew install ultrafastmov/tap/ultrafast    # macOS and Linux, prebuilt
@@ -364,7 +374,9 @@ cargo install ultrafast                    # from crates.io, Rust 1.91 or later
 docker run --gpus all ghcr.io/ultrafastmov/ultrafast:latest info
 ``` 
 
-Or download a prebuilt archive for macOS (Apple silicon) or Linux x86_64 from [GitHub releases](<https://github.com/ultrafastmov/ultrafast/releases>). It renders with **Metal** on macOS and **Vulkan** on Linux, and on Windows through WSL2 ([WINDOWS.md](<https://github.com/ultrafastmov/ultrafast/blob/main/docs/WINDOWS.md>)). Exports on Vulkan use ffmpeg, and on Linux voiceover and OCR use eSpeak NG and Tesseract. The Docker image includes all of them; the prebuilt binaries include everything else. No GPU? [ultrafast Cloud](<https://ultrafast.mov/cloud/>) is coming soon.
+Or tell your agent “Use ultrafast.mov”: it reads [llms.txt](<https://ultrafast.mov/llms.txt>), installs ultrafast and works from there.
+
+It renders with **Metal** on macOS and **Vulkan** on Linux, and on Windows through WSL2 ([WINDOWS.md](<https://github.com/ultrafastmov/ultrafast/blob/main/docs/WINDOWS.md>)). Exports on Vulkan use ffmpeg, and on Linux voiceover and OCR use eSpeak NG and Tesseract. The Docker image includes all of them; the prebuilt binaries include everything else. No GPU? [ultrafast Cloud](<https://ultrafast.mov/cloud/>) is coming soon.
 
 ```
 $ uf info
@@ -1172,7 +1184,7 @@ Yes. The video is a JSON document file, so ask for changes any time: new words, 
 
 Free and open source. Install it, connect your agent, and ask.
 
-`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
 Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
 
@@ -1395,7 +1407,7 @@ For anyone who can describe a video. They render on ultrafast Cloud, so they ope
 
 Every integration renders the same documents with the same engine.
 
-`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
 Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
 
@@ -1472,7 +1484,7 @@ Available today
 
 Everything Cloud will run is open source. `uf serve` gives you the HTTP API and remote MCP on one machine with a GPU, with one API key and files on local disk.
 
-`cargo install ultrafast`[HTTP API docs](<https://ultrafast.mov/docs/api/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh`[HTTP API docs](<https://ultrafast.mov/docs/api/>)
 
 ```
 docker run --gpus all -p 8080:8080 -v ultrafast:/data \
@@ -1643,7 +1655,7 @@ A document only describes the video: nodes and their params. A Remotion or Hyper
 
 Install the engine and time a render on your own GPU.
 
-`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
 Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
 
@@ -1861,7 +1873,7 @@ Remotion facts from its docs, checked 21 November 2026: [pricing](<https://www.r
 
 Install the engine and time a render on your own GPU.
 
-`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
 Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
 
@@ -2050,7 +2062,7 @@ HyperFrames facts from its docs, checked 21 November 2026: [repository](<https:/
 
 Install the engine and time a render on your own GPU.
 
-`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
 Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
 
@@ -2222,7 +2234,7 @@ The documents read footage and data from local files. To render one, download th
 
 Install ultrafast, connect your agent, and give it a brief like one of these.
 
-`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
 Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
 

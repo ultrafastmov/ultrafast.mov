@@ -68,7 +68,7 @@ Available today
 
 Everything Cloud will run is open source. `uf serve` gives you the HTTP API and remote MCP on one machine with a GPU, with one API key and files on local disk.
 
-`cargo install ultrafast`[HTTP API docs](<https://ultrafast.mov/docs/api/>)
+`curl -fsSL https://ultrafast.mov/install.sh | sh`[HTTP API docs](<https://ultrafast.mov/docs/api/>)
 
 ```
 docker run --gpus all -p 8080:8080 -v ultrafast:/data \
