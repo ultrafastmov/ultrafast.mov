@@ -8,13 +8,13 @@ Open source · Apache-2.0 or MIT
 
 # ultrafast: the video engine agents can see
 
-Videos are JSON your agent writes, checks and renders on the GPU.
+Shaders, 3D, motion type and real camera optics, written by your agent in up to [80% fewer tokens](<https://ultrafast.mov/compare/#tokens>) and rendered at GPU speed.
 
 `curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
 macOS (Apple silicon) and Linux. [Other ways to install](<https://ultrafast.mov/docs/#install>)
 
-Or tell your agent `“Use ultrafast.mov”`
+Or tell your agent `“Go to ultrafast.mov and make…”`
 
 clay.json · excerpt
 

@@ -53,7 +53,7 @@ cargo install ultrafast                    # from crates.io, Rust 1.91 or later
 docker run --gpus all ghcr.io/ultrafastmov/ultrafast:latest info
 ``` 
 
-Or tell your agent “Use ultrafast.mov”: it reads [llms.txt](<https://ultrafast.mov/llms.txt>), installs ultrafast and works from there.
+Or tell your agent “Go to ultrafast.mov and make…” and finish the sentence: it reads [llms.txt](<https://ultrafast.mov/llms.txt>), installs ultrafast and makes the video. Say “go to”: a bare “ultrafast.mov” reads to an agent like a video file.
 
 It renders with **Metal** on macOS and **Vulkan** on Linux, and on Windows through WSL2 ([WINDOWS.md](<https://github.com/ultrafastmov/ultrafast/blob/main/docs/WINDOWS.md>)). Exports on Vulkan use ffmpeg, and on Linux voiceover and OCR use eSpeak NG and Tesseract. The Docker image includes all of them; the prebuilt binaries include everything else. No GPU? [ultrafast Cloud](<https://ultrafast.mov/cloud/>) is coming soon.
 
