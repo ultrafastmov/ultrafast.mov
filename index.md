@@ -1,6 +1,6 @@
-# ultrafast · Shot on the GPU
+# ultrafast · Shot on the GPU · Open-source video engine for agents
 
-> Shot on the GPU. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU. Open source. Connect Claude Code, Codex, Cursor or Gemini CLI.
+> Shot on the GPU. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU. An open-source video engine for coding agents.
 
 URL: https://ultrafast.mov/
 

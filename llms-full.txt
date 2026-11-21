@@ -2,9 +2,9 @@
 
 > ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.
 
-# ultrafast · Shot on the GPU
+# ultrafast · Shot on the GPU · Open-source video engine for agents
 
-> Shot on the GPU. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU. Open source. Connect Claude Code, Codex, Cursor or Gemini CLI.
+> Shot on the GPU. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU. An open-source video engine for coding agents.
 
 URL: https://ultrafast.mov/
 
@@ -1364,10 +1364,9 @@ Jobs with signed webhooks, output to your own bucket, sign-in and GPUs that scal
 [SELF_HOST.md](<https://github.com/ultrafastmov/ultrafast/blob/main/docs/service/SELF_HOST.md>)
 
 ```
-[mcp_servers.ultrafast]
-command = "uf"
-args = ["mcp"]
-```0 
+docker run --gpus all -p 8080:8080 -v ultrafast:/data \
+  ghcr.io/ultrafastmov/ultrafast:latest serve
+``` 
 
 CLI and live player
 
@@ -1378,10 +1377,12 @@ CLI and live player
 [CLI reference](<https://ultrafast.mov/docs/cli/>)
 
 ```
-[mcp_servers.ultrafast]
-command = "uf"
-args = ["mcp"]
-```1 
+uf new vertical film.json
+uf check film.json
+uf live film.json
+uf review film.json --safe social
+uf export film.json film.mp4
+``` 
 
 Chat apps · coming soon
 

@@ -171,10 +171,9 @@ Jobs with signed webhooks, output to your own bucket, sign-in and GPUs that scal
 [SELF_HOST.md](<https://github.com/ultrafastmov/ultrafast/blob/main/docs/service/SELF_HOST.md>)
 
 ```
-[mcp_servers.ultrafast]
-command = "uf"
-args = ["mcp"]
-```0 
+docker run --gpus all -p 8080:8080 -v ultrafast:/data \
+  ghcr.io/ultrafastmov/ultrafast:latest serve
+``` 
 
 CLI and live player
 
@@ -185,10 +184,12 @@ CLI and live player
 [CLI reference](<https://ultrafast.mov/docs/cli/>)
 
 ```
-[mcp_servers.ultrafast]
-command = "uf"
-args = ["mcp"]
-```1 
+uf new vertical film.json
+uf check film.json
+uf live film.json
+uf review film.json --safe social
+uf export film.json film.mp4
+``` 
 
 Chat apps · coming soon
 
