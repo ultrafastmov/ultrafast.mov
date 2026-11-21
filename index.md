@@ -1,6 +1,6 @@
 # ultrafast · Shot on the GPU
 
-> Open-source GPU video engine. Videos are JSON your agent writes, checks and renders at hundreds of frames a second. Install it and connect Claude Code, Codex, Cursor or Gemini CLI.
+> Shot on the GPU. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU. Open source. Connect Claude Code, Codex, Cursor or Gemini CLI.
 
 URL: https://ultrafast.mov/
 

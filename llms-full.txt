@@ -1,10 +1,10 @@
 # ultrafast: full site text
 
-> ultrafast is an open-source GPU video engine for agents. A video is a JSON document: your agent writes it, checks it, reviews every frame and renders it on the GPU at hundreds of frames a second, with no browser in the loop.
+> ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.
 
 # ultrafast · Shot on the GPU
 
-> Open-source GPU video engine. Videos are JSON your agent writes, checks and renders at hundreds of frames a second. Install it and connect Claude Code, Codex, Cursor or Gemini CLI.
+> Shot on the GPU. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU. Open source. Connect Claude Code, Codex, Cursor or Gemini CLI.
 
 URL: https://ultrafast.mov/
 

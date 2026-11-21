@@ -1,6 +1,6 @@
 # ultrafast
 
-> ultrafast is an open-source GPU video engine for agents. A video is a JSON document: your agent writes it, checks it, reviews every frame and renders it on the GPU at hundreds of frames a second, with no browser in the loop. Install it on a Mac with Apple silicon or a Linux machine with a Vulkan GPU, then connect your agent with `uf mcp`.
+> ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports. Install it on a Mac with Apple silicon or a Linux machine with a Vulkan GPU, then connect your agent with `uf mcp`.
 
 If a person sent you here to make a video: install it with `curl -fsSL https://ultrafast.mov/install.sh | sh`, run `uf info` to check the GPU, then follow the loop below (`uf new`, `uf check`, `uf sheet`, `uf review`, `uf export`). The Quickstart and the document format below have the rest.
 
