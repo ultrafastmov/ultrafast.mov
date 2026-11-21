@@ -44,26 +44,6 @@ A 10-second vertical teaser for my pottery class. Saturdays, first class free.
 
 10 s · 1080×1920 · a pot thrown on the wheel in 3D
 
-[Video: Podcast clip](https://ultrafast.mov/media/examples/podcast.mp4)
-
-### Podcast and interview clips
-
-Podcasters, interviewers, conference teams
-
-Pull the best 25 seconds from this episode. Captions on, vertical, our colours.
-
-26 s · 1080×1920 · captions timed to each word, his own voice
-
-[Video: Two launches, one count](https://ultrafast.mov/media/examples/liftoff.mp4)
-
-### Documentaries and recaps
-
-Documentary makers, archives, event teams
-
-Cut the Apollo 11 and Artemis I launches together on the 1969 countdown. Make it feel like a documentary.
-
-22.5 s · 1920×804 · NASA footage and commentary, cut to the count
-
 [Video: Artemis I's route](https://ultrafast.mov/media/examples/orbit.mp4)
 
 ### Explainers
@@ -153,6 +133,26 @@ Studios, agencies, launches
 One continuous zoom through everything we make, ending on our logo.
 
 28 s · 1920×1080 · seven worlds, one camera, a seamless loop
+
+[Video: Two launches, one count](https://ultrafast.mov/media/examples/liftoff.mp4)
+
+### Documentaries and recaps
+
+Documentary makers, archives, event teams
+
+Cut the Apollo 11 and Artemis I launches together on the 1969 countdown. Make it feel like a documentary.
+
+22.5 s · 1920×804 · NASA footage and commentary, cut to the count
+
+[Video: Podcast clip](https://ultrafast.mov/media/examples/podcast.mp4)
+
+### Podcast and interview clips
+
+Podcasters, interviewers, conference teams
+
+Pull the best 25 seconds from this episode. Captions on, vertical, our colours.
+
+26 s · 1080×1920 · captions timed to each word, his own voice
 
 For builders
 

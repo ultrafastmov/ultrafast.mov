@@ -54,22 +54,6 @@ What agents made with it, and each brief in a sentence.
 
 [All use cases](<https://ultrafast.mov/use-cases/>)
 
-[Video: Two launches, one count](https://ultrafast.mov/media/examples/liftoff.mp4)
-
-### [Documentaries and recaps](<https://ultrafast.mov/use-cases/#documentary>)
-
-Cut the Apollo 11 and Artemis I launches together on the 1969 countdown. Make it feel like a documentary.
-
-2.39:1 · 1920×804 · 22.5 s · exported in 3.36 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/liftoff.json>)
-
-[Video: Podcast clip](https://ultrafast.mov/media/examples/podcast.mp4)
-
-### [Podcast and interview clips](<https://ultrafast.mov/use-cases/#podcasts>)
-
-Pull the best 25 seconds from this episode. Captions on, vertical, our colours.
-
-9:16 · 1080×1920 · 26 s · exported in 6.00 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/podcast.json>)
-
 [Video: Lens launch](https://ultrafast.mov/media/examples/product.mp4) 3D rendered by ultrafast
 
 ### [Launch films](<https://ultrafast.mov/use-cases/#launches>)
@@ -103,6 +87,22 @@ Turn NOAA's Mauna Loa CO₂ file into a chart for Instagram.
 A 15-second loop for the album cover: something growing, in celadon.
 
 1:1 · 1080×1080 · 15 s · exported in 1.06 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/bloom.json>)
+
+[Video: Two launches, one count](https://ultrafast.mov/media/examples/liftoff.mp4)
+
+### [Documentaries and recaps](<https://ultrafast.mov/use-cases/#documentary>)
+
+Cut the Apollo 11 and Artemis I launches together on the 1969 countdown. Make it feel like a documentary.
+
+2.39:1 · 1920×804 · 22.5 s · exported in 3.36 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/liftoff.json>)
+
+[Video: Podcast clip](https://ultrafast.mov/media/examples/podcast.mp4)
+
+### [Podcast and interview clips](<https://ultrafast.mov/use-cases/#podcasts>)
+
+Pull the best 25 seconds from this episode. Captions on, vertical, our colours.
+
+9:16 · 1080×1920 · 26 s · exported in 6.00 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/podcast.json>)
 
 How it works
 
@@ -228,11 +228,11 @@ Integrations
   * [**Self-host**`docker run …`the HTTP API on one GPU _Available_](<https://ultrafast.mov/integrations/#self-host>)
   * [**ChatGPT app** make and edit videos in a chat _Coming soon_](<https://ultrafast.mov/cloud/#apps>)
   * [**Claude connector** for Claude on the web, desktop and phone _Coming soon_](<https://ultrafast.mov/cloud/#apps>)
-  * [**ultrafast Cloud** our GPUs, one API key _Waitlist_](<https://ultrafast.mov/cloud/>)
+  * [**ultrafast Cloud** hosted GPUs, one API key _Waitlist_](<https://ultrafast.mov/cloud/>)
 
 Two ways to run it
 
-## Your GPU today. Ours soon.
+## Your GPU today. ultrafast Cloud soon.
 
 [About ultrafast Cloud](<https://ultrafast.mov/cloud/>)
 
@@ -253,12 +253,12 @@ costs
 
 docket Bultrafast Cloud · coming soon
 
-### Ours
+### Cloud
 
 you bring
     one API key. No GPU, drivers or ffmpeg
 you get
-    the same engine and HTTP API, on our GPUs
+    the same engine and HTTP API, on hosted GPUs
 with it
     the ChatGPT app, the Claude connector and remote MCP with sign-in
 price
@@ -276,7 +276,7 @@ An open-source video engine built for AI agents. A video is a JSON document of n
 
 Do I need a GPU?
 
-Yes, for now: a Mac with Apple silicon, or a computer with a Vulkan GPU on Linux or Windows (through WSL2). ultrafast Cloud, which renders on our GPUs, is coming soon: [join the waitlist](<https://ultrafast.mov/cloud/>).
+Yes, for now: a Mac with Apple silicon, or a computer with a Vulkan GPU on Linux or Windows (through WSL2). ultrafast Cloud, which renders on hosted GPUs, is coming soon: [join the waitlist](<https://ultrafast.mov/cloud/>).
 
 Can it edit my own footage?
 
@@ -304,7 +304,7 @@ Nothing. The engine is free under Apache-2.0 or MIT, for commercial use, at any 
 
 Is there a hosted version?
 
-Not yet. ultrafast Cloud will run the same engine on our GPUs with one API key, and the ChatGPT app and the Claude connector will run on it. [Join the waitlist](<https://ultrafast.mov/cloud/>) and we'll email you when it opens.
+Not yet. ultrafast Cloud will run the same engine on hosted GPUs with one API key, and the ChatGPT app and the Claude connector will run on it. [Join the waitlist](<https://ultrafast.mov/cloud/>) for one email when it opens.
 
 ## curl -fsSL https://ultrafast.mov/install.sh | sh
 

@@ -1,14 +1,14 @@
 # ultrafast Cloud · Coming soon · Join the waitlist
 
-> ultrafast Cloud will render the open-source engine on our GPUs with one API key, and run the ChatGPT app and the Claude connector. Coming soon; join the waitlist.
+> ultrafast Cloud will render the open-source engine on hosted GPUs with one API key, and run the ChatGPT app and the Claude connector. Coming soon; join the waitlist.
 
 URL: https://ultrafast.mov/cloud/
 
 ultrafast Cloud · coming soon
 
-# Our GPUs. Coming soon.
+# No GPU needed. Coming soon.
 
-The open-source engine, rendering on our GPUs: one API key, nothing to install. Join the waitlist and we’ll email you when it opens.
+The open-source engine on hosted GPUs: one API key, nothing to install. Join the waitlist for one email when it opens.
 
 Email for the ultrafast Cloud waitlist Join the waitlist
 
@@ -85,7 +85,7 @@ Questions
 
 When does ultrafast Cloud open?
 
-There's no date yet. Join the waitlist and we'll email you when it opens.
+There's no date yet. Join the waitlist for one email when it opens.
 
 What will it cost?
 
@@ -101,14 +101,14 @@ No. It's the engine Cloud will run, under Apache-2.0 or MIT. Use it commercially
 
 Do the ChatGPT app and the Claude connector need Cloud?
 
-Yes. They render on our GPUs, so they open with Cloud. Coding agents work today with `uf mcp` on your own machine.
+Yes. They render on ultrafast Cloud, so they open with it. Coding agents work today with `uf mcp` on your own machine.
 
-What do you do with my email?
+What happens to my email?
 
-We email you when Cloud opens. We don't use it for anything else or share it.
+It gets one email when Cloud opens. It isn't used for anything else or shared.
 
 ## Get on the list.
 
-We’ll email you when ultrafast Cloud opens.
+One email when ultrafast Cloud opens.
 
 Email for the ultrafast Cloud waitlist Join the waitlist

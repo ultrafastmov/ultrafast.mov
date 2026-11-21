@@ -128,4 +128,4 @@ uf export film.json plates/ --alpha                           # PNG frames and a
   
 ## Cloud
 
-ultrafast Cloud, which will run these commands on our GPUs, is coming soon: [join the waitlist](<https://ultrafast.mov/cloud/>). Until then every command runs on your own GPU, and `uf serve` shares it over HTTP.
+ultrafast Cloud, which will run these commands on hosted GPUs, is coming soon: [join the waitlist](<https://ultrafast.mov/cloud/>). Until then every command runs on your own GPU, and `uf serve` shares it over HTTP.

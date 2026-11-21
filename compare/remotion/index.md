@@ -193,7 +193,7 @@ Not directly: it doesn't run React. Ask your agent to rewrite the composition as
 
 Does ultrafast need a GPU?
 
-Yes, for now: a Mac with Apple silicon or a Vulkan GPU. ultrafast Cloud, which renders on ours, is coming soon ([waitlist](<https://ultrafast.mov/cloud/>)).
+Yes, for now: a Mac with Apple silicon or a Vulkan GPU. ultrafast Cloud, which renders on hosted GPUs, is coming soon ([waitlist](<https://ultrafast.mov/cloud/>)).
 
 Does ultrafast have an embeddable web player like Remotion's?
 

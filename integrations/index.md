@@ -19,7 +19,7 @@ Coding agents, any MCP client, Python and TypeScript, an HTTP API and Docker, al
   * [**Self-host**`docker run …`the HTTP API on one GPU _Available_](<https://ultrafast.mov/integrations/#self-host>)
   * [**ChatGPT app** make and edit videos in a chat _Coming soon_](<https://ultrafast.mov/cloud/#apps>)
   * [**Claude connector** for Claude on the web, desktop and phone _Coming soon_](<https://ultrafast.mov/cloud/#apps>)
-  * [**ultrafast Cloud** our GPUs, one API key _Waitlist_](<https://ultrafast.mov/cloud/>)
+  * [**ultrafast Cloud** hosted GPUs, one API key _Waitlist_](<https://ultrafast.mov/cloud/>)
 
 Coding agents
 

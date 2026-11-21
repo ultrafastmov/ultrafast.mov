@@ -30,7 +30,7 @@
 <link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/site.css?v=e73c02f9">
+<link rel="stylesheet" href="/css/site.css?v=1c769418">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. A video is a JSON document: your agent writes it, checks it, reviews every frame and renders it on the GPU at hundreds of frames a second, with no browser in the loop.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Use cases","item":"https://ultrafast.mov/use-cases/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need to know how to edit video?","acceptedAnswer":{"@type":"Answer","text":"No. Describe what you want to your agent in plain words, the way you'd brief a person. The agent writes the document, ultrafast checks every frame for unreadable or clipped text, and the agent exports the file."}},{"@type":"Question","name":"Which agents can do this?","acceptedAnswer":{"@type":"Answer","text":"Any agent that can run an MCP server or a shell: Claude Code, Codex, Cursor and Gemini CLI connect to uf mcp in one line. See MCP. The ChatGPT app and the Claude connector come with ultrafast Cloud."}},{"@type":"Question","name":"Can I use my own footage, photos and logo?","acceptedAnswer":{"@type":"Answer","text":"Yes. Give your agent the files. ultrafast works with video, photos, SVG logos, Lottie animations, music and voiceover, and any Google Font by name."}},{"@type":"Question","name":"How long does a video take?","acceptedAnswer":{"@type":"Answer","text":"The render takes seconds: each film on this page exported in under 8 seconds on one RTX 5090. Writing and reviewing the document takes your agent longer, depending on the model and the film."}},{"@type":"Question","name":"Can I change it afterwards?","acceptedAnswer":{"@type":"Answer","text":"Yes. The video is a JSON document file, so ask for changes any time: new words, another size, a different song. The agent edits the nodes that change and leaves the rest as it was."}}]},{"@type":"WebPage","name":"Use cases · Make videos by asking · ultrafast","description":"Social posts, podcast clips, documentaries, explainers, data stories, launch films and title sequences, made by asking an agent: Claude Code, Codex, Cursor or Gemini CLI with ultrafast.","url":"https://ultrafast.mov/use-cases/","isPartOf":{"@id":"https://ultrafast.mov/#site"},"dateModified":"2026-11-22"}]}</script>
 </head>
 <body>
@@ -126,24 +126,6 @@
     <p class="got">10 s · 1080×1920 · a pot thrown on the wheel in 3D</p>
   </div>
 </article>
-<article class="case" id="podcasts">
-  <div class="media fit paper" style="--ar:0.5625"><video class="lazy" muted loop playsinline preload="none" poster="/media/examples/podcast.jpg" width="720" height="1280" data-full="/media/examples/podcast.full" aria-label="Podcast clip"><source data-src="/media/examples/podcast.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/examples/podcast.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/examples/podcast.mp4" type="video/mp4"></video><button class="snd" type="button" aria-pressed="false">Sound on</button></div>
-  <div class="body">
-    <h3>Podcast and interview clips</h3>
-    <p>Podcasters, interviewers, conference teams</p>
-    <p class="ask">Pull the best 25 seconds from this episode. Captions on, vertical, our colours.</p>
-    <p class="got">26 s · 1080×1920 · captions timed to each word, his own voice</p>
-  </div>
-</article>
-<article class="case" id="documentary">
-  <div class="media wide paper" style="--ar:2.3881"><video class="lazy" muted loop playsinline preload="none" poster="/media/examples/liftoff.jpg" width="1280" height="536" data-full="/media/examples/liftoff.full" aria-label="Two launches, one count"><source data-src="/media/examples/liftoff.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/examples/liftoff.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/examples/liftoff.mp4" type="video/mp4"></video><button class="snd" type="button" aria-pressed="false">Sound on</button></div>
-  <div class="body">
-    <h3>Documentaries and recaps</h3>
-    <p>Documentary makers, archives, event teams</p>
-    <p class="ask">Cut the Apollo 11 and Artemis I launches together on the 1969 countdown. Make it feel like a documentary.</p>
-    <p class="got">22.5 s · 1920×804 · NASA footage and commentary, cut to the count</p>
-  </div>
-</article>
 <article class="case" id="explainers">
   <div class="media wide paper" style="--ar:1.7778"><video class="lazy" muted loop playsinline preload="none" poster="/media/examples/orbit.jpg" width="1280" height="720" data-full="/media/examples/orbit.full" aria-label="Artemis I&#39;s route"><source data-src="/media/examples/orbit.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/examples/orbit.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/examples/orbit.mp4" type="video/mp4"></video></div>
   <div class="body">
@@ -223,6 +205,24 @@
     <p>Studios, agencies, launches</p>
     <p class="ask">One continuous zoom through everything we make, ending on our logo.</p>
     <p class="got">28 s · 1920×1080 · seven worlds, one camera, a seamless loop</p>
+  </div>
+</article>
+<article class="case" id="documentary">
+  <div class="media wide paper" style="--ar:2.3881"><video class="lazy" muted loop playsinline preload="none" poster="/media/examples/liftoff.jpg" width="1280" height="536" data-full="/media/examples/liftoff.full" aria-label="Two launches, one count"><source data-src="/media/examples/liftoff.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/examples/liftoff.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/examples/liftoff.mp4" type="video/mp4"></video><button class="snd" type="button" aria-pressed="false">Sound on</button></div>
+  <div class="body">
+    <h3>Documentaries and recaps</h3>
+    <p>Documentary makers, archives, event teams</p>
+    <p class="ask">Cut the Apollo 11 and Artemis I launches together on the 1969 countdown. Make it feel like a documentary.</p>
+    <p class="got">22.5 s · 1920×804 · NASA footage and commentary, cut to the count</p>
+  </div>
+</article>
+<article class="case" id="podcasts">
+  <div class="media fit paper" style="--ar:0.5625"><video class="lazy" muted loop playsinline preload="none" poster="/media/examples/podcast.jpg" width="720" height="1280" data-full="/media/examples/podcast.full" aria-label="Podcast clip"><source data-src="/media/examples/podcast.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/examples/podcast.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/examples/podcast.mp4" type="video/mp4"></video><button class="snd" type="button" aria-pressed="false">Sound on</button></div>
+  <div class="body">
+    <h3>Podcast and interview clips</h3>
+    <p>Podcasters, interviewers, conference teams</p>
+    <p class="ask">Pull the best 25 seconds from this episode. Captions on, vertical, our colours.</p>
+    <p class="got">26 s · 1080×1920 · captions timed to each word, his own voice</p>
   </div>
 </article>
     </div>
@@ -340,6 +340,6 @@
   </div>
 </footer>
 
-<script type="module" src="/js/site.js?v=e73c02f9"></script>
+<script type="module" src="/js/site.js?v=1c769418"></script>
 </body>
 </html>

@@ -545,7 +545,7 @@ for (const f of $$('form[data-waitlist]')) f.addEventListener('submit', async e 
     const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data) });
     const j = await r.json().catch(() => ({}));
     if (r.ok && j.success && j.already) done("You're already on the list.");
-    else if (r.ok && j.success) done("You're on the list. We'll email you when ultrafast Cloud opens.");
+    else if (r.ok && j.success) done("You're on the list. One email when ultrafast Cloud opens.");
     else if (r.status === 429) say('Too many tries from here. Wait a minute, then try again.', 'err');
     else say(j.message || "That didn't go through. Check the address and try again.", 'err');
   } catch (err) {
