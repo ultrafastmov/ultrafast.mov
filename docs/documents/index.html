@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The document format · ultrafast docs</title>
+<meta name="description" content="An ultrafast video is one JSON document: a format, a graph of nodes, animated params and timing windows. The full shape, with examples.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/docs/documents/">
+<link rel="alternate" type="text/markdown" href="/docs/documents/index.md" title="The document format · ultrafast docs (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="The document">
+<meta property="og:description" content="An ultrafast video is one JSON document: a format, a graph of nodes, animated params and timing windows. The full shape, with examples.">
+<meta property="og:url" content="https://ultrafast.mov/docs/documents/">
+<meta property="og:image" content="https://ultrafast.mov/og/docs-documents.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The document · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The document">
+<meta name="twitter:description" content="An ultrafast video is one JSON document: a format, a graph of nodes, animated params and timing windows. The full shape, with examples.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/docs-documents.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=38337fe4">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. A video is a JSON document: your agent writes it, checks it, reviews every frame and renders it on the GPU at hundreds of frames a second, with no browser in the loop.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://ultrafast.mov/docs/"},{"@type":"ListItem","position":3,"name":"The document","item":"https://ultrafast.mov/docs/documents/"}]},{"@type":"TechArticle","headline":"The document format","description":"An ultrafast video is one JSON document: a format, a graph of nodes, animated params and timing windows. The full shape, with examples.","url":"https://ultrafast.mov/docs/documents/","dateModified":"2026-11-22","publisher":{"@id":"https://ultrafast.mov/#org"},"about":{"@id":"https://ultrafast.mov/#app"}}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/" aria-current="page">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="band stock-cotton phead" style="padding-bottom:56px">
+  <div class="sunburst" aria-hidden="true" style="--sx:92%;--sy:40%;--r2:520px"></div>
+  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+<li><a href="/docs/">Docs</a></li>  <li aria-current="page">The document</li>
+</ol>
+
+    <p class="eyebrow"><i style="--c:var(--blue)"></i>Docs</p>
+    <h1 class="pr h1" data-plates="blue black"><span class="ln">The document</span></h1>
+    <p class="lede">A video is one JSON file. Here is its whole shape.</p>
+  </div>
+</section>
+<section class="band stock-thermal" style="padding-top:72px">
+  <div class="wrap docs">
+    <nav class="side" aria-label="Docs">
+      <h2>Start</h2>
+      <ul><li><a href="/docs/">Quickstart</a></li><li><a href="/docs/documents/" aria-current="page">The document</a></li></ul>
+      <h2>Reference</h2>
+      <ul><li><a href="/docs/ops/">Ops</a></li><li><a href="/docs/cli/">CLI</a></li><li><a href="/docs/mcp/">MCP server</a></li><li><a href="/docs/api/">HTTP API</a></li></ul>
+      <h2>For agents</h2>
+      <ul><li><a href="/llms.txt">llms.txt</a></li><li><a href="/docs/documents/index.md">This page as Markdown</a></li></ul>
+    </nav>
+    <article class="prose">
+<nav class="toc" aria-label="On this page"><b>On this page</b><ol>
+  <li><a href="#shape">Shape</a></li><li><a href="#format">format</a></li><li><a href="#nodes">nodes</a></li><li><a href="#params">Params and animation</a></li>
+  <li><a href="#timing">timing</a></li><li><a href="#components">components</a></li><li><a href="#assets">Assets, colour, type</a></li><li><a href="#schema">Schema and versions</a></li>
+</ol></nav>
+
+<h2 id="shape">Shape</h2>
+<div class="code"><div class="cbar"><span>film.json</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;fps&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;motion_blur&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;samples&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;shutter&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;nodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;&lt;id&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;op&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;timing&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;components&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;output&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;id of the node to render&gt;&quot;</span>
+<span class="p">}</span></code></pre></div><p>Documents are plain files you can diff, template and edit. The engine reloads a document when it changes, so an agent can write it directly or through <code>uf edit</code>.</p>
+
+<h2 id="format">format</h2>
+<ul>
+  <li><code>width</code>, <code>height</code>: any size, in pixels. Change them and frame-relative layout (blocks, captions, <code>fit</code>, stacks) follows.</li>
+  <li><code>fps</code>, <code>duration</code>: frames per second and seconds.</li>
+  <li><code>motion_blur</code>: <code>samples</code> and <code>shutter</code>, plus <code>max_samples</code> for whips and fast pans. Each moving layer is blurred on its own, as a compositor does; footage and shaders hold at the frame's time.</li>
+</ul>
+
+<h2 id="nodes">nodes</h2>
+<p>Each node has an <code>op</code>, its <code>params</code>, its <code>inputs</code> (other nodes, by id, on named ports) and optional <code>timing</code>. Sources have no inputs; effects take a <code>source</code>; composites take <code>fg</code> and <code>bg</code>.</p>
+<div class="code"><div class="cbar"><span>a title over footage</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="nt">&quot;clip&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;video&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;src&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch.mp4&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;fit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cover&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="nt">&quot;grade&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grade&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;clip&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;look&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.6</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;block&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;title&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Artemis I&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;kicker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;16 Nov 2022&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="nt">&quot;comp&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;over&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;fg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;title&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;bg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grade&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span></code></pre></div><p>Generators (<code>solid</code>, <code>gradient</code>, <code>noise</code>, shaders) are infinite: crop or transform them into panels. Paths and text stay vector until they are rasterized, so a <code>transform</code> directly on them stays sharp at any scale. The planner fuses chains of nodes into one GPU kernel and skips what can't be seen.</p>
+
+<h2 id="params">Params and animation</h2>
+<p>Any param can be a constant or animated:</p>
+<div class="code"><div class="cbar"><span>five ways to set a param</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span>
+<span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">540</span><span class="p">,</span><span class="w"> </span><span class="mi">2100</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;ease&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;out_expo&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">                        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">540</span><span class="p">,</span><span class="w"> </span><span class="mi">960</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="nt">&quot;rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;repeat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pingpong&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;wiggle&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;frequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amplitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;base&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">540</span><span class="p">,</span><span class="w"> </span><span class="mi">960</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="nt">&quot;opacity&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;expr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.5 + 0.5 * sin(t * 3)&quot;</span><span class="w"> </span><span class="p">}</span></code></pre></div><ul>
+  <li><strong>Keys</strong>: <code>t</code> in seconds, <code>v</code> the value, <code>ease</code> a name (<code>in_out_cubic</code>, <code>out_expo</code>, <code>out_back</code>, <code>spring</code>...) or a CSS-style bezier <code>{"bezier": [0.16, 1, 0.3, 1]}</code>. <code>repeat</code>: <code>cycle</code> or <code>pingpong</code>.</li>
+  <li><strong>Drivers</strong>: <code>wiggle</code>, <code>oscillate</code>, and <code>audio</code>, which follows a soundtrack band so a param pulses with the music.</li>
+  <li><strong>Expressions</strong>: <code>{"expr": "..."}</code>, a formula of <code>t</code>, with a list for vectors.</li>
+</ul>
+
+<h2 id="timing">timing</h2>
+<div class="code"><div class="cbar"><span>a shot on screen from 2 s to 6 s, played at half speed</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="nt">&quot;timing&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;in&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;out&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="p">}</span></code></pre></div><ul>
+  <li><code>in</code>, <code>out</code>: when the node is on screen. Outside its window a composite passes its background through and an effect passes its source; neither costs anything.</li>
+  <li><code>offset</code>: where the node's local time zero sits in its parent's time. <code>speed</code>: local seconds per parent second (negative plays backwards). <code>loop</code>: local time wraps at this duration.</li>
+  <li>Windows compose through nesting. For cuts between shots, prefer <code>transition</code> nodes (crossfade, dip, wipe, push, slide, iris, zoom, dissolve, glitch, blur); each shot renders only while it is on screen.</li>
+</ul>
+
+<h2 id="components">components</h2>
+<p>A component is a small document with its own params and inputs, used like an op. <code>"$name"</code> inside a component refers to one of its params. Components are flattened before planning, so they cost nothing at render time. <code>uf import-svg</code> and <code>uf import-lottie</code> write SVG artwork and Lottie animations as components with every part editable.</p>
+
+<h2 id="assets">Assets, colour, type</h2>
+<ul>
+  <li>File paths (footage, images, fonts, SVG, Lottie, audio) are relative to the document.</li>
+  <li>Colours are sRGB hex (<code>#ff48b0</code>, <code>#ff48b080</code>) or 0–1 arrays with straight alpha. Compositing is in linear light; set <code>"space": "srgb"</code> on an <code>over</code>, <code>blend</code> or <code>gradient</code> to blend the way CSS and Figma do.</li>
+  <li>Fonts: a family name (any Google Font is fetched once by name), a font file, or a bundled face (<code>ultrafast:display</code>, <code>ultrafast:sans</code>, <code>ultrafast:serif</code>, <code>ultrafast:mono</code>, <code>ultrafast:wide</code>). Variable fonts animate any axis with <code>axis_&lt;tag&gt;</code>.</li>
+</ul>
+
+<h2 id="schema">Schema and versions</h2>
+<p>Documents carry <code>"version": 1</code>. The JSON Schema is published at <a href="/schema/v1.json">ultrafast.mov/schema/v1.json</a> for editor completion and validation; <code>uf schema</code> prints the same file, and <code>uf ops</code> the vocabulary with every param's type and default. Changes within a version are additive.</p>
+    </article>
+  </div>
+</section>
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=38337fe4"></script>
+</body>
+</html>

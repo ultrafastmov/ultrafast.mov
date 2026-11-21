@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCP server · 20 tools · ultrafast docs</title>
+<meta name="description" content="ultrafast as MCP tools for Claude Code, Codex, Cursor, Gemini CLI and any MCP client: local over stdio with uf mcp, or remote over Streamable HTTP from your own uf serve with an API key.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/docs/mcp/">
+<link rel="alternate" type="text/markdown" href="/docs/mcp/index.md" title="MCP server · 20 tools · ultrafast docs (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="20 MCP tools">
+<meta property="og:description" content="ultrafast as MCP tools for Claude Code, Codex, Cursor, Gemini CLI and any MCP client: local over stdio with uf mcp, or remote over Streamable HTTP from your own uf serve with an API key.">
+<meta property="og:url" content="https://ultrafast.mov/docs/mcp/">
+<meta property="og:image" content="https://ultrafast.mov/og/docs-mcp.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="20 MCP tools · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="20 MCP tools">
+<meta name="twitter:description" content="ultrafast as MCP tools for Claude Code, Codex, Cursor, Gemini CLI and any MCP client: local over stdio with uf mcp, or remote over Streamable HTTP from your own uf serve with an API key.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/docs-mcp.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=38337fe4">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. A video is a JSON document: your agent writes it, checks it, reviews every frame and renders it on the GPU at hundreds of frames a second, with no browser in the loop.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://ultrafast.mov/docs/"},{"@type":"ListItem","position":3,"name":"MCP server","item":"https://ultrafast.mov/docs/mcp/"}]},{"@type":"TechArticle","headline":"MCP server","description":"ultrafast as MCP tools for Claude Code, Codex, Cursor, Gemini CLI and any MCP client: local over stdio with uf mcp, or remote over Streamable HTTP from your own uf serve with an API key.","url":"https://ultrafast.mov/docs/mcp/","dateModified":"2026-11-22","publisher":{"@id":"https://ultrafast.mov/#org"},"about":{"@id":"https://ultrafast.mov/#app"}}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/" aria-current="page">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="band stock-cotton phead" style="padding-bottom:56px">
+  <div class="sunburst" aria-hidden="true" style="--sx:92%;--sy:40%;--r2:520px"></div>
+  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+<li><a href="/docs/">Docs</a></li>  <li aria-current="page">MCP server</li>
+</ol>
+
+    <p class="eyebrow"><i style="--c:var(--blue)"></i>Docs</p>
+    <h1 class="pr h1" data-plates="blue black"><span class="ln">MCP server</span></h1>
+    <p class="lede">20 tools that let an agent write a video, look at it, fix it and export it, without a shell.</p>
+  </div>
+</section>
+<section class="band stock-thermal" style="padding-top:72px">
+  <div class="wrap docs">
+    <nav class="side" aria-label="Docs">
+      <h2>Start</h2>
+      <ul><li><a href="/docs/">Quickstart</a></li><li><a href="/docs/documents/">The document</a></li></ul>
+      <h2>Reference</h2>
+      <ul><li><a href="/docs/ops/">Ops</a></li><li><a href="/docs/cli/">CLI</a></li><li><a href="/docs/mcp/" aria-current="page">MCP server</a></li><li><a href="/docs/api/">HTTP API</a></li></ul>
+      <h2>For agents</h2>
+      <ul><li><a href="/llms.txt">llms.txt</a></li><li><a href="/docs/mcp/index.md">This page as Markdown</a></li></ul>
+    </nav>
+    <article class="prose">
+<nav class="toc" aria-label="On this page"><b>On this page</b><ol>
+  <li><a href="#local">Local, over stdio</a></li><li><a href="#remote">Remote, over HTTP</a></li><li><a href="#tools">The tools</a></li><li><a href="#how">How agents use them</a></li>
+</ol></nav>
+
+<h2 id="local">Local, over stdio</h2>
+<p><code>uf mcp</code> is a stdio MCP server (JSON-RPC 2.0, one message per line). Renders run on your GPU.</p>
+<div class="code"><div class="cbar"><span>Claude Code</span><button class="copy" type="button">copy</button></div><pre><code class="hl">claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>ultrafast<span class="w"> </span>--<span class="w"> </span>uf<span class="w"> </span>mcp</code></pre></div><div class="code"><div class="cbar"><span>Codex · ~/.codex/config.toml</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="k">[mcp_servers.ultrafast]</span>
+<span class="n">command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;uf&quot;</span>
+<span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mcp&quot;</span><span class="p">]</span></code></pre></div><div class="code"><div class="cbar"><span>Cursor · .cursor/mcp.json, Gemini CLI · ~/.gemini/settings.json, Claude Desktop · claude_desktop_config.json</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;mcpServers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;ultrafast&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uf&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mcp&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div><p>Documents stay plain JSON files. The server keeps a renderer per document, so repeated frames are fast, and reloads a file when it changes, whether the agent edits it with <code>ultrafast_edit</code> or writes it directly.</p>
+
+<h2 id="remote">Remote, over HTTP</h2>
+<p><code>ultrafast serve</code> answers MCP over Streamable HTTP at <code>/mcp</code>, with its API key as a bearer token, for agent frameworks and any client that can't run a local process. It serves the 16 tools that need no local files; they take the document and asset ids instead of file paths; frames and sheets come back as images and exports as download links.</p>
+<div class="code"><div class="cbar"><span>Claude Code, your server</span><button class="copy" type="button">copy</button></div><pre><code class="hl">claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>--transport<span class="w"> </span>http<span class="w"> </span>ultrafast<span class="w"> </span>http://localhost:8080/mcp<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--header<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$ULTRAFAST_API_KEY</span><span class="s2">&quot;</span></code></pre></div><p>A hosted server with OAuth sign-in, for the ChatGPT app and the Claude connector, comes with <a href="/cloud/">ultrafast Cloud</a>.</p>
+
+<h2 id="tools">The tools</h2>
+<div class="tablewrap"><table class="tbl">
+<thead><tr><th scope="col">tool</th><th scope="col">does</th></tr></thead>
+<tbody>
+<tr><td><code>ultrafast_ops</code></td><td>The op vocabulary: ports, params, types, defaults, docs.</td></tr>
+<tr><td><code>ultrafast_new</code></td><td>Write a template (<code>vertical</code>, <code>title</code>, <code>square</code>, <code>promo</code>, <code>explainer</code>, <code>product</code>) to a path.</td></tr>
+<tr><td><code>ultrafast_check</code></td><td>Problems in a document, static and render-time.</td></tr>
+<tr><td><code>ultrafast_frame</code></td><td>One exact frame, returned as an image.</td></tr>
+<tr><td><code>ultrafast_sheet</code></td><td>A labelled contact sheet of frames, returned as an image.</td></tr>
+<tr><td><code>ultrafast_review</code></td><td>Renders the film and reports unreadable, too-brief, clipped, overlapping or tiny text, unsafe areas and seizure-risk flashing.</td></tr>
+<tr><td><code>ultrafast_inspect</code></td><td>What is on screen at a time: each element's node, bounds and words.</td></tr>
+<tr><td><code>ultrafast_edit</code></td><td>Apply an edit batch to the document file, atomically.</td></tr>
+<tr><td><code>ultrafast_export</code></td><td>Encode to MP4, MOV (ProRes), WebM, a GIF, a PNG or EXR sequence or sound alone, at any size, frame rate and quality level, transparent where the codec allows.</td></tr>
+<tr><td><code>ultrafast_estimate</code></td><td>Rendered minutes, GPU seconds and the time to the first byte, before rendering.</td></tr>
+<tr><td><code>ultrafast_batch</code></td><td>One document, a video per row of a CSV or JSON file.</td></tr>
+<tr><td><code>ultrafast_profile</code></td><td>GPU milliseconds per render group, for slow films.</td></tr>
+<tr><td><code>ultrafast_beats</code></td><td>Tempo, beats, downbeats and onsets of a soundtrack.</td></tr>
+<tr><td><code>ultrafast_voiceover</code></td><td>Speak a script to WAV with every word's time, for audio and captions.</td></tr>
+<tr><td><code>ultrafast_import_svg</code></td><td>An SVG as an editable component, or added to a document.</td></tr>
+<tr><td><code>ultrafast_decompose</code></td><td>A finished video as an editable document: plate, vector layers with their motion, gradients, type read back as text in its matched font.</td></tr>
+<tr><td><code>ultrafast_match_font</code></td><td>A text node's font, size, baseline, tracking and colour, from a video frame.</td></tr>
+<tr><td><code>ultrafast_ocr</code></td><td>The text in a video frame, with word boxes and a draft of text nodes.</td></tr>
+<tr><td><code>ultrafast_measure</code></td><td>Glyph metrics of a line of text.</td></tr>
+<tr><td><code>ultrafast_outline</code></td><td>A line of text as SVG path data.</td></tr>
+</tbody></table></div>
+
+<h2 id="how">How agents use them</h2>
+<ol>
+  <li><code>ultrafast_new</code> or write the JSON; <code>ultrafast_ops</code> when unsure of a param.</li>
+  <li><code>ultrafast_check</code> until it's clean.</li>
+  <li><code>ultrafast_sheet</code> to see the motion; <code>ultrafast_inspect</code> to find the node behind a pixel.</li>
+  <li><code>ultrafast_review</code>; fix what it reports with <code>ultrafast_edit</code>.</li>
+  <li><code>ultrafast_export</code>.</li>
+</ol>
+<p>The ultrafast skill teaches agents the document and this loop: <code class="nw">npx skills add ultrafastmov/ultrafast</code>. In Claude Code, the plugin brings the skill and <code>uf mcp</code> together: <code class="nw">claude plugin marketplace add ultrafastmov/ultrafast</code>, then <code class="nw">claude plugin install ultrafast@ultrafast</code>.</p>
+<p>Agents that read docs can start from <a href="/llms.txt">llms.txt</a>; every page here is also available as Markdown at <code>index.md</code>.</p>
+    </article>
+  </div>
+</section>
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=38337fe4"></script>
+</body>
+</html>

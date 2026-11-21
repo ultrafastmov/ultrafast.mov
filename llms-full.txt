@@ -1,0 +1,3248 @@
+# ultrafast: full site text
+
+> ultrafast is an open-source GPU video engine for agents. A video is a JSON document: your agent writes it, checks it, reviews every frame and renders it on the GPU at hundreds of frames a second, with no browser in the loop.
+
+# ultrafast · The video engine agents can see
+
+> Open-source GPU video engine. Videos are JSON your agent writes, checks and renders at hundreds of frames a second. Install it and connect Claude Code, Codex, Cursor or Gemini CLI.
+
+URL: https://ultrafast.mov/
+
+Open source · Apache-2.0 or MIT
+
+# ultrafast: the video engine agents can see
+
+Videos are JSON your agent writes, checks and renders on the GPU.
+
+`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+clay.json · excerpt
+
+```
+{
+  "format": { "width": 1080,
+    "height": 1920, "fps": 30 },
+  "nodes": {
+    "vessel": {
+      "op": "shader",
+      "params": {
+        "code": "// a lathe, its profile keyed…",
+        "u4": { "keys": [ … ] } } },
+    "title": {
+      "op": "text",
+      "params": {
+        "text": "Spin something new.",
+        "font": "ultrafast:display",
+        "size": 176 } },
+    …
+  },
+  "output": "grain"
+}
+``` 
+
+[Video: Spin something new: a 10-second pottery class teaser](https://ultrafast.mov/media/examples/clay.mp4) 
+
+**1.68 s** to export these 10 seconds at 1080×1920.
+
+Rust · Vulkan on Linux and WSL2 · Metal on macOS · 70 ops · 20 MCP tools · a live player
+
+Use cases
+
+## Made by asking.
+
+What agents made with it, and each brief in a sentence.
+
+[All use cases](<https://ultrafast.mov/use-cases/>)
+
+[Video: Two launches, one count](https://ultrafast.mov/media/examples/liftoff.mp4)
+
+### [Documentaries and recaps](<https://ultrafast.mov/use-cases/#documentary>)
+
+Cut the Apollo 11 and Artemis I launches together on the 1969 countdown. Make it feel like a documentary.
+
+2.39:1 · 1920×804 · 22.5 s · exported in 3.36 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/liftoff.json>)
+
+[Video: Podcast clip](https://ultrafast.mov/media/examples/podcast.mp4)
+
+### [Podcast and interview clips](<https://ultrafast.mov/use-cases/#podcasts>)
+
+Pull the best 25 seconds from this episode. Captions on, vertical, our colours.
+
+9:16 · 1080×1920 · 26 s · exported in 6.00 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/podcast.json>)
+
+[Video: Lens launch](https://ultrafast.mov/media/examples/product.mp4) 3D rendered by ultrafast
+
+### [Launch films](<https://ultrafast.mov/use-cases/#launches>)
+
+A launch film for our 35 mm lens: the knurling, the iris, an exploded view, then the price.
+
+16:9 · 1920×1080 · 16 s · exported in 4.88 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/product.json>)
+
+[Video: Year in review](https://ultrafast.mov/media/examples/wrapped.mp4)
+
+### [One video per customer](<https://ultrafast.mov/use-cases/#at-scale>)
+
+Make every member their year in review from this spreadsheet.
+
+9:16 · 1080×1920 · 12 s · exported in 1.37 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/wrapped.json>)
+
+[[Video: Year in review: Tomás](https://ultrafast.mov/media/examples/wrapped-tomas.mp4)Tomás](<https://ultrafast.mov/examples/wrapped-tomas.json>)[[Video: Year in review: Oluwaseun](https://ultrafast.mov/media/examples/wrapped-oluwaseun.mp4)Oluwaseun](<https://ultrafast.mov/examples/wrapped-oluwaseun.json>)[[Video: Year in review: Bea](https://ultrafast.mov/media/examples/wrapped-bea.mp4)Bea](<https://ultrafast.mov/examples/wrapped-bea.json>)
+
+[Video: The Keeling Curve](https://ultrafast.mov/media/examples/keeling.mp4)
+
+### [Data stories](<https://ultrafast.mov/use-cases/#data>)
+
+Turn NOAA's Mauna Loa CO₂ file into a chart for Instagram.
+
+4:5 · 1080×1350 · 16 s · exported in 1.50 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/keeling.json>)
+
+[Video: Celadon dish](https://ultrafast.mov/media/examples/bloom.mp4)
+
+### [Loops and visuals](<https://ultrafast.mov/use-cases/#loops>)
+
+A 15-second loop for the album cover: something growing, in celadon.
+
+1:1 · 1080×1080 · 15 s · exported in 1.06 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/bloom.json>)
+
+How it works
+
+## A frame is a stack of plates.
+
+Each plate is a node in one JSON document. Point at a line to find its plate; click to pull it.
+
+clay.json · 1080×1920 · 30 fps · 10 s
+
+3D and 2D
+
+## 3D, 2D, or both.
+
+One engine renders 3D models, type, vector shapes, charts and footage, and composites them in the same frame. No Blender, no After Effects, no plugins: all of it is in the document.
+
+[All the films](<https://ultrafast.mov/examples/>)
+
+  * ![The HOLM 35 lens from the launch film, rendered in 3D by ultrafast](https://ultrafast.mov/img/lens_front.webp)3D
+  * ![The same lens rendered again with the camera turned 84 degrees](https://ultrafast.mov/img/lens_side.webp)3D, camera turned 84°
+  * ![The concert poster: Swiss-style type and vector shapes](https://ultrafast.mov/img/mix_poster.webp)2D: type and shapes
+  * ![The pottery class teaser: a 3D pot on its wheel under the title and details](https://ultrafast.mov/img/mix_clay.webp)both: a 3D pot under set type
+
+The lens and the pot are geometry and materials in their documents, lit and rendered by ultrafast, not made in a 3D app. Turning the camera is one more render of the same node: about 0.3 s.
+
+Speed
+
+## 894 frames a second
+
+1920×1080 · 6-sample motion blur · one RTX 5090
+
+press log
+
+1080p, 6-sample blur
+    894 fps
+launch film, 16 s
+    4.88 s
+simulation, 15 s
+    1.06 s
+class teaser, 10 s
+    1.68 s
+
+no browser in the loop
+
+[Video: HOLM 35 f/1.4, a launch film for a camera lens](https://ultrafast.mov/media/examples/product.mp4) 
+
+**4.88 s** to export this 16-second launch film: 480 frames at 1920×1080.
+
+Review
+
+## First draft: eight findings. Second: none.
+
+`uf review` read all 300 frames in 4.7 s.
+
+![Contact sheet of the first draft from uf sheet, frames at 0.55, 2.6, 4.5 and 7.5 seconds. Frame one is a white flash, the title runs off the right edge, the studio name is too dark to read and the details are tiny.](https://ultrafast.mov/img/proof_draft.webp)
+
+  1. **flashing** more than 3 flashes per second: a photosensitive seizure risk (WCAG 2.3.1)
+  2. **clipped** "Pottery class" runs off the frame (right by 40 px)
+  3. **low contrast ×2** "HALDEN CLAY STUDIO" never reaches readable contrast (best 1.6:1, want 3:1 or more); "118 TANNER STREET" 1.6:1
+  4. **too brief** "First class free" is readable for 0.4 s; 3 words need about 0.9 s
+  5. **small text ×3** set at 20 px; below about 24 px it is hard to read on a phone
+
+![Contact sheet of the second draft at the same moments: no flash, the title fits, the studio name and the details read.](https://ultrafast.mov/img/proof_approved.webp) 0 findings
+
+  1. `new`: starts from a template
+  2. `check`: finds problems without rendering
+  3. `review`: reads every frame
+  4. `export`: the teaser in 1.68 s
+
+Edits
+
+## Edit it by asking.
+
+Your agent edits the document, not the pixels. One sentence changed one node: the pot's shape, its camera and its shader. The type, light and timing stayed as they were.
+
+This works today in Claude Code, Codex, Cursor and Gemini CLI with `uf mcp`.
+
+Coming soon The ChatGPT app and the Claude connector, for making videos in a chat. [Join the waitlist](<https://ultrafast.mov/cloud/#apps>)
+
+A 10-second vertical teaser for my pottery class. Saturdays, first class free.
+
+[Video: The teaser, first version: a vase thrown on the wheel](https://ultrafast.mov/media/examples/clay.mp4)
+
+agentclay.json · 10 s · 1080×1920 · `review` 0 findings
+
+Make it a wide bowl instead of a vase.
+
+[Video: The teaser after the edit: a wide bowl](https://ultrafast.mov/media/examples/clay-bowl.mp4)
+
+agentedited 1 node, `vessel`. The type, light and timing are untouched.
+
+Compare
+
+## No browser in the loop.
+
+Remotion and HyperFrames draw each frame in headless Chrome and capture it. ultrafast draws it on the GPU, and your agent writes a fifth of the tokens.
+
+[Full comparison](<https://ultrafast.mov/compare/>)
+
+| ultrafast| Remotion| HyperFrames  
+---|---|---|---  
+Draws each frame with| GPU kernels, Metal or Vulkan| headless Chrome, a screenshot per frame| headless Chrome, captured frame by frame  
+You write| one JSON document| a React project| HTML, CSS and JavaScript  
+Output tokens for a 10 s short| about 1,100| about 5,500| about 4,400  
+Published speed, 1080p| 300 frames in 0.34 s, with 6-sample motion blur, on one GPU| an 80 s video in 15 s, split across up to 200 Lambda functions| 300 frames in 9.8 s  
+Agents review their frames| `check`, `review`, `inspect`, frames and contact sheets| no built-in review| no built-in review  
+Licence| Apache-2.0 or MIT| free up to 3 people; companies pay per render or per seat| Apache-2.0  
+Hosted rendering| ultrafast Cloud, coming soon ([waitlist](<https://ultrafast.mov/cloud/>)); `uf serve` on your GPU today| none: Lambda in your AWS account| HeyGen credits, or your own Lambda or Cloud Run  
+  
+Remotion and HyperFrames figures are from their own docs, November 2026. [Sources](<https://ultrafast.mov/compare/#sources>).
+
+Integrations
+
+## Wherever your agent runs.
+
+[All integrations](<https://ultrafast.mov/integrations/>)
+
+  * [**MCP server**`uf mcp`local · 20 tools _Available_](<https://ultrafast.mov/docs/mcp/>)
+  * [**Coding agents** Claude Code, Codex, Cursor, Gemini CLI _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
+  * [**Skill and plugin**`npx skills add``ultrafastmov/ultrafast` _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
+  * [**Remote MCP**`uf serve`/mcp on your server, one key _Available_](<https://ultrafast.mov/integrations/#remote-mcp>)
+  * [**SDKs**`pip install ultrafastmov``npm i ultrafastmov` _Available_](<https://ultrafast.mov/integrations/#sdks>)
+  * [**Framework starters** Vercel AI SDK, OpenAI Agents SDK, LangGraph, Mastra _Available_](<https://ultrafast.mov/integrations/#frameworks>)
+  * [**Self-host**`docker run …`the HTTP API on one GPU _Available_](<https://ultrafast.mov/integrations/#self-host>)
+  * [**ChatGPT app** make and edit videos in a chat _Coming soon_](<https://ultrafast.mov/cloud/#apps>)
+  * [**Claude connector** for Claude on the web, desktop and phone _Coming soon_](<https://ultrafast.mov/cloud/#apps>)
+  * [**ultrafast Cloud** our GPUs, one API key _Waitlist_](<https://ultrafast.mov/cloud/>)
+
+Two ways to run it
+
+## Your GPU today. Ours soon.
+
+[About ultrafast Cloud](<https://ultrafast.mov/cloud/>)
+
+docket Aopen source · available
+
+### Yours
+
+licence
+    Apache-2.0 or MIT
+runs on
+    Metal on macOS (Apple silicon) · Vulkan on Linux and Windows (WSL2)
+in the box
+    70 ops · 20 MCP tools · the live player · the render service
+costs
+    nothing, at any scale
+
+`cargo install ultrafast`
+
+docket Bultrafast Cloud · coming soon
+
+### Ours
+
+you bring
+    one API key. No GPU, drivers or ffmpeg
+you get
+    the same engine and HTTP API, on our GPUs
+with it
+    the ChatGPT app, the Claude connector and remote MCP with sign-in
+price
+    set before it opens
+
+waitlist Email for the ultrafast Cloud waitlist Join the waitlist
+
+Questions
+
+## Common questions.
+
+What is ultrafast?
+
+An open-source video engine built for AI agents. A video is a JSON document of nodes (footage, type, shapes, 3D, effects); ultrafast checks it, shows the agent its frames and renders it on the GPU at hundreds of frames a second.
+
+Do I need a GPU?
+
+Yes, for now: a Mac with Apple silicon, or a computer with a Vulkan GPU on Linux or Windows (through WSL2). ultrafast Cloud, which renders on our GPUs, is coming soon: [join the waitlist](<https://ultrafast.mov/cloud/>).
+
+Can it edit my own footage?
+
+Yes. Cut, trim, speed-ramp, reframe, grade, key and caption video files, mix in music and voiceover, and add titles, logos and charts. The [footage examples](<https://ultrafast.mov/examples/#footage>) cut, caption and grade NASA film and sound.
+
+Is the 3D in the examples rendered by ultrafast?
+
+Yes. The pot, the lens, the compass, the chrome ring, the Earth and the Moon are geometry and materials written in each film's document. ultrafast lights and renders them on the GPU every frame, in the same pass as the type. Nothing was filmed, and nothing was made in a 3D app.
+
+Which sizes and formats can it make?
+
+Any size and frame rate: 9:16, 1:1, 4:5, 16:9, 21:9 or your own, up to 4K. Exports are MP4 or MOV in H.264 or HEVC, with sound.
+
+How is it different from Remotion or HyperFrames?
+
+They draw each frame in headless Chrome and screenshot it. ultrafast draws on the GPU with no browser: 300 frames of 1080p with motion blur in 0.34 s on one RTX 5090, where HyperFrames' own guide gives 9.8 s for 300 frames. It also gives agents tools to check and review their videos. See the [comparison](<https://ultrafast.mov/compare/>).
+
+Does an agent use fewer tokens with ultrafast?
+
+Yes, about a fifth as many. A 10-second short is about 1,100 output tokens of JSON. The same short is about 5,500 tokens as a Remotion project and 4,400 as a HyperFrames composition, and most of that is web code. See [tokens](<https://ultrafast.mov/compare/#tokens>).
+
+What does it cost?
+
+Nothing. The engine is free under Apache-2.0 or MIT, for commercial use, at any scale.
+
+Is there a hosted version?
+
+Not yet. ultrafast Cloud will run the same engine on our GPUs with one API key, and the ChatGPT app and the Claude connector will run on it. [Join the waitlist](<https://ultrafast.mov/cloud/>) and we'll email you when it opens.
+
+## cargo install ultrafast
+
+`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Quickstart · ultrafast docs
+
+> Install ultrafast, make your first video, and learn the loop agents use: new, check, sheet, review, export. Then connect it to your agent over MCP.
+
+URL: https://ultrafast.mov/docs/
+
+Docs
+
+# Quickstart
+
+Install it, make your first video, then hand the loop to your agent.
+
+## Start
+
+  * [Quickstart](<https://ultrafast.mov/docs/>)
+  * [The document](<https://ultrafast.mov/docs/documents/>)
+
+## Reference
+
+  * [Ops](<https://ultrafast.mov/docs/ops/>)
+  * [CLI](<https://ultrafast.mov/docs/cli/>)
+  * [MCP server](<https://ultrafast.mov/docs/mcp/>)
+  * [HTTP API](<https://ultrafast.mov/docs/api/>)
+
+## For agents
+
+  * [llms.txt](<https://ultrafast.mov/llms.txt>)
+  * [This page as Markdown](<https://ultrafast.mov/docs/index.md>)
+
+**On this page**
+
+  1. Install
+  2. Your first video
+  3. What you just made
+  4. The loop
+  5. Connect an agent
+  6. Run it as a service
+  7. Next
+
+## Install
+
+One binary, `ultrafast`, with `uf` as its short name. Pick one:
+
+```
+brew install ultrafastmov/tap/ultrafast    # macOS and Linux, prebuilt
+cargo install ultrafast                    # from crates.io, Rust 1.91 or later
+docker run --gpus all ghcr.io/ultrafastmov/ultrafast:latest info
+``` 
+
+Or download a prebuilt archive for macOS (Apple silicon) or Linux x86_64 from [GitHub releases](<https://github.com/ultrafastmov/ultrafast/releases>). It renders with **Metal** on macOS and **Vulkan** on Linux, and on Windows through WSL2 ([WINDOWS.md](<https://github.com/ultrafastmov/ultrafast/blob/main/docs/WINDOWS.md>)). Exports on Vulkan use ffmpeg, and on Linux voiceover and OCR use eSpeak NG and Tesseract. The Docker image includes all of them; the prebuilt binaries include everything else. No GPU? [ultrafast Cloud](<https://ultrafast.mov/cloud/>) is coming soon.
+
+```
+$ uf info
+backend: vulkan
+device:  NVIDIA GeForce RTX 5090
+``` 
+
+## Your first video
+
+Start from a template, look at it, then export it.
+
+```
+uf new vertical film.json                       # 1080×1920, 6 s, already looks finished
+uf check film.json                              # problems, before anything renders
+uf sheet film.json --count 9 --out sheet.png    # nine frames in one image
+uf live film.json                               # plays it; edits show on the next frame
+uf review film.json --safe social               # what a viewer would trip over
+uf export film.json film.mp4                    # hardware-encoded mp4
+``` 
+
+Other templates: `title`, `square`, `promo`, `explainer` and `product`. Edit the words in `film.json` and run `uf export` again.
+
+## What you just made
+
+A video is one JSON document: a `format`, a graph of `nodes`, and the node to `output`. Nodes are sources (footage, type, shapes, 3D), effects and composites; any param can be animated.
+
+```
+{
+  "version": 1,
+  "format": { "width": 1920, "height": 1080, "fps": 60, "duration": 4.0 },
+  "output": "comp",
+  "nodes": {
+    "bg":   { "op": "gradient", "params": { "a": "#0b0b1a", "b": "#2a1650" } },
+    "disc": { "op": "shape", "params": {
+      "kind": "circle", "color": "#ff7a2e", "size": [360, 360],
+      "center": { "keys": [
+        { "t": 0, "v": [560, 540], "ease": "in_out_cubic" },
+        { "t": 4, "v": [1360, 540] }
+      ] } } },
+    "comp": { "op": "over", "inputs": { "fg": "disc", "bg": "bg" } }
+  }
+}
+``` 
+
+The whole vocabulary is in [the op reference](<https://ultrafast.mov/docs/ops/>), and `uf ops` prints it as JSON. The shape of a document is in [The document](<https://ultrafast.mov/docs/documents/>).
+
+## The loop
+
+This is how an agent works, and how you should too:
+
+  1. **Start** from `uf new` or a copy of an example.
+  2. **Check** : `uf check` reports unknown ops, misspelled params (with suggestions), wrongly shaped values, broken shaders and missing files, without rendering.
+  3. **Look** : `uf sheet` for motion at a glance, `uf render --at 2.5` for one exact frame, `uf inspect --at 2.5` for which node drew what.
+  4. **Review** : `uf review` renders the film and reports unreadable, clipped, overlapping, tiny or too-brief text, text under social app buttons, and flashing faster than three times a second.
+  5. **Export** : `uf export`, hardware-encoded with sound and motion blur.
+
+## Connect an agent
+
+`uf mcp` serves all of this as 20 MCP tools over stdio. Frames and contact sheets come back as images, so the agent sees what it made.
+
+```
+claude mcp add ultrafast -- uf mcp
+``` 
+
+Codex, Cursor, Gemini CLI and remote MCP over HTTP are on the [MCP page](<https://ultrafast.mov/docs/mcp/>). Agents can also read [llms.txt](<https://ultrafast.mov/llms.txt>) and every page of these docs as Markdown.
+
+## Run it as a service
+
+`uf serve` puts the engine behind an HTTP API and remote MCP on your GPU, with one API key, for apps, the [SDKs](<https://ultrafast.mov/integrations/#sdks>) and agents on other machines.
+
+```
+uf serve --port 8080                   # prints its API key at first start
+export ULTRAFAST_API_KEY=uf_live_...
+jq '{document: ., output: {inline: true}}' film.json |
+curl http://localhost:8080/v1/render -H "Authorization: Bearer $ULTRAFAST_API_KEY" \
+  -H "Content-Type: application/json" --data-binary @- -o film.mp4
+``` 
+
+The requests are in [HTTP API](<https://ultrafast.mov/docs/api/>). A hosted version, ultrafast Cloud, is coming soon: [join the waitlist](<https://ultrafast.mov/cloud/>).
+
+## Next
+
+  * [The document](<https://ultrafast.mov/docs/documents/>): format, nodes, animation, timing and components.
+  * [Op reference](<https://ultrafast.mov/docs/ops/>): all 70 ops with their params.
+  * [CLI](<https://ultrafast.mov/docs/cli/>) and [HTTP API](<https://ultrafast.mov/docs/api/>).
+  * [Examples](<https://ultrafast.mov/examples/>): every video there links to its document.
+
+
+---
+
+# The document format · ultrafast docs
+
+> An ultrafast video is one JSON document: a format, a graph of nodes, animated params and timing windows. The full shape, with examples.
+
+URL: https://ultrafast.mov/docs/documents/
+
+Docs
+
+# The document
+
+A video is one JSON file. Here is its whole shape.
+
+## Start
+
+  * [Quickstart](<https://ultrafast.mov/docs/>)
+  * [The document](<https://ultrafast.mov/docs/documents/>)
+
+## Reference
+
+  * [Ops](<https://ultrafast.mov/docs/ops/>)
+  * [CLI](<https://ultrafast.mov/docs/cli/>)
+  * [MCP server](<https://ultrafast.mov/docs/mcp/>)
+  * [HTTP API](<https://ultrafast.mov/docs/api/>)
+
+## For agents
+
+  * [llms.txt](<https://ultrafast.mov/llms.txt>)
+  * [This page as Markdown](<https://ultrafast.mov/docs/documents/index.md>)
+
+**On this page**
+
+  1. Shape
+  2. format
+  3. nodes
+  4. Params and animation
+  5. timing
+  6. components
+  7. Assets, colour, type
+  8. Schema and versions
+
+## Shape
+
+```
+{
+  "version": 1,
+  "format": { "width": 1080, "height": 1920, "fps": 30, "duration": 10,
+              "motion_blur": { "samples": 6, "shutter": 0.5 } },
+  "nodes": {
+    "<id>": { "op": "<op>", "params": { }, "inputs": { }, "timing": { } }
+  },
+  "components": { },
+  "output": "<id of the node to render>"
+}
+``` 
+
+Documents are plain files you can diff, template and edit. The engine reloads a document when it changes, so an agent can write it directly or through `uf edit`.
+
+## format
+
+  * `width`, `height`: any size, in pixels. Change them and frame-relative layout (blocks, captions, `fit`, stacks) follows.
+  * `fps`, `duration`: frames per second and seconds.
+  * `motion_blur`: `samples` and `shutter`, plus `max_samples` for whips and fast pans. Each moving layer is blurred on its own, as a compositor does; footage and shaders hold at the frame's time.
+
+## nodes
+
+Each node has an `op`, its `params`, its `inputs` (other nodes, by id, on named ports) and optional `timing`. Sources have no inputs; effects take a `source`; composites take `fg` and `bg`.
+
+```
+"clip":  { "op": "video", "params": { "src": "launch.mp4", "fit": "cover", "start": 12 } },
+"grade": { "op": "grade", "inputs": { "source": "clip" }, "params": { "look": 2, "amount": 0.6 } },
+"title": { "op": "block", "params": { "kind": "title", "title": "Artemis I", "kicker": "16 Nov 2022" } },
+"comp":  { "op": "over", "inputs": { "fg": "title", "bg": "grade" } }
+``` 
+
+Generators (`solid`, `gradient`, `noise`, shaders) are infinite: crop or transform them into panels. Paths and text stay vector until they are rasterized, so a `transform` directly on them stays sharp at any scale. The planner fuses chains of nodes into one GPU kernel and skips what can't be seen.
+
+## Params and animation
+
+Any param can be a constant or animated:
+
+```
+"size": 64
+"position": { "keys": [ { "t": 0, "v": [540, 2100], "ease": "out_expo" },
+                        { "t": 0.8, "v": [540, 960] } ] }
+"rotation": { "keys": [ { "t": 0, "v": 0 }, { "t": 1, "v": 10 } ], "repeat": "pingpong" }
+"position": { "wiggle": { "frequency": 2, "amplitude": 10, "base": [540, 960] } }
+"opacity":  { "expr": "0.5 + 0.5 * sin(t * 3)" }
+``` 
+
+  * **Keys** : `t` in seconds, `v` the value, `ease` a name (`in_out_cubic`, `out_expo`, `out_back`, `spring`...) or a CSS-style bezier `{"bezier": [0.16, 1, 0.3, 1]}`. `repeat`: `cycle` or `pingpong`.
+  * **Drivers** : `wiggle`, `oscillate`, and `audio`, which follows a soundtrack band so a param pulses with the music.
+  * **Expressions** : `{"expr": "..."}`, a formula of `t`, with a list for vectors.
+
+## timing
+
+```
+"timing": { "in": 2, "out": 6, "offset": 2, "speed": 0.5 }
+``` 
+
+  * `in`, `out`: when the node is on screen. Outside its window a composite passes its background through and an effect passes its source; neither costs anything.
+  * `offset`: where the node's local time zero sits in its parent's time. `speed`: local seconds per parent second (negative plays backwards). `loop`: local time wraps at this duration.
+  * Windows compose through nesting. For cuts between shots, prefer `transition` nodes (crossfade, dip, wipe, push, slide, iris, zoom, dissolve, glitch, blur); each shot renders only while it is on screen.
+
+## components
+
+A component is a small document with its own params and inputs, used like an op. `"$name"` inside a component refers to one of its params. Components are flattened before planning, so they cost nothing at render time. `uf import-svg` and `uf import-lottie` write SVG artwork and Lottie animations as components with every part editable.
+
+## Assets, colour, type
+
+  * File paths (footage, images, fonts, SVG, Lottie, audio) are relative to the document.
+  * Colours are sRGB hex (`#ff48b0`, `#ff48b080`) or 0–1 arrays with straight alpha. Compositing is in linear light; set `"space": "srgb"` on an `over`, `blend` or `gradient` to blend the way CSS and Figma do.
+  * Fonts: a family name (any Google Font is fetched once by name), a font file, or a bundled face (`ultrafast:display`, `ultrafast:sans`, `ultrafast:serif`, `ultrafast:mono`, `ultrafast:wide`). Variable fonts animate any axis with `axis_<tag>`.
+
+## Schema and versions
+
+Documents carry `"version": 1`. The JSON Schema is published at [ultrafast.mov/schema/v1.json](<https://ultrafast.mov/schema/v1.json>) for editor completion and validation; `uf schema` prints the same file, and `uf ops` the vocabulary with every param's type and default. Changes within a version are additive.
+
+
+---
+
+# MCP server · 20 tools · ultrafast docs
+
+> ultrafast as MCP tools for Claude Code, Codex, Cursor, Gemini CLI and any MCP client: local over stdio with uf mcp, or remote over Streamable HTTP from your own uf serve with an API key.
+
+URL: https://ultrafast.mov/docs/mcp/
+
+Docs
+
+# MCP server
+
+20 tools that let an agent write a video, look at it, fix it and export it, without a shell.
+
+## Start
+
+  * [Quickstart](<https://ultrafast.mov/docs/>)
+  * [The document](<https://ultrafast.mov/docs/documents/>)
+
+## Reference
+
+  * [Ops](<https://ultrafast.mov/docs/ops/>)
+  * [CLI](<https://ultrafast.mov/docs/cli/>)
+  * [MCP server](<https://ultrafast.mov/docs/mcp/>)
+  * [HTTP API](<https://ultrafast.mov/docs/api/>)
+
+## For agents
+
+  * [llms.txt](<https://ultrafast.mov/llms.txt>)
+  * [This page as Markdown](<https://ultrafast.mov/docs/mcp/index.md>)
+
+**On this page**
+
+  1. Local, over stdio
+  2. Remote, over HTTP
+  3. The tools
+  4. How agents use them
+
+## Local, over stdio
+
+`uf mcp` is a stdio MCP server (JSON-RPC 2.0, one message per line). Renders run on your GPU.
+
+```
+claude mcp add ultrafast -- uf mcp
+``` 
+
+```
+[mcp_servers.ultrafast]
+command = "uf"
+args = ["mcp"]
+``` 
+
+```
+{
+  "mcpServers": {
+    "ultrafast": { "command": "uf", "args": ["mcp"] }
+  }
+}
+``` 
+
+Documents stay plain JSON files. The server keeps a renderer per document, so repeated frames are fast, and reloads a file when it changes, whether the agent edits it with `ultrafast_edit` or writes it directly.
+
+## Remote, over HTTP
+
+`ultrafast serve` answers MCP over Streamable HTTP at `/mcp`, with its API key as a bearer token, for agent frameworks and any client that can't run a local process. It serves the 16 tools that need no local files; they take the document and asset ids instead of file paths; frames and sheets come back as images and exports as download links.
+
+```
+claude mcp add --transport http ultrafast http://localhost:8080/mcp \
+  --header "Authorization: Bearer $ULTRAFAST_API_KEY"
+``` 
+
+A hosted server with OAuth sign-in, for the ChatGPT app and the Claude connector, comes with [ultrafast Cloud](<https://ultrafast.mov/cloud/>).
+
+## The tools
+
+tool| does  
+---|---  
+`ultrafast_ops`| The op vocabulary: ports, params, types, defaults, docs.  
+`ultrafast_new`| Write a template (`vertical`, `title`, `square`, `promo`, `explainer`, `product`) to a path.  
+`ultrafast_check`| Problems in a document, static and render-time.  
+`ultrafast_frame`| One exact frame, returned as an image.  
+`ultrafast_sheet`| A labelled contact sheet of frames, returned as an image.  
+`ultrafast_review`| Renders the film and reports unreadable, too-brief, clipped, overlapping or tiny text, unsafe areas and seizure-risk flashing.  
+`ultrafast_inspect`| What is on screen at a time: each element's node, bounds and words.  
+`ultrafast_edit`| Apply an edit batch to the document file, atomically.  
+`ultrafast_export`| Encode to MP4, MOV (ProRes), WebM, a GIF, a PNG or EXR sequence or sound alone, at any size, frame rate and quality level, transparent where the codec allows.  
+`ultrafast_estimate`| Rendered minutes, GPU seconds and the time to the first byte, before rendering.  
+`ultrafast_batch`| One document, a video per row of a CSV or JSON file.  
+`ultrafast_profile`| GPU milliseconds per render group, for slow films.  
+`ultrafast_beats`| Tempo, beats, downbeats and onsets of a soundtrack.  
+`ultrafast_voiceover`| Speak a script to WAV with every word's time, for audio and captions.  
+`ultrafast_import_svg`| An SVG as an editable component, or added to a document.  
+`ultrafast_decompose`| A finished video as an editable document: plate, vector layers with their motion, gradients, type read back as text in its matched font.  
+`ultrafast_match_font`| A text node's font, size, baseline, tracking and colour, from a video frame.  
+`ultrafast_ocr`| The text in a video frame, with word boxes and a draft of text nodes.  
+`ultrafast_measure`| Glyph metrics of a line of text.  
+`ultrafast_outline`| A line of text as SVG path data.  
+  
+## How agents use them
+
+  1. `ultrafast_new` or write the JSON; `ultrafast_ops` when unsure of a param.
+  2. `ultrafast_check` until it's clean.
+  3. `ultrafast_sheet` to see the motion; `ultrafast_inspect` to find the node behind a pixel.
+  4. `ultrafast_review`; fix what it reports with `ultrafast_edit`.
+  5. `ultrafast_export`.
+
+The ultrafast skill teaches agents the document and this loop: `npx skills add ultrafastmov/ultrafast`. In Claude Code, the plugin brings the skill and `uf mcp` together: `claude plugin marketplace add ultrafastmov/ultrafast`, then `claude plugin install ultrafast@ultrafast`.
+
+Agents that read docs can start from [llms.txt](<https://ultrafast.mov/llms.txt>); every page here is also available as Markdown at `index.md`.
+
+
+---
+
+# CLI reference · ultrafast docs
+
+> Every ultrafast command: new, check, sheet, render, review, inspect, live, export, serve, mcp and more. The CLI is ultrafast, or uf for short.
+
+URL: https://ultrafast.mov/docs/cli/
+
+Docs  
+  
+# The CLI
+
+`ultrafast`, or `uf` for short. Every command answers in JSON or in files you can look at.
+
+## Start
+
+  * [Quickstart](<https://ultrafast.mov/docs/>)
+  * [The document](<https://ultrafast.mov/docs/documents/>)
+
+## Reference
+
+  * [Ops](<https://ultrafast.mov/docs/ops/>)
+  * [CLI](<https://ultrafast.mov/docs/cli/>)
+  * [MCP server](<https://ultrafast.mov/docs/mcp/>)
+  * [HTTP API](<https://ultrafast.mov/docs/api/>)
+
+## For agents
+
+  * [llms.txt](<https://ultrafast.mov/llms.txt>)
+  * [This page as Markdown](<https://ultrafast.mov/docs/cli/index.md>)
+
+**On this page**
+
+  1. Make
+  2. Export
+  3. Look and review
+  4. Learn the vocabulary
+  5. Import and rebuild
+  6. Sound
+  7. Speed
+  8. Serve
+  9. Cloud
+
+## Make
+
+`uf new <template> <out.json>`| Start from a template: `vertical`, `title`, `square`, `promo`, `explainer`, `product`.  
+---|---  
+`uf check <doc.json>`| Problems without rendering: unknown ops, misspelled params, bad values, broken shaders, missing files.  
+`uf edit <doc.json> <edits.json>`| Apply an edit batch; prints what kind of change it was.  
+`uf live <doc.json> [--port 7878]`| A realtime player and JSON-lines edit server; reloads the file when it changes. `--compare ref.mp4` shows a reference split against it.  
+`uf send '<json>'`| Send one request to a live session.  
+`uf record <doc> <script> <out.mp4>`| Play a document while applying a script of edits, and film the player.  
+`uf export <doc> <out>`| Encode the film; the format follows `<out>`. H.264 and HEVC encode on the GPU with zero readback. All the options are under Export.  
+`uf batch <doc> --data rows.csv`| One document, a video per row of a CSV, JSON or JSON-lines file. A column named `node.param` sets that param; other columns name the files: `--out 'out/{name}.mp4'`. `--docs DIR` writes each row's document instead.  
+  
+## Export
+
+One document gives every deliverable. The same settings work as `uf export` flags, [MCP](<https://ultrafast.mov/docs/mcp/>) tool arguments and the [API](<https://ultrafast.mov/docs/api/>)'s `output`. Settings that don't go together are refused before anything renders.
+
+Formats| `.mp4`, `.mov`, `.mkv`, `.webm`, `.gif`; a folder (`frames/`) or a pattern (`frames/{frame:05}.exr`) for a PNG or EXR sequence, with the sound beside it as `audio.wav`; `.wav`, `.mp3`, `.m4a`, `.flac`, `.opus` for the sound alone. `--format` names one.  
+---|---  
+`--quality draft|standard|high|master`| `draft` is a fast preview: no motion blur and the fastest encode. `standard` is the default. `high` takes more motion-blur samples and a slower encode, for uploads that get re-encoded. `master` takes twice the samples and the best encode. The shutter never changes, so the look stays the document's.  
+`--size 720p|1080p|1440p|4k|WxH`, `--scale S`| Renders at that size, sharp; it is not an upscale. `720p` is the short side, so a vertical film stays vertical.  
+`--fps N`| Another frame rate (`29.97` and `30000/1001` work); the film plays at the same speed. GIFs default to at most 30.  
+`--codec h264|hevc|av1|vp9|prores`| The default is H.264 (VP9 in `.webm`). `--prores-profile proxy|light|standard|hq|4444|4444-xq` defaults to `hq`.  
+`--alpha`| Keeps transparency: ProRes 4444 in `.mov`, VP9 in `.webm`, GIF, PNG and EXR. Leave the full-frame background out of the document.  
+`--crf N`, `--bitrate 8M`| Constant quality on the codec's scale, or an average bitrate, instead of the quality level's.  
+`--audio-codec aac|opus|mp3|flac|pcm|pcm-24`, `--audio-bitrate 192k`, `--no-audio`| The sound in the file: AAC by default, Opus in WebM, PCM with ProRes.  
+`--loops N`| GIF: how many more times it plays after the first. `0` plays once; the default is forever.  
+`--from S`, `--to S`, `--workers N`| A range of the film; several renderers on the GPU at once.  
+  
+```
+uf export film.json film.mp4 --quality draft --size 720p     # watch the motion
+uf export film.json film.mp4 --size 4k --quality high         # a sharp 4K upload
+uf export film.json overlay.mov --codec prores --alpha        # ProRes 4444 for an editor
+uf export film.json web.webm --alpha                          # VP9 with alpha for a page
+uf export film.json teaser.gif --size 480p --fps 15           # a GIF
+uf export film.json plates/ --alpha                           # PNG frames and audio.wav
+``` 
+
+## Look and review
+
+`uf sheet <doc> [--count N]`| A labelled contact sheet of frames: motion at a glance.  
+---|---  
+`uf render <doc> --at 2.5 --out f.png`| One exact frame; `--size 4k` or `--scale 2` renders it larger.  
+`uf frames <doc> --out-dir DIR`| Every frame (or every Nth) as PNG.  
+`uf inspect <doc> --at T [--point X,Y]`| What is on screen at a time: each element's node, bounds and words; with `--point`, the topmost element there.  
+`uf review <doc> [--safe margin|social]`| Render the film and report what viewers would trip over: unreadable, too-brief, clipped, overlapping or tiny text; text under social app buttons; flashing faster than 3 per second.  
+  
+## Learn the vocabulary
+
+`uf ops`| Every op, its ports, params, types and defaults, as JSON. The same as the [op reference](<https://ultrafast.mov/docs/ops/>).  
+---|---  
+`uf schema`| The document format as JSON Schema, the same as [/schema/v1.json](<https://ultrafast.mov/schema/v1.json>).  
+`uf measure '<text params>'`| Glyph-by-glyph metrics of a line of text, for hand layout.  
+`uf outline '<text params>'`| A line of text as SVG path data, for morphs and vector work.  
+`uf info`| The GPU and backend in use.  
+  
+## Import and rebuild
+
+`uf import-svg <file.svg>`| An SVG as an editable component: one path per shape, gradients, strokes, text as outlines.  
+---|---  
+`uf import-lottie <anim.json>`| A Lottie animation as editable paths and keyframes.  
+`uf decompose <video> --out-dir DIR`| Split a motion-graphics video into a still plate and vector layers keyed frame by frame.  
+`uf reconstruct <video> --out-dir DIR`| A whole video as an editable draft: shots, text layers with matched fonts, backgrounds, fades.  
+`uf probe`, `extract`, `compare`, `fit`, `fit-motion`, `match-font`, `plate`, `ocr`, `matte`| Refine a reconstruction: shots, reference frames, PSNR and SSIM, fitted params and motion, fonts, plates, text, mattes. Text is read with Apple Vision on macOS and Tesseract elsewhere; `matte` needs macOS.  
+`uf faces <video>`| Face tracks, who is talking and the cuts: what a `clip_camera` follows. A `clip_camera` without `faces` tracks them itself.  
+  
+## Sound
+
+`uf beats <audio or video>`| Tempo, beat grid, downbeats and onsets as JSON: cut on the beat.  
+---|---  
+`uf voiceover '<text>' out.wav words.json`| Speak a script and write the time of every word, for `audio` and `captions` nodes. The system voices on macOS, eSpeak NG elsewhere.  
+  
+## Speed
+
+`uf estimate <doc>`| What an export costs before it runs: rendered minutes, GPU seconds timed on sampled frames, and the time to the first byte. Give it the export flags (`--size 4k --quality high`) to estimate that export. `--json` for the numbers.  
+---|---  
+`uf bench <doc>`| GPU throughput with no readback.  
+`uf profile <doc> [--from T]`| GPU time per render group: which nodes cost what, and how many motion-blur samples each runs.  
+`uf plan <doc>`| How the graph fused into kernels.  
+`uf warm <doc>...`| Compile and cache every kernel the documents need, so a fresh instance starts compiled.  
+  
+## Serve
+
+`uf mcp`| 20 MCP tools over stdio. See [MCP server](<https://ultrafast.mov/docs/mcp/>).  
+---|---  
+`uf serve [--port 8080]`| The render service on your GPU: the [HTTP API](<https://ultrafast.mov/docs/api/>) (renders, uploads, frames, sheets, check, review, estimate) and remote MCP at `/mcp`, with one API key and files on local disk. `uf serve key` prints a new key.  
+`uf batch`| With no document: export `<doc.json> <out.mp4>` per line of stdin with one warm renderer.  
+  
+## Cloud
+
+ultrafast Cloud, which will run these commands on our GPUs, is coming soon: [join the waitlist](<https://ultrafast.mov/cloud/>). Until then every command runs on your own GPU, and `uf serve` shares it over HTTP.
+
+
+---
+
+# HTTP API · ultrafast docs
+
+> Render ultrafast documents over HTTP with uf serve on your own GPU: renders, frames, sheets, check, review, estimates and uploads, with one API key.
+
+URL: https://ultrafast.mov/docs/api/
+
+Docs
+
+# HTTP API
+
+Render documents over HTTP from `uf serve` on your own GPU, with one API key and files on local disk.
+
+## Start
+
+  * [Quickstart](<https://ultrafast.mov/docs/>)
+  * [The document](<https://ultrafast.mov/docs/documents/>)
+
+## Reference
+
+  * [Ops](<https://ultrafast.mov/docs/ops/>)
+  * [CLI](<https://ultrafast.mov/docs/cli/>)
+  * [MCP server](<https://ultrafast.mov/docs/mcp/>)
+  * [HTTP API](<https://ultrafast.mov/docs/api/>)
+
+## For agents
+
+  * [llms.txt](<https://ultrafast.mov/llms.txt>)
+  * [This page as Markdown](<https://ultrafast.mov/docs/api/index.md>)
+
+**On this page**
+
+  1. Authentication
+  2. POST /v1/render
+  3. Jobs and webhooks
+  4. POST /v1/estimate
+  5. POST /v1/frame
+  6. Check and review
+  7. Uploads
+  8. Errors and limits
+  9. Cloud-only parts
+
+## Authentication
+
+Start the server with `uf serve` (or the [Docker image](<https://ultrafast.mov/integrations/#self-host>)); the base URL is `http://localhost:8080` unless you pass `--port` or `--host`. Send its API key as a bearer token: with none set, it makes one at first start and prints it, and `uf serve key` prints a new one. The SDKs read `ULTRAFAST_BASE_URL` and `ULTRAFAST_API_KEY`.
+
+```
+Authorization: Bearer uf_live_...
+Content-Type: application/json
+``` 
+
+## POST /v1/render
+
+A document in, a video out: MP4, MOV, WebM, a GIF, a PNG or EXR sequence, or sound alone, at any size and frame rate. Short renders can come back in the response; anything longer goes to storage and returns a receipt.
+
+```
+{
+  "document": { "version": 1, "format": { }, "nodes": { }, "output": "comp" },
+  "output": {
+    "inline": true,
+    "quality": "draft",
+    "size": "720p",
+    "audio": true,
+    "range": null
+  }
+}
+``` 
+
+  * `output.inline: true`: the file is the response body (up to 32 MiB), with its own content type. Otherwise it is stored and you get a receipt with a signed URL.
+  * `output.format`: `mp4` (default), `mov`, `mkv`, `webm`, `gif`; `png` or `exr` for an image sequence, delivered as a zip with the sound as `audio.wav`; `wav`, `mp3`, `m4a`, `flac` or `opus` for the sound alone. `output.name`'s extension picks it too.
+  * `output.codec`: `h264` (default), `hevc`, `av1`, `vp9` or `prores` (`prores_profile`: `proxy` to `4444-xq`, default `hq`). `output.alpha: true` keeps transparency in ProRes 4444, VP9, GIF, PNG and EXR.
+  * `output.quality`: `draft` (a fast preview without motion blur), `standard` (default), `high` or `master`. `crf` or `bitrate` (`"8M"`) override its encoder setting.
+  * `output.size`: `720p`, `1080p`, `1440p`, `4k` or `"WxH"`, rendered at that size, sharp, not scaled up; or `scale`. `output.fps`: another frame rate; the film plays at the same speed. Minutes count the size you render.
+  * `audio`, `audio_codec`, `audio_bitrate`; `loops` for GIFs; `output.range`: `[from, to]` seconds. Settings that don't go together are a `400` before anything renders.
+  * `output.uri` (Cloud only): write to your own bucket (`s3://`, `gs://`, `r2://`) instead, create-only, so a retry never overwrites a finished video.
+
+```
+{
+  "status": "rendered",
+  "url": "http://localhost:8080/v1/files/renders/render_01M7.../film.mp4?expires=...&sig=...",
+  "duration": 11.6,
+  "frames": 348,
+  "bytes": 6620112,
+  "sha256": "2b7e...",
+  "video": { "width": 1080, "height": 1920, "fps": 30, "format": "mp4", "codec": "h264", "quality": "standard" },
+  "minutes": 0.19,
+  "timings": { "plan_s": 0.03, "render_s": 1.71, "encode_s": 0.22, "total_s": 2.2 }
+}
+``` 
+
+## Jobs and webhooks
+
+Planned for [ultrafast Cloud](<https://ultrafast.mov/cloud/>), and not in `uf serve`: long or batch renders as jobs, with a webhook called when each is done. A self-hosted server answers `/v1/jobs` with `501` and the code `cloud_only`.
+
+Webhooks are signed with your webhook secret (`GET /v1/me`; `Ultrafast-Signature: sha256=` and the hex HMAC-SHA256 of the body) and retried with backoff for 24 hours.
+
+## POST /v1/estimate
+
+What a document will cost before it renders: rendered minutes, GPU seconds and the time to the first byte, from the same plan the renderer runs. A few sampled frames render on the GPU and nothing is encoded. Send the render request's `output` along (`{"size": "4k", "quality": "high"}`) to estimate that render.
+
+```
+{ "minutes": 0.2, "gpu_seconds": 2.1, "first_byte_s": 3.0, "usd": null }
+``` 
+
+`usd` stays null unless whoever runs the server sets a price per minute.
+
+## POST /v1/frame
+
+One frame as PNG or JPEG: `{"document": {...}, "at": 2.5, "format": "png"}`. `POST /v1/sheet` returns a labelled contact sheet the same way.
+
+## Check and review
+
+`POST /v1/check` with `{"document": {...}}` returns `{"ok", "issues"}`, the same as `uf check`. `POST /v1/review` renders the film and returns what `uf review` finds: `{"document": {...}, "safe": "social"}`.
+
+## Uploads
+
+Footage, images, fonts and audio go up once and are referenced by id in documents.
+
+```
+curl http://localhost:8080/v1/uploads -H "Authorization: Bearer $ULTRAFAST_API_KEY" \
+  -F file=@interview.mp4
+# {"id": "asset_7Kq...", "uri": "asset://7Kq...", "bytes": 48211002, ...}
+``` 
+
+Then use `"src": "asset://7Kq..."` in a `video`, `image`, `audio` or `captions` node. Public `https://` URLs work too. Documents sent to the server never read local paths; the SDKs upload a document's local files for you.
+
+## Errors and limits
+
+Errors come back as `{"error": {"status", "code", "message", "retry"}}`.
+
+status| meaning  
+---|---  
+`400`| The document doesn't pass `check`. The body lists the issues, the same as `uf check`.  
+`401`| Missing or wrong API key.  
+`403`| The document reads a local path, or a host the server doesn't allow.  
+`413`| Inline output over 32 MiB: leave out `inline` to store it and get a receipt.  
+`422`| An input couldn't be fetched.  
+`429`| The queue is full: the server renders one request at a time, and 16 more can wait.  
+`501`| `cloud_only`: jobs, `output.uri` and bucket inputs are planned for ultrafast Cloud.  
+  
+A render stops after 10 minutes of work. The limits on output length, input size and the queue are settings; see [SELF_HOST.md](<https://github.com/ultrafastmov/ultrafast/blob/main/docs/service/SELF_HOST.md>).
+
+## Cloud-only parts
+
+A few parts of the API wait for [ultrafast Cloud](<https://ultrafast.mov/cloud/>): jobs with signed webhooks, writing renders to your own S3, R2 or GCS bucket with `output.uri`, reading inputs from buckets, and many keys with sign-in. `uf serve` answers them with `501` and the code `cloud_only`, and the SDKs raise `CloudOnly` (Python) or `CloudOnlyError` (TypeScript). It has no billing, so `/v1/estimate` gives a price only if you set `ULTRAFAST_USD_PER_MINUTE`. The full list of settings is in [SELF_HOST.md](<https://github.com/ultrafastmov/ultrafast/blob/main/docs/service/SELF_HOST.md>).
+
+
+---
+
+# Use cases · Make videos by asking · ultrafast
+
+> Social posts, podcast clips, documentaries, explainers, data stories, launch films and title sequences, made by asking an agent: Claude Code, Codex, Cursor or Gemini CLI with ultrafast.
+
+URL: https://ultrafast.mov/use-cases/
+
+Use cases
+
+# Ask your agent for a video.
+
+Describe it to Claude Code, Codex, Cursor or Gemini CLI with ultrafast connected. The agent writes the document, ultrafast checks every frame, and the agent exports the file. No timeline, no editor.
+
+[Connect your agent](<https://ultrafast.mov/docs/#agents>) [See examples](<https://ultrafast.mov/examples/>)
+
+How it goes
+
+## Three steps.
+
+  1. ### Ask
+
+Say what it's for, how long, and what's in it. Give the agent footage, photos or a logo if you have them.
+
+  2. ### Look
+
+The agent reads contact sheets and fixes what `review` finds; `uf live` plays the draft for you. Say what to change: words, colours, music, length.
+
+  3. ### Export
+
+An MP4 in each size you need, 9:16 to 21:9. The document stays in your folder, so next week's changes start from it.
+
+Twelve things agents made
+
+## Made by asking.
+
+Each card gives the brief in a sentence. Every film here is a real render, made by a coding agent with ultrafast; its document is on the [examples page](<https://ultrafast.mov/examples/>).
+
+[Video: Pottery class teaser](https://ultrafast.mov/media/examples/clay.mp4)
+
+### Social posts for a small business
+
+Shops, studios, classes, cafés
+
+A 10-second vertical teaser for my pottery class. Saturdays, first class free.
+
+10 s · 1080×1920 · a pot thrown on the wheel in 3D
+
+[Video: Podcast clip](https://ultrafast.mov/media/examples/podcast.mp4)
+
+### Podcast and interview clips
+
+Podcasters, interviewers, conference teams
+
+Pull the best 25 seconds from this episode. Captions on, vertical, our colours.
+
+26 s · 1080×1920 · captions timed to each word, his own voice
+
+[Video: Two launches, one count](https://ultrafast.mov/media/examples/liftoff.mp4)
+
+### Documentaries and recaps
+
+Documentary makers, archives, event teams
+
+Cut the Apollo 11 and Artemis I launches together on the 1969 countdown. Make it feel like a documentary.
+
+22.5 s · 1920×804 · NASA footage and commentary, cut to the count
+
+[Video: Artemis I's route](https://ultrafast.mov/media/examples/orbit.mp4)
+
+### Explainers
+
+Teachers, science and news channels
+
+Show how Artemis I got to the Moon and back, from NASA's trajectory data.
+
+20 s · 1920×1080 · the as-flown route, day and distance counters
+
+[Video: The Keeling Curve](https://ultrafast.mov/media/examples/keeling.mp4)
+
+### Data stories
+
+Analysts, newsrooms, newsletters
+
+Turn NOAA's Mauna Loa CO₂ file into a chart for Instagram.
+
+16 s · 1080×1350 · every value read from the file
+
+[Video: Lens launch](https://ultrafast.mov/media/examples/product.mp4)
+
+### Launch films
+
+Hardware makers, product and marketing teams
+
+A launch film for our 35 mm lens: the knurling, the iris, an exploded view, then the price.
+
+16 s · 1920×1080 · studio-lit 3D, callouts pinned to the parts
+
+[Video: SQL notebook launch](https://ultrafast.mov/media/examples/ui.mp4)
+
+### Product demos
+
+Software, developer tools, docs teams
+
+Show someone running this query and sharing the chart, with the app tilting in 3D.
+
+16 s · 1920×1080 · real query results, a cursor that moves like a hand
+
+[Video: Year in review](https://ultrafast.mov/media/examples/wrapped.mp4)
+
+### One video per customer
+
+Apps, clubs, subscriptions, ecommerce
+
+Make every member their year in review from this spreadsheet.
+
+12 s · 1080×1920 · one document, a file per member
+
+[Video: Concert poster](https://ultrafast.mov/media/examples/swiss.mp4)
+
+### Posters that move
+
+Venues, festivals, promoters
+
+A poster for our concert night that moves with the music.
+
+12.8 s · 1080×1350 · locked to the beat of its own track
+
+[Video: Celadon dish](https://ultrafast.mov/media/examples/bloom.mp4)
+
+### Loops and visuals
+
+Musicians, artists, galleries, brands
+
+A 15-second loop for the album cover: something growing, in celadon.
+
+15 s · 1080×1080 · a simulation stepped every frame, a seamless loop
+
+[Video: Main titles](https://ultrafast.mov/media/examples/meridian.mp4)
+
+### Title sequences
+
+Filmmakers, studios, streaming teams
+
+Main titles for our drama: a brass compass, sea charts, a lighthouse in fog.
+
+24 s · 1920×804 · 3D brass, parchment, star trails
+
+[Video: Endless zoom](https://ultrafast.mov/media/examples/dive.mp4)
+
+### Brand films
+
+Studios, agencies, launches
+
+One continuous zoom through everything we make, ending on our logo.
+
+28 s · 1920×1080 · seven worlds, one camera, a seamless loop
+
+For builders
+
+## Put it inside your product.
+
+Your users ask your app for a video; your agent writes the document; ultrafast renders it on your GPU with `uf serve`. They never see a timeline.
+
+[Read the quickstart](<https://ultrafast.mov/docs/>)[Integrations](<https://ultrafast.mov/integrations/>)
+
+```
+from ultrafastmov import Ultrafast
+
+uf = Ultrafast(base_url="http://localhost:8080")  # your uf serve
+
+doc = uf.load("teaser.json")     # what your agent wrote
+issues = uf.check(doc)           # before a frame renders
+video = uf.render(doc)
+video.save("teaser.mp4")
+``` 
+
+Questions
+
+## Common questions.
+
+Do I need to know how to edit video?
+
+No. Describe what you want to your agent in plain words, the way you'd brief a person. The agent writes the document, ultrafast checks every frame for unreadable or clipped text, and the agent exports the file.
+
+Which agents can do this?
+
+Any agent that can run an MCP server or a shell: Claude Code, Codex, Cursor and Gemini CLI connect to `uf mcp` in one line. See [MCP](<https://ultrafast.mov/docs/mcp/>). The ChatGPT app and the Claude connector come with [ultrafast Cloud](<https://ultrafast.mov/cloud/>).
+
+Can I use my own footage, photos and logo?
+
+Yes. Give your agent the files. ultrafast works with video, photos, SVG logos, Lottie animations, music and voiceover, and any Google Font by name.
+
+How long does a video take?
+
+The render takes seconds: each film on this page exported in under 8 seconds on one RTX 5090. Writing and reviewing the document takes your agent longer, depending on the model and the film.
+
+Can I change it afterwards?
+
+Yes. The video is a JSON document file, so ask for changes any time: new words, another size, a different song. The agent edits the nodes that change and leaves the rest as it was.
+
+## Make the first one.
+
+Free and open source. Install it, connect your agent, and ask.
+
+`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Integrations · MCP, coding agents, SDKs · ultrafast
+
+> Use ultrafast from Claude Code, Codex, Cursor, Gemini CLI and any MCP client, from Python and TypeScript, over HTTP, or in Docker on your own GPU. The ChatGPT app and Claude connector are coming with ultrafast Cloud.
+
+URL: https://ultrafast.mov/integrations/
+
+Integrations
+
+# Wherever your agent runs.
+
+Coding agents, any MCP client, Python and TypeScript, an HTTP API and Docker, all on your own GPU today. The ChatGPT app and the Claude connector come with ultrafast Cloud.
+
+  * [**MCP server**`uf mcp`local · 20 tools _Available_](<https://ultrafast.mov/docs/mcp/>)
+  * [**Coding agents** Claude Code, Codex, Cursor, Gemini CLI _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
+  * [**Skill and plugin**`npx skills add``ultrafastmov/ultrafast` _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
+  * [**Remote MCP**`uf serve`/mcp on your server, one key _Available_](<https://ultrafast.mov/integrations/#remote-mcp>)
+  * [**SDKs**`pip install ultrafastmov``npm i ultrafastmov` _Available_](<https://ultrafast.mov/integrations/#sdks>)
+  * [**Framework starters** Vercel AI SDK, OpenAI Agents SDK, LangGraph, Mastra _Available_](<https://ultrafast.mov/integrations/#frameworks>)
+  * [**Self-host**`docker run …`the HTTP API on one GPU _Available_](<https://ultrafast.mov/integrations/#self-host>)
+  * [**ChatGPT app** make and edit videos in a chat _Coming soon_](<https://ultrafast.mov/cloud/#apps>)
+  * [**Claude connector** for Claude on the web, desktop and phone _Coming soon_](<https://ultrafast.mov/cloud/#apps>)
+  * [**ultrafast Cloud** our GPUs, one API key _Waitlist_](<https://ultrafast.mov/cloud/>)
+
+Coding agents
+
+## Claude Code, Codex, Cursor, Gemini CLI.
+
+Run `uf mcp` on your machine and the agent gets 20 tools: it writes the document, looks at frames and contact sheets, fixes what `review` finds and exports.
+
+### Claude Code
+
+```
+claude mcp add ultrafast -- uf mcp
+``` 
+
+### Codex
+
+```
+[mcp_servers.ultrafast]
+command = "uf"
+args = ["mcp"]
+``` 
+
+### Cursor
+
+```
+{
+  "mcpServers": {
+    "ultrafast": { "command": "uf", "args": ["mcp"] }
+  }
+}
+``` 
+
+### Gemini CLI
+
+```
+{
+  "mcpServers": {
+    "ultrafast": { "command": "uf", "args": ["mcp"] }
+  }
+}
+``` 
+
+Each agent also gets the ultrafast skill: `npx skills add ultrafastmov/ultrafast`. In Claude Code, the plugin brings both: `claude plugin marketplace add ultrafastmov/ultrafast`, then `claude plugin install ultrafast@ultrafast`.
+
+Remote MCP
+
+## From your own server.
+
+`uf serve` answers MCP over Streamable HTTP at `/mcp`, with its API key as a bearer token. The tools take documents and asset ids instead of file paths; frames and contact sheets come back as images, so the agent sees its work.
+
+A hosted server with OAuth sign-in comes with [ultrafast Cloud](<https://ultrafast.mov/cloud/>).
+
+[MCP docs](<https://ultrafast.mov/docs/mcp/#remote>)
+
+```
+claude mcp add --transport http ultrafast \
+  http://localhost:8080/mcp \
+  --header "Authorization: Bearer $ULTRAFAST_API_KEY"
+``` 
+
+```
+{
+  "mcpServers": {
+    "ultrafast": {
+      "url": "http://localhost:8080/mcp",
+      "headers": { "Authorization": "Bearer uf_live_..." }
+    }
+  }
+}
+``` 
+
+SDKs
+
+## Python and TypeScript.
+
+`render`, `frame`, `sheet`, `check`, `review`, `estimate` and `upload`, against your own `uf serve`. Local footage, images and fonts in the document are uploaded for you.
+
+```
+from ultrafastmov import Ultrafast
+
+# your uf serve, and the key it printed
+uf = Ultrafast(base_url="http://localhost:8080")
+
+doc = uf.load("film.json")
+for issue in uf.review(doc):
+    print(issue.kind, issue.node, issue.message)
+uf.render(doc).save("film.mp4")
+``` 
+
+```
+import { Ultrafast } from "ultrafastmov";
+
+// your uf serve, and the key it printed
+const uf = new Ultrafast({ baseUrl: "http://localhost:8080" });
+
+const doc = await uf.load("film.json");
+await (await uf.sheet(doc, { count: 9 })).save("sheet.png");
+const render = await uf.render(doc);
+await render.save("film.mp4");
+``` 
+
+Agent frameworks
+
+## Starters for the frameworks you build on.
+
+Starter apps for the Vercel AI SDK, the OpenAI Agents SDK, LangGraph and Mastra: an agent that takes a brief, works through the `/mcp` tools of your `uf serve` and returns a reviewed MP4. They're in the `starters/` folder of the repo.
+
+[Starters on GitHub](<https://github.com/ultrafastmov/ultrafast/tree/main/starters>)
+
+```
+from agents import Agent, Runner
+from agents.mcp import MCPServerStreamableHttp
+
+async with MCPServerStreamableHttp(params={
+    "url": "http://localhost:8080/mcp",
+    "headers": {"Authorization": f"Bearer {key}"},
+}) as ultrafast:
+    agent = Agent(
+        name="Editor",
+        mcp_servers=[ultrafast],
+        instructions="Make it, review it, export it.",
+    )
+    result = await Runner.run(agent, "A 15 s launch promo")
+``` 
+
+HTTP API
+
+## One request, one video.
+
+POST a document to your `uf serve`, get an MP4 back.
+
+[HTTP API docs](<https://ultrafast.mov/docs/api/>)
+
+```
+jq '{document: ., output: {inline: true}}' film.json |
+curl http://localhost:8080/v1/render \
+  -H "Authorization: Bearer $ULTRAFAST_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data-binary @- -o film.mp4
+``` 
+
+Self-host
+
+## Your GPU.
+
+The render service is open source: the HTTP API and remote MCP on one machine with a GPU, one API key, files on local disk. Enough to build against and to share one box on a small team.
+
+Jobs with signed webhooks, output to your own bucket, sign-in and GPUs that scale are planned for [ultrafast Cloud](<https://ultrafast.mov/cloud/>).
+
+[SELF_HOST.md](<https://github.com/ultrafastmov/ultrafast/blob/main/docs/service/SELF_HOST.md>)
+
+```
+[mcp_servers.ultrafast]
+command = "uf"
+args = ["mcp"]
+```0 
+
+CLI and live player
+
+## And a shell.
+
+`uf live film.json` plays a document while you or an agent edit it; parameter edits show on the next frame.
+
+[CLI reference](<https://ultrafast.mov/docs/cli/>)
+
+```
+[mcp_servers.ultrafast]
+command = "uf"
+args = ["mcp"]
+```1 
+
+Chat apps · coming soon
+
+## ChatGPT and Claude.
+
+For anyone who can describe a video. They render on ultrafast Cloud, so they open with it.
+
+[Join the waitlist](<https://ultrafast.mov/cloud/#waitlist>)
+
+### ChatGPT app Coming soon
+
+  * Add ultrafast from ChatGPT's app directory.
+  * Ask for a video; attach footage, photos or a logo.
+  * Edit it by asking, then download the file.
+
+### Claude connector Coming soon
+
+  * Add ultrafast in Claude's settings under Connectors, then sign in.
+  * Works in Claude on the web, desktop and phone.
+  * The ultrafast skill, which teaches the document and the review loop, works today in Claude Code.
+
+## Pick one and start.
+
+Every integration renders the same documents with the same engine.
+
+`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# ultrafast Cloud · Coming soon · Join the waitlist
+
+> ultrafast Cloud will render the open-source engine on our GPUs with one API key, and run the ChatGPT app and the Claude connector. Coming soon; join the waitlist.
+
+URL: https://ultrafast.mov/cloud/
+
+ultrafast Cloud · coming soon
+
+# Our GPUs. Coming soon.
+
+The open-source engine, rendering on our GPUs: one API key, nothing to install. Join the waitlist and we’ll email you when it opens.
+
+Email for the ultrafast Cloud waitlist Join the waitlist
+
+Planned
+
+## What Cloud adds.
+
+None of this is open yet. The engine underneath is the one you can install today.
+
+### One API key
+
+The same HTTP API as `uf serve`: renders, frames, contact sheets, check and review, from the SDKs, curl or an agent.
+
+### No GPU to run
+
+No drivers, no ffmpeg and no machine to keep warm. Renders start on GPUs that are already running.
+
+### The ChatGPT app
+
+Describe a video in a chat, edit it by asking, download the file.
+
+### The Claude connector
+
+The same in Claude on the web, desktop and phone, added under Connectors.
+
+### Remote MCP with sign-in
+
+The MCP tools at one URL for any MCP client, signed in with OAuth instead of a key.
+
+### Jobs and storage
+
+Long renders as jobs with signed webhooks, and output written to your own S3, R2 or GCS bucket.
+
+ChatGPT and Claude · coming soon
+
+## Make it in a chat.
+
+The ChatGPT app and the Claude connector render on Cloud, so they open with it.
+
+The edit on the right was made by a coding agent with `uf mcp`, which works today. In the apps, the same request will happen in a chat.
+
+A 10-second vertical teaser for my pottery class. Saturdays, first class free.
+
+[Video: The teaser, first version: a vase thrown on the wheel](https://ultrafast.mov/media/examples/clay.mp4)
+
+agentclay.json · 10 s · 1080×1920 · `review` 0 findings
+
+Make it a wide bowl instead of a vase.
+
+[Video: The teaser after the edit: a wide bowl](https://ultrafast.mov/media/examples/clay-bowl.mp4)
+
+agentedited 1 node, `vessel`. The type, light and timing are untouched.
+
+Available today
+
+## Run it yourself.
+
+Everything Cloud will run is open source. `uf serve` gives you the HTTP API and remote MCP on one machine with a GPU, with one API key and files on local disk.
+
+`cargo install ultrafast`[HTTP API docs](<https://ultrafast.mov/docs/api/>)
+
+```
+docker run --gpus all -p 8080:8080 -v ultrafast:/data \
+  ghcr.io/ultrafastmov/ultrafast:latest serve
+``` 
+
+```
+uf serve --port 8080       # prints its API key at first start
+``` 
+
+Questions
+
+## Common questions.
+
+When does ultrafast Cloud open?
+
+There's no date yet. Join the waitlist and we'll email you when it opens.
+
+What will it cost?
+
+Prices aren't set yet. They'll be on this page before it opens. The engine stays free and open source.
+
+Can I render on my own GPU today?
+
+Yes. The engine, the CLI, `uf mcp` and the render service are all open source. `uf serve` or the Docker image serves the HTTP API and remote MCP from one machine with a GPU, with one API key and files on local disk. See the [HTTP API](<https://ultrafast.mov/docs/api/>).
+
+Is the open-source engine limited?
+
+No. It's the engine Cloud will run, under Apache-2.0 or MIT. Use it commercially, at any scale, for free.
+
+Do the ChatGPT app and the Claude connector need Cloud?
+
+Yes. They render on our GPUs, so they open with Cloud. Coding agents work today with `uf mcp` on your own machine.
+
+What do you do with my email?
+
+We email you when Cloud opens. We don't use it for anything else or share it.
+
+## Get on the list.
+
+We’ll email you when ultrafast Cloud opens.
+
+Email for the ultrafast Cloud waitlist Join the waitlist
+
+
+---
+
+# ultrafast vs Remotion vs HyperFrames · Comparison
+
+> How ultrafast compares with Remotion and HyperFrames: how each renders, speed, agent tools, licence and cost per minute.
+
+URL: https://ultrafast.mov/compare/
+
+Compare
+
+# No browser in the loop.
+
+Remotion and HyperFrames lay out a web page for every frame in headless Chrome, then capture it. ultrafast draws the frame on the GPU and encodes it there.
+
+[ultrafast vs Remotion](<https://ultrafast.mov/compare/remotion/>) [ultrafast vs HyperFrames](<https://ultrafast.mov/compare/hyperframes/>)
+
+At a glance
+
+## Three ways to make video from code.
+
+| ultrafast| Remotion| HyperFrames  
+---|---|---|---  
+Draws each frame with| GPU kernels, Metal or Vulkan; the planner fuses nodes into one kernel per group| headless Chrome; parallel tabs render and screenshot frames| headless Chrome via Puppeteer; 1 to 24 browser workers  
+You write| one JSON document; no build step| a React and TypeScript project| HTML, CSS and JS with a paused GSAP timeline or another adapter  
+Output tokens for a 10 s short| about 1,100| about 5,500| about 4,400  
+Published speed, 1080p| 300 frames with 6-sample motion blur in 0.34 s on one RTX 5090| an 80 s video in 15 s on Lambda, up to 200 functions| 300 frames in 9.8 s; 25 s with one costly CSS rule  
+GPU| renders on it| not used by default; none on Lambda| optional, for WebGL and hardware encoding  
+Agents check and review| `check` before rendering; `review` reads every frame for unreadable, clipped or too-brief text and flashing; `inspect` maps pixels to nodes| no built-in review| no built-in review  
+Agent surfaces| 20 MCP tools, local and remote; skills; ChatGPT and Claude apps coming soon| 13 Agent Skills; plugins for 5 coding agents; hosted MCP shut down in October 2026| 9 skills; plugins for 6 agents; Claude connector; ChatGPT Work plugin  
+Same pixels on every machine| bundled fonts, the same kernels everywhere| frames must be pure functions of the frame number| fonts and Chrome versions can shift pixels; Docker pins them  
+Export| MP4 (H.264, HEVC, AV1), ProRes to 4444 XQ, transparent ProRes and WebM, GIF, PNG and EXR sequences, sound alone; any size, sharp; draft to master| H.264, H.265, VP8, VP9, AV1, ProRes, GIF, transparent video, image sequences, sound alone; `--scale`| H.264, H.265, ProRes, transparent WebM and MOV, GIF, PNG sequences, HLS, HDR10; 1080p or 4K  
+3D, simulation, shaders| in the same graph: 3D with image-based light and glass, raymarching, particles, fluid, feedback, Slang shaders| Three.js through React Three Fiber, shaders| Three.js, WebGPU, WebGL shader transitions  
+Licence| Apache-2.0 or MIT| source-available: free up to 3 people; companies $0.01 a render ($100/mo minimum) or $25 a seat| Apache-2.0  
+Hosted rendering| your own GPU with `uf serve`; ultrafast Cloud has a [waitlist](<https://ultrafast.mov/cloud/>)| none; Lambda runs in your AWS account| HeyGen credits, or your own Lambda or Cloud Run  
+  
+Tokens
+
+## Up to 80% fewer tokens.
+
+Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain. In a web project most of them are web code. In an ultrafast document, every token describes the video.
+
+  1. ultrafast **1,100**
+  2. HyperFrames **4,400**
+  3. Remotion **5,500**
+
+describes the video; web code around it: imports, components, styles, timeline set-up, project files
+
+The same title written both ways: [ultrafast and Remotion](<https://ultrafast.mov/compare/remotion/#tokens>), [ultrafast and HyperFrames](<https://ultrafast.mov/compare/hyperframes/#tokens>).
+
+10,000 shorts a month| output tokens| at $20 per million  
+---|---|---  
+ultrafast| 11 million| $220  
+HyperFrames| 44 million| $880  
+Remotion| 55 million| $1,100  
+  
+Speed
+
+## Frames a second, per machine.
+
+300 frames of 1080p. ultrafast's run includes 6-sample motion blur; HyperFrames' numbers are from its performance guide. Remotion publishes Lambda times instead of per-machine ones.
+
+  1. ultrafast **894 fps**
+  2. HyperFrames **31 fps**
+  3. HyperFrames, one costly CSS rule **12 fps**
+
+Cost
+
+## A 10-second short.
+
+What it takes to write and render one vertical 1080p clip, the most common thing agents make. Tokens at $20 per million output tokens.
+
+| to write it| to render it| also needed  
+---|---|---|---  
+ultrafast, your GPU| about 2¢ of tokens| nothing| a Mac or a Vulkan GPU  
+Remotion, company of 4+| about 11¢ of tokens| $0.01 licence fee plus Lambda compute in your AWS account| $100 a month minimum, an AWS account  
+HyperFrames| about 9¢ of tokens| your own Lambda or Cloud Run compute, or HeyGen credits| Node 22, FFmpeg, a cloud account  
+  
+Which one
+
+## Pick by the job.
+
+### Choose ultrafast when
+
+  * An agent writes the video and should see and fix it before anyone watches.
+  * You render a lot: shorts at scale, one video per customer, every aspect ratio.
+  * You want 3D, particles, fluid or shaders in the same document as the captions.
+  * You want a permissive licence with no per-render fee.
+
+### Choose a browser renderer when
+
+  * Your team already builds the video's parts as React components or HTML and CSS.
+  * You need an embeddable web player (Remotion) or HeyGen's avatars and voices (HyperFrames).
+  * You need HDR or HLS output today.
+  * You have no GPU and don't want to use a hosted service.
+
+Questions
+
+## Common questions.
+
+Is ultrafast a Remotion alternative?
+
+Yes. Both make video from code. Remotion renders React components in headless Chrome; ultrafast renders a JSON document on the GPU with no browser, under Apache-2.0 or MIT with no per-render fee.
+
+Is ultrafast a HyperFrames alternative?
+
+Yes. HyperFrames turns HTML and GSAP into video in headless Chrome. ultrafast has the same permissive licence, renders on the GPU with no browser, and gives agents tools to review their frames.
+
+Why does a browser renderer take longer?
+
+It lays out a web page for every frame, then captures it from the browser and hands it to an encoder. ultrafast compiles the document into GPU kernels once, draws each frame directly and encodes it on the same GPU, without copying frames back to the CPU.
+
+Can I bring videos I already made?
+
+Yes. `uf reconstruct` turns a finished video into an editable document draft: shots, text layers in matched fonts, backgrounds and fades. Or ask your agent to rewrite a composition as a document.
+
+Why does an agent need fewer tokens with ultrafast?
+
+A document only describes the video: nodes and their params. A Remotion or HyperFrames project also needs imports, components, CSS, timeline set-up and project files, and grain, a grade or captions timed to each word are code to write. In ultrafast each of those is one node. A 10-second short is about 1,100 output tokens, against about 4,400 in HyperFrames and 5,500 in Remotion.
+
+**Sources** , checked 21 November 2026: Remotion [pricing](<https://www.remotion.dev/docs/license/pricing>), [team size](<https://www.remotion.dev/docs/terms#TeamSize>), [Lambda](<https://www.remotion.dev/lambda>), [MCP](<https://www.remotion.dev/docs/ai/mcp>), [skills](<https://www.remotion.dev/docs/ai/skills>), [GPU](<https://www.remotion.dev/docs/gpu>), [flickering](<https://www.remotion.dev/docs/flickering>); HyperFrames [repository](<https://github.com/heygen-com/hyperframes>), [CLI](<https://hyperframes.heygen.com/packages/cli>), [performance](<https://hyperframes.heygen.com/guides/performance>), [determinism](<https://hyperframes.heygen.com/concepts/determinism>), [plugins](<https://hyperframes.heygen.com/guides/plugins>), [Lambda](<https://hyperframes.heygen.com/deploy/aws-lambda>). Product names belong to their owners.
+
+## Make one and time it.
+
+Install the engine and time a render on your own GPU.
+
+`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# ultrafast vs Remotion · A Remotion alternative on the GPU
+
+> Remotion renders React in headless Chrome. ultrafast renders a JSON document on the GPU: faster renders, no per-render licence fee, and tools that let agents see their work.
+
+URL: https://ultrafast.mov/compare/remotion/
+
+Compare
+
+# ultrafast vs Remotion.
+
+Remotion renders React components in headless Chrome, one screenshot per frame. ultrafast renders a JSON document on the GPU. Both make video from code; they differ in speed, licence and what an agent can see.
+
+At a glance
+
+## Side by side.
+
+| ultrafast| Remotion  
+---|---|---  
+How a frame is made| GPU kernels compiled from the document; encoded on the same GPU with no readback| a React tree laid out in Chrome Headless Shell, screenshotted, encoded with FFmpeg  
+You write| one JSON document, checked before it renders| a React and TypeScript project  
+Output tokens for a 10 s short| about 1,100, all of it the video| about 5,500, most of it web code  
+Speed| 894 fps at 1080p with motion blur on one GPU; 11.6 s of 1080×1920 in about 2.2 s on one L4| an 80 s video in 15 s on Lambda across up to 200 functions; a 1-minute example in 19 s  
+Licence| Apache-2.0 or MIT, for everyone| source-available; a company licence from 4 people, counting all staff  
+Price to render| free on your GPU| $0.01 per render ($100/mo minimum) or $25 per seat per month, plus your AWS bill  
+Hosted rendering| ultrafast Cloud is coming soon ([waitlist](<https://ultrafast.mov/cloud/>)); `uf serve` on your own GPU today| none; Lambda in your own AWS account  
+For agents| 20 MCP tools (local and remote), a skill, ChatGPT and Claude apps coming soon; frames come back as images| 13 Agent Skills, plugins for 5 coding agents, Studio WebMCP; the hosted MCP closed on 26 October 2026  
+Review of the result| `review` reads every frame: unreadable, clipped, overlapping or too-brief text, text under app buttons, flashing| no built-in review  
+Effects| 3D with image-based light and glass, raymarching, particles, fluid and feedback sims, Slang shaders, 19 blend modes| Three.js through React Three Fiber, shaders, Lottie, motion blur  
+Export| H.264, HEVC and AV1 MP4; ProRes proxy to 4444 XQ; transparent ProRes 4444 and VP9 WebM; GIF; PNG and EXR sequences; sound alone. Any size, rendered sharp, and any frame rate; four quality levels from draft to master| H.264, H.265, VP8, VP9, AV1, ProRes, GIF, transparent video, image sequences, sound alone; `--scale`; CRF and bitrate, no quality levels  
+  
+Speed
+
+## One GPU instead of 200 functions.
+
+Remotion gets its speed by splitting a video across many Lambda functions. ultrafast renders the whole video on one GPU, faster than playback, so a short is done before a cold function starts.
+
+ultrafast, measured
+
+1080p, 6-sample blur, RTX 5090
+    894 fps
+10 s hero, same GPU
+    0.34 s
+11.6 s of 1080×1920, one L4
+    2.2 s
+10 s vertical teaser, 3D
+    1.68 s
+16 s launch film, 3D
+    4.88 s
+
+Remotion's published figures: an 80 s video in 15 s; a 1-minute render in 19 s for $0.017 of AWS compute.
+
+Tokens
+
+## A fifth of the tokens.
+
+Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain. In a web project most of them are web code. In an ultrafast document, every token describes the video.
+
+  1. ultrafast **1,100**
+  2. Remotion **5,500**
+
+describes the video; web code around it: imports, components, styles, timeline set-up, project files
+
+### The same title, both ways.
+
+The pottery teaser’s title, its letters rising in one by one.
+
+ultrafast
+
+```
+"title": {
+  "op": "text",
+  "params": {
+    "text": "Spin something new.",
+    "font": "ultrafast:display", "weight": 300, "size": 176,
+    "color": "#f1e8dc", "position": [80, 380], "valign": "baseline",
+    "width": 880, "line_height": 0.9, "tracking": -3,
+    "stagger": 0.03,
+    "glyph_opacity": { "keys": [
+      { "t": 0.7, "v": [0], "ease": "in_out_sine" },
+      { "t": 1.5, "v": [1] } ] },
+    "glyph_offset": { "keys": [
+      { "t": 0.7, "v": [0, 56],
+        "ease": { "bezier": [0.16, 1, 0.3, 1] } },
+      { "t": 1.8, "v": [0, 0] } ] }
+  }
+}
+``` 
+
+Remotion
+
+```
+import {AbsoluteFill, Easing, interpolate, useCurrentFrame,
+  useVideoConfig} from 'remotion';
+import {loadFont} from '@remotion/google-fonts/Fraunces';
+
+const {fontFamily} = loadFont('normal', {weights: ['300']});
+const TEXT = 'Spin something new.';
+const clamp = {
+  extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
+} as const;
+
+export const Title: React.FC = () => {
+  const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  let n = 0;
+  return (
+    <AbsoluteFill>
+      <h1 style={{
+        position: 'absolute', left: 80, top: 222, width: 880,
+        margin: 0, fontFamily, fontWeight: 300, fontSize: 176,
+        lineHeight: 0.9, letterSpacing: -3, color: '#f1e8dc',
+      }}>
+        {TEXT.split(' ').map((word, w) => (
+          <span key={w} style={{display: 'inline-block'}}>
+            {[...word, '\u00a0'].map((ch, c) => {
+              const t = frame / fps - 0.7 - 0.03 * n++;
+              const opacity = interpolate(t, [0, 0.8], [0, 1], {
+                ...clamp, easing: Easing.inOut(Easing.sin),
+              });
+              const y = interpolate(t, [0, 1.1], [56, 0], {
+                ...clamp, easing: Easing.bezier(0.16, 1, 0.3, 1),
+              });
+              return (
+                <span key={c} style={{
+                  display: 'inline-block', opacity,
+                  transform: `translateY(${y}px)`,
+                }}>{ch}</span>
+              );
+            })}
+          </span>
+        ))}
+      </h1>
+    </AbsoluteFill>
+  );
+};
+``` 
+
+The rest of the gap is project files such as `Root.tsx` and `package.json`, and the effects: grain, a grade and captions timed to each word are a component each in Remotion and one node each in ultrafast.
+
+Licence and cost
+
+## No company licence.
+
+Remotion is free for individuals and organisations of up to 3 people. At 4, counting everyone in the company whether they touch video or not, it needs a company licence. ultrafast is Apache-2.0 or MIT for everyone. Tokens at $20 per million output tokens.
+
+10,000 ten-second shorts a month| to write them| to render them  
+---|---|---  
+ultrafast on your GPUs| about $220 in output tokens| $0 in licences  
+Remotion, Automators licence| about $1,100 in output tokens| $100 in render fees, plus Lambda compute in your AWS account  
+  
+For agents
+
+## An agent that can see what it made.
+
+A Remotion agent writes React and renders it; a person finds out what went wrong. An ultrafast agent checks the document, looks at contact sheets, and fixes what `review` reports before you watch.
+
+### Write
+
+JSON with a published schema and `uf ops` for every param. No project, no build, no `node_modules`.
+
+### Check and look
+
+`check` before rendering; frames and contact sheets returned as images; `inspect` names the node behind a pixel.
+
+### Review and fix
+
+`review` reads every frame for unreadable, clipped or too-brief text and flashing. The agent edits one node and renders again in under a second.
+
+### Choose ultrafast when
+
+  * An agent makes the videos and should review them.
+  * You render often enough that per-render fees, Lambda bills and model tokens add up.
+  * You need 3D, simulation or shader work alongside captions and footage.
+  * Your company has more than 3 people and wants a permissive licence.
+
+### Choose Remotion when
+
+  * Your video is built from React components you already have.
+  * You need Remotion's embeddable web Player.
+  * You want the largest community: 74,000 GitHub stars.
+
+Questions
+
+## Common questions.
+
+Is ultrafast free for companies?
+
+Yes, at any size. The engine is Apache-2.0 or MIT. Remotion requires a company licence once an organisation has 4 or more people: $0.01 per render with a $100 monthly minimum, or $25 per seat per month.
+
+Can ultrafast render my Remotion project?
+
+Not directly: it doesn't run React. Ask your agent to rewrite the composition as an ultrafast document, or run `uf reconstruct` on a finished render to get an editable draft.
+
+Does ultrafast need a GPU?
+
+Yes, for now: a Mac with Apple silicon or a Vulkan GPU. ultrafast Cloud, which renders on ours, is coming soon ([waitlist](<https://ultrafast.mov/cloud/>)).
+
+Does ultrafast have an embeddable web player like Remotion's?
+
+No. ultrafast's live player is a desktop window for authoring. For the web, export an MP4.
+
+How many tokens does an agent spend on a Remotion video?
+
+About 5,500 output tokens for a 10-second short: the composition, its components, styles and project files. The same short as an ultrafast document is about 1,100. At $20 per million output tokens, 10,000 shorts cost about $1,100 to write in Remotion and $220 in ultrafast.
+
+Remotion facts from its docs, checked 21 November 2026: [pricing](<https://www.remotion.dev/docs/license/pricing>), [team size](<https://www.remotion.dev/docs/terms#TeamSize>), [Lambda](<https://www.remotion.dev/lambda>), [cost example](<https://www.remotion.dev/docs/lambda/cost-example>), [MCP](<https://www.remotion.dev/docs/ai/mcp>), [skills](<https://www.remotion.dev/docs/ai/skills>), [plugins](<https://www.remotion.dev/docs/ai/plugins>). Remotion is a trademark of its owner.
+
+## Make one and time it.
+
+Install the engine and time a render on your own GPU.
+
+`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# ultrafast vs HyperFrames · GPU rendering vs HTML in Chrome
+
+> HyperFrames turns HTML and GSAP into video through headless Chrome. ultrafast renders on the GPU with no browser: faster, with 3D, simulation, shaders and a review loop for agents.
+
+URL: https://ultrafast.mov/compare/hyperframes/
+
+Compare
+
+# ultrafast vs HyperFrames.
+
+HyperFrames, from HeyGen, turns HTML and GSAP into video through headless Chrome. ultrafast renders on the GPU with no browser. Both are open source under permissive licences; the engines are different.
+
+At a glance
+
+## Side by side.
+
+| ultrafast| HyperFrames  
+---|---|---  
+How a frame is made| GPU kernels compiled from the document; encoded on the same GPU| a page laid out in Chrome via Puppeteer, captured per frame, encoded with FFmpeg; 1 to 24 browsers of about 256 MB each  
+You write| one JSON document with a published schema| HTML and CSS with `data-*` timing, and a paused GSAP timeline or another adapter  
+Output tokens for a 10 s short| about 1,100, all of it the video| about 4,400, most of it web code  
+Speed, 300 frames of 1080p| 0.34 s with 6-sample motion blur, one RTX 5090| 9.8 s; 25 s with one costly CSS rule  
+Same pixels everywhere| bundled fonts, the same kernels on every machine| fonts and Chrome versions can shift pixels; `--docker` pins them  
+Install| one binary| Node 22+, FFmpeg, a managed Chrome  
+For agents| 20 MCP tools (local and remote) including `check`, `review` and `inspect`; frames returned as images; ChatGPT and Claude apps coming soon| 9 skills; plugins for 6 agents; a Claude connector with `compose` and `render_video`; a ChatGPT Work plugin  
+Review of the result| every frame read for unreadable, clipped or too-brief text and flashing| no built-in review  
+Effects| 3D with image-based light and glass, raymarching, particles, fluid and feedback sims, Slang shaders| Three.js, WebGPU, Lottie, WebGL shader transitions, motion blur  
+Export| H.264, HEVC and AV1 MP4; ProRes proxy to 4444 XQ; transparent ProRes 4444 and VP9 WebM; GIF; PNG and EXR sequences; sound alone. Any size and frame rate; draft, standard, high and master| H.264 and H.265 MP4, ProRes, transparent WebM and MOV, GIF, PNG sequences, HLS, HDR10; draft, standard and high; 1080p or 4K  
+Licence| Apache-2.0 or MIT| Apache-2.0  
+Hosted rendering| your own GPU with `uf serve`; ultrafast Cloud has a [waitlist](<https://ultrafast.mov/cloud/>)| HeyGen credits, or your own Lambda or Cloud Run  
+  
+Speed
+
+## About 30 times their own number.
+
+HyperFrames' performance guide renders 300 frames of 1080p in 9.8 s. ultrafast renders 300 frames of 1080p, with 6-sample motion blur, in 0.34 s.
+
+  1. ultrafast **0.34 s**
+  2. HyperFrames **9.8 s**
+  3. HyperFrames, one costly CSS rule **25 s**
+
+Tokens
+
+## A quarter of the tokens.
+
+Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain. In a web project most of them are web code. In an ultrafast document, every token describes the video.
+
+  1. ultrafast **1,100**
+  2. HyperFrames **4,400**
+
+describes the video; web code around it: imports, components, styles, timeline set-up, project files
+
+### The same title, both ways.
+
+The pottery teaser’s title, its letters rising in one by one.
+
+ultrafast
+
+```
+"title": {
+  "op": "text",
+  "params": {
+    "text": "Spin something new.",
+    "font": "ultrafast:display", "weight": 300, "size": 176,
+    "color": "#f1e8dc", "position": [80, 380], "valign": "baseline",
+    "width": 880, "line_height": 0.9, "tracking": -3,
+    "stagger": 0.03,
+    "glyph_opacity": { "keys": [
+      { "t": 0.7, "v": [0], "ease": "in_out_sine" },
+      { "t": 1.5, "v": [1] } ] },
+    "glyph_offset": { "keys": [
+      { "t": 0.7, "v": [0, 56],
+        "ease": { "bezier": [0.16, 1, 0.3, 1] } },
+      { "t": 1.8, "v": [0, 0] } ] }
+  }
+}
+``` 
+
+HyperFrames
+
+```
+<div id="root" data-composition-id="teaser" data-start="0"
+     data-width="1080" data-height="1920">
+  <h1 id="title" class="clip" data-start="0" data-duration="10"
+      data-track-index="1">Spin something new.</h1>
+</div>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@300");
+  #title {
+    position: absolute; left: 80px; top: 222px; width: 880px;
+    margin: 0; font: 300 176px/0.9 "Fraunces", serif;
+    letter-spacing: -3px; color: #f1e8dc;
+  }
+  #title .w, #title .c { display: inline-block; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js">
+</script>
+<script>
+  const title = document.getElementById("title");
+  title.innerHTML = title.textContent.split(" ").map((w) =>
+    '<span class="w">' + [...w, "\u00a0"].map((c) =>
+      '<span class="c">' + c + "</span>").join("") + "</span>"
+  ).join("");
+  const tl = gsap.timeline({ paused: true });
+  tl.from("#title .c", { opacity: 0, duration: 0.8,
+    ease: "sine.inOut", stagger: 0.03 }, 0.7);
+  tl.from("#title .c", { y: 56, duration: 1.1,
+    ease: "expo.out", stagger: 0.03 }, 0.7);
+  window.__timelines = window.__timelines || {};
+  window.__timelines["teaser"] = tl;
+</script>
+``` 
+
+The rest of the gap is the effects: grain, a grade and captions timed to each word are a script or a canvas each in HyperFrames and one node each in ultrafast.
+
+10,000 shorts a month| output tokens| at $20 per million  
+---|---|---  
+ultrafast| 11 million| $220  
+HyperFrames| 44 million| $880  
+  
+Beyond the browser
+
+## What a page can't do quickly.
+
+In a browser, every glass refraction, particle and fluid step is work done inside a web page. In ultrafast they are nodes in the same graph as the captions, fused into GPU kernels.
+
+### 3D
+
+Extruded and bevelled type, glTF, image-based light, shadows, depth of field, refractive glass, and raymarched product shots.
+
+### Simulation
+
+Particles and swarms that form type; ink and smoke fluid; feedback loops for trails and reaction-diffusion. Exact on export, and scrubbable.
+
+### Shaders
+
+Agents write Slang shaders as nodes. `check` compiles them before anything renders.
+
+### Choose ultrafast when
+
+  * Render time and cost matter: shorts at scale, every aspect ratio, one per customer.
+  * An agent should review its own video before a person sees it.
+  * You need the same pixels on every machine without pinning a browser.
+  * You want 3D, simulation or shaders without a page doing the work.
+
+### Choose HyperFrames when
+
+  * You think in HTML, CSS and GSAP, or have compositions in them already.
+  * You need HeyGen's avatars and voices in the same tool.
+  * You need HDR10 or HLS output today.
+  * You have no GPU and want to render on CPUs.
+
+Questions
+
+## Common questions.
+
+Both are open source. What's the difference?
+
+HyperFrames renders HTML and GSAP in headless Chrome; ultrafast renders a JSON document on the GPU. That makes ultrafast about 30 times faster on HyperFrames' own published numbers, and lets agents review the frames they made.
+
+Will my video look the same on every machine?
+
+With ultrafast, yes: fonts are bundled or fetched by name, and the GPU kernels are the same on every machine. HyperFrames notes that fonts and Chrome versions can shift pixels between machines unless you render in Docker.
+
+Can I use GSAP or HTML I already have?
+
+Not directly. Ask your agent to rewrite the composition as an ultrafast document, or run `uf reconstruct` on a finished render to get an editable draft.
+
+Do I need Node or FFmpeg?
+
+No Node. ultrafast is one binary; exports on Vulkan use FFmpeg, and the prebuilt binaries and Docker image bring what they need.
+
+How many tokens does an agent spend on a HyperFrames video?
+
+About 4,400 output tokens for a 10-second short: the HTML, the CSS, the GSAP timeline and the scripts for captions and grain. The same short as an ultrafast document is about 1,100. At $20 per million output tokens, 10,000 shorts cost about $880 to write in HyperFrames and $220 in ultrafast.
+
+HyperFrames facts from its docs, checked 21 November 2026: [repository](<https://github.com/heygen-com/hyperframes>), [CLI](<https://hyperframes.heygen.com/packages/cli>), [performance](<https://hyperframes.heygen.com/guides/performance>), [determinism](<https://hyperframes.heygen.com/concepts/determinism>), [plugins](<https://hyperframes.heygen.com/guides/plugins>), [MCP](<https://hyperframes.heygen.com/guides/mcp>), [Lambda](<https://hyperframes.heygen.com/deploy/aws-lambda>). HyperFrames and HeyGen are trademarks of their owner.
+
+## Make one and time it.
+
+Install the engine and time a render on your own GPU.
+
+`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Examples · Films made from JSON documents · ultrafast
+
+> Films made with ultrafast, each with the JSON document that made it: NASA footage cut to its own sound, a podcast clip, data stories, 3D launch films, a simulation and title sequences.
+
+URL: https://ultrafast.mov/examples/
+
+Examples
+
+# Every one comes with its document.
+
+12 films, each one JSON document, made by a coding agent. Open any of them to see how it was made.
+
+Real footage
+
+## Cut, captioned, graded.
+
+NASA footage and sound, edited by documents an agent wrote and `review` passed.
+
+[Video: Two launches, one count](https://ultrafast.mov/media/examples/liftoff.mp4)
+
+### Two launches, one count
+
+Apollo 11 and Artemis I lift off in alternating shots, cut to the 1969 launch commentary, with each number in large type and both launches' clocks counting down to zero.
+
+2.39:1 · 1920×804 · 22.5 s · exported in 3.36 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/liftoff.json>)
+
+[Video: Podcast clip](https://ultrafast.mov/media/examples/podcast.mp4)
+
+### Podcast clip
+
+A vertical clip of NASA astronaut Mark Vande Hei aboard the space station, with word-timed captions, a waveform driven by his voice, and Earth cut in on the words that name it.
+
+9:16 · 1080×1920 · 26 s · exported in 6.00 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/podcast.json>)
+
+Data
+
+## Drawn from the numbers.
+
+Every figure on screen comes from the source credited below.
+
+[Video: Artemis I's route](https://ultrafast.mov/media/examples/orbit.mp4) 3D rendered by ultrafast
+
+### Artemis I's route
+
+Artemis I's flown route drawn across lit models of the Earth and Moon, with flight-day and distance counters, and Orion's own view of the Moon at the return flyby.
+
+16:9 · 1920×1080 · 20 s · exported in 7.05 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/orbit.json>)
+
+[Video: The Keeling Curve](https://ultrafast.mov/media/examples/keeling.mp4)
+
+### The Keeling Curve
+
+Every monthly mean of carbon dioxide at Mauna Loa since March 1958 draws itself; the camera dives into 2025 to show the seasonal cycle, and the latest month lands large.
+
+4:5 · 1080×1350 · 16 s · exported in 1.50 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/keeling.json>)
+
+[Video: Year in review](https://ultrafast.mov/media/examples/wrapped.mp4)
+
+### Year in review
+
+One script writes a cycling club's year-in-review for each member: distance counts up over the days they rode, their favourite loop draws itself on a contour map, and the climbing rises as mountains.
+
+9:16 · 1080×1920 · 12 s · exported in 1.37 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/wrapped.json>)
+
+[[Video: Year in review: Tomás](https://ultrafast.mov/media/examples/wrapped-tomas.mp4)Tomás](<https://ultrafast.mov/examples/wrapped-tomas.json>)[[Video: Year in review: Oluwaseun](https://ultrafast.mov/media/examples/wrapped-oluwaseun.mp4)Oluwaseun](<https://ultrafast.mov/examples/wrapped-oluwaseun.json>)[[Video: Year in review: Bea](https://ultrafast.mov/media/examples/wrapped-bea.mp4)Bea](<https://ultrafast.mov/examples/wrapped-bea.json>)
+
+[Video: SQL notebook launch](https://ultrafast.mov/media/examples/ui.mp4)
+
+### SQL notebook launch
+
+A query against NASA's Exoplanet Archive is typed, run, charted and shared in an app that glides and tilts in 3D.
+
+16:9 · 1920×1080 · 16 s · exported in 6.00 s · [document](<https://ultrafast.mov/examples/ui.json>)
+
+No footage
+
+## Nothing here was filmed.
+
+The 3D, the simulations and the type are rendered by ultrafast from each document, every frame. Nothing here was filmed or made in another app.
+
+[Video: Pottery class teaser](https://ultrafast.mov/media/examples/clay.mp4)
+
+3D rendered by ultrafast
+
+### Pottery class teaser
+
+A lump of wet terracotta is centred, opened and pulled into a vase on a turning wheel under window light, beside the class title and its details.
+
+9:16 · 1080×1920 · 10 s · exported in 1.68 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/clay.json>)
+
+[Video: Lens launch](https://ultrafast.mov/media/examples/product.mp4) 3D rendered by ultrafast
+
+### Lens launch
+
+A camera lens that doesn't exist, lit like a studio product shot: light finds the knurled barrel, the focus scale turns, eleven blades stop down and the optics slide apart under callouts.
+
+16:9 · 1920×1080 · 16 s · exported in 4.88 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/product.json>)
+
+[Video: Celadon dish](https://ultrafast.mov/media/examples/bloom.mp4)
+
+### Celadon dish
+
+A carving grows across a celadon dish by reaction–diffusion, stepped every frame; the camera closes in on the glaze, then molten glaze floods back over it.
+
+1:1 · 1080×1080 · 15 s · exported in 1.06 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/bloom.json>)
+
+[Video: Concert poster](https://ultrafast.mov/media/examples/swiss.mp4)
+
+### Concert poster
+
+A Swiss-style poster for a night of four concerts. Its dial is the score of its own track, and the headline widens and narrows on every beat.
+
+4:5 · 1080×1350 · 12.8 s · exported in 0.72 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/swiss.json>)
+
+[Video: Endless zoom](https://ultrafast.mov/media/examples/dive.mp4) 3D rendered by ultrafast
+
+### Endless zoom
+
+One camera falls through seven nested worlds (type, vector blades, a chrome torus, ink, shader contours and rings of type) to the wordmark, whose dot holds the first frame again.
+
+16:9 · 1920×1080 · 28 s · exported in 5.65 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/dive.json>)
+
+[Video: Main titles](https://ultrafast.mov/media/examples/meridian.mp4) 3D rendered by ultrafast
+
+### Main titles
+
+Main titles for a drama that doesn't exist: a brass compass, a sea chart with a route inking itself across it, star trails over the sea, an armillary sphere, and a lighthouse whose beam lights the title.
+
+2.39:1 · 1920×804 · 24 s · exported in 1.44 s · `review`: 0 findings · [document](<https://ultrafast.mov/examples/meridian.json>)
+
+Credits
+
+## Footage and data.
+
+footage and sound| NASA record| used in  
+---|---|---  
+Apollo 11 25th Anniversary "B" Roll FootageNASA · 1969-07-16| [KSC-19690716-MH-NAS01-0001-Apollo_11_Historical_Footage_and_Broll-DVC_1560](<https://images.nasa.gov/details/KSC-19690716-MH-NAS01-0001-Apollo_11_Historical_Footage_and_Broll-DVC_1560>)| Two launches, one count  
+Video - Apollo 11 Pre-Launch and LaunchNASA · 1969-07-16| [KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372](<https://images.nasa.gov/details/KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372>)| Two launches, one count  
+4K Earth Views, Extended Cut for Earth Day 2021NASA · 2021-04-22| [jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_ 2021_210422-4KMP4](<https://images.nasa.gov/details/jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_%202021_210422-4KMP4>)| Podcast clip  
+NASA Astronaut Answers Social Media Questions About Record Breaking SpaceflightNASA · 2022-03-15| [jsc2022m000083_NTV-VideoFile_Mark_Vande_Hei_Social_Media_Questions_220314-MP4](<https://images.nasa.gov/details/jsc2022m000083_NTV-VideoFile_Mark_Vande_Hei_Social_Media_Questions_220314-MP4>)| Podcast clip  
+Artemis I Launch - Engineering Views - ML DeckNASA · 2022-11-16| [KSC-20221116-MH-NAS01-0001-Artemis_I_Launch_Engineering_Views_ML_Deck_LC_39B-3318973](<https://images.nasa.gov/details/KSC-20221116-MH-NAS01-0001-Artemis_I_Launch_Engineering_Views_ML_Deck_LC_39B-3318973>)| Two launches, one count  
+Artemis I Slow Motion LiftoffNASA/Frank Michuax · 2022-11-16| [KSC-20221116--MH-FMX-01-0001-Artemis_1_slowmo_liftoff-3314595](<https://images.nasa.gov/details/KSC-20221116--MH-FMX-01-0001-Artemis_1_slowmo_liftoff-3314595>)| Two launches, one count  
+Artemis I Launch from NASA Causeway (Slo Mo)NASA/Brandon Hancock · 2022-11-16| [GX010506](<https://images.nasa.gov/details/GX010506>)| Two launches, one count  
+Artemis I Launch ImageryNASA/Walter Lindblom · 2022-11-16| [KSC-20221116-MH-WEL01-0001-Artemis_I_Launch_Imagery-3319254](<https://images.nasa.gov/details/KSC-20221116-MH-WEL01-0001-Artemis_I_Launch_Imagery-3319254>)| Two launches, one count  
+Flight Day 20: To the MoonNASA · 2022-12-05| [FD 20 2](<https://images.nasa.gov/details/FD%2020%202>)| Artemis I's route  
+  
+data and images| source| used in  
+---|---|---  
+Artemis I as-flown trajectory (spacecraft −1023)NASA/JSC navigation via JPL Horizons · 2022-12-13| [ssd.jpl.nasa.gov](<https://ssd.jpl.nasa.gov/horizons/>)| Artemis I's route  
+Blue Marble: Next Generation, NovemberNASA Earth Observatory · 2004-11| [visibleearth.nasa.gov](<https://visibleearth.nasa.gov/images/74192/november-blue-marble-next-generation>)| Artemis I's route  
+Earth at Night (Black Marble) 2016NASA Earth Observatory · 2016| [visibleearth.nasa.gov](<https://visibleearth.nasa.gov/images/144898/earth-at-night-black-marble-2016-color-maps>)| Artemis I's route  
+CGI Moon KitNASA's Scientific Visualization Studio · 2019| [svs.gsfc.nasa.gov](<https://svs.gsfc.nasa.gov/4720>)| Artemis I's route  
+Monthly mean CO₂ at Mauna Loa (co2_mm_mlo.csv)NOAA Global Monitoring Laboratory; Scripps Institution of Oceanography · 2026-11-19| [gml.noaa.gov](<https://gml.noaa.gov/ccgg/trends/data.html>)| The Keeling Curve  
+NASA Exoplanet Archive: confirmed planets by discovery year and methodNASA Exoplanet Science Institute, Caltech/IPAC · 2026-11-21| [exoplanetarchive.ipac.caltech.edu](<https://exoplanetarchive.ipac.caltech.edu/>)| SQL notebook launch  
+  
+Footage and sound courtesy of NASA. NASA media is generally not subject to copyright in the United States ([NASA media usage guidelines](<https://www.nasa.gov/nasa-brand-center/images-and-media/>)). Its use here does not imply endorsement by NASA. Carbon dioxide data: NOAA Global Monitoring Laboratory and Scripps Institution of Oceanography. This page uses the NASA Exoplanet Archive, operated by the California Institute of Technology under contract with NASA.
+
+The concert poster's track was synthesized by a Python script that ships with its document. Fonts are from Google Fonts, under the SIL Open Font License.
+
+The documents read footage and data from local files. To render one, download the source files, or point each `src` at your own.
+
+## Make your own.
+
+Install ultrafast, connect your agent, and give it a brief like one of these.
+
+`cargo install ultrafast` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Op reference · all 70 ops · ultrafast docs
+
+> Every ultrafast op with its ports, params, types and defaults: text, paths, video, captions, blocks, 3D, particles, fluid, shaders, transitions and looks.
+
+URL: https://ultrafast.mov/docs/ops/
+
+Docs
+
+# 70 ops
+
+Every op with its ports, params, types and defaults. `uf ops` prints the same as JSON.
+
+## Start
+
+  * [Quickstart](<https://ultrafast.mov/docs/>)
+  * [The document](<https://ultrafast.mov/docs/documents/>)
+
+## Reference
+
+  * [Ops](<https://ultrafast.mov/docs/ops/>)
+  * [CLI](<https://ultrafast.mov/docs/cli/>)
+  * [MCP server](<https://ultrafast.mov/docs/mcp/>)
+  * [HTTP API](<https://ultrafast.mov/docs/api/>)
+
+## For agents
+
+  * [llms.txt](<https://ultrafast.mov/llms.txt>)
+  * [This page as Markdown](<https://ultrafast.mov/docs/ops/index.md>)
+
+**Groups**
+
+  1. Sources (14)
+  2. Compositing (8)
+  3. Color (8)
+  4. Geometry and warps (8)
+  5. 3D (5)
+  6. Simulation and particles (4)
+  7. Footage, sound and captions (4)
+  8. Blocks (1)
+  9. Shaders (1)
+  10. Looks (17)
+
+Params marked animatable take a constant, `{"keys": [...]}`, `{"expr": "..."}` or a driver (see [params and animation](<https://ultrafast.mov/docs/documents/#params>)). Ports are the node's `inputs`.
+
+## Sources
+
+### solid
+
+flat color
+
+color| color| fill color · default `#000000`  
+---|---|---  
+  
+### gradient
+
+linear, radial or conic gradient
+
+kind| enum(linear | radial | conic)| gradient shape · default `linear`  
+---|---|---  
+a| color| start color (with b: a two-stop gradient)  
+b| color| end color  
+stops| text | number[]| "0:#ff0000, 1:#0000ff" or [pos,r,g,b,a,...], up to 8  
+space| enum(linear | srgb)| interpolation space; srgb matches CSS/Figma · default `linear`  
+start| vec2| linear: start point px · default `[0,0]`  
+end| vec2| linear: end point px · default `[0,h]`  
+center| vec2| radial/conic center px · default `frame center`  
+radius| number| radial radius px · default `max(w,h)/2`  
+angle| number| conic start angle, degrees · default `0`  
+  
+### shape
+
+analytic rectangle / rounded rect / ellipse (SDF, antialiased)
+
+kind| enum(rect | ellipse | circle)| shape · default `rect`  
+---|---|---  
+color| color| fill (or stroke) color · default `#ffffff`  
+center| vec2| center px · default `frame center`  
+size| vec2| width and height px · default `[w/4,w/4]`  
+radius| number| corner radius px · default `0`  
+rotation| number| degrees · default `0`  
+scale| number | vec2| scale about the center (size, corners and stroke) · default `1`  
+opacity| number| 0..1, fades the shape · default `1`  
+stroke| number| outline width px; 0 fills · default `0`  
+softness| number| edge softness in output pixels · default `1`  
+  
+### checker
+
+checkerboard
+
+a| color| first cell · default `#333333`  
+---|---|---  
+b| color| second cell · default `#666666`  
+size| number| cell px · default `32`  
+  
+### noise
+
+fractal simplex noise between two colors
+
+a| color| low color · default `#000000`  
+---|---|---  
+b| color| high color · default `#ffffff`  
+scale| vec2 | number| px per noise cell · default `[200,200]`  
+offset| vec2| pan px · default `[0,0]`  
+evolution| number| third noise dimension; animate it · default `0`  
+octaves| number| 1..8 · default `4`  
+  
+### image
+
+still image or image sequence
+
+src| text| file path relative to the document; {frame} / {frame:05} for sequences  
+---|---|---  
+fit| enum(contain | cover | fill | none)| placement in the frame, or in `rect` (cover there by default); only fill stretches · default `contain`  
+rect| vec4| [x,y,w,h] px box the picture goes in, by `fit`; it keeps its aspect ratio  
+opacity| number| 0..1 · default `1`  
+space| enum(linear | srgb)| interpolation space when scaled; srgb filters the encoded values as browsers do · default `linear`  
+fps| number| sequence frame rate · default `document fps`  
+first_frame| number| sequence frame number at local time 0 · default `0`  
+  
+### video
+
+video clip, hardware decoded
+
+src| text| file path  
+---|---|---  
+fit| enum(contain | cover | fill | none)| placement in the frame, or in `rect` (cover there by default); only fill stretches · default `contain`  
+rect| vec4| [x,y,w,h] px box the footage goes in, by `fit`; it keeps its aspect ratio  
+opacity| number| 0..1 · default `1`  
+space| enum(linear | srgb)| interpolation space when scaled; srgb filters the encoded values as browsers do · default `linear`  
+start| number| source seconds at local time 0 · default `0`  
+speed| number| playback rate · default `1`  
+loop| bool| wrap at the clip's end (else hold the last frame) · default `false`  
+time| number| explicit source time (animate for time remapping)  
+  
+### path
+
+vector path (SVG data or preset), GPU exact-coverage raster
+
+to| text| SVG path data to morph toward; several separated by | to morph through each in turn  
+---|---|---  
+morph| number| 0 = this path, 1 = `to` (with several targets, 2 = the second, ...); animate it · default `0`  
+d| text| SVG path data  
+kind| enum(star | polygon | circle | line | polyline | polygon_points)| preset instead of d  
+center| vec2| preset center · default `frame center`  
+radius| number| preset radius · default `h/4`  
+sides| number| star points / polygon sides · default `5 / 6`  
+inner_radius| number| star inner radius · default `0.45 r`  
+points| number[]| flat [x0,y0,x1,y1,...] for line/polyline/polygon_points  
+color| color| paint · default `#ffffff`  
+opacity| number| 0..1, fades the whole node (animate for fades) · default `1`  
+fill_rule| enum(nonzero | evenodd)| fill rule · default `nonzero`  
+trim_start| number| 0..1 of length · default `0`  
+trim_end| number| 0..1 of length (animate for draw-on) · default `1`  
+stroke| number| stroke width px; 0 fills · default `0`  
+join| enum(miter | round | bevel)| stroke joins · default `miter`  
+cap| enum(butt | round | square)| stroke caps · default `butt`  
+dash| number[]| dash pattern [on, off, ...] px  
+dash_offset| number| dash phase px · default `0`  
+position| vec2| where the anchor lands, px · default `[0,0]`  
+anchor| vec2| pivot in the node's own space, px · default `[0,0]`  
+scale| vec2 | number| scale around the anchor · default `[1,1]`  
+rotation| number| degrees, clockwise · default `0`  
+  
+### text
+
+shaped text, GPU exact-coverage raster
+
+text| text| content; \n breaks lines; *word* is emphasis (em_ params), [words]{color=#ffd23f highlight=#ff4d6d} styles a span  
+---|---|---  
+font| text| family name or font file path · default `Helvetica Neue`  
+weight| number| 100..900 · default `400`  
+style| enum(normal | italic)| style · default `normal`  
+size| number| px · default `64`  
+color| color| paint · default `#ffffff`  
+opacity| number| 0..1, fades the whole node (animate for fades) · default `1`  
+align| enum(left | center | right)| horizontal anchor of each line · default `left`  
+valign| enum(top | middle | baseline | bottom)| vertical anchor of the block · default `top`  
+width| number| wrap width px  
+line_height| number| multiple of size · default `1.2`  
+tracking| number| extra px between glyphs · default `0`  
+features| text| OpenType features, e.g. "liga=0,ss01"  
+variations| text| variable-font axes, e.g. "wdth=80, opsz=144" (weight drives wght; opsz follows size unless set)  
+axis_<tag>| number| one variable-font axis, animatable: axis_wdth, axis_SOFT · default `axis default`  
+stagger| number| seconds between glyphs for the glyph_* animators · default `0`  
+stagger_order| enum(forward | reverse | center | random)| which glyphs go first · default `forward`  
+glyph_offset| vec2| per-glyph offset px, keyed in glyph time (t - stagger * order) · default `[0,0]`  
+glyph_scale| vec2| per-glyph scale about the glyph's center, glyph time · default `[1,1]`  
+glyph_rotation| number| per-glyph rotation degrees, glyph time · default `0`  
+glyph_opacity| number| per-glyph opacity, glyph time · default `1`  
+reveal| number| glyphs visible (fractional fades) · default `all`  
+reveal_softness| number| glyphs the reveal fade spans · default `1`  
+reveal_offset| vec2| offset of not-yet-revealed glyphs px · default `[0,0]`  
+fill_rule| enum(nonzero | evenodd)| fill rule · default `nonzero`  
+skim| bool| glanced at, not read (code, data labels): ultrafast review skips its reading-time check · default `false`  
+markup| bool| parse inline styling in text: *emphasis* and [words]{color=#ffd23f weight=800 font="ultrafast:serif" style=italic size=80 highlight=#ff4d6d underline=4 underline_color=#fff rise=10 draw=1} · default `true`  
+em_color| color| color of *emphasis* · default `text color`  
+em_font| text| face of *emphasis* (e.g. ultrafast:serif for a serif accent) · default `font`  
+em_weight| number| weight of *emphasis* · default `weight`  
+em_style| enum(normal | italic)| style of *emphasis* (italic is synthesized for faces without one) · default `italic when no em_ param is set`  
+em_size| number| size px of *emphasis* · default `size`  
+em_highlight| color| marker box behind *emphasis* · default `none`  
+em_underline| number| underline thickness px under *emphasis* · default `0`  
+em_underline_color| color| underline color · default `em_color`  
+em_rise| number| baseline shift px of *emphasis* (up) · default `0`  
+em_draw| number| share of the emphasis highlights and underlines drawn, 0..1, one stroke across lines in reading order (animate it) · default `1`  
+on_path| text| SVG path data the text follows (closed paths wrap: circular badges); align picks start, middle or end  
+path_offset| number| px along the path; animate it to run text along · default `0`  
+number| number| show this value instead of text (animate it: counters)  
+decimals| number| digits after the point for number · default `0`  
+thousands| text| group separator for number ("" for none) · default `,`  
+prefix| text| before number, e.g. $  
+suffix| text| after number, e.g. % or k  
+scramble| number| decoding text: animate 0 (all random) to 1 (the text)  
+scramble_chars| text| characters the undecoded ones cycle through · default `A-Z, 0-9, symbols`  
+stroke| number| stroke width px; 0 fills · default `0`  
+join| enum(miter | round | bevel)| stroke joins · default `miter`  
+cap| enum(butt | round | square)| stroke caps · default `butt`  
+dash| number[]| dash pattern [on, off, ...] px  
+dash_offset| number| dash phase px · default `0`  
+position| vec2| where the anchor lands, px · default `[0,0]`  
+anchor| vec2| pivot in the node's own space, px · default `[0,0]`  
+scale| vec2 | number| scale around the anchor · default `[1,1]`  
+rotation| number| degrees, clockwise · default `0`  
+  
+### svg
+
+an SVG file (logo, icon, illustration) as vector paths: fills, strokes, gradients, text as outlines; `ultrafast import-svg` gives the same as editable nodes
+
+src| text| .svg file (relative to the document)  
+---|---|---  
+size| vec2 | number| fit inside [w, h] px, keeping its aspect · default `the SVG's own size`  
+position| vec2| where the anchor lands, px · default `[0,0]`  
+anchor| vec2| pivot in the artwork's px (after size) · default `[0,0]`  
+scale| vec2 | number| scale around the anchor (stays vector-sharp) · default `[1,1]`  
+rotation| number| degrees, clockwise · default `0`  
+opacity| number| 0..1 · default `1`  
+  
+### lottie
+
+a Lottie (Bodymovin) animation as editable ultrafast nodes: shape layers become paths with Lottie's keyframes, transforms stay vector; loops by default
+
+src| text| Lottie .json file  
+---|---|---  
+size| vec2 | number| fit it into this box px · default `the animation's size`  
+loop| bool| repeat over its duration · default `true`  
+position| vec2| where its top-left (or anchor) lands px · default `[0,0]`  
+anchor| vec2| pivot px in its fitted space · default `[0,0]`  
+scale| vec2 | number| scale · default `[1,1]`  
+rotation| number| degrees · default `0`  
+opacity| number| 0..1 · default `1`  
+  
+### code
+
+source code in a panel: syntax-highlighted, optionally typed on with a caret, line numbers, highlighted lines, window chrome
+
+code| text| the source (\n between lines; tabs become 4 spaces)  
+---|---|---  
+language| enum(rust | python | js | ts | json | bash | go | swift | c | cpp | slang | sql | css | html | text)| how to color it · default `text`  
+theme| enum(ultrafast | paper | mono)| colors (paper is light) · default `ultrafast`  
+title| text| file name in the title bar  
+window| bool| title bar with three dots · default `true`  
+background| bool| the panel and its shadow · default `true`  
+line_numbers| bool| gutter numbers · default `true`  
+highlight| text| lines to mark, e.g. "3" or "2,5-7"  
+highlight_at| number| when the marked lines light up · default `0`  
+type_speed| number| characters per second typed on (0: all shown) · default `0`  
+at| number| when typing starts · default `0`  
+caret| bool| a blinking caret while and after typing · default `true`  
+font| text| a monospaced face · default `ultrafast:mono`  
+size| number| px · default `30 at 1080p`  
+line_height| number| multiple of size · default `1.55`  
+padding| number| px inside the panel · default `1.4 x size`  
+radius| number| panel corner radius px · default `0.55 x size`  
+width| number| panel width px · default `fits the longest line`  
+position| vec2| top-left of the panel · default `centered`  
+opacity| number| 0..1 · default `1`  
+  
+### marble
+
+flowing marble/ink generator (half resolution by default)
+
+filaments| number| default `0.8`  
+---|---|---  
+resolution| number| default `0.5`  
+veins| number| default `1.0`  
+  
+### starfield
+
+drifting starfield generator
+
+speed| number| default `0.3`  
+---|---|---  
+travel| number| default `0.0`  
+  
+## Compositing
+
+### over (fg, bg)
+
+fg over bg (Porter-Duff)
+
+opacity| number| fg opacity · default `1`  
+---|---|---  
+space| enum(linear | srgb)| blend space · default `linear`  
+  
+### blend (fg, bg)
+
+blend modes (W3C)
+
+mode| enum(normal | multiply | screen | overlay | darken | lighten | color_dodge | color_burn | hard_light | soft_light | difference | exclusion | hue | saturation | color | luminosity | add | subtract | divide)| mode · default `normal`  
+---|---|---  
+opacity| number| fg opacity · default `1`  
+space| enum(linear | srgb)| blend space · default `linear`  
+  
+### composite (fg, bg)
+
+Porter-Duff operators
+
+operator| enum(in | out | atop | xor | plus | over)| operator · default `over`  
+---|---|---  
+  
+### mask (source, matte)
+
+track matte
+
+mode| enum(alpha | alpha_inverted | luma | luma_inverted)| matte channel · default `alpha`  
+---|---|---  
+  
+### mix (a, b)
+
+crossfade
+
+t| number| 0 = a, 1 = b · default `0.5`  
+---|---|---  
+  
+### opacity (source)
+
+multiply alpha
+
+opacity| number| 0..1 · default `1`  
+---|---|---  
+  
+### stack (in0, in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15)
+
+lays its inputs (in0, in1, ...: text, path, shape, svg or stack) out in a column or row by their measured bounds
+
+direction| enum(column | row)| stack downward or rightward · default `column`  
+---|---|---  
+at| number| seconds at which children are measured (when their entrances have landed) · default `0`  
+gap| number| px between children · default `24`  
+align| enum(start | center | end)| children across the stack · default `start`  
+position| vec2| where the block's anchor goes · default `[0,0]`  
+anchor| enum(top_left | top | top_right | left | center | right | bottom_left | bottom | bottom_right)| which point of the block sits at position · default `top_left`  
+  
+### transition (a, b)
+
+from shot `a` to shot `b` over `duration` s starting `at`: only a renders before, only b after
+
+kind| enum(crossfade | dip | wipe | push | slide | iris | zoom | dissolve | glitch | blur)| how: dip goes through `color`; wipe/push/slide move along `direction`; iris opens from `center`; dissolve burns through noise · default `crossfade`  
+---|---|---  
+at| number| start, seconds · default `0`  
+duration| number| seconds · default `0.8`  
+direction| number| degrees: 0 moves rightward, 90 downward · default `0`  
+softness| number| edge softness (blur: strength) · default `per kind`  
+color| color| dip color; wipe and dissolve edge glow color (dissolve: ember #ff9a4a) · default `#000000`  
+glow| number| edge glow strength · default `0 (dissolve 2)`  
+center| vec2| iris and zoom center px · default `frame center`  
+grain| number| dissolve noise size px · default `160`  
+ease| text | number[]| progress easing: a name (in_out_cubic) or [x1, y1, x2, y2] · default `per kind`  
+  
+## Color
+
+### adjust (source)
+
+exposure, contrast, saturation, hue, brightness, gamma
+
+exposure| number| stops (linear light) · default `0`  
+---|---|---  
+contrast| number| around mid grey · default `1`  
+saturation| number| 0 = grey · default `1`  
+hue| number| degrees · default `0`  
+brightness| number| offset · default `0`  
+gamma| number| gamma · default `1`  
+  
+### levels (source)
+
+input/output levels with gamma
+
+in_black| number| default `0`  
+---|---|---  
+in_white| number| default `1`  
+gamma| number| default `1`  
+out_black| number| default `0`  
+out_white| number| default `1`  
+  
+### color_matrix (source)
+
+4x5 matrix on straight linear RGBA
+
+matrix| number[]| 20 numbers, row-major · default `identity`  
+---|---|---  
+  
+### lut (source)
+
+3D LUT color grade (.cube)
+
+src| text| .cube file (3D LUT)  
+---|---|---  
+amount| number| 0..1 mix with the ungraded image · default `1`  
+space| enum(srgb | linear)| what the LUT expects as input (most grading LUTs: srgb) · default `srgb`  
+  
+### invert (source)
+
+invert colors
+
+amount| number| 0..1 · default `1`  
+---|---|---  
+  
+### tint (source)
+
+map luminance between two colors
+
+dark| color| shadows · default `#000000`  
+---|---|---  
+light| color| highlights · default `#ffffff`  
+  
+### threshold (source)
+
+luminance threshold
+
+level| number| default `0.5`  
+---|---|---  
+softness| number| default `0.01`  
+  
+### grade (source)
+
+color grade looks 0..4 (look, amount)
+
+amount| number| default `1.0`  
+---|---|---  
+look| number| default `0.0`  
+  
+## Geometry and warps
+
+### crop (source)
+
+keep a rectangle
+
+rect| vec4| [x,y,w,h] px · default `frame`  
+---|---|---  
+softness| number| edge px · default `1`  
+  
+### transform (source)
+
+2D transform (absorbed into paths/text for sharpness)
+
+position| vec2| where the anchor lands · default `frame center`  
+---|---|---  
+anchor| vec2| pivot · default `frame center`  
+scale| vec2 | number| scale · default `[1,1]`  
+rotation| number| degrees · default `0`  
+skew| number| degrees · default `0`  
+  
+### corner_pin (source)
+
+perspective: map the frame (or source_rect) to four corners
+
+corners| number[]| [tl, tr, br, bl] as 8 numbers · default `frame corners`  
+---|---|---  
+source_rect| vec4| [x,y,w,h] of the source mapped · default `frame`  
+  
+### wave (source)
+
+sine displacement
+
+amplitude| number| px · default `10`  
+---|---|---  
+wavelength| number| px · default `100`  
+phase| number| degrees · default `0`  
+direction| number| degrees · default `0`  
+  
+### twirl (source)
+
+swirl around a center
+
+center| vec2| default `frame center`  
+---|---|---  
+radius| number| default `min(w,h)/2`  
+angle| number| degrees · default `90`  
+  
+### tile (source)
+
+repeat a region
+
+origin| vec2| default `[0,0]`  
+---|---|---  
+size| vec2| default `frame`  
+  
+### displace (source, map)
+
+displace source by a map's red/green
+
+amount| vec2| px · default `[20,20]`  
+---|---|---  
+  
+### blur (source)
+
+gaussian blur
+
+radius| number| sigma px · default `8`  
+---|---|---  
+  
+## 3D
+
+### mesh (texture)
+
+3D mesh (scene object for render3d)
+
+primitive| enum(cube | plane | sphere | cylinder | cone | torus | text | path)| unit-sized primitive, or extruded text / SVG path · default `cube`  
+---|---|---  
+text| text| primitive text: content  
+font| text| primitive text: family or file · default `Helvetica Neue`  
+weight| number| primitive text: weight · default `400`  
+style| enum(normal | italic)| primitive text: style · default `normal`  
+size| number| primitive text: size in world units · default `1`  
+align| enum(left | center | right)| primitive text: alignment · default `center`  
+tracking| number| primitive text: extra spacing (px at 100 px/unit) · default `0`  
+line_height| number| primitive text: multiple of size · default `1.2`  
+d| text| primitive path: SVG path data  
+units| number| primitive path: path px per world unit · default `100`  
+depth| number| extrusion depth, world units · default `0.25`  
+bevel| number| text/path: 45-degree chamfer on both rims, world units · default `0`  
+src| text| .gltf/.glb file instead of a primitive  
+segments| number| tessellation · default `32`  
+position| vec3| default `[0,0,0]`  
+rotation| vec3| degrees, X then Y then Z · default `[0,0,0]`  
+scale| vec3 | number| default `[1,1,1]`  
+color| color| base color · default `#cccccc`  
+metallic| number| 0..1 · default `0`  
+roughness| number| 0..1 · default `0.5`  
+emissive| color| emitted light · default `#000000`  
+transmission| number| glass: 0..1 of the scene behind seen through it (refracted) · default `0`  
+ior| number| glass: index of refraction (water 1.33, glass 1.5, diamond 2.4) · default `1.45`  
+thickness| number| glass: how far refracted rays travel inside, world units (more bends more) · default `0.5`  
+dispersion| number| glass: color splitting (try 1..2) · default `0`  
+opacity| number| 0..1 · default `1`  
+  
+### light
+
+3D light (scene object)
+
+kind| enum(directional | point)| default `directional`  
+---|---|---  
+direction| vec3| toward the light (directional) · default `[0.4,0.8,0.6]`  
+position| vec3| point light position · default `[0,2,2]`  
+color| color| default `#ffffff`  
+intensity| number| default `3`  
+  
+### camera
+
+3D camera (scene object)
+
+position| vec3| default `[0,0,5]`  
+---|---|---  
+orbit| vec3| [azimuth, elevation, distance] around target (overrides position)  
+target| vec3| default `[0,0,0]`  
+up| vec3| default `[0,1,0]`  
+fov| number| vertical, degrees · default `45`  
+near| number| default `0.1`  
+far| number| default `1000`  
+  
+### render3d (*)
+
+renders connected meshes/lights/camera (any port names; camera on `camera`)
+
+ambient| number| hemisphere light intensity · default `0.35`  
+---|---|---  
+sky| color| ambient from above · default `#e6f2ff`  
+ground| color| ambient from below · default `#5a4d47`  
+background| color| clear color · default `transparent`  
+shadows| bool| the first directional light casts a shadow map · default `true`  
+shadow_strength| number| 0 = no darkening, 1 = full · default `0.85`  
+shadow_bias| number| depth bias in shadow-map texels (raise if surfaces self-shadow) · default `1`  
+environment_intensity| number| scale of the image on the `environment` port (equirectangular; lights and reflects) · default `1`  
+environment_rotation| number| turns the environment around +y, degrees · default `0`  
+fog| vec2| [start, end] distance from the camera where surfaces fade into fog_color  
+fog_color| color| fog color · default `background`  
+aperture| number| depth of field: blur radius px far from focus (0 = off) · default `0`  
+focus| number| depth of field: in-focus distance, world units · default `camera to target`  
+  
+### raymarch (in0, in1, in2, in3)
+
+3D as a signed-distance scene marched per pixel: write float2 map(float3 p) -> (distance, material id); soft shadows, occlusion, a reflection bounce, environment and antialiasing come with it
+
+scene| text| Slang: float2 map(float3 p) (+ optional void material(float id, float3 p, float3 n, inout float3 albedo, inout float metallic, inout float roughness)); helpers sdSphere, sdBox, sdCylinder, sdTorus, sdCapsule, sdBand, sdPlane, smin, opU, rotX/Y/Z, fbm3, knob(i), layerDistance + extrude (any ultrafast layer as a 3D solid), presetMaterial (ids 0 matte, 1 brass, 2 polished brass, 3 steel, 4 gold, 5 copper, 6 black lacquer, 7 ceramic, 8 rubber, 9 clear glass, 10 chrome; metallic < 0 makes glass); input(i, px) reads in0..in3  
+---|---|---  
+orbit| vec3| camera [azimuth, elevation, distance] around target, degrees and world units · default `[30,20,8]`  
+target| vec3| what the camera looks at · default `[0,0,0]`  
+fov| number| vertical, degrees · default `35`  
+light| vec3| point light position (casts soft shadows) · default `[-4,5,4]`  
+light_color| color| light color · default `#fff2e0`  
+light_intensity| number| inverse-square intensity · default `40`  
+environment| enum(studio | room | night | sky | lightbox | horizon)| what reflections and ambient light see (lightbox: bars of light, made for glass and chrome) · default `studio`  
+background| text| environment, transparent (to composite over 2D), or a color · default `environment`  
+background_level| number| brightness of an environment background · default `0.35`  
+exposure| number| before tone mapping · default `1`  
+samples| number| rays per pixel (1..8), jittered · default `2`  
+bounce| bool| trace one reflection bounce for glossy surfaces · default `true`  
+ior| number| glass index of refraction (materials with metallic < 0, preset 9) · default `1.5`  
+dispersion| number| glass color splitting (0 none, 2 strong) · default `1`  
+max_distance| number| rays stop here · default `80`  
+k0| number| k0..k4: free knobs read as knob(0..4) in the scene (animatable)  
+resolution| number| render scale · default `1`  
+  
+## Simulation and particles
+
+### swarm
+
+particles that assemble into text (or a path) and scatter: progress 0..1
+
+text| text| what the particles form (or `d`)  
+---|---|---  
+d| text| SVG path data to form instead of text (offset by position)  
+font| text| font family or file · default `Helvetica Neue`  
+weight| number| font weight · default `400`  
+style| enum(normal | italic)| font style · default `normal`  
+tracking| number| extra px between glyphs · default `0`  
+variations| text| variable-font axes, as on text  
+axis_<tag>| number| one variable-font axis, as on text · default `axis default`  
+size| number| text size px · default `64`  
+position| vec2| text position (as `text`) · default `[0,0]`  
+align| enum(left | center | right)| text alignment · default `left`  
+valign| enum(top | middle | baseline | bottom)| vertical alignment · default `top`  
+count| number| particles · default `4000`  
+progress| number| 0 scattered, 1 formed; animate it · default `1`  
+stagger| number| spread of arrival times (fraction of progress) · default `0.5`  
+scatter| number| how far particles start from home, px · default `700`  
+origin| vec2| start every particle from this point instead  
+turbulence| number| drift amplitude while away from home, px · default `40`  
+particle_size| vec2| size scattered and formed, px · default `[2,3]`  
+color| color| color when formed · default `#ffffff`  
+color_scatter| color| color when scattered · default `color`  
+shimmer| number| 0..1 twinkle · default `0`  
+stretch| number| streak along travel while moving · default `0`  
+seed| number| random seed · default `1`  
+blend| enum(over | add)| how particles combine · default `over`  
+  
+### particles (sprite)
+
+deterministic particle system (closed form: scrub anywhere), drawn as sprites
+
+seed| number| random seed · default `1`  
+---|---|---  
+rate| number| particles emitted per second · default `60`  
+max| number| cap on particles alive · default `5000`  
+life| vec2| lifetime range, s · default `[1.5,2.5]`  
+position| vec2| emitter center px · default `[960,540]`  
+emitter_size| vec2| emitter rectangle px · default `[0,0]`  
+direction| number| degrees (-90 = up) · default `-90`  
+spread| number| cone angle, degrees · default `30`  
+speed| vec2| initial speed range, px/s · default `[200,400]`  
+gravity| vec2| px/s^2 · default `[0,300]`  
+drag| number| linear drag, 1/s · default `0`  
+size| vec2| size at birth and death, px · default `[8,2]`  
+size_jitter| number| 0..1 random size reduction · default `0.3`  
+spin| vec2| rotation speed range, deg/s · default `[0,0]`  
+color_start| color| color at birth · default `#ffffff`  
+color_end| color| color at death · default `color_start`  
+fade_in| number| fraction of life fading in · default `0.1`  
+fade_out| number| fraction of life fading out · default `0.3`  
+shape| enum(circle | square | spark | sprite)| sprite uses the `sprite` input · default `circle`  
+stretch| number| spark stretch along velocity · default `0`  
+blend| enum(over | add)| how particles combine · default `over`  
+emit_start| number| emission start, s (negative pre-warms) · default `0`  
+emit_end| number| emission end, s · default `forever`  
+  
+### fluid (dye, stir)
+
+ink/smoke simulation: `dye` pours color in, `stir` pushes it around; stepped once per frame (exact on export, seekable)
+
+start| number| local time the simulation starts (blank before) · default `0`  
+---|---|---  
+emit| number| how fast `dye` replaces the fluid where it is, per s · default `6`  
+dissipation| number| dye fade per s · default `0.15`  
+velocity_dissipation| number| motion fade per s · default `0.4`  
+vorticity| number| keeps eddies curling (0 = silky, 10+ = churning) · default `4`  
+turbulence| number| curl-noise stirring, px/s^2 (try 400..3000) · default `0`  
+turbulence_scale| number| size of the noise eddies, px · default `260`  
+wind| vec2| drift of everything, px/s · default `[0,0]`  
+buoyancy| number| dye rises (smoke), px/s^2 per unit alpha · default `0`  
+stir| number| push away from the edges of the `stir` image · default `2500`  
+swirl| number| spin around the edges of the `stir` image · default `0`  
+resolution| number| velocity grid, fraction of the frame · default `0.25`  
+dye_resolution| number| dye grid, fraction of the frame · default `0.5`  
+pressure_iterations| number| incompressibility solver iterations · default `24`  
+substeps| number| steps per frame (1..8) · default `1`  
+seed| number| turbulence pattern · default `1`  
+  
+### feedback (in0, in1, in2, in3)
+
+agent Slang stepped once per frame on its own previous result: float4 update(float2 pos, float px) with prev(pos), input(i,pos), dt(), step_index()
+
+code| text| Slang source defining update()  
+---|---|---  
+start| number| local time the simulation starts (blank before) · default `0`  
+resolution| number| state grid, fraction of the frame · default `1`  
+substeps| number| updates per frame (1..64) · default `1`  
+u| number[]| up to 16 values, param(i)  
+u0| number| u0..u15 individually (animatable)  
+  
+## Footage, sound and captions
+
+### clip_camera
+
+video framed on its speaker: faces are tracked from the footage (or given), then a follow camera with dead zone and eased pans, cuts on shots and speaker changes, scope zoom, protect mode (blurred cover behind the contained frame)
+
+src| text| source video  
+---|---|---  
+faces| text| face tracks, inline as JSON text or a file: {sourceWidth, sourceHeight, fps, frames: [{frame, faces: [{id, x, y, w, h, talk, focus}]}], shots: [{startFrame, endFrame, protect, cinematicScope}]}; omit it and the clip's faces, who is talking and its cuts are tracked from the footage (`ultrafast faces` writes the same) · default `tracked from src`  
+start| number| source seconds where the clip begins · default `0`  
+duration| number| clip seconds · default `document duration`  
+tuning| text| camera tuning overrides as JSON  
+opacity| number| 0..1 · default `1`  
+  
+### captions
+
+animated captions from word timings (karaoke, pop, reveal): pages laid out to fit, every word its own text node
+
+src| text| transcript: Whisper/word JSON, .srt or .vtt  
+---|---|---  
+words| text| inline instead: lines of `start end word`, SRT text or JSON  
+style| enum(karaoke | pop | reveal | plain)| karaoke lights the spoken word; pop pops each word on; reveal fades them on · default `karaoke`  
+font| text| family or file · default `Helvetica Neue`  
+size| number| px · default `6.5% of the short side`  
+weight| number| 100..900 · default `800`  
+color| color| words not yet spoken · default `#ffffff`  
+highlight| color| the word being spoken · default `#ffd23f`  
+spoken| color| words already spoken · default `color`  
+highlight_background| color| a rounded pill behind the spoken word  
+background| color| a rounded box behind each page  
+uppercase| bool| set in capitals · default `false`  
+tracking| number| extra px between glyphs · default `0`  
+width| number| line width px · default `82% of the width`  
+max_lines| number| lines per page · default `2`  
+line_height| number| multiple of size · default `1.18`  
+position| vec2| center of the caption block (moved into `safe` if it would cross it) · default `[w/2, 0.72 h]`  
+align| enum(left | center | right)| line alignment · default `center`  
+safe| enum(auto | social | margin | none)| area pages stay inside: auto is clear of the social apps' buttons and captions on a vertical frame (what `review --safe social` checks) and a 4% margin otherwise; none places them exactly at position · default `auto`  
+linger| number| seconds a page stays after its last word · default `0.6`  
+opacity| number| 0..1 · default `1`  
+  
+### audio
+
+sound mixed into exports
+
+src| text| any media file with audio  
+---|---|---  
+start| number| source seconds playing at local time `from` · default `0`  
+gain| number| linear, animatable · default `1`  
+from| number| local seconds the sound starts at (silent before) · default `0`  
+duration| number| seconds it plays from `from` (0: until the source ends) · default `0`  
+rate| number| playback speed with the pitch kept (time stretched) · default `1`  
+  
+### chroma_key (source)
+
+keys out a green (or any) screen: key color r, g, b (sRGB 0..1), tolerance, softness, spill
+
+b| number| default `0.25`  
+---|---|---  
+g| number| default `0.69`  
+r| number| default `0.0`  
+softness| number| default `0.08`  
+spill| number| default `0.8`  
+tolerance| number| default `0.12`  
+  
+## Blocks
+
+### block
+
+a ready-made animated block in one house style: title, lower_third, quote, stat, chapter, end_card, and charts: bar_chart, line_chart, donut (place it in time with a timing offset)
+
+kind| enum(title | lower_third | quote | stat | chapter | end_card | bar_chart | line_chart | donut)| which block · default `title`  
+---|---|---  
+title| text| title / chapter / end_card / charts (above the chart)  
+kicker| text| title, charts: small line above  
+subtitle| text| title: line below  
+number| text| chapter: its number, e.g. 01  
+name| text| lower_third  
+role| text| lower_third  
+quote| text| quote  
+author| text| quote  
+value| number| stat: counts up to it · default `0`  
+prefix| text| stat, bar and line values  
+suffix| text| stat, bar and line values  
+decimals| number| stat, bar and line values · default `0`  
+label| text| stat  
+tagline| text| end_card  
+cta| text| end_card: a pill button  
+logo| text| end_card: SVG file  
+values| number[]| charts: the data, e.g. [24, 31, 58, 265]  
+labels| text| charts: one per value, comma separated (or | when labels hold commas)  
+highlight| number| charts: index of the value set in the accent and called out (-1: none) · default `bar, donut: the largest; line: the last`  
+height| number| charts: plot height px · default `34% of the height`  
+max| number| bar, line: the value at the top of the plot · default `largest value`  
+min| number| line: the value at the baseline · default `0 or the smallest`  
+color| color| bar: other bars; line: the line · default `muted (line: accent)`  
+area| bool| line: fill under the line · default `true`  
+draw_time| number| line: seconds the line takes to draw · default `1.6`  
+colors| text| donut: segment colors, comma separated · default `accent, then a palette`  
+radius| number| donut: outer radius px · default `fits the plot`  
+thickness| number| donut: ring thickness px · default `30% of radius`  
+number_font| text| stat, donut: the big number's face · default `ultrafast:wide`  
+duration| number| seconds before it exits (end_card stays) · default `3.5 (lower_third 4, quote 5, chapter 2.5, charts 5)`  
+ink| color| type color · default `#f6f3ee`  
+muted| color| secondary type · default `ink at 72%`  
+accent| color| rules, bars, quote mark, pill · default `#ff5c7a`  
+display_font| text| headline face · default `ultrafast:display`  
+text_font| text| body face · default `ultrafast:sans`  
+mono_font| text| labels · default `ultrafast:mono`  
+align| enum(left | center)| alignment (end_card is centered) · default `left`  
+position| vec2| title/quote/stat: top of the block; lower_third: bottom-left; end_card: center · default `per kind`  
+width| number| wrap width px · default `80% of the width`  
+scale| number| size multiplier (sizes follow the frame) · default `1`  
+opacity| number| 0..1 · default `1`  
+  
+## Shaders
+
+### shader (in0, in1, in2, in3)
+
+agent-written Slang: float4 shade(float2 pos, float px)
+
+resolution| number| render at this fraction of the frame size and upscale (soft, costly looks; write shaders with pos/size()) · default `1`  
+---|---|---  
+code| text| Slang source defining shade(); `static const` tables of 64+ numbers are read from the params (editing their values compiles nothing)  
+u| number[]| up to 16 values, param(i)  
+u0| number| u0..u15 individually (animatable)  
+motion_blur| bool| true: the format's motion blur samples its clock and animated u values (a shader that moves things); otherwise it holds at the frame's time · default `false`  
+  
+## Looks
+
+### drop_shadow (source)
+
+soft shadow under the source (color, opacity, offset, radius)
+
+color| color| default `#000000`  
+---|---|---  
+offset| vec2| default `[8.0,8.0]`  
+opacity| number| default `0.6`  
+radius| number| default `12.0`  
+  
+### glow (source)
+
+soft colored glow around the source
+
+intensity| number| default `1.0`  
+---|---|---  
+radius| number| default `16.0`  
+  
+### vignette (source)
+
+darkened edges (inner, outer colors)
+
+inner| color| default `#00000000`  
+---|---|---  
+outer| color| default `#000000b0`  
+  
+### stroke_outline (source)
+
+solid outline around the source's shape (color, width px)
+
+color| color| default `#ffffff`  
+---|---|---  
+width| number| default `4.0`  
+  
+### bloom (source)
+
+light bleeding from bright areas (threshold, radius, intensity, wide)
+
+intensity| number| default `0.6`  
+---|---|---  
+radius| number| default `32.0`  
+threshold| number| default `0.75`  
+wide| number| default `0.3`  
+  
+### grain (source)
+
+animated film grain (amount)
+
+amount| number| default `0.07`  
+---|---|---  
+  
+### aberration (source)
+
+chromatic fringes toward the edges
+
+amount| number| default `8.0`  
+---|---|---  
+  
+### repeater (source)
+
+count copies, each moved by (dx, dy), turned by rotate degrees and scaled by scale about (cx, cy), fading by fade: trails, radial arrays, tunnels
+
+count| number| default `6.0`  
+---|---|---  
+cx| number| default `0.0`  
+cy| number| default `0.0`  
+dx| number| default `0.0`  
+dy| number| default `0.0`  
+fade| number| default `1.0`  
+rotate| number| default `0.0`  
+scale| number| default `1.0`  
+  
+### halftone (source)
+
+riso halftone dots of one ink (cell, angle, r, g, b): sized by the source's coverage, or with tone 1 by how dark it is (to screen footage)
+
+angle| number| default `15.0`  
+---|---|---  
+b| number| default `0.69`  
+cell| number| default `9.0`  
+g| number| default `0.28`  
+r| number| default `1.0`  
+seed| number| default `1.0`  
+tone| number| default `0.0`  
+  
+### glitch (source)
+
+digital glitch: slices, offsets, color splits
+
+amount| number| default `0.5`  
+---|---|---  
+roll| number| default `0.35`  
+tracking| number| default `0.3`  
+  
+### crt (source)
+
+CRT screen: curvature, scanlines, aperture grille
+
+phosphor| number| default `0.9`  
+---|---|---  
+  
+### dot_matrix (source)
+
+LED dot-matrix resampling
+
+b| number| default `0.61`  
+---|---|---  
+cell| number| default `11.0`  
+g| number| default `1.0`  
+r| number| default `0.49`  
+  
+### glass_pane (source)
+
+frosted, refracting glass pane over what is beneath
+
+bend| number| default `36.0`  
+---|---|---  
+bevel| number| default `34.0`  
+frost| number| default `26.0`  
+gain| number| default `0.92`  
+height| number| default `400.0`  
+lift| number| default `0.06`  
+light| number| default `1.0`  
+radius| number| default `48.0`  
+width| number| default `600.0`  
+x| number| default `540.0`  
+y| number| default `540.0`  
+  
+### lens_flare (source)
+
+lens flare from a light at (x, y)
+
+b| number| default `0.6`  
+---|---|---  
+g| number| default `0.82`  
+intensity| number| default `1.0`  
+r| number| default `1.0`  
+x| number| default `1400.0`  
+y| number| default `300.0`  
+  
+### light_leak (source)
+
+warm film light leaks drifting over the frame
+
+b| number| default `0.18`  
+---|---|---  
+g| number| default `0.45`  
+intensity| number| default `0.6`  
+r| number| default `1.0`  
+speed| number| default `1.0`  
+  
+### film_look (source)
+
+lens and film over the source: red halation, a hair of softness, grit, lifted blacks, grade, fringes, vignette, grain (hides the tells of plain 3D)
+
+aberration| number| default `0.8`  
+---|---|---  
+grain| number| default `0.09`  
+grit| number| default `0.35`  
+halation| number| default `0.9`  
+lift| number| default `0.03`  
+saturation| number| default `0.82`  
+softness| number| default `0.55`  
+vignette| color| default `#000000b0`  
+  
+### engrave (source)
+
+copperplate engraving: tone to hatching, contours inked, dark backdrop left as paper (spacing, backdrop, ink_*, paper_*)
+
+backdrop| number| default `0.3`  
+---|---|---  
+ink_b| number| default `0.04`  
+ink_g| number| default `0.07`  
+ink_r| number| default `0.12`  
+paper_b| number| default `0.76`  
+paper_g| number| default `0.88`  
+paper_r| number| default `0.93`  
+spacing| number| default `6.0`

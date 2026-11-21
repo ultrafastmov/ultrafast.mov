@@ -1,0 +1,1418 @@
+{
+ "version": 1,
+ "format": {
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "duration": 10.0,
+  "motion_blur": {
+   "samples": 6,
+   "shutter": 0.5
+  }
+ },
+ "output": "grain",
+ "nodes": {
+  "backdrop": {
+   "op": "shader",
+   "params": {
+    "code": "// The studio wall behind the wheel, far and out of focus: warm plaster in\n// the dark, and the window's light falling on it as a soft, skewed patch\n// with the faint shadow of its mullions, behind the pot. It falls off to\n// near black toward the frame's edges.\n//   u0 brightness   u1 drift (px)   u2, u3 patch centre (px)\n//   u4, u5 patch half width, half height (px)\nfloat sq(float x) { return x * x; }\n\nfloat4 shade(float2 pos, float px) {\n  float2 sz = size();\n  float k = param(0);\n  float2 c = float2(param(2) + param(1), param(3));\n  float2 half_ = float2(param(4), param(5));\n  // the patch leans: the light comes in from the left, a little from above\n  float2 q = pos - c;\n  q.x -= q.y * 0.16;\n  float2 d2 = abs(q) - half_;\n  float box = length(max(d2, 0.0)) + min(max(d2.x, d2.y), 0.0);\n  float soft = 0.11 * sz.y;\n  float patch_ = 1.0 - smoothstep(-soft, soft, box);\n  // mullions: one upright, one transom, soft as the patch is\n  float bars = exp(-sq((q.x + half_.x * 0.06) / (0.035 * sz.y))) * 0.30\n             + exp(-sq((q.y + half_.y * 0.22) / (0.030 * sz.y))) * 0.24;\n  patch_ *= 1.0 - bars * smoothstep(0.0, 0.6, patch_);\n  // brighter toward the window side of the patch\n  patch_ *= 0.86 + 0.14 * smoothstep(half_.x, -half_.x, q.x);\n  // the spill around it, and the room's dark\n  float2 g = (pos - c) / sz.y;\n  float spill = exp(-dot(g * float2(1.2, 1.0), g * float2(1.2, 1.0)) * 3.2);\n  float n = snoise(float3(pos / sz.y * 2.4, 3.7)) * 0.5 + snoise(float3(pos / sz.y * 6.0, 9.1)) * 0.25;\n  float3 deep = float3(0.0040, 0.0029, 0.0023);\n  float3 mid = float3(0.030, 0.021, 0.015);\n  float3 lit = float3(0.235, 0.170, 0.122);\n  float3 col = deep + mid * spill * k + lit * patch_ * k;\n  col *= 1.0 + 0.05 * n;\n  // the very top and bottom of the frame fall into shadow\n  float y = pos.y / sz.y;\n  col *= lerp(0.5, 1.0, smoothstep(0.0, 0.42, y)) * lerp(1.0, 0.6, smoothstep(0.75, 1.0, y));\n  return float4(col, 1.0);\n}\n\n",
+    "u0": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        0.94
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 10.0,
+       "v": [
+        1.0
+       ]
+      }
+     ]
+    },
+    "u1": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -24.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 10.0,
+       "v": [
+        24.0
+       ]
+      }
+     ]
+    },
+    "u2": 640.0,
+    "u3": 1010.0,
+    "u4": 250.0,
+    "u5": 300.0
+   }
+  },
+  "vessel": {
+   "op": "shader",
+   "params": {
+    "code": "// Clay thrown on a wheel, lit by one large window on the left in a warm,\n// dark room. The vessel is a lathe distance field whose profile is keyed:\n//   u0 height   u1 radius   u2 open   u3 dome   u4 belly   u5 flare (lump to bowl)   u6 lip\n//   u7 touch (0..1 up the wall: where the hands were last, wettest there)\n//   u8 centred (0: an off-centre lump that wobbles as it turns, 1: true)\n// The camera orbits the wheel as the raymarch op's does:\n//   u9 azimuth  u10 elevation  u11 distance  u12 target height\n//   u13 window azimuth (degrees: it sweeps at the end)  u14 lens shift (frame heights,\n//   + moves the image down)  u15 aperture. Field of view: FOV.\n// Each pixel takes NS samples, each at its own sub-pixel spot, lens point and\n// moment of the shutter: antialiasing, depth of field and the wheel's motion\n// blur in one pass. Misses are transparent: the backdrop is its own layer.\n\n#define NS 6\nstatic const float RPS = 0.72;              // wheel turns per second\nstatic const float T_SLOW = 6.9;            // the potter lifts off the pedal\nstatic const float T_STOP = 9.2;            // the wheel is still\nstatic const float SHUTTER = 0.5 / 30.0;    // seconds the shutter is open\nstatic const float EXPOSURE = 1.0;\nstatic const float FOV = 22.0;               // vertical, degrees\nstatic float g_spin = 0.0;                  // wheel angle of this sample\nstatic float g_dspin = 0.0;                 // angle it turns within the sample\nstatic float g_rnd = 0.0;                   // per-sample random\nstatic float g_ring = 1.0;                  // < 1: rings filled (the water film's surface)\n\n// ---- helpers -------------------------------------------------------------\nfloat sq(float x) { return x * x; }\nfloat smax(float a, float b, float k) { float h = saturate(0.5 - 0.5 * (b - a) / k); return lerp(b, a, h) + k * h * (1.0 - h); }\nfloat smin(float a, float b, float k) { float h = saturate(0.5 + 0.5 * (b - a) / k); return lerp(b, a, h) - k * h * (1.0 - h); }\nfloat3 rotY(float3 p, float a) { float c = cos(a), s = sin(a); return float3(c * p.x + s * p.z, p.y, -s * p.x + c * p.z); }\nfloat wrapPi(float a) { return a - 6.2831853 * floor(a / 6.2831853 + 0.5); }\nfloat sdBox2(float2 p, float2 b, float r) { float2 q = abs(p) - b + r; return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r; }\nfloat3 lin(float3 s) { return pow(s, float3(2.2, 2.2, 2.2)); }\nfloat hash21(float2 p) { float3 p3 = frac(float3(p.xyx) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return frac((p3.x + p3.y) * p3.z); }\n\n// Wheel angle at time t: steady, then slowing to rest (speed falls as\n// (1 - x)^2), in closed form so any frame renders on its own.\nfloat spinAt(float t) {\n  float w0 = 6.2831853 * RPS;\n  if (t < T_SLOW) return w0 * t;\n  float D = T_STOP - T_SLOW;\n  float y = 1.0 - saturate((t - T_SLOW) / D);\n  return w0 * (T_SLOW + D * (1.0 - y * y * y) / 3.0);\n}\nfloat spinRate(float t) {\n  return 6.2831853 * RPS * sq(1.0 - saturate((t - T_SLOW) / (T_STOP - T_SLOW)));\n}\n\n// ---- the form ------------------------------------------------------------\nfloat kH() { return param(0); }\nfloat kR() { return param(1); }\nfloat kOpen() { return param(2); }\nfloat kDome() { return param(3); }\nfloat kBelly() { return param(4); }\nfloat kNeck() { return param(5); }\nfloat kLip() { return param(6); }\nfloat kTouch() { return param(7); }\nfloat kWob() { return 1.0 - param(8); }\n// How far the walls have been pulled: rings, thin walls, a tucked foot.\nfloat pull() { return smoothstep(0.7, 1.3, kH()); }\n\n// The smooth body: radius at normalized height v (0 foot .. 1 rim).\nfloat bodyR(float v) {\n  float R = kR();\n  float lump = R * (1.0 - 0.07 * v);\n  float bowl = R * (0.40 + 0.60 * (1.0 - pow(1.0 - v, 1.9)));\n  float r = lerp(lump, bowl, kNeck());\n  r -= 0.07 * R * pull() * (1.0 - smoothstep(0.0, 0.14, v));\n  r += kBelly() * sin(3.14159265 * v) * (1.0 - v);\n  r += kLip() * sq(smoothstep(0.85, 1.0, v));\n  return r;\n}\nfloat wallW(float v) { return lerp(0.15, 0.072, v) * lerp(2.3, 1.0, pull()); }\n// The rim is a little out of level, as thrown rims are; the lump, lumpy.\nfloat rimH(float th) {\n  return kH() + (0.012 * sin(th + 0.9) + 0.004 * sin(3.0 * th - 0.4)) * pull();\n}\nfloat lumps(float v, float th) {\n  return kWob() * (0.045 * sin(2.0 * th + 0.5 + v) + 0.025 * sin(3.0 * th + 2.0 - 2.0 * v)) * smoothstep(0.0, 0.3, v);\n}\n// Throwing rings: a spiral ridge climbing about a ring per turn, unevenly\n// spaced, pressed unevenly round the turn; soft on the belly, crisper near\n// the rim. Returns the offset and its slope per unit v.\nfloat rings(float v, float th, out float dv) {\n  float N = 13.0;\n  float ph = 6.2831853 * (v * N + 0.32 * sin(v * 6.3 + 1.3) + 0.12 * sin(v * 17.0)) - th;\n  float dph = 6.2831853 * (N + 0.32 * 6.3 * cos(v * 6.3 + 1.3) + 0.12 * 17.0 * cos(v * 17.0));\n  float env_ = lerp(0.55, 1.25, smoothstep(0.55, 0.92, v)) * (1.0 - 0.6 * smoothstep(0.93, 0.99, v));\n  float a = 0.0034 * g_ring * pull() * smoothstep(0.03, 0.12, v) * env_;\n  a *= 0.7 + 0.3 * sin(2.0 * th + v * 5.0);\n  float sharp = smoothstep(0.6, 0.95, v);\n  float s = sin(ph) + (0.18 + 0.22 * sharp) * sin(2.0 * ph + 1.1) + 0.12 * sharp * sin(3.0 * ph + 0.4);\n  dv = a * dph * (cos(ph) + 2.0 * (0.18 + 0.22 * sharp) * cos(2.0 * ph + 1.1) + 0.36 * sharp * cos(3.0 * ph + 0.4));\n  return a * s;\n}\n// A finger dragged up the lower wall on the last pull, slanting.\nfloat drag(float v, float th) {\n  float c = wrapPi(th - (1.9 + 0.7 * v));\n  return exp(-sq(c / 0.11)) * smoothstep(0.08, 0.18, v) * smoothstep(0.55, 0.38, v) * pull();\n}\n// The off-centre lump, in the wheel's turning frame.\nfloat2 offC() { return float2(0.07, 0.03) * kWob(); }\n\nfloat clayD(float3 q) {\n  q.xz -= offC();\n  float r = length(q.xz);\n  float th = atan2(q.z, q.x);\n  float H = rimH(th) + 0.05 * kWob() * sin(th + 2.2) * smoothstep(0.0, 0.45, r);\n  float vc = saturate(q.y / H);\n  float e = 0.012;\n  float va = min(vc + e, 1.0), vb = max(vc - e, 0.0);\n  float r0 = bodyR(vc);\n  float dr = (bodyR(va) - bodyR(vb)) / ((va - vb) * H);\n  float rdv;\n  float ro = r0 + lumps(vc, th) + rings(vc, th, rdv) - 0.009 * g_ring * drag(vc, th);\n  float dro = dr + rdv / H;\n  float side = (r - ro) / sqrt(1.0 + dro * dro);\n  float R = kR(), dome = kDome();\n  float top = (q.y - (H - dome * sq(r / R))) / sqrt(1.0 + sq(2.0 * dome * r / (R * R)));\n  float d = smax(side, top, 0.05 + 0.3 * dome);\n  d = max(d, -q.y - 0.05);\n  float op = kOpen();\n  if (op > 0.001) {\n    float wr = smoothstep(0.0, 0.75, op);\n    float w = wallW(vc);\n    float idv;\n    float ri = (r0 - w + rings(vc, th + 2.1, idv) * 0.8) * wr;\n    float dw = (wallW(va) - wallW(vb)) / ((va - vb) * H);\n    float dri = (dr - dw + 0.8 * idv / H) * wr;\n    float floorY = lerp(H + 0.25, 0.13, smoothstep(0.0, 0.4, op));\n    float cav = smax((r - ri) / sqrt(1.0 + dri * dri), floorY - q.y, 0.03 + 0.11 * wr);\n    d = smax(d, -cav, 0.022);\n  }\n  return d;\n}\n\n// Cast aluminium wheel head (32 cm), top face at y = 0, and the splash pan round it.\nfloat wheelD(float3 p) {\n  float2 d = float2(length(p.xz) - 1.62 + 0.025, abs(p.y + 0.08) - 0.08 + 0.025);\n  return min(max(d.x, d.y), 0.0) + length(max(d, 0.0)) - 0.025;\n}\nfloat panD(float3 p) {\n  // the splash pan sits below the head: its rolled rim just under the top\n  float r = length(p.xz);\n  float wall = sdBox2(float2(r - 1.92 - 0.06 * saturate(p.y + 0.7), p.y + 0.42), float2(0.03, 0.30), 0.02);\n  float rim = length(float2(r - 1.98, p.y + 0.12)) - 0.045;\n  float floor_ = sdBox2(float2(r - 1.1, p.y + 0.72), float2(1.2, 0.03), 0.01);\n  return min(min(wall, rim), floor_);\n}\n\nfloat2 map(float3 p) {\n  float2 res = float2(panD(p), 3.0);\n  float dw = wheelD(p);\n  float rb = length(p.xz) - (kR() + kBelly() + kLip() + 0.32);\n  float bound = max(rb, max(p.y - (kH() + 0.32), -p.y - 0.1));\n  // far from the pot, the distance to its bounding cylinder will do; near\n  // it (0.5), the real distance: soft shadows read the size of near misses\n  float dc = bound > 0.5 ? bound : clayD(rotY(p, -g_spin));\n  float d = smin(dc, dw, 0.03);\n  float id = dc < dw + 0.004 ? 1.0 : 2.0;\n  if (d < res.x) res = float2(d, id);\n  return res;\n}\n\n// ---- light ---------------------------------------------------------------\n// One tall window to the left of camera, a little in front, at pot height.\nstatic const float2 LHALF = float2(2.3, 3.9);\n// The window's centre: 8.7 away at azimuth u13 (degrees; it can sweep).\nfloat3 lightC() { float a = radians(param(13)); return float3(8.71 * sin(a), 2.3, 8.71 * cos(a)); }\nstatic const float3 LRAD = float3(1.0, 0.93, 0.84) * 9.5;\nfloat3 lightN() { float3 c = lightC(); return normalize(float3(-c.x, 0.0, -c.z)); }\nvoid lightAxes(out float3 ax, out float3 ay) {\n  float3 n = lightN();\n  ax = normalize(cross(n, float3(0.0, 1.0, 0.0)));\n  ay = cross(ax, n);\n}\nfloat edgeFF(float3 a, float3 b, float3 n) {\n  float c = clamp(dot(a, b), -0.9999, 0.9999);\n  float3 cr = cross(a, b);\n  return acos(c) * dot(cr, n) / max(length(cr), 1e-6);\n}\n// Share of the hemisphere the window fills, cosine weighted (Lambert).\nfloat windowFF(float3 p, float3 n) {\n  float3 ax, ay; lightAxes(ax, ay);\n  float3 c0 = lightC() - ax * LHALF.x - ay * LHALF.y, c1 = lightC() + ax * LHALF.x - ay * LHALF.y;\n  float3 c2 = lightC() + ax * LHALF.x + ay * LHALF.y, c3 = lightC() - ax * LHALF.x + ay * LHALF.y;\n  float3 v0 = normalize(c0 - p), v1 = normalize(c1 - p), v2 = normalize(c2 - p), v3 = normalize(c3 - p);\n  float s = edgeFF(v0, v1, n) + edgeFF(v1, v2, n) + edgeFF(v2, v3, n) + edgeFF(v3, v0, n);\n  return max(s, 0.0) / 6.2831853;\n}\n// Box-filtered coverage of [-a, a] by a window of half width b around x.\nfloat cover1(float x, float a, float b) { return saturate((min(x + b, a) - max(x - b, -a)) / (2.0 * b)); }\n// The window seen in a reflection, blurred by roughness; its mullions show\n// only in the sharpest reflections.\nfloat windowSpec(float3 p, float3 r, float rough) {\n  float3 n = lightN();\n  float dn = dot(r, n);\n  if (dn > -1e-3) return 0.0;\n  float t = dot(lightC() - p, n) / dn;\n  if (t <= 0.0) return 0.0;\n  float3 ax, ay; lightAxes(ax, ay);\n  float3 h = p + r * t - lightC();\n  float u = dot(h, ax), w = dot(h, ay);\n  float b = 2.2 * rough * rough * t + 0.015 * t;\n  float cx = cover1(u, LHALF.x, b), cy = cover1(w, LHALF.y, b);\n  float mx = cover1(u, 0.07, b), my = cover1(w - 0.6, 0.07, b);\n  float c = cx * cy - mx * cy - my * cx + mx * my;\n  // the sky in the upper panes is brighter than the street below\n  float sky = cover1(w - LHALF.y * 0.45, LHALF.y * 0.55, b) * cx;\n  return max(c, 0.0) * (0.7 + 0.2 * saturate(1.0 - sq(w / LHALF.y))) + 1.3 * sky * (1.0 - mx);\n}\n// The room as reflections and ambient light see it: warm and dark, the\n// window's light pooled on the wall behind the pot (the backdrop shows the\n// same pool), a faint warm bounce on the right, the lit wheel below.\nfloat3 env(float3 d) {\n  float3 c = float3(0.011, 0.008, 0.006);\n  // the lit patch on the far wall, where the camera's rays past the pot land\n  float2 w = float2(d.x - 0.06, d.y + 0.17);\n  float pool = smoothstep(0.2, -0.5, d.z) * exp(-dot(w * float2(1.9, 3.2), w * float2(1.9, 3.2)));\n  c += float3(0.30, 0.235, 0.18) * pool;\n  c += float3(0.026, 0.018, 0.013) * smoothstep(0.3, -0.8, d.x) * smoothstep(-0.4, 0.2, d.y);\n  c += float3(0.012, 0.009, 0.007) * smoothstep(0.2, 0.9, d.x);\n  c *= lerp(1.0, 0.45, smoothstep(0.05, 0.8, d.y));\n  return c;\n}\n\n// ---- tracing -------------------------------------------------------------\nfloat2 march(float3 ro, float3 rd) {\n  // the scene lives inside r < 2.5, -0.75 < y < 3: clip the ray to it\n  float t0 = 0.0, t1 = 60.0;\n  float a = dot(rd.xz, rd.xz), b = dot(ro.xz, rd.xz), c = dot(ro.xz, ro.xz) - 2.5 * 2.5;\n  float disc = b * b - a * c;\n  if (disc < 0.0) return float2(-1.0, -1.0);\n  float sd = sqrt(disc);\n  t0 = max(t0, (-b - sd) / a); t1 = min(t1, (-b + sd) / a);\n  float ya = (-0.75 - ro.y) / rd.y, yb = (3.0 - ro.y) / rd.y;\n  t0 = max(t0, min(ya, yb)); t1 = min(t1, max(ya, yb));\n  if (t0 > t1) return float2(-1.0, -1.0);\n  float t = t0;\n  for (int i = 0; i < 160; i++) {\n    float2 h = map(ro + rd * t);\n    if (h.x < 0.00018 * t) return float2(t, h.y);\n    t += h.x * 0.85;\n    if (t > t1) break;\n  }\n  return float2(-1.0, -1.0);\n}\nfloat3 calcNormal(float3 p, float t) {\n  float e = 0.0005 + 0.00008 * t;\n  float2 k = float2(1.0, -1.0);\n  return normalize(k.xyy * map(p + k.xyy * e).x + k.yyx * map(p + k.yyx * e).x +\n                   k.yxy * map(p + k.yxy * e).x + k.xxx * map(p + k.xxx * e).x);\n}\n// Occlusion of the window by other geometry (the window's own horizon is in\n// windowFF): starts clear of the surface, jittered so steps don't band. The\n// plain penumbra estimate: the lathe's distances are bounds, not exact, and\n// the triangulated estimate collapses where they overshoot.\nfloat softShadow(float3 ro, float3 rd, float tmax, float k) {\n  float res = 1.0, t = 0.12 + 0.05 * g_rnd;\n  for (int i = 0; i < 44; i++) {\n    float h = map(ro + rd * t).x;\n    res = min(res, k * h / t);\n    t += clamp(h, 0.015, 0.3);\n    if (res < 0.002 || t > tmax) break;\n  }\n  res = saturate(res);\n  return res * res * (3.0 - 2.0 * res);\n}\nfloat calcAO(float3 p, float3 n) {\n  float occ = 0.0, sca = 1.0;\n  for (int i = 0; i < 5; i++) {\n    float h = 0.012 + 0.06 * float(i);\n    occ += (h - map(p + n * h).x) * sca;\n    sca *= 0.78;\n  }\n  return saturate(1.0 - 2.2 * occ);\n}\n\n// ---- materials -----------------------------------------------------------\nstruct Mat { float3 alb; float metal; float rough; float coat; float coatRough; };\n\nMat clayMat(float3 p) {\n  Mat m;\n  float3 q = rotY(p, -g_spin);\n  q.xz -= offC();\n  float th = atan2(q.z, q.x);\n  float H = kH();\n  float v = q.y / H;\n  float vs = saturate(v);\n  float r = length(q.xz);\n  float inside = smoothstep(-0.01, -0.03, r - (bodyR(vs) - wallW(vs) * 0.5)) * step(0.02, kOpen());\n  float3 base = lin(float3(0.68, 0.37, 0.25));\n  float3 slipC = lin(float3(0.78, 0.50, 0.37));\n  float3 darkC = lin(float3(0.16, 0.095, 0.07));\n  float3 grogC = lin(float3(0.86, 0.71, 0.56));\n  float3 alb = float3(0.0, 0.0, 0.0);\n  float streakA = 0.0, speck = 0.0, dragA = 0.0, wipeA = 0.0;\n  // The texture is averaged over the slice of a turn this sample sees.\n  for (int k = 0; k < 3; k++) {\n    float a = th + g_dspin * ((float(k) + 0.5) / 3.0 - 0.5);\n    float3 c = float3(cos(a), sin(a), v * 3.4);\n    float body = snoise(float3(c.xy * 1.1, c.z * 0.35) + 11.0);\n    // slip smeared round by the hands: long along the turn, thin up the wall\n    float sa = a + 0.35 * v;\n    float smear = smoothstep(-0.1, 0.8, snoise(float3(cos(sa) * 1.3, sin(sa) * 1.3, v * 7.5) + 3.0));\n    float dg = drag(vs, a);\n    // two thumb wipes: thinner, paler slip, long round the turn\n    float tw = exp(-sq(wrapPi(a - 0.6) / 0.42) - sq((v - 0.30) / 0.045))\n             + 0.8 * exp(-sq(wrapPi(a + 2.3) / 0.30) - sq((v - 0.62) / 0.035));\n    tw *= pull() * (0.8 + 0.2 * snoise(float3(c.xy * 6.0, v * 30.0)));\n    // iron spots: sparse, larger than the grog\n    float2 cell = float2((a + 3.14159265) * 7.0, v * 15.0);\n    float2 ci = floor(cell), cf = frac(cell);\n    ci.x = fmod(ci.x + 44.0, 44.0);\n    float hsp = hash21(ci + 0.37);\n    float2 at = float2(hash21(ci + 7.1), hash21(ci + 3.3)) * 0.7 + 0.15;\n    float rad = 0.07 + 0.08 * hash21(ci + 9.9);\n    float iron = step(0.90, hsp) * (1.0 - smoothstep(rad * 0.6, rad, length((cf - at) * float2(1.0, 1.6))));\n    float dk = smoothstep(0.70, 0.78, snoise(c * 22.0));\n    float gr = smoothstep(0.74, 0.82, snoise(c * 26.0 + float3(7.3, 1.1, 3.7)));\n    float3 cc = base * (0.93 + 0.10 * body);\n    cc = lerp(cc, slipC, saturate(smear * 0.28 + dg * 0.55 + tw * 0.6));\n    cc = lerp(cc, darkC, saturate(dk * 0.85 + iron * 0.9));\n    cc = lerp(cc, grogC, gr * 0.7);\n    alb += cc;\n    streakA += smear; dragA += dg; wipeA += saturate(tw);\n    speck += saturate(dk + gr);\n  }\n  alb /= 3.0; streakA /= 3.0; speck /= 3.0; dragA /= 3.0; wipeA /= 3.0;\n  float groove = smoothstep(0.1, 0.9, -sin(6.2831853 * v * 13.0 - th)) * pull();\n  float wet = 0.58 + 0.42 * exp(-sq((v - kTouch()) / 0.2)) + 0.22 * smoothstep(0.82, 1.0, v)\n            + 0.14 * streakA + 0.40 * (1.0 - smoothstep(0.0, 0.08, v)) + 0.10 * groove\n            + 0.45 * dragA - 0.45 * wipeA;\n  wet = saturate(wet + inside * 0.3);\n  alb *= lerp(1.0, 0.70, wet) * lerp(1.0, 0.85, inside);\n  m.alb = alb;\n  m.metal = 0.0;\n  m.rough = 0.62;\n  m.coat = wet * (1.0 - 0.5 * speck);\n  m.coatRough = max(lerp(0.30, 0.07, wet), 0.13 * smoothstep(0.955, 0.99, v));\n  return m;\n}\n\n// Slip splats flung on the head: polar centre, radial and tangential half sizes.\nstatic const float4 SPLATS[7] = {\n  float4(0.40, 1.10, 0.030, 0.070), float4(1.75, 1.34, 0.022, 0.100), float4(2.65, 1.00, 0.026, 0.045),\n  float4(3.70, 1.48, 0.030, 0.140), float4(4.45, 1.20, 0.018, 0.040), float4(5.30, 1.42, 0.026, 0.080),\n  float4(5.95, 1.04, 0.020, 0.035) };\n\nMat wheelMat(float3 p) {\n  Mat m;\n  float3 q = rotY(p, -g_spin);\n  float r = length(q.xz);\n  float th = atan2(q.z, q.x);\n  float Rf = bodyR(0.0) + 0.05 * kWob();\n  float3 alu = lin(float3(0.80, 0.80, 0.80));\n  float3 slurry = lin(float3(0.50, 0.27, 0.18));\n  float3 filmC = lin(float3(0.66, 0.53, 0.46));\n  float3 dried = lin(float3(0.82, 0.64, 0.51));\n  float clay = 0.0, wet = 0.0, dry = 0.0, scratch = 0.0;\n  for (int k = 0; k < 3; k++) {\n    float a = th + g_dspin * ((float(k) + 0.5) / 3.0 - 0.5);\n    float2 xz = float2(cos(a), sin(a)) * r;\n    // slurry round the foot, its edge uneven\n    float edge = Rf + 0.15 + 0.05 * snoise(float3(cos(a) * 1.6, sin(a) * 1.6, 1.7)) + 0.02 * snoise(float3(xz * 7.0, 4.0));\n    float ring = 1.0 - smoothstep(edge - 0.03, edge + 0.012, r);\n    // arcs the sponge left: thin, broken, part of a turn each\n    float film = 0.55 + 0.25 * snoise(float3(cos(a) * 1.2, sin(a) * 1.2, r * 2.5) + 5.0);\n    film *= 1.0 - 0.6 * exp(-sq(wrapPi(a - 2.2) / 0.45)) * exp(-sq((r - 1.38) / 0.16));\n    float arcs = max(film * (0.8 + 0.2 * sin(r * 41.0 + 1.5 * snoise(float3(xz * 1.4, 2.0)))), 0.0) * 0.8;\n    // splats, some still wet, the rest dried paler\n    float sp = 0.0, spd = 0.0;\n    for (int i = 0; i < 7; i++) {\n      float4 s = SPLATS[i];\n      float dt = wrapPi(a - s.x) * r;\n      float dr = r - s.y;\n      float wob = 0.25 * snoise(float3(dt * 18.0, dr * 18.0, float(i) * 3.1));\n      float e = length(float2(dt / s.w, dr / s.z)) + wob;\n      float c = 1.0 - smoothstep(0.85, 1.0, e);\n      sp = max(sp, c);\n      spd = max(spd, c * step(0.5, frac(float(i) * 0.37 + 0.2)));\n    }\n    // a tool scratch, bright through the satin\n    float2 s0 = float2(0.62, 1.02), s1 = float2(1.38, 0.42);\n    float2 pa = xz - s0, ba = s1 - s0;\n    float hh = saturate(dot(pa, ba) / dot(ba, ba));\n    float sd = length(pa - ba * hh);\n    float scr = (1.0 - smoothstep(0.003, 0.009, sd)) * smoothstep(0.0, 0.12, hh) * smoothstep(1.0, 0.8, hh);\n    clay += saturate(max(max(ring, arcs), sp));\n    wet += saturate(ring + (sp - spd));\n    dry += spd;\n    scratch += scr;\n  }\n  clay /= 3.0; wet /= 3.0; dry /= 3.0; scratch /= 3.0;\n  float lathe = 0.5 + 0.5 * sin(r * 180.0);\n  float3 cc = lerp(filmC, slurry, saturate(wet));\n  cc = lerp(cc, dried, saturate(dry / max(clay, 1e-3)));\n  m.alb = lerp(alu * (0.96 + 0.04 * lathe) * (1.0 + 0.2 * scratch), cc, clay);\n  m.metal = 1.0 - clay;\n  m.rough = lerp(0.24 + 0.05 * lathe - 0.1 * scratch, lerp(0.75, 0.5, wet), clay);\n  m.coat = saturate(wet) * clay;\n  m.coatRough = 0.12;\n  return m;\n}\n\nMat panMat(float3 p) {\n  Mat m;\n  float spots = smoothstep(0.6, 0.8, snoise(p * 3.0 + 2.0)) * 0.5 + smoothstep(0.78, 0.86, snoise(p * 9.0)) * 0.6;\n  m.alb = lerp(lin(float3(0.085, 0.080, 0.076)), lin(float3(0.50, 0.37, 0.29)), saturate(spots) * 0.5);\n  m.metal = 0.0; m.rough = 0.55; m.coat = 0.0; m.coatRough = 0.5;\n  return m;\n}\n\n// ---- shading -------------------------------------------------------------\nfloat3 shadeHit(float3 p, float3 rd, float t, float id) {\n  float3 n = calcNormal(p, t);\n  float3 v = -rd;\n  Mat m;\n  float3 nc = n;\n  if (id < 1.5) {\n    m = clayMat(p);\n    // the water film fills the grooves: its surface is smoother than the clay\n    g_ring = 0.6;\n    nc = calcNormal(p, t);\n    g_ring = 1.0;\n    // the slip film is uneven: its reflection wavers, and turns with the pot\n    float3 qo = rotY(p, -g_spin) * float3(2.6, 8.0, 2.6);\n    float3 pert = float3(snoise(qo), snoise(qo + 17.1), snoise(qo + 31.7));\n    nc = normalize(nc + 0.055 * pert);\n  } else if (id < 2.5) m = wheelMat(p);\n  else m = panMat(p);\n  float3 Lv = lightC() - p;\n  float dl = length(Lv);\n  float3 L = Lv / dl;\n  // a black flag below the window keeps its light off the wheel's near edge\n  float flag = smoothstep(1.8, 1.05, p.z - 0.2 * p.x);\n  float ff = windowFF(p, n) * flag;\n  // rings and drag marks are relief: their shading is in the normal, so\n  // shadows and occlusion are traced without them (no ridge self-shadowing)\n  g_ring = 0.0;\n  float3 Ls = lightC() + float3(0.0, 1.6, 0.0) - p;\n  float sh = ff > 0.0 ? softShadow(p + n * 0.01, normalize(Ls), length(Ls), 5.0) : 0.0;\n  float ao = calcAO(p, n);\n  g_ring = 1.0;\n  float nv = saturate(dot(n, v));\n  float3 r = reflect(rd, n);\n  float3 F0 = lerp(float3(0.04, 0.04, 0.04), m.alb, m.metal);\n  float3 F = F0 + (1.0 - F0) * pow(1.0 - nv, 5.0);\n  float3 amb = env(n) * 1.6 + env(float3(0.0, -1.0, 0.0)) * 0.4 * saturate(-n.y);\n  float occ = ao * ao;\n  if (id > 1.5 && id < 2.5) {\n    float s = length(p.xz) - (bodyR(0.0) + 0.02);\n    occ *= 1.0 - 0.6 * exp(-max(s, 0.0) / 0.16);\n  }\n  float3 diff = m.alb * (1.0 - m.metal) * (LRAD * ff * sh + amb * occ);\n  float3 envR = lerp(env(r), env(normalize(r + n)), saturate(m.rough * 1.3));\n  float3 spec = F * (LRAD * windowSpec(p, r, m.rough) * sh * flag + envR * occ);\n  // the wet film: a sheen with a sharp core and a soft halo\n  float3 rc = reflect(rd, nc);\n  float Fc = 0.02 + 0.98 * pow(1.0 - saturate(dot(nc, v)), 5.0);\n  float ws = 0.6 * windowSpec(p, rc, m.coatRough) + 0.4 * windowSpec(p, rc, min(m.coatRough * 2.3 + 0.08, 0.9));\n  float3 envC = lerp(env(rc), env(normalize(rc + nc)), saturate(m.coatRough * 1.3));\n  float3 coat = m.coat * Fc * 1.8 * (LRAD * ws * sh * flag + envC * occ);\n  return (diff + spec) * (1.0 - m.coat * Fc) + coat;\n}\n\nfloat3 tonemap(float3 x) {\n  return saturate((x * (2.51 * x + 0.03)) / (x * (2.43 * x + 0.59) + 0.14));\n}\n\nfloat4 shade(float2 pos, float px) {\n  float2 sz = size();\n  float tm = time();\n  float az = radians(param(9)), el = radians(param(10));\n  float dist = param(11);\n  float3 target = float3(0.0, param(12), 0.0);\n  float3 eye = target + dist * float3(sin(az) * cos(el), sin(el), cos(az) * cos(el));\n  float3 fw = normalize(target - eye);\n  float3 rt = normalize(cross(fw, float3(0.0, 1.0, 0.0)));\n  float3 up = cross(rt, fw);\n  float focal = 1.0 / tan(radians(FOV) * 0.5);\n  float shift = param(14) * 2.0;\n  float aper = param(15);\n  float frame = floor(tm * 30.0 + 0.5);\n  float rnd = hash21(pos + float2(frame * 7.13, frame * 3.71));\n  float3 acc = float3(0.0, 0.0, 0.0);\n  float cover = 0.0;\n  for (int s = 0; s < NS; s++) {\n    float fs = (float(s) + rnd) / float(NS);\n    float ja = 6.2831853 * (float(s) / float(NS) + rnd * 0.37) + 0.6;\n    float2 jit = float2(cos(ja), sin(ja)) * 0.36;\n    g_spin = spinAt(tm + (fs - 0.5) * SHUTTER);\n    g_dspin = spinRate(tm) * SHUTTER / float(NS);\n    g_rnd = frac(rnd * 1.7 + float(s) * 0.618034);\n    float2 q = (pos + jit - sz * 0.5) / (sz.y * 0.5);\n    q.y -= shift;\n    float3 rd = normalize(fw * focal + rt * q.x - up * q.y);\n    float la = 6.2831853 * frac(float(s) * 0.618034 + rnd * 0.71);\n    float lr = aper * sqrt(frac(fs * 0.7 + 0.15));\n    float3 ro = eye + (rt * cos(la) + up * sin(la)) * lr;\n    float3 fp = eye + rd * (dist / dot(rd, fw));\n    rd = normalize(fp - ro);\n    float2 hit = march(ro, rd);\n    if (hit.x > 0.0) {\n      float3 p = ro + rd * hit.x;\n      acc += tonemap(shadeHit(p, rd, hit.x, hit.y) * EXPOSURE);\n      cover += 1.0;\n    }\n  }\n  return float4(acc / float(NS), cover / float(NS));\n}\n",
+    "u0": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        0.6
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 0.4,
+       "v": [
+        0.69
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 0.9,
+       "v": [
+        0.62
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 1.1,
+       "v": [
+        0.62
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.05,
+       "v": [
+        0.76
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.15,
+       "v": [
+        0.76
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.75,
+       "v": [
+        0.98
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.92,
+       "v": [
+        0.98
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 3.47,
+       "v": [
+        1.16
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 3.64,
+       "v": [
+        1.16
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 4.19,
+       "v": [
+        1.28
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 4.25,
+       "v": [
+        1.28
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 5.75,
+       "v": [
+        1.32
+       ]
+      }
+     ]
+    },
+    "u1": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        0.94
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 1.1,
+       "v": [
+        0.92
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.05,
+       "v": [
+        0.86
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.15,
+       "v": [
+        0.86
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.75,
+       "v": [
+        0.98
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.92,
+       "v": [
+        0.98
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 3.47,
+       "v": [
+        1.1
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 3.64,
+       "v": [
+        1.1
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 4.19,
+       "v": [
+        1.2
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 4.25,
+       "v": [
+        1.2
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 5.75,
+       "v": [
+        1.25
+       ]
+      }
+     ]
+    },
+    "u2": {
+     "keys": [
+      {
+       "t": 1.1,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.05,
+       "v": [
+        1.0
+       ]
+      }
+     ]
+    },
+    "u3": {
+     "keys": [
+      {
+       "t": 1.1,
+       "v": [
+        0.3
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 1.85,
+       "v": [
+        0.04
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 2.35,
+       "v": [
+        0.0
+       ]
+      }
+     ]
+    },
+    "u4": {
+     "keys": [
+      {
+       "t": 4.25,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 5.05,
+       "v": [
+        0.06
+       ]
+      }
+     ]
+    },
+    "u5": {
+     "keys": [
+      {
+       "t": 2.05,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.15,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.75,
+       "v": [
+        0.45
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.92,
+       "v": [
+        0.45
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 3.47,
+       "v": [
+        0.8
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 3.64,
+       "v": [
+        0.8
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 4.19,
+       "v": [
+        1.0
+       ],
+       "ease": "in_out_cubic"
+      }
+     ]
+    },
+    "u6": {
+     "keys": [
+      {
+       "t": 5.05,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 5.75,
+       "v": [
+        0.07
+       ]
+      }
+     ]
+    },
+    "u7": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        0.85
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 1.1,
+       "v": [
+        0.9
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 2.02,
+       "v": [
+        0.95
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.15,
+       "v": [
+        0.08
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.75,
+       "v": [
+        1.0
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.79,
+       "v": [
+        0.95
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 2.92,
+       "v": [
+        0.08
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 3.47,
+       "v": [
+        1.0
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 3.51,
+       "v": [
+        0.95
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 3.64,
+       "v": [
+        0.08
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 4.19,
+       "v": [
+        1.0
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 4.25,
+       "v": [
+        0.36
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 4.85,
+       "v": [
+        0.4
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 5.45,
+       "v": [
+        0.8
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 5.75,
+       "v": [
+        0.97
+       ]
+      }
+     ]
+    },
+    "u8": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 0.45,
+       "v": [
+        0.3
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 1.2,
+       "v": [
+        1.0
+       ]
+      }
+     ]
+    },
+    "u9": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -7.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 1.2,
+       "v": [
+        -6.6
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 4.6,
+       "v": [
+        -4.5
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 9.3,
+       "v": [
+        7.0
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "u10": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        25.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 1.2,
+       "v": [
+        24.6
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 4.6,
+       "v": [
+        24.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 9.3,
+       "v": [
+        30.0
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "u11": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        11.65
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 1.2,
+       "v": [
+        12.2
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 4.6,
+       "v": [
+        19.35
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 9.3,
+       "v": [
+        20.5
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "u12": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        0.3
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 1.2,
+       "v": [
+        0.31
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 4.6,
+       "v": [
+        0.55
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 9.3,
+       "v": [
+        0.55
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "u14": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        0.0072
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 1.2,
+       "v": [
+        0.012
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 4.6,
+       "v": [
+        0.1003
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 9.3,
+       "v": [
+        0.1035
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "u13": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -56.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 6.3,
+       "v": [
+        -60.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 9.3,
+       "v": [
+        -34.0
+       ]
+      }
+     ]
+    },
+    "u15": 0.15
+   }
+  },
+  "scene": {
+   "op": "over",
+   "inputs": {
+    "fg": "vessel",
+    "bg": "backdrop"
+   }
+  },
+  "dust": {
+   "op": "particles",
+   "params": {
+    "seed": 7,
+    "rate": 34,
+    "max": 700,
+    "life": [
+     6.0,
+     9.0
+    ],
+    "position": [
+     420,
+     1010
+    ],
+    "emitter_size": [
+     980,
+     1150
+    ],
+    "direction": -70,
+    "spread": 160,
+    "speed": [
+     5,
+     16
+    ],
+    "gravity": [
+     3.0,
+     -2.5
+    ],
+    "drag": 0.15,
+    "size": [
+     3.4,
+     2.6
+    ],
+    "size_jitter": 0.65,
+    "color_start": "#fff1df",
+    "color_end": "#ffe6cc",
+    "fade_in": 0.25,
+    "fade_out": 0.35,
+    "shape": "circle",
+    "blend": "add",
+    "emit_start": -14.0
+   }
+  },
+  "dust_near": {
+   "op": "particles",
+   "params": {
+    "seed": 21,
+    "rate": 2.0,
+    "max": 60,
+    "life": [
+     6.0,
+     9.0
+    ],
+    "position": [
+     170,
+     1000
+    ],
+    "emitter_size": [
+     340,
+     1300
+    ],
+    "direction": -75,
+    "spread": 150,
+    "speed": [
+     6,
+     18
+    ],
+    "gravity": [
+     4.0,
+     -3.0
+    ],
+    "drag": 0.1,
+    "size": [
+     30,
+     24
+    ],
+    "size_jitter": 0.55,
+    "color_start": "#ffe9d240",
+    "fade_in": 0.3,
+    "fade_out": 0.4,
+    "shape": "circle",
+    "blend": "add",
+    "emit_start": -14.0
+   }
+  },
+  "dust_near_soft": {
+   "op": "blur",
+   "params": {
+    "radius": 5.0
+   },
+   "inputs": {
+    "source": "dust_near"
+   }
+  },
+  "motes": {
+   "op": "blend",
+   "params": {
+    "mode": "add"
+   },
+   "inputs": {
+    "fg": "dust_near_soft",
+    "bg": "dust"
+   }
+  },
+  "light_matte": {
+   "op": "shader",
+   "params": {
+    "code": "// Where the window's light crosses the air: it comes in from the left at\n// about the pot's height and spreads and fades across the frame.\n//   u0 haze strength   u1 mode (0: the haze it lights, premultiplied, to add;\n//                                 1: the light's matte, to mask the dust)\nfloat4 shade(float2 pos, float px) {\n  float2 sz = size();\n  float x = pos.x / sz.x;\n  float yc = 0.53 * sz.y - 0.10 * pos.x;\n  float spread = 0.16 * sz.y + 0.22 * pos.x;\n  float band = exp(-pow((pos.y - yc) / spread, 2.0));\n  float m = band * (1.0 - smoothstep(0.05, 1.05, x));\n  if (param(1) > 0.5) return float4(m, m, m, m);\n  float3 haze = float3(1.0, 0.86, 0.70) * param(0) * m;\n  return float4(haze, max(haze.r, max(haze.g, haze.b)));\n}\n",
+    "u0": 0.0,
+    "u1": 1.0
+   }
+  },
+  "motes_in_light": {
+   "op": "mask",
+   "params": {
+    "mode": "alpha"
+   },
+   "inputs": {
+    "source": "motes",
+    "matte": "light_matte"
+   }
+  },
+  "haze": {
+   "op": "shader",
+   "params": {
+    "code": "// Where the window's light crosses the air: it comes in from the left at\n// about the pot's height and spreads and fades across the frame.\n//   u0 haze strength   u1 mode (0: the haze it lights, premultiplied, to add;\n//                                 1: the light's matte, to mask the dust)\nfloat4 shade(float2 pos, float px) {\n  float2 sz = size();\n  float x = pos.x / sz.x;\n  float yc = 0.53 * sz.y - 0.10 * pos.x;\n  float spread = 0.16 * sz.y + 0.22 * pos.x;\n  float band = exp(-pow((pos.y - yc) / spread, 2.0));\n  float m = band * (1.0 - smoothstep(0.05, 1.05, x));\n  if (param(1) > 0.5) return float4(m, m, m, m);\n  float3 haze = float3(1.0, 0.86, 0.70) * param(0) * m;\n  return float4(haze, max(haze.r, max(haze.g, haze.b)));\n}\n",
+    "u0": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        0.045
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 10.0,
+       "v": [
+        0.056
+       ]
+      }
+     ]
+    },
+    "u1": 0.0
+   }
+  },
+  "light": {
+   "op": "blend",
+   "params": {
+    "mode": "add"
+   },
+   "inputs": {
+    "fg": "motes_in_light",
+    "bg": "haze"
+   }
+  },
+  "lit": {
+   "op": "blend",
+   "params": {
+    "mode": "add"
+   },
+   "inputs": {
+    "fg": "light",
+    "bg": "scene"
+   }
+  },
+  "falloff": {
+   "op": "gradient",
+   "params": {
+    "kind": "linear",
+    "start": [
+     0,
+     1345
+    ],
+    "end": [
+     0,
+     1600
+    ],
+    "stops": "0:#0d090700, 1:#0d0907c8"
+   }
+  },
+  "shaded": {
+   "op": "over",
+   "inputs": {
+    "fg": "falloff",
+    "bg": "lit"
+   }
+  },
+  "bloom": {
+   "op": "bloom",
+   "params": {
+    "intensity": 0.22,
+    "radius": 26.0,
+    "threshold": 0.8,
+    "wide": 0.25
+   },
+   "inputs": {
+    "source": "shaded"
+   }
+  },
+  "studio": {
+   "op": "text",
+   "params": {
+    "text": "HALDEN CLAY STUDIO",
+    "font": "ultrafast:sans",
+    "weight": 500,
+    "size": 28,
+    "tracking": 5.0,
+    "color": "#d39b79",
+    "position": [
+     88,
+     206
+    ],
+    "valign": "baseline",
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.45,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 1.25,
+       "v": [
+        1.0
+       ]
+      },
+      {
+       "t": 9.25,
+       "v": [
+        1.0
+       ],
+       "ease": {
+        "bezier": [
+         0.7,
+         0.0,
+         0.84,
+         0.0
+        ]
+       }
+      },
+      {
+       "t": 9.75,
+       "v": [
+        0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "address": {
+   "op": "text",
+   "params": {
+    "text": "118 TANNER STREET",
+    "font": "ultrafast:sans",
+    "weight": 500,
+    "size": 28,
+    "tracking": 5.0,
+    "color": "#d39b79",
+    "position": [
+     950,
+     206
+    ],
+    "valign": "baseline",
+    "align": "right",
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.6,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 1.4,
+       "v": [
+        1.0
+       ]
+      },
+      {
+       "t": 9.25,
+       "v": [
+        1.0
+       ],
+       "ease": {
+        "bezier": [
+         0.7,
+         0.0,
+         0.84,
+         0.0
+        ]
+       }
+      },
+      {
+       "t": 9.75,
+       "v": [
+        0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "title": {
+   "op": "text",
+   "params": {
+    "text": "Spin something new.",
+    "font": "ultrafast:display",
+    "weight": 300,
+    "size": 176,
+    "color": "#f1e8dc",
+    "position": [
+     80,
+     380
+    ],
+    "valign": "baseline",
+    "width": 880,
+    "line_height": 0.9,
+    "tracking": -3.0,
+    "stagger": 0.03,
+    "glyph_opacity": {
+     "keys": [
+      {
+       "t": 0.7,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 1.5,
+       "v": [
+        1.0
+       ]
+      }
+     ]
+    },
+    "glyph_offset": {
+     "keys": [
+      {
+       "t": 0.7,
+       "v": [
+        0,
+        56
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 1.8,
+       "v": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    "opacity": {
+     "keys": [
+      {
+       "t": 9.2,
+       "v": [
+        1.0
+       ],
+       "ease": {
+        "bezier": [
+         0.7,
+         0.0,
+         0.84,
+         0.0
+        ]
+       }
+      },
+      {
+       "t": 9.7,
+       "v": [
+        0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "detail": {
+   "op": "text",
+   "params": {
+    "text": "Wheel throwing for beginners",
+    "font": "ultrafast:sans",
+    "weight": 500,
+    "size": 36,
+    "color": "#f1e8dc",
+    "valign": "baseline",
+    "opacity": {
+     "keys": [
+      {
+       "t": 5.0,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 5.6,
+       "v": [
+        1.0
+       ]
+      },
+      {
+       "t": 9.15,
+       "v": [
+        1.0
+       ],
+       "ease": {
+        "bezier": [
+         0.7,
+         0.0,
+         0.84,
+         0.0
+        ]
+       }
+      },
+      {
+       "t": 9.65,
+       "v": [
+        0.0
+       ]
+      }
+     ]
+    },
+    "position": {
+     "keys": [
+      {
+       "t": 5.0,
+       "v": [
+        0,
+        24
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 5.9,
+       "v": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "detail2": {
+   "op": "text",
+   "params": {
+    "text": "Saturdays, 10 am \u2013 noon",
+    "font": "ultrafast:sans",
+    "weight": 400,
+    "size": 36,
+    "color": "#f1e8dc",
+    "valign": "baseline",
+    "opacity": {
+     "keys": [
+      {
+       "t": 5.18,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 5.78,
+       "v": [
+        1.0
+       ]
+      },
+      {
+       "t": 9.15,
+       "v": [
+        1.0
+       ],
+       "ease": {
+        "bezier": [
+         0.7,
+         0.0,
+         0.84,
+         0.0
+        ]
+       }
+      },
+      {
+       "t": 9.65,
+       "v": [
+        0.0
+       ]
+      }
+     ]
+    },
+    "position": {
+     "keys": [
+      {
+       "t": 5.18,
+       "v": [
+        0,
+        24
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 6.08,
+       "v": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "detail3": {
+   "op": "text",
+   "params": {
+    "text": "First class free",
+    "font": "ultrafast:sans",
+    "weight": 500,
+    "size": 36,
+    "color": "#e3a582",
+    "valign": "baseline",
+    "opacity": {
+     "keys": [
+      {
+       "t": 5.36,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 5.96,
+       "v": [
+        1.0
+       ]
+      },
+      {
+       "t": 9.15,
+       "v": [
+        1.0
+       ],
+       "ease": {
+        "bezier": [
+         0.7,
+         0.0,
+         0.84,
+         0.0
+        ]
+       }
+      },
+      {
+       "t": 9.65,
+       "v": [
+        0.0
+       ]
+      }
+     ]
+    },
+    "position": {
+     "keys": [
+      {
+       "t": 5.36,
+       "v": [
+        0,
+        24
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 6.26,
+       "v": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "details": {
+   "op": "stack",
+   "params": {
+    "direction": "column",
+    "gap": 9,
+    "align": "start",
+    "position": [
+     88,
+     1530
+    ],
+    "anchor": "bottom_left",
+    "at": 6.0
+   },
+   "inputs": {
+    "in0": "detail",
+    "in1": "detail2",
+    "in2": "detail3"
+   }
+  },
+  "over": {
+   "op": "over",
+   "inputs": {
+    "fg": "studio",
+    "bg": "bloom"
+   }
+  },
+  "over2": {
+   "op": "over",
+   "inputs": {
+    "fg": "address",
+    "bg": "over"
+   }
+  },
+  "over3": {
+   "op": "over",
+   "inputs": {
+    "fg": "title",
+    "bg": "over2"
+   }
+  },
+  "over4": {
+   "op": "over",
+   "inputs": {
+    "fg": "details",
+    "bg": "over3"
+   }
+  },
+  "dip": {
+   "op": "solid",
+   "params": {
+    "color": "#0d0907"
+   }
+  },
+  "dip_over": {
+   "op": "over",
+   "params": {
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        1.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 0.45,
+       "v": [
+        0.0
+       ]
+      },
+      {
+       "t": 9.4,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 10.0,
+       "v": [
+        1.0
+       ]
+      }
+     ]
+    }
+   },
+   "inputs": {
+    "fg": "dip",
+    "bg": "over4"
+   }
+  },
+  "vignette": {
+   "op": "vignette",
+   "params": {
+    "inner": "#00000000",
+    "outer": "#0000007a"
+   },
+   "inputs": {
+    "source": "dip_over"
+   }
+  },
+  "grain": {
+   "op": "grain",
+   "params": {
+    "amount": 0.05
+   },
+   "inputs": {
+    "source": "vignette"
+   }
+  }
+ }
+}

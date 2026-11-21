@@ -1,0 +1,43 @@
+# ultrafast
+
+> ultrafast is an open-source GPU video engine for agents. A video is a JSON document: your agent writes it, checks it, reviews every frame and renders it on the GPU at hundreds of frames a second, with no browser in the loop. Install it on a Mac with Apple silicon or a Linux machine with a Vulkan GPU, then connect your agent with `uf mcp`.
+
+Facts an agent needs:
+
+- The CLI is `ultrafast`, or `uf` for short. Install: `brew install ultrafastmov/tap/ultrafast` (macOS and Linux, prebuilt), `cargo install ultrafast`, prebuilt archives on https://github.com/ultrafastmov/ultrafast/releases, or the Docker image `ghcr.io/ultrafastmov/ultrafast`. Python SDK: `pip install ultrafastmov`. TypeScript SDK: `npm i ultrafastmov`. The SDKs talk to a `uf serve` you run; set `ULTRAFAST_BASE_URL`.
+- A video is one JSON document: `{"version": 1, "format": {...}, "nodes": {...}, "output": "<node id>"}`. `uf ops` prints every op (70) with its params as JSON.
+- The loop: `uf new` → `uf check` (finds mistakes without rendering) → `uf sheet` (contact sheet) → `uf review` (unreadable, clipped or too-brief text, seizure-risk flashing) → `uf export`.
+- MCP: local `uf mcp` (stdio, 20 tools), or remote over Streamable HTTP at `/mcp` on your own `ultrafast serve`, with its API key as a bearer token.
+- Skill: `npx skills add ultrafastmov/ultrafast` (the document format and the check, look, review, export loop). Claude Code plugin (the skill and `uf mcp`): `claude plugin marketplace add ultrafastmov/ultrafast`, then `claude plugin install ultrafast@ultrafast`.
+- HTTP: `uf serve` (or the Docker image's `serve`) answers `POST /v1/render`, `/v1/frame`, `/v1/sheet`, `/v1/check`, `/v1/review`, `/v1/estimate` and `/v1/uploads` on one machine with a GPU, with `Authorization: Bearer $ULTRAFAST_API_KEY`.
+- Not available yet: ultrafast Cloud (hosted rendering), the ChatGPT app, the Claude connector and a hosted MCP server. They are coming soon; there is a waitlist at https://ultrafast.mov/cloud/. There is no `--cloud` flag.
+- Licence: Apache-2.0 or MIT. Renders with Metal on macOS and Vulkan on Linux and Windows (WSL2).
+- Tokens: a 10-second short is about 1,100 output tokens of JSON, against about 5,500 as a Remotion project and 4,400 as a HyperFrames composition. Grain, grades, captions, 3D and simulations are one node each, not code to write.
+- 3D is rendered by the engine in the same document as the type: raymarched shapes and materials, meshes, image-based light, glass. The 3D in the example films is all rendered by ultrafast.
+
+## Docs
+
+- [Quickstart](https://ultrafast.mov/docs/index.md): install, first video, the loop, connecting an agent
+- [The document format](https://ultrafast.mov/docs/documents/index.md): the JSON document: format, nodes, animation, timing, components
+- [Op reference](https://ultrafast.mov/docs/ops/index.md): all 70 ops with ports, params, types and defaults
+- [CLI reference](https://ultrafast.mov/docs/cli/index.md): every command
+- [MCP server](https://ultrafast.mov/docs/mcp/index.md): the 20 MCP tools and client setup
+- [HTTP API](https://ultrafast.mov/docs/api/index.md): the HTTP API of uf serve
+
+## Product
+
+- [Use cases](https://ultrafast.mov/use-cases/index.md): what people make with it, with example prompts
+- [Integrations](https://ultrafast.mov/integrations/index.md): Claude Code, Codex, Cursor, Gemini CLI, SDKs, HTTP, self-hosting
+- [ultrafast Cloud](https://ultrafast.mov/cloud/index.md): ultrafast Cloud, the ChatGPT app and the Claude connector: coming soon, with a waitlist
+- [Examples](https://ultrafast.mov/examples/index.md): example videos with their documents
+
+## Comparisons
+
+- [ultrafast vs Remotion vs HyperFrames](https://ultrafast.mov/compare/index.md): ultrafast, Remotion and HyperFrames side by side
+- [ultrafast vs Remotion](https://ultrafast.mov/compare/remotion/index.md): ultrafast vs Remotion
+- [ultrafast vs HyperFrames](https://ultrafast.mov/compare/hyperframes/index.md): ultrafast vs HyperFrames
+
+## Optional
+
+- [Full text of this site](https://ultrafast.mov/llms-full.txt): every page above as Markdown, in one file
+- [Source code](https://github.com/ultrafastmov/ultrafast)

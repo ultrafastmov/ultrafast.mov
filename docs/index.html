@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quickstart · ultrafast docs</title>
+<meta name="description" content="Install ultrafast, make your first video, and learn the loop agents use: new, check, sheet, review, export. Then connect it to your agent over MCP.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/docs/">
+<link rel="alternate" type="text/markdown" href="/docs/index.md" title="Quickstart · ultrafast docs (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="Quickstart">
+<meta property="og:description" content="Install ultrafast, make your first video, and learn the loop agents use: new, check, sheet, review, export. Then connect it to your agent over MCP.">
+<meta property="og:url" content="https://ultrafast.mov/docs/">
+<meta property="og:image" content="https://ultrafast.mov/og/docs.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quickstart · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quickstart">
+<meta name="twitter:description" content="Install ultrafast, make your first video, and learn the loop agents use: new, check, sheet, review, export. Then connect it to your agent over MCP.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/docs.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=38337fe4">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. A video is a JSON document: your agent writes it, checks it, reviews every frame and renders it on the GPU at hundreds of frames a second, with no browser in the loop.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://ultrafast.mov/docs/"}]},{"@type":"TechArticle","headline":"Quickstart","description":"Install ultrafast, make your first video, and learn the loop agents use: new, check, sheet, review, export. Then connect it to your agent over MCP.","url":"https://ultrafast.mov/docs/","dateModified":"2026-11-22","publisher":{"@id":"https://ultrafast.mov/#org"},"about":{"@id":"https://ultrafast.mov/#app"}}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/" aria-current="page">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="band stock-cotton phead" style="padding-bottom:56px">
+  <div class="sunburst" aria-hidden="true" style="--sx:92%;--sy:40%;--r2:520px"></div>
+  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+  <li aria-current="page">Docs</li>
+</ol>
+
+    <p class="eyebrow"><i style="--c:var(--blue)"></i>Docs</p>
+    <h1 class="pr h1" data-plates="blue black"><span class="ln">Quickstart</span></h1>
+    <p class="lede">Install it, make your first video, then hand the loop to your agent.</p>
+  </div>
+</section>
+<section class="band stock-thermal" style="padding-top:72px">
+  <div class="wrap docs">
+    <nav class="side" aria-label="Docs">
+      <h2>Start</h2>
+      <ul><li><a href="/docs/" aria-current="page">Quickstart</a></li><li><a href="/docs/documents/">The document</a></li></ul>
+      <h2>Reference</h2>
+      <ul><li><a href="/docs/ops/">Ops</a></li><li><a href="/docs/cli/">CLI</a></li><li><a href="/docs/mcp/">MCP server</a></li><li><a href="/docs/api/">HTTP API</a></li></ul>
+      <h2>For agents</h2>
+      <ul><li><a href="/llms.txt">llms.txt</a></li><li><a href="/docs/index.md">This page as Markdown</a></li></ul>
+    </nav>
+    <article class="prose">
+<nav class="toc" aria-label="On this page"><b>On this page</b><ol>
+  <li><a href="#install">Install</a></li><li><a href="#first-video">Your first video</a></li><li><a href="#document">What you just made</a></li>
+  <li><a href="#loop">The loop</a></li><li><a href="#agents">Connect an agent</a></li><li><a href="#serve">Run it as a service</a></li><li><a href="#next">Next</a></li>
+</ol></nav>
+
+<h2 id="install">Install</h2>
+<p>One binary, <code>ultrafast</code>, with <code>uf</code> as its short name. Pick one:</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">brew<span class="w"> </span>install<span class="w"> </span>ultrafastmov/tap/ultrafast<span class="w">    </span><span class="c1"># macOS and Linux, prebuilt</span>
+cargo<span class="w"> </span>install<span class="w"> </span>ultrafast<span class="w">                    </span><span class="c1"># from crates.io, Rust 1.91 or later</span>
+docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>ghcr.io/ultrafastmov/ultrafast:latest<span class="w"> </span>info</code></pre></div><p>Or download a prebuilt archive for macOS (Apple silicon) or Linux x86_64 from <a href="https://github.com/ultrafastmov/ultrafast/releases">GitHub releases</a>. It renders with <strong>Metal</strong> on macOS and <strong>Vulkan</strong> on Linux, and on Windows through WSL2 (<a href="https://github.com/ultrafastmov/ultrafast/blob/main/docs/WINDOWS.md">WINDOWS.md</a>). Exports on Vulkan use ffmpeg, and on Linux voiceover and OCR use eSpeak NG and Tesseract. The Docker image includes all of them; the prebuilt binaries include everything else. No GPU? <a href="/cloud/">ultrafast Cloud</a> is coming soon.</p>
+<div class="code"><div class="cbar"><span>check the GPU</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="gp">$ </span>uf<span class="w"> </span>info
+<span class="go">backend: vulkan</span>
+<span class="go">device:  NVIDIA GeForce RTX 5090</span></code></pre></div>
+<h2 id="first-video">Your first video</h2>
+<p>Start from a template, look at it, then export it.</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">uf<span class="w"> </span>new<span class="w"> </span>vertical<span class="w"> </span>film.json<span class="w">                       </span><span class="c1"># 1080×1920, 6 s, already looks finished</span>
+uf<span class="w"> </span>check<span class="w"> </span>film.json<span class="w">                              </span><span class="c1"># problems, before anything renders</span>
+uf<span class="w"> </span>sheet<span class="w"> </span>film.json<span class="w"> </span>--count<span class="w"> </span><span class="m">9</span><span class="w"> </span>--out<span class="w"> </span>sheet.png<span class="w">    </span><span class="c1"># nine frames in one image</span>
+uf<span class="w"> </span>live<span class="w"> </span>film.json<span class="w">                               </span><span class="c1"># plays it; edits show on the next frame</span>
+uf<span class="w"> </span>review<span class="w"> </span>film.json<span class="w"> </span>--safe<span class="w"> </span>social<span class="w">               </span><span class="c1"># what a viewer would trip over</span>
+uf<span class="w"> </span><span class="nb">export</span><span class="w"> </span>film.json<span class="w"> </span>film.mp4<span class="w">                    </span><span class="c1"># hardware-encoded mp4</span></code></pre></div><p>Other templates: <code>title</code>, <code>square</code>, <code>promo</code>, <code>explainer</code> and <code>product</code>. Edit the words in <code>film.json</code> and run <code>uf export</code> again.</p>
+
+<h2 id="document">What you just made</h2>
+<p>A video is one JSON document: a <code>format</code>, a graph of <code>nodes</code>, and the node to <code>output</code>. Nodes are sources (footage, type, shapes, 3D), effects and composites; any param can be animated.</p>
+<div class="code"><div class="cbar"><span>hello.json</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;fps&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.0</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;output&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;comp&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;nodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;bg&quot;</span><span class="p">:</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gradient&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;a&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#0b0b1a&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;b&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#2a1650&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;disc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shape&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;circle&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ff7a2e&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">360</span><span class="p">,</span><span class="w"> </span><span class="mi">360</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;center&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">560</span><span class="p">,</span><span class="w"> </span><span class="mi">540</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;ease&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;in_out_cubic&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1360</span><span class="p">,</span><span class="w"> </span><span class="mi">540</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;comp&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;over&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;fg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;disc&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;bg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bg&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div><p>The whole vocabulary is in <a href="/docs/ops/">the op reference</a>, and <code>uf ops</code> prints it as JSON. The shape of a document is in <a href="/docs/documents/">The document</a>.</p>
+
+<h2 id="loop">The loop</h2>
+<p>This is how an agent works, and how you should too:</p>
+<ol>
+  <li><strong>Start</strong> from <code>uf new</code> or a copy of an example.</li>
+  <li><strong>Check</strong>: <code>uf check</code> reports unknown ops, misspelled params (with suggestions), wrongly shaped values, broken shaders and missing files, without rendering.</li>
+  <li><strong>Look</strong>: <code>uf sheet</code> for motion at a glance, <code>uf render --at 2.5</code> for one exact frame, <code>uf inspect --at 2.5</code> for which node drew what.</li>
+  <li><strong>Review</strong>: <code>uf review</code> renders the film and reports unreadable, clipped, overlapping, tiny or too-brief text, text under social app buttons, and flashing faster than three times a second.</li>
+  <li><strong>Export</strong>: <code>uf export</code>, hardware-encoded with sound and motion blur.</li>
+</ol>
+
+<h2 id="agents">Connect an agent</h2>
+<p><code>uf mcp</code> serves all of this as 20 MCP tools over stdio. Frames and contact sheets come back as images, so the agent sees what it made.</p>
+<div class="code"><div class="cbar"><span>Claude Code</span><button class="copy" type="button">copy</button></div><pre><code class="hl">claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>ultrafast<span class="w"> </span>--<span class="w"> </span>uf<span class="w"> </span>mcp</code></pre></div><p>Codex, Cursor, Gemini CLI and remote MCP over HTTP are on the <a href="/docs/mcp/">MCP page</a>. Agents can also read <a href="/llms.txt">llms.txt</a> and every page of these docs as Markdown.</p>
+
+<h2 id="serve">Run it as a service</h2>
+<p><code>uf serve</code> puts the engine behind an HTTP API and remote MCP on your GPU, with one API key, for apps, the <a href="/integrations/#sdks">SDKs</a> and agents on other machines.</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">uf<span class="w"> </span>serve<span class="w"> </span>--port<span class="w"> </span><span class="m">8080</span><span class="w">                   </span><span class="c1"># prints its API key at first start</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">ULTRAFAST_API_KEY</span><span class="o">=</span>uf_live_...
+jq<span class="w"> </span><span class="s1">&#39;{document: ., output: {inline: true}}&#39;</span><span class="w"> </span>film.json<span class="w"> </span><span class="p">|</span>
+curl<span class="w"> </span>http://localhost:8080/v1/render<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$ULTRAFAST_API_KEY</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span>--data-binary<span class="w"> </span>@-<span class="w"> </span>-o<span class="w"> </span>film.mp4</code></pre></div><p>The requests are in <a href="/docs/api/">HTTP API</a>. A hosted version, ultrafast Cloud, is coming soon: <a href="/cloud/">join the waitlist</a>.</p>
+
+<h2 id="next">Next</h2>
+<ul>
+  <li><a href="/docs/documents/">The document</a>: format, nodes, animation, timing and components.</li>
+  <li><a href="/docs/ops/">Op reference</a>: all 70 ops with their params.</li>
+  <li><a href="/docs/cli/">CLI</a> and <a href="/docs/api/">HTTP API</a>.</li>
+  <li><a href="/examples/">Examples</a>: every video there links to its document.</li>
+</ul>
+    </article>
+  </div>
+</section>
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=38337fe4"></script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+{
+ "version": 1,
+ "format": {
+  "width": 1080,
+  "height": 1080,
+  "fps": 30,
+  "duration": 15.0
+ },
+ "output": "grained",
+ "nodes": {
+  "spore": {
+   "op": "shape",
+   "params": {
+    "kind": "circle",
+    "center": [
+     540.0,
+     540.0
+    ],
+    "size": [
+     26,
+     26
+    ],
+    "color": "#ffffff"
+   }
+  },
+  "spore2": {
+   "op": "shape",
+   "params": {
+    "kind": "circle",
+    "center": [
+     555.0,
+     532.0
+    ],
+    "size": [
+     16,
+     16
+    ],
+    "color": "#ffffff"
+   }
+  },
+  "spores": {
+   "op": "over",
+   "inputs": {
+    "fg": "spore2",
+    "bg": "spore"
+   }
+  },
+  "spore3": {
+   "op": "shape",
+   "params": {
+    "kind": "circle",
+    "center": [
+     529.0,
+     552.0
+    ],
+    "size": [
+     14,
+     14
+    ],
+    "color": "#ffffff"
+   }
+  },
+  "spores2": {
+   "op": "over",
+   "inputs": {
+    "fg": "spore3",
+    "bg": "spores"
+   }
+  },
+  "spore4": {
+   "op": "shape",
+   "params": {
+    "kind": "circle",
+    "center": [
+     545.0,
+     555.0
+    ],
+    "size": [
+     10,
+     10
+    ],
+    "color": "#ffffff"
+   }
+  },
+  "spores3": {
+   "op": "over",
+   "inputs": {
+    "fg": "spore4",
+    "bg": "spores2"
+   }
+  },
+  "spore5": {
+   "op": "shape",
+   "params": {
+    "kind": "circle",
+    "center": [
+     527.0,
+     529.0
+    ],
+    "size": [
+     9.0,
+     9.0
+    ],
+    "color": "#ffffff"
+   }
+  },
+  "spores4": {
+   "op": "over",
+   "inputs": {
+    "fg": "spore5",
+    "bg": "spores3"
+   }
+  },
+  "growth": {
+   "op": "feedback",
+   "params": {
+    "code": "\nfloat hash12(float2 p) {\n    float3 p3 = frac(float3(p.x, p.y, p.x) * 0.1031);\n    p3 += dot(p3, float3(p3.y, p3.z, p3.x) + 33.33);\n    return frac((p3.x + p3.y) * p3.z);\n}\nfloat vnoise(float2 p) {\n    float2 i = floor(p);\n    float2 f = p - i;\n    float2 u = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);\n    float a = hash12(i), b = hash12(i + float2(1.0, 0.0));\n    float c = hash12(i + float2(0.0, 1.0)), d = hash12(i + float2(1.0, 1.0));\n    return lerp(lerp(a, b, u.x), lerp(c, d, u.x), u.y);\n}\nfloat fbm(float2 p) {\n    float s = 0.0, a = 0.5;\n    for (int i = 0; i < 4; i++) { s += a * vnoise(p); p = p * 2.03 + float2(17.1, 9.7); a *= 0.5; }\n    return s;\n}\n// the flood front's lobes, shared by the simulation and the glaze\nfloat floodDist(float2 d, float t, float R) {\n    // distance to the dish's centre, warped so the front is lopsided (it runs in faster\n    // from the upper right) and lobed like a viscous sheet; the warp scales with the front\n    float ang = atan2(d.y, d.x);\n    float2 q = float2(cos(ang), sin(ang));\n    float lobes = (fbm(q * 2.1 + float2(0.0, t * 0.22) + 23.0) - 0.5) * 2.0;\n    float lop = cos(ang + 0.75);\n    return length(d) + min(R, 420.0) * (0.10 * lop + 0.09 * lobes);\n}\n\n// state: x = substrate a, y = growth b, z = age (slow average of b)\n// u: 0 rosette radius px, 1 flood radius px, 2 back to rest 0..1, 3,4 center px,\n//    5 seed level, 6 still until (s), 7 state texel px\nfloat4 rest(float2 pos) {\n    return float4(1.0, param(5) * input(0, pos).a, 0.0, 1.0);\n}\nfloat4 st(float2 p) {\n    float2 lo = float2(0.5, 0.5) * param(7);\n    return prev(clamp(p, lo, size() - lo));\n}\nfloat4 update(float2 pos, float px) {\n    if (step_index() == 0 || time() < param(6)) return rest(pos);\n    float2 d = pos - float2(param(3), param(4));\n    float ang = atan2(d.y, d.x);\n    // the rim wanders: lobes of lichen, not a compass circle\n    float wob = 0.07 * (fbm(float2(cos(ang), sin(ang)) * 2.2 + 4.0) - 0.5) * 2.0;\n    float r = length(d) / (param(0) * (1.0 + wob));\n    // dense branching at the heart, coral fingers mid-way, slow lobes at the rim\n    float2 fk = r < 0.45 ? lerp(float2(0.040, 0.0605), float2(0.046, 0.0615), r / 0.45)\n                         : lerp(float2(0.046, 0.0615), float2(0.0545, 0.0625), saturate((r - 0.45) / 0.4));\n    float feed = fk.x + 0.0016 * (fbm(pos / 230.0 + 11.0) - 0.5);\n    float kill = fk.y + 0.0010 * (fbm(pos / 190.0 + 5.0) - 0.5);\n    kill = lerp(kill, 0.0715, smoothstep(0.86, 1.04, r));\n    // under the flood the carving is gone: the growth dies well behind the glaze's front\n    float rf = floodDist(d, time(), param(1));\n    float under = smoothstep(param(1) + 150.0, param(1) + 165.0, rf);\n    if (param(1) < 60.0) under = max(under, 1.0 - smoothstep(0.05, 0.5, input(0, pos).a));\n    kill = lerp(kill, 0.10, under);\n\n    float4 s = st(pos);\n    float2 lap = -s.xy\n        + 0.2 * (st(pos + float2(px, 0)).xy + st(pos - float2(px, 0)).xy\n               + st(pos + float2(0, px)).xy + st(pos - float2(0, px)).xy)\n        + 0.05 * (st(pos + float2(px, px)).xy + st(pos - float2(px, px)).xy\n                + st(pos + float2(px, -px)).xy + st(pos + float2(-px, px)).xy);\n    float a = s.x, b = s.y;\n    float react = a * b * b;\n    a += lap.x - react + feed * (1.0 - a);\n    b += 0.5 * lap.y + react - (kill + feed) * b;\n    b *= 1.0 - 0.05 * under;\n    b = max(b, param(5) * input(0, pos).a);\n    float age = s.z + (b - s.z) * 0.0009;\n    float4 o = float4(saturate(a), saturate(b), saturate(age), 1.0);\n    return lerp(o, rest(pos), param(2));\n}\n",
+    "resolution": 0.45,
+    "substeps": 40,
+    "u": [
+     292.0,
+     2000.0,
+     0.0,
+     540.0,
+     540.0,
+     0.42,
+     0.45,
+     2.2222222222222223
+    ],
+    "u1": {
+     "keys": [
+      {
+       "t": 9.95,
+       "v": [
+        2000.0
+       ]
+      },
+      {
+       "t": 10.0,
+       "v": [
+        412.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 13.8,
+       "v": [
+        0.0
+       ]
+      }
+     ]
+    },
+    "u2": {
+     "keys": [
+      {
+       "t": 13.8,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 14.25,
+       "v": [
+        1.0
+       ]
+      }
+     ]
+    }
+   },
+   "inputs": {
+    "in0": "spores4"
+   }
+  },
+  "dish": {
+   "op": "shader",
+   "params": {
+    "code": "\nfloat hash12(float2 p) {\n    float3 p3 = frac(float3(p.x, p.y, p.x) * 0.1031);\n    p3 += dot(p3, float3(p3.y, p3.z, p3.x) + 33.33);\n    return frac((p3.x + p3.y) * p3.z);\n}\nfloat vnoise(float2 p) {\n    float2 i = floor(p);\n    float2 f = p - i;\n    float2 u = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);\n    float a = hash12(i), b = hash12(i + float2(1.0, 0.0));\n    float c = hash12(i + float2(0.0, 1.0)), d = hash12(i + float2(1.0, 1.0));\n    return lerp(lerp(a, b, u.x), lerp(c, d, u.x), u.y);\n}\nfloat fbm(float2 p) {\n    float s = 0.0, a = 0.5;\n    for (int i = 0; i < 4; i++) { s += a * vnoise(p); p = p * 2.03 + float2(17.1, 9.7); a *= 0.5; }\n    return s;\n}\n// the flood front's lobes, shared by the simulation and the glaze\nfloat floodDist(float2 d, float t, float R) {\n    // distance to the dish's centre, warped so the front is lopsided (it runs in faster\n    // from the upper right) and lobed like a viscous sheet; the warp scales with the front\n    float ang = atan2(d.y, d.x);\n    float2 q = float2(cos(ang), sin(ang));\n    float lobes = (fbm(q * 2.1 + float2(0.0, t * 0.22) + 23.0) - 0.5) * 2.0;\n    float lop = cos(ang + 0.75);\n    return length(d) + min(R, 420.0) * (0.10 * lop + 0.09 * lobes);\n}\n\n// u: 0 state texel px, 1 key azimuth rad, 2 key elevation rad, 3 zoom, 4,5 camera center px,\n//    6 carve depth px, 7 overhead softbox offset x, 8 exposure, 9,10 dish center px,\n//    11..13 glaze absorption rgb, 14 flood radius px, 15 flood on 0..1\nstatic const float RW = 318.0;   // flat well\nstatic const float RC = 398.0;   // top of the wall\nstatic const float RO = 428.0;   // outer edge\nstatic const float HC = 30.0;   // wall height\n\nfloat4 fieldAt(float2 p) {\n    // cubic B-spline over the state grid from four bilinear taps: smooth relief at any zoom\n    float tx = param(0);\n    float2 u = p / tx - 0.5;\n    float2 i = floor(u);\n    float2 f = u - i;\n    float2 f2 = f * f, f3 = f2 * f;\n    float2 w0 = (1.0 - 3.0 * f + 3.0 * f2 - f3) / 6.0;\n    float2 w1 = (4.0 - 6.0 * f2 + 3.0 * f3) / 6.0;\n    float2 w2 = (1.0 + 3.0 * f + 3.0 * f2 - 3.0 * f3) / 6.0;\n    float2 w3 = f3 / 6.0;\n    float2 g0 = w0 + w1, g1 = w2 + w3;\n    float2 p0 = (i + w1 / g0 - 0.5) * tx, p1 = (i + w3 / g1 + 1.5) * tx;\n    return g0.y * (g0.x * input(0, p0) + g1.x * input(0, float2(p1.x, p0.y)))\n         + g1.y * (g0.x * input(0, float2(p0.x, p1.y)) + g1.x * input(0, p1));\n}\nfloat well(float r) { return 1.0 - smoothstep(RW - 26.0, RW - 6.0, r); }\nfloat carve(float b) { return smoothstep(0.08, 0.27, b); }\nfloat dishH(float r) {\n    float bead = 3.0 * exp(-pow((r - (RO - 9.0)) / 7.0, 2.0));\n    return HC * smoothstep(RW, RC, r) + bead - (HC + 34.0) * smoothstep(RO - 6.0, RO + 4.0, r);\n}\n// how far the flood has filled the carving here: 0 open, 1 filled level\nfloat filled(float2 p, float2 dc) {\n    // the relief levels just behind the front\n    float rf = floodDist(p - dc, time(), param(14));\n    return smoothstep(param(14) - 2.0, param(14) + 26.0, rf) * param(15);\n}\nfloat faded(float2 p, float2 dc) {\n    // the colour of the filled grooves lingers under the gloss, then sinks away\n    float rf = floodDist(p - dc, time(), param(14));\n    return smoothstep(param(14) + 20.0, param(14) + 150.0, rf) * param(15);\n}\nfloat heightAt(float2 p, float2 dc, float depth) {\n    float r = length(p - dc);\n    return dishH(r) - depth * carve(input(0, p).y) * well(r) * (1.0 - filled(p, dc));\n}\n\nfloat softbox(float3 R, float3 Ls, float2 half_size, float edge, float glow) {\n    float3 up = float3(0.0, -1.0, 0.0);\n    float3 ux = normalize(cross(up, Ls));\n    float3 uy = cross(Ls, ux);\n    float d = dot(R, Ls);\n    if (d <= 0.0) return 0.0;\n    float2 q = float2(dot(R, ux), dot(R, uy)) / d;\n    float2 e = abs(q) - half_size;\n    float box = 1.0 - smoothstep(-edge, edge, max(e.x, e.y));\n    float2 m = max(e, 0.0);\n    return box + glow * exp(-dot(m, m) * 40.0);\n}\n\n// crazing in the glaze: the edges of a jittered cell pattern\nfloat craze(float2 p) {\n    float2 g = p / 74.0;\n    float2 i = floor(g);\n    float f1 = 9.0, f2 = 9.0;\n    for (int y = -1; y <= 1; y++) {\n        for (int x = -1; x <= 1; x++) {\n            float2 c = i + float2(float(x), float(y));\n            float2 o = float2(hash12(c + 3.1), hash12(c + 8.7)) * 0.85 + 0.075;\n            float dd = length(c + o - g);\n            if (dd < f1) { f2 = f1; f1 = dd; } else if (dd < f2) { f2 = dd; }\n        }\n    }\n    return 1.0 - smoothstep(0.0, 0.012, f2 - f1);\n}\n\nfloat4 shade(float2 pos, float px) {\n    float2 sz = size();\n    float zoom = param(3);\n    float2 p = float2(param(4), param(5)) + (pos - 0.5 * sz) / zoom;\n    float dd = 0.8 / zoom;\n    float depth = param(6);\n    float2 dc = float2(param(9), param(10));\n    float2 rel = p - dc;\n    float r = length(rel);\n    float2 radial = rel / max(r, 1e-3);\n\n    float3 Pw = float3(pos - 0.5 * sz, 0.0);\n    float3 V = normalize(float3(0.0, 0.0, 1900.0) - Pw);\n    float az = param(1), el = param(2);\n    float3 L = float3(cos(el) * cos(az), cos(el) * sin(az), sin(el));\n    float2 l2 = normalize(L.xy);\n    float tanel = L.z / max(length(L.xy), 1e-3);\n    float3 key = float3(1.0, 0.88, 0.74) * 1.95;\n\n    float h0d = dishH(r);\n    float dh = (dishH(r + 0.75) - dishH(r - 0.75)) / 1.5;\n    float d2h = (dishH(r + 2.0) - 2.0 * h0d + dishH(r - 2.0)) / 4.0;\n    float2 lfield = (p - float2(param(4), param(5)));\n\n    if (r > RO + 5.0) {\n        // dark honed stone: the dish's shadow on it, a little mineral fleck\n        float2 sh = p - (dc - l2 * ((HC + 34.0) / tanel) * 0.9);\n        float shade_d = smoothstep(RO - 30.0, RO + 80.0, length(sh));\n        float contact = smoothstep(RO + 3.0, RO + 30.0, r);\n        float mott = fbm(p / 150.0) * 0.6 + fbm(p / 21.0 + 5.0) * 0.4;\n        float fleck = step(0.9975, hash12(floor(p / 1.6) + 4.0)) * 0.6;\n        float3 stone = lerp(float3(0.016, 0.0135, 0.012), float3(0.032, 0.026, 0.021), mott) * (1.0 + fleck);\n        float fall = 0.45 + 0.85 * saturate(0.5 + 0.5 * dot(normalize(Pw.xy + 1e-3), l2) * length(Pw.xy) / 700.0);\n        float3 col = stone * (key * L.z * fall * (0.2 + 0.8 * shade_d) * (0.4 + 0.6 * contact) + 0.07);\n        return float4(col * param(8), 1.0);\n    }\n\n    // the carved body (filled back in where the flood has passed)\n    float fl = filled(p, dc);\n    float fc = faded(p, dc);\n    float4 s0 = fieldAt(p);\n    float wl = well(r) * (1.0 - fl);\n    float c0 = carve(s0.y) * wl;\n    float cghost = carve(s0.y) * well(r) * (1.0 - fc);\n    float gx = (carve(fieldAt(p + float2(dd, 0.0)).y) - carve(fieldAt(p - float2(dd, 0.0)).y)) / (2.0 * dd) * wl;\n    float gy = (carve(fieldAt(p + float2(0.0, dd)).y) - carve(fieldAt(p - float2(0.0, dd)).y)) / (2.0 * dd) * wl;\n    float2 gbody = -depth * float2(gx, gy) + dh * radial;\n    float3 nb = normalize(float3(-gbody, 1.0));\n\n    // the glaze levels over the carving: a gaussian-smoothed copy (value and gradient from one ring)\n    float sig = 5.5;\n    float gsum = 1.0, cb = c0;\n    float2 gg = float2(0.0, 0.0);\n    for (int k = 0; k < 12; k++) {\n        float a = float(k) * 0.5235988 + 0.26;\n        float rad = (k % 2 == 0) ? sig : 2.0 * sig;\n        float2 q = float2(cos(a), sin(a)) * rad;\n        float w = exp(-0.5 * dot(q, q) / (sig * sig));\n        float cv = carve(input(0, p + q).y) * well(length(p + q - dc)) * (1.0 - filled(p + q, dc));\n        cb += w * cv;\n        gsum += w;\n        gg += cv * w * q / (sig * sig);\n    }\n    cb /= gsum;\n    gg /= gsum;\n    float follow = 0.42;\n    float2 swell = float2(fbm(p / 420.0) - fbm(p / 420.0 + float2(0.6, 0.0)),\n                          fbm(p / 420.0 + 7.0) - fbm(p / 420.0 + float2(7.0, 0.6)));\n    // orange peel in the gloss: two rotated octaves, so no grid shows at macro\n    float2 pr = float2(0.8 * p.x - 0.6 * p.y, 0.6 * p.x + 0.8 * p.y);\n    float2 peel = float2(vnoise(pr / 2.9) + 0.5 * vnoise(p / 1.7 + 5.0) - 0.75,\n                         vnoise(pr / 2.9 + 9.0) + 0.5 * vnoise(p / 1.7 + 13.0) - 0.75);\n    // the flood's leading edge: a meniscus of liquid glaze, and the sheet thickest just behind it\n    float rf = floodDist(p - dc, time(), param(14));\n    float xm = rf - param(14) - 5.0;\n    float menA = param(15) * smoothstep(60.0, 170.0, param(14));\n    float men = menA * exp(-xm * xm / 40.0);\n    float dmen = menA * (-2.0 * xm / 40.0) * exp(-xm * xm / 40.0) * 5.5;\n    float refr = menA * exp(-pow((rf - param(14) + 2.0) / 3.5, 2.0));\n    float sheet = param(15) * smoothstep(param(14) - 3.0, param(14) + 6.0, rf) * exp(-max(rf - param(14), 0.0) / 90.0);\n    float2 gsurf = -depth * follow * gg + dh * radial + dmen * radial;\n    float3 ns = normalize(float3(-gsurf + swell * 0.03 + peel * 0.007 * (1.0 - 0.8 * sheet), 1.0));\n\n    // glaze thickness: thick in the grooves and at the foot of the wall, thin over the rim\n    float th = 0.30 + 1.45 * (max(c0, 0.62 * cghost) - follow * cb) * (0.6 + 0.4 * saturate(s0.z * 3.0));\n    float inner = 1.0 - smoothstep(RO - 9.0, RO - 5.0, r);\n    th += clamp(d2h * 3.2, -0.16, 0.40) * inner;\n    th = lerp(0.34, th, inner) + 0.02 * (fbm(p / 9.0) - 0.5);\n    th += 0.16 * sheet + 0.05 * men;\n    th = max(th, 0.10);\n    float3 sigma = float3(param(11), param(12), param(13));\n    float3 trans = exp(-2.0 * sigma * th);\n    // iron specks under thin glaze, round\n    float2 sq = p / 9.0;\n    float2 si = floor(sq);\n    float sdist = length(sq - si - (0.25 + 0.5 * float2(hash12(si + 31.0), hash12(si + 47.0))));\n    float speck = step(0.93, hash12(si + 19.0)) * (1.0 - smoothstep(0.035, 0.075, sdist))\n                * (1.0 - smoothstep(0.3, 0.8, th)) * 0.85;\n    float3 clay = lerp(float3(0.62, 0.44, 0.30), float3(0.86, 0.83, 0.77), smoothstep(0.10, 0.22, th));\n    float3 body = lerp(clay, float3(0.28, 0.17, 0.10), speck);\n    float3 albedo = body * trans;\n\n    // raking key light, with the shadows the carving and the rim cast\n    float hc = heightAt(p, dc, depth);\n    float shadow = 0.0;\n    for (int k = 1; k <= 10; k++) {\n        float dist = (k <= 5) ? 2.0 * float(k) : 10.0 + 14.0 * float(k - 5);\n        float hs = heightAt(p + l2 * dist, dc, depth);\n        shadow = max(shadow, saturate(((hs - hc) - dist * tanel) / (2.0 + 0.12 * dist)));\n    }\n    float wrap = 0.25;\n    float ndl = saturate((dot(nb, L) + wrap) / (1.0 + wrap));\n    float fall = 0.82 + 0.36 * clamp(dot(normalize(Pw.xy + 1e-3), l2) * length(Pw.xy) / 600.0, -1.0, 1.0);\n    float3 amb = float3(0.15, 0.19, 0.25) * (0.7 + 0.3 * nb.z);\n    float3 col = albedo * (key * fall * ndl * (1.0 - 0.78 * shadow) + amb);\n    col += float3(0.016, 0.046, 0.042) * saturate(th - 0.4) * fall * (1.0 - 0.5 * shadow);\n\n    // bubbles held in the thick glaze, catching the key\n    float2 bq = p / 7.0;\n    float2 bi = floor(bq);\n    float2 bcen = 0.25 + 0.5 * float2(hash12(bi + 71.0), hash12(bi + 13.0));\n    float brad = 0.06 + 0.16 * hash12(bi + 37.0);\n    float bdist = length(bq - bi - bcen) / brad;\n    float bub = step(0.55, hash12(bi + 5.0)) * smoothstep(0.55, 1.1, th);\n    float bodyb = bub * (1.0 - smoothstep(0.75, 1.0, bdist));\n    float glint = bub * (1.0 - smoothstep(0.0, 0.45, length(bq - bi - bcen + l2 * brad * 0.45) / brad));\n    col = col * (1.0 + 0.10 * bodyb) + key * fall * glint * 0.10 * (1.0 - shadow);\n    // crazing, faint, where the glaze is thick enough to craze\n    col *= 1.0 - 0.10 * craze(p) * smoothstep(0.25, 0.6, th) * inner;\n\n    // the gloss: a long softbox on the key side and a broad one overhead\n    float3 R = reflect(-V, ns);\n    float ndv = saturate(dot(ns, V));\n    float fres = 0.04 + 0.96 * pow(1.0 - ndv, 5.0);\n    float3 Lk = normalize(float3(L.xy * 0.95, L.z + 0.2));\n    float3 Lo = normalize(float3(param(7), -0.16, 1.0));\n    float envk = softbox(R, Lk, float2(0.55, 0.13), 0.03, 0.2) * 15.0;\n    float envo = softbox(R, Lo, float2(0.075, 0.05), 0.05, 0.05) * 16.0;\n    float env = envk + envo + 0.22 * saturate(R.z);\n    col += env * fres * float3(1.0, 0.96, 0.90) * (1.0 - 0.45 * shadow);\n    col *= 1.0 - 0.22 * refr;\n    return float4(col * param(8), 1.0);\n}\n",
+    "u": [
+     2.2222222222222223,
+     -2.25,
+     0.38,
+     1.1,
+     540.0,
+     540.0,
+     9.0,
+     -0.1,
+     1.0,
+     540.0,
+     540.0,
+     0.95,
+     0.52,
+     0.5,
+     2000.0,
+     0.0
+    ],
+    "u1": {
+     "expr": "-2.25 + 0.30 * sin(tau * t / 15)"
+    },
+    "u3": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        1.1
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 6.6,
+       "v": [
+        1.32
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 9.25,
+       "v": [
+        2.45
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 9.75,
+       "v": [
+        2.5
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 12.7,
+       "v": [
+        1.1
+       ]
+      }
+     ]
+    },
+    "u4": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        540.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 6.6,
+       "v": [
+        518.3142857142857
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 9.25,
+       "v": [
+        406.92857142857144
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 9.75,
+       "v": [
+        402.0
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 12.7,
+       "v": [
+        540.0
+       ]
+      }
+     ]
+    },
+    "u5": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        540.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 6.6,
+       "v": [
+        522.4
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 9.25,
+       "v": [
+        432.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 9.75,
+       "v": [
+        428.0
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 12.7,
+       "v": [
+        540.0
+       ]
+      }
+     ]
+    },
+    "u7": {
+     "expr": "-0.10 + 0.07 * sin(tau * t / 15 + 1.2)"
+    },
+    "u14": {
+     "keys": [
+      {
+       "t": 9.95,
+       "v": [
+        2000.0
+       ]
+      },
+      {
+       "t": 10.0,
+       "v": [
+        412.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 13.8,
+       "v": [
+        0.0
+       ]
+      }
+     ]
+    },
+    "u15": {
+     "keys": [
+      {
+       "t": 9.95,
+       "v": [
+        1.0
+       ]
+      },
+      {
+       "t": 14.25,
+       "v": [
+        1.0
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 14.9,
+       "v": [
+        0.0
+       ]
+      }
+     ]
+    }
+   },
+   "inputs": {
+    "in0": "growth"
+   }
+  },
+  "lens_blur": {
+   "op": "blur",
+   "params": {
+    "radius": {
+     "keys": [
+      {
+       "t": 6.6,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 9.25,
+       "v": [
+        6.0
+       ]
+      },
+      {
+       "t": 9.75,
+       "v": [
+        6.0
+       ],
+       "ease": "in_out_cubic"
+      },
+      {
+       "t": 12.7,
+       "v": [
+        0.0
+       ]
+      }
+     ]
+    }
+   },
+   "inputs": {
+    "source": "dish"
+   },
+   "timing": {
+    "in": 6.6,
+    "out": 12.7
+   }
+  },
+  "focus_falloff": {
+   "op": "gradient",
+   "params": {
+    "kind": "radial",
+    "center": [
+     540.0,
+     540.0
+    ],
+    "radius": 760,
+    "stops": "0:#00000000, 0.42:#00000000, 0.85:#000000ff, 1:#000000ff"
+   }
+  },
+  "soft_edges": {
+   "op": "mask",
+   "params": {
+    "mode": "alpha"
+   },
+   "inputs": {
+    "source": "lens_blur",
+    "matte": "focus_falloff"
+   },
+   "timing": {
+    "in": 6.6,
+    "out": 12.7
+   }
+  },
+  "lens": {
+   "op": "over",
+   "inputs": {
+    "fg": "soft_edges",
+    "bg": "dish"
+   },
+   "timing": {
+    "in": 6.6,
+    "out": 12.7
+   }
+  },
+  "sheen": {
+   "op": "bloom",
+   "params": {
+    "threshold": 0.9,
+    "radius": 20,
+    "intensity": 0.22,
+    "wide": 0.3
+   },
+   "inputs": {
+    "source": "lens"
+   }
+  },
+  "vignette": {
+   "op": "vignette",
+   "params": {
+    "inner": "#00000000",
+    "outer": "#00000052"
+   },
+   "inputs": {
+    "source": "sheen"
+   }
+  },
+  "grade": {
+   "op": "adjust",
+   "params": {
+    "contrast": 1.06,
+    "saturation": 1.1
+   },
+   "inputs": {
+    "source": "vignette"
+   }
+  },
+  "grain": {
+   "op": "shader",
+   "params": {
+    "code": "float4 shade(float2 pos, float px) {\n  float2 p = floor(pos) + floor(time() * 24.0) * float2(37.0, 17.0);\n  float h = frac(sin(dot(p, float2(12.9898, 78.233))) * 43758.5453);\n  float g = frac(sin(dot(p + 3.1, float2(39.346, 11.135))) * 24634.6345);\n  float n = (h + g) * 0.5;\n  return float4(float3(n), 1.0);\n}"
+   }
+  },
+  "grained": {
+   "op": "blend",
+   "params": {
+    "mode": "overlay",
+    "opacity": 0.045
+   },
+   "inputs": {
+    "fg": "grain",
+    "bg": "grade"
+   }
+  }
+ }
+}

@@ -1,0 +1,1282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Op reference · all 70 ops · ultrafast docs</title>
+<meta name="description" content="Every ultrafast op with its ports, params, types and defaults: text, paths, video, captions, blocks, 3D, particles, fluid, shaders, transitions and looks.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/docs/ops/">
+<link rel="alternate" type="text/markdown" href="/docs/ops/index.md" title="Op reference · all 70 ops · ultrafast docs (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="70 ops">
+<meta property="og:description" content="Every ultrafast op with its ports, params, types and defaults: text, paths, video, captions, blocks, 3D, particles, fluid, shaders, transitions and looks.">
+<meta property="og:url" content="https://ultrafast.mov/docs/ops/">
+<meta property="og:image" content="https://ultrafast.mov/og/docs-ops.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="70 ops · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="70 ops">
+<meta name="twitter:description" content="Every ultrafast op with its ports, params, types and defaults: text, paths, video, captions, blocks, 3D, particles, fluid, shaders, transitions and looks.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/docs-ops.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=38337fe4">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. A video is a JSON document: your agent writes it, checks it, reviews every frame and renders it on the GPU at hundreds of frames a second, with no browser in the loop.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://ultrafast.mov/docs/"},{"@type":"ListItem","position":3,"name":"Ops","item":"https://ultrafast.mov/docs/ops/"}]},{"@type":"TechArticle","headline":"Op reference","description":"Every ultrafast op with its ports, params, types and defaults: text, paths, video, captions, blocks, 3D, particles, fluid, shaders, transitions and looks.","url":"https://ultrafast.mov/docs/ops/","dateModified":"2026-11-22","publisher":{"@id":"https://ultrafast.mov/#org"},"about":{"@id":"https://ultrafast.mov/#app"}}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/" aria-current="page">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="band stock-cotton phead" style="padding-bottom:56px">
+  <div class="sunburst" aria-hidden="true" style="--sx:92%;--sy:40%;--r2:520px"></div>
+  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+<li><a href="/docs/">Docs</a></li>  <li aria-current="page">Ops</li>
+</ol>
+
+    <p class="eyebrow"><i style="--c:var(--blue)"></i>Docs</p>
+    <h1 class="pr h1" data-plates="blue black"><span class="ln">70 ops</span></h1>
+    <p class="lede">Every op with its ports, params, types and defaults. <code>uf ops</code> prints the same as JSON.</p>
+  </div>
+</section>
+<section class="band stock-thermal" style="padding-top:72px">
+  <div class="wrap docs">
+    <nav class="side" aria-label="Docs">
+      <h2>Start</h2>
+      <ul><li><a href="/docs/">Quickstart</a></li><li><a href="/docs/documents/">The document</a></li></ul>
+      <h2>Reference</h2>
+      <ul><li><a href="/docs/ops/" aria-current="page">Ops</a></li><li><a href="/docs/cli/">CLI</a></li><li><a href="/docs/mcp/">MCP server</a></li><li><a href="/docs/api/">HTTP API</a></li></ul>
+      <h2>For agents</h2>
+      <ul><li><a href="/llms.txt">llms.txt</a></li><li><a href="/docs/ops/index.md">This page as Markdown</a></li></ul>
+    </nav>
+    <article class="prose">
+<nav class="toc" aria-label="Groups"><b>Groups</b><ol>
+<li><a href="#sources">Sources</a> (14)</li><li><a href="#compositing">Compositing</a> (8)</li><li><a href="#color">Color</a> (8)</li><li><a href="#geometry-and-warps">Geometry and warps</a> (8)</li><li><a href="#3d">3D</a> (5)</li><li><a href="#simulation-and-particles">Simulation and particles</a> (4)</li><li><a href="#footage-sound-and-captions">Footage, sound and captions</a> (4)</li><li><a href="#blocks">Blocks</a> (1)</li><li><a href="#shaders">Shaders</a> (1)</li><li><a href="#looks">Looks</a> (17)</li></ol></nav>
+<p>Params marked animatable take a constant, <code>{"keys": [...]}</code>, <code>{"expr": "..."}</code> or a driver (see <a href="/docs/documents/#params">params and animation</a>). Ports are the node's <code>inputs</code>.</p>
+<section class="opgroup" id="sources">
+  <h2>Sources</h2>
+  <div class="op" id="op-solid">
+    <h3>solid</h3>
+    <p>flat color</p>
+    <table>
+      <tbody>
+        <tr><td>color</td><td>color</td><td>fill color · <span class="def">default <code>#000000</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-gradient">
+    <h3>gradient</h3>
+    <p>linear, radial or conic gradient</p>
+    <table>
+      <tbody>
+        <tr><td>kind</td><td>enum(linear | radial | conic)</td><td>gradient shape · <span class="def">default <code>linear</code></span></td></tr>
+        <tr><td>a</td><td>color</td><td>start color (with b: a two-stop gradient)</td></tr>
+        <tr><td>b</td><td>color</td><td>end color</td></tr>
+        <tr><td>stops</td><td>text | number[]</td><td>&#34;0:#ff0000, 1:#0000ff&#34; or [pos,r,g,b,a,...], up to 8</td></tr>
+        <tr><td>space</td><td>enum(linear | srgb)</td><td>interpolation space; srgb matches CSS/Figma · <span class="def">default <code>linear</code></span></td></tr>
+        <tr><td>start</td><td>vec2</td><td>linear: start point px · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>end</td><td>vec2</td><td>linear: end point px · <span class="def">default <code>[0,h]</code></span></td></tr>
+        <tr><td>center</td><td>vec2</td><td>radial/conic center px · <span class="def">default <code>frame center</code></span></td></tr>
+        <tr><td>radius</td><td>number</td><td>radial radius px · <span class="def">default <code>max(w,h)/2</code></span></td></tr>
+        <tr><td>angle</td><td>number</td><td>conic start angle, degrees · <span class="def">default <code>0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-shape">
+    <h3>shape</h3>
+    <p>analytic rectangle / rounded rect / ellipse (SDF, antialiased)</p>
+    <table>
+      <tbody>
+        <tr><td>kind</td><td>enum(rect | ellipse | circle)</td><td>shape · <span class="def">default <code>rect</code></span></td></tr>
+        <tr><td>color</td><td>color</td><td>fill (or stroke) color · <span class="def">default <code>#ffffff</code></span></td></tr>
+        <tr><td>center</td><td>vec2</td><td>center px · <span class="def">default <code>frame center</code></span></td></tr>
+        <tr><td>size</td><td>vec2</td><td>width and height px · <span class="def">default <code>[w/4,w/4]</code></span></td></tr>
+        <tr><td>radius</td><td>number</td><td>corner radius px · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>rotation</td><td>number</td><td>degrees · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>scale</td><td>number | vec2</td><td>scale about the center (size, corners and stroke) · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>opacity</td><td>number</td><td>0..1, fades the shape · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>stroke</td><td>number</td><td>outline width px; 0 fills · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>softness</td><td>number</td><td>edge softness in output pixels · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-checker">
+    <h3>checker</h3>
+    <p>checkerboard</p>
+    <table>
+      <tbody>
+        <tr><td>a</td><td>color</td><td>first cell · <span class="def">default <code>#333333</code></span></td></tr>
+        <tr><td>b</td><td>color</td><td>second cell · <span class="def">default <code>#666666</code></span></td></tr>
+        <tr><td>size</td><td>number</td><td>cell px · <span class="def">default <code>32</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-noise">
+    <h3>noise</h3>
+    <p>fractal simplex noise between two colors</p>
+    <table>
+      <tbody>
+        <tr><td>a</td><td>color</td><td>low color · <span class="def">default <code>#000000</code></span></td></tr>
+        <tr><td>b</td><td>color</td><td>high color · <span class="def">default <code>#ffffff</code></span></td></tr>
+        <tr><td>scale</td><td>vec2 | number</td><td>px per noise cell · <span class="def">default <code>[200,200]</code></span></td></tr>
+        <tr><td>offset</td><td>vec2</td><td>pan px · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>evolution</td><td>number</td><td>third noise dimension; animate it · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>octaves</td><td>number</td><td>1..8 · <span class="def">default <code>4</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-image">
+    <h3>image</h3>
+    <p>still image or image sequence</p>
+    <table>
+      <tbody>
+        <tr><td>src</td><td>text</td><td>file path relative to the document; {frame} / {frame:05} for sequences</td></tr>
+        <tr><td>fit</td><td>enum(contain | cover | fill | none)</td><td>placement in the frame, or in `rect` (cover there by default); only fill stretches · <span class="def">default <code>contain</code></span></td></tr>
+        <tr><td>rect</td><td>vec4</td><td>[x,y,w,h] px box the picture goes in, by `fit`; it keeps its aspect ratio</td></tr>
+        <tr><td>opacity</td><td>number</td><td>0..1 · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>space</td><td>enum(linear | srgb)</td><td>interpolation space when scaled; srgb filters the encoded values as browsers do · <span class="def">default <code>linear</code></span></td></tr>
+        <tr><td>fps</td><td>number</td><td>sequence frame rate · <span class="def">default <code>document fps</code></span></td></tr>
+        <tr><td>first_frame</td><td>number</td><td>sequence frame number at local time 0 · <span class="def">default <code>0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-video">
+    <h3>video</h3>
+    <p>video clip, hardware decoded</p>
+    <table>
+      <tbody>
+        <tr><td>src</td><td>text</td><td>file path</td></tr>
+        <tr><td>fit</td><td>enum(contain | cover | fill | none)</td><td>placement in the frame, or in `rect` (cover there by default); only fill stretches · <span class="def">default <code>contain</code></span></td></tr>
+        <tr><td>rect</td><td>vec4</td><td>[x,y,w,h] px box the footage goes in, by `fit`; it keeps its aspect ratio</td></tr>
+        <tr><td>opacity</td><td>number</td><td>0..1 · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>space</td><td>enum(linear | srgb)</td><td>interpolation space when scaled; srgb filters the encoded values as browsers do · <span class="def">default <code>linear</code></span></td></tr>
+        <tr><td>start</td><td>number</td><td>source seconds at local time 0 · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>speed</td><td>number</td><td>playback rate · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>loop</td><td>bool</td><td>wrap at the clip&#39;s end (else hold the last frame) · <span class="def">default <code>false</code></span></td></tr>
+        <tr><td>time</td><td>number</td><td>explicit source time (animate for time remapping)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-path">
+    <h3>path</h3>
+    <p>vector path (SVG data or preset), GPU exact-coverage raster</p>
+    <table>
+      <tbody>
+        <tr><td>to</td><td>text</td><td>SVG path data to morph toward; several separated by | to morph through each in turn</td></tr>
+        <tr><td>morph</td><td>number</td><td>0 = this path, 1 = `to` (with several targets, 2 = the second, ...); animate it · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>d</td><td>text</td><td>SVG path data</td></tr>
+        <tr><td>kind</td><td>enum(star | polygon | circle | line | polyline | polygon_points)</td><td>preset instead of d</td></tr>
+        <tr><td>center</td><td>vec2</td><td>preset center · <span class="def">default <code>frame center</code></span></td></tr>
+        <tr><td>radius</td><td>number</td><td>preset radius · <span class="def">default <code>h/4</code></span></td></tr>
+        <tr><td>sides</td><td>number</td><td>star points / polygon sides · <span class="def">default <code>5 / 6</code></span></td></tr>
+        <tr><td>inner_radius</td><td>number</td><td>star inner radius · <span class="def">default <code>0.45 r</code></span></td></tr>
+        <tr><td>points</td><td>number[]</td><td>flat [x0,y0,x1,y1,...] for line/polyline/polygon_points</td></tr>
+        <tr><td>color</td><td>color</td><td>paint · <span class="def">default <code>#ffffff</code></span></td></tr>
+        <tr><td>opacity</td><td>number</td><td>0..1, fades the whole node (animate for fades) · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>fill_rule</td><td>enum(nonzero | evenodd)</td><td>fill rule · <span class="def">default <code>nonzero</code></span></td></tr>
+        <tr><td>trim_start</td><td>number</td><td>0..1 of length · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>trim_end</td><td>number</td><td>0..1 of length (animate for draw-on) · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>stroke</td><td>number</td><td>stroke width px; 0 fills · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>join</td><td>enum(miter | round | bevel)</td><td>stroke joins · <span class="def">default <code>miter</code></span></td></tr>
+        <tr><td>cap</td><td>enum(butt | round | square)</td><td>stroke caps · <span class="def">default <code>butt</code></span></td></tr>
+        <tr><td>dash</td><td>number[]</td><td>dash pattern [on, off, ...] px</td></tr>
+        <tr><td>dash_offset</td><td>number</td><td>dash phase px · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>position</td><td>vec2</td><td>where the anchor lands, px · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>anchor</td><td>vec2</td><td>pivot in the node&#39;s own space, px · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>scale</td><td>vec2 | number</td><td>scale around the anchor · <span class="def">default <code>[1,1]</code></span></td></tr>
+        <tr><td>rotation</td><td>number</td><td>degrees, clockwise · <span class="def">default <code>0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-text">
+    <h3>text</h3>
+    <p>shaped text, GPU exact-coverage raster</p>
+    <table>
+      <tbody>
+        <tr><td>text</td><td>text</td><td>content; \n breaks lines; *word* is emphasis (em_ params), [words]{color=#ffd23f highlight=#ff4d6d} styles a span</td></tr>
+        <tr><td>font</td><td>text</td><td>family name or font file path · <span class="def">default <code>Helvetica Neue</code></span></td></tr>
+        <tr><td>weight</td><td>number</td><td>100..900 · <span class="def">default <code>400</code></span></td></tr>
+        <tr><td>style</td><td>enum(normal | italic)</td><td>style · <span class="def">default <code>normal</code></span></td></tr>
+        <tr><td>size</td><td>number</td><td>px · <span class="def">default <code>64</code></span></td></tr>
+        <tr><td>color</td><td>color</td><td>paint · <span class="def">default <code>#ffffff</code></span></td></tr>
+        <tr><td>opacity</td><td>number</td><td>0..1, fades the whole node (animate for fades) · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>align</td><td>enum(left | center | right)</td><td>horizontal anchor of each line · <span class="def">default <code>left</code></span></td></tr>
+        <tr><td>valign</td><td>enum(top | middle | baseline | bottom)</td><td>vertical anchor of the block · <span class="def">default <code>top</code></span></td></tr>
+        <tr><td>width</td><td>number</td><td>wrap width px</td></tr>
+        <tr><td>line_height</td><td>number</td><td>multiple of size · <span class="def">default <code>1.2</code></span></td></tr>
+        <tr><td>tracking</td><td>number</td><td>extra px between glyphs · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>features</td><td>text</td><td>OpenType features, e.g. &#34;liga=0,ss01&#34;</td></tr>
+        <tr><td>variations</td><td>text</td><td>variable-font axes, e.g. &#34;wdth=80, opsz=144&#34; (weight drives wght; opsz follows size unless set)</td></tr>
+        <tr><td>axis_&lt;tag&gt;</td><td>number</td><td>one variable-font axis, animatable: axis_wdth, axis_SOFT · <span class="def">default <code>axis default</code></span></td></tr>
+        <tr><td>stagger</td><td>number</td><td>seconds between glyphs for the glyph_* animators · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>stagger_order</td><td>enum(forward | reverse | center | random)</td><td>which glyphs go first · <span class="def">default <code>forward</code></span></td></tr>
+        <tr><td>glyph_offset</td><td>vec2</td><td>per-glyph offset px, keyed in glyph time (t - stagger * order) · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>glyph_scale</td><td>vec2</td><td>per-glyph scale about the glyph&#39;s center, glyph time · <span class="def">default <code>[1,1]</code></span></td></tr>
+        <tr><td>glyph_rotation</td><td>number</td><td>per-glyph rotation degrees, glyph time · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>glyph_opacity</td><td>number</td><td>per-glyph opacity, glyph time · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>reveal</td><td>number</td><td>glyphs visible (fractional fades) · <span class="def">default <code>all</code></span></td></tr>
+        <tr><td>reveal_softness</td><td>number</td><td>glyphs the reveal fade spans · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>reveal_offset</td><td>vec2</td><td>offset of not-yet-revealed glyphs px · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>fill_rule</td><td>enum(nonzero | evenodd)</td><td>fill rule · <span class="def">default <code>nonzero</code></span></td></tr>
+        <tr><td>skim</td><td>bool</td><td>glanced at, not read (code, data labels): ultrafast review skips its reading-time check · <span class="def">default <code>false</code></span></td></tr>
+        <tr><td>markup</td><td>bool</td><td>parse inline styling in text: *emphasis* and [words]{color=#ffd23f weight=800 font=&#34;ultrafast:serif&#34; style=italic size=80 highlight=#ff4d6d underline=4 underline_color=#fff rise=10 draw=1} · <span class="def">default <code>true</code></span></td></tr>
+        <tr><td>em_color</td><td>color</td><td>color of *emphasis* · <span class="def">default <code>text color</code></span></td></tr>
+        <tr><td>em_font</td><td>text</td><td>face of *emphasis* (e.g. ultrafast:serif for a serif accent) · <span class="def">default <code>font</code></span></td></tr>
+        <tr><td>em_weight</td><td>number</td><td>weight of *emphasis* · <span class="def">default <code>weight</code></span></td></tr>
+        <tr><td>em_style</td><td>enum(normal | italic)</td><td>style of *emphasis* (italic is synthesized for faces without one) · <span class="def">default <code>italic when no em_ param is set</code></span></td></tr>
+        <tr><td>em_size</td><td>number</td><td>size px of *emphasis* · <span class="def">default <code>size</code></span></td></tr>
+        <tr><td>em_highlight</td><td>color</td><td>marker box behind *emphasis* · <span class="def">default <code>none</code></span></td></tr>
+        <tr><td>em_underline</td><td>number</td><td>underline thickness px under *emphasis* · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>em_underline_color</td><td>color</td><td>underline color · <span class="def">default <code>em_color</code></span></td></tr>
+        <tr><td>em_rise</td><td>number</td><td>baseline shift px of *emphasis* (up) · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>em_draw</td><td>number</td><td>share of the emphasis highlights and underlines drawn, 0..1, one stroke across lines in reading order (animate it) · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>on_path</td><td>text</td><td>SVG path data the text follows (closed paths wrap: circular badges); align picks start, middle or end</td></tr>
+        <tr><td>path_offset</td><td>number</td><td>px along the path; animate it to run text along · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>number</td><td>number</td><td>show this value instead of text (animate it: counters)</td></tr>
+        <tr><td>decimals</td><td>number</td><td>digits after the point for number · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>thousands</td><td>text</td><td>group separator for number (&#34;&#34; for none) · <span class="def">default <code>,</code></span></td></tr>
+        <tr><td>prefix</td><td>text</td><td>before number, e.g. $</td></tr>
+        <tr><td>suffix</td><td>text</td><td>after number, e.g. % or k</td></tr>
+        <tr><td>scramble</td><td>number</td><td>decoding text: animate 0 (all random) to 1 (the text)</td></tr>
+        <tr><td>scramble_chars</td><td>text</td><td>characters the undecoded ones cycle through · <span class="def">default <code>A-Z, 0-9, symbols</code></span></td></tr>
+        <tr><td>stroke</td><td>number</td><td>stroke width px; 0 fills · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>join</td><td>enum(miter | round | bevel)</td><td>stroke joins · <span class="def">default <code>miter</code></span></td></tr>
+        <tr><td>cap</td><td>enum(butt | round | square)</td><td>stroke caps · <span class="def">default <code>butt</code></span></td></tr>
+        <tr><td>dash</td><td>number[]</td><td>dash pattern [on, off, ...] px</td></tr>
+        <tr><td>dash_offset</td><td>number</td><td>dash phase px · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>position</td><td>vec2</td><td>where the anchor lands, px · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>anchor</td><td>vec2</td><td>pivot in the node&#39;s own space, px · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>scale</td><td>vec2 | number</td><td>scale around the anchor · <span class="def">default <code>[1,1]</code></span></td></tr>
+        <tr><td>rotation</td><td>number</td><td>degrees, clockwise · <span class="def">default <code>0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-svg">
+    <h3>svg</h3>
+    <p>an SVG file (logo, icon, illustration) as vector paths: fills, strokes, gradients, text as outlines; `ultrafast import-svg` gives the same as editable nodes</p>
+    <table>
+      <tbody>
+        <tr><td>src</td><td>text</td><td>.svg file (relative to the document)</td></tr>
+        <tr><td>size</td><td>vec2 | number</td><td>fit inside [w, h] px, keeping its aspect · <span class="def">default <code>the SVG&#39;s own size</code></span></td></tr>
+        <tr><td>position</td><td>vec2</td><td>where the anchor lands, px · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>anchor</td><td>vec2</td><td>pivot in the artwork&#39;s px (after size) · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>scale</td><td>vec2 | number</td><td>scale around the anchor (stays vector-sharp) · <span class="def">default <code>[1,1]</code></span></td></tr>
+        <tr><td>rotation</td><td>number</td><td>degrees, clockwise · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>opacity</td><td>number</td><td>0..1 · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-lottie">
+    <h3>lottie</h3>
+    <p>a Lottie (Bodymovin) animation as editable ultrafast nodes: shape layers become paths with Lottie&#39;s keyframes, transforms stay vector; loops by default</p>
+    <table>
+      <tbody>
+        <tr><td>src</td><td>text</td><td>Lottie .json file</td></tr>
+        <tr><td>size</td><td>vec2 | number</td><td>fit it into this box px · <span class="def">default <code>the animation&#39;s size</code></span></td></tr>
+        <tr><td>loop</td><td>bool</td><td>repeat over its duration · <span class="def">default <code>true</code></span></td></tr>
+        <tr><td>position</td><td>vec2</td><td>where its top-left (or anchor) lands px · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>anchor</td><td>vec2</td><td>pivot px in its fitted space · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>scale</td><td>vec2 | number</td><td>scale · <span class="def">default <code>[1,1]</code></span></td></tr>
+        <tr><td>rotation</td><td>number</td><td>degrees · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>opacity</td><td>number</td><td>0..1 · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-code">
+    <h3>code</h3>
+    <p>source code in a panel: syntax-highlighted, optionally typed on with a caret, line numbers, highlighted lines, window chrome</p>
+    <table>
+      <tbody>
+        <tr><td>code</td><td>text</td><td>the source (\n between lines; tabs become 4 spaces)</td></tr>
+        <tr><td>language</td><td>enum(rust | python | js | ts | json | bash | go | swift | c | cpp | slang | sql | css | html | text)</td><td>how to color it · <span class="def">default <code>text</code></span></td></tr>
+        <tr><td>theme</td><td>enum(ultrafast | paper | mono)</td><td>colors (paper is light) · <span class="def">default <code>ultrafast</code></span></td></tr>
+        <tr><td>title</td><td>text</td><td>file name in the title bar</td></tr>
+        <tr><td>window</td><td>bool</td><td>title bar with three dots · <span class="def">default <code>true</code></span></td></tr>
+        <tr><td>background</td><td>bool</td><td>the panel and its shadow · <span class="def">default <code>true</code></span></td></tr>
+        <tr><td>line_numbers</td><td>bool</td><td>gutter numbers · <span class="def">default <code>true</code></span></td></tr>
+        <tr><td>highlight</td><td>text</td><td>lines to mark, e.g. &#34;3&#34; or &#34;2,5-7&#34;</td></tr>
+        <tr><td>highlight_at</td><td>number</td><td>when the marked lines light up · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>type_speed</td><td>number</td><td>characters per second typed on (0: all shown) · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>at</td><td>number</td><td>when typing starts · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>caret</td><td>bool</td><td>a blinking caret while and after typing · <span class="def">default <code>true</code></span></td></tr>
+        <tr><td>font</td><td>text</td><td>a monospaced face · <span class="def">default <code>ultrafast:mono</code></span></td></tr>
+        <tr><td>size</td><td>number</td><td>px · <span class="def">default <code>30 at 1080p</code></span></td></tr>
+        <tr><td>line_height</td><td>number</td><td>multiple of size · <span class="def">default <code>1.55</code></span></td></tr>
+        <tr><td>padding</td><td>number</td><td>px inside the panel · <span class="def">default <code>1.4 x size</code></span></td></tr>
+        <tr><td>radius</td><td>number</td><td>panel corner radius px · <span class="def">default <code>0.55 x size</code></span></td></tr>
+        <tr><td>width</td><td>number</td><td>panel width px · <span class="def">default <code>fits the longest line</code></span></td></tr>
+        <tr><td>position</td><td>vec2</td><td>top-left of the panel · <span class="def">default <code>centered</code></span></td></tr>
+        <tr><td>opacity</td><td>number</td><td>0..1 · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-marble">
+    <h3>marble</h3>
+    <p>flowing marble/ink generator (half resolution by default)</p>
+    <table>
+      <tbody>
+        <tr><td>filaments</td><td>number</td><td><span class="def">default <code>0.8</code></span></td></tr>
+        <tr><td>resolution</td><td>number</td><td><span class="def">default <code>0.5</code></span></td></tr>
+        <tr><td>veins</td><td>number</td><td><span class="def">default <code>1.0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-starfield">
+    <h3>starfield</h3>
+    <p>drifting starfield generator</p>
+    <table>
+      <tbody>
+        <tr><td>speed</td><td>number</td><td><span class="def">default <code>0.3</code></span></td></tr>
+        <tr><td>travel</td><td>number</td><td><span class="def">default <code>0.0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section class="opgroup" id="compositing">
+  <h2>Compositing</h2>
+  <div class="op" id="op-over">
+    <h3>over <small>(fg, bg)</small></h3>
+    <p>fg over bg (Porter-Duff)</p>
+    <table>
+      <tbody>
+        <tr><td>opacity</td><td>number</td><td>fg opacity · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>space</td><td>enum(linear | srgb)</td><td>blend space · <span class="def">default <code>linear</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-blend">
+    <h3>blend <small>(fg, bg)</small></h3>
+    <p>blend modes (W3C)</p>
+    <table>
+      <tbody>
+        <tr><td>mode</td><td>enum(normal | multiply | screen | overlay | darken | lighten | color_dodge | color_burn | hard_light | soft_light | difference | exclusion | hue | saturation | color | luminosity | add | subtract | divide)</td><td>mode · <span class="def">default <code>normal</code></span></td></tr>
+        <tr><td>opacity</td><td>number</td><td>fg opacity · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>space</td><td>enum(linear | srgb)</td><td>blend space · <span class="def">default <code>linear</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-composite">
+    <h3>composite <small>(fg, bg)</small></h3>
+    <p>Porter-Duff operators</p>
+    <table>
+      <tbody>
+        <tr><td>operator</td><td>enum(in | out | atop | xor | plus | over)</td><td>operator · <span class="def">default <code>over</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-mask">
+    <h3>mask <small>(source, matte)</small></h3>
+    <p>track matte</p>
+    <table>
+      <tbody>
+        <tr><td>mode</td><td>enum(alpha | alpha_inverted | luma | luma_inverted)</td><td>matte channel · <span class="def">default <code>alpha</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-mix">
+    <h3>mix <small>(a, b)</small></h3>
+    <p>crossfade</p>
+    <table>
+      <tbody>
+        <tr><td>t</td><td>number</td><td>0 = a, 1 = b · <span class="def">default <code>0.5</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-opacity">
+    <h3>opacity <small>(source)</small></h3>
+    <p>multiply alpha</p>
+    <table>
+      <tbody>
+        <tr><td>opacity</td><td>number</td><td>0..1 · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-stack">
+    <h3>stack <small>(in0, in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15)</small></h3>
+    <p>lays its inputs (in0, in1, ...: text, path, shape, svg or stack) out in a column or row by their measured bounds</p>
+    <table>
+      <tbody>
+        <tr><td>direction</td><td>enum(column | row)</td><td>stack downward or rightward · <span class="def">default <code>column</code></span></td></tr>
+        <tr><td>at</td><td>number</td><td>seconds at which children are measured (when their entrances have landed) · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>gap</td><td>number</td><td>px between children · <span class="def">default <code>24</code></span></td></tr>
+        <tr><td>align</td><td>enum(start | center | end)</td><td>children across the stack · <span class="def">default <code>start</code></span></td></tr>
+        <tr><td>position</td><td>vec2</td><td>where the block&#39;s anchor goes · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>anchor</td><td>enum(top_left | top | top_right | left | center | right | bottom_left | bottom | bottom_right)</td><td>which point of the block sits at position · <span class="def">default <code>top_left</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-transition">
+    <h3>transition <small>(a, b)</small></h3>
+    <p>from shot `a` to shot `b` over `duration` s starting `at`: only a renders before, only b after</p>
+    <table>
+      <tbody>
+        <tr><td>kind</td><td>enum(crossfade | dip | wipe | push | slide | iris | zoom | dissolve | glitch | blur)</td><td>how: dip goes through `color`; wipe/push/slide move along `direction`; iris opens from `center`; dissolve burns through noise · <span class="def">default <code>crossfade</code></span></td></tr>
+        <tr><td>at</td><td>number</td><td>start, seconds · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>duration</td><td>number</td><td>seconds · <span class="def">default <code>0.8</code></span></td></tr>
+        <tr><td>direction</td><td>number</td><td>degrees: 0 moves rightward, 90 downward · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>softness</td><td>number</td><td>edge softness (blur: strength) · <span class="def">default <code>per kind</code></span></td></tr>
+        <tr><td>color</td><td>color</td><td>dip color; wipe and dissolve edge glow color (dissolve: ember #ff9a4a) · <span class="def">default <code>#000000</code></span></td></tr>
+        <tr><td>glow</td><td>number</td><td>edge glow strength · <span class="def">default <code>0 (dissolve 2)</code></span></td></tr>
+        <tr><td>center</td><td>vec2</td><td>iris and zoom center px · <span class="def">default <code>frame center</code></span></td></tr>
+        <tr><td>grain</td><td>number</td><td>dissolve noise size px · <span class="def">default <code>160</code></span></td></tr>
+        <tr><td>ease</td><td>text | number[]</td><td>progress easing: a name (in_out_cubic) or [x1, y1, x2, y2] · <span class="def">default <code>per kind</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section class="opgroup" id="color">
+  <h2>Color</h2>
+  <div class="op" id="op-adjust">
+    <h3>adjust <small>(source)</small></h3>
+    <p>exposure, contrast, saturation, hue, brightness, gamma</p>
+    <table>
+      <tbody>
+        <tr><td>exposure</td><td>number</td><td>stops (linear light) · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>contrast</td><td>number</td><td>around mid grey · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>saturation</td><td>number</td><td>0 = grey · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>hue</td><td>number</td><td>degrees · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>brightness</td><td>number</td><td>offset · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>gamma</td><td>number</td><td>gamma · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-levels">
+    <h3>levels <small>(source)</small></h3>
+    <p>input/output levels with gamma</p>
+    <table>
+      <tbody>
+        <tr><td>in_black</td><td>number</td><td><span class="def">default <code>0</code></span></td></tr>
+        <tr><td>in_white</td><td>number</td><td><span class="def">default <code>1</code></span></td></tr>
+        <tr><td>gamma</td><td>number</td><td><span class="def">default <code>1</code></span></td></tr>
+        <tr><td>out_black</td><td>number</td><td><span class="def">default <code>0</code></span></td></tr>
+        <tr><td>out_white</td><td>number</td><td><span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-color_matrix">
+    <h3>color_matrix <small>(source)</small></h3>
+    <p>4x5 matrix on straight linear RGBA</p>
+    <table>
+      <tbody>
+        <tr><td>matrix</td><td>number[]</td><td>20 numbers, row-major · <span class="def">default <code>identity</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-lut">
+    <h3>lut <small>(source)</small></h3>
+    <p>3D LUT color grade (.cube)</p>
+    <table>
+      <tbody>
+        <tr><td>src</td><td>text</td><td>.cube file (3D LUT)</td></tr>
+        <tr><td>amount</td><td>number</td><td>0..1 mix with the ungraded image · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>space</td><td>enum(srgb | linear)</td><td>what the LUT expects as input (most grading LUTs: srgb) · <span class="def">default <code>srgb</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-invert">
+    <h3>invert <small>(source)</small></h3>
+    <p>invert colors</p>
+    <table>
+      <tbody>
+        <tr><td>amount</td><td>number</td><td>0..1 · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-tint">
+    <h3>tint <small>(source)</small></h3>
+    <p>map luminance between two colors</p>
+    <table>
+      <tbody>
+        <tr><td>dark</td><td>color</td><td>shadows · <span class="def">default <code>#000000</code></span></td></tr>
+        <tr><td>light</td><td>color</td><td>highlights · <span class="def">default <code>#ffffff</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-threshold">
+    <h3>threshold <small>(source)</small></h3>
+    <p>luminance threshold</p>
+    <table>
+      <tbody>
+        <tr><td>level</td><td>number</td><td><span class="def">default <code>0.5</code></span></td></tr>
+        <tr><td>softness</td><td>number</td><td><span class="def">default <code>0.01</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-grade">
+    <h3>grade <small>(source)</small></h3>
+    <p>color grade looks 0..4 (look, amount)</p>
+    <table>
+      <tbody>
+        <tr><td>amount</td><td>number</td><td><span class="def">default <code>1.0</code></span></td></tr>
+        <tr><td>look</td><td>number</td><td><span class="def">default <code>0.0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section class="opgroup" id="geometry-and-warps">
+  <h2>Geometry and warps</h2>
+  <div class="op" id="op-crop">
+    <h3>crop <small>(source)</small></h3>
+    <p>keep a rectangle</p>
+    <table>
+      <tbody>
+        <tr><td>rect</td><td>vec4</td><td>[x,y,w,h] px · <span class="def">default <code>frame</code></span></td></tr>
+        <tr><td>softness</td><td>number</td><td>edge px · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-transform">
+    <h3>transform <small>(source)</small></h3>
+    <p>2D transform (absorbed into paths/text for sharpness)</p>
+    <table>
+      <tbody>
+        <tr><td>position</td><td>vec2</td><td>where the anchor lands · <span class="def">default <code>frame center</code></span></td></tr>
+        <tr><td>anchor</td><td>vec2</td><td>pivot · <span class="def">default <code>frame center</code></span></td></tr>
+        <tr><td>scale</td><td>vec2 | number</td><td>scale · <span class="def">default <code>[1,1]</code></span></td></tr>
+        <tr><td>rotation</td><td>number</td><td>degrees · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>skew</td><td>number</td><td>degrees · <span class="def">default <code>0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-corner_pin">
+    <h3>corner_pin <small>(source)</small></h3>
+    <p>perspective: map the frame (or source_rect) to four corners</p>
+    <table>
+      <tbody>
+        <tr><td>corners</td><td>number[]</td><td>[tl, tr, br, bl] as 8 numbers · <span class="def">default <code>frame corners</code></span></td></tr>
+        <tr><td>source_rect</td><td>vec4</td><td>[x,y,w,h] of the source mapped · <span class="def">default <code>frame</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-wave">
+    <h3>wave <small>(source)</small></h3>
+    <p>sine displacement</p>
+    <table>
+      <tbody>
+        <tr><td>amplitude</td><td>number</td><td>px · <span class="def">default <code>10</code></span></td></tr>
+        <tr><td>wavelength</td><td>number</td><td>px · <span class="def">default <code>100</code></span></td></tr>
+        <tr><td>phase</td><td>number</td><td>degrees · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>direction</td><td>number</td><td>degrees · <span class="def">default <code>0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-twirl">
+    <h3>twirl <small>(source)</small></h3>
+    <p>swirl around a center</p>
+    <table>
+      <tbody>
+        <tr><td>center</td><td>vec2</td><td><span class="def">default <code>frame center</code></span></td></tr>
+        <tr><td>radius</td><td>number</td><td><span class="def">default <code>min(w,h)/2</code></span></td></tr>
+        <tr><td>angle</td><td>number</td><td>degrees · <span class="def">default <code>90</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-tile">
+    <h3>tile <small>(source)</small></h3>
+    <p>repeat a region</p>
+    <table>
+      <tbody>
+        <tr><td>origin</td><td>vec2</td><td><span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>size</td><td>vec2</td><td><span class="def">default <code>frame</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-displace">
+    <h3>displace <small>(source, map)</small></h3>
+    <p>displace source by a map&#39;s red/green</p>
+    <table>
+      <tbody>
+        <tr><td>amount</td><td>vec2</td><td>px · <span class="def">default <code>[20,20]</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-blur">
+    <h3>blur <small>(source)</small></h3>
+    <p>gaussian blur</p>
+    <table>
+      <tbody>
+        <tr><td>radius</td><td>number</td><td>sigma px · <span class="def">default <code>8</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section class="opgroup" id="3d">
+  <h2>3D</h2>
+  <div class="op" id="op-mesh">
+    <h3>mesh <small>(texture)</small></h3>
+    <p>3D mesh (scene object for render3d)</p>
+    <table>
+      <tbody>
+        <tr><td>primitive</td><td>enum(cube | plane | sphere | cylinder | cone | torus | text | path)</td><td>unit-sized primitive, or extruded text / SVG path · <span class="def">default <code>cube</code></span></td></tr>
+        <tr><td>text</td><td>text</td><td>primitive text: content</td></tr>
+        <tr><td>font</td><td>text</td><td>primitive text: family or file · <span class="def">default <code>Helvetica Neue</code></span></td></tr>
+        <tr><td>weight</td><td>number</td><td>primitive text: weight · <span class="def">default <code>400</code></span></td></tr>
+        <tr><td>style</td><td>enum(normal | italic)</td><td>primitive text: style · <span class="def">default <code>normal</code></span></td></tr>
+        <tr><td>size</td><td>number</td><td>primitive text: size in world units · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>align</td><td>enum(left | center | right)</td><td>primitive text: alignment · <span class="def">default <code>center</code></span></td></tr>
+        <tr><td>tracking</td><td>number</td><td>primitive text: extra spacing (px at 100 px/unit) · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>line_height</td><td>number</td><td>primitive text: multiple of size · <span class="def">default <code>1.2</code></span></td></tr>
+        <tr><td>d</td><td>text</td><td>primitive path: SVG path data</td></tr>
+        <tr><td>units</td><td>number</td><td>primitive path: path px per world unit · <span class="def">default <code>100</code></span></td></tr>
+        <tr><td>depth</td><td>number</td><td>extrusion depth, world units · <span class="def">default <code>0.25</code></span></td></tr>
+        <tr><td>bevel</td><td>number</td><td>text/path: 45-degree chamfer on both rims, world units · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>src</td><td>text</td><td>.gltf/.glb file instead of a primitive</td></tr>
+        <tr><td>segments</td><td>number</td><td>tessellation · <span class="def">default <code>32</code></span></td></tr>
+        <tr><td>position</td><td>vec3</td><td><span class="def">default <code>[0,0,0]</code></span></td></tr>
+        <tr><td>rotation</td><td>vec3</td><td>degrees, X then Y then Z · <span class="def">default <code>[0,0,0]</code></span></td></tr>
+        <tr><td>scale</td><td>vec3 | number</td><td><span class="def">default <code>[1,1,1]</code></span></td></tr>
+        <tr><td>color</td><td>color</td><td>base color · <span class="def">default <code>#cccccc</code></span></td></tr>
+        <tr><td>metallic</td><td>number</td><td>0..1 · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>roughness</td><td>number</td><td>0..1 · <span class="def">default <code>0.5</code></span></td></tr>
+        <tr><td>emissive</td><td>color</td><td>emitted light · <span class="def">default <code>#000000</code></span></td></tr>
+        <tr><td>transmission</td><td>number</td><td>glass: 0..1 of the scene behind seen through it (refracted) · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>ior</td><td>number</td><td>glass: index of refraction (water 1.33, glass 1.5, diamond 2.4) · <span class="def">default <code>1.45</code></span></td></tr>
+        <tr><td>thickness</td><td>number</td><td>glass: how far refracted rays travel inside, world units (more bends more) · <span class="def">default <code>0.5</code></span></td></tr>
+        <tr><td>dispersion</td><td>number</td><td>glass: color splitting (try 1..2) · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>opacity</td><td>number</td><td>0..1 · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-light">
+    <h3>light</h3>
+    <p>3D light (scene object)</p>
+    <table>
+      <tbody>
+        <tr><td>kind</td><td>enum(directional | point)</td><td><span class="def">default <code>directional</code></span></td></tr>
+        <tr><td>direction</td><td>vec3</td><td>toward the light (directional) · <span class="def">default <code>[0.4,0.8,0.6]</code></span></td></tr>
+        <tr><td>position</td><td>vec3</td><td>point light position · <span class="def">default <code>[0,2,2]</code></span></td></tr>
+        <tr><td>color</td><td>color</td><td><span class="def">default <code>#ffffff</code></span></td></tr>
+        <tr><td>intensity</td><td>number</td><td><span class="def">default <code>3</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-camera">
+    <h3>camera</h3>
+    <p>3D camera (scene object)</p>
+    <table>
+      <tbody>
+        <tr><td>position</td><td>vec3</td><td><span class="def">default <code>[0,0,5]</code></span></td></tr>
+        <tr><td>orbit</td><td>vec3</td><td>[azimuth, elevation, distance] around target (overrides position)</td></tr>
+        <tr><td>target</td><td>vec3</td><td><span class="def">default <code>[0,0,0]</code></span></td></tr>
+        <tr><td>up</td><td>vec3</td><td><span class="def">default <code>[0,1,0]</code></span></td></tr>
+        <tr><td>fov</td><td>number</td><td>vertical, degrees · <span class="def">default <code>45</code></span></td></tr>
+        <tr><td>near</td><td>number</td><td><span class="def">default <code>0.1</code></span></td></tr>
+        <tr><td>far</td><td>number</td><td><span class="def">default <code>1000</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-render3d">
+    <h3>render3d <small>(*)</small></h3>
+    <p>renders connected meshes/lights/camera (any port names; camera on `camera`)</p>
+    <table>
+      <tbody>
+        <tr><td>ambient</td><td>number</td><td>hemisphere light intensity · <span class="def">default <code>0.35</code></span></td></tr>
+        <tr><td>sky</td><td>color</td><td>ambient from above · <span class="def">default <code>#e6f2ff</code></span></td></tr>
+        <tr><td>ground</td><td>color</td><td>ambient from below · <span class="def">default <code>#5a4d47</code></span></td></tr>
+        <tr><td>background</td><td>color</td><td>clear color · <span class="def">default <code>transparent</code></span></td></tr>
+        <tr><td>shadows</td><td>bool</td><td>the first directional light casts a shadow map · <span class="def">default <code>true</code></span></td></tr>
+        <tr><td>shadow_strength</td><td>number</td><td>0 = no darkening, 1 = full · <span class="def">default <code>0.85</code></span></td></tr>
+        <tr><td>shadow_bias</td><td>number</td><td>depth bias in shadow-map texels (raise if surfaces self-shadow) · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>environment_intensity</td><td>number</td><td>scale of the image on the `environment` port (equirectangular; lights and reflects) · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>environment_rotation</td><td>number</td><td>turns the environment around +y, degrees · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>fog</td><td>vec2</td><td>[start, end] distance from the camera where surfaces fade into fog_color</td></tr>
+        <tr><td>fog_color</td><td>color</td><td>fog color · <span class="def">default <code>background</code></span></td></tr>
+        <tr><td>aperture</td><td>number</td><td>depth of field: blur radius px far from focus (0 = off) · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>focus</td><td>number</td><td>depth of field: in-focus distance, world units · <span class="def">default <code>camera to target</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-raymarch">
+    <h3>raymarch <small>(in0, in1, in2, in3)</small></h3>
+    <p>3D as a signed-distance scene marched per pixel: write float2 map(float3 p) -&gt; (distance, material id); soft shadows, occlusion, a reflection bounce, environment and antialiasing come with it</p>
+    <table>
+      <tbody>
+        <tr><td>scene</td><td>text</td><td>Slang: float2 map(float3 p) (+ optional void material(float id, float3 p, float3 n, inout float3 albedo, inout float metallic, inout float roughness)); helpers sdSphere, sdBox, sdCylinder, sdTorus, sdCapsule, sdBand, sdPlane, smin, opU, rotX/Y/Z, fbm3, knob(i), layerDistance + extrude (any ultrafast layer as a 3D solid), presetMaterial (ids 0 matte, 1 brass, 2 polished brass, 3 steel, 4 gold, 5 copper, 6 black lacquer, 7 ceramic, 8 rubber, 9 clear glass, 10 chrome; metallic &lt; 0 makes glass); input(i, px) reads in0..in3</td></tr>
+        <tr><td>orbit</td><td>vec3</td><td>camera [azimuth, elevation, distance] around target, degrees and world units · <span class="def">default <code>[30,20,8]</code></span></td></tr>
+        <tr><td>target</td><td>vec3</td><td>what the camera looks at · <span class="def">default <code>[0,0,0]</code></span></td></tr>
+        <tr><td>fov</td><td>number</td><td>vertical, degrees · <span class="def">default <code>35</code></span></td></tr>
+        <tr><td>light</td><td>vec3</td><td>point light position (casts soft shadows) · <span class="def">default <code>[-4,5,4]</code></span></td></tr>
+        <tr><td>light_color</td><td>color</td><td>light color · <span class="def">default <code>#fff2e0</code></span></td></tr>
+        <tr><td>light_intensity</td><td>number</td><td>inverse-square intensity · <span class="def">default <code>40</code></span></td></tr>
+        <tr><td>environment</td><td>enum(studio | room | night | sky | lightbox | horizon)</td><td>what reflections and ambient light see (lightbox: bars of light, made for glass and chrome) · <span class="def">default <code>studio</code></span></td></tr>
+        <tr><td>background</td><td>text</td><td>environment, transparent (to composite over 2D), or a color · <span class="def">default <code>environment</code></span></td></tr>
+        <tr><td>background_level</td><td>number</td><td>brightness of an environment background · <span class="def">default <code>0.35</code></span></td></tr>
+        <tr><td>exposure</td><td>number</td><td>before tone mapping · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>samples</td><td>number</td><td>rays per pixel (1..8), jittered · <span class="def">default <code>2</code></span></td></tr>
+        <tr><td>bounce</td><td>bool</td><td>trace one reflection bounce for glossy surfaces · <span class="def">default <code>true</code></span></td></tr>
+        <tr><td>ior</td><td>number</td><td>glass index of refraction (materials with metallic &lt; 0, preset 9) · <span class="def">default <code>1.5</code></span></td></tr>
+        <tr><td>dispersion</td><td>number</td><td>glass color splitting (0 none, 2 strong) · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>max_distance</td><td>number</td><td>rays stop here · <span class="def">default <code>80</code></span></td></tr>
+        <tr><td>k0</td><td>number</td><td>k0..k4: free knobs read as knob(0..4) in the scene (animatable)</td></tr>
+        <tr><td>resolution</td><td>number</td><td>render scale · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section class="opgroup" id="simulation-and-particles">
+  <h2>Simulation and particles</h2>
+  <div class="op" id="op-swarm">
+    <h3>swarm</h3>
+    <p>particles that assemble into text (or a path) and scatter: progress 0..1</p>
+    <table>
+      <tbody>
+        <tr><td>text</td><td>text</td><td>what the particles form (or `d`)</td></tr>
+        <tr><td>d</td><td>text</td><td>SVG path data to form instead of text (offset by position)</td></tr>
+        <tr><td>font</td><td>text</td><td>font family or file · <span class="def">default <code>Helvetica Neue</code></span></td></tr>
+        <tr><td>weight</td><td>number</td><td>font weight · <span class="def">default <code>400</code></span></td></tr>
+        <tr><td>style</td><td>enum(normal | italic)</td><td>font style · <span class="def">default <code>normal</code></span></td></tr>
+        <tr><td>tracking</td><td>number</td><td>extra px between glyphs · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>variations</td><td>text</td><td>variable-font axes, as on text</td></tr>
+        <tr><td>axis_&lt;tag&gt;</td><td>number</td><td>one variable-font axis, as on text · <span class="def">default <code>axis default</code></span></td></tr>
+        <tr><td>size</td><td>number</td><td>text size px · <span class="def">default <code>64</code></span></td></tr>
+        <tr><td>position</td><td>vec2</td><td>text position (as `text`) · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>align</td><td>enum(left | center | right)</td><td>text alignment · <span class="def">default <code>left</code></span></td></tr>
+        <tr><td>valign</td><td>enum(top | middle | baseline | bottom)</td><td>vertical alignment · <span class="def">default <code>top</code></span></td></tr>
+        <tr><td>count</td><td>number</td><td>particles · <span class="def">default <code>4000</code></span></td></tr>
+        <tr><td>progress</td><td>number</td><td>0 scattered, 1 formed; animate it · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>stagger</td><td>number</td><td>spread of arrival times (fraction of progress) · <span class="def">default <code>0.5</code></span></td></tr>
+        <tr><td>scatter</td><td>number</td><td>how far particles start from home, px · <span class="def">default <code>700</code></span></td></tr>
+        <tr><td>origin</td><td>vec2</td><td>start every particle from this point instead</td></tr>
+        <tr><td>turbulence</td><td>number</td><td>drift amplitude while away from home, px · <span class="def">default <code>40</code></span></td></tr>
+        <tr><td>particle_size</td><td>vec2</td><td>size scattered and formed, px · <span class="def">default <code>[2,3]</code></span></td></tr>
+        <tr><td>color</td><td>color</td><td>color when formed · <span class="def">default <code>#ffffff</code></span></td></tr>
+        <tr><td>color_scatter</td><td>color</td><td>color when scattered · <span class="def">default <code>color</code></span></td></tr>
+        <tr><td>shimmer</td><td>number</td><td>0..1 twinkle · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>stretch</td><td>number</td><td>streak along travel while moving · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>seed</td><td>number</td><td>random seed · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>blend</td><td>enum(over | add)</td><td>how particles combine · <span class="def">default <code>over</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-particles">
+    <h3>particles <small>(sprite)</small></h3>
+    <p>deterministic particle system (closed form: scrub anywhere), drawn as sprites</p>
+    <table>
+      <tbody>
+        <tr><td>seed</td><td>number</td><td>random seed · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>rate</td><td>number</td><td>particles emitted per second · <span class="def">default <code>60</code></span></td></tr>
+        <tr><td>max</td><td>number</td><td>cap on particles alive · <span class="def">default <code>5000</code></span></td></tr>
+        <tr><td>life</td><td>vec2</td><td>lifetime range, s · <span class="def">default <code>[1.5,2.5]</code></span></td></tr>
+        <tr><td>position</td><td>vec2</td><td>emitter center px · <span class="def">default <code>[960,540]</code></span></td></tr>
+        <tr><td>emitter_size</td><td>vec2</td><td>emitter rectangle px · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>direction</td><td>number</td><td>degrees (-90 = up) · <span class="def">default <code>-90</code></span></td></tr>
+        <tr><td>spread</td><td>number</td><td>cone angle, degrees · <span class="def">default <code>30</code></span></td></tr>
+        <tr><td>speed</td><td>vec2</td><td>initial speed range, px/s · <span class="def">default <code>[200,400]</code></span></td></tr>
+        <tr><td>gravity</td><td>vec2</td><td>px/s^2 · <span class="def">default <code>[0,300]</code></span></td></tr>
+        <tr><td>drag</td><td>number</td><td>linear drag, 1/s · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>size</td><td>vec2</td><td>size at birth and death, px · <span class="def">default <code>[8,2]</code></span></td></tr>
+        <tr><td>size_jitter</td><td>number</td><td>0..1 random size reduction · <span class="def">default <code>0.3</code></span></td></tr>
+        <tr><td>spin</td><td>vec2</td><td>rotation speed range, deg/s · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>color_start</td><td>color</td><td>color at birth · <span class="def">default <code>#ffffff</code></span></td></tr>
+        <tr><td>color_end</td><td>color</td><td>color at death · <span class="def">default <code>color_start</code></span></td></tr>
+        <tr><td>fade_in</td><td>number</td><td>fraction of life fading in · <span class="def">default <code>0.1</code></span></td></tr>
+        <tr><td>fade_out</td><td>number</td><td>fraction of life fading out · <span class="def">default <code>0.3</code></span></td></tr>
+        <tr><td>shape</td><td>enum(circle | square | spark | sprite)</td><td>sprite uses the `sprite` input · <span class="def">default <code>circle</code></span></td></tr>
+        <tr><td>stretch</td><td>number</td><td>spark stretch along velocity · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>blend</td><td>enum(over | add)</td><td>how particles combine · <span class="def">default <code>over</code></span></td></tr>
+        <tr><td>emit_start</td><td>number</td><td>emission start, s (negative pre-warms) · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>emit_end</td><td>number</td><td>emission end, s · <span class="def">default <code>forever</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-fluid">
+    <h3>fluid <small>(dye, stir)</small></h3>
+    <p>ink/smoke simulation: `dye` pours color in, `stir` pushes it around; stepped once per frame (exact on export, seekable)</p>
+    <table>
+      <tbody>
+        <tr><td>start</td><td>number</td><td>local time the simulation starts (blank before) · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>emit</td><td>number</td><td>how fast `dye` replaces the fluid where it is, per s · <span class="def">default <code>6</code></span></td></tr>
+        <tr><td>dissipation</td><td>number</td><td>dye fade per s · <span class="def">default <code>0.15</code></span></td></tr>
+        <tr><td>velocity_dissipation</td><td>number</td><td>motion fade per s · <span class="def">default <code>0.4</code></span></td></tr>
+        <tr><td>vorticity</td><td>number</td><td>keeps eddies curling (0 = silky, 10+ = churning) · <span class="def">default <code>4</code></span></td></tr>
+        <tr><td>turbulence</td><td>number</td><td>curl-noise stirring, px/s^2 (try 400..3000) · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>turbulence_scale</td><td>number</td><td>size of the noise eddies, px · <span class="def">default <code>260</code></span></td></tr>
+        <tr><td>wind</td><td>vec2</td><td>drift of everything, px/s · <span class="def">default <code>[0,0]</code></span></td></tr>
+        <tr><td>buoyancy</td><td>number</td><td>dye rises (smoke), px/s^2 per unit alpha · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>stir</td><td>number</td><td>push away from the edges of the `stir` image · <span class="def">default <code>2500</code></span></td></tr>
+        <tr><td>swirl</td><td>number</td><td>spin around the edges of the `stir` image · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>resolution</td><td>number</td><td>velocity grid, fraction of the frame · <span class="def">default <code>0.25</code></span></td></tr>
+        <tr><td>dye_resolution</td><td>number</td><td>dye grid, fraction of the frame · <span class="def">default <code>0.5</code></span></td></tr>
+        <tr><td>pressure_iterations</td><td>number</td><td>incompressibility solver iterations · <span class="def">default <code>24</code></span></td></tr>
+        <tr><td>substeps</td><td>number</td><td>steps per frame (1..8) · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>seed</td><td>number</td><td>turbulence pattern · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-feedback">
+    <h3>feedback <small>(in0, in1, in2, in3)</small></h3>
+    <p>agent Slang stepped once per frame on its own previous result: float4 update(float2 pos, float px) with prev(pos), input(i,pos), dt(), step_index()</p>
+    <table>
+      <tbody>
+        <tr><td>code</td><td>text</td><td>Slang source defining update()</td></tr>
+        <tr><td>start</td><td>number</td><td>local time the simulation starts (blank before) · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>resolution</td><td>number</td><td>state grid, fraction of the frame · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>substeps</td><td>number</td><td>updates per frame (1..64) · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>u</td><td>number[]</td><td>up to 16 values, param(i)</td></tr>
+        <tr><td>u0</td><td>number</td><td>u0..u15 individually (animatable)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section class="opgroup" id="footage-sound-and-captions">
+  <h2>Footage, sound and captions</h2>
+  <div class="op" id="op-clip_camera">
+    <h3>clip_camera</h3>
+    <p>video framed on its speaker: faces are tracked from the footage (or given), then a follow camera with dead zone and eased pans, cuts on shots and speaker changes, scope zoom, protect mode (blurred cover behind the contained frame)</p>
+    <table>
+      <tbody>
+        <tr><td>src</td><td>text</td><td>source video</td></tr>
+        <tr><td>faces</td><td>text</td><td>face tracks, inline as JSON text or a file: {sourceWidth, sourceHeight, fps, frames: [{frame, faces: [{id, x, y, w, h, talk, focus}]}], shots: [{startFrame, endFrame, protect, cinematicScope}]}; omit it and the clip&#39;s faces, who is talking and its cuts are tracked from the footage (`ultrafast faces` writes the same) · <span class="def">default <code>tracked from src</code></span></td></tr>
+        <tr><td>start</td><td>number</td><td>source seconds where the clip begins · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>duration</td><td>number</td><td>clip seconds · <span class="def">default <code>document duration</code></span></td></tr>
+        <tr><td>tuning</td><td>text</td><td>camera tuning overrides as JSON</td></tr>
+        <tr><td>opacity</td><td>number</td><td>0..1 · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-captions">
+    <h3>captions</h3>
+    <p>animated captions from word timings (karaoke, pop, reveal): pages laid out to fit, every word its own text node</p>
+    <table>
+      <tbody>
+        <tr><td>src</td><td>text</td><td>transcript: Whisper/word JSON, .srt or .vtt</td></tr>
+        <tr><td>words</td><td>text</td><td>inline instead: lines of `start end word`, SRT text or JSON</td></tr>
+        <tr><td>style</td><td>enum(karaoke | pop | reveal | plain)</td><td>karaoke lights the spoken word; pop pops each word on; reveal fades them on · <span class="def">default <code>karaoke</code></span></td></tr>
+        <tr><td>font</td><td>text</td><td>family or file · <span class="def">default <code>Helvetica Neue</code></span></td></tr>
+        <tr><td>size</td><td>number</td><td>px · <span class="def">default <code>6.5% of the short side</code></span></td></tr>
+        <tr><td>weight</td><td>number</td><td>100..900 · <span class="def">default <code>800</code></span></td></tr>
+        <tr><td>color</td><td>color</td><td>words not yet spoken · <span class="def">default <code>#ffffff</code></span></td></tr>
+        <tr><td>highlight</td><td>color</td><td>the word being spoken · <span class="def">default <code>#ffd23f</code></span></td></tr>
+        <tr><td>spoken</td><td>color</td><td>words already spoken · <span class="def">default <code>color</code></span></td></tr>
+        <tr><td>highlight_background</td><td>color</td><td>a rounded pill behind the spoken word</td></tr>
+        <tr><td>background</td><td>color</td><td>a rounded box behind each page</td></tr>
+        <tr><td>uppercase</td><td>bool</td><td>set in capitals · <span class="def">default <code>false</code></span></td></tr>
+        <tr><td>tracking</td><td>number</td><td>extra px between glyphs · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>width</td><td>number</td><td>line width px · <span class="def">default <code>82% of the width</code></span></td></tr>
+        <tr><td>max_lines</td><td>number</td><td>lines per page · <span class="def">default <code>2</code></span></td></tr>
+        <tr><td>line_height</td><td>number</td><td>multiple of size · <span class="def">default <code>1.18</code></span></td></tr>
+        <tr><td>position</td><td>vec2</td><td>center of the caption block (moved into `safe` if it would cross it) · <span class="def">default <code>[w/2, 0.72 h]</code></span></td></tr>
+        <tr><td>align</td><td>enum(left | center | right)</td><td>line alignment · <span class="def">default <code>center</code></span></td></tr>
+        <tr><td>safe</td><td>enum(auto | social | margin | none)</td><td>area pages stay inside: auto is clear of the social apps&#39; buttons and captions on a vertical frame (what `review --safe social` checks) and a 4% margin otherwise; none places them exactly at position · <span class="def">default <code>auto</code></span></td></tr>
+        <tr><td>linger</td><td>number</td><td>seconds a page stays after its last word · <span class="def">default <code>0.6</code></span></td></tr>
+        <tr><td>opacity</td><td>number</td><td>0..1 · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-audio">
+    <h3>audio</h3>
+    <p>sound mixed into exports</p>
+    <table>
+      <tbody>
+        <tr><td>src</td><td>text</td><td>any media file with audio</td></tr>
+        <tr><td>start</td><td>number</td><td>source seconds playing at local time `from` · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>gain</td><td>number</td><td>linear, animatable · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>from</td><td>number</td><td>local seconds the sound starts at (silent before) · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>duration</td><td>number</td><td>seconds it plays from `from` (0: until the source ends) · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>rate</td><td>number</td><td>playback speed with the pitch kept (time stretched) · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-chroma_key">
+    <h3>chroma_key <small>(source)</small></h3>
+    <p>keys out a green (or any) screen: key color r, g, b (sRGB 0..1), tolerance, softness, spill</p>
+    <table>
+      <tbody>
+        <tr><td>b</td><td>number</td><td><span class="def">default <code>0.25</code></span></td></tr>
+        <tr><td>g</td><td>number</td><td><span class="def">default <code>0.69</code></span></td></tr>
+        <tr><td>r</td><td>number</td><td><span class="def">default <code>0.0</code></span></td></tr>
+        <tr><td>softness</td><td>number</td><td><span class="def">default <code>0.08</code></span></td></tr>
+        <tr><td>spill</td><td>number</td><td><span class="def">default <code>0.8</code></span></td></tr>
+        <tr><td>tolerance</td><td>number</td><td><span class="def">default <code>0.12</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section class="opgroup" id="blocks">
+  <h2>Blocks</h2>
+  <div class="op" id="op-block">
+    <h3>block</h3>
+    <p>a ready-made animated block in one house style: title, lower_third, quote, stat, chapter, end_card, and charts: bar_chart, line_chart, donut (place it in time with a timing offset)</p>
+    <table>
+      <tbody>
+        <tr><td>kind</td><td>enum(title | lower_third | quote | stat | chapter | end_card | bar_chart | line_chart | donut)</td><td>which block · <span class="def">default <code>title</code></span></td></tr>
+        <tr><td>title</td><td>text</td><td>title / chapter / end_card / charts (above the chart)</td></tr>
+        <tr><td>kicker</td><td>text</td><td>title, charts: small line above</td></tr>
+        <tr><td>subtitle</td><td>text</td><td>title: line below</td></tr>
+        <tr><td>number</td><td>text</td><td>chapter: its number, e.g. 01</td></tr>
+        <tr><td>name</td><td>text</td><td>lower_third</td></tr>
+        <tr><td>role</td><td>text</td><td>lower_third</td></tr>
+        <tr><td>quote</td><td>text</td><td>quote</td></tr>
+        <tr><td>author</td><td>text</td><td>quote</td></tr>
+        <tr><td>value</td><td>number</td><td>stat: counts up to it · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>prefix</td><td>text</td><td>stat, bar and line values</td></tr>
+        <tr><td>suffix</td><td>text</td><td>stat, bar and line values</td></tr>
+        <tr><td>decimals</td><td>number</td><td>stat, bar and line values · <span class="def">default <code>0</code></span></td></tr>
+        <tr><td>label</td><td>text</td><td>stat</td></tr>
+        <tr><td>tagline</td><td>text</td><td>end_card</td></tr>
+        <tr><td>cta</td><td>text</td><td>end_card: a pill button</td></tr>
+        <tr><td>logo</td><td>text</td><td>end_card: SVG file</td></tr>
+        <tr><td>values</td><td>number[]</td><td>charts: the data, e.g. [24, 31, 58, 265]</td></tr>
+        <tr><td>labels</td><td>text</td><td>charts: one per value, comma separated (or | when labels hold commas)</td></tr>
+        <tr><td>highlight</td><td>number</td><td>charts: index of the value set in the accent and called out (-1: none) · <span class="def">default <code>bar, donut: the largest; line: the last</code></span></td></tr>
+        <tr><td>height</td><td>number</td><td>charts: plot height px · <span class="def">default <code>34% of the height</code></span></td></tr>
+        <tr><td>max</td><td>number</td><td>bar, line: the value at the top of the plot · <span class="def">default <code>largest value</code></span></td></tr>
+        <tr><td>min</td><td>number</td><td>line: the value at the baseline · <span class="def">default <code>0 or the smallest</code></span></td></tr>
+        <tr><td>color</td><td>color</td><td>bar: other bars; line: the line · <span class="def">default <code>muted (line: accent)</code></span></td></tr>
+        <tr><td>area</td><td>bool</td><td>line: fill under the line · <span class="def">default <code>true</code></span></td></tr>
+        <tr><td>draw_time</td><td>number</td><td>line: seconds the line takes to draw · <span class="def">default <code>1.6</code></span></td></tr>
+        <tr><td>colors</td><td>text</td><td>donut: segment colors, comma separated · <span class="def">default <code>accent, then a palette</code></span></td></tr>
+        <tr><td>radius</td><td>number</td><td>donut: outer radius px · <span class="def">default <code>fits the plot</code></span></td></tr>
+        <tr><td>thickness</td><td>number</td><td>donut: ring thickness px · <span class="def">default <code>30% of radius</code></span></td></tr>
+        <tr><td>number_font</td><td>text</td><td>stat, donut: the big number&#39;s face · <span class="def">default <code>ultrafast:wide</code></span></td></tr>
+        <tr><td>duration</td><td>number</td><td>seconds before it exits (end_card stays) · <span class="def">default <code>3.5 (lower_third 4, quote 5, chapter 2.5, charts 5)</code></span></td></tr>
+        <tr><td>ink</td><td>color</td><td>type color · <span class="def">default <code>#f6f3ee</code></span></td></tr>
+        <tr><td>muted</td><td>color</td><td>secondary type · <span class="def">default <code>ink at 72%</code></span></td></tr>
+        <tr><td>accent</td><td>color</td><td>rules, bars, quote mark, pill · <span class="def">default <code>#ff5c7a</code></span></td></tr>
+        <tr><td>display_font</td><td>text</td><td>headline face · <span class="def">default <code>ultrafast:display</code></span></td></tr>
+        <tr><td>text_font</td><td>text</td><td>body face · <span class="def">default <code>ultrafast:sans</code></span></td></tr>
+        <tr><td>mono_font</td><td>text</td><td>labels · <span class="def">default <code>ultrafast:mono</code></span></td></tr>
+        <tr><td>align</td><td>enum(left | center)</td><td>alignment (end_card is centered) · <span class="def">default <code>left</code></span></td></tr>
+        <tr><td>position</td><td>vec2</td><td>title/quote/stat: top of the block; lower_third: bottom-left; end_card: center · <span class="def">default <code>per kind</code></span></td></tr>
+        <tr><td>width</td><td>number</td><td>wrap width px · <span class="def">default <code>80% of the width</code></span></td></tr>
+        <tr><td>scale</td><td>number</td><td>size multiplier (sizes follow the frame) · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>opacity</td><td>number</td><td>0..1 · <span class="def">default <code>1</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section class="opgroup" id="shaders">
+  <h2>Shaders</h2>
+  <div class="op" id="op-shader">
+    <h3>shader <small>(in0, in1, in2, in3)</small></h3>
+    <p>agent-written Slang: float4 shade(float2 pos, float px)</p>
+    <table>
+      <tbody>
+        <tr><td>resolution</td><td>number</td><td>render at this fraction of the frame size and upscale (soft, costly looks; write shaders with pos/size()) · <span class="def">default <code>1</code></span></td></tr>
+        <tr><td>code</td><td>text</td><td>Slang source defining shade(); `static const` tables of 64+ numbers are read from the params (editing their values compiles nothing)</td></tr>
+        <tr><td>u</td><td>number[]</td><td>up to 16 values, param(i)</td></tr>
+        <tr><td>u0</td><td>number</td><td>u0..u15 individually (animatable)</td></tr>
+        <tr><td>motion_blur</td><td>bool</td><td>true: the format&#39;s motion blur samples its clock and animated u values (a shader that moves things); otherwise it holds at the frame&#39;s time · <span class="def">default <code>false</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section class="opgroup" id="looks">
+  <h2>Looks</h2>
+  <div class="op" id="op-drop_shadow">
+    <h3>drop_shadow <small>(source)</small></h3>
+    <p>soft shadow under the source (color, opacity, offset, radius)</p>
+    <table>
+      <tbody>
+        <tr><td>color</td><td>color</td><td><span class="def">default <code>#000000</code></span></td></tr>
+        <tr><td>offset</td><td>vec2</td><td><span class="def">default <code>[8.0,8.0]</code></span></td></tr>
+        <tr><td>opacity</td><td>number</td><td><span class="def">default <code>0.6</code></span></td></tr>
+        <tr><td>radius</td><td>number</td><td><span class="def">default <code>12.0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-glow">
+    <h3>glow <small>(source)</small></h3>
+    <p>soft colored glow around the source</p>
+    <table>
+      <tbody>
+        <tr><td>intensity</td><td>number</td><td><span class="def">default <code>1.0</code></span></td></tr>
+        <tr><td>radius</td><td>number</td><td><span class="def">default <code>16.0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-vignette">
+    <h3>vignette <small>(source)</small></h3>
+    <p>darkened edges (inner, outer colors)</p>
+    <table>
+      <tbody>
+        <tr><td>inner</td><td>color</td><td><span class="def">default <code>#00000000</code></span></td></tr>
+        <tr><td>outer</td><td>color</td><td><span class="def">default <code>#000000b0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-stroke_outline">
+    <h3>stroke_outline <small>(source)</small></h3>
+    <p>solid outline around the source&#39;s shape (color, width px)</p>
+    <table>
+      <tbody>
+        <tr><td>color</td><td>color</td><td><span class="def">default <code>#ffffff</code></span></td></tr>
+        <tr><td>width</td><td>number</td><td><span class="def">default <code>4.0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-bloom">
+    <h3>bloom <small>(source)</small></h3>
+    <p>light bleeding from bright areas (threshold, radius, intensity, wide)</p>
+    <table>
+      <tbody>
+        <tr><td>intensity</td><td>number</td><td><span class="def">default <code>0.6</code></span></td></tr>
+        <tr><td>radius</td><td>number</td><td><span class="def">default <code>32.0</code></span></td></tr>
+        <tr><td>threshold</td><td>number</td><td><span class="def">default <code>0.75</code></span></td></tr>
+        <tr><td>wide</td><td>number</td><td><span class="def">default <code>0.3</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-grain">
+    <h3>grain <small>(source)</small></h3>
+    <p>animated film grain (amount)</p>
+    <table>
+      <tbody>
+        <tr><td>amount</td><td>number</td><td><span class="def">default <code>0.07</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-aberration">
+    <h3>aberration <small>(source)</small></h3>
+    <p>chromatic fringes toward the edges</p>
+    <table>
+      <tbody>
+        <tr><td>amount</td><td>number</td><td><span class="def">default <code>8.0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-repeater">
+    <h3>repeater <small>(source)</small></h3>
+    <p>count copies, each moved by (dx, dy), turned by rotate degrees and scaled by scale about (cx, cy), fading by fade: trails, radial arrays, tunnels</p>
+    <table>
+      <tbody>
+        <tr><td>count</td><td>number</td><td><span class="def">default <code>6.0</code></span></td></tr>
+        <tr><td>cx</td><td>number</td><td><span class="def">default <code>0.0</code></span></td></tr>
+        <tr><td>cy</td><td>number</td><td><span class="def">default <code>0.0</code></span></td></tr>
+        <tr><td>dx</td><td>number</td><td><span class="def">default <code>0.0</code></span></td></tr>
+        <tr><td>dy</td><td>number</td><td><span class="def">default <code>0.0</code></span></td></tr>
+        <tr><td>fade</td><td>number</td><td><span class="def">default <code>1.0</code></span></td></tr>
+        <tr><td>rotate</td><td>number</td><td><span class="def">default <code>0.0</code></span></td></tr>
+        <tr><td>scale</td><td>number</td><td><span class="def">default <code>1.0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-halftone">
+    <h3>halftone <small>(source)</small></h3>
+    <p>riso halftone dots of one ink (cell, angle, r, g, b): sized by the source&#39;s coverage, or with tone 1 by how dark it is (to screen footage)</p>
+    <table>
+      <tbody>
+        <tr><td>angle</td><td>number</td><td><span class="def">default <code>15.0</code></span></td></tr>
+        <tr><td>b</td><td>number</td><td><span class="def">default <code>0.69</code></span></td></tr>
+        <tr><td>cell</td><td>number</td><td><span class="def">default <code>9.0</code></span></td></tr>
+        <tr><td>g</td><td>number</td><td><span class="def">default <code>0.28</code></span></td></tr>
+        <tr><td>r</td><td>number</td><td><span class="def">default <code>1.0</code></span></td></tr>
+        <tr><td>seed</td><td>number</td><td><span class="def">default <code>1.0</code></span></td></tr>
+        <tr><td>tone</td><td>number</td><td><span class="def">default <code>0.0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-glitch">
+    <h3>glitch <small>(source)</small></h3>
+    <p>digital glitch: slices, offsets, color splits</p>
+    <table>
+      <tbody>
+        <tr><td>amount</td><td>number</td><td><span class="def">default <code>0.5</code></span></td></tr>
+        <tr><td>roll</td><td>number</td><td><span class="def">default <code>0.35</code></span></td></tr>
+        <tr><td>tracking</td><td>number</td><td><span class="def">default <code>0.3</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-crt">
+    <h3>crt <small>(source)</small></h3>
+    <p>CRT screen: curvature, scanlines, aperture grille</p>
+    <table>
+      <tbody>
+        <tr><td>phosphor</td><td>number</td><td><span class="def">default <code>0.9</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-dot_matrix">
+    <h3>dot_matrix <small>(source)</small></h3>
+    <p>LED dot-matrix resampling</p>
+    <table>
+      <tbody>
+        <tr><td>b</td><td>number</td><td><span class="def">default <code>0.61</code></span></td></tr>
+        <tr><td>cell</td><td>number</td><td><span class="def">default <code>11.0</code></span></td></tr>
+        <tr><td>g</td><td>number</td><td><span class="def">default <code>1.0</code></span></td></tr>
+        <tr><td>r</td><td>number</td><td><span class="def">default <code>0.49</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-glass_pane">
+    <h3>glass_pane <small>(source)</small></h3>
+    <p>frosted, refracting glass pane over what is beneath</p>
+    <table>
+      <tbody>
+        <tr><td>bend</td><td>number</td><td><span class="def">default <code>36.0</code></span></td></tr>
+        <tr><td>bevel</td><td>number</td><td><span class="def">default <code>34.0</code></span></td></tr>
+        <tr><td>frost</td><td>number</td><td><span class="def">default <code>26.0</code></span></td></tr>
+        <tr><td>gain</td><td>number</td><td><span class="def">default <code>0.92</code></span></td></tr>
+        <tr><td>height</td><td>number</td><td><span class="def">default <code>400.0</code></span></td></tr>
+        <tr><td>lift</td><td>number</td><td><span class="def">default <code>0.06</code></span></td></tr>
+        <tr><td>light</td><td>number</td><td><span class="def">default <code>1.0</code></span></td></tr>
+        <tr><td>radius</td><td>number</td><td><span class="def">default <code>48.0</code></span></td></tr>
+        <tr><td>width</td><td>number</td><td><span class="def">default <code>600.0</code></span></td></tr>
+        <tr><td>x</td><td>number</td><td><span class="def">default <code>540.0</code></span></td></tr>
+        <tr><td>y</td><td>number</td><td><span class="def">default <code>540.0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-lens_flare">
+    <h3>lens_flare <small>(source)</small></h3>
+    <p>lens flare from a light at (x, y)</p>
+    <table>
+      <tbody>
+        <tr><td>b</td><td>number</td><td><span class="def">default <code>0.6</code></span></td></tr>
+        <tr><td>g</td><td>number</td><td><span class="def">default <code>0.82</code></span></td></tr>
+        <tr><td>intensity</td><td>number</td><td><span class="def">default <code>1.0</code></span></td></tr>
+        <tr><td>r</td><td>number</td><td><span class="def">default <code>1.0</code></span></td></tr>
+        <tr><td>x</td><td>number</td><td><span class="def">default <code>1400.0</code></span></td></tr>
+        <tr><td>y</td><td>number</td><td><span class="def">default <code>300.0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-light_leak">
+    <h3>light_leak <small>(source)</small></h3>
+    <p>warm film light leaks drifting over the frame</p>
+    <table>
+      <tbody>
+        <tr><td>b</td><td>number</td><td><span class="def">default <code>0.18</code></span></td></tr>
+        <tr><td>g</td><td>number</td><td><span class="def">default <code>0.45</code></span></td></tr>
+        <tr><td>intensity</td><td>number</td><td><span class="def">default <code>0.6</code></span></td></tr>
+        <tr><td>r</td><td>number</td><td><span class="def">default <code>1.0</code></span></td></tr>
+        <tr><td>speed</td><td>number</td><td><span class="def">default <code>1.0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-film_look">
+    <h3>film_look <small>(source)</small></h3>
+    <p>lens and film over the source: red halation, a hair of softness, grit, lifted blacks, grade, fringes, vignette, grain (hides the tells of plain 3D)</p>
+    <table>
+      <tbody>
+        <tr><td>aberration</td><td>number</td><td><span class="def">default <code>0.8</code></span></td></tr>
+        <tr><td>grain</td><td>number</td><td><span class="def">default <code>0.09</code></span></td></tr>
+        <tr><td>grit</td><td>number</td><td><span class="def">default <code>0.35</code></span></td></tr>
+        <tr><td>halation</td><td>number</td><td><span class="def">default <code>0.9</code></span></td></tr>
+        <tr><td>lift</td><td>number</td><td><span class="def">default <code>0.03</code></span></td></tr>
+        <tr><td>saturation</td><td>number</td><td><span class="def">default <code>0.82</code></span></td></tr>
+        <tr><td>softness</td><td>number</td><td><span class="def">default <code>0.55</code></span></td></tr>
+        <tr><td>vignette</td><td>color</td><td><span class="def">default <code>#000000b0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="op" id="op-engrave">
+    <h3>engrave <small>(source)</small></h3>
+    <p>copperplate engraving: tone to hatching, contours inked, dark backdrop left as paper (spacing, backdrop, ink_*, paper_*)</p>
+    <table>
+      <tbody>
+        <tr><td>backdrop</td><td>number</td><td><span class="def">default <code>0.3</code></span></td></tr>
+        <tr><td>ink_b</td><td>number</td><td><span class="def">default <code>0.04</code></span></td></tr>
+        <tr><td>ink_g</td><td>number</td><td><span class="def">default <code>0.07</code></span></td></tr>
+        <tr><td>ink_r</td><td>number</td><td><span class="def">default <code>0.12</code></span></td></tr>
+        <tr><td>paper_b</td><td>number</td><td><span class="def">default <code>0.76</code></span></td></tr>
+        <tr><td>paper_g</td><td>number</td><td><span class="def">default <code>0.88</code></span></td></tr>
+        <tr><td>paper_r</td><td>number</td><td><span class="def">default <code>0.93</code></span></td></tr>
+        <tr><td>spacing</td><td>number</td><td><span class="def">default <code>6.0</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+    </article>
+  </div>
+</section>
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=38337fe4"></script>
+</body>
+</html>

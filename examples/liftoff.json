@@ -1,0 +1,4657 @@
+{
+ "version": 1,
+ "format": {
+  "width": 1920,
+  "height": 804,
+  "fps": 24,
+  "duration": 22.5
+ },
+ "output": "grain",
+ "nodes": {
+  "black": {
+   "op": "solid",
+   "params": {
+    "color": "#060505"
+   }
+  },
+  "v_dawn": {
+   "op": "video",
+   "params": {
+    "src": "../../../footage/clips/liftoff_a11_dawn.mp4",
+    "start": 0.1,
+    "speed": 1.0,
+    "rect": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -13.44,
+        -300.0,
+        1946.88,
+        1320.56
+       ]
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        -59.23,
+        -337.11,
+        2044.22,
+        1386.59
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "fit": "fill"
+   },
+   "timing": {
+    "in": 0.0,
+    "out": 3.1249,
+    "offset": 0.0
+   }
+  },
+  "soft_dawn": {
+   "op": "blur",
+   "params": {
+    "radius": 1.8
+   },
+   "inputs": {
+    "source": "v_dawn"
+   },
+   "timing": {
+    "in": 0.0,
+    "out": 3.1249,
+    "offset": 0.0
+   }
+  },
+  "sharp_dawn": {
+   "op": "shader",
+   "params": {
+    "code": "float4 shade(float2 pos, float px) {\n  float4 a = input(0, pos);\n  float4 b = input(1, pos);\n  return float4(max(a.rgb + param(0) * (a.rgb - b.rgb), 0.0), a.a);\n}",
+    "u": [
+     0.7
+    ]
+   },
+   "inputs": {
+    "in0": "v_dawn",
+    "in1": "soft_dawn"
+   },
+   "timing": {
+    "in": 0.0,
+    "out": 3.1249,
+    "offset": 0.0
+   }
+  },
+  "g_dawn": {
+   "op": "adjust",
+   "params": {
+    "saturation": 0.92,
+    "contrast": 1.12,
+    "exposure": 0.1
+   },
+   "inputs": {
+    "source": "sharp_dawn"
+   },
+   "timing": {
+    "in": 0.0,
+    "out": 3.1249,
+    "offset": 0.0
+   }
+  },
+  "film_dawn": {
+   "op": "film_look",
+   "params": {
+    "halation": 0.55,
+    "softness": 0.15,
+    "grit": 0.22,
+    "lift": 0.04,
+    "saturation": 0.86,
+    "grain": 0.085,
+    "vignette": "#00000090",
+    "aberration": 0.5
+   },
+   "inputs": {
+    "source": "g_dawn"
+   },
+   "timing": {
+    "in": 0.0,
+    "out": 3.1249,
+    "offset": 0.0
+   }
+  },
+  "weave_dawn": {
+   "op": "transform",
+   "params": {
+    "anchor": [
+     960.0,
+     402.0
+    ],
+    "position": {
+     "wiggle": {
+      "frequency": 3.0,
+      "amplitude": [
+       1.6,
+       1.2
+      ],
+      "base": [
+       960.0,
+       402.0
+      ],
+      "octaves": 4,
+      "seed": 7
+     }
+    },
+    "rotation": {
+     "wiggle": {
+      "frequency": 1.5,
+      "amplitude": 0.05,
+      "octaves": 2,
+      "seed": 3
+     }
+    }
+   },
+   "inputs": {
+    "source": "film_dawn"
+   },
+   "timing": {
+    "in": 0.0,
+    "out": 3.1249,
+    "offset": 0.0
+   }
+  },
+  "v_sparks": {
+   "op": "video",
+   "params": {
+    "src": "../../../footage/clips/liftoff_ml806.mp4",
+    "start": 9.2,
+    "speed": 1.0,
+    "rect": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -38.4,
+        -268.0,
+        1996.8,
+        1123.2
+       ]
+      },
+      {
+       "t": 1.125,
+       "v": [
+        -62.21,
+        -283.01,
+        2036.74,
+        1145.66
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "fit": "fill"
+   },
+   "timing": {
+    "in": 3.1249,
+    "out": 4.2499,
+    "offset": 3.1249
+   }
+  },
+  "g_sparks": {
+   "op": "adjust",
+   "params": {
+    "saturation": 0.95,
+    "contrast": 1.06
+   },
+   "inputs": {
+    "source": "v_sparks"
+   },
+   "timing": {
+    "in": 3.1249,
+    "out": 4.2499,
+    "offset": 3.1249
+   }
+  },
+  "warm_sparks": {
+   "op": "color_matrix",
+   "params": {
+    "matrix": [
+     1.0,
+     0.03,
+     -0.03,
+     0,
+     0,
+     0.0,
+     1.0,
+     0.0,
+     0,
+     0,
+     -0.03,
+     0.05,
+     0.86,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     0
+    ]
+   },
+   "inputs": {
+    "source": "g_sparks"
+   },
+   "timing": {
+    "in": 3.1249,
+    "out": 4.2499,
+    "offset": 3.1249
+   }
+  },
+  "v_ignition": {
+   "op": "video",
+   "params": {
+    "src": "../../../footage/clips/liftoff_a11_ignition.mp4",
+    "start": 2.8,
+    "speed": 1.4,
+    "rect": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -282.62,
+        -150.0,
+        2227.2,
+        1510.7
+       ]
+      },
+      {
+       "t": 2.4167,
+       "v": [
+        -347.69,
+        -169.51,
+        2316.29,
+        1571.13
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "fit": "fill"
+   },
+   "timing": {
+    "in": 4.2499,
+    "out": 6.6666,
+    "offset": 4.2499
+   }
+  },
+  "soft_ignition": {
+   "op": "blur",
+   "params": {
+    "radius": 1.8
+   },
+   "inputs": {
+    "source": "v_ignition"
+   },
+   "timing": {
+    "in": 4.2499,
+    "out": 6.6666,
+    "offset": 4.2499
+   }
+  },
+  "sharp_ignition": {
+   "op": "shader",
+   "params": {
+    "code": "float4 shade(float2 pos, float px) {\n  float4 a = input(0, pos);\n  float4 b = input(1, pos);\n  return float4(max(a.rgb + param(0) * (a.rgb - b.rgb), 0.0), a.a);\n}",
+    "u": [
+     0.7
+    ]
+   },
+   "inputs": {
+    "in0": "v_ignition",
+    "in1": "soft_ignition"
+   },
+   "timing": {
+    "in": 4.2499,
+    "out": 6.6666,
+    "offset": 4.2499
+   }
+  },
+  "g_ignition": {
+   "op": "adjust",
+   "params": {
+    "saturation": 0.92,
+    "contrast": 1.04,
+    "exposure": 0.25
+   },
+   "inputs": {
+    "source": "sharp_ignition"
+   },
+   "timing": {
+    "in": 4.2499,
+    "out": 6.6666,
+    "offset": 4.2499
+   }
+  },
+  "film_ignition": {
+   "op": "film_look",
+   "params": {
+    "halation": 0.55,
+    "softness": 0.15,
+    "grit": 0.22,
+    "lift": 0.04,
+    "saturation": 0.86,
+    "grain": 0.085,
+    "vignette": "#00000090",
+    "aberration": 0.5
+   },
+   "inputs": {
+    "source": "g_ignition"
+   },
+   "timing": {
+    "in": 4.2499,
+    "out": 6.6666,
+    "offset": 4.2499
+   }
+  },
+  "weave_ignition": {
+   "op": "transform",
+   "params": {
+    "anchor": [
+     960.0,
+     402.0
+    ],
+    "position": {
+     "wiggle": {
+      "frequency": 3.0,
+      "amplitude": [
+       1.6,
+       1.2
+      ],
+      "base": [
+       960.0,
+       402.0
+      ],
+      "octaves": 4,
+      "seed": 7
+     }
+    },
+    "rotation": {
+     "wiggle": {
+      "frequency": 1.5,
+      "amplitude": 0.05,
+      "octaves": 2,
+      "seed": 3
+     }
+    }
+   },
+   "inputs": {
+    "source": "film_ignition"
+   },
+   "timing": {
+    "in": 4.2499,
+    "out": 6.6666,
+    "offset": 4.2499
+   }
+  },
+  "v_water": {
+   "op": "video",
+   "params": {
+    "src": "../../../footage/clips/liftoff_ml805.mp4",
+    "start": 17.012,
+    "speed": 1.0,
+    "rect": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -38.4,
+        -268.0,
+        1996.8,
+        1123.2
+       ]
+      },
+      {
+       "t": 0.875,
+       "v": [
+        -54.53,
+        -283.01,
+        2036.74,
+        1145.66
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "fit": "fill"
+   },
+   "timing": {
+    "in": 6.6666,
+    "out": 7.5416,
+    "offset": 6.6666
+   }
+  },
+  "g_water": {
+   "op": "adjust",
+   "params": {
+    "saturation": 0.95,
+    "contrast": 1.06
+   },
+   "inputs": {
+    "source": "v_water"
+   },
+   "timing": {
+    "in": 6.6666,
+    "out": 7.5416,
+    "offset": 6.6666
+   }
+  },
+  "warm_water": {
+   "op": "color_matrix",
+   "params": {
+    "matrix": [
+     1.0,
+     0.03,
+     -0.03,
+     0,
+     0,
+     0.0,
+     1.0,
+     0.0,
+     0,
+     0,
+     -0.03,
+     0.05,
+     0.86,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     0
+    ]
+   },
+   "inputs": {
+    "source": "g_water"
+   },
+   "timing": {
+    "in": 6.6666,
+    "out": 7.5416,
+    "offset": 6.6666
+   }
+  },
+  "v_spread": {
+   "op": "video",
+   "params": {
+    "src": "../../../footage/clips/liftoff_a11_ignition.mp4",
+    "start": 7.408,
+    "speed": 1.4,
+    "rect": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -282.62,
+        -150.0,
+        2227.2,
+        1510.7
+       ]
+      },
+      {
+       "t": 0.9583,
+       "v": [
+        -347.69,
+        -169.51,
+        2316.29,
+        1571.13
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "fit": "fill"
+   },
+   "timing": {
+    "in": 7.5416,
+    "out": 8.4999,
+    "offset": 7.5416
+   }
+  },
+  "soft_spread": {
+   "op": "blur",
+   "params": {
+    "radius": 1.8
+   },
+   "inputs": {
+    "source": "v_spread"
+   },
+   "timing": {
+    "in": 7.5416,
+    "out": 8.4999,
+    "offset": 7.5416
+   }
+  },
+  "sharp_spread": {
+   "op": "shader",
+   "params": {
+    "code": "float4 shade(float2 pos, float px) {\n  float4 a = input(0, pos);\n  float4 b = input(1, pos);\n  return float4(max(a.rgb + param(0) * (a.rgb - b.rgb), 0.0), a.a);\n}",
+    "u": [
+     0.7
+    ]
+   },
+   "inputs": {
+    "in0": "v_spread",
+    "in1": "soft_spread"
+   },
+   "timing": {
+    "in": 7.5416,
+    "out": 8.4999,
+    "offset": 7.5416
+   }
+  },
+  "g_spread": {
+   "op": "adjust",
+   "params": {
+    "saturation": 0.92,
+    "contrast": 1.04
+   },
+   "inputs": {
+    "source": "sharp_spread"
+   },
+   "timing": {
+    "in": 7.5416,
+    "out": 8.4999,
+    "offset": 7.5416
+   }
+  },
+  "film_spread": {
+   "op": "film_look",
+   "params": {
+    "halation": 0.55,
+    "softness": 0.15,
+    "grit": 0.22,
+    "lift": 0.04,
+    "saturation": 0.86,
+    "grain": 0.085,
+    "vignette": "#00000090",
+    "aberration": 0.5
+   },
+   "inputs": {
+    "source": "g_spread"
+   },
+   "timing": {
+    "in": 7.5416,
+    "out": 8.4999,
+    "offset": 7.5416
+   }
+  },
+  "weave_spread": {
+   "op": "transform",
+   "params": {
+    "anchor": [
+     960.0,
+     402.0
+    ],
+    "position": {
+     "wiggle": {
+      "frequency": 3.0,
+      "amplitude": [
+       1.6,
+       1.2
+      ],
+      "base": [
+       960.0,
+       402.0
+      ],
+      "octaves": 4,
+      "seed": 7
+     }
+    },
+    "rotation": {
+     "wiggle": {
+      "frequency": 1.5,
+      "amplitude": 0.05,
+      "octaves": 2,
+      "seed": 3
+     }
+    }
+   },
+   "inputs": {
+    "source": "film_spread"
+   },
+   "timing": {
+    "in": 7.5416,
+    "out": 8.4999,
+    "offset": 7.5416
+   }
+  },
+  "v_rs251": {
+   "op": "video",
+   "params": {
+    "src": "../../../footage/clips/liftoff_ml806.mp4",
+    "start": 21.7,
+    "speed": 1.0,
+    "rect": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -38.4,
+        -268.0,
+        1996.8,
+        1123.2
+       ]
+      },
+      {
+       "t": 0.8333,
+       "v": [
+        -58.37,
+        -283.81,
+        2036.74,
+        1145.66
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "fit": "fill"
+   },
+   "timing": {
+    "in": 8.4999,
+    "out": 9.3332,
+    "offset": 8.4999
+   }
+  },
+  "g_rs251": {
+   "op": "adjust",
+   "params": {
+    "saturation": 0.95,
+    "contrast": 1.06
+   },
+   "inputs": {
+    "source": "v_rs251"
+   },
+   "timing": {
+    "in": 8.4999,
+    "out": 9.3332,
+    "offset": 8.4999
+   }
+  },
+  "warm_rs251": {
+   "op": "color_matrix",
+   "params": {
+    "matrix": [
+     1.0,
+     0.03,
+     -0.03,
+     0,
+     0,
+     0.0,
+     1.0,
+     0.0,
+     0,
+     0,
+     -0.03,
+     0.05,
+     0.86,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     0
+    ]
+   },
+   "inputs": {
+    "source": "g_rs251"
+   },
+   "timing": {
+    "in": 8.4999,
+    "out": 9.3332,
+    "offset": 8.4999
+   }
+  },
+  "v_fire": {
+   "op": "video",
+   "params": {
+    "src": "../../../footage/clips/liftoff_a11_ignition.mp4",
+    "start": 9.917,
+    "speed": 1.4,
+    "rect": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -282.62,
+        -150.0,
+        2227.2,
+        1510.7
+       ]
+      },
+      {
+       "t": 1.0834,
+       "v": [
+        -347.69,
+        -169.51,
+        2316.29,
+        1571.13
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "fit": "fill"
+   },
+   "timing": {
+    "in": 9.3332,
+    "out": 10.4166,
+    "offset": 9.3332
+   }
+  },
+  "soft_fire": {
+   "op": "blur",
+   "params": {
+    "radius": 1.8
+   },
+   "inputs": {
+    "source": "v_fire"
+   },
+   "timing": {
+    "in": 9.3332,
+    "out": 10.4166,
+    "offset": 9.3332
+   }
+  },
+  "sharp_fire": {
+   "op": "shader",
+   "params": {
+    "code": "float4 shade(float2 pos, float px) {\n  float4 a = input(0, pos);\n  float4 b = input(1, pos);\n  return float4(max(a.rgb + param(0) * (a.rgb - b.rgb), 0.0), a.a);\n}",
+    "u": [
+     0.7
+    ]
+   },
+   "inputs": {
+    "in0": "v_fire",
+    "in1": "soft_fire"
+   },
+   "timing": {
+    "in": 9.3332,
+    "out": 10.4166,
+    "offset": 9.3332
+   }
+  },
+  "g_fire": {
+   "op": "adjust",
+   "params": {
+    "saturation": 0.92,
+    "contrast": 1.04
+   },
+   "inputs": {
+    "source": "sharp_fire"
+   },
+   "timing": {
+    "in": 9.3332,
+    "out": 10.4166,
+    "offset": 9.3332
+   }
+  },
+  "film_fire": {
+   "op": "film_look",
+   "params": {
+    "halation": 0.55,
+    "softness": 0.15,
+    "grit": 0.22,
+    "lift": 0.04,
+    "saturation": 0.86,
+    "grain": 0.085,
+    "vignette": "#00000090",
+    "aberration": 0.5
+   },
+   "inputs": {
+    "source": "g_fire"
+   },
+   "timing": {
+    "in": 9.3332,
+    "out": 10.4166,
+    "offset": 9.3332
+   }
+  },
+  "weave_fire": {
+   "op": "transform",
+   "params": {
+    "anchor": [
+     960.0,
+     402.0
+    ],
+    "position": {
+     "wiggle": {
+      "frequency": 3.0,
+      "amplitude": [
+       1.6,
+       1.2
+      ],
+      "base": [
+       960.0,
+       402.0
+      ],
+      "octaves": 4,
+      "seed": 7
+     }
+    },
+    "rotation": {
+     "wiggle": {
+      "frequency": 1.5,
+      "amplitude": 0.05,
+      "octaves": 2,
+      "seed": 3
+     }
+    }
+   },
+   "inputs": {
+    "source": "film_fire"
+   },
+   "timing": {
+    "in": 9.3332,
+    "out": 10.4166,
+    "offset": 9.3332
+   }
+  },
+  "v_thrust": {
+   "op": "video",
+   "params": {
+    "src": "../../../footage/clips/liftoff_ml806.mp4",
+    "start": 26.7,
+    "speed": 1.0,
+    "rect": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -38.4,
+        -268.0,
+        1996.8,
+        1123.2
+       ]
+      },
+      {
+       "t": 0.9166,
+       "v": [
+        -58.37,
+        -283.01,
+        2036.74,
+        1145.66
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "fit": "fill"
+   },
+   "timing": {
+    "in": 10.4166,
+    "out": 11.3332,
+    "offset": 10.4166
+   }
+  },
+  "g_thrust": {
+   "op": "adjust",
+   "params": {
+    "saturation": 0.95,
+    "contrast": 1.06
+   },
+   "inputs": {
+    "source": "v_thrust"
+   },
+   "timing": {
+    "in": 10.4166,
+    "out": 11.3332,
+    "offset": 10.4166
+   }
+  },
+  "warm_thrust": {
+   "op": "color_matrix",
+   "params": {
+    "matrix": [
+     1.0,
+     0.03,
+     -0.03,
+     0,
+     0,
+     0.0,
+     1.0,
+     0.0,
+     0,
+     0,
+     -0.03,
+     0.05,
+     0.86,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     0
+    ]
+   },
+   "inputs": {
+    "source": "g_thrust"
+   },
+   "timing": {
+    "in": 10.4166,
+    "out": 11.3332,
+    "offset": 10.4166
+   }
+  },
+  "v_held": {
+   "op": "video",
+   "params": {
+    "src": "../../../footage/clips/liftoff_a11_base.mp4",
+    "start": 0.7,
+    "speed": 1.0,
+    "rect": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -13.44,
+        -330.0,
+        1946.88,
+        1320.56
+       ]
+      },
+      {
+       "t": 1.2084,
+       "v": [
+        -32.91,
+        -346.25,
+        1985.82,
+        1346.97
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "fit": "fill"
+   },
+   "timing": {
+    "in": 11.3332,
+    "out": 12.5416,
+    "offset": 11.3332
+   }
+  },
+  "soft_held": {
+   "op": "blur",
+   "params": {
+    "radius": 1.8
+   },
+   "inputs": {
+    "source": "v_held"
+   },
+   "timing": {
+    "in": 11.3332,
+    "out": 12.5416,
+    "offset": 11.3332
+   }
+  },
+  "sharp_held": {
+   "op": "shader",
+   "params": {
+    "code": "float4 shade(float2 pos, float px) {\n  float4 a = input(0, pos);\n  float4 b = input(1, pos);\n  return float4(max(a.rgb + param(0) * (a.rgb - b.rgb), 0.0), a.a);\n}",
+    "u": [
+     0.7
+    ]
+   },
+   "inputs": {
+    "in0": "v_held",
+    "in1": "soft_held"
+   },
+   "timing": {
+    "in": 11.3332,
+    "out": 12.5416,
+    "offset": 11.3332
+   }
+  },
+  "g_held": {
+   "op": "adjust",
+   "params": {
+    "saturation": 0.92,
+    "contrast": 1.04
+   },
+   "inputs": {
+    "source": "sharp_held"
+   },
+   "timing": {
+    "in": 11.3332,
+    "out": 12.5416,
+    "offset": 11.3332
+   }
+  },
+  "film_held": {
+   "op": "film_look",
+   "params": {
+    "halation": 0.55,
+    "softness": 0.15,
+    "grit": 0.22,
+    "lift": 0.04,
+    "saturation": 0.86,
+    "grain": 0.085,
+    "vignette": "#00000090",
+    "aberration": 0.5
+   },
+   "inputs": {
+    "source": "g_held"
+   },
+   "timing": {
+    "in": 11.3332,
+    "out": 12.5416,
+    "offset": 11.3332
+   }
+  },
+  "weave_held": {
+   "op": "transform",
+   "params": {
+    "anchor": [
+     960.0,
+     402.0
+    ],
+    "position": {
+     "wiggle": {
+      "frequency": 3.0,
+      "amplitude": [
+       1.6,
+       1.2
+      ],
+      "base": [
+       960.0,
+       402.0
+      ],
+      "octaves": 4,
+      "seed": 7
+     }
+    },
+    "rotation": {
+     "wiggle": {
+      "frequency": 1.5,
+      "amplitude": 0.05,
+      "octaves": 2,
+      "seed": 3
+     }
+    }
+   },
+   "inputs": {
+    "source": "film_held"
+   },
+   "timing": {
+    "in": 11.3332,
+    "out": 12.5416,
+    "offset": 11.3332
+   }
+  },
+  "v_boosters": {
+   "op": "video",
+   "params": {
+    "src": "../../../footage/clips/liftoff_ml806.mp4",
+    "start": 32.075,
+    "speed": 1.0,
+    "rect": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -38.4,
+        -268.0,
+        1996.8,
+        1123.2
+       ]
+      },
+      {
+       "t": 0.6666,
+       "v": [
+        -68.35,
+        -288.1,
+        2056.7,
+        1156.9
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "fit": "fill"
+   },
+   "timing": {
+    "in": 12.5416,
+    "out": 13.2082,
+    "offset": 12.5416
+   }
+  },
+  "g_boosters": {
+   "op": "adjust",
+   "params": {
+    "saturation": 0.95,
+    "contrast": 1.06
+   },
+   "inputs": {
+    "source": "v_boosters"
+   },
+   "timing": {
+    "in": 12.5416,
+    "out": 13.2082,
+    "offset": 12.5416
+   }
+  },
+  "warm_boosters": {
+   "op": "color_matrix",
+   "params": {
+    "matrix": [
+     1.0,
+     0.03,
+     -0.03,
+     0,
+     0,
+     0.0,
+     1.0,
+     0.0,
+     0,
+     0,
+     -0.03,
+     0.05,
+     0.86,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     0
+    ]
+   },
+   "inputs": {
+    "source": "g_boosters"
+   },
+   "timing": {
+    "in": 12.5416,
+    "out": 13.2082,
+    "offset": 12.5416
+   }
+  },
+  "v_rise": {
+   "op": "video",
+   "params": {
+    "src": "../../../footage/clips/liftoff_a11_base.mp4",
+    "start": 11.0,
+    "speed": 2.0,
+    "rect": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -13.44,
+        -330.0,
+        1946.88,
+        1320.56
+       ]
+      },
+      {
+       "t": 1.9584,
+       "v": [
+        -37.78,
+        -349.3,
+        1995.55,
+        1353.57
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "fit": "fill"
+   },
+   "timing": {
+    "in": 13.2082,
+    "out": 15.1666,
+    "offset": 13.2082
+   }
+  },
+  "soft_rise": {
+   "op": "blur",
+   "params": {
+    "radius": 1.8
+   },
+   "inputs": {
+    "source": "v_rise"
+   },
+   "timing": {
+    "in": 13.2082,
+    "out": 15.1666,
+    "offset": 13.2082
+   }
+  },
+  "sharp_rise": {
+   "op": "shader",
+   "params": {
+    "code": "float4 shade(float2 pos, float px) {\n  float4 a = input(0, pos);\n  float4 b = input(1, pos);\n  return float4(max(a.rgb + param(0) * (a.rgb - b.rgb), 0.0), a.a);\n}",
+    "u": [
+     0.7
+    ]
+   },
+   "inputs": {
+    "in0": "v_rise",
+    "in1": "soft_rise"
+   },
+   "timing": {
+    "in": 13.2082,
+    "out": 15.1666,
+    "offset": 13.2082
+   }
+  },
+  "g_rise": {
+   "op": "adjust",
+   "params": {
+    "saturation": 0.92,
+    "contrast": 1.04
+   },
+   "inputs": {
+    "source": "sharp_rise"
+   },
+   "timing": {
+    "in": 13.2082,
+    "out": 15.1666,
+    "offset": 13.2082
+   }
+  },
+  "film_rise": {
+   "op": "film_look",
+   "params": {
+    "halation": 0.55,
+    "softness": 0.15,
+    "grit": 0.22,
+    "lift": 0.04,
+    "saturation": 0.86,
+    "grain": 0.085,
+    "vignette": "#00000090",
+    "aberration": 0.5
+   },
+   "inputs": {
+    "source": "g_rise"
+   },
+   "timing": {
+    "in": 13.2082,
+    "out": 15.1666,
+    "offset": 13.2082
+   }
+  },
+  "weave_rise": {
+   "op": "transform",
+   "params": {
+    "anchor": [
+     960.0,
+     402.0
+    ],
+    "position": {
+     "wiggle": {
+      "frequency": 3.0,
+      "amplitude": [
+       1.6,
+       1.2
+      ],
+      "base": [
+       960.0,
+       402.0
+      ],
+      "octaves": 4,
+      "seed": 7
+     }
+    },
+    "rotation": {
+     "wiggle": {
+      "frequency": 1.5,
+      "amplitude": 0.05,
+      "octaves": 2,
+      "seed": 3
+     }
+    }
+   },
+   "inputs": {
+    "source": "film_rise"
+   },
+   "timing": {
+    "in": 13.2082,
+    "out": 15.1666,
+    "offset": 13.2082
+   }
+  },
+  "v_usa": {
+   "op": "video",
+   "params": {
+    "src": "../../../footage/clips/liftoff_a11_usa.mp4",
+    "start": 1.75,
+    "speed": 1.3,
+    "rect": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        -13.44,
+        -300.0,
+        1946.88,
+        1320.56
+       ]
+      },
+      {
+       "t": 2.1666,
+       "v": [
+        -36.75,
+        -314.04,
+        1985.82,
+        1346.97
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "fit": "fill"
+   },
+   "timing": {
+    "in": 15.1666,
+    "out": 17.3332,
+    "offset": 15.1666
+   }
+  },
+  "soft_usa": {
+   "op": "blur",
+   "params": {
+    "radius": 1.8
+   },
+   "inputs": {
+    "source": "v_usa"
+   },
+   "timing": {
+    "in": 15.1666,
+    "out": 17.3332,
+    "offset": 15.1666
+   }
+  },
+  "sharp_usa": {
+   "op": "shader",
+   "params": {
+    "code": "float4 shade(float2 pos, float px) {\n  float4 a = input(0, pos);\n  float4 b = input(1, pos);\n  return float4(max(a.rgb + param(0) * (a.rgb - b.rgb), 0.0), a.a);\n}",
+    "u": [
+     0.7
+    ]
+   },
+   "inputs": {
+    "in0": "v_usa",
+    "in1": "soft_usa"
+   },
+   "timing": {
+    "in": 15.1666,
+    "out": 17.3332,
+    "offset": 15.1666
+   }
+  },
+  "g_usa": {
+   "op": "adjust",
+   "params": {
+    "saturation": 0.92,
+    "contrast": 1.04
+   },
+   "inputs": {
+    "source": "sharp_usa"
+   },
+   "timing": {
+    "in": 15.1666,
+    "out": 17.3332,
+    "offset": 15.1666
+   }
+  },
+  "film_usa": {
+   "op": "film_look",
+   "params": {
+    "halation": 0.55,
+    "softness": 0.15,
+    "grit": 0.22,
+    "lift": 0.04,
+    "saturation": 0.86,
+    "grain": 0.085,
+    "vignette": "#00000090",
+    "aberration": 0.5
+   },
+   "inputs": {
+    "source": "g_usa"
+   },
+   "timing": {
+    "in": 15.1666,
+    "out": 17.3332,
+    "offset": 15.1666
+   }
+  },
+  "weave_usa": {
+   "op": "transform",
+   "params": {
+    "anchor": [
+     960.0,
+     402.0
+    ],
+    "position": {
+     "wiggle": {
+      "frequency": 3.0,
+      "amplitude": [
+       1.6,
+       1.2
+      ],
+      "base": [
+       960.0,
+       402.0
+      ],
+      "octaves": 4,
+      "seed": 7
+     }
+    },
+    "rotation": {
+     "wiggle": {
+      "frequency": 1.5,
+      "amplitude": 0.05,
+      "octaves": 2,
+      "seed": 3
+     }
+    }
+   },
+   "inputs": {
+    "source": "film_usa"
+   },
+   "timing": {
+    "in": 15.1666,
+    "out": 17.3332,
+    "offset": 15.1666
+   }
+  },
+  "v_clear": {
+   "op": "video",
+   "params": {
+    "src": "../../../footage/clips/liftoff_sm_tower.mp4",
+    "start": 7.0,
+    "speed": 3.0,
+    "rect": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        0.0,
+        -150.0,
+        1920.0,
+        1012.5
+       ]
+      },
+      {
+       "t": 1.9584,
+       "v": [
+        -25.92,
+        -166.56,
+        1977.6,
+        1042.88
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "fit": "fill"
+   },
+   "timing": {
+    "in": 17.3332,
+    "out": 19.2916,
+    "offset": 17.3332
+   }
+  },
+  "g_clear": {
+   "op": "adjust",
+   "params": {
+    "saturation": 0.95,
+    "contrast": 1.06
+   },
+   "inputs": {
+    "source": "v_clear"
+   },
+   "timing": {
+    "in": 17.3332,
+    "out": 19.2916,
+    "offset": 17.3332
+   }
+  },
+  "v_smoke": {
+   "op": "video",
+   "params": {
+    "src": "../../../footage/clips/liftoff_gx_smoke.mp4",
+    "start": 11.5,
+    "speed": 2.4,
+    "rect": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        0.0,
+        -190.0,
+        1920.0,
+        1080.0
+       ]
+      },
+      {
+       "t": 3.2084,
+       "v": [
+        -48.0,
+        -229.65,
+        2016.0,
+        1134.0
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    },
+    "fit": "fill"
+   },
+   "timing": {
+    "in": 19.2916,
+    "out": 22.5,
+    "offset": 19.2916
+   }
+  },
+  "g_smoke": {
+   "op": "adjust",
+   "params": {
+    "saturation": 1.05,
+    "contrast": 1.14,
+    "exposure": -0.6
+   },
+   "inputs": {
+    "source": "v_smoke"
+   },
+   "timing": {
+    "in": 19.2916,
+    "out": 22.5,
+    "offset": 19.2916
+   }
+  },
+  "over": {
+   "op": "over",
+   "inputs": {
+    "fg": "weave_dawn",
+    "bg": "black"
+   }
+  },
+  "over2": {
+   "op": "over",
+   "inputs": {
+    "fg": "warm_sparks",
+    "bg": "over"
+   }
+  },
+  "over3": {
+   "op": "over",
+   "inputs": {
+    "fg": "weave_ignition",
+    "bg": "over2"
+   }
+  },
+  "over4": {
+   "op": "over",
+   "inputs": {
+    "fg": "warm_water",
+    "bg": "over3"
+   }
+  },
+  "over5": {
+   "op": "over",
+   "inputs": {
+    "fg": "weave_spread",
+    "bg": "over4"
+   }
+  },
+  "over6": {
+   "op": "over",
+   "inputs": {
+    "fg": "warm_rs251",
+    "bg": "over5"
+   }
+  },
+  "over7": {
+   "op": "over",
+   "inputs": {
+    "fg": "weave_fire",
+    "bg": "over6"
+   }
+  },
+  "over8": {
+   "op": "over",
+   "inputs": {
+    "fg": "warm_thrust",
+    "bg": "over7"
+   }
+  },
+  "over9": {
+   "op": "over",
+   "inputs": {
+    "fg": "weave_held",
+    "bg": "over8"
+   }
+  },
+  "over10": {
+   "op": "over",
+   "inputs": {
+    "fg": "warm_boosters",
+    "bg": "over9"
+   }
+  },
+  "over11": {
+   "op": "over",
+   "inputs": {
+    "fg": "weave_rise",
+    "bg": "over10"
+   }
+  },
+  "over12": {
+   "op": "over",
+   "inputs": {
+    "fg": "weave_usa",
+    "bg": "over11"
+   }
+  },
+  "over13": {
+   "op": "over",
+   "inputs": {
+    "fg": "g_clear",
+    "bg": "over12"
+   }
+  },
+  "over14": {
+   "op": "over",
+   "inputs": {
+    "fg": "g_smoke",
+    "bg": "over13"
+   }
+  },
+  "scrim": {
+   "op": "gradient",
+   "params": {
+    "kind": "linear",
+    "start": [
+     1020,
+     0
+    ],
+    "end": [
+     1900,
+     0
+    ],
+    "stops": "0:#00000000, 0.55:#00000066, 1:#000000a8"
+   }
+  },
+  "scrimmed": {
+   "op": "over",
+   "params": {
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        0.35
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        0.55
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        0.55
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        0.45
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        0.45
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 15.1666,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      }
+     ]
+    }
+   },
+   "inputs": {
+    "fg": "scrim",
+    "bg": "over14"
+   }
+  },
+  "floor": {
+   "op": "gradient",
+   "params": {
+    "kind": "radial",
+    "center": [
+     440,
+     930
+    ],
+    "radius": 980,
+    "stops": "0:#000000d0, 0.5:#00000088, 1:#00000000"
+   }
+  },
+  "floored": {
+   "op": "over",
+   "params": {
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        1.0
+       ]
+      },
+      {
+       "t": 15.1666,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      }
+     ]
+    }
+   },
+   "inputs": {
+    "fg": "floor",
+    "bg": "scrimmed"
+   }
+  },
+  "floor_hot": {
+   "op": "gradient",
+   "params": {
+    "kind": "radial",
+    "center": [
+     660,
+     880
+    ],
+    "radius": 860,
+    "stops": "0:#000000a0, 0.6:#00000050, 1:#00000000"
+   }
+  },
+  "floored_hot": {
+   "op": "over",
+   "params": {
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        0.9
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        0.8
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        0.8
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 15.1666,
+       "v": [
+        0.0
+       ],
+       "ease": "hold"
+      }
+     ]
+    }
+   },
+   "inputs": {
+    "fg": "floor_hot",
+    "bg": "floored"
+   }
+  },
+  "fade": {
+   "op": "solid",
+   "params": {
+    "color": "#060505"
+   }
+  },
+  "fades": {
+   "op": "over",
+   "params": {
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        1.0
+       ]
+      },
+      {
+       "t": 0.5,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 21.4,
+       "v": [
+        0.0
+       ]
+      },
+      {
+       "t": 22.42,
+       "v": [
+        1.0
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    }
+   },
+   "inputs": {
+    "fg": "fade",
+    "bg": "floored_hot"
+   }
+  },
+  "n121": {
+   "op": "text",
+   "params": {
+    "text": "12",
+    "font": "Sofia Sans Extra Condensed",
+    "weight": 100,
+    "size": 600,
+    "color": "#efe8dc",
+    "align": "right",
+    "valign": "baseline",
+    "position": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        1824,
+        758
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 0.8499,
+       "v": [
+        1824,
+        740
+       ]
+      }
+     ]
+    },
+    "tracking": -4,
+    "skim": true
+   },
+   "timing": {
+    "in": 0.4999,
+    "out": 1.3332
+   }
+  },
+  "n111": {
+   "op": "text",
+   "params": {
+    "text": "11",
+    "font": "Sofia Sans Extra Condensed",
+    "weight": 100,
+    "size": 600,
+    "color": "#efe8dc",
+    "align": "right",
+    "valign": "baseline",
+    "position": {
+     "keys": [
+      {
+       "t": 1.3332,
+       "v": [
+        1824,
+        758
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 1.6832,
+       "v": [
+        1824,
+        740
+       ]
+      }
+     ]
+    },
+    "tracking": -4,
+    "skim": true
+   },
+   "timing": {
+    "in": 1.3332,
+    "out": 2.2499
+   }
+  },
+  "n101": {
+   "op": "text",
+   "params": {
+    "text": "10",
+    "font": "Sofia Sans Extra Condensed",
+    "weight": 200,
+    "size": 600,
+    "color": "#efe8dc",
+    "align": "right",
+    "valign": "baseline",
+    "position": {
+     "keys": [
+      {
+       "t": 2.2499,
+       "v": [
+        1824,
+        758
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 2.5999,
+       "v": [
+        1824,
+        740
+       ]
+      }
+     ]
+    },
+    "tracking": -4,
+    "skim": true
+   },
+   "timing": {
+    "in": 2.2499,
+    "out": 3.1249
+   }
+  },
+  "n91": {
+   "op": "text",
+   "params": {
+    "text": "9",
+    "font": "Sofia Sans Extra Condensed",
+    "weight": 200,
+    "size": 600,
+    "color": "#efe8dc",
+    "align": "right",
+    "valign": "baseline",
+    "position": {
+     "keys": [
+      {
+       "t": 3.1249,
+       "v": [
+        1824,
+        758
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 3.4749,
+       "v": [
+        1824,
+        740
+       ]
+      }
+     ]
+    },
+    "tracking": -4,
+    "skim": true
+   },
+   "timing": {
+    "in": 3.1249,
+    "out": 4.2499
+   }
+  },
+  "n61": {
+   "op": "text",
+   "params": {
+    "text": "6",
+    "font": "Sofia Sans Extra Condensed",
+    "weight": 300,
+    "size": 600,
+    "color": "#efe8dc",
+    "align": "right",
+    "valign": "baseline",
+    "position": {
+     "keys": [
+      {
+       "t": 6.6666,
+       "v": [
+        1824,
+        758
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 7.0166,
+       "v": [
+        1824,
+        740
+       ]
+      }
+     ]
+    },
+    "tracking": -4,
+    "skim": true
+   },
+   "timing": {
+    "in": 6.6666,
+    "out": 7.5416
+   }
+  },
+  "n51": {
+   "op": "text",
+   "params": {
+    "text": "5",
+    "font": "Sofia Sans Extra Condensed",
+    "weight": 400,
+    "size": 600,
+    "color": "#140f0b",
+    "align": "right",
+    "valign": "baseline",
+    "position": {
+     "keys": [
+      {
+       "t": 7.5416,
+       "v": [
+        1824,
+        758
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 7.8916,
+       "v": [
+        1824,
+        740
+       ]
+      }
+     ]
+    },
+    "tracking": -4,
+    "skim": true
+   },
+   "timing": {
+    "in": 7.5416,
+    "out": 8.4999
+   }
+  },
+  "n41": {
+   "op": "text",
+   "params": {
+    "text": "4",
+    "font": "Sofia Sans Extra Condensed",
+    "weight": 500,
+    "size": 600,
+    "color": "#140f0b",
+    "align": "right",
+    "valign": "baseline",
+    "position": {
+     "keys": [
+      {
+       "t": 8.4999,
+       "v": [
+        1824,
+        758
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 8.8499,
+       "v": [
+        1824,
+        740
+       ]
+      }
+     ]
+    },
+    "tracking": -4,
+    "skim": true
+   },
+   "timing": {
+    "in": 8.4999,
+    "out": 9.3332
+   }
+  },
+  "n31": {
+   "op": "text",
+   "params": {
+    "text": "3",
+    "font": "Sofia Sans Extra Condensed",
+    "weight": 600,
+    "size": 600,
+    "color": "#140f0b",
+    "align": "right",
+    "valign": "baseline",
+    "position": {
+     "keys": [
+      {
+       "t": 9.3332,
+       "v": [
+        1824,
+        758
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 9.6832,
+       "v": [
+        1824,
+        740
+       ]
+      }
+     ]
+    },
+    "tracking": -4,
+    "skim": true
+   },
+   "timing": {
+    "in": 9.3332,
+    "out": 10.4166
+   }
+  },
+  "n21": {
+   "op": "text",
+   "params": {
+    "text": "2",
+    "font": "Sofia Sans Extra Condensed",
+    "weight": 700,
+    "size": 600,
+    "color": "#140f0b",
+    "align": "right",
+    "valign": "baseline",
+    "position": {
+     "keys": [
+      {
+       "t": 10.4166,
+       "v": [
+        1824,
+        758
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 10.7666,
+       "v": [
+        1824,
+        740
+       ]
+      }
+     ]
+    },
+    "tracking": -4,
+    "skim": true
+   },
+   "timing": {
+    "in": 10.4166,
+    "out": 11.3332
+   }
+  },
+  "n11": {
+   "op": "text",
+   "params": {
+    "text": "1",
+    "font": "Sofia Sans Extra Condensed",
+    "weight": 800,
+    "size": 600,
+    "color": "#efe8dc",
+    "align": "right",
+    "valign": "baseline",
+    "position": {
+     "keys": [
+      {
+       "t": 11.3332,
+       "v": [
+        1824,
+        758
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 11.6832,
+       "v": [
+        1824,
+        740
+       ]
+      }
+     ]
+    },
+    "tracking": -4,
+    "skim": true
+   },
+   "timing": {
+    "in": 11.3332,
+    "out": 12.5416
+   }
+  },
+  "n01": {
+   "op": "text",
+   "params": {
+    "text": "0",
+    "font": "Sofia Sans Extra Condensed",
+    "weight": 900,
+    "size": 600,
+    "color": "#140f0b",
+    "align": "right",
+    "valign": "baseline",
+    "position": {
+     "keys": [
+      {
+       "t": 12.5416,
+       "v": [
+        1824,
+        758
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 12.8916,
+       "v": [
+        1824,
+        740
+       ]
+      }
+     ]
+    },
+    "tracking": -4,
+    "skim": true
+   },
+   "timing": {
+    "in": 12.5416,
+    "out": 13.2082
+   }
+  },
+  "clear": {
+   "op": "solid",
+   "params": {
+    "color": "#00000000"
+   }
+  },
+  "over15": {
+   "op": "over",
+   "inputs": {
+    "fg": "n121",
+    "bg": "clear"
+   }
+  },
+  "over16": {
+   "op": "over",
+   "inputs": {
+    "fg": "n111",
+    "bg": "over15"
+   }
+  },
+  "over17": {
+   "op": "over",
+   "inputs": {
+    "fg": "n101",
+    "bg": "over16"
+   }
+  },
+  "over18": {
+   "op": "over",
+   "inputs": {
+    "fg": "n91",
+    "bg": "over17"
+   }
+  },
+  "over19": {
+   "op": "over",
+   "inputs": {
+    "fg": "n61",
+    "bg": "over18"
+   }
+  },
+  "over20": {
+   "op": "over",
+   "inputs": {
+    "fg": "n11",
+    "bg": "over19"
+   }
+  },
+  "count_shadow": {
+   "op": "drop_shadow",
+   "params": {
+    "color": "#000000",
+    "offset": [
+     0,
+     0
+    ],
+    "radius": 26,
+    "opacity": 0.32
+   },
+   "inputs": {
+    "source": "over20"
+   }
+  },
+  "over21": {
+   "op": "over",
+   "inputs": {
+    "fg": "n51",
+    "bg": "clear"
+   }
+  },
+  "over22": {
+   "op": "over",
+   "inputs": {
+    "fg": "n41",
+    "bg": "over21"
+   }
+  },
+  "over23": {
+   "op": "over",
+   "inputs": {
+    "fg": "n31",
+    "bg": "over22"
+   }
+  },
+  "over24": {
+   "op": "over",
+   "inputs": {
+    "fg": "n21",
+    "bg": "over23"
+   }
+  },
+  "over25": {
+   "op": "over",
+   "inputs": {
+    "fg": "n01",
+    "bg": "over24"
+   }
+  },
+  "slate_1969_01": {
+   "op": "text",
+   "params": {
+    "font": "Sofia Sans",
+    "size": 20,
+    "tracking": 3.2,
+    "color": "#efe8dc",
+    "valign": "baseline",
+    "features": "tnum",
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "weight": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "text": "APOLLO 11",
+    "position": [
+     96,
+     708
+    ]
+   },
+   "timing": {
+    "in": 0.4999,
+    "out": 15.1666
+   }
+  },
+  "slate_1969_11": {
+   "op": "text",
+   "params": {
+    "font": "Sofia Sans",
+    "size": 20,
+    "tracking": 3.2,
+    "color": "#efe8dc",
+    "valign": "baseline",
+    "features": "tnum",
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "weight": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "text": "LAUNCH COMPLEX 39A",
+    "position": [
+     262,
+     708
+    ]
+   },
+   "timing": {
+    "in": 0.4999,
+    "out": 15.1666
+   }
+  },
+  "slate_1969_21": {
+   "op": "text",
+   "params": {
+    "font": "Sofia Sans",
+    "size": 20,
+    "tracking": 3.2,
+    "color": "#efe8dc",
+    "valign": "baseline",
+    "features": "tnum",
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "weight": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "text": "JULY 16, 1969",
+    "position": [
+     563,
+     708
+    ]
+   },
+   "timing": {
+    "in": 0.4999,
+    "out": 15.1666
+   }
+  },
+  "clock_1969_01": {
+   "op": "text",
+   "params": {
+    "font": "Sofia Sans",
+    "size": 20,
+    "tracking": 3.2,
+    "color": "#efe8dc",
+    "valign": "baseline",
+    "features": "tnum",
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "weight": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "text": "",
+    "position": [
+     846,
+     708
+    ],
+    "decimals": 0,
+    "skim": true,
+    "number": {
+     "keys": [
+      {
+       "t": 0.5416,
+       "v": [
+        47.55
+       ]
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        59.55
+       ]
+      }
+     ]
+    },
+    "prefix": "09:31:",
+    "suffix": " EDT"
+   },
+   "timing": {
+    "in": 0.4999,
+    "out": 12.5416
+   }
+  },
+  "clock_1969_11": {
+   "op": "text",
+   "params": {
+    "font": "Sofia Sans",
+    "size": 20,
+    "tracking": 3.2,
+    "color": "#efe8dc",
+    "valign": "baseline",
+    "features": "tnum",
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "weight": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "text": "",
+    "position": [
+     846,
+     708
+    ],
+    "decimals": 0,
+    "skim": true,
+    "number": {
+     "keys": [
+      {
+       "t": 12.5416,
+       "v": [
+        -0.45
+       ]
+      },
+      {
+       "t": 22.5416,
+       "v": [
+        9.55
+       ]
+      }
+     ]
+    },
+    "prefix": "09:32:0",
+    "suffix": " EDT"
+   },
+   "timing": {
+    "in": 12.5416,
+    "out": 15.1666
+   }
+  },
+  "slate_2022_01": {
+   "op": "text",
+   "params": {
+    "font": "Sofia Sans",
+    "size": 20,
+    "tracking": 3.2,
+    "color": "#efe8dc",
+    "valign": "baseline",
+    "features": "tnum",
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "weight": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "text": "ARTEMIS I",
+    "position": [
+     96,
+     740
+    ]
+   },
+   "timing": {
+    "in": 0.4999,
+    "out": 15.1666
+   }
+  },
+  "slate_2022_11": {
+   "op": "text",
+   "params": {
+    "font": "Sofia Sans",
+    "size": 20,
+    "tracking": 3.2,
+    "color": "#efe8dc",
+    "valign": "baseline",
+    "features": "tnum",
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "weight": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "text": "LAUNCH COMPLEX 39B",
+    "position": [
+     262,
+     740
+    ]
+   },
+   "timing": {
+    "in": 0.4999,
+    "out": 15.1666
+   }
+  },
+  "slate_2022_21": {
+   "op": "text",
+   "params": {
+    "font": "Sofia Sans",
+    "size": 20,
+    "tracking": 3.2,
+    "color": "#efe8dc",
+    "valign": "baseline",
+    "features": "tnum",
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "weight": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "text": "NOVEMBER 16, 2022",
+    "position": [
+     563,
+     740
+    ]
+   },
+   "timing": {
+    "in": 0.4999,
+    "out": 15.1666
+   }
+  },
+  "clock_2022_01": {
+   "op": "text",
+   "params": {
+    "font": "Sofia Sans",
+    "size": 20,
+    "tracking": 3.2,
+    "color": "#efe8dc",
+    "valign": "baseline",
+    "features": "tnum",
+    "opacity": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        1.0
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        0.72
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "weight": {
+     "keys": [
+      {
+       "t": 0.4999,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 3.1249,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 4.2499,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 6.6666,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 7.5416,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 8.4999,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 9.3332,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 10.4166,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 11.3332,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        700
+       ],
+       "ease": "hold"
+      },
+      {
+       "t": 13.2082,
+       "v": [
+        400
+       ],
+       "ease": "hold"
+      }
+     ]
+    },
+    "text": "",
+    "position": [
+     846,
+     740
+    ],
+    "decimals": 0,
+    "skim": true,
+    "number": {
+     "keys": [
+      {
+       "t": 0.5416,
+       "v": [
+        31.55
+       ]
+      },
+      {
+       "t": 27.5416,
+       "v": [
+        58.55
+       ]
+      }
+     ]
+    },
+    "prefix": "01:47:",
+    "suffix": " EST"
+   },
+   "timing": {
+    "in": 0.4999,
+    "out": 15.1666
+   }
+  },
+  "slate_rule": {
+   "op": "shape",
+   "params": {
+    "kind": "rect",
+    "center": [
+     551.0,
+     674
+    ],
+    "size": [
+     910,
+     1.2
+    ],
+    "color": "#efe8dc",
+    "opacity": 0.45
+   },
+   "timing": {
+    "in": 0.4999,
+    "out": 15.1666
+   }
+  },
+  "over26": {
+   "op": "over",
+   "inputs": {
+    "fg": "slate_1969_01",
+    "bg": "clear"
+   }
+  },
+  "over27": {
+   "op": "over",
+   "inputs": {
+    "fg": "slate_1969_11",
+    "bg": "over26"
+   }
+  },
+  "over28": {
+   "op": "over",
+   "inputs": {
+    "fg": "slate_1969_21",
+    "bg": "over27"
+   }
+  },
+  "over29": {
+   "op": "over",
+   "inputs": {
+    "fg": "clock_1969_01",
+    "bg": "over28"
+   }
+  },
+  "over30": {
+   "op": "over",
+   "inputs": {
+    "fg": "clock_1969_11",
+    "bg": "over29"
+   }
+  },
+  "over31": {
+   "op": "over",
+   "inputs": {
+    "fg": "slate_2022_01",
+    "bg": "over30"
+   }
+  },
+  "over32": {
+   "op": "over",
+   "inputs": {
+    "fg": "slate_2022_11",
+    "bg": "over31"
+   }
+  },
+  "over33": {
+   "op": "over",
+   "inputs": {
+    "fg": "slate_2022_21",
+    "bg": "over32"
+   }
+  },
+  "over34": {
+   "op": "over",
+   "inputs": {
+    "fg": "clock_2022_01",
+    "bg": "over33"
+   }
+  },
+  "over35": {
+   "op": "over",
+   "inputs": {
+    "fg": "slate_rule",
+    "bg": "over34"
+   }
+  },
+  "slate": {
+   "op": "drop_shadow",
+   "params": {
+    "color": "#000000",
+    "offset": [
+     0,
+     1
+    ],
+    "radius": 10,
+    "opacity": 0.85
+   },
+   "inputs": {
+    "source": "over35"
+   }
+  },
+  "title": {
+   "op": "text",
+   "params": {
+    "text": "We go",
+    "font": "Sofia Sans Extra Condensed",
+    "weight": 100,
+    "size": 200,
+    "color": "#efe8dc",
+    "align": "left",
+    "valign": "baseline",
+    "position": [
+     92.6,
+     250
+    ],
+    "tracking": {
+     "keys": [
+      {
+       "t": 19.2916,
+       "v": [
+        12.0
+       ],
+       "ease": {
+        "bezier": [
+         0.16,
+         1.0,
+         0.3,
+         1.0
+        ]
+       }
+      },
+      {
+       "t": 21.8916,
+       "v": [
+        6.0
+       ]
+      }
+     ]
+    },
+    "opacity": {
+     "keys": [
+      {
+       "t": 19.2916,
+       "v": [
+        0.0
+       ]
+      },
+      {
+       "t": 19.9916,
+       "v": [
+        1.0
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 21.7,
+       "v": [
+        1.0
+       ]
+      },
+      {
+       "t": 22.35,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    }
+   }
+  },
+  "over36": {
+   "op": "over",
+   "inputs": {
+    "fg": "count_shadow",
+    "bg": "fades"
+   }
+  },
+  "over37": {
+   "op": "over",
+   "inputs": {
+    "fg": "over25",
+    "bg": "over36"
+   }
+  },
+  "over38": {
+   "op": "over",
+   "inputs": {
+    "fg": "slate",
+    "bg": "over37"
+   }
+  },
+  "over39": {
+   "op": "over",
+   "inputs": {
+    "fg": "title",
+    "bg": "over38"
+   }
+  },
+  "grain": {
+   "op": "grain",
+   "params": {
+    "amount": 0.04
+   },
+   "inputs": {
+    "source": "over39"
+   }
+  },
+  "voice": {
+   "op": "audio",
+   "params": {
+    "src": "../../../footage/clips/liftoff_a11_pao.wav",
+    "start": 0.5,
+    "gain": {
+     "keys": [
+      {
+       "t": 0.0,
+       "v": [
+        1.0
+       ]
+      },
+      {
+       "t": 19.2916,
+       "v": [
+        1.0
+       ]
+      },
+      {
+       "t": 19.4416,
+       "v": [
+        0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "roar_build": {
+   "op": "audio",
+   "params": {
+    "src": "../../../footage/clips/liftoff_a1_roar.wav",
+    "start": 1.5,
+    "from": 4.2499,
+    "duration": 8.2917,
+    "gain": {
+     "keys": [
+      {
+       "t": 4.2499,
+       "v": [
+        0.0
+       ]
+      },
+      {
+       "t": 4.5499,
+       "v": [
+        0.85
+       ]
+      },
+      {
+       "t": 12.1416,
+       "v": [
+        0.85
+       ]
+      },
+      {
+       "t": 12.4416,
+       "v": [
+        0.45
+       ]
+      },
+      {
+       "t": 12.5416,
+       "v": [
+        0.45
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "roar": {
+   "op": "audio",
+   "params": {
+    "src": "../../../footage/clips/liftoff_a1_roar.wav",
+    "start": 16.0,
+    "from": 12.5416,
+    "duration": 6.85,
+    "gain": {
+     "keys": [
+      {
+       "t": 12.5416,
+       "v": [
+        1.0
+       ]
+      },
+      {
+       "t": 13.1582,
+       "v": [
+        1.0
+       ]
+      },
+      {
+       "t": 13.3082,
+       "v": [
+        0.38
+       ]
+      },
+      {
+       "t": 14.2916,
+       "v": [
+        0.38
+       ]
+      },
+      {
+       "t": 14.5916,
+       "v": [
+        0.9
+       ]
+      },
+      {
+       "t": 15.0466,
+       "v": [
+        0.9
+       ]
+      },
+      {
+       "t": 15.1666,
+       "v": [
+        0.42
+       ]
+      },
+      {
+       "t": 17.2499,
+       "v": [
+        0.42
+       ]
+      },
+      {
+       "t": 17.3332,
+       "v": [
+        0.7
+       ]
+      },
+      {
+       "t": 19.2716,
+       "v": [
+        0.85
+       ]
+      },
+      {
+       "t": 19.3716,
+       "v": [
+        0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "roar_far": {
+   "op": "audio",
+   "params": {
+    "src": "../../../footage/clips/liftoff_a1_roar_far.wav",
+    "start": 22.729999999999997,
+    "from": 19.2716,
+    "gain": {
+     "keys": [
+      {
+       "t": 19.2716,
+       "v": [
+        0.0
+       ]
+      },
+      {
+       "t": 19.3516,
+       "v": [
+        0.62
+       ]
+      },
+      {
+       "t": 20.5,
+       "v": [
+        0.62
+       ]
+      },
+      {
+       "t": 22.5,
+       "v": [
+        0.0
+       ],
+       "ease": "in_out_sine"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

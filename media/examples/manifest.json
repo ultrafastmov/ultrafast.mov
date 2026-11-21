@@ -1,0 +1,1318 @@
+{
+ "licence": "NASA media is generally not subject to copyright in the United States; see NASA's media usage guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/)",
+ "entries": [
+  {
+   "id": "liftoff",
+   "section": "footage",
+   "title": "Two launches, one count",
+   "description": "Apollo 11 and Artemis I lift off in alternating shots, cut to the 1969 launch commentary, with each number in large type and both launches' clocks counting down to zero.",
+   "width": 1920,
+   "height": 804,
+   "aspect": "2.39:1",
+   "fps": 24,
+   "duration": 22.5,
+   "export_seconds": 3.36,
+   "export_frames": 540,
+   "review_findings": 0,
+   "ops_used": [
+    "adjust",
+    "audio",
+    "blur",
+    "color_matrix",
+    "drop_shadow",
+    "film_look",
+    "gradient",
+    "grain",
+    "over",
+    "shader",
+    "shape",
+    "solid",
+    "text",
+    "transform",
+    "video"
+   ],
+   "footage": [
+    {
+     "clip": "liftoff_a11_base.mp4",
+     "nasa_id": "KSC-19690716-MH-NAS01-0001-Apollo_11_Historical_Footage_and_Broll-DVC_1560"
+    },
+    {
+     "clip": "liftoff_a11_dawn.mp4",
+     "nasa_id": "KSC-19690716-MH-NAS01-0001-Apollo_11_Historical_Footage_and_Broll-DVC_1560"
+    },
+    {
+     "clip": "liftoff_a11_ignition.mp4",
+     "nasa_id": "KSC-19690716-MH-NAS01-0001-Apollo_11_Historical_Footage_and_Broll-DVC_1560"
+    },
+    {
+     "clip": "liftoff_a11_pao.wav",
+     "nasa_id": "KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372"
+    },
+    {
+     "clip": "liftoff_a11_usa.mp4",
+     "nasa_id": "KSC-19690716-MH-NAS01-0001-Apollo_11_Historical_Footage_and_Broll-DVC_1560"
+    },
+    {
+     "clip": "liftoff_a1_roar.wav",
+     "nasa_id": "KSC-20221116-MH-WEL01-0001-Artemis_I_Launch_Imagery-3319254"
+    },
+    {
+     "clip": "liftoff_a1_roar_far.wav",
+     "nasa_id": "KSC-20221116-MH-WEL01-0001-Artemis_I_Launch_Imagery-3319254"
+    },
+    {
+     "clip": "liftoff_gx_smoke.mp4",
+     "nasa_id": "GX010506"
+    },
+    {
+     "clip": "liftoff_ml805.mp4",
+     "nasa_id": "KSC-20221116-MH-NAS01-0001-Artemis_I_Launch_Engineering_Views_ML_Deck_LC_39B-3318973"
+    },
+    {
+     "clip": "liftoff_ml806.mp4",
+     "nasa_id": "KSC-20221116-MH-NAS01-0001-Artemis_I_Launch_Engineering_Views_ML_Deck_LC_39B-3318973"
+    },
+    {
+     "clip": "liftoff_sm_tower.mp4",
+     "nasa_id": "KSC-20221116--MH-FMX-01-0001-Artemis_1_slowmo_liftoff-3314595"
+    }
+   ],
+   "document": "/examples/liftoff.json",
+   "audio": true,
+   "gallery": true,
+   "files": {
+    "av1": {
+     "url": "/media/examples/liftoff.av1.mp4",
+     "bytes": 3525022
+    },
+    "hevc": {
+     "url": "/media/examples/liftoff.hevc.mp4",
+     "bytes": 3280030
+    },
+    "mp4": {
+     "url": "/media/examples/liftoff.mp4",
+     "bytes": 5265324
+    },
+    "full_av1": {
+     "url": "/media/examples/liftoff.full.av1.mp4",
+     "bytes": 6391830
+    },
+    "full_hevc": {
+     "url": "/media/examples/liftoff.full.hevc.mp4",
+     "bytes": 6807545
+    },
+    "poster": {
+     "url": "/media/examples/liftoff.jpg",
+     "bytes": 47827
+    },
+    "og": {
+     "url": "/media/examples/liftoff.og.jpg",
+     "bytes": 84930
+    }
+   }
+  },
+  {
+   "id": "podcast",
+   "section": "footage",
+   "title": "Podcast clip",
+   "description": "A vertical clip of NASA astronaut Mark Vande Hei aboard the space station, with word-timed captions, a waveform driven by his voice, and Earth cut in on the words that name it.",
+   "width": 1080,
+   "height": 1920,
+   "aspect": "9:16",
+   "fps": 30,
+   "duration": 26.0,
+   "export_seconds": 6.0,
+   "export_frames": 780,
+   "review_findings": 0,
+   "ops_used": [
+    "adjust",
+    "audio",
+    "blend",
+    "bloom",
+    "blur",
+    "crop",
+    "gradient",
+    "grain",
+    "lut",
+    "mask",
+    "mix",
+    "noise",
+    "opacity",
+    "over",
+    "path",
+    "shader",
+    "shape",
+    "solid",
+    "text",
+    "video",
+    "vignette"
+   ],
+   "footage": [
+    {
+     "clip": "podcast_earth_dusk.mp4",
+     "nasa_id": "jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_ 2021_210422-4KMP4"
+    },
+    {
+     "clip": "podcast_earth_limb.mp4",
+     "nasa_id": "jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_ 2021_210422-4KMP4"
+    },
+    {
+     "clip": "podcast_vande_hei_tight.mp4",
+     "nasa_id": "jsc2022m000083_NTV-VideoFile_Mark_Vande_Hei_Social_Media_Questions_220314-MP4"
+    }
+   ],
+   "document": "/examples/podcast.json",
+   "audio": true,
+   "gallery": true,
+   "files": {
+    "av1": {
+     "url": "/media/examples/podcast.av1.mp4",
+     "bytes": 3055038
+    },
+    "hevc": {
+     "url": "/media/examples/podcast.hevc.mp4",
+     "bytes": 3135561
+    },
+    "mp4": {
+     "url": "/media/examples/podcast.mp4",
+     "bytes": 6528783
+    },
+    "full_av1": {
+     "url": "/media/examples/podcast.full.av1.mp4",
+     "bytes": 4949687
+    },
+    "full_hevc": {
+     "url": "/media/examples/podcast.full.hevc.mp4",
+     "bytes": 5717585
+    },
+    "poster": {
+     "url": "/media/examples/podcast.jpg",
+     "bytes": 96081
+    },
+    "og": {
+     "url": "/media/examples/podcast.og.jpg",
+     "bytes": 80622
+    }
+   }
+  },
+  {
+   "id": "orbit",
+   "section": "data",
+   "title": "Artemis I's route",
+   "description": "Artemis I's flown route drawn across lit models of the Earth and Moon, with flight-day and distance counters, and Orion's own view of the Moon at the return flyby.",
+   "width": 1920,
+   "height": 1080,
+   "aspect": "16:9",
+   "fps": 30,
+   "duration": 20.0,
+   "export_seconds": 7.05,
+   "export_frames": 600,
+   "review_findings": 0,
+   "ops_used": [
+    "adjust",
+    "blend",
+    "bloom",
+    "gradient",
+    "image",
+    "mask",
+    "opacity",
+    "over",
+    "path",
+    "shader",
+    "shape",
+    "solid",
+    "text",
+    "transform",
+    "video",
+    "vignette"
+   ],
+   "footage": [
+    {
+     "clip": "orion_moon_fd20.mp4",
+     "nasa_id": "FD 20 2"
+    }
+   ],
+   "document": "/examples/orbit.json",
+   "audio": false,
+   "gallery": true,
+   "files": {
+    "av1": {
+     "url": "/media/examples/orbit.av1.mp4",
+     "bytes": 1782732
+    },
+    "hevc": {
+     "url": "/media/examples/orbit.hevc.mp4",
+     "bytes": 1928443
+    },
+    "mp4": {
+     "url": "/media/examples/orbit.mp4",
+     "bytes": 5063800
+    },
+    "full_av1": {
+     "url": "/media/examples/orbit.full.av1.mp4",
+     "bytes": 3158831
+    },
+    "full_hevc": {
+     "url": "/media/examples/orbit.full.hevc.mp4",
+     "bytes": 3622714
+    },
+    "poster": {
+     "url": "/media/examples/orbit.jpg",
+     "bytes": 63791
+    },
+    "og": {
+     "url": "/media/examples/orbit.og.jpg",
+     "bytes": 71776
+    }
+   }
+  },
+  {
+   "id": "keeling",
+   "section": "data",
+   "title": "The Keeling Curve",
+   "description": "Every monthly mean of carbon dioxide at Mauna Loa since March 1958 draws itself; the camera dives into 2025 to show the seasonal cycle, and the latest month lands large.",
+   "width": 1080,
+   "height": 1350,
+   "aspect": "4:5",
+   "fps": 30,
+   "duration": 16.0,
+   "export_seconds": 1.5,
+   "export_frames": 480,
+   "review_findings": 0,
+   "ops_used": [
+    "blend",
+    "crop",
+    "opacity",
+    "over",
+    "path",
+    "shader",
+    "shape",
+    "solid",
+    "text"
+   ],
+   "footage": [],
+   "document": "/examples/keeling.json",
+   "audio": false,
+   "gallery": true,
+   "files": {
+    "av1": {
+     "url": "/media/examples/keeling.av1.mp4",
+     "bytes": 908914
+    },
+    "hevc": {
+     "url": "/media/examples/keeling.hevc.mp4",
+     "bytes": 639353
+    },
+    "mp4": {
+     "url": "/media/examples/keeling.mp4",
+     "bytes": 2322779
+    },
+    "full_av1": {
+     "url": "/media/examples/keeling.full.av1.mp4",
+     "bytes": 979832
+    },
+    "full_hevc": {
+     "url": "/media/examples/keeling.full.hevc.mp4",
+     "bytes": 720996
+    },
+    "poster": {
+     "url": "/media/examples/keeling.jpg",
+     "bytes": 102656
+    },
+    "og": {
+     "url": "/media/examples/keeling.og.jpg",
+     "bytes": 47115
+    }
+   }
+  },
+  {
+   "id": "wrapped",
+   "section": "data",
+   "title": "Year in review",
+   "description": "One script writes a cycling club's year-in-review for each member: distance counts up over the days they rode, their favourite loop draws itself on a contour map, and the climbing rises as mountains.",
+   "width": 1080,
+   "height": 1920,
+   "aspect": "9:16",
+   "fps": 30,
+   "duration": 12.0,
+   "export_seconds": 1.37,
+   "export_frames": 360,
+   "review_findings": 0,
+   "ops_used": [
+    "crop",
+    "gradient",
+    "grain",
+    "mask",
+    "opacity",
+    "over",
+    "path",
+    "shader",
+    "shape",
+    "solid",
+    "text",
+    "transform",
+    "transition"
+   ],
+   "footage": [],
+   "document": "/examples/wrapped.json",
+   "audio": false,
+   "gallery": true,
+   "files": {
+    "av1": {
+     "url": "/media/examples/wrapped.av1.mp4",
+     "bytes": 1009632
+    },
+    "hevc": {
+     "url": "/media/examples/wrapped.hevc.mp4",
+     "bytes": 941478
+    },
+    "mp4": {
+     "url": "/media/examples/wrapped.mp4",
+     "bytes": 2061077
+    },
+    "full_av1": {
+     "url": "/media/examples/wrapped.full.av1.mp4",
+     "bytes": 1679785
+    },
+    "full_hevc": {
+     "url": "/media/examples/wrapped.full.hevc.mp4",
+     "bytes": 1596940
+    },
+    "poster": {
+     "url": "/media/examples/wrapped.jpg",
+     "bytes": 71790
+    },
+    "og": {
+     "url": "/media/examples/wrapped.og.jpg",
+     "bytes": 21198
+    }
+   },
+   "variants": [
+    {
+     "id": "wrapped-tomas",
+     "section": "data",
+     "title": "Year in review: Tomás",
+     "description": "One script writes a cycling club's year-in-review for each member: distance counts up over the days they rode, their favourite loop draws itself on a contour map, and the climbing rises as mountains.",
+     "width": 1080,
+     "height": 1920,
+     "aspect": "9:16",
+     "fps": 30,
+     "duration": 12.0,
+     "export_seconds": 1.37,
+     "export_frames": 360,
+     "review_findings": 0,
+     "ops_used": [
+      "crop",
+      "gradient",
+      "grain",
+      "mask",
+      "opacity",
+      "over",
+      "path",
+      "shader",
+      "shape",
+      "solid",
+      "text",
+      "transform",
+      "transition"
+     ],
+     "footage": [],
+     "document": "/examples/wrapped-tomas.json",
+     "audio": false,
+     "gallery": true,
+     "files": {
+      "av1": {
+       "url": "/media/examples/wrapped-tomas.av1.mp4",
+       "bytes": 1041756
+      },
+      "hevc": {
+       "url": "/media/examples/wrapped-tomas.hevc.mp4",
+       "bytes": 910625
+      },
+      "mp4": {
+       "url": "/media/examples/wrapped-tomas.mp4",
+       "bytes": 2369828
+      },
+      "full_av1": {
+       "url": "/media/examples/wrapped-tomas.full.av1.mp4",
+       "bytes": 1703934
+      },
+      "full_hevc": {
+       "url": "/media/examples/wrapped-tomas.full.hevc.mp4",
+       "bytes": 1550803
+      },
+      "poster": {
+       "url": "/media/examples/wrapped-tomas.jpg",
+       "bytes": 69543
+      }
+     }
+    },
+    {
+     "id": "wrapped-oluwaseun",
+     "section": "data",
+     "title": "Year in review: Oluwaseun",
+     "description": "One script writes a cycling club's year-in-review for each member: distance counts up over the days they rode, their favourite loop draws itself on a contour map, and the climbing rises as mountains.",
+     "width": 1080,
+     "height": 1920,
+     "aspect": "9:16",
+     "fps": 30,
+     "duration": 12.0,
+     "export_seconds": 1.52,
+     "export_frames": 360,
+     "review_findings": 0,
+     "ops_used": [
+      "crop",
+      "gradient",
+      "grain",
+      "mask",
+      "opacity",
+      "over",
+      "path",
+      "shader",
+      "shape",
+      "solid",
+      "text",
+      "transform",
+      "transition"
+     ],
+     "footage": [],
+     "document": "/examples/wrapped-oluwaseun.json",
+     "audio": false,
+     "gallery": true,
+     "files": {
+      "av1": {
+       "url": "/media/examples/wrapped-oluwaseun.av1.mp4",
+       "bytes": 960791
+      },
+      "hevc": {
+       "url": "/media/examples/wrapped-oluwaseun.hevc.mp4",
+       "bytes": 882594
+      },
+      "mp4": {
+       "url": "/media/examples/wrapped-oluwaseun.mp4",
+       "bytes": 2111252
+      },
+      "full_av1": {
+       "url": "/media/examples/wrapped-oluwaseun.full.av1.mp4",
+       "bytes": 1555760
+      },
+      "full_hevc": {
+       "url": "/media/examples/wrapped-oluwaseun.full.hevc.mp4",
+       "bytes": 1507814
+      },
+      "poster": {
+       "url": "/media/examples/wrapped-oluwaseun.jpg",
+       "bytes": 69826
+      }
+     }
+    },
+    {
+     "id": "wrapped-bea",
+     "section": "data",
+     "title": "Year in review: Bea",
+     "description": "One script writes a cycling club's year-in-review for each member: distance counts up over the days they rode, their favourite loop draws itself on a contour map, and the climbing rises as mountains.",
+     "width": 1080,
+     "height": 1920,
+     "aspect": "9:16",
+     "fps": 30,
+     "duration": 12.0,
+     "export_seconds": 1.57,
+     "export_frames": 360,
+     "review_findings": 0,
+     "ops_used": [
+      "crop",
+      "gradient",
+      "grain",
+      "mask",
+      "opacity",
+      "over",
+      "path",
+      "shader",
+      "shape",
+      "solid",
+      "text",
+      "transform",
+      "transition"
+     ],
+     "footage": [],
+     "document": "/examples/wrapped-bea.json",
+     "audio": false,
+     "gallery": true,
+     "files": {
+      "av1": {
+       "url": "/media/examples/wrapped-bea.av1.mp4",
+       "bytes": 967238
+      },
+      "hevc": {
+       "url": "/media/examples/wrapped-bea.hevc.mp4",
+       "bytes": 899904
+      },
+      "mp4": {
+       "url": "/media/examples/wrapped-bea.mp4",
+       "bytes": 2185510
+      },
+      "full_av1": {
+       "url": "/media/examples/wrapped-bea.full.av1.mp4",
+       "bytes": 1619554
+      },
+      "full_hevc": {
+       "url": "/media/examples/wrapped-bea.full.hevc.mp4",
+       "bytes": 1538719
+      },
+      "poster": {
+       "url": "/media/examples/wrapped-bea.jpg",
+       "bytes": 68087
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "ui",
+   "section": "data",
+   "title": "SQL notebook launch",
+   "description": "A query against NASA's Exoplanet Archive is typed, run, charted and shared in an app that glides and tilts in 3D.",
+   "width": 1920,
+   "height": 1080,
+   "aspect": "16:9",
+   "fps": 30,
+   "duration": 16.0,
+   "export_seconds": 6.0,
+   "export_frames": 480,
+   "review_findings": 84,
+   "ops_used": [
+    "aberration",
+    "adjust",
+    "blend",
+    "bloom",
+    "blur",
+    "corner_pin",
+    "crop",
+    "gradient",
+    "grain",
+    "mask",
+    "opacity",
+    "over",
+    "path",
+    "shader",
+    "shape",
+    "solid",
+    "text",
+    "transform",
+    "vignette"
+   ],
+   "footage": [],
+   "document": "/examples/ui.json",
+   "audio": false,
+   "gallery": true,
+   "files": {
+    "av1": {
+     "url": "/media/examples/ui.av1.mp4",
+     "bytes": 1591469
+    },
+    "hevc": {
+     "url": "/media/examples/ui.hevc.mp4",
+     "bytes": 1781555
+    },
+    "mp4": {
+     "url": "/media/examples/ui.mp4",
+     "bytes": 3517255
+    },
+    "full_av1": {
+     "url": "/media/examples/ui.full.av1.mp4",
+     "bytes": 3126345
+    },
+    "full_hevc": {
+     "url": "/media/examples/ui.full.hevc.mp4",
+     "bytes": 3828206
+    },
+    "poster": {
+     "url": "/media/examples/ui.jpg",
+     "bytes": 46416
+    },
+    "og": {
+     "url": "/media/examples/ui.og.jpg",
+     "bytes": 41818
+    }
+   }
+  },
+  {
+   "id": "clay",
+   "section": "drawn",
+   "title": "Pottery class teaser",
+   "description": "A lump of wet terracotta is centred, opened and pulled into a vase on a turning wheel under window light, beside the class title and its details.",
+   "width": 1080,
+   "height": 1920,
+   "aspect": "9:16",
+   "fps": 30,
+   "duration": 10.0,
+   "export_seconds": 1.68,
+   "export_frames": 300,
+   "review_findings": 0,
+   "ops_used": [
+    "blend",
+    "bloom",
+    "blur",
+    "gradient",
+    "grain",
+    "mask",
+    "over",
+    "particles",
+    "shader",
+    "solid",
+    "stack",
+    "text",
+    "vignette"
+   ],
+   "footage": [],
+   "document": "/examples/clay.json",
+   "audio": false,
+   "gallery": true,
+   "files": {
+    "av1": {
+     "url": "/media/examples/clay.av1.mp4",
+     "bytes": 900180
+    },
+    "hevc": {
+     "url": "/media/examples/clay.hevc.mp4",
+     "bytes": 1127473
+    },
+    "mp4": {
+     "url": "/media/examples/clay.mp4",
+     "bytes": 2084560
+    },
+    "full_av1": {
+     "url": "/media/examples/clay.full.av1.mp4",
+     "bytes": 1998440
+    },
+    "full_hevc": {
+     "url": "/media/examples/clay.full.hevc.mp4",
+     "bytes": 2774001
+    },
+    "poster": {
+     "url": "/media/examples/clay.jpg",
+     "bytes": 61070
+    },
+    "og": {
+     "url": "/media/examples/clay.og.jpg",
+     "bytes": 38891
+    }
+   },
+   "variants": [
+    {
+     "id": "clay-v1",
+     "section": "drawn",
+     "title": "Pottery class teaser, first version",
+     "description": "A lump of wet terracotta is centred, opened and pulled into a vase on a turning wheel under window light, beside the class title and its details.",
+     "width": 1080,
+     "height": 1920,
+     "aspect": "9:16",
+     "fps": 30,
+     "duration": 10.0,
+     "export_seconds": 1.68,
+     "export_frames": 300,
+     "review_findings": 0,
+     "ops_used": [
+      "blend",
+      "bloom",
+      "blur",
+      "gradient",
+      "grain",
+      "mask",
+      "over",
+      "particles",
+      "shader",
+      "solid",
+      "stack",
+      "text",
+      "vignette"
+     ],
+     "footage": [],
+     "document": "/examples/clay-v1.json",
+     "audio": false,
+     "gallery": false,
+     "files": {
+      "av1": {
+       "url": "/media/examples/clay-v1.av1.mp4",
+       "bytes": 866233
+      },
+      "hevc": {
+       "url": "/media/examples/clay-v1.hevc.mp4",
+       "bytes": 1120156
+      },
+      "mp4": {
+       "url": "/media/examples/clay-v1.mp4",
+       "bytes": 2074322
+      },
+      "full_av1": {
+       "url": "/media/examples/clay-v1.full.av1.mp4",
+       "bytes": 1964638
+      },
+      "full_hevc": {
+       "url": "/media/examples/clay-v1.full.hevc.mp4",
+       "bytes": 2850142
+      },
+      "poster": {
+       "url": "/media/examples/clay-v1.jpg",
+       "bytes": 56168
+      }
+     }
+    },
+    {
+     "id": "clay-bowl",
+     "section": "drawn",
+     "title": "Pottery class teaser, as a bowl",
+     "description": "A lump of wet terracotta is centred, opened and pulled into a vase on a turning wheel under window light, beside the class title and its details.",
+     "width": 1080,
+     "height": 1920,
+     "aspect": "9:16",
+     "fps": 30,
+     "duration": 10.0,
+     "export_seconds": 1.51,
+     "export_frames": 300,
+     "review_findings": 0,
+     "ops_used": [
+      "blend",
+      "bloom",
+      "blur",
+      "gradient",
+      "grain",
+      "mask",
+      "over",
+      "particles",
+      "shader",
+      "solid",
+      "stack",
+      "text",
+      "vignette"
+     ],
+     "footage": [],
+     "document": "/examples/clay-bowl.json",
+     "audio": false,
+     "gallery": false,
+     "files": {
+      "av1": {
+       "url": "/media/examples/clay-bowl.av1.mp4",
+       "bytes": 904618
+      },
+      "hevc": {
+       "url": "/media/examples/clay-bowl.hevc.mp4",
+       "bytes": 1119001
+      },
+      "mp4": {
+       "url": "/media/examples/clay-bowl.mp4",
+       "bytes": 2065372
+      },
+      "full_av1": {
+       "url": "/media/examples/clay-bowl.full.av1.mp4",
+       "bytes": 2046471
+      },
+      "full_hevc": {
+       "url": "/media/examples/clay-bowl.full.hevc.mp4",
+       "bytes": 2790121
+      },
+      "poster": {
+       "url": "/media/examples/clay-bowl.jpg",
+       "bytes": 59226
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "product",
+   "section": "drawn",
+   "title": "Lens launch",
+   "description": "A camera lens that doesn't exist, lit like a studio product shot: light finds the knurled barrel, the focus scale turns, eleven blades stop down and the optics slide apart under callouts.",
+   "width": 1920,
+   "height": 1080,
+   "aspect": "16:9",
+   "fps": 30,
+   "duration": 16.0,
+   "export_seconds": 4.88,
+   "export_frames": 480,
+   "review_findings": 0,
+   "ops_used": [
+    "aberration",
+    "bloom",
+    "film_look",
+    "grain",
+    "over",
+    "path",
+    "shader",
+    "shape",
+    "solid",
+    "text",
+    "transition"
+   ],
+   "footage": [],
+   "document": "/examples/product.json",
+   "audio": false,
+   "gallery": true,
+   "files": {
+    "av1": {
+     "url": "/media/examples/product.av1.mp4",
+     "bytes": 2365187
+    },
+    "hevc": {
+     "url": "/media/examples/product.hevc.mp4",
+     "bytes": 2314744
+    },
+    "mp4": {
+     "url": "/media/examples/product.mp4",
+     "bytes": 4167807
+    },
+    "full_av1": {
+     "url": "/media/examples/product.full.av1.mp4",
+     "bytes": 5955163
+    },
+    "full_hevc": {
+     "url": "/media/examples/product.full.hevc.mp4",
+     "bytes": 6025935
+    },
+    "poster": {
+     "url": "/media/examples/product.jpg",
+     "bytes": 94253
+    },
+    "og": {
+     "url": "/media/examples/product.og.jpg",
+     "bytes": 57780
+    }
+   }
+  },
+  {
+   "id": "bloom",
+   "section": "drawn",
+   "title": "Celadon dish",
+   "description": "A carving grows across a celadon dish by reaction–diffusion, stepped every frame; the camera closes in on the glaze, then molten glaze floods back over it.",
+   "width": 1080,
+   "height": 1080,
+   "aspect": "1:1",
+   "fps": 30,
+   "duration": 15.0,
+   "export_seconds": 1.06,
+   "export_frames": 450,
+   "review_findings": 0,
+   "ops_used": [
+    "adjust",
+    "blend",
+    "bloom",
+    "blur",
+    "feedback",
+    "gradient",
+    "mask",
+    "over",
+    "shader",
+    "shape",
+    "vignette"
+   ],
+   "footage": [],
+   "document": "/examples/bloom.json",
+   "audio": false,
+   "gallery": true,
+   "files": {
+    "av1": {
+     "url": "/media/examples/bloom.av1.mp4",
+     "bytes": 1999486
+    },
+    "hevc": {
+     "url": "/media/examples/bloom.hevc.mp4",
+     "bytes": 1841128
+    },
+    "mp4": {
+     "url": "/media/examples/bloom.mp4",
+     "bytes": 3408686
+    },
+    "full_av1": {
+     "url": "/media/examples/bloom.full.av1.mp4",
+     "bytes": 2340256
+    },
+    "full_hevc": {
+     "url": "/media/examples/bloom.full.hevc.mp4",
+     "bytes": 2223047
+    },
+    "poster": {
+     "url": "/media/examples/bloom.jpg",
+     "bytes": 116925
+    },
+    "og": {
+     "url": "/media/examples/bloom.og.jpg",
+     "bytes": 71844
+    }
+   }
+  },
+  {
+   "id": "swiss",
+   "section": "drawn",
+   "title": "Concert poster",
+   "description": "A Swiss-style poster for a night of four concerts. Its dial is the score of its own track, and the headline widens and narrows on every beat.",
+   "width": 1080,
+   "height": 1350,
+   "aspect": "4:5",
+   "fps": 30,
+   "duration": 12.8,
+   "export_seconds": 0.72,
+   "export_frames": 384,
+   "review_findings": 0,
+   "ops_used": [
+    "audio",
+    "blend",
+    "color_matrix",
+    "noise",
+    "over",
+    "path",
+    "shader",
+    "shape",
+    "solid",
+    "text",
+    "transform"
+   ],
+   "footage": [],
+   "document": "/examples/swiss.json",
+   "audio": true,
+   "gallery": true,
+   "files": {
+    "av1": {
+     "url": "/media/examples/swiss.av1.mp4",
+     "bytes": 1187275
+    },
+    "hevc": {
+     "url": "/media/examples/swiss.hevc.mp4",
+     "bytes": 1082045
+    },
+    "mp4": {
+     "url": "/media/examples/swiss.mp4",
+     "bytes": 2670805
+    },
+    "full_av1": {
+     "url": "/media/examples/swiss.full.av1.mp4",
+     "bytes": 1205598
+    },
+    "full_hevc": {
+     "url": "/media/examples/swiss.full.hevc.mp4",
+     "bytes": 1161740
+    },
+    "poster": {
+     "url": "/media/examples/swiss.jpg",
+     "bytes": 105062
+    },
+    "og": {
+     "url": "/media/examples/swiss.og.jpg",
+     "bytes": 59096
+    }
+   }
+  },
+  {
+   "id": "dive",
+   "section": "drawn",
+   "title": "Endless zoom",
+   "description": "One camera falls through seven nested worlds (type, vector blades, a chrome torus, ink, shader contours and rings of type) to the wordmark, whose dot holds the first frame again.",
+   "width": 1920,
+   "height": 1080,
+   "aspect": "16:9",
+   "fps": 30,
+   "duration": 28.0,
+   "export_seconds": 5.65,
+   "export_frames": 840,
+   "review_findings": 0,
+   "ops_used": [
+    "bloom",
+    "fluid",
+    "grain",
+    "mask",
+    "over",
+    "path",
+    "raymarch",
+    "shader",
+    "shape",
+    "solid",
+    "transform",
+    "world0",
+    "world1",
+    "world2",
+    "world3",
+    "world4",
+    "world5",
+    "world6"
+   ],
+   "footage": [],
+   "document": "/examples/dive.json",
+   "audio": false,
+   "gallery": true,
+   "files": {
+    "av1": {
+     "url": "/media/examples/dive.av1.mp4",
+     "bytes": 7557779
+    },
+    "hevc": {
+     "url": "/media/examples/dive.hevc.mp4",
+     "bytes": 8363418
+    },
+    "mp4": {
+     "url": "/media/examples/dive.mp4",
+     "bytes": 6871904
+    },
+    "full_av1": {
+     "url": "/media/examples/dive.full.av1.mp4",
+     "bytes": 14270111
+    },
+    "full_hevc": {
+     "url": "/media/examples/dive.full.hevc.mp4",
+     "bytes": 16723761
+    },
+    "poster": {
+     "url": "/media/examples/dive.jpg",
+     "bytes": 99829
+    },
+    "og": {
+     "url": "/media/examples/dive.og.jpg",
+     "bytes": 131687
+    }
+   }
+  },
+  {
+   "id": "meridian",
+   "section": "drawn",
+   "title": "Main titles",
+   "description": "Main titles for a drama that doesn't exist: a brass compass, a sea chart with a route inking itself across it, star trails over the sea, an armillary sphere, and a lighthouse whose beam lights the title.",
+   "width": 1920,
+   "height": 804,
+   "aspect": "2.39:1",
+   "fps": 30,
+   "duration": 24.0,
+   "export_seconds": 1.44,
+   "export_frames": 720,
+   "review_findings": 0,
+   "ops_used": [
+    "aberration",
+    "adjust",
+    "blend",
+    "bloom",
+    "blur",
+    "corner_pin",
+    "glow",
+    "gradient",
+    "grain",
+    "mask",
+    "over",
+    "particles",
+    "path",
+    "raymarch",
+    "repeater",
+    "shader",
+    "shape",
+    "solid",
+    "text",
+    "transform",
+    "transition",
+    "vignette"
+   ],
+   "footage": [],
+   "document": "/examples/meridian.json",
+   "audio": false,
+   "gallery": true,
+   "files": {
+    "av1": {
+     "url": "/media/examples/meridian.av1.mp4",
+     "bytes": 2513649
+    },
+    "hevc": {
+     "url": "/media/examples/meridian.hevc.mp4",
+     "bytes": 2435412
+    },
+    "mp4": {
+     "url": "/media/examples/meridian.mp4",
+     "bytes": 5640723
+    },
+    "full_av1": {
+     "url": "/media/examples/meridian.full.av1.mp4",
+     "bytes": 5496601
+    },
+    "full_hevc": {
+     "url": "/media/examples/meridian.full.hevc.mp4",
+     "bytes": 5489871
+    },
+    "poster": {
+     "url": "/media/examples/meridian.jpg",
+     "bytes": 33489
+    },
+    "og": {
+     "url": "/media/examples/meridian.og.jpg",
+     "bytes": 36975
+    }
+   }
+  }
+ ],
+ "sources": [
+  {
+   "title": "Apollo 11 25th Anniversary \"B\" Roll Footage",
+   "nasa_id": "KSC-19690716-MH-NAS01-0001-Apollo_11_Historical_Footage_and_Broll-DVC_1560",
+   "page": "https://images.nasa.gov/details/KSC-19690716-MH-NAS01-0001-Apollo_11_Historical_Footage_and_Broll-DVC_1560",
+   "date": "1969-07-16",
+   "credit": "NASA",
+   "center": "KSC",
+   "kind": "footage",
+   "used_in": [
+    "Two launches, one count"
+   ]
+  },
+  {
+   "title": "Video - Apollo 11 Pre-Launch and Launch",
+   "nasa_id": "KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372",
+   "page": "https://images.nasa.gov/details/KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372",
+   "date": "1969-07-16",
+   "credit": "NASA",
+   "center": "KSC",
+   "kind": "footage",
+   "used_in": [
+    "Two launches, one count"
+   ]
+  },
+  {
+   "title": "4K Earth Views, Extended Cut for Earth Day 2021",
+   "nasa_id": "jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_ 2021_210422-4KMP4",
+   "page": "https://images.nasa.gov/details/jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_%202021_210422-4KMP4",
+   "date": "2021-04-22",
+   "credit": "NASA",
+   "center": "JSC",
+   "kind": "footage",
+   "used_in": [
+    "Podcast clip"
+   ]
+  },
+  {
+   "title": "NASA Astronaut Answers Social Media Questions About Record Breaking Spaceflight",
+   "nasa_id": "jsc2022m000083_NTV-VideoFile_Mark_Vande_Hei_Social_Media_Questions_220314-MP4",
+   "page": "https://images.nasa.gov/details/jsc2022m000083_NTV-VideoFile_Mark_Vande_Hei_Social_Media_Questions_220314-MP4",
+   "date": "2022-03-15",
+   "credit": "NASA",
+   "center": "JSC",
+   "kind": "footage",
+   "used_in": [
+    "Podcast clip"
+   ]
+  },
+  {
+   "title": "Artemis I Launch - Engineering Views - ML Deck",
+   "nasa_id": "KSC-20221116-MH-NAS01-0001-Artemis_I_Launch_Engineering_Views_ML_Deck_LC_39B-3318973",
+   "page": "https://images.nasa.gov/details/KSC-20221116-MH-NAS01-0001-Artemis_I_Launch_Engineering_Views_ML_Deck_LC_39B-3318973",
+   "date": "2022-11-16",
+   "credit": "NASA",
+   "center": "KSC",
+   "kind": "footage",
+   "used_in": [
+    "Two launches, one count"
+   ]
+  },
+  {
+   "title": "Artemis I Slow Motion Liftoff",
+   "nasa_id": "KSC-20221116--MH-FMX-01-0001-Artemis_1_slowmo_liftoff-3314595",
+   "page": "https://images.nasa.gov/details/KSC-20221116--MH-FMX-01-0001-Artemis_1_slowmo_liftoff-3314595",
+   "date": "2022-11-16",
+   "credit": "NASA/Frank Michuax",
+   "center": "KSC",
+   "kind": "footage",
+   "used_in": [
+    "Two launches, one count"
+   ]
+  },
+  {
+   "title": "Artemis I Launch from NASA Causeway (Slo Mo)",
+   "nasa_id": "GX010506",
+   "page": "https://images.nasa.gov/details/GX010506",
+   "date": "2022-11-16",
+   "credit": "NASA/Brandon Hancock",
+   "center": "MSFC",
+   "kind": "footage",
+   "used_in": [
+    "Two launches, one count"
+   ]
+  },
+  {
+   "title": "Artemis I Launch Imagery",
+   "nasa_id": "KSC-20221116-MH-WEL01-0001-Artemis_I_Launch_Imagery-3319254",
+   "page": "https://images.nasa.gov/details/KSC-20221116-MH-WEL01-0001-Artemis_I_Launch_Imagery-3319254",
+   "date": "2022-11-16",
+   "credit": "NASA/Walter Lindblom",
+   "center": "KSC",
+   "kind": "footage",
+   "used_in": [
+    "Two launches, one count"
+   ]
+  },
+  {
+   "title": "Flight Day 20: To the Moon",
+   "nasa_id": "FD 20 2",
+   "page": "https://images.nasa.gov/details/FD%2020%202",
+   "date": "2022-12-05",
+   "credit": "NASA",
+   "center": "JSC",
+   "kind": "footage",
+   "used_in": [
+    "Artemis I's route"
+   ]
+  }
+ ],
+ "other_sources": [
+  {
+   "title": "Artemis I as-flown trajectory (spacecraft −1023)",
+   "credit": "NASA/JSC navigation via JPL Horizons",
+   "page": "https://ssd.jpl.nasa.gov/horizons/",
+   "kind": "data",
+   "date": "2022-12-13",
+   "used_in": [
+    "Artemis I's route"
+   ]
+  },
+  {
+   "title": "Blue Marble: Next Generation, November",
+   "credit": "NASA Earth Observatory",
+   "page": "https://visibleearth.nasa.gov/images/74192/november-blue-marble-next-generation",
+   "kind": "texture",
+   "date": "2004-11",
+   "used_in": [
+    "Artemis I's route"
+   ]
+  },
+  {
+   "title": "Earth at Night (Black Marble) 2016",
+   "credit": "NASA Earth Observatory",
+   "page": "https://visibleearth.nasa.gov/images/144898/earth-at-night-black-marble-2016-color-maps",
+   "kind": "texture",
+   "date": "2016",
+   "used_in": [
+    "Artemis I's route"
+   ]
+  },
+  {
+   "title": "CGI Moon Kit",
+   "credit": "NASA's Scientific Visualization Studio",
+   "page": "https://svs.gsfc.nasa.gov/4720",
+   "kind": "texture",
+   "date": "2019",
+   "used_in": [
+    "Artemis I's route"
+   ]
+  },
+  {
+   "title": "Monthly mean CO₂ at Mauna Loa (co2_mm_mlo.csv)",
+   "credit": "NOAA Global Monitoring Laboratory; Scripps Institution of Oceanography",
+   "page": "https://gml.noaa.gov/ccgg/trends/data.html",
+   "kind": "data",
+   "date": "2026-11-19",
+   "used_in": [
+    "The Keeling Curve"
+   ]
+  },
+  {
+   "title": "NASA Exoplanet Archive: confirmed planets by discovery year and method",
+   "credit": "NASA Exoplanet Science Institute, Caltech/IPAC",
+   "page": "https://exoplanetarchive.ipac.caltech.edu/",
+   "kind": "data",
+   "date": "2026-11-21",
+   "used_in": [
+    "SQL notebook launch"
+   ]
+  }
+ ]
+}

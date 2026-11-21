@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ultrafast vs Remotion · A Remotion alternative on the GPU</title>
+<meta name="description" content="Remotion renders React in headless Chrome. ultrafast renders a JSON document on the GPU: faster renders, no per-render licence fee, and tools that let agents see their work.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/compare/remotion/">
+<link rel="alternate" type="text/markdown" href="/compare/remotion/index.md" title="ultrafast vs Remotion · A Remotion alternative on the GPU (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="ultrafast vs Remotion">
+<meta property="og:description" content="Remotion renders React in headless Chrome. ultrafast renders a JSON document on the GPU: faster renders, no per-render licence fee, and tools that let agents see their work.">
+<meta property="og:url" content="https://ultrafast.mov/compare/remotion/">
+<meta property="og:image" content="https://ultrafast.mov/og/compare-remotion.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ultrafast vs Remotion · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ultrafast vs Remotion">
+<meta name="twitter:description" content="Remotion renders React in headless Chrome. ultrafast renders a JSON document on the GPU: faster renders, no per-render licence fee, and tools that let agents see their work.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/compare-remotion.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=38337fe4">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. A video is a JSON document: your agent writes it, checks it, reviews every frame and renders it on the GPU at hundreds of frames a second, with no browser in the loop.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Compare","item":"https://ultrafast.mov/compare/"},{"@type":"ListItem","position":3,"name":"vs Remotion","item":"https://ultrafast.mov/compare/remotion/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is ultrafast free for companies?","acceptedAnswer":{"@type":"Answer","text":"Yes, at any size. The engine is Apache-2.0 or MIT. Remotion requires a company licence once an organisation has 4 or more people: $0.01 per render with a $100 monthly minimum, or $25 per seat per month."}},{"@type":"Question","name":"Can ultrafast render my Remotion project?","acceptedAnswer":{"@type":"Answer","text":"Not directly: it doesn't run React. Ask your agent to rewrite the composition as an ultrafast document, or run uf reconstruct on a finished render to get an editable draft."}},{"@type":"Question","name":"Does ultrafast need a GPU?","acceptedAnswer":{"@type":"Answer","text":"Yes, for now: a Mac with Apple silicon or a Vulkan GPU. ultrafast Cloud, which renders on ours, is coming soon (waitlist)."}},{"@type":"Question","name":"Does ultrafast have an embeddable web player like Remotion's?","acceptedAnswer":{"@type":"Answer","text":"No. ultrafast's live player is a desktop window for authoring. For the web, export an MP4."}},{"@type":"Question","name":"How many tokens does an agent spend on a Remotion video?","acceptedAnswer":{"@type":"Answer","text":"About 5,500 output tokens for a 10-second short: the composition, its components, styles and project files. The same short as an ultrafast document is about 1,100. At $20 per million output tokens, 10,000 shorts cost about $1,100 to write in Remotion and $220 in ultrafast."}}]},{"@type":"WebPage","name":"ultrafast vs Remotion · A Remotion alternative on the GPU","description":"Remotion renders React in headless Chrome. ultrafast renders a JSON document on the GPU: faster renders, no per-render licence fee, and tools that let agents see their work.","url":"https://ultrafast.mov/compare/remotion/","isPartOf":{"@id":"https://ultrafast.mov/#site"},"dateModified":"2026-11-22"}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/" aria-current="page">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="band stock-cotton phead">
+<div class="sunburst" aria-hidden="true"></div>  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+<li><a href="/compare/">Compare</a></li>  <li aria-current="page">vs Remotion</li>
+</ol>
+
+    <p class="eyebrow"><i style="--c:var(--orange)"></i>Compare</p>
+    <h1 class="pr h1" data-plates="pink black"><span class="ln">ultrafast</span> <span class="ln">vs Remotion.</span></h1>
+    <p class="lede">Remotion renders React components in headless Chrome, one screenshot per frame. ultrafast renders a JSON document on the GPU. Both make video from code; they differ in speed, licence and what an agent can see.</p>
+  </div>
+</section>
+
+<section class="band stock-thermal">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow"><i style="--c:var(--orange)"></i>At a glance</p>
+      <h2 class="pr " data-plates="pink black"><span class="ln">Side by side.</span></h2>
+    </div>
+    <div class="tablewrap">
+      <table class="tbl">
+        <thead><tr><th scope="col"></th><th scope="col" class="us">ultrafast</th><th scope="col">Remotion</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">How a frame is made</th><td class="us">GPU kernels compiled from the document; encoded on the same GPU with no readback</td><td>a React tree laid out in Chrome Headless Shell, screenshotted, encoded with FFmpeg</td></tr>
+          <tr><th scope="row">You write</th><td class="us">one JSON document, checked before it renders</td><td>a React and TypeScript project</td></tr>
+          <tr><th scope="row">Output tokens for a 10 s short</th><td class="us">about 1,100, all of it the video</td><td>about 5,500, most of it web code</td></tr>
+          <tr><th scope="row">Speed</th><td class="us">894 fps at 1080p with motion blur on one GPU; 11.6 s of 1080×1920 in about 2.2 s on one L4</td><td>an 80 s video in 15 s on Lambda across up to 200 functions; a 1-minute example in 19 s</td></tr>
+          <tr><th scope="row">Licence</th><td class="us">Apache-2.0 or MIT, for everyone</td><td>source-available; a company licence from 4 people, counting all staff</td></tr>
+          <tr><th scope="row">Price to render</th><td class="us">free on your GPU</td><td>$0.01 per render ($100/mo minimum) or $25 per seat per month, plus your AWS bill</td></tr>
+          <tr><th scope="row">Hosted rendering</th><td class="us">ultrafast Cloud is coming soon (<a class="alink" href="/cloud/">waitlist</a>); <code>uf serve</code> on your own GPU today</td><td>none; Lambda in your own AWS account</td></tr>
+          <tr><th scope="row">For agents</th><td class="us">20 MCP tools (local and remote), a skill, ChatGPT and Claude apps coming soon; frames come back as images</td><td>13 Agent Skills, plugins for 5 coding agents, Studio WebMCP; the hosted MCP closed on 26 October 2026</td></tr>
+          <tr><th scope="row">Review of the result</th><td class="us yes"><code>review</code> reads every frame: unreadable, clipped, overlapping or too-brief text, text under app buttons, flashing</td><td class="no">no built-in review</td></tr>
+          <tr><th scope="row">Effects</th><td class="us">3D with image-based light and glass, raymarching, particles, fluid and feedback sims, Slang shaders, 19 blend modes</td><td>Three.js through React Three Fiber, shaders, Lottie, motion blur</td></tr>
+          <tr><th scope="row">Export</th><td class="us">H.264, HEVC and AV1 MP4; ProRes proxy to 4444 XQ; transparent ProRes 4444 and VP9 WebM; GIF; PNG and EXR sequences; sound alone. Any size, rendered sharp, and any frame rate; four quality levels from draft to master</td><td>H.264, H.265, VP8, VP9, AV1, ProRes, GIF, transparent video, image sequences, sound alone; <code>--scale</code>; CRF and bitrate, no quality levels</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="band stock-newsprint">
+  <div class="wrap pheadgrid">
+    <div>
+      <p class="eyebrow"><i style="--c:var(--yellow)"></i>Speed</p>
+      <h2 class="pr " data-plates="pink black"><span class="ln">One GPU instead</span> <span class="ln">of 200 functions.</span></h2>
+      <p class="sub">Remotion gets its speed by splitting a video across many Lambda functions. ultrafast renders the whole video on one GPU, faster than playback, so a short is done before a cold function starts.</p>
+    </div>
+    <div class="receipt" aria-label="Measured ultrafast times">
+      <p class="rh">ultrafast, measured</p>
+      <dl>
+        <dt>1080p, 6-sample blur, RTX 5090</dt><dd>894 fps</dd>
+        <dt>10 s hero, same GPU</dt><dd>0.34 s</dd>
+        <dt>11.6 s of 1080×1920, one L4</dt><dd>2.2 s</dd>
+<dt>10 s vertical teaser, 3D</dt><dd>1.68 s</dd><dt>16 s launch film, 3D</dt><dd>4.88 s</dd>      </dl>
+      <p class="rf">Remotion's published figures: an 80 s video in 15 s; a 1-minute render in 19 s for $0.017 of AWS compute.</p>
+    </div>
+  </div>
+</section>
+
+<section id="tokens" class="band stock-cotton">
+  <div class="wrap">
+    <div class="pheadgrid">
+      <div>
+        <p class="eyebrow"><i style="--c:var(--green)"></i>Tokens</p>
+        <h2 class="pr " data-plates="pink black"><span class="ln">A fifth of</span> <span class="ln">the tokens.</span></h2>
+        <p class="sub">Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain. In a web project most of them are web code. In an ultrafast document, every token describes the video.</p>
+      </div>
+      <div>
+        <ol class="race tok" aria-label="Output tokens an agent writes for the same 10-second short">
+<li><span>ultrafast</span> <i class="bar" aria-hidden="true"><i class="v" style="--w:20.0%"></i></i> <b>1,100</b></li>
+<li><span>Remotion</span> <i class="bar" aria-hidden="true"><i class="v" style="--w:23.6%"></i><i class="c" style="--w:76.4%"></i></i> <b>5,500</b></li>
+        </ol>
+        <p class="tokkey"><span><i class="v" aria-hidden="true"></i>describes the video</span><span class="sr">; </span><span><i class="c" aria-hidden="true"></i>web code around it: imports, components, styles, timeline set-up, project files</span></p>
+      </div>
+    </div>
+
+    <div class="tkcode">
+      <h3>The same title, both ways.</h3>
+      <p>The pottery teaser’s title, its letters rising in one by one.</p>
+      <div class="vsgrid codegrid">
+        <div>
+          <p class="who">ultrafast</p>
+<div class="code"><div class="cbar"><span>clay.json: the title node</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Spin something new.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;font&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ultrafast:display&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;weight&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">176</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#f1e8dc&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">380</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;valign&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;baseline&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">880</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;line_height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;tracking&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;stagger&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;glyph_opacity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;ease&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;in_out_sine&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;glyph_offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">56</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;ease&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;bezier&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.16</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.8</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>        </div>
+        <div>
+          <p class="who">Remotion</p>
+<div class="code"><div class="cbar"><span>Title.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="nx">AbsoluteFill</span><span class="p">,</span><span class="w"> </span><span class="nx">Easing</span><span class="p">,</span><span class="w"> </span><span class="nx">interpolate</span><span class="p">,</span><span class="w"> </span><span class="nx">useCurrentFrame</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">useVideoConfig</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;remotion&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="nx">loadFont</span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@remotion/google-fonts/Fraunces&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="nx">fontFamily</span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">loadFont</span><span class="p">(</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">weights</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;300&#39;</span><span class="p">]});</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">TEXT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Spin something new.&#39;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">clamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">extrapolateLeft</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;clamp&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">extrapolateRight</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;clamp&#39;</span><span class="p">,</span>
+<span class="p">}</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="kd">const</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Title</span><span class="o">:</span><span class="w"> </span><span class="kt">React.FC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useCurrentFrame</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="nx">fps</span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useVideoConfig</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">AbsoluteFill</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">h1</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span>
+<span class="w">        </span><span class="nx">position</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="kt">80</span><span class="p">,</span><span class="w"> </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="kt">222</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="kt">880</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">margin</span><span class="o">:</span><span class="w"> </span><span class="kt">0</span><span class="p">,</span><span class="w"> </span><span class="nx">fontFamily</span><span class="p">,</span><span class="w"> </span><span class="nx">fontWeight</span><span class="o">:</span><span class="w"> </span><span class="kt">300</span><span class="p">,</span><span class="w"> </span><span class="nx">fontSize</span><span class="o">:</span><span class="w"> </span><span class="kt">176</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">lineHeight</span><span class="o">:</span><span class="w"> </span><span class="kt">0.9</span><span class="p">,</span><span class="w"> </span><span class="nx">letterSpacing</span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#f1e8dc&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="p">}}&gt;</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">TEXT</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">).</span><span class="nx">map</span><span class="p">((</span><span class="nx">word</span><span class="p">,</span><span class="w"> </span><span class="nx">w</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">span</span><span class="w"> </span><span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">w</span><span class="p">}</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="nx">display</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;inline-block&#39;</span><span class="p">}}&gt;</span>
+<span class="w">            </span><span class="p">{[...</span><span class="nx">word</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;\u00a0&#39;</span><span class="p">].</span><span class="nx">map</span><span class="p">((</span><span class="nx">ch</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="kd">const</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frame</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">fps</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">0.7</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">0.03</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">n</span><span class="o">++</span><span class="p">;</span>
+<span class="w">              </span><span class="kd">const</span><span class="w"> </span><span class="nx">opacity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">interpolate</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">],</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">...</span><span class="nx">clamp</span><span class="p">,</span><span class="w"> </span><span class="nx">easing</span><span class="o">:</span><span class="w"> </span><span class="kt">Easing.inOut</span><span class="p">(</span><span class="nx">Easing</span><span class="p">.</span><span class="nx">sin</span><span class="p">),</span>
+<span class="w">              </span><span class="p">});</span>
+<span class="w">              </span><span class="kd">const</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">interpolate</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.1</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">56</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">],</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">...</span><span class="nx">clamp</span><span class="p">,</span><span class="w"> </span><span class="nx">easing</span><span class="o">:</span><span class="w"> </span><span class="kt">Easing.bezier</span><span class="p">(</span><span class="mf">0.16</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">),</span>
+<span class="w">              </span><span class="p">});</span>
+<span class="w">              </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">                </span><span class="p">&lt;</span><span class="nt">span</span><span class="w"> </span><span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">c</span><span class="p">}</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span>
+<span class="w">                  </span><span class="nx">display</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;inline-block&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">opacity</span><span class="p">,</span>
+<span class="w">                  </span><span class="nx">transform</span><span class="o">:</span><span class="w"> </span><span class="sb">`translateY(</span><span class="si">${</span><span class="nx">y</span><span class="si">}</span><span class="sb">px)`</span><span class="p">,</span>
+<span class="w">                </span><span class="p">}}&gt;{</span><span class="nx">ch</span><span class="p">}&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="w">              </span><span class="p">);</span>
+<span class="w">            </span><span class="p">})}</span>
+<span class="w">          </span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">))}</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">AbsoluteFill</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">};</span></code></pre></div>        </div>
+      </div>
+      <p class="tkrest">The rest of the gap is project files such as <code>Root.tsx</code> and <code>package.json</code>, and the effects: grain, a grade and captions timed to each word are a component each in Remotion and one node each in ultrafast.</p>
+    </div>
+
+
+  </div>
+</section>
+<section class="band stock-kraft">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow"><i style="--c:var(--orange)"></i>Licence and cost</p>
+      <h2 class="pr " data-plates="pink black"><span class="ln">No company licence.</span></h2>
+      <p class="sub">Remotion is free for individuals and organisations of up to 3 people. At 4, counting everyone in the company whether they touch video or not, it needs a company licence. ultrafast is Apache-2.0 or MIT for everyone. Tokens at $20 per million output tokens.</p>
+    </div>
+    <div class="tablewrap">
+      <table class="tbl">
+        <thead><tr><th scope="col">10,000 ten-second shorts a month</th><th scope="col">to write them</th><th scope="col">to render them</th></tr></thead>
+        <tbody>
+          <tr class="us"><th scope="row">ultrafast on your GPUs</th><td>about $220 in output tokens</td><td>$0 in licences</td></tr>
+          <tr><th scope="row">Remotion, Automators licence</th><td>about $1,100 in output tokens</td><td>$100 in render fees, plus Lambda compute in your AWS account</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="band stock-cotton">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow"><i style="--c:var(--blue)"></i>For agents</p>
+      <h2 class="pr " data-plates="blue black"><span class="ln">An agent that can</span> <span class="ln">see what it made.</span></h2>
+      <p class="sub">A Remotion agent writes React and renders it; a person finds out what went wrong. An ultrafast agent checks the document, looks at contact sheets, and fixes what <code>review</code> reports before you watch.</p>
+    </div>
+    <div class="feats">
+      <div class="feat"><h3>Write</h3><p>JSON with a published schema and <code>uf ops</code> for every param. No project, no build, no <code>node_modules</code>.</p></div>
+      <div class="feat"><h3>Check and look</h3><p><code>check</code> before rendering; frames and contact sheets returned as images; <code>inspect</code> names the node behind a pixel.</p></div>
+      <div class="feat"><h3>Review and fix</h3><p><code>review</code> reads every frame for unreadable, clipped or too-brief text and flashing. The agent edits one node and renders again in under a second.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band stock-thermal">
+  <div class="wrap">
+    <div class="vsgrid">
+      <div class="verdict us">
+        <h3>Choose ultrafast when</h3>
+        <ul>
+          <li>An agent makes the videos and should review them.</li>
+          <li>You render often enough that per-render fees, Lambda bills and model tokens add up.</li>
+          <li>You need 3D, simulation or shader work alongside captions and footage.</li>
+          <li>Your company has more than 3 people and wants a permissive licence.</li>
+        </ul>
+      </div>
+      <div class="verdict">
+        <h3>Choose Remotion when</h3>
+        <ul>
+          <li>Your video is built from React components you already have.</li>
+          <li>You need Remotion's embeddable web Player.</li>
+          <li>You want the largest community: 74,000 GitHub stars.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band stock-cotton">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow"><i style="--c:var(--blue)"></i>Questions</p>
+      <h2 class="pr " data-plates="blue black"><span class="ln">Common questions.</span></h2>
+    </div>
+    <div class="faq">
+  <details open>
+    <summary>Is ultrafast free for companies?</summary>
+    <div class="ans"><p>Yes, at any size. The engine is Apache-2.0 or MIT. Remotion requires a company licence once an organisation has 4 or more people: $0.01 per render with a $100 monthly minimum, or $25 per seat per month.</p></div>
+  </details>
+  <details>
+    <summary>Can ultrafast render my Remotion project?</summary>
+    <div class="ans"><p>Not directly: it doesn't run React. Ask your agent to rewrite the composition as an ultrafast document, or run <code>uf reconstruct</code> on a finished render to get an editable draft.</p></div>
+  </details>
+  <details>
+    <summary>Does ultrafast need a GPU?</summary>
+    <div class="ans"><p>Yes, for now: a Mac with Apple silicon or a Vulkan GPU. ultrafast Cloud, which renders on ours, is coming soon (<a href="/cloud/">waitlist</a>).</p></div>
+  </details>
+  <details>
+    <summary>Does ultrafast have an embeddable web player like Remotion&#39;s?</summary>
+    <div class="ans"><p>No. ultrafast's live player is a desktop window for authoring. For the web, export an MP4.</p></div>
+  </details>
+  <details>
+    <summary>How many tokens does an agent spend on a Remotion video?</summary>
+    <div class="ans"><p>About 5,500 output tokens for a 10-second short: the composition, its components, styles and project files. The same short as an ultrafast document is about 1,100. At $20 per million output tokens, 10,000 shorts cost about $1,100 to write in Remotion and $220 in ultrafast.</p></div>
+  </details>
+</div>
+
+    <p class="credit" style="margin-top:40px">Remotion facts from its docs, checked 21 November 2026: <a class="alink" href="https://www.remotion.dev/docs/license/pricing">pricing</a>, <a class="alink" href="https://www.remotion.dev/docs/terms#TeamSize">team size</a>, <a class="alink" href="https://www.remotion.dev/lambda">Lambda</a>, <a class="alink" href="https://www.remotion.dev/docs/lambda/cost-example">cost example</a>, <a class="alink" href="https://www.remotion.dev/docs/ai/mcp">MCP</a>, <a class="alink" href="https://www.remotion.dev/docs/ai/skills">skills</a>, <a class="alink" href="https://www.remotion.dev/docs/ai/plugins">plugins</a>. Remotion is a trademark of its owner.</p>
+  </div>
+</section>
+
+<section class="band stock-canary ctaband">
+  <div class="wrap">
+    <h2 class="pr " data-plates="pink blue"><span class="ln">Make one and time it.</span></h2>
+    <p class="sub">Install the engine and time a render on your own GPU.</p>
+    <div class="actions">
+      <button class="chip big" data-copy="cargo install ultrafast" type="button"><code>cargo install ultrafast</code><span class="tick" aria-hidden="true">copied</span></button>
+      <a class="btn big" href="/docs/">Read the quickstart</a>
+    </div>
+    <p class="aside">Want it hosted? <a class="alink" href="/cloud/">Join the ultrafast Cloud waitlist</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=38337fe4"></script>
+</body>
+</html>

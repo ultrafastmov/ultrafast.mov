@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="mark_fill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff7a3d"/>
+      <stop offset="0.55" stop-color="#ff2e63"/>
+      <stop offset="1" stop-color="#7a3cff"/>
+    </linearGradient>
+    <radialGradient id="mark_sheen" cx="88" cy="64" r="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect id="tile" x="8" y="8" width="240" height="240" rx="64" fill="url(#mark_fill)"/>
+  <rect id="sheen" x="8" y="8" width="240" height="240" rx="64" fill="url(#mark_sheen)"/>
+  <!-- A lowercase u leaning into its own speed lines. -->
+  <g id="glyph" transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">
+    <path id="u" stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+    <path id="streak_1" stroke-width="14" d="M 54 100 L 86 100"/>
+    <path id="streak_2" stroke-width="14" d="M 42 132 L 86 132"/>
+    <path id="streak_3" stroke-width="14" d="M 60 164 L 86 164"/>
+  </g>
+</svg>
