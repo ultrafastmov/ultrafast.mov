@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video MCP server for agents · Shot on the GPU · ultrafast</title>
+<meta name="description" content="A video MCP server for Claude Code, Cursor and any MCP client: 20 tools to write, look at, review and export video, rendered on your GPU. Open source.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/mcp/">
+<link rel="alternate" type="text/markdown" href="/mcp/index.md" title="Video MCP server for agents · Shot on the GPU · ultrafast (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="Video MCP server">
+<meta property="og:description" content="A video MCP server for Claude Code, Cursor and any MCP client: 20 tools to write, look at, review and export video, rendered on your GPU. Open source.">
+<meta property="og:url" content="https://ultrafast.mov/mcp/">
+<meta property="og:image" content="https://ultrafast.mov/og/mcp.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Video MCP server · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Video MCP server">
+<meta name="twitter:description" content="A video MCP server for Claude Code, Cursor and any MCP client: 20 tools to write, look at, review and export video, rendered on your GPU. Open source.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/mcp.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=1c769418">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"MCP server","item":"https://ultrafast.mov/mcp/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can Claude make videos with an MCP server?","acceptedAnswer":{"@type":"Answer","text":"Yes. With ultrafast connected, Claude Code writes the video as a document, looks at its frames, reviews them and exports the file on your GPU. In a test with the ultrafast skill, it went from a one-line request to an exported video with 0 review findings. Add it with claude mcp add ultrafast -- uf mcp or the plugin. There is also a .mcpb bundle for Claude Desktop. The Claude connector comes with ultrafast Cloud."}},{"@type":"Question","name":"Which MCP clients does it work with?","acceptedAnswer":{"@type":"Answer","text":"Any client that starts a local server over stdio or connects over Streamable HTTP. Tested: Claude Code used it over stdio and HTTP, Cursor CLI listed all 20 tools, and Gemini CLI connected over stdio and HTTP. The configs for Codex and Claude Desktop are in the MCP reference; they haven't been tested yet."}},{"@type":"Question","name":"Can it edit videos I already have?","acceptedAnswer":{"@type":"Answer","text":"Yes, as footage in a document: cut, trim, speed-ramp, reframe, grade, key and caption clips, and put the cuts on the beat with ultrafast_beats. ultrafast_decompose turns a finished motion-graphics video into an editable document. It is not an FFmpeg wrapper: ultrafast renders every frame on the GPU."}},{"@type":"Question","name":"Do I need a GPU?","acceptedAnswer":{"@type":"Answer","text":"A GPU is the fast path: a Mac with Apple silicon, or a Linux x86_64 machine with a Vulkan GPU. There is no prebuilt Windows or Intel Mac build. No GPU? The Docker image renders on the CPU through Mesa's software Vulkan driver: frames in under a second, and a 6-second 1080×1920 export in about 17 seconds on 4 cores of a fast desktop CPU. Heavy 3D or particle work is much slower. An agent can also connect to a server that has a GPU: uf serve answers MCP at /mcp with its API key. Hosted GPUs come with ultrafast Cloud, which has a waitlist."}},{"@type":"Question","name":"Is there a hosted MCP server?","acceptedAnswer":{"@type":"Answer","text":"Not yet. The server runs on your machine (uf mcp) or on your own server (/mcp on uf serve, with its API key). A hosted server with OAuth sign-in comes with ultrafast Cloud. Join the waitlist for one email when it opens."}}]},{"@type":"WebPage","name":"Video MCP server for agents · Shot on the GPU · ultrafast","description":"A video MCP server for Claude Code, Cursor and any MCP client: 20 tools to write, look at, review and export video, rendered on your GPU. Open source.","url":"https://ultrafast.mov/mcp/","isPartOf":{"@id":"https://ultrafast.mov/#site"},"dateModified":"2026-11-22"}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/" aria-current="page">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="band stock-cotton phead">
+  <div class="sunburst" aria-hidden="true"></div>
+  <div class="wrap pheadgrid">
+    <div>
+      <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+  <li aria-current="page">MCP server</li>
+</ol>
+
+      <h1 class="pr h1" data-plates="pink black"><span class="ln">Shot on</span> <span class="ln">the GPU.</span></h1>
+      <p class="lede">Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU. Open source.</p>
+      <p class="sub">The ultrafast MCP server gives your agent 20 tools to write a video, look at its frames, review them and export the file, on your own GPU.</p>
+      <div class="actions">
+        <button class="chip big" data-copy="curl -fsSL https://ultrafast.mov/install.sh | sh" type="button"><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code><span class="tick" aria-hidden="true">copied</span></button>
+        <a class="btn big" href="#setup">Set up your client</a>
+      </div>
+      <p class="also">macOS on Apple silicon and Linux x86_64. Every parameter is in the <a class="alink" href="/docs/mcp/">MCP reference</a>.</p>
+    </div>
+    <div>
+      <div class="receipt" aria-label="The ultrafast MCP server in brief">
+        <p class="rh">ultrafast MCP server, v0.1.1</p>
+        <dl>
+          <dt>tools over stdio, uf mcp</dt><dd>20</dd>
+          <dt>tools over HTTP, /mcp</dt><dd>16</dd>
+          <dt>frames and sheets</dt><dd>images</dd>
+          <dt>review reads</dt><dd>every frame</dd>
+          <dt>licence</dt><dd>Apache-2.0 or MIT</dd>
+        </dl>
+        <p class="rf">In the official MCP Registry as io.github.ultrafastmov/ultrafast</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band stock-thermal" id="loop">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="pr " data-plates="red black"><span class="ln">What your</span> <span class="ln">agent sees.</span></h2>
+      <p class="sub">Frames and contact sheets come back as images. The review comes back as findings, each naming a node, a time and a fix.</p>
+    </div>
+    <ol class="steps">
+      <li><h3>It looks</h3><p><code>ultrafast_frame</code> returns one exact frame and <code>ultrafast_sheet</code> a labelled contact sheet, as images in the conversation. <code>ultrafast_inspect</code> names the node behind anything on screen.</p></li>
+      <li><h3>It reviews</h3><p><code>ultrafast_review</code> renders every frame. It reports text that is unreadable, clipped, overlapping, too small or too brief, text under social-app buttons, and flashing that risks seizures.</p></li>
+      <li><h3>It fixes and exports</h3><p><code>ultrafast_edit</code> changes the nodes a finding names and leaves the rest. <code>ultrafast_export</code> writes MP4, MOV, WebM, a GIF or an image sequence, at any size.</p></li>
+    </ol>
+
+    <div class="proofsheet" style="margin-top:72px">
+      <figure class="draft">
+        <img src="/img/proof_draft.webp" width="1400" height="621" loading="lazy" alt="Contact sheet of the first draft, frames at 0.55, 2.6, 4.5 and 7.5 seconds. Frame one is a white flash, the title runs off the right edge, the studio name is too dark to read and the details are tiny.">
+        <svg class="redpen" viewBox="0 0 1960 869" aria-hidden="true" preserveAspectRatio="none">
+          <path pathLength="1" d="M90 170 L 404 720 M 404 170 L 90 720"/>
+          <path pathLength="1" d="M880 140 C 950 118, 1010 150, 998 200 C 988 246, 922 258, 878 238 C 842 222, 838 168, 882 140"/>
+          <path pathLength="1" d="M1020 118 q 24 -12 48 0 t 48 0 t 48 0 t 48 0 t 48 0 t 48 0 t 48 0 t 48 0"/>
+          <path pathLength="1" d="M1014 674 L 1002 674 L 1002 714 L 1014 714 M 1096 674 L 1108 674 L 1108 714 L 1096 714"/>
+          <path pathLength="1" d="M1500 694 C 1560 702, 1622 702, 1676 690"/>
+          <g class="num"><circle cx="440" cy="132" r="22"/><text x="440" y="141">1</text><circle cx="850" cy="112" r="22"/><text x="850" y="121">2</text><circle cx="1436" cy="64" r="22"/><text x="1436" y="73">3</text><circle cx="1146" cy="694" r="22"/><text x="1146" y="703">4</text><circle cx="1712" cy="668" r="22"/><text x="1712" y="677">5</text></g>
+        </svg>
+        <ol class="notes" aria-label="The first draft's 8 review findings">
+          <li><b>flashing</b> <samp>more than 3 flashes per second: a photosensitive seizure risk (WCAG 2.3.1)</samp></li>
+          <li><b>clipped</b> <samp>"Pottery class" runs off the frame (right by 40 px)</samp></li>
+          <li><b>low contrast ×2</b> <samp>"HALDEN CLAY STUDIO" never reaches readable contrast (best 1.6:1, want 3:1 or more); "118 TANNER STREET" 1.6:1</samp></li>
+          <li><b>too brief</b> <samp>"First class free" is readable for 0.4 s; 3 words need about 0.9 s</samp></li>
+          <li><b>small text ×3</b> <samp>set at 20 px; below about 24 px it is hard to read on a phone</samp></li>
+        </ol>
+      </figure>
+      <div class="after">
+        <figure class="approved">
+          <img src="/img/proof_approved.webp" width="1400" height="621" loading="lazy" alt="Contact sheet of the second draft at the same moments: no flash, the title fits, the studio name and the details read.">
+          <span class="stamp ok" aria-label="review: 0 findings">0 findings</span>
+        </figure>
+        <ol class="slip" aria-label="The loop, by tool">
+          <li><code>sheet</code><span>the draft, as an image</span></li>
+          <li><code>review</code><span>8 findings, each with a fix</span></li>
+          <li><code>edit</code><span>the nodes they name</span></li>
+          <li><code>export</code><span>after 0 findings, in 1.68 s</span></li>
+        </ol>
+      </div>
+    </div>
+    <p class="credit" style="margin-top:28px;max-width:86ch">The pottery teaser from the <a class="alink" href="/examples/">examples</a>: its first draft and its second, at the same four moments. The review read all 300 frames in 4.7 s. These sheets and reviews came from the CLI (<code>uf sheet</code>, <code>uf review --safe social</code>), which runs the same code as the tools. The second version's document is <a class="alink" href="/examples/clay-v1.json">clay-v1.json</a>.</p>
+  </div>
+</section>
+
+<section class="band stock-newsprint" id="tools">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="pr " data-plates="blue black"><span class="ln">20 tools,</span> <span class="ln">in six groups.</span></h2>
+      <p class="sub">As <code>uf mcp</code> lists them in v0.1.1. The remote server has the 16 that don't read or write files on your machine.</p>
+    </div>
+    <div class="feats">
+      <div class="verdict" id="write">
+        <h3>Write</h3>
+        <ul>
+          <li><code>ultrafast_ops</code>: the op vocabulary, with every port, param, type and default.</li>
+          <li><code>ultrafast_new</code>: a template to start from: vertical, title, square, promo, explainer or product.</li>
+          <li><code>ultrafast_edit</code>: an edit batch applied to the document, atomically.</li>
+        </ul>
+      </div>
+      <div class="verdict" id="look">
+        <h3>Look</h3>
+        <ul>
+          <li><code>ultrafast_frame</code>: one exact frame, as an image.</li>
+          <li><code>ultrafast_sheet</code>: a labelled contact sheet of frames, as one image.</li>
+          <li><code>ultrafast_inspect</code>: what is on screen at a time, with each element's node, bounds and words.</li>
+        </ul>
+      </div>
+      <div class="verdict" id="review">
+        <h3>Check and review</h3>
+        <ul>
+          <li><code>ultrafast_check</code>: problems before rendering: unknown ops, misspelled params, broken shaders, missing files or fonts.</li>
+          <li><code>ultrafast_review</code>: renders the film and reports what a viewer would trip over, with the node and a fix.</li>
+        </ul>
+      </div>
+      <div class="verdict" id="export">
+        <h3>Render and export</h3>
+        <ul>
+          <li><code>ultrafast_export</code>: MP4, MOV, MKV or WebM, a GIF, PNG or EXR frames, or sound alone, at any size and frame rate.</li>
+          <li><code>ultrafast_estimate</code>: rendered minutes, GPU seconds and the time to the first frame, before rendering.</li>
+          <li><code>ultrafast_batch</code>: one document, a video per row of data.</li>
+          <li><code>ultrafast_profile</code>: GPU milliseconds per render group, for slow films.</li>
+        </ul>
+      </div>
+      <div class="verdict" id="import">
+        <h3>Import</h3>
+        <ul>
+          <li><code>ultrafast_import_svg</code>: an SVG as an editable component.</li>
+          <li><code>ultrafast_decompose</code>: a finished motion-graphics video as an editable document. <span class="credit">Local only.</span></li>
+          <li><code>ultrafast_ocr</code>: the text in a video frame, with word boxes and draft text nodes. <span class="credit">Local only.</span></li>
+          <li><code>ultrafast_match_font</code>: a text node's font, size, tracking and colour, from a video frame. <span class="credit">Local only.</span></li>
+        </ul>
+      </div>
+      <div class="verdict" id="sound-and-type">
+        <h3>Sound and type</h3>
+        <ul>
+          <li><code>ultrafast_beats</code>: tempo, beats, downbeats and onsets of a soundtrack.</li>
+          <li><code>ultrafast_voiceover</code>: a script spoken to WAV, with every word's time. <span class="credit">Local only.</span></li>
+          <li><code>ultrafast_measure</code>: glyph metrics of a line of text.</li>
+          <li><code>ultrafast_outline</code>: a line of text as SVG path data.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="credit" style="margin-top:40px;max-width:86ch">The server also tells the agent the loop when it connects: ops, a template, check until clean, look at sheets and frames, review and fix, then export. “Always look at a sheet before exporting.” Parameters for every tool are in the <a class="alink" href="/docs/mcp/#tools">MCP reference</a>.</p>
+  </div>
+</section>
+
+<section class="band stock-cotton" id="setup">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="pr " data-plates="pink black"><span class="ln">Set up</span> <span class="ln">your client.</span></h2>
+      <p class="sub">Install ultrafast, run <code>uf info</code> to check the GPU, then add the server to your client. Each block says what was tested, in November 2026.</p>
+      <div class="actions"><button class="chip big" data-copy="curl -fsSL https://ultrafast.mov/install.sh | sh" type="button"><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code><span class="tick" aria-hidden="true">copied</span></button></div>
+    </div>
+    <div class="vsgrid codegrid">
+      <div id="claude-code">
+        <h3 class="sr">Claude Code, with the plugin</h3>
+<div class="code"><div class="cbar"><span>Claude Code · plugin</span><button class="copy" type="button">copy</button></div><pre><code class="hl">claude<span class="w"> </span>plugin<span class="w"> </span>marketplace<span class="w"> </span>add<span class="w"> </span>ultrafastmov/ultrafast
+claude<span class="w"> </span>plugin<span class="w"> </span>install<span class="w"> </span>ultrafast@ultrafast</code></pre></div>        <p class="credit">The ultrafast skill and <code>uf mcp</code> together. Tested: the plugin installs from the repo. With the skill, Claude Code went from a one-line request to an exported video with 0 review findings.</p>
+      </div>
+      <div>
+        <h3 class="sr">Claude Code, the MCP server alone</h3>
+<div class="code"><div class="cbar"><span>Claude Code · MCP server only</span><button class="copy" type="button">copy</button></div><pre><code class="hl">claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>ultrafast<span class="w"> </span>--<span class="w"> </span>uf<span class="w"> </span>mcp</code></pre></div>        <p class="credit">Tested with Claude Code 2.1.325: a model run used new, check, sheet (and saw the image), inspect, edit and export.</p>
+      </div>
+      <div id="cursor">
+        <h3 class="sr">Cursor</h3>
+<div class="code"><div class="cbar"><span>Cursor · .cursor/mcp.json</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;mcpServers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;ultrafast&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uf&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mcp&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>        <p class="credit">Tested with Cursor CLI 2026.11.19: all 20 tools listed. No model run yet.</p>
+      </div>
+      <div id="gemini-cli">
+        <h3 class="sr">Gemini CLI</h3>
+<div class="code"><div class="cbar"><span>Gemini CLI · ~/.gemini/settings.json</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;mcpServers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;ultrafast&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uf&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mcp&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>        <p class="credit">Tested with Gemini CLI 0.70: connected over stdio, and over HTTP with <code>httpUrl</code> and a header. No model run yet.</p>
+      </div>
+      <div id="remote">
+        <h3 class="sr">Remote, from your own uf serve</h3>
+<div class="code"><div class="cbar"><span>Remote · /mcp on your uf serve</span><button class="copy" type="button">copy</button></div><pre><code class="hl">uf<span class="w"> </span>serve<span class="w">    </span><span class="c1"># on the machine with the GPU; prints an API key on first start</span>
+claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>--transport<span class="w"> </span>http<span class="w"> </span>ultrafast<span class="w"> </span>http://localhost:8080/mcp<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--header<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$ULTRAFAST_API_KEY</span><span class="s2">&quot;</span></code></pre></div>        <p class="credit">16 tools over Streamable HTTP, with the server's API key as a bearer token. Documents travel inline; exports come back as download links. Tested with Claude Code over HTTP, and with MCP Inspector, which called all 16 tools.</p>
+      </div>
+      <div id="registry">
+        <h3 class="sr">The MCP Registry and the MCP bundles</h3>
+<div class="code"><div class="cbar"><span>MCP Registry · MCP Bundles</span><button class="copy" type="button">copy</button></div><pre><code class="hl">io.github.ultrafastmov/ultrafast
+
+ultrafast-0.1.1-macos-arm64.mcpb
+ultrafast-0.1.1-linux-x86_64.mcpb</code></pre></div>        <p class="credit">The name in the <a class="alink" href="https://registry.modelcontextprotocol.io/v0/servers?search=io.github.ultrafastmov/ultrafast">official MCP Registry</a>, which points to the two bundles on the <a class="alink" href="https://github.com/ultrafastmov/ultrafast/releases/tag/v0.1.1">v0.1.1 release</a>: a .mcpb bundle for Claude Desktop on a <a class="alink" href="https://github.com/ultrafastmov/ultrafast/releases/download/v0.1.1/ultrafast-0.1.1-macos-arm64.mcpb">Mac with Apple silicon</a>, and one for <a class="alink" href="https://github.com/ultrafastmov/ultrafast/releases/download/v0.1.1/ultrafast-0.1.1-linux-x86_64.mcpb">Linux x86_64</a>. Each carries the binary and asks for one setting: the folder for documents and videos, <code>~/ultrafast</code> by default.</p>
+      </div>
+    </div>
+    <p class="credit" style="margin-top:28px;max-width:86ch">Codex and the JSON config for Claude Desktop are in the <a class="alink" href="/docs/mcp/#local">MCP reference</a>; neither has been tested yet. Any other MCP client that runs a stdio server, or connects over Streamable HTTP with a header, takes the same settings.</p>
+  </div>
+</section>
+
+<section class="band stock-kraft" id="different">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="pr " data-plates="pink black"><span class="ln">How it differs from</span> <span class="ln">other video MCP servers.</span></h2>
+      <p class="sub">Most video MCP servers wrap FFmpeg to edit files you already have, or call a hosted API. ultrafast makes the frames.</p>
+    </div>
+    <div class="vsgrid">
+      <div class="verdict">
+        <h3>FFmpeg wrappers</h3>
+        <ul>
+          <li>They cut, trim, join and convert video files you already have.</li>
+          <li>FFmpeg does the work. The tools pass it the commands.</li>
+        </ul>
+      </div>
+      <div class="verdict">
+        <h3>Hosted APIs</h3>
+        <ul>
+          <li>The tools send the job to a rendering service and get a result back.</li>
+          <li>They need an account with that service, and stop working if it closes. Remotion's hosted MCP server shut down on 26 October 2026.</li>
+        </ul>
+      </div>
+      <div class="verdict us" style="grid-column:1 / -1">
+        <h3>ultrafast renders the frames</h3>
+        <ul>
+          <li>It draws every frame on your GPU: 3D, simulations, shaders, motion type and footage, in one document.</li>
+          <li>Frames and contact sheets come back as images the agent can look at, before anyone watches the film.</li>
+          <li><code>ultrafast_review</code> reads every frame and names the node, the time and a fix for each problem it finds.</li>
+          <li>A video is a JSON document, so a change edits the nodes it touches and leaves the rest as they were.</li>
+          <li>It runs on your machine with no account, under Apache-2.0 or MIT.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="credit" style="margin-top:28px">Remotion's MCP page: <a class="alink" href="https://www.remotion.dev/docs/ai/mcp">remotion.dev/docs/ai/mcp</a>, read on 21 November 2026. Remotion is a trademark of its owner. More on how ultrafast compares: <a class="alink" href="/compare/">Compare</a>.</p>
+  </div>
+</section>
+
+<section class="band stock-thermal" id="limits">
+  <div class="wrap pheadgrid" style="align-items:start">
+    <div>
+      <h2 class="pr " data-plates="blue black"><span class="ln">Limits.</span></h2>
+      <p class="sub">What to know before you connect it. Checked 22 November 2026.</p>
+    </div>
+    <div class="verdict">
+      <h3>What it needs, and what it doesn't do yet</h3>
+      <ul>
+        <li>A GPU: a Mac with Apple silicon, or a Linux x86_64 machine with a Vulkan GPU.</li>
+        <li>No GPU? The Docker image (<code>ghcr.io/ultrafastmov/ultrafast</code>) renders on the CPU through Mesa's software Vulkan driver: frames in under a second, and a 6-second 1080×1920 export in about 17 seconds on 4 cores of a fast desktop CPU. Heavy 3D or particle work is much slower. On Linux, <code>mesa-vulkan-drivers</code> gives the other installs the same CPU path.</li>
+        <li>No prebuilt Windows or Intel Mac build.</li>
+        <li>On Linux, exports need ffmpeg; <code>ultrafast_voiceover</code> needs espeak-ng and <code>ultrafast_ocr</code> needs Tesseract.</li>
+        <li>The remote server at <code>/mcp</code> takes one API key as a bearer token. There is no OAuth sign-in on it.</li>
+        <li>OAuth sign-in and hosted rendering come with ultrafast Cloud, and so do the Claude connector and the ChatGPT app. Cloud has a <a class="alink" href="/cloud/">waitlist</a>.</li>
+        <li>Lottie import is in the CLI only (<code>uf import-lottie</code>). A document can still use a <code>lottie</code> node.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band stock-cotton tight" id="faq">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="pr small" data-plates="blue black"><span class="ln">Questions about</span> <span class="ln">the MCP server.</span></h2>
+    </div>
+    <div class="faq">
+  <details open>
+    <summary>Can Claude make videos with an MCP server?</summary>
+    <div class="ans"><p>Yes. With ultrafast connected, Claude Code writes the video as a document, looks at its frames, reviews them and exports the file on your GPU. In a test with the ultrafast skill, it went from a one-line request to an exported video with 0 review findings. Add it with <code>claude mcp add ultrafast -- uf mcp</code> or the plugin. There is also a .mcpb bundle for Claude Desktop. The Claude connector comes with <a href="/cloud/">ultrafast Cloud</a>.</p></div>
+  </details>
+  <details>
+    <summary>Which MCP clients does it work with?</summary>
+    <div class="ans"><p>Any client that starts a local server over stdio or connects over Streamable HTTP. Tested: Claude Code used it over stdio and HTTP, Cursor CLI listed all 20 tools, and Gemini CLI connected over stdio and HTTP. The configs for Codex and Claude Desktop are in the <a href="/docs/mcp/">MCP reference</a>; they haven't been tested yet.</p></div>
+  </details>
+  <details>
+    <summary>Can it edit videos I already have?</summary>
+    <div class="ans"><p>Yes, as footage in a document: cut, trim, speed-ramp, reframe, grade, key and caption clips, and put the cuts on the beat with <code>ultrafast_beats</code>. <code>ultrafast_decompose</code> turns a finished motion-graphics video into an editable document. It is not an FFmpeg wrapper: ultrafast renders every frame on the GPU.</p></div>
+  </details>
+  <details>
+    <summary>Do I need a GPU?</summary>
+    <div class="ans"><p>A GPU is the fast path: a Mac with Apple silicon, or a Linux x86_64 machine with a Vulkan GPU. There is no prebuilt Windows or Intel Mac build. No GPU? The Docker image renders on the CPU through Mesa's software Vulkan driver: frames in under a second, and a 6-second 1080×1920 export in about 17 seconds on 4 cores of a fast desktop CPU. Heavy 3D or particle work is much slower. An agent can also connect to a server that has a GPU: <code>uf serve</code> answers MCP at <code>/mcp</code> with its API key. Hosted GPUs come with <a href="/cloud/">ultrafast Cloud</a>, which has a waitlist.</p></div>
+  </details>
+  <details>
+    <summary>Is there a hosted MCP server?</summary>
+    <div class="ans"><p>Not yet. The server runs on your machine (<code>uf mcp</code>) or on your own server (<code>/mcp</code> on <code>uf serve</code>, with its API key). A hosted server with OAuth sign-in comes with <a href="/cloud/">ultrafast Cloud</a>. Join the waitlist for one email when it opens.</p></div>
+  </details>
+</div>
+
+  </div>
+</section>
+
+<section class="band stock-canary ctaband">
+  <div class="wrap">
+    <h2 class="pr " data-plates="pink blue"><span class="ln">Connect your agent.</span></h2>
+    <p class="sub">Install ultrafast, then add <code>uf mcp</code> to your client.</p>
+    <div class="actions">
+      <button class="chip big" data-copy="curl -fsSL https://ultrafast.mov/install.sh | sh" type="button"><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code><span class="tick" aria-hidden="true">copied</span></button>
+      <a class="btn big" href="/docs/">Read the quickstart</a>
+    </div>
+    <p class="aside">Want it hosted? <a class="alink" href="/cloud/">Join the ultrafast Cloud waitlist</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code></span>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=1c769418"></script>
+</body>
+</html>

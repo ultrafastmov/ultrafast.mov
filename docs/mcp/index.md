@@ -102,6 +102,8 @@ tool| does
   4. `ultrafast_review`; fix what it reports with `ultrafast_edit`.
   5. `ultrafast_export`.
 
+The [MCP server overview](<https://ultrafast.mov/mcp/>) shows this loop on a real film, with the clients tested and how it differs from other video MCP servers.
+
 The ultrafast skill teaches agents the document and this loop: `npx skills add ultrafastmov/ultrafast`. In Claude Code, the plugin brings the skill and `uf mcp` together: `claude plugin marketplace add ultrafastmov/ultrafast`, then `claude plugin install ultrafast@ultrafast`.
 
 Agents that read docs can start from [llms.txt](<https://ultrafast.mov/llms.txt>); every page here is also available as Markdown at `index.md`.

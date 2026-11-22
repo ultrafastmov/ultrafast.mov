@@ -8,7 +8,7 @@ Open source · Apache-2.0 or MIT
 
 # ultrafast: video shot on the GPU
 
-Shaders, 3D, motion type and real camera optics, written by your agent in up to [80% fewer tokens](<https://ultrafast.mov/compare/#tokens>) and rendered at GPU speed.
+Shaders, 3D, motion type and real camera optics, written by your agent and rendered at GPU speed.
 
 `curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
@@ -197,7 +197,7 @@ Compare
 
 ## No browser in the loop.
 
-Remotion and HyperFrames draw each frame in headless Chrome and capture it. ultrafast draws it on the GPU, and your agent writes a fifth of the tokens.
+Remotion and HyperFrames draw each frame in headless Chrome and capture it. ultrafast draws it on the GPU, and your agent writes about a third fewer tokens than for Remotion.
 
 [Full comparison](<https://ultrafast.mov/compare/>)
 
@@ -205,7 +205,7 @@ Remotion and HyperFrames draw each frame in headless Chrome and capture it. ultr
 ---|---|---|---  
 Draws each frame with| GPU kernels, Metal or Vulkan| headless Chrome, a screenshot per frame| headless Chrome, captured frame by frame  
 You write| one JSON document| a React project| HTML, CSS and JavaScript  
-Output tokens for a 10 s short| about 1,100| about 5,500| about 4,400  
+Output tokens for a 10 s short| about 1,234| about 1,868| about 1,680  
 Published speed, 1080p| 300 frames in 0.34 s, with 6-sample motion blur, on one GPU| an 80 s video in 15 s, split across up to 200 Lambda functions| 300 frames in 9.8 s  
 Agents review their frames| `check`, `review`, `inspect`, frames and contact sheets| no built-in review| no built-in review  
 Licence| Apache-2.0 or MIT| free up to 3 people; companies pay per render or per seat| Apache-2.0  
@@ -296,7 +296,7 @@ They draw each frame in headless Chrome and screenshot it. ultrafast draws on th
 
 Does an agent use fewer tokens with ultrafast?
 
-Yes, about a fifth as many. A 10-second short is about 1,100 output tokens of JSON. The same short is about 5,500 tokens as a Remotion project and 4,400 as a HyperFrames composition, and most of that is web code. See [tokens](<https://ultrafast.mov/compare/#tokens>).
+Yes, about a third fewer than with Remotion and a quarter fewer than with HyperFrames. Measured on the same 10-second short: 1,234 output tokens as an ultrafast document, 1,868 for Remotion and 1,680 for HyperFrames (tiktoken o200k_base). See [tokens](<https://ultrafast.mov/compare/#tokens>).
 
 What does it cost?
 

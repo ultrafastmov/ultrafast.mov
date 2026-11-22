@@ -31,7 +31,7 @@
 <link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/site.css?v=1c769418">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Compare","item":"https://ultrafast.mov/compare/"},{"@type":"ListItem","position":3,"name":"vs Remotion","item":"https://ultrafast.mov/compare/remotion/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is ultrafast free for companies?","acceptedAnswer":{"@type":"Answer","text":"Yes, at any size. The engine is Apache-2.0 or MIT. Remotion requires a company licence once an organisation has 4 or more people: $0.01 per render with a $100 monthly minimum, or $25 per seat per month."}},{"@type":"Question","name":"Can ultrafast render my Remotion project?","acceptedAnswer":{"@type":"Answer","text":"Not directly: it doesn't run React. Ask your agent to rewrite the composition as an ultrafast document, or run uf reconstruct on a finished render to get an editable draft."}},{"@type":"Question","name":"Does ultrafast need a GPU?","acceptedAnswer":{"@type":"Answer","text":"Yes, for now: a Mac with Apple silicon or a Vulkan GPU. ultrafast Cloud, which renders on hosted GPUs, is coming soon (waitlist)."}},{"@type":"Question","name":"Does ultrafast have an embeddable web player like Remotion's?","acceptedAnswer":{"@type":"Answer","text":"No. ultrafast's live player is a desktop window for authoring. For the web, export an MP4."}},{"@type":"Question","name":"How many tokens does an agent spend on a Remotion video?","acceptedAnswer":{"@type":"Answer","text":"About 5,500 output tokens for a 10-second short: the composition, its components, styles and project files. The same short as an ultrafast document is about 1,100. At $20 per million output tokens, 10,000 shorts cost about $1,100 to write in Remotion and $220 in ultrafast."}}]},{"@type":"WebPage","name":"ultrafast vs Remotion · A Remotion alternative on the GPU","description":"Remotion renders React in headless Chrome. ultrafast renders a JSON document on the GPU: faster renders, no per-render licence fee, and tools that let agents see their work.","url":"https://ultrafast.mov/compare/remotion/","isPartOf":{"@id":"https://ultrafast.mov/#site"},"dateModified":"2026-11-22"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Compare","item":"https://ultrafast.mov/compare/"},{"@type":"ListItem","position":3,"name":"vs Remotion","item":"https://ultrafast.mov/compare/remotion/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is ultrafast free for companies?","acceptedAnswer":{"@type":"Answer","text":"Yes, at any size. The engine is Apache-2.0 or MIT. Remotion requires a company licence once an organisation has 4 or more people: $0.01 per render with a $100 monthly minimum, or $25 per seat per month."}},{"@type":"Question","name":"Can ultrafast render my Remotion project?","acceptedAnswer":{"@type":"Answer","text":"Not directly: it doesn't run React. Ask your agent to rewrite the composition as an ultrafast document, or run uf reconstruct on a finished render to get an editable draft."}},{"@type":"Question","name":"Does ultrafast need a GPU?","acceptedAnswer":{"@type":"Answer","text":"A GPU is the fast path: a Mac with Apple silicon or a Vulkan GPU. No GPU? The Docker image renders on the CPU through Mesa's software Vulkan driver: frames in under a second, and a 6-second 1080×1920 export in about 17 seconds on 4 cores of a fast desktop CPU. Heavy 3D or particle work is much slower. ultrafast Cloud, which renders on hosted GPUs, is coming soon (waitlist)."}},{"@type":"Question","name":"Does ultrafast have an embeddable web player like Remotion's?","acceptedAnswer":{"@type":"Answer","text":"No. ultrafast's live player is a desktop window for authoring. For the web, export an MP4."}},{"@type":"Question","name":"How many tokens does an agent spend on a Remotion video?","acceptedAnswer":{"@type":"Answer","text":"Measured on a 10-second vertical short (footage, a title, three lines, word-timed captions, a grade and grain): 1,868 output tokens for the composition, config and CLI commands. The same short as an ultrafast document is 1,234, about a third fewer (tiktoken o200k_base)."}}]},{"@type":"WebPage","name":"ultrafast vs Remotion · A Remotion alternative on the GPU","description":"Remotion renders React in headless Chrome. ultrafast renders a JSON document on the GPU: faster renders, no per-render licence fee, and tools that let agents see their work.","url":"https://ultrafast.mov/compare/remotion/","isPartOf":{"@id":"https://ultrafast.mov/#site"},"dateModified":"2026-11-22"}]}</script>
 </head>
 <body>
 <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
@@ -103,7 +103,7 @@
         <tbody>
           <tr><th scope="row">How a frame is made</th><td class="us">GPU kernels compiled from the document; encoded on the same GPU with no readback</td><td>a React tree laid out in Chrome Headless Shell, screenshotted, encoded with FFmpeg</td></tr>
           <tr><th scope="row">You write</th><td class="us">one JSON document, checked before it renders</td><td>a React and TypeScript project</td></tr>
-          <tr><th scope="row">Output tokens for a 10 s short</th><td class="us">about 1,100, all of it the video</td><td>about 5,500, most of it web code</td></tr>
+          <tr><th scope="row">Output tokens for a 10 s short</th><td class="us">about 1,234, measured</td><td>about 1,868, most of it web code</td></tr>
           <tr><th scope="row">Speed</th><td class="us">894 fps at 1080p with motion blur on one GPU; 11.6 s of 1080×1920 in about 2.2 s on one L4</td><td>an 80 s video in 15 s on Lambda across up to 200 functions; a 1-minute example in 19 s</td></tr>
           <tr><th scope="row">Licence</th><td class="us">Apache-2.0 or MIT, for everyone</td><td>source-available; a company licence from 4 people, counting all staff</td></tr>
           <tr><th scope="row">Price to render</th><td class="us">free on your GPU</td><td>$0.01 per render ($100/mo minimum) or $25 per seat per month, plus your AWS bill</td></tr>
@@ -142,15 +142,14 @@
     <div class="pheadgrid">
       <div>
         <p class="eyebrow"><i style="--c:var(--green)"></i>Tokens</p>
-        <h2 class="pr " data-plates="pink black"><span class="ln">A fifth of</span> <span class="ln">the tokens.</span></h2>
-        <p class="sub">Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain. In a web project most of them are web code. In an ultrafast document, every token describes the video.</p>
+        <h2 class="pr " data-plates="pink black"><span class="ln">A third fewer</span> <span class="ln">tokens.</span></h2>
+        <p class="sub">Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain, counted with tiktoken (o200k_base) over the files each tool needs: the ultrafast document; Remotion&#39;s composition, config and CLI commands; HyperFrames&#39; HTML and its grading command. Measured 22 November 2026.</p>
       </div>
       <div>
         <ol class="race tok" aria-label="Output tokens an agent writes for the same 10-second short">
-<li><span>ultrafast</span> <i class="bar" aria-hidden="true"><i class="v" style="--w:20.0%"></i></i> <b>1,100</b></li>
-<li><span>Remotion</span> <i class="bar" aria-hidden="true"><i class="v" style="--w:23.6%"></i><i class="c" style="--w:76.4%"></i></i> <b>5,500</b></li>
+<li><span>ultrafast</span> <i class="bar" aria-hidden="true"><i class="v" style="--w:66.1%"></i></i> <b>1,234</b></li>
+<li><span>Remotion</span> <i class="bar" aria-hidden="true"><i class="v" style="--w:100.0%"></i></i> <b>1,868</b></li>
         </ol>
-        <p class="tokkey"><span><i class="v" aria-hidden="true"></i>describes the video</span><span class="sr">; </span><span><i class="c" aria-hidden="true"></i>web code around it: imports, components, styles, timeline set-up, project files</span></p>
       </div>
     </div>
 
@@ -241,8 +240,8 @@
       <table class="tbl">
         <thead><tr><th scope="col">10,000 ten-second shorts a month</th><th scope="col">to write them</th><th scope="col">to render them</th></tr></thead>
         <tbody>
-          <tr class="us"><th scope="row">ultrafast on your GPUs</th><td>about $220 in output tokens</td><td>$0 in licences</td></tr>
-          <tr><th scope="row">Remotion, Automators licence</th><td>about $1,100 in output tokens</td><td>$100 in render fees, plus Lambda compute in your AWS account</td></tr>
+          <tr class="us"><th scope="row">ultrafast on your GPUs</th><td>about $247 in output tokens</td><td>$0 in licences</td></tr>
+          <tr><th scope="row">Remotion, Automators licence</th><td>about $374 in output tokens</td><td>$100 in render fees, plus Lambda compute in your AWS account</td></tr>
         </tbody>
       </table>
     </div>
@@ -306,7 +305,7 @@
   </details>
   <details>
     <summary>Does ultrafast need a GPU?</summary>
-    <div class="ans"><p>Yes, for now: a Mac with Apple silicon or a Vulkan GPU. ultrafast Cloud, which renders on hosted GPUs, is coming soon (<a href="/cloud/">waitlist</a>).</p></div>
+    <div class="ans"><p>A GPU is the fast path: a Mac with Apple silicon or a Vulkan GPU. No GPU? The Docker image renders on the CPU through Mesa's software Vulkan driver: frames in under a second, and a 6-second 1080×1920 export in about 17 seconds on 4 cores of a fast desktop CPU. Heavy 3D or particle work is much slower. ultrafast Cloud, which renders on hosted GPUs, is coming soon (<a href="/cloud/">waitlist</a>).</p></div>
   </details>
   <details>
     <summary>Does ultrafast have an embeddable web player like Remotion&#39;s?</summary>
@@ -314,7 +313,7 @@
   </details>
   <details>
     <summary>How many tokens does an agent spend on a Remotion video?</summary>
-    <div class="ans"><p>About 5,500 output tokens for a 10-second short: the composition, its components, styles and project files. The same short as an ultrafast document is about 1,100. At $20 per million output tokens, 10,000 shorts cost about $1,100 to write in Remotion and $220 in ultrafast.</p></div>
+    <div class="ans"><p>Measured on a 10-second vertical short (footage, a title, three lines, word-timed captions, a grade and grain): 1,868 output tokens for the composition, config and CLI commands. The same short as an ultrafast document is 1,234, about a third fewer (tiktoken o200k_base).</p></div>
   </details>
 </div>
 

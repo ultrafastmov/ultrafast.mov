@@ -18,7 +18,7 @@ At a glance
 ---|---|---  
 How a frame is made| GPU kernels compiled from the document; encoded on the same GPU with no readback| a React tree laid out in Chrome Headless Shell, screenshotted, encoded with FFmpeg  
 You write| one JSON document, checked before it renders| a React and TypeScript project  
-Output tokens for a 10 s short| about 1,100, all of it the video| about 5,500, most of it web code  
+Output tokens for a 10 s short| about 1,234, measured| about 1,868, most of it web code  
 Speed| 894 fps at 1080p with motion blur on one GPU; 11.6 s of 1080×1920 in about 2.2 s on one L4| an 80 s video in 15 s on Lambda across up to 200 functions; a 1-minute example in 19 s  
 Licence| Apache-2.0 or MIT, for everyone| source-available; a company licence from 4 people, counting all staff  
 Price to render| free on your GPU| $0.01 per render ($100/mo minimum) or $25 per seat per month, plus your AWS bill  
@@ -51,14 +51,12 @@ Remotion's published figures: an 80 s video in 15 s; a 1-minute render in 19 s f
 
 Tokens
 
-## A fifth of the tokens.
+## A third fewer tokens.
 
-Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain. In a web project most of them are web code. In an ultrafast document, every token describes the video.
+Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain, counted with tiktoken (o200k_base) over the files each tool needs: the ultrafast document; Remotion's composition, config and CLI commands; HyperFrames' HTML and its grading command. Measured 22 November 2026.
 
-  1. ultrafast **1,100**
-  2. Remotion **5,500**
-
-describes the video; web code around it: imports, components, styles, timeline set-up, project files
+  1. ultrafast **1,234**
+  2. Remotion **1,868**
 
 ### The same title, both ways.
 
@@ -145,8 +143,8 @@ Remotion is free for individuals and organisations of up to 3 people. At 4, coun
 
 10,000 ten-second shorts a month| to write them| to render them  
 ---|---|---  
-ultrafast on your GPUs| about $220 in output tokens| $0 in licences  
-Remotion, Automators licence| about $1,100 in output tokens| $100 in render fees, plus Lambda compute in your AWS account  
+ultrafast on your GPUs| about $247 in output tokens| $0 in licences  
+Remotion, Automators licence| about $374 in output tokens| $100 in render fees, plus Lambda compute in your AWS account  
   
 For agents
 
@@ -195,7 +193,7 @@ Not directly: it doesn't run React. Ask your agent to rewrite the composition as
 
 Does ultrafast need a GPU?
 
-Yes, for now: a Mac with Apple silicon or a Vulkan GPU. ultrafast Cloud, which renders on hosted GPUs, is coming soon ([waitlist](<https://ultrafast.mov/cloud/>)).
+A GPU is the fast path: a Mac with Apple silicon or a Vulkan GPU. No GPU? The Docker image renders on the CPU through Mesa's software Vulkan driver: frames in under a second, and a 6-second 1080×1920 export in about 17 seconds on 4 cores of a fast desktop CPU. Heavy 3D or particle work is much slower. ultrafast Cloud, which renders on hosted GPUs, is coming soon ([waitlist](<https://ultrafast.mov/cloud/>)).
 
 Does ultrafast have an embeddable web player like Remotion's?
 
@@ -203,7 +201,7 @@ No. ultrafast's live player is a desktop window for authoring. For the web, expo
 
 How many tokens does an agent spend on a Remotion video?
 
-About 5,500 output tokens for a 10-second short: the composition, its components, styles and project files. The same short as an ultrafast document is about 1,100. At $20 per million output tokens, 10,000 shorts cost about $1,100 to write in Remotion and $220 in ultrafast.
+Measured on a 10-second vertical short (footage, a title, three lines, word-timed captions, a grade and grain): 1,868 output tokens for the composition, config and CLI commands. The same short as an ultrafast document is 1,234, about a third fewer (tiktoken o200k_base).
 
 Remotion facts from its docs, checked 21 November 2026: [pricing](<https://www.remotion.dev/docs/license/pricing>), [team size](<https://www.remotion.dev/docs/terms#TeamSize>), [Lambda](<https://www.remotion.dev/lambda>), [cost example](<https://www.remotion.dev/docs/lambda/cost-example>), [MCP](<https://www.remotion.dev/docs/ai/mcp>), [skills](<https://www.remotion.dev/docs/ai/skills>), [plugins](<https://www.remotion.dev/docs/ai/plugins>). Remotion is a trademark of its owner.
 

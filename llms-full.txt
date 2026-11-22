@@ -12,7 +12,7 @@ Open source · Apache-2.0 or MIT
 
 # ultrafast: video shot on the GPU
 
-Shaders, 3D, motion type and real camera optics, written by your agent in up to [80% fewer tokens](<https://ultrafast.mov/compare/#tokens>) and rendered at GPU speed.
+Shaders, 3D, motion type and real camera optics, written by your agent and rendered at GPU speed.
 
 `curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
@@ -201,7 +201,7 @@ Compare
 
 ## No browser in the loop.
 
-Remotion and HyperFrames draw each frame in headless Chrome and capture it. ultrafast draws it on the GPU, and your agent writes a fifth of the tokens.
+Remotion and HyperFrames draw each frame in headless Chrome and capture it. ultrafast draws it on the GPU, and your agent writes about a third fewer tokens than for Remotion.
 
 [Full comparison](<https://ultrafast.mov/compare/>)
 
@@ -209,7 +209,7 @@ Remotion and HyperFrames draw each frame in headless Chrome and capture it. ultr
 ---|---|---|---  
 Draws each frame with| GPU kernels, Metal or Vulkan| headless Chrome, a screenshot per frame| headless Chrome, captured frame by frame  
 You write| one JSON document| a React project| HTML, CSS and JavaScript  
-Output tokens for a 10 s short| about 1,100| about 5,500| about 4,400  
+Output tokens for a 10 s short| about 1,234| about 1,868| about 1,680  
 Published speed, 1080p| 300 frames in 0.34 s, with 6-sample motion blur, on one GPU| an 80 s video in 15 s, split across up to 200 Lambda functions| 300 frames in 9.8 s  
 Agents review their frames| `check`, `review`, `inspect`, frames and contact sheets| no built-in review| no built-in review  
 Licence| Apache-2.0 or MIT| free up to 3 people; companies pay per render or per seat| Apache-2.0  
@@ -300,7 +300,7 @@ They draw each frame in headless Chrome and screenshot it. ultrafast draws on th
 
 Does an agent use fewer tokens with ultrafast?
 
-Yes, about a fifth as many. A 10-second short is about 1,100 output tokens of JSON. The same short is about 5,500 tokens as a Remotion project and 4,400 as a HyperFrames composition, and most of that is web code. See [tokens](<https://ultrafast.mov/compare/#tokens>).
+Yes, about a third fewer than with Remotion and a quarter fewer than with HyperFrames. Measured on the same 10-second short: 1,234 output tokens as an ultrafast document, 1,868 for Remotion and 1,680 for HyperFrames (tiktoken o200k_base). See [tokens](<https://ultrafast.mov/compare/#tokens>).
 
 What does it cost?
 
@@ -690,6 +690,8 @@ tool| does
   3. `ultrafast_sheet` to see the motion; `ultrafast_inspect` to find the node behind a pixel.
   4. `ultrafast_review`; fix what it reports with `ultrafast_edit`.
   5. `ultrafast_export`.
+
+The [MCP server overview](<https://ultrafast.mov/mcp/>) shows this loop on a real film, with the clients tested and how it differs from other video MCP servers.
 
 The ultrafast skill teaches agents the document and this loop: `npx skills add ultrafastmov/ultrafast`. In Claude Code, the plugin brings the skill and `uf mcp` together: `claude plugin marketplace add ultrafastmov/ultrafast`, then `claude plugin install ultrafast@ultrafast`.
 
@@ -1218,7 +1220,7 @@ Coding agents
 
 ## Claude Code, Codex, Cursor, Gemini CLI.
 
-Run `uf mcp` on your machine and the agent gets 20 tools: it writes the document, looks at frames and contact sheets, fixes what `review` finds and exports.
+Run `uf mcp` on your machine and the agent gets 20 tools: it writes the document, looks at frames and contact sheets, fixes what `review` finds and exports. The [MCP server page](<https://ultrafast.mov/mcp/>) shows that loop on a real film.
 
 ### Claude Code
 
@@ -1415,6 +1417,255 @@ Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud
 
 ---
 
+# Video MCP server for agents · Shot on the GPU · ultrafast
+
+> A video MCP server for Claude Code, Cursor and any MCP client: 20 tools to write, look at, review and export video, rendered on your GPU. Open source.
+
+URL: https://ultrafast.mov/mcp/
+
+# Shot on the GPU.
+
+Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU. Open source.
+
+The ultrafast MCP server gives your agent 20 tools to write a video, look at its frames, review them and export the file, on your own GPU.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` Set up your client
+
+macOS on Apple silicon and Linux x86_64. Every parameter is in the [MCP reference](<https://ultrafast.mov/docs/mcp/>).
+
+ultrafast MCP server, v0.1.1
+
+tools over stdio, uf mcp
+    20
+tools over HTTP, /mcp
+    16
+frames and sheets
+    images
+review reads
+    every frame
+licence
+    Apache-2.0 or MIT
+
+In the official MCP Registry as io.github.ultrafastmov/ultrafast
+
+## What your agent sees.
+
+Frames and contact sheets come back as images. The review comes back as findings, each naming a node, a time and a fix.
+
+  1. ### It looks
+
+`ultrafast_frame` returns one exact frame and `ultrafast_sheet` a labelled contact sheet, as images in the conversation. `ultrafast_inspect` names the node behind anything on screen.
+
+  2. ### It reviews
+
+`ultrafast_review` renders every frame. It reports text that is unreadable, clipped, overlapping, too small or too brief, text under social-app buttons, and flashing that risks seizures.
+
+  3. ### It fixes and exports
+
+`ultrafast_edit` changes the nodes a finding names and leaves the rest. `ultrafast_export` writes MP4, MOV, WebM, a GIF or an image sequence, at any size.
+
+![Contact sheet of the first draft, frames at 0.55, 2.6, 4.5 and 7.5 seconds. Frame one is a white flash, the title runs off the right edge, the studio name is too dark to read and the details are tiny.](https://ultrafast.mov/img/proof_draft.webp)
+
+  1. **flashing** more than 3 flashes per second: a photosensitive seizure risk (WCAG 2.3.1)
+  2. **clipped** "Pottery class" runs off the frame (right by 40 px)
+  3. **low contrast ×2** "HALDEN CLAY STUDIO" never reaches readable contrast (best 1.6:1, want 3:1 or more); "118 TANNER STREET" 1.6:1
+  4. **too brief** "First class free" is readable for 0.4 s; 3 words need about 0.9 s
+  5. **small text ×3** set at 20 px; below about 24 px it is hard to read on a phone
+
+![Contact sheet of the second draft at the same moments: no flash, the title fits, the studio name and the details read.](https://ultrafast.mov/img/proof_approved.webp) 0 findings
+
+  1. `sheet`: the draft, as an image
+  2. `review`: 8 findings, each with a fix
+  3. `edit`: the nodes they name
+  4. `export`: after 0 findings, in 1.68 s
+
+The pottery teaser from the [examples](<https://ultrafast.mov/examples/>): its first draft and its second, at the same four moments. The review read all 300 frames in 4.7 s. These sheets and reviews came from the CLI (`uf sheet`, `uf review --safe social`), which runs the same code as the tools. The second version's document is [clay-v1.json](<https://ultrafast.mov/examples/clay-v1.json>).
+
+## 20 tools, in six groups.
+
+As `uf mcp` lists them in v0.1.1. The remote server has the 16 that don't read or write files on your machine.
+
+### Write
+
+  * `ultrafast_ops`: the op vocabulary, with every port, param, type and default.
+  * `ultrafast_new`: a template to start from: vertical, title, square, promo, explainer or product.
+  * `ultrafast_edit`: an edit batch applied to the document, atomically.
+
+### Look
+
+  * `ultrafast_frame`: one exact frame, as an image.
+  * `ultrafast_sheet`: a labelled contact sheet of frames, as one image.
+  * `ultrafast_inspect`: what is on screen at a time, with each element's node, bounds and words.
+
+### Check and review
+
+  * `ultrafast_check`: problems before rendering: unknown ops, misspelled params, broken shaders, missing files or fonts.
+  * `ultrafast_review`: renders the film and reports what a viewer would trip over, with the node and a fix.
+
+### Render and export
+
+  * `ultrafast_export`: MP4, MOV, MKV or WebM, a GIF, PNG or EXR frames, or sound alone, at any size and frame rate.
+  * `ultrafast_estimate`: rendered minutes, GPU seconds and the time to the first frame, before rendering.
+  * `ultrafast_batch`: one document, a video per row of data.
+  * `ultrafast_profile`: GPU milliseconds per render group, for slow films.
+
+### Import
+
+  * `ultrafast_import_svg`: an SVG as an editable component.
+  * `ultrafast_decompose`: a finished motion-graphics video as an editable document. Local only.
+  * `ultrafast_ocr`: the text in a video frame, with word boxes and draft text nodes. Local only.
+  * `ultrafast_match_font`: a text node's font, size, tracking and colour, from a video frame. Local only.
+
+### Sound and type
+
+  * `ultrafast_beats`: tempo, beats, downbeats and onsets of a soundtrack.
+  * `ultrafast_voiceover`: a script spoken to WAV, with every word's time. Local only.
+  * `ultrafast_measure`: glyph metrics of a line of text.
+  * `ultrafast_outline`: a line of text as SVG path data.
+
+The server also tells the agent the loop when it connects: ops, a template, check until clean, look at sheets and frames, review and fix, then export. “Always look at a sheet before exporting.” Parameters for every tool are in the [MCP reference](<https://ultrafast.mov/docs/mcp/#tools>).
+
+## Set up your client.
+
+Install ultrafast, run `uf info` to check the GPU, then add the server to your client. Each block says what was tested, in November 2026.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh`
+
+### Claude Code, with the plugin
+
+```
+claude plugin marketplace add ultrafastmov/ultrafast
+claude plugin install ultrafast@ultrafast
+``` 
+
+The ultrafast skill and `uf mcp` together. Tested: the plugin installs from the repo. With the skill, Claude Code went from a one-line request to an exported video with 0 review findings.
+
+### Claude Code, the MCP server alone
+
+```
+claude mcp add ultrafast -- uf mcp
+``` 
+
+Tested with Claude Code 2.1.325: a model run used new, check, sheet (and saw the image), inspect, edit and export.
+
+### Cursor
+
+```
+{
+  "mcpServers": {
+    "ultrafast": { "command": "uf", "args": ["mcp"] }
+  }
+}
+``` 
+
+Tested with Cursor CLI 2026.11.19: all 20 tools listed. No model run yet.
+
+### Gemini CLI
+
+```
+{
+  "mcpServers": {
+    "ultrafast": { "command": "uf", "args": ["mcp"] }
+  }
+}
+``` 
+
+Tested with Gemini CLI 0.70: connected over stdio, and over HTTP with `httpUrl` and a header. No model run yet.
+
+### Remote, from your own uf serve
+
+```
+uf serve    # on the machine with the GPU; prints an API key on first start
+claude mcp add --transport http ultrafast http://localhost:8080/mcp \
+  --header "Authorization: Bearer $ULTRAFAST_API_KEY"
+``` 
+
+16 tools over Streamable HTTP, with the server's API key as a bearer token. Documents travel inline; exports come back as download links. Tested with Claude Code over HTTP, and with MCP Inspector, which called all 16 tools.
+
+### The MCP Registry and the MCP bundles
+
+```
+io.github.ultrafastmov/ultrafast
+
+ultrafast-0.1.1-macos-arm64.mcpb
+ultrafast-0.1.1-linux-x86_64.mcpb
+``` 
+
+The name in the [official MCP Registry](<https://registry.modelcontextprotocol.io/v0/servers?search=io.github.ultrafastmov/ultrafast>), which points to the two bundles on the [v0.1.1 release](<https://github.com/ultrafastmov/ultrafast/releases/tag/v0.1.1>): a .mcpb bundle for Claude Desktop on a [Mac with Apple silicon](<https://github.com/ultrafastmov/ultrafast/releases/download/v0.1.1/ultrafast-0.1.1-macos-arm64.mcpb>), and one for [Linux x86_64](<https://github.com/ultrafastmov/ultrafast/releases/download/v0.1.1/ultrafast-0.1.1-linux-x86_64.mcpb>). Each carries the binary and asks for one setting: the folder for documents and videos, `~/ultrafast` by default.
+
+Codex and the JSON config for Claude Desktop are in the [MCP reference](<https://ultrafast.mov/docs/mcp/#local>); neither has been tested yet. Any other MCP client that runs a stdio server, or connects over Streamable HTTP with a header, takes the same settings.
+
+## How it differs from other video MCP servers.
+
+Most video MCP servers wrap FFmpeg to edit files you already have, or call a hosted API. ultrafast makes the frames.
+
+### FFmpeg wrappers
+
+  * They cut, trim, join and convert video files you already have.
+  * FFmpeg does the work. The tools pass it the commands.
+
+### Hosted APIs
+
+  * The tools send the job to a rendering service and get a result back.
+  * They need an account with that service, and stop working if it closes. Remotion's hosted MCP server shut down on 26 October 2026.
+
+### ultrafast renders the frames
+
+  * It draws every frame on your GPU: 3D, simulations, shaders, motion type and footage, in one document.
+  * Frames and contact sheets come back as images the agent can look at, before anyone watches the film.
+  * `ultrafast_review` reads every frame and names the node, the time and a fix for each problem it finds.
+  * A video is a JSON document, so a change edits the nodes it touches and leaves the rest as they were.
+  * It runs on your machine with no account, under Apache-2.0 or MIT.
+
+Remotion's MCP page: [remotion.dev/docs/ai/mcp](<https://www.remotion.dev/docs/ai/mcp>), read on 21 November 2026. Remotion is a trademark of its owner. More on how ultrafast compares: [Compare](<https://ultrafast.mov/compare/>).
+
+## Limits.
+
+What to know before you connect it. Checked 22 November 2026.
+
+### What it needs, and what it doesn't do yet
+
+  * A GPU: a Mac with Apple silicon, or a Linux x86_64 machine with a Vulkan GPU.
+  * No GPU? The Docker image (`ghcr.io/ultrafastmov/ultrafast`) renders on the CPU through Mesa's software Vulkan driver: frames in under a second, and a 6-second 1080×1920 export in about 17 seconds on 4 cores of a fast desktop CPU. Heavy 3D or particle work is much slower. On Linux, `mesa-vulkan-drivers` gives the other installs the same CPU path.
+  * No prebuilt Windows or Intel Mac build.
+  * On Linux, exports need ffmpeg; `ultrafast_voiceover` needs espeak-ng and `ultrafast_ocr` needs Tesseract.
+  * The remote server at `/mcp` takes one API key as a bearer token. There is no OAuth sign-in on it.
+  * OAuth sign-in and hosted rendering come with ultrafast Cloud, and so do the Claude connector and the ChatGPT app. Cloud has a [waitlist](<https://ultrafast.mov/cloud/>).
+  * Lottie import is in the CLI only (`uf import-lottie`). A document can still use a `lottie` node.
+
+## Questions about the MCP server.
+
+Can Claude make videos with an MCP server?
+
+Yes. With ultrafast connected, Claude Code writes the video as a document, looks at its frames, reviews them and exports the file on your GPU. In a test with the ultrafast skill, it went from a one-line request to an exported video with 0 review findings. Add it with `claude mcp add ultrafast -- uf mcp` or the plugin. There is also a .mcpb bundle for Claude Desktop. The Claude connector comes with [ultrafast Cloud](<https://ultrafast.mov/cloud/>).
+
+Which MCP clients does it work with?
+
+Any client that starts a local server over stdio or connects over Streamable HTTP. Tested: Claude Code used it over stdio and HTTP, Cursor CLI listed all 20 tools, and Gemini CLI connected over stdio and HTTP. The configs for Codex and Claude Desktop are in the [MCP reference](<https://ultrafast.mov/docs/mcp/>); they haven't been tested yet.
+
+Can it edit videos I already have?
+
+Yes, as footage in a document: cut, trim, speed-ramp, reframe, grade, key and caption clips, and put the cuts on the beat with `ultrafast_beats`. `ultrafast_decompose` turns a finished motion-graphics video into an editable document. It is not an FFmpeg wrapper: ultrafast renders every frame on the GPU.
+
+Do I need a GPU?
+
+A GPU is the fast path: a Mac with Apple silicon, or a Linux x86_64 machine with a Vulkan GPU. There is no prebuilt Windows or Intel Mac build. No GPU? The Docker image renders on the CPU through Mesa's software Vulkan driver: frames in under a second, and a 6-second 1080×1920 export in about 17 seconds on 4 cores of a fast desktop CPU. Heavy 3D or particle work is much slower. An agent can also connect to a server that has a GPU: `uf serve` answers MCP at `/mcp` with its API key. Hosted GPUs come with [ultrafast Cloud](<https://ultrafast.mov/cloud/>), which has a waitlist.
+
+Is there a hosted MCP server?
+
+Not yet. The server runs on your machine (`uf mcp`) or on your own server (`/mcp` on `uf serve`, with its API key). A hosted server with OAuth sign-in comes with [ultrafast Cloud](<https://ultrafast.mov/cloud/>). Join the waitlist for one email when it opens.
+
+## Connect your agent.
+
+Install ultrafast, then add `uf mcp` to your client.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
 # ultrafast Cloud · Coming soon · Join the waitlist
 
 > ultrafast Cloud will render the open-source engine on hosted GPUs with one API key, and run the ChatGPT app and the Claude connector. Coming soon; join the waitlist.
@@ -1555,7 +1806,7 @@ At a glance
 ---|---|---|---  
 Draws each frame with| GPU kernels, Metal or Vulkan; the planner fuses nodes into one kernel per group| headless Chrome; parallel tabs render and screenshot frames| headless Chrome via Puppeteer; 1 to 24 browser workers  
 You write| one JSON document; no build step| a React and TypeScript project| HTML, CSS and JS with a paused GSAP timeline or another adapter  
-Output tokens for a 10 s short| about 1,100| about 5,500| about 4,400  
+Output tokens for a 10 s short| about 1,234| about 1,868| about 1,680  
 Published speed, 1080p| 300 frames with 6-sample motion blur in 0.34 s on one RTX 5090| an 80 s video in 15 s on Lambda, up to 200 functions| 300 frames in 9.8 s; 25 s with one costly CSS rule  
 GPU| renders on it| not used by default; none on Lambda| optional, for WebGL and hardware encoding  
 Agents check and review| `check` before rendering; `review` reads every frame for unreadable, clipped or too-brief text and flashing; `inspect` maps pixels to nodes| no built-in review| no built-in review  
@@ -1568,23 +1819,21 @@ Hosted rendering| your own GPU with `uf serve`; ultrafast Cloud has a [waitlist]
   
 Tokens
 
-## Up to 80% fewer tokens.
+## Up to a third fewer tokens.
 
-Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain. In a web project most of them are web code. In an ultrafast document, every token describes the video.
+Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain, counted with tiktoken (o200k_base) over the files each tool needs: the ultrafast document; Remotion's composition, config and CLI commands; HyperFrames' HTML and its grading command. Measured 22 November 2026.
 
-  1. ultrafast **1,100**
-  2. HyperFrames **4,400**
-  3. Remotion **5,500**
-
-describes the video; web code around it: imports, components, styles, timeline set-up, project files
+  1. ultrafast **1,234**
+  2. HyperFrames **1,680**
+  3. Remotion **1,868**
 
 The same title written both ways: [ultrafast and Remotion](<https://ultrafast.mov/compare/remotion/#tokens>), [ultrafast and HyperFrames](<https://ultrafast.mov/compare/hyperframes/#tokens>).
 
 10,000 shorts a month| output tokens| at $20 per million  
 ---|---|---  
-ultrafast| 11 million| $220  
-HyperFrames| 44 million| $880  
-Remotion| 55 million| $1,100  
+ultrafast| 12.34 million| $247  
+HyperFrames| 16.8 million| $336  
+Remotion| 18.68 million| $374  
   
 Speed
 
@@ -1605,8 +1854,8 @@ What it takes to write and render one vertical 1080p clip, the most common thing
 | to write it| to render it| also needed  
 ---|---|---|---  
 ultrafast, your GPU| about 2¢ of tokens| nothing| a Mac or a Vulkan GPU  
-Remotion, company of 4+| about 11¢ of tokens| $0.01 licence fee plus Lambda compute in your AWS account| $100 a month minimum, an AWS account  
-HyperFrames| about 9¢ of tokens| your own Lambda or Cloud Run compute, or HeyGen credits| Node 22, FFmpeg, a cloud account  
+Remotion, company of 4+| about 4¢ of tokens| $0.01 licence fee plus Lambda compute in your AWS account| $100 a month minimum, an AWS account  
+HyperFrames| about 3¢ of tokens| your own Lambda or Cloud Run compute, or HeyGen credits| Node 22, FFmpeg, a cloud account  
   
 Which one
 
@@ -1650,7 +1899,7 @@ Yes. `uf reconstruct` turns a finished video into an editable document draft: sh
 
 Why does an agent need fewer tokens with ultrafast?
 
-A document only describes the video: nodes and their params. A Remotion or HyperFrames project also needs imports, components, CSS, timeline set-up and project files, and grain, a grade or captions timed to each word are code to write. In ultrafast each of those is one node. A 10-second short is about 1,100 output tokens, against about 4,400 in HyperFrames and 5,500 in Remotion.
+A document only describes the video: nodes and their params. A Remotion or HyperFrames project also needs imports, components, CSS, timeline set-up and project files, and grain, a grade or captions timed to each word are code to write. In ultrafast each of those is one node. Measured on the same 10-second short: 1,234 output tokens in ultrafast, 1,680 in HyperFrames and 1,868 in Remotion (tiktoken o200k_base).
 
 **Sources** , checked 21 November 2026: Remotion [pricing](<https://www.remotion.dev/docs/license/pricing>), [team size](<https://www.remotion.dev/docs/terms#TeamSize>), [Lambda](<https://www.remotion.dev/lambda>), [MCP](<https://www.remotion.dev/docs/ai/mcp>), [skills](<https://www.remotion.dev/docs/ai/skills>), [GPU](<https://www.remotion.dev/docs/gpu>), [flickering](<https://www.remotion.dev/docs/flickering>); HyperFrames [repository](<https://github.com/heygen-com/hyperframes>), [CLI](<https://hyperframes.heygen.com/packages/cli>), [performance](<https://hyperframes.heygen.com/guides/performance>), [determinism](<https://hyperframes.heygen.com/concepts/determinism>), [plugins](<https://hyperframes.heygen.com/guides/plugins>), [Lambda](<https://hyperframes.heygen.com/deploy/aws-lambda>). Product names belong to their owners.
 
@@ -1685,7 +1934,7 @@ At a glance
 ---|---|---  
 How a frame is made| GPU kernels compiled from the document; encoded on the same GPU with no readback| a React tree laid out in Chrome Headless Shell, screenshotted, encoded with FFmpeg  
 You write| one JSON document, checked before it renders| a React and TypeScript project  
-Output tokens for a 10 s short| about 1,100, all of it the video| about 5,500, most of it web code  
+Output tokens for a 10 s short| about 1,234, measured| about 1,868, most of it web code  
 Speed| 894 fps at 1080p with motion blur on one GPU; 11.6 s of 1080×1920 in about 2.2 s on one L4| an 80 s video in 15 s on Lambda across up to 200 functions; a 1-minute example in 19 s  
 Licence| Apache-2.0 or MIT, for everyone| source-available; a company licence from 4 people, counting all staff  
 Price to render| free on your GPU| $0.01 per render ($100/mo minimum) or $25 per seat per month, plus your AWS bill  
@@ -1718,14 +1967,12 @@ Remotion's published figures: an 80 s video in 15 s; a 1-minute render in 19 s f
 
 Tokens
 
-## A fifth of the tokens.
+## A third fewer tokens.
 
-Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain. In a web project most of them are web code. In an ultrafast document, every token describes the video.
+Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain, counted with tiktoken (o200k_base) over the files each tool needs: the ultrafast document; Remotion's composition, config and CLI commands; HyperFrames' HTML and its grading command. Measured 22 November 2026.
 
-  1. ultrafast **1,100**
-  2. Remotion **5,500**
-
-describes the video; web code around it: imports, components, styles, timeline set-up, project files
+  1. ultrafast **1,234**
+  2. Remotion **1,868**
 
 ### The same title, both ways.
 
@@ -1812,8 +2059,8 @@ Remotion is free for individuals and organisations of up to 3 people. At 4, coun
 
 10,000 ten-second shorts a month| to write them| to render them  
 ---|---|---  
-ultrafast on your GPUs| about $220 in output tokens| $0 in licences  
-Remotion, Automators licence| about $1,100 in output tokens| $100 in render fees, plus Lambda compute in your AWS account  
+ultrafast on your GPUs| about $247 in output tokens| $0 in licences  
+Remotion, Automators licence| about $374 in output tokens| $100 in render fees, plus Lambda compute in your AWS account  
   
 For agents
 
@@ -1862,7 +2109,7 @@ Not directly: it doesn't run React. Ask your agent to rewrite the composition as
 
 Does ultrafast need a GPU?
 
-Yes, for now: a Mac with Apple silicon or a Vulkan GPU. ultrafast Cloud, which renders on hosted GPUs, is coming soon ([waitlist](<https://ultrafast.mov/cloud/>)).
+A GPU is the fast path: a Mac with Apple silicon or a Vulkan GPU. No GPU? The Docker image renders on the CPU through Mesa's software Vulkan driver: frames in under a second, and a 6-second 1080×1920 export in about 17 seconds on 4 cores of a fast desktop CPU. Heavy 3D or particle work is much slower. ultrafast Cloud, which renders on hosted GPUs, is coming soon ([waitlist](<https://ultrafast.mov/cloud/>)).
 
 Does ultrafast have an embeddable web player like Remotion's?
 
@@ -1870,7 +2117,7 @@ No. ultrafast's live player is a desktop window for authoring. For the web, expo
 
 How many tokens does an agent spend on a Remotion video?
 
-About 5,500 output tokens for a 10-second short: the composition, its components, styles and project files. The same short as an ultrafast document is about 1,100. At $20 per million output tokens, 10,000 shorts cost about $1,100 to write in Remotion and $220 in ultrafast.
+Measured on a 10-second vertical short (footage, a title, three lines, word-timed captions, a grade and grain): 1,868 output tokens for the composition, config and CLI commands. The same short as an ultrafast document is 1,234, about a third fewer (tiktoken o200k_base).
 
 Remotion facts from its docs, checked 21 November 2026: [pricing](<https://www.remotion.dev/docs/license/pricing>), [team size](<https://www.remotion.dev/docs/terms#TeamSize>), [Lambda](<https://www.remotion.dev/lambda>), [cost example](<https://www.remotion.dev/docs/lambda/cost-example>), [MCP](<https://www.remotion.dev/docs/ai/mcp>), [skills](<https://www.remotion.dev/docs/ai/skills>), [plugins](<https://www.remotion.dev/docs/ai/plugins>). Remotion is a trademark of its owner.
 
@@ -1905,7 +2152,7 @@ At a glance
 ---|---|---  
 How a frame is made| GPU kernels compiled from the document; encoded on the same GPU| a page laid out in Chrome via Puppeteer, captured per frame, encoded with FFmpeg; 1 to 24 browsers of about 256 MB each  
 You write| one JSON document with a published schema| HTML and CSS with `data-*` timing, and a paused GSAP timeline or another adapter  
-Output tokens for a 10 s short| about 1,100, all of it the video| about 4,400, most of it web code  
+Output tokens for a 10 s short| about 1,234, measured| about 1,680, most of it web code  
 Speed, 300 frames of 1080p| 0.34 s with 6-sample motion blur, one RTX 5090| 9.8 s; 25 s with one costly CSS rule  
 Same pixels everywhere| bundled fonts, the same kernels on every machine| fonts and Chrome versions can shift pixels; `--docker` pins them  
 Install| one binary| Node 22+, FFmpeg, a managed Chrome  
@@ -1928,14 +2175,12 @@ HyperFrames' performance guide renders 300 frames of 1080p in 9.8 s. ultrafast r
 
 Tokens
 
-## A quarter of the tokens.
+## A quarter fewer tokens.
 
-Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain. In a web project most of them are web code. In an ultrafast document, every token describes the video.
+Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain, counted with tiktoken (o200k_base) over the files each tool needs: the ultrafast document; Remotion's composition, config and CLI commands; HyperFrames' HTML and its grading command. Measured 22 November 2026.
 
-  1. ultrafast **1,100**
-  2. HyperFrames **4,400**
-
-describes the video; web code around it: imports, components, styles, timeline set-up, project files
+  1. ultrafast **1,234**
+  2. HyperFrames **1,680**
 
 ### The same title, both ways.
 
@@ -2002,8 +2247,8 @@ The rest of the gap is the effects: grain, a grade and captions timed to each wo
 
 10,000 shorts a month| output tokens| at $20 per million  
 ---|---|---  
-ultrafast| 11 million| $220  
-HyperFrames| 44 million| $880  
+ultrafast| 12.34 million| $247  
+HyperFrames| 16.8 million| $336  
   
 Beyond the browser
 
@@ -2059,7 +2304,7 @@ No Node. ultrafast is one binary; exports on Vulkan use FFmpeg, and the prebuilt
 
 How many tokens does an agent spend on a HyperFrames video?
 
-About 4,400 output tokens for a 10-second short: the HTML, the CSS, the GSAP timeline and the scripts for captions and grain. The same short as an ultrafast document is about 1,100. At $20 per million output tokens, 10,000 shorts cost about $880 to write in HyperFrames and $220 in ultrafast.
+Measured on a 10-second vertical short (footage, a title, three lines, word-timed captions, a grade and grain): 1,680 output tokens for the HTML composition and its grading command. The same short as an ultrafast document is 1,234, about a quarter fewer (tiktoken o200k_base).
 
 HyperFrames facts from its docs, checked 21 November 2026: [repository](<https://github.com/heygen-com/hyperframes>), [CLI](<https://hyperframes.heygen.com/packages/cli>), [performance](<https://hyperframes.heygen.com/guides/performance>), [determinism](<https://hyperframes.heygen.com/concepts/determinism>), [plugins](<https://hyperframes.heygen.com/guides/plugins>), [MCP](<https://hyperframes.heygen.com/guides/mcp>), [Lambda](<https://hyperframes.heygen.com/deploy/aws-lambda>). HyperFrames and HeyGen are trademarks of their owner.
 

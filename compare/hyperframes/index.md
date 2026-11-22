@@ -18,7 +18,7 @@ At a glance
 ---|---|---  
 How a frame is made| GPU kernels compiled from the document; encoded on the same GPU| a page laid out in Chrome via Puppeteer, captured per frame, encoded with FFmpeg; 1 to 24 browsers of about 256 MB each  
 You write| one JSON document with a published schema| HTML and CSS with `data-*` timing, and a paused GSAP timeline or another adapter  
-Output tokens for a 10 s short| about 1,100, all of it the video| about 4,400, most of it web code  
+Output tokens for a 10 s short| about 1,234, measured| about 1,680, most of it web code  
 Speed, 300 frames of 1080p| 0.34 s with 6-sample motion blur, one RTX 5090| 9.8 s; 25 s with one costly CSS rule  
 Same pixels everywhere| bundled fonts, the same kernels on every machine| fonts and Chrome versions can shift pixels; `--docker` pins them  
 Install| one binary| Node 22+, FFmpeg, a managed Chrome  
@@ -41,14 +41,12 @@ HyperFrames' performance guide renders 300 frames of 1080p in 9.8 s. ultrafast r
 
 Tokens
 
-## A quarter of the tokens.
+## A quarter fewer tokens.
 
-Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain. In a web project most of them are web code. In an ultrafast document, every token describes the video.
+Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain, counted with tiktoken (o200k_base) over the files each tool needs: the ultrafast document; Remotion's composition, config and CLI commands; HyperFrames' HTML and its grading command. Measured 22 November 2026.
 
-  1. ultrafast **1,100**
-  2. HyperFrames **4,400**
-
-describes the video; web code around it: imports, components, styles, timeline set-up, project files
+  1. ultrafast **1,234**
+  2. HyperFrames **1,680**
 
 ### The same title, both ways.
 
@@ -115,8 +113,8 @@ The rest of the gap is the effects: grain, a grade and captions timed to each wo
 
 10,000 shorts a month| output tokens| at $20 per million  
 ---|---|---  
-ultrafast| 11 million| $220  
-HyperFrames| 44 million| $880  
+ultrafast| 12.34 million| $247  
+HyperFrames| 16.8 million| $336  
   
 Beyond the browser
 
@@ -172,7 +170,7 @@ No Node. ultrafast is one binary; exports on Vulkan use FFmpeg, and the prebuilt
 
 How many tokens does an agent spend on a HyperFrames video?
 
-About 4,400 output tokens for a 10-second short: the HTML, the CSS, the GSAP timeline and the scripts for captions and grain. The same short as an ultrafast document is about 1,100. At $20 per million output tokens, 10,000 shorts cost about $880 to write in HyperFrames and $220 in ultrafast.
+Measured on a 10-second vertical short (footage, a title, three lines, word-timed captions, a grade and grain): 1,680 output tokens for the HTML composition and its grading command. The same short as an ultrafast document is 1,234, about a quarter fewer (tiktoken o200k_base).
 
 HyperFrames facts from its docs, checked 21 November 2026: [repository](<https://github.com/heygen-com/hyperframes>), [CLI](<https://hyperframes.heygen.com/packages/cli>), [performance](<https://hyperframes.heygen.com/guides/performance>), [determinism](<https://hyperframes.heygen.com/concepts/determinism>), [plugins](<https://hyperframes.heygen.com/guides/plugins>), [MCP](<https://hyperframes.heygen.com/guides/mcp>), [Lambda](<https://hyperframes.heygen.com/deploy/aws-lambda>). HyperFrames and HeyGen are trademarks of their owner.
 

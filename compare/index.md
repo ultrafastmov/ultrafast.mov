@@ -20,7 +20,7 @@ At a glance
 ---|---|---|---  
 Draws each frame with| GPU kernels, Metal or Vulkan; the planner fuses nodes into one kernel per group| headless Chrome; parallel tabs render and screenshot frames| headless Chrome via Puppeteer; 1 to 24 browser workers  
 You write| one JSON document; no build step| a React and TypeScript project| HTML, CSS and JS with a paused GSAP timeline or another adapter  
-Output tokens for a 10 s short| about 1,100| about 5,500| about 4,400  
+Output tokens for a 10 s short| about 1,234| about 1,868| about 1,680  
 Published speed, 1080p| 300 frames with 6-sample motion blur in 0.34 s on one RTX 5090| an 80 s video in 15 s on Lambda, up to 200 functions| 300 frames in 9.8 s; 25 s with one costly CSS rule  
 GPU| renders on it| not used by default; none on Lambda| optional, for WebGL and hardware encoding  
 Agents check and review| `check` before rendering; `review` reads every frame for unreadable, clipped or too-brief text and flashing; `inspect` maps pixels to nodes| no built-in review| no built-in review  
@@ -33,23 +33,21 @@ Hosted rendering| your own GPU with `uf serve`; ultrafast Cloud has a [waitlist]
   
 Tokens
 
-## Up to 80% fewer tokens.
+## Up to a third fewer tokens.
 
-Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain. In a web project most of them are web code. In an ultrafast document, every token describes the video.
+Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain, counted with tiktoken (o200k_base) over the files each tool needs: the ultrafast document; Remotion's composition, config and CLI commands; HyperFrames' HTML and its grading command. Measured 22 November 2026.
 
-  1. ultrafast **1,100**
-  2. HyperFrames **4,400**
-  3. Remotion **5,500**
-
-describes the video; web code around it: imports, components, styles, timeline set-up, project files
+  1. ultrafast **1,234**
+  2. HyperFrames **1,680**
+  3. Remotion **1,868**
 
 The same title written both ways: [ultrafast and Remotion](<https://ultrafast.mov/compare/remotion/#tokens>), [ultrafast and HyperFrames](<https://ultrafast.mov/compare/hyperframes/#tokens>).
 
 10,000 shorts a month| output tokens| at $20 per million  
 ---|---|---  
-ultrafast| 11 million| $220  
-HyperFrames| 44 million| $880  
-Remotion| 55 million| $1,100  
+ultrafast| 12.34 million| $247  
+HyperFrames| 16.8 million| $336  
+Remotion| 18.68 million| $374  
   
 Speed
 
@@ -70,8 +68,8 @@ What it takes to write and render one vertical 1080p clip, the most common thing
 | to write it| to render it| also needed  
 ---|---|---|---  
 ultrafast, your GPU| about 2¢ of tokens| nothing| a Mac or a Vulkan GPU  
-Remotion, company of 4+| about 11¢ of tokens| $0.01 licence fee plus Lambda compute in your AWS account| $100 a month minimum, an AWS account  
-HyperFrames| about 9¢ of tokens| your own Lambda or Cloud Run compute, or HeyGen credits| Node 22, FFmpeg, a cloud account  
+Remotion, company of 4+| about 4¢ of tokens| $0.01 licence fee plus Lambda compute in your AWS account| $100 a month minimum, an AWS account  
+HyperFrames| about 3¢ of tokens| your own Lambda or Cloud Run compute, or HeyGen credits| Node 22, FFmpeg, a cloud account  
   
 Which one
 
@@ -115,7 +113,7 @@ Yes. `uf reconstruct` turns a finished video into an editable document draft: sh
 
 Why does an agent need fewer tokens with ultrafast?
 
-A document only describes the video: nodes and their params. A Remotion or HyperFrames project also needs imports, components, CSS, timeline set-up and project files, and grain, a grade or captions timed to each word are code to write. In ultrafast each of those is one node. A 10-second short is about 1,100 output tokens, against about 4,400 in HyperFrames and 5,500 in Remotion.
+A document only describes the video: nodes and their params. A Remotion or HyperFrames project also needs imports, components, CSS, timeline set-up and project files, and grain, a grade or captions timed to each word are code to write. In ultrafast each of those is one node. Measured on the same 10-second short: 1,234 output tokens in ultrafast, 1,680 in HyperFrames and 1,868 in Remotion (tiktoken o200k_base).
 
 **Sources** , checked 21 November 2026: Remotion [pricing](<https://www.remotion.dev/docs/license/pricing>), [team size](<https://www.remotion.dev/docs/terms#TeamSize>), [Lambda](<https://www.remotion.dev/lambda>), [MCP](<https://www.remotion.dev/docs/ai/mcp>), [skills](<https://www.remotion.dev/docs/ai/skills>), [GPU](<https://www.remotion.dev/docs/gpu>), [flickering](<https://www.remotion.dev/docs/flickering>); HyperFrames [repository](<https://github.com/heygen-com/hyperframes>), [CLI](<https://hyperframes.heygen.com/packages/cli>), [performance](<https://hyperframes.heygen.com/guides/performance>), [determinism](<https://hyperframes.heygen.com/concepts/determinism>), [plugins](<https://hyperframes.heygen.com/guides/plugins>), [Lambda](<https://hyperframes.heygen.com/deploy/aws-lambda>). Product names belong to their owners.
 

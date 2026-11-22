@@ -25,7 +25,7 @@ Coding agents
 
 ## Claude Code, Codex, Cursor, Gemini CLI.
 
-Run `uf mcp` on your machine and the agent gets 20 tools: it writes the document, looks at frames and contact sheets, fixes what `review` finds and exports.
+Run `uf mcp` on your machine and the agent gets 20 tools: it writes the document, looks at frames and contact sheets, fixes what `review` finds and exports. The [MCP server page](<https://ultrafast.mov/mcp/>) shows that loop on a real film.
 
 ### Claude Code
 

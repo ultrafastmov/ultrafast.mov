@@ -15,7 +15,8 @@ Facts an agent needs:
 - HTTP: `uf serve` (or the Docker image's `serve`) answers `POST /v1/render`, `/v1/frame`, `/v1/sheet`, `/v1/check`, `/v1/review`, `/v1/estimate` and `/v1/uploads` on one machine with a GPU, with `Authorization: Bearer $ULTRAFAST_API_KEY`.
 - Not available yet: ultrafast Cloud (hosted rendering), the ChatGPT app, the Claude connector and a hosted MCP server. They are coming soon; there is a waitlist at https://ultrafast.mov/cloud/. There is no `--cloud` flag.
 - Licence: Apache-2.0 or MIT. Renders with Metal on macOS and Vulkan on Linux and Windows (WSL2).
-- Tokens: a 10-second short is about 1,100 output tokens of JSON, against about 5,500 as a Remotion project and 4,400 as a HyperFrames composition. Grain, grades, captions, 3D and simulations are one node each, not code to write.
+- No GPU (e.g. an agent in a container): the Docker image `ghcr.io/ultrafastmov/ultrafast` renders on the CPU through Mesa's llvmpipe Vulkan driver, slower but correct: frames in under a second, a 6-second 1080x1920 export in about 17 s on 4 desktop cores. On Linux, `mesa-vulkan-drivers` gives the other installs the same path. macOS needs Metal.
+- Tokens (measured 22 Nov 2026, tiktoken o200k_base): the same 10-second short is 1,234 output tokens as an ultrafast document, 1,868 for Remotion and 1,680 for HyperFrames. Grain, grades, captions, 3D and simulations are one node each, not code to write.
 - 3D is rendered by the engine in the same document as the type: raymarched shapes and materials, meshes, image-based light, glass. The 3D in the example films is all rendered by ultrafast.
 
 ## Docs
@@ -31,6 +32,7 @@ Facts an agent needs:
 
 - [Use cases](https://ultrafast.mov/use-cases/index.md): what people make with it, with example prompts
 - [Integrations](https://ultrafast.mov/integrations/index.md): Claude Code, Codex, Cursor, Gemini CLI, SDKs, HTTP, self-hosting
+- [Video MCP server for agents](https://ultrafast.mov/mcp/index.md): the video MCP server: what the agent sees, the 20 tools by group, setup per tested client, the MCP Registry name, limits
 - [ultrafast Cloud](https://ultrafast.mov/cloud/index.md): ultrafast Cloud, the ChatGPT app and the Claude connector: coming soon, with a waitlist
 - [Examples](https://ultrafast.mov/examples/index.md): example videos with their documents
 
