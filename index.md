@@ -211,7 +211,7 @@ Agents review their frames| `check`, `review`, `inspect`, frames and contact she
 Licence| Apache-2.0 or MIT| free up to 3 people; companies pay per render or per seat| Apache-2.0  
 Hosted rendering| ultrafast Cloud, coming soon ([waitlist](<https://ultrafast.mov/cloud/>)); `uf serve` on your GPU today| none: Lambda in your AWS account| HeyGen credits, or your own Lambda or Cloud Run  
   
-Remotion and HyperFrames figures are from their own docs, November 2026. [Sources](<https://ultrafast.mov/compare/#sources>).
+Export times are from the [benchmark](<https://ultrafast.mov/benchmarks/>); other Remotion and HyperFrames figures are from their own docs, November 2026. [Sources](<https://ultrafast.mov/compare/#sources>).
 
 Integrations
 

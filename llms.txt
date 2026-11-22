@@ -41,6 +41,7 @@ Facts an agent needs:
 - [ultrafast vs Remotion vs HyperFrames](https://ultrafast.mov/compare/index.md): ultrafast, Remotion and HyperFrames side by side
 - [ultrafast vs Remotion](https://ultrafast.mov/compare/remotion/index.md): ultrafast vs Remotion
 - [ultrafast vs HyperFrames](https://ultrafast.mov/compare/hyperframes/index.md): ultrafast vs HyperFrames
+- [Render benchmark: ultrafast vs Remotion vs HyperFrames](https://ultrafast.mov/benchmarks/index.md): the head-to-head render benchmark on one RTX 5090 and the token count, with the method, the caveats and how to reproduce them
 - [Open source Remotion alternatives, compared](https://ultrafast.mov/alternatives/remotion/index.md): eight open-source tools with their licences, renderers, agent tooling and release dates, and when to choose each
 
 ## Optional

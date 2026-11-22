@@ -53,7 +53,7 @@ Speed
 
 ## Measured on one machine.
 
-The same 10-second videos, written in each tool the way its docs teach and exported end to end on one RTX 5090 workstation (Ryzen 9 9950X3D), median of five warm runs. Remotion and HyperFrames at the fastest setting found for each. Title card: 0.85 s, 2.32 s and 3.53 s. Animated chart: 0.88 s, 2.25 s and 3.31 s. Method, every configuration and one script to reproduce it: [the benchmark](<https://github.com/ultrafastmov/benchmarks>).
+The same 10-second videos, written in each tool the way its docs teach and exported end to end on one RTX 5090 workstation (Ryzen 9 9950X3D2), median of five warm runs. Remotion and HyperFrames at the fastest setting found for each. Title card: 0.85 s, 2.32 s and 3.53 s. Animated chart: 0.88 s, 2.25 s and 3.31 s. Method, every configuration and one script to reproduce it: [the benchmark](<https://github.com/ultrafastmov/benchmarks>). The [benchmark page](<https://ultrafast.mov/benchmarks/>) has every scene, the cold runs, the token count and where ultrafast does worse.
 
   1. ultrafast **0.98 s**
   2. HyperFrames **4.46 s**
