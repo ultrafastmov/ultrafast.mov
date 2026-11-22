@@ -130,6 +130,8 @@ vertical teaser, 10 s, 3D
 
 Export times for every film are on [examples](<https://ultrafast.mov/examples/>). No other tool on this page has been timed on the same machine, so this page compares no speeds.
 
+Measured on one RTX 5090 workstation, end to end: three 10-second videos (a title card, an animated chart and captioned NASA footage) exported in 0.85 to 0.98 s with ultrafast, against 2.32 to 6.69 s for Remotion and 3.31 to 4.46 s for HyperFrames at the fastest setting found for each. Only these three tools were measured. [Method and raw results](<https://github.com/ultrafastmov/benchmarks>).
+
 ### Agents see their frames
 
 `check` finds mistakes before rendering. Frames and contact sheets come back as images. `review` reads every frame for unreadable, clipped, overlapping or too-brief text and flashing. `inspect` names the node behind a pixel.

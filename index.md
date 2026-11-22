@@ -206,7 +206,7 @@ Remotion and HyperFrames draw each frame in headless Chrome and capture it. ultr
 Draws each frame with| GPU kernels, Metal or Vulkan| headless Chrome, a screenshot per frame| headless Chrome, captured frame by frame  
 You write| one JSON document| a React project| HTML, CSS and JavaScript  
 Output tokens for a 10 s short| about 1,234| about 1,868| about 1,680  
-Published speed, 1080p| 300 frames in 0.34 s, with 6-sample motion blur, on one GPU| an 80 s video in 15 s, split across up to 200 Lambda functions| 300 frames in 9.8 s  
+Export, same machine ([benchmark](<https://github.com/ultrafastmov/benchmarks>))| 0.98 s for 10 s of captioned NASA footage, 1080×1920, end to end| 6.69 s at its fastest setting found; 8.53 s with its default command| 4.46 s at its fastest setting found; 5.05 s with its default command  
 Agents review their frames| `check`, `review`, `inspect`, frames and contact sheets| no built-in review| no built-in review  
 Licence| Apache-2.0 or MIT| free up to 3 people; companies pay per render or per seat| Apache-2.0  
 Hosted rendering| ultrafast Cloud, coming soon ([waitlist](<https://ultrafast.mov/cloud/>)); `uf serve` on your GPU today| none: Lambda in your AWS account| HeyGen credits, or your own Lambda or Cloud Run  
@@ -292,7 +292,7 @@ Any size and frame rate: 9:16, 1:1, 4:5, 16:9, 21:9 or your own, up to 4K. Expor
 
 How is it different from Remotion or HyperFrames?
 
-They draw each frame in headless Chrome and screenshot it. ultrafast draws on the GPU with no browser: 300 frames of 1080p with motion blur in 0.34 s on one RTX 5090, where HyperFrames' own guide gives 9.8 s for 300 frames. It also gives agents tools to check and review their videos. See the [comparison](<https://ultrafast.mov/compare/>).
+They draw each frame in headless Chrome and screenshot it. ultrafast draws on the GPU with no browser. On one RTX 5090 workstation, three 10-second videos exported in 0.85 to 0.98 s; at their fastest settings, Remotion took 2.6 to 6.8 times as long and HyperFrames 3.8 to 4.5 times ([benchmark](<https://github.com/ultrafastmov/benchmarks>)). It also gives agents tools to check and review their videos. See the [comparison](<https://ultrafast.mov/compare/>).
 
 Does an agent use fewer tokens with ultrafast?
 

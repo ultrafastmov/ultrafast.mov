@@ -21,7 +21,7 @@ At a glance
 Draws each frame with| GPU kernels, Metal or Vulkan; the planner fuses nodes into one kernel per group| headless Chrome; parallel tabs render and screenshot frames| headless Chrome via Puppeteer; 1 to 24 browser workers  
 You write| one JSON document; no build step| a React and TypeScript project| HTML, CSS and JS with a paused GSAP timeline or another adapter  
 Output tokens for a 10 s short| about 1,234| about 1,868| about 1,680  
-Published speed, 1080p| 300 frames with 6-sample motion blur in 0.34 s on one RTX 5090| an 80 s video in 15 s on Lambda, up to 200 functions| 300 frames in 9.8 s; 25 s with one costly CSS rule  
+Export, same machine ([benchmark](<https://github.com/ultrafastmov/benchmarks>))| 0.98 s for 10 s of captioned NASA footage, 1080×1920, end to end| 6.69 s at its fastest setting found; 8.53 s with its default command| 4.46 s at its fastest setting found; 5.05 s with its default command  
 GPU| renders on it| not used by default; none on Lambda| optional, for WebGL and hardware encoding  
 Agents check and review| `check` before rendering; `review` reads every frame for unreadable, clipped or too-brief text and flashing; `inspect` maps pixels to nodes| no built-in review| no built-in review  
 Agent surfaces| 20 MCP tools, local and remote; skills; ChatGPT and Claude apps coming soon| 13 Agent Skills; plugins for 5 coding agents; hosted MCP shut down in October 2026| 9 skills; plugins for 6 agents; Claude connector; ChatGPT Work plugin  
@@ -51,13 +51,13 @@ Remotion| 18.68 million| $374
   
 Speed
 
-## Frames a second, per machine.
+## Measured on one machine.
 
-300 frames of 1080p. ultrafast's run includes 6-sample motion blur; HyperFrames' numbers are from its performance guide. Remotion publishes Lambda times instead of per-machine ones.
+The same 10-second videos, written in each tool the way its docs teach and exported end to end on one RTX 5090 workstation (Ryzen 9 9950X3D), median of five warm runs. Remotion and HyperFrames at the fastest setting found for each. Title card: 0.85 s, 2.32 s and 3.53 s. Animated chart: 0.88 s, 2.25 s and 3.31 s. Method, every configuration and one script to reproduce it: [the benchmark](<https://github.com/ultrafastmov/benchmarks>).
 
-  1. ultrafast **894 fps**
-  2. HyperFrames **31 fps**
-  3. HyperFrames, one costly CSS rule **12 fps**
+  1. ultrafast **0.98 s**
+  2. HyperFrames **4.46 s**
+  3. Remotion **6.69 s**
 
 Cost
 

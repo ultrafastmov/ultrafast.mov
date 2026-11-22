@@ -284,7 +284,7 @@ img, video { max-width: 100%; }
 .race li { display: grid; grid-template-columns: minmax(110px, 200px) 1fr 96px; align-items: center; gap: 16px; font: 15px/1.25 var(--mono); }
 .race b { font: 900 20px/1 var(--wood); text-align: right; white-space: nowrap; }
 .race .bar { height: 26px; background: var(--c, #b8b0a2); width: var(--w); min-width: 4px; }
-.race li:first-child .bar { background: var(--pink); }
+.race li:first-child .bar, .race li.us .bar { background: var(--pink); }
 
 /* ---------- review: the proof ---------- */
 .proofsheet { display: grid; grid-template-columns: 1.7fr 1fr; gap: 44px; align-items: start; }

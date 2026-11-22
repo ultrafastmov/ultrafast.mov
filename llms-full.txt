@@ -210,7 +210,7 @@ Remotion and HyperFrames draw each frame in headless Chrome and capture it. ultr
 Draws each frame with| GPU kernels, Metal or Vulkan| headless Chrome, a screenshot per frame| headless Chrome, captured frame by frame  
 You write| one JSON document| a React project| HTML, CSS and JavaScript  
 Output tokens for a 10 s short| about 1,234| about 1,868| about 1,680  
-Published speed, 1080p| 300 frames in 0.34 s, with 6-sample motion blur, on one GPU| an 80 s video in 15 s, split across up to 200 Lambda functions| 300 frames in 9.8 s  
+Export, same machine ([benchmark](<https://github.com/ultrafastmov/benchmarks>))| 0.98 s for 10 s of captioned NASA footage, 1080×1920, end to end| 6.69 s at its fastest setting found; 8.53 s with its default command| 4.46 s at its fastest setting found; 5.05 s with its default command  
 Agents review their frames| `check`, `review`, `inspect`, frames and contact sheets| no built-in review| no built-in review  
 Licence| Apache-2.0 or MIT| free up to 3 people; companies pay per render or per seat| Apache-2.0  
 Hosted rendering| ultrafast Cloud, coming soon ([waitlist](<https://ultrafast.mov/cloud/>)); `uf serve` on your GPU today| none: Lambda in your AWS account| HeyGen credits, or your own Lambda or Cloud Run  
@@ -296,7 +296,7 @@ Any size and frame rate: 9:16, 1:1, 4:5, 16:9, 21:9 or your own, up to 4K. Expor
 
 How is it different from Remotion or HyperFrames?
 
-They draw each frame in headless Chrome and screenshot it. ultrafast draws on the GPU with no browser: 300 frames of 1080p with motion blur in 0.34 s on one RTX 5090, where HyperFrames' own guide gives 9.8 s for 300 frames. It also gives agents tools to check and review their videos. See the [comparison](<https://ultrafast.mov/compare/>).
+They draw each frame in headless Chrome and screenshot it. ultrafast draws on the GPU with no browser. On one RTX 5090 workstation, three 10-second videos exported in 0.85 to 0.98 s; at their fastest settings, Remotion took 2.6 to 6.8 times as long and HyperFrames 3.8 to 4.5 times ([benchmark](<https://github.com/ultrafastmov/benchmarks>)). It also gives agents tools to check and review their videos. See the [comparison](<https://ultrafast.mov/compare/>).
 
 Does an agent use fewer tokens with ultrafast?
 
@@ -1807,7 +1807,7 @@ At a glance
 Draws each frame with| GPU kernels, Metal or Vulkan; the planner fuses nodes into one kernel per group| headless Chrome; parallel tabs render and screenshot frames| headless Chrome via Puppeteer; 1 to 24 browser workers  
 You write| one JSON document; no build step| a React and TypeScript project| HTML, CSS and JS with a paused GSAP timeline or another adapter  
 Output tokens for a 10 s short| about 1,234| about 1,868| about 1,680  
-Published speed, 1080p| 300 frames with 6-sample motion blur in 0.34 s on one RTX 5090| an 80 s video in 15 s on Lambda, up to 200 functions| 300 frames in 9.8 s; 25 s with one costly CSS rule  
+Export, same machine ([benchmark](<https://github.com/ultrafastmov/benchmarks>))| 0.98 s for 10 s of captioned NASA footage, 1080×1920, end to end| 6.69 s at its fastest setting found; 8.53 s with its default command| 4.46 s at its fastest setting found; 5.05 s with its default command  
 GPU| renders on it| not used by default; none on Lambda| optional, for WebGL and hardware encoding  
 Agents check and review| `check` before rendering; `review` reads every frame for unreadable, clipped or too-brief text and flashing; `inspect` maps pixels to nodes| no built-in review| no built-in review  
 Agent surfaces| 20 MCP tools, local and remote; skills; ChatGPT and Claude apps coming soon| 13 Agent Skills; plugins for 5 coding agents; hosted MCP shut down in October 2026| 9 skills; plugins for 6 agents; Claude connector; ChatGPT Work plugin  
@@ -1837,13 +1837,13 @@ Remotion| 18.68 million| $374
   
 Speed
 
-## Frames a second, per machine.
+## Measured on one machine.
 
-300 frames of 1080p. ultrafast's run includes 6-sample motion blur; HyperFrames' numbers are from its performance guide. Remotion publishes Lambda times instead of per-machine ones.
+The same 10-second videos, written in each tool the way its docs teach and exported end to end on one RTX 5090 workstation (Ryzen 9 9950X3D), median of five warm runs. Remotion and HyperFrames at the fastest setting found for each. Title card: 0.85 s, 2.32 s and 3.53 s. Animated chart: 0.88 s, 2.25 s and 3.31 s. Method, every configuration and one script to reproduce it: [the benchmark](<https://github.com/ultrafastmov/benchmarks>).
 
-  1. ultrafast **894 fps**
-  2. HyperFrames **31 fps**
-  3. HyperFrames, one costly CSS rule **12 fps**
+  1. ultrafast **0.98 s**
+  2. HyperFrames **4.46 s**
+  3. Remotion **6.69 s**
 
 Cost
 
@@ -1963,7 +1963,7 @@ ultrafast, measured
 16 s launch film, 3D
     4.88 s
 
-Remotion's published figures: an 80 s video in 15 s; a 1-minute render in 19 s for $0.017 of AWS compute.
+On the same RTX 5090 workstation, three 10-second videos took Remotion 2.32 to 6.69 s at the fastest setting found (2.6 to 6.8 times ultrafast's time) and 4.45 to 8.53 s with its default command ([benchmark](<https://github.com/ultrafastmov/benchmarks>)). Remotion's published Lambda figures: an 80 s video in 15 s; a 1-minute render in 19 s for $0.017 of AWS compute.
 
 Tokens
 
@@ -2153,7 +2153,7 @@ At a glance
 How a frame is made| GPU kernels compiled from the document; encoded on the same GPU| a page laid out in Chrome via Puppeteer, captured per frame, encoded with FFmpeg; 1 to 24 browsers of about 256 MB each  
 You write| one JSON document with a published schema| HTML and CSS with `data-*` timing, and a paused GSAP timeline or another adapter  
 Output tokens for a 10 s short| about 1,234, measured| about 1,680, most of it web code  
-Speed, 300 frames of 1080p| 0.34 s with 6-sample motion blur, one RTX 5090| 9.8 s; 25 s with one costly CSS rule  
+Export, same machine ([benchmark](<https://github.com/ultrafastmov/benchmarks>))| 0.85–0.98 s for three 10-second videos| 3.31–4.46 s at its fastest setting found; 3.71–5.05 s with its default command  
 Same pixels everywhere| bundled fonts, the same kernels on every machine| fonts and Chrome versions can shift pixels; `--docker` pins them  
 Install| one binary| Node 22+, FFmpeg, a managed Chrome  
 For agents| 20 MCP tools (local and remote) including `check`, `review` and `inspect`; frames returned as images; ChatGPT and Claude apps coming soon| 9 skills; plugins for 6 agents; a Claude connector with `compose` and `render_video`; a ChatGPT Work plugin  
@@ -2165,13 +2165,16 @@ Hosted rendering| your own GPU with `uf serve`; ultrafast Cloud has a [waitlist]
   
 Speed
 
-## About 30 times their own number.
+## About four times faster, measured.
 
-HyperFrames' performance guide renders 300 frames of 1080p in 9.8 s. ultrafast renders 300 frames of 1080p, with 6-sample motion blur, in 0.34 s.
+Three 10-second videos written in both tools and exported end to end on one RTX 5090 workstation. At the fastest setting found, HyperFrames took 3.8 to 4.5 times as long; with its default command, 4.2 to 5.1 times. [Method and raw results](<https://github.com/ultrafastmov/benchmarks>).
 
-  1. ultrafast **0.34 s**
-  2. HyperFrames **9.8 s**
-  3. HyperFrames, one costly CSS rule **25 s**
+  1. Title card, ultrafast **0.85 s**
+  2. Title card, HyperFrames **3.53 s**
+  3. Chart, ultrafast **0.88 s**
+  4. Chart, HyperFrames **3.31 s**
+  5. Footage, ultrafast **0.98 s**
+  6. Footage, HyperFrames **4.46 s**
 
 Tokens
 
@@ -2288,7 +2291,7 @@ Questions
 
 Both are open source. What's the difference?
 
-HyperFrames renders HTML and GSAP in headless Chrome; ultrafast renders a JSON document on the GPU. That makes ultrafast about 30 times faster on HyperFrames' own published numbers, and lets agents review the frames they made.
+HyperFrames renders HTML and GSAP in headless Chrome; ultrafast renders a JSON document on the GPU. That makes ultrafast about four times faster on the same machine (3.8 to 4.5 times at HyperFrames' fastest setting, in a [public benchmark](<https://github.com/ultrafastmov/benchmarks>)), and lets agents review the frames they made.
 
 Will my video look the same on every machine?
 
@@ -2450,6 +2453,8 @@ vertical teaser, 10 s, 3D
     1.68 s
 
 Export times for every film are on [examples](<https://ultrafast.mov/examples/>). No other tool on this page has been timed on the same machine, so this page compares no speeds.
+
+Measured on one RTX 5090 workstation, end to end: three 10-second videos (a title card, an animated chart and captioned NASA footage) exported in 0.85 to 0.98 s with ultrafast, against 2.32 to 6.69 s for Remotion and 3.31 to 4.46 s for HyperFrames at the fastest setting found for each. Only these three tools were measured. [Method and raw results](<https://github.com/ultrafastmov/benchmarks>).
 
 ### Agents see their frames
 

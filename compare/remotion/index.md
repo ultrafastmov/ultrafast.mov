@@ -47,7 +47,7 @@ ultrafast, measured
 16 s launch film, 3D
     4.88 s
 
-Remotion's published figures: an 80 s video in 15 s; a 1-minute render in 19 s for $0.017 of AWS compute.
+On the same RTX 5090 workstation, three 10-second videos took Remotion 2.32 to 6.69 s at the fastest setting found (2.6 to 6.8 times ultrafast's time) and 4.45 to 8.53 s with its default command ([benchmark](<https://github.com/ultrafastmov/benchmarks>)). Remotion's published Lambda figures: an 80 s video in 15 s; a 1-minute render in 19 s for $0.017 of AWS compute.
 
 Tokens
 
