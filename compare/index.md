@@ -35,7 +35,7 @@ Tokens
 
 ## Up to a third fewer tokens.
 
-Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain, counted with tiktoken (o200k_base) over the files each tool needs: the ultrafast document; Remotion's composition, config and CLI commands; HyperFrames' HTML and its grading command. Measured 22 November 2026.
+Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain, counted with tiktoken (o200k_base) over the files each tool needs: the ultrafast document; Remotion's composition, config and CLI commands; HyperFrames' HTML and its grading command. Counting only what is typed after each tool's own scaffold: ultrafast 1,218, HyperFrames 1,500, Remotion 1,660. Measured 22 November 2026.
 
   1. ultrafast **1,234**
   2. HyperFrames **1,680**
@@ -113,7 +113,7 @@ Yes. `uf reconstruct` turns a finished video into an editable document draft: sh
 
 Why does an agent need fewer tokens with ultrafast?
 
-A document only describes the video: nodes and their params. A Remotion or HyperFrames project also needs imports, components, CSS, timeline set-up and project files, and grain, a grade or captions timed to each word are code to write. In ultrafast each of those is one node. Measured on the same 10-second short: 1,234 output tokens in ultrafast, 1,680 in HyperFrames and 1,868 in Remotion (tiktoken o200k_base).
+A document only describes the video: nodes and their params. A Remotion or HyperFrames project also needs imports, components, CSS and timeline set-up around its effects. Measured on the same 10-second short (tiktoken o200k_base): 1,234 tokens in ultrafast, 1,680 in HyperFrames and 1,868 in Remotion across the files the agent writes; 1,218, 1,500 and 1,660 counting only what is typed after each tool's scaffold.
 
 **Sources** , checked 21 November 2026: Remotion [pricing](<https://www.remotion.dev/docs/license/pricing>), [team size](<https://www.remotion.dev/docs/terms#TeamSize>), [Lambda](<https://www.remotion.dev/lambda>), [MCP](<https://www.remotion.dev/docs/ai/mcp>), [skills](<https://www.remotion.dev/docs/ai/skills>), [GPU](<https://www.remotion.dev/docs/gpu>), [flickering](<https://www.remotion.dev/docs/flickering>); HyperFrames [repository](<https://github.com/heygen-com/hyperframes>), [CLI](<https://hyperframes.heygen.com/packages/cli>), [performance](<https://hyperframes.heygen.com/guides/performance>), [determinism](<https://hyperframes.heygen.com/concepts/determinism>), [plugins](<https://hyperframes.heygen.com/guides/plugins>), [Lambda](<https://hyperframes.heygen.com/deploy/aws-lambda>). Product names belong to their owners.
 

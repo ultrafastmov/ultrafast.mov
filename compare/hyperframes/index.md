@@ -41,9 +41,9 @@ HyperFrames' performance guide renders 300 frames of 1080p in 9.8 s. ultrafast r
 
 Tokens
 
-## A quarter fewer tokens.
+## A fifth to a quarter fewer tokens.
 
-Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain, counted with tiktoken (o200k_base) over the files each tool needs: the ultrafast document; Remotion's composition, config and CLI commands; HyperFrames' HTML and its grading command. Measured 22 November 2026.
+Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain, counted with tiktoken (o200k_base) over the files each tool needs: the ultrafast document; Remotion's composition, config and CLI commands; HyperFrames' HTML and its grading command. Counting only what is typed after each tool's own scaffold: ultrafast 1,218, HyperFrames 1,500, Remotion 1,660. Measured 22 November 2026.
 
   1. ultrafast **1,234**
   2. HyperFrames **1,680**
@@ -109,7 +109,7 @@ HyperFrames
 </script>
 ``` 
 
-The rest of the gap is the effects: grain, a grade and captions timed to each word are a script or a canvas each in HyperFrames and one node each in ultrafast.
+Grain, a grade and word-timed captions are built in on both sides now: HyperFrames' `media-treatment` command and caption groups, against one node each in ultrafast. The gap is mostly the HTML, CSS and timeline set-up around them.
 
 10,000 shorts a month| output tokens| at $20 per million  
 ---|---|---  
@@ -170,7 +170,7 @@ No Node. ultrafast is one binary; exports on Vulkan use FFmpeg, and the prebuilt
 
 How many tokens does an agent spend on a HyperFrames video?
 
-Measured on a 10-second vertical short (footage, a title, three lines, word-timed captions, a grade and grain): 1,680 output tokens for the HTML composition and its grading command. The same short as an ultrafast document is 1,234, about a quarter fewer (tiktoken o200k_base).
+Measured on a 10-second vertical short (footage, a title, three lines, word-timed captions, a grade and grain): 1,680 output tokens for the HTML composition and its grading command. The same short as an ultrafast document is 1,234 (tiktoken o200k_base). Counting only what is typed after each tool's scaffold: 1,500 and 1,218.
 
 HyperFrames facts from its docs, checked 21 November 2026: [repository](<https://github.com/heygen-com/hyperframes>), [CLI](<https://hyperframes.heygen.com/packages/cli>), [performance](<https://hyperframes.heygen.com/guides/performance>), [determinism](<https://hyperframes.heygen.com/concepts/determinism>), [plugins](<https://hyperframes.heygen.com/guides/plugins>), [MCP](<https://hyperframes.heygen.com/guides/mcp>), [Lambda](<https://hyperframes.heygen.com/deploy/aws-lambda>). HyperFrames and HeyGen are trademarks of their owner.
 

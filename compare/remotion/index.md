@@ -51,9 +51,9 @@ Remotion's published figures: an 80 s video in 15 s; a 1-minute render in 19 s f
 
 Tokens
 
-## A third fewer tokens.
+## A quarter to a third fewer tokens.
 
-Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain, counted with tiktoken (o200k_base) over the files each tool needs: the ultrafast document; Remotion's composition, config and CLI commands; HyperFrames' HTML and its grading command. Measured 22 November 2026.
+Output tokens an agent writes for a 10-second vertical short: footage, a title, three lines of detail, captions timed to each word, a grade and grain, counted with tiktoken (o200k_base) over the files each tool needs: the ultrafast document; Remotion's composition, config and CLI commands; HyperFrames' HTML and its grading command. Counting only what is typed after each tool's own scaffold: ultrafast 1,218, HyperFrames 1,500, Remotion 1,660. Measured 22 November 2026.
 
   1. ultrafast **1,234**
   2. Remotion **1,868**
@@ -133,7 +133,7 @@ export const Title: React.FC = () => {
 };
 ``` 
 
-The rest of the gap is project files such as `Root.tsx` and `package.json`, and the effects: grain, a grade and captions timed to each word are a component each in Remotion and one node each in ultrafast.
+Grain, a grade and word-timed captions are built in on both sides now: `@remotion/effects` and a captions Element that Remotion's CLI installs, against one node each in ultrafast. The gap is mostly the React around them.
 
 Licence and cost
 
@@ -201,7 +201,7 @@ No. ultrafast's live player is a desktop window for authoring. For the web, expo
 
 How many tokens does an agent spend on a Remotion video?
 
-Measured on a 10-second vertical short (footage, a title, three lines, word-timed captions, a grade and grain): 1,868 output tokens for the composition, config and CLI commands. The same short as an ultrafast document is 1,234, about a third fewer (tiktoken o200k_base).
+Measured on a 10-second vertical short (footage, a title, three lines, word-timed captions, a grade and grain): 1,868 output tokens for the composition, config and CLI commands. The same short as an ultrafast document is 1,234 (tiktoken o200k_base). Counting only what is typed after each tool's scaffold: 1,660 and 1,218.
 
 Remotion facts from its docs, checked 21 November 2026: [pricing](<https://www.remotion.dev/docs/license/pricing>), [team size](<https://www.remotion.dev/docs/terms#TeamSize>), [Lambda](<https://www.remotion.dev/lambda>), [cost example](<https://www.remotion.dev/docs/lambda/cost-example>), [MCP](<https://www.remotion.dev/docs/ai/mcp>), [skills](<https://www.remotion.dev/docs/ai/skills>), [plugins](<https://www.remotion.dev/docs/ai/plugins>). Remotion is a trademark of its owner.
 

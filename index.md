@@ -197,7 +197,7 @@ Compare
 
 ## No browser in the loop.
 
-Remotion and HyperFrames draw each frame in headless Chrome and capture it. ultrafast draws it on the GPU, and your agent writes about a third fewer tokens than for Remotion.
+Remotion and HyperFrames draw each frame in headless Chrome and capture it. ultrafast draws it on the GPU, and your agent writes a quarter to a third fewer tokens than for Remotion.
 
 [Full comparison](<https://ultrafast.mov/compare/>)
 
@@ -296,7 +296,7 @@ They draw each frame in headless Chrome and screenshot it. ultrafast draws on th
 
 Does an agent use fewer tokens with ultrafast?
 
-Yes, about a third fewer than with Remotion and a quarter fewer than with HyperFrames. Measured on the same 10-second short: 1,234 output tokens as an ultrafast document, 1,868 for Remotion and 1,680 for HyperFrames (tiktoken o200k_base). See [tokens](<https://ultrafast.mov/compare/#tokens>).
+Yes: a quarter to a third fewer than with Remotion, and a fifth to a quarter fewer than with HyperFrames. Measured on the same 10-second short (tiktoken o200k_base): 1,234 tokens across the files the agent writes in ultrafast, 1,868 for Remotion and 1,680 for HyperFrames; counting only what is typed after each tool's scaffold, 1,218, 1,660 and 1,500. See [tokens](<https://ultrafast.mov/compare/#tokens>).
 
 What does it cost?
 

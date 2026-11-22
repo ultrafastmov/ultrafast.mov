@@ -16,7 +16,7 @@ Facts an agent needs:
 - Not available yet: ultrafast Cloud (hosted rendering), the ChatGPT app, the Claude connector and a hosted MCP server. They are coming soon; there is a waitlist at https://ultrafast.mov/cloud/. There is no `--cloud` flag.
 - Licence: Apache-2.0 or MIT. Renders with Metal on macOS and Vulkan on Linux and Windows (WSL2).
 - No GPU (e.g. an agent in a container): the Docker image `ghcr.io/ultrafastmov/ultrafast` renders on the CPU through Mesa's llvmpipe Vulkan driver, slower but correct: frames in under a second, a 6-second 1080x1920 export in about 17 s on 4 desktop cores. On Linux, `mesa-vulkan-drivers` gives the other installs the same path. macOS needs Metal.
-- Tokens (measured 22 Nov 2026, tiktoken o200k_base): the same 10-second short is 1,234 output tokens as an ultrafast document, 1,868 for Remotion and 1,680 for HyperFrames. Grain, grades, captions, 3D and simulations are one node each, not code to write.
+- Tokens (measured 22 Nov 2026, tiktoken o200k_base): the same 10-second short is 1,234 output tokens as an ultrafast document, 1,868 for Remotion and 1,680 for HyperFrames (counting only what is typed after each tool's scaffold: 1,218, 1,660 and 1,500). Grain, grades, captions, 3D and simulations are one node each.
 - 3D is rendered by the engine in the same document as the type: raymarched shapes and materials, meshes, image-based light, glass. The 3D in the example films is all rendered by ultrafast.
 
 ## Docs
