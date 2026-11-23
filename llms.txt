@@ -61,6 +61,11 @@ Each film has a watch page (as Markdown below) and the JSON document that made i
 - [Endless zoom](https://ultrafast.mov/examples/dive/index.md): One camera falls through seven nested worlds (type, vector blades, a chrome torus, ink, shader contours and rings of type) to the wordmark, whose dot holds the first frame again. Document: https://ultrafast.mov/examples/dive.json
 - [Main titles](https://ultrafast.mov/examples/meridian/index.md): Main titles for a drama that doesn't exist: a brass compass, a sea chart with a route inking itself across it, star trails over the sea, an armillary sphere, and a lighthouse whose beam lights the title. Document: https://ultrafast.mov/examples/meridian.json
 
+## Blog
+
+- [A video is not a web page](https://ultrafast.mov/blog/a-video-is-not-a-web-page/index.md): Remotion and HyperFrames make video by screenshotting a web page, frame after frame. Why that design is slow and fragile, what the web still gets right, and what an engine made for video does instead.
+- [RSS feed](https://ultrafast.mov/blog/rss.xml)
+
 ## Optional
 
 - [Full text of this site](https://ultrafast.mov/llms-full.txt): every page above as Markdown, in one file
