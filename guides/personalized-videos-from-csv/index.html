@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personalized videos from a CSV, open source · ultrafast</title>
+<meta name="description" content="Make one personalized video per row of a CSV or JSON file on your own GPU with an open-source engine: the template, the sheet, checking every row before rendering, long names, a photo per row, and the same from Python or HTTP.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/guides/personalized-videos-from-csv/">
+<link rel="alternate" type="text/markdown" href="/guides/personalized-videos-from-csv/index.md" title="Personalized videos from a CSV, open source · ultrafast (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="ultrafast blog"><meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="Personalized videos from a CSV">
+<meta property="og:description" content="Make one personalized video per row of a CSV or JSON file on your own GPU with an open-source engine: the template, the sheet, checking every row before rendering, long names, a photo per row, and the same from Python or HTTP.">
+<meta property="og:url" content="https://ultrafast.mov/guides/personalized-videos-from-csv/">
+<meta property="og:image" content="https://ultrafast.mov/og/guide-personalized-videos-from-csv.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Personalized videos from a CSV · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Personalized videos from a CSV">
+<meta name="twitter:description" content="Make one personalized video per row of a CSV or JSON file on your own GPU with an open-source engine: the template, the sheet, checking every row before rendering, long names, a photo per row, and the same from Python or HTTP.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/guide-personalized-videos-from-csv.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=c102dd99">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://ultrafast.mov/docs/"},{"@type":"ListItem","position":3,"name":"Personalized videos from a CSV","item":"https://ultrafast.mov/guides/personalized-videos-from-csv/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I make personalized videos from a spreadsheet for free?","acceptedAnswer":{"@type":"Answer","text":"Yes, if you have the hardware. ultrafast is open source (Apache-2.0 or MIT) and renders on your own Mac with Apple silicon or Linux machine with a Vulkan GPU, so there is no per-video or per-minute fee: uf batch card.json --data rows.csv --out 'out/{name}.mp4' makes one video per row."}},{"@type":"Question","name":"Does my customer data leave my machine?","acceptedAnswer":{"@type":"Answer","text":"Not with the command line: uf batch reads the sheet and renders on the same machine. With uf serve, the rows go only to the server you run. Fonts named in a template may be downloaded by name the first time they are used."}},{"@type":"Question","name":"Can each row have its own photo or video clip?","acceptedAnswer":{"@type":"Answer","text":"Yes. A column such as photo.src sets the file of an image or video node per row. Relative paths resolve from the template's folder, and a row whose file is missing stops the batch before anything renders."}},{"@type":"Question","name":"How do I stop long names from running off the frame?","acceptedAnswer":{"@type":"Answer","text":"Render and look: uf review on the longest rows reports text that runs off the frame, overlaps other text or is too small, and uf sheet shows nine frames on one image. A wrap width on the text node breaks a long full name onto a second line. uf check alone can't see it, because a long name is a valid document."}},{"@type":"Question","name":"Can I do this from n8n, Zapier or my own code?","acceptedAnswer":{"@type":"Answer","text":"From your own code, yes: the Python and TypeScript SDKs talk to uf serve, so you copy the template, set the params from your data and render. There is no n8n or Zapier node, but their HTTP request step can POST each row's document to /v1/render on your server."}}]},{"@type":"TechArticle","@id":"https://ultrafast.mov/guides/personalized-videos-from-csv/#article","headline":"Personalized videos from a CSV, open source","description":"Make one personalized video per row of a CSV or JSON file on your own GPU with an open-source engine: the template, the sheet, checking every row before rendering, long names, a photo per row, and the same from Python or HTTP.","url":"https://ultrafast.mov/guides/personalized-videos-from-csv/","mainEntityOfPage":"https://ultrafast.mov/guides/personalized-videos-from-csv/","image":"https://ultrafast.mov/og/guide-personalized-videos-from-csv.jpg","datePublished":"2026-11-23T21:47:41+00:00","dateModified":"2026-11-23T21:47:41+00:00","inLanguage":"en","author":{"@id":"https://ultrafast.mov/#org"},"publisher":{"@id":"https://ultrafast.mov/#org"},"about":{"@id":"https://ultrafast.mov/#app"}}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/" aria-current="page">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="band stock-cotton phead" style="padding-bottom:56px">
+  <div class="sunburst" aria-hidden="true" style="--sx:92%;--sy:40%;--r2:520px"></div>
+  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+<li><a href="/docs/">Docs</a></li>  <li aria-current="page">Personalized videos from a CSV</li>
+</ol>
+
+    <p class="eyebrow"><i style="--c:var(--blue)"></i>Docs</p>
+    <h1 class="pr h1" data-plates="blue black"><span class="ln">Personalized videos</span> <span class="ln">from a CSV.</span></h1>
+    <p class="lede">A template and a spreadsheet make a finished video per row, each with its own customer name, order number and code. Rendered on your own GPU by an open-source engine, so the rows never leave your machine and no one charges per video.</p>
+  </div>
+</section>
+<section class="band stock-thermal" style="padding-top:72px">
+  <div class="wrap docs">
+    <nav class="side" aria-label="Docs">
+      <h2>Start</h2>
+      <ul><li><a href="/docs/">Quickstart</a></li><li><a href="/docs/documents/">The document</a></li></ul>
+      <h2>Guides</h2>
+      <ul><li><a href="/guides/render-video-from-json/">Render video from JSON</a></li><li><a href="/guides/personalized-videos-from-csv/" aria-current="page">Personalized videos from a CSV</a></li></ul>
+      <h2>Reference</h2>
+      <ul><li><a href="/docs/ops/">Ops</a></li><li><a href="/docs/cli/">CLI</a></li><li><a href="/docs/mcp/">MCP server</a></li><li><a href="/docs/api/">HTTP API</a></li></ul>
+      <h2>For agents</h2>
+      <ul><li><a href="/llms.txt">llms.txt</a></li><li><a href="/guides/personalized-videos-from-csv/index.md">This page as Markdown</a></li></ul>
+    </nav>
+    <article class="prose">
+<nav class="toc" aria-label="On this page"><b>On this page</b><ol>
+  <li><a href="#template">The template</a></li><li><a href="#sheet">The sheet</a></li><li><a href="#check">Check every row first</a></li>
+  <li><a href="#look">Long names</a></li><li><a href="#render">Render the batch</a></li><li><a href="#media">A photo or clip per row</a></li>
+  <li><a href="#code">From code, a queue or an agent</a></li><li><a href="#limits">Limits</a></li><li><a href="#faq">Questions</a></li>
+</ol></nav>
+
+<h2 id="template">The template</h2>
+<p>The template is an ordinary ultrafast document: a JSON file with a <code>format</code>, a graph of <code>nodes</code> and an <code>output</code> (the whole shape is in <a href="/guides/render-video-from-json/">Render video from JSON</a>). This one is the engine's vertical starter (<code>uf new vertical card.json</code>), a 6-second 1080×1920 card, with its words changed to a thank-you note. Three of its nodes are the parts that change per customer:</p>
+<div class="code"><div class="cbar"><span>card.json: the three nodes the sheet changes, some params left out</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="nt">&quot;line2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Priya.&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;font&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Instrument Serif&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;style&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;italic&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">190</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ffd7a8&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.55</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">84</span><span class="p">,</span><span class="w"> </span><span class="mi">1210</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;ease&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;bezier&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.16</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">                          </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.25</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">84</span><span class="p">,</span><span class="w"> </span><span class="mi">1020</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORDER 10482&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;font&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Geist Mono&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">86</span><span class="p">,</span><span class="w"> </span><span class="mi">600</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10% off the next one: PRIYA10&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;font&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Geist Mono&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ffd7a8&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">86</span><span class="p">,</span><span class="w"> </span><span class="mi">1320</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;reveal&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.4</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.6</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span></code></pre></div><p>Nothing in the template marks a field as a variable. Any param of any node can be set from the sheet, so the design stays a normal document you can preview, check and edit like any other.</p>
+
+<h2 id="sheet">The sheet</h2>
+<p>A column named <code>node.param</code> sets that param in each row's copy of the template. Any other column is just data, and can name the output file.</p>
+<div class="code"><div class="cbar"><span>rows.csv</span><button class="copy" type="button">copy</button></div><pre><code class="hl">name,line2.text,label.text,code.text,line2.color
+priya,Priya.,ORDER 10482,10% off the next one: PRIYA10,#ffd7a8
+tomas,Tomás.,ORDER 10483,10% off the next one: TOMAS10,#a8e0ff
+mei,Mei.,ORDER 10484,10% off the next one: MEI10,#c8ffa8</code></pre></div><ul>
+  <li>Rows can be CSV, a JSON array of objects, or JSON lines.</li>
+  <li>Numbers are read as numbers (<code>line2.size</code> = <code>160</code>), colours as hex text with optional alpha.</li>
+  <li><code>format.width</code>, <code>format.height</code> and the other format fields can be columns too. Layout built from blocks and captions follows the frame; pixel positions such as this card's don't, so give each size its own template.</li>
+  <li>In <code>--out</code>, <code>{name}</code> is filled from the <code>name</code> column (any column works) and <code>{row}</code> is the row number.</li>
+</ul>
+
+<h2 id="check">Check every row before anything renders</h2>
+<p><code>uf batch</code> builds every row's document first and checks each one, so a typo in row 400 stops the run before the first frame. The error names the row and what's wrong:</p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">$ uf batch card.json --data rows.csv --out &#39;out/{name}.mp4&#39;
+Error: row 1: `nosuch.text`: no node `nosuch` (did you mean `code`?)</code></pre></div><p>To see each row's document, write them out instead of rendering, and check them like any other file:</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">uf<span class="w"> </span>batch<span class="w"> </span>card.json<span class="w"> </span>--data<span class="w"> </span>rows.csv<span class="w"> </span>--out<span class="w"> </span><span class="s1">&#39;out/{name}.mp4&#39;</span><span class="w"> </span>--docs<span class="w"> </span>docs/<span class="w">   </span><span class="c1"># docs/priya.json, docs/tomas.json, docs/mei.json</span>
+<span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>docs/*.json<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>uf<span class="w"> </span>check<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span></code></pre></div><p><code>check</code> reports two levels. A missing file is an error (<code>"severity": "error"</code>) and stops a batch. A value of the wrong type, such as text in a number column, is a warning: the batch still runs, so read the warnings when a sheet comes from somewhere new.</p>
+
+<h2 id="look">Long names</h2>
+<p>Add a row for <code>Maximiliana-Josefina.</code> and <code>check</code> still passes: a name too wide for the frame is a valid document. Catching it takes a render. <code>uf sheet</code> puts nine frames of one row on a single image, and <code>uf review</code> reads every frame for text that is clipped, overlapping, too small or on screen too briefly to read:</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">uf<span class="w"> </span>sheet<span class="w"> </span>docs/maximiliana.json<span class="w"> </span>--count<span class="w"> </span><span class="m">9</span><span class="w"> </span>--out<span class="w"> </span>sheet.png
+uf<span class="w"> </span>review<span class="w"> </span>docs/maximiliana.json<span class="w"> </span>--safe<span class="w"> </span>social<span class="w">      </span><span class="c1"># also flags text under a social app&#39;s buttons and captions</span></code></pre></div><p>For a sheet of unknown names, review the longest few rows before the full run. For full names with spaces, a wrap width (<code>"width"</code> on the text node, in pixels) breaks a long one onto a second line instead of running it off the edge.</p>
+
+<h2 id="render">Render the batch</h2>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">uf<span class="w"> </span>batch<span class="w"> </span>card.json<span class="w"> </span>--data<span class="w"> </span>rows.csv<span class="w"> </span>--out<span class="w"> </span><span class="s1">&#39;out/{name}.mp4&#39;</span>
+uf<span class="w"> </span>batch<span class="w"> </span>card.json<span class="w"> </span>--data<span class="w"> </span>rows.csv<span class="w"> </span>--out<span class="w"> </span><span class="s1">&#39;out/{name}.mp4&#39;</span><span class="w"> </span>--codec<span class="w"> </span>hevc<span class="w"> </span>--quality<span class="w"> </span>high<span class="w">   </span><span class="c1"># export settings apply to every row</span></code></pre></div><p>One renderer stays warm for the whole sheet, so fonts and GPU pipelines load once for the whole run, not once per video. Each row prints its frame count and time, and the run ends with the total. Every export setting works here: H.264, HEVC or AV1 MP4, ProRes, WebM, GIF, any size and frame rate. <code>uf estimate card.json</code> reports the GPU time of one video before you start.</p>
+
+<h2 id="media">A photo, a logo or a clip per row</h2>
+<p>An <code>image</code> or <code>video</code> node takes its file from <code>src</code>, so a column can swap it per row:</p>
+<div class="code"><div class="cbar"><span>rows.csv with a photo per row</span><button class="copy" type="button">copy</button></div><pre><code class="hl">name,line2.text,photo.src
+priya,Priya.,photos/priya.jpg
+tomas,Tomás.,photos/tomas.jpg</code></pre></div><p>Relative paths resolve from the template's folder. If you write the row documents somewhere else with <code>--docs</code>, use absolute paths in the sheet so each document still finds its files. A row whose file is missing fails the check, before rendering starts.</p>
+
+<h2 id="code">From code, a queue or an agent</h2>
+<p>When the rows come from a database or a form instead of a file, set the params in code. <code>uf serve</code> runs the same engine behind an HTTP API on your machine, with one API key, and the Python and TypeScript SDKs wrap it:</p>
+<div class="code"><div class="cbar"><span>Python: pip install ultrafastmov</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ultrafastmov</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ultrafast</span>
+
+<span class="n">uf</span> <span class="o">=</span> <span class="n">Ultrafast</span><span class="p">()</span>                          <span class="c1"># your uf serve; ULTRAFAST_API_KEY</span>
+<span class="n">card</span> <span class="o">=</span> <span class="n">uf</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;card.json&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;customers.csv&quot;</span><span class="p">)):</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">card</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>                     <span class="c1"># a deep copy; relative paths still resolve from card.json&#39;s folder</span>
+    <span class="n">doc</span><span class="p">[</span><span class="s2">&quot;nodes&quot;</span><span class="p">][</span><span class="s2">&quot;line2&quot;</span><span class="p">][</span><span class="s2">&quot;params&quot;</span><span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;first_name&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span>
+    <span class="n">doc</span><span class="p">[</span><span class="s2">&quot;nodes&quot;</span><span class="p">][</span><span class="s2">&quot;code&quot;</span><span class="p">][</span><span class="s2">&quot;params&quot;</span><span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;10% off the next one: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">uf</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;out/</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.mp4&quot;</span><span class="p">)</span></code></pre></div><p>Any tool that can send an HTTP request can do the same with <code>POST /v1/render</code> and the row's document (<a href="/docs/api/">HTTP API</a>). A self-hosted server renders one job at a time on its GPU; send the rows one after another. Agents get the same thing as an MCP tool: <code>ultrafast_batch</code> renders one document per row of a data file, or of rows passed inline (up to 20 a call on a remote server, a download link per row; see <a href="/docs/mcp/">MCP server</a>).</p>
+
+<h2 id="limits">Limits</h2>
+<ul>
+  <li>It needs a Mac with Apple silicon, or Linux with a Vulkan GPU. Without a GPU, the Docker image renders on the CPU, correctly but much more slowly.</li>
+  <li>There's no hosted service yet: you run the renderer. <a href="/cloud/">ultrafast Cloud</a> is a waitlist.</li>
+  <li>One template per batch. Different layouts per segment are separate templates, or a <code>format</code> column with layout that follows the frame.</li>
+  <li>Hosted APIs such as Shotstack, JSON2Video and Creatomate run the render for you and charge per minute; their prices and formats are compared on <a href="/alternatives/json-to-video-api/">ultrafast vs JSON-to-video APIs</a>.</li>
+</ul>
+
+<h2 id="faq">Questions</h2>
+<div class="faq">
+  <details open>
+    <summary>Can I make personalized videos from a spreadsheet for free?</summary>
+    <div class="ans"><p>Yes, if you have the hardware. ultrafast is open source (Apache-2.0 or MIT) and renders on your own Mac with Apple silicon or Linux machine with a Vulkan GPU, so there is no per-video or per-minute fee: <code>uf batch card.json --data rows.csv --out 'out/{name}.mp4'</code> makes one video per row.</p></div>
+  </details>
+  <details>
+    <summary>Does my customer data leave my machine?</summary>
+    <div class="ans"><p>Not with the command line: <code>uf batch</code> reads the sheet and renders on the same machine. With <code>uf serve</code>, the rows go only to the server you run. Fonts named in a template may be downloaded by name the first time they are used.</p></div>
+  </details>
+  <details>
+    <summary>Can each row have its own photo or video clip?</summary>
+    <div class="ans"><p>Yes. A column such as <code>photo.src</code> sets the file of an <code>image</code> or <code>video</code> node per row. Relative paths resolve from the template's folder, and a row whose file is missing stops the batch before anything renders.</p></div>
+  </details>
+  <details>
+    <summary>How do I stop long names from running off the frame?</summary>
+    <div class="ans"><p>Render and look: <code>uf review</code> on the longest rows reports text that runs off the frame, overlaps other text or is too small, and <code>uf sheet</code> shows nine frames on one image. A wrap width on the text node breaks a long full name onto a second line. <code>uf check</code> alone can't see it, because a long name is a valid document.</p></div>
+  </details>
+  <details>
+    <summary>Can I do this from n8n, Zapier or my own code?</summary>
+    <div class="ans"><p>From your own code, yes: the Python and TypeScript SDKs talk to <code>uf serve</code>, so you copy the template, set the params from your data and render. There is no n8n or Zapier node, but their HTTP request step can POST each row's document to <code>/v1/render</code> on your server.</p></div>
+  </details>
+</div>
+
+    </article>
+  </div>
+</section>
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/learn/can-claude-make-videos/">Can Claude make videos?</a>
+<a href="/blog/">Blog</a>      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+<a href="/changelog/">Changelog</a>      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+      <a href="/alternatives/remotion/">Remotion alternatives</a>
+      <a href="/alternatives/hyperframes/">HyperFrames alternatives</a>
+      <a href="/alternatives/json-to-video-api/">vs JSON-to-video APIs</a>
+      <a href="/benchmarks/">Benchmarks</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code></span>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=c102dd99"></script>
+</body>
+</html>

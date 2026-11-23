@@ -19,7 +19,7 @@ At a glance
 How a frame is made| GPU kernels compiled from the document; encoded on the same GPU| a page laid out in Chrome via Puppeteer, captured per frame, encoded with FFmpeg; 1 to 24 browsers of about 256 MB each  
 You write| one JSON document with a published schema| HTML and CSS with `data-*` timing, and a paused GSAP timeline or another adapter  
 Output tokens for a 10 s short| about 1,234, measured| about 1,680, most of it web code  
-Export, same machine ([benchmark](<https://github.com/ultrafastmov/benchmarks>))| 0.85–0.98 s for three 10-second videos| 3.31–4.46 s at its fastest setting found; 3.71–5.05 s with its default command  
+Export, same machine ([benchmark](<https://github.com/ultrafastmov/benchmarks>))| 0.66–0.78 s for three 10-second videos| 3.31–4.46 s at its fastest setting found; 3.71–5.05 s with its default command  
 Same pixels everywhere| bundled fonts, the same kernels on every machine| fonts and Chrome versions can shift pixels; `--docker` pins them  
 Install| one binary| Node 22+, FFmpeg, a managed Chrome  
 For agents| 20 MCP tools (local and remote) including `check`, `review` and `inspect`; frames returned as images; ChatGPT and Claude apps coming soon| 9 skills; plugins for 6 agents; a Claude connector with `compose` and `render_video`; a ChatGPT Work plugin  
@@ -31,15 +31,15 @@ Hosted rendering| your own GPU with `uf serve`; ultrafast Cloud has a [waitlist]
   
 Speed
 
-## About four times faster, measured.
+## About five times faster, measured.
 
-Three 10-second videos written in both tools and exported end to end on one RTX 5090 workstation. At the fastest setting found, HyperFrames took 3.8 to 4.5 times as long; with its default command, 4.2 to 5.1 times. [Method and raw results](<https://github.com/ultrafastmov/benchmarks>).
+Three 10-second videos written in both tools and exported end to end on one RTX 5090 workstation. At the fastest setting found, HyperFrames took 4.6 to 5.7 times as long; with its default command, 5.2 to 6.5 times. [Method and raw results](<https://github.com/ultrafastmov/benchmarks>).
 
-  1. Title card, ultrafast **0.85 s**
+  1. Title card, ultrafast **0.66 s**
   2. Title card, HyperFrames **3.53 s**
-  3. Chart, ultrafast **0.88 s**
+  3. Chart, ultrafast **0.72 s**
   4. Chart, HyperFrames **3.31 s**
-  5. Footage, ultrafast **0.98 s**
+  5. Footage, ultrafast **0.78 s**
   6. Footage, HyperFrames **4.46 s**
 
 Tokens
@@ -157,7 +157,7 @@ Questions
 
 Both are open source. What's the difference?
 
-HyperFrames renders HTML and GSAP in headless Chrome; ultrafast renders a JSON document on the GPU. That makes ultrafast about four times faster on the same machine (3.8 to 4.5 times at HyperFrames' fastest setting, in a [public benchmark](<https://github.com/ultrafastmov/benchmarks>)), and lets agents review the frames they made.
+HyperFrames renders HTML and GSAP in headless Chrome; ultrafast renders a JSON document on the GPU. That makes ultrafast about five times faster on the same machine (4.6 to 5.7 times at HyperFrames' fastest setting, in a [public benchmark](<https://github.com/ultrafastmov/benchmarks>)), and lets agents review the frames they made.
 
 Will my video look the same on every machine?
 

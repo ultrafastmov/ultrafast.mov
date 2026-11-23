@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open-source alternative to Shotstack, JSON2Video and Creatomate · ultrafast</title>
+<meta name="description" content="Render JSON to video on your own GPU instead of a per-minute API: ultrafast compared with Shotstack, JSON2Video and Creatomate on price, formats, 3D, self-hosting and agent tools.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/alternatives/json-to-video-api/">
+<link rel="alternate" type="text/markdown" href="/alternatives/json-to-video-api/index.md" title="Open-source alternative to Shotstack, JSON2Video and Creatomate · ultrafast (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="ultrafast blog"><meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="JSON to video on your own GPU">
+<meta property="og:description" content="Render JSON to video on your own GPU instead of a per-minute API: ultrafast compared with Shotstack, JSON2Video and Creatomate on price, formats, 3D, self-hosting and agent tools.">
+<meta property="og:url" content="https://ultrafast.mov/alternatives/json-to-video-api/">
+<meta property="og:image" content="https://ultrafast.mov/og/alternatives-json-to-video-api.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="JSON to video on your own GPU · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JSON to video on your own GPU">
+<meta name="twitter:description" content="Render JSON to video on your own GPU instead of a per-minute API: ultrafast compared with Shotstack, JSON2Video and Creatomate on price, formats, 3D, self-hosting and agent tools.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/alternatives-json-to-video-api.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=c102dd99">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Compare","item":"https://ultrafast.mov/compare/"},{"@type":"ListItem","position":3,"name":"JSON-to-video APIs","item":"https://ultrafast.mov/alternatives/json-to-video-api/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is there an open-source alternative to Shotstack or JSON2Video?","acceptedAnswer":{"@type":"Answer","text":"Yes. ultrafast is an open-source (Apache-2.0 or MIT) engine that renders a JSON document to video on your own GPU, from the command line, over MCP or through a self-hosted HTTP API. Its JSON format is its own, so an existing Shotstack Edit or JSON2Video Movie is rewritten rather than imported; a coding agent with the ultrafast skill can do that."}},{"@type":"Question","name":"Can I self-host a JSON-to-video API?","acceptedAnswer":{"@type":"Answer","text":"With ultrafast, yes: docker run --gpus all ghcr.io/ultrafastmov/ultrafast serve starts an HTTP API and a remote MCP server on one machine with one API key. It renders one job at a time on its GPU. Shotstack, JSON2Video and Creatomate don't offer a self-hosted renderer."}},{"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"The engine is free, including for commercial use; the cost is your own GPU's time. For comparison, Shotstack lists 5¢ to 20¢ per rendered minute by plan, JSON2Video's one credit per second works out to about 17¢ to 42¢ a minute, and Creatomate's pixel-based credits come to about 84¢ a minute of 1080p at 30 fps on its Essential plan billed yearly."}},{"@type":"Question","name":"Does ultrafast have a hosted API like Shotstack?","acceptedAnswer":{"@type":"Answer","text":"Not yet. Hosted rendering with OAuth connectors for Claude and ChatGPT comes with ultrafast Cloud, which has a waitlist. Until then you run it yourself, on a Mac with Apple silicon, Linux with a Vulkan GPU, or the Docker image."}},{"@type":"Question","name":"Does it work with n8n, Zapier or Make?","acceptedAnswer":{"@type":"Answer","text":"There is no ready-made node or app. Any of them can call the HTTP API of uf serve with an HTTP request step: POST the document to /v1/render with the API key as a bearer token."}}]},{"@type":"WebPage","@id":"https://ultrafast.mov/alternatives/json-to-video-api/#page","name":"Open-source alternative to Shotstack, JSON2Video and Creatomate · ultrafast","description":"Render JSON to video on your own GPU instead of a per-minute API: ultrafast compared with Shotstack, JSON2Video and Creatomate on price, formats, 3D, self-hosting and agent tools.","url":"https://ultrafast.mov/alternatives/json-to-video-api/","isPartOf":{"@id":"https://ultrafast.mov/#site"},"primaryImageOfPage":"https://ultrafast.mov/og/alternatives-json-to-video-api.jpg","inLanguage":"en","datePublished":"2026-11-23T21:47:41+00:00","dateModified":"2026-11-23T21:47:41+00:00"}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/" aria-current="page">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="band stock-cotton phead">
+  <div class="sunburst" aria-hidden="true"></div>
+  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+<li><a href="/compare/">Compare</a></li>  <li aria-current="page">JSON-to-video APIs</li>
+</ol>
+
+    <h1 class="pr h1" data-plates="pink black"><span class="ln">JSON to video,</span> <span class="ln">on your own GPU.</span></h1>
+    <p class="lede">Shotstack, JSON2Video and Creatomate render your JSON in their cloud and charge by the minute. ultrafast is an open-source engine that renders it on your own GPU. Here is what each one does better, from their own docs.</p>
+    <p class="credit" style="margin-top:28px">Updated <time datetime="2026-11-23">23 November 2026</time>. ultrafast wrote this page. Every vendor figure is from that vendor's own pages; <a class="alink" href="#sources">sources</a> are at the end. Prices marked “about” are worked out from the vendor's published credit rules.</p>
+  </div>
+</section>
+
+<section class="band stock-thermal" id="table">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="pr " data-plates="pink black"><span class="ln">Four ways to render</span> <span class="ln">a JSON video.</span></h2>
+      <p class="sub">The three APIs are hosted services. ultrafast is a binary, a Docker image and an HTTP server you run yourself.</p>
+    </div>
+    <div class="tablewrap">
+      <table class="tbl" style="min-width:1080px;font-size:14px">
+        <thead><tr><th scope="col"></th><th scope="col" class="us">ultrafast</th><th scope="col" id="shotstack">Shotstack</th><th scope="col" id="json2video">JSON2Video</th><th scope="col" id="creatomate">Creatomate</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Where it renders</th><td class="us">your GPU: a Mac with Apple silicon, or Linux with a Vulkan GPU; much more slowly on the CPU in Docker</td><td>Shotstack's cloud; the Studio SDK can also export in the browser</td><td>JSON2Video's cloud</td><td>Creatomate's cloud</td></tr>
+          <tr><th scope="row">Self-hosted</th><td class="us yes"><code>uf serve</code>: an HTTP API and a remote MCP server on one machine</td><td class="no">not offered</td><td class="no">not offered</td><td class="no">not offered</td></tr>
+          <tr><th scope="row">Licence</th><td class="us">Apache-2.0 or MIT, engine included</td><td>proprietary service; Studio SDK under PolyForm Shield (source-available); CLI Apache-2.0</td><td>proprietary service; CLI and SDKs MIT</td><td>proprietary service; Preview SDK and libraries MIT</td></tr>
+          <tr><th scope="row">Price per rendered minute</th><td class="us">no fee; your GPU's time</td><td>5¢ to 20¢, by plan; 4K from the $99 Pro plan</td><td>one credit per second: about 17¢ to 42¢</td><td>credits by pixels × frames: about 84¢ for 1080p at 30 fps on Essential, billed yearly</td></tr>
+          <tr><th scope="row">Free to start</th><td class="us">free for any use, commercial included</td><td>10 credits on sign-up, valid 30 days; watermarked sandbox</td><td>600 credits once; watermarked, up to 60 s, no commercial use</td><td>50 credits; renders are previews of up to 480 px</td></tr>
+          <tr><th scope="row">The JSON</th><td class="us">a graph of nodes with animated params and timing windows, checked against a <a class="alink" href="/schema/v1.json">published schema</a></td><td>an Edit: a timeline of tracks and clips, 16 asset types, merge fields</td><td>a Movie: scenes played back to back, 9 element types, variables</td><td>RenderScript: 6 element types, keyframes, nested compositions</td></tr>
+          <tr><th scope="row">3D and shaders</th><td class="us yes">3D (glTF, extruded type, image-based light, glass), Slang shaders, particles, fluid</td><td class="no">not documented</td><td class="no">not documented</td><td class="no">3D-style transforms only</td></tr>
+          <tr><th scope="row">Lottie</th><td class="us yes">as editable vector nodes</td><td class="part">inside the <code>html5</code> asset, captured from a browser page, which Shotstack calls “the heaviest to render”</td><td class="no">not documented</td><td class="no">not documented</td></tr>
+          <tr><th scope="row">Output</th><td class="us">H.264, HEVC and AV1 MP4; ProRes up to 4444 XQ; transparent ProRes and WebM; GIF; PNG and EXR sequences; sound alone</td><td>mp4, gif, mp3, jpg, png, bmp</td><td>MP4, and an MP3 audio track on paid plans</td><td>mp4, jpg, png, gif</td></tr>
+          <tr><th scope="row">Frame rate</th><td class="us">any</td><td>12 to 60 fps</td><td>“Currently every movie renders at 25 fps”</td><td>at most 60 fps</td></tr>
+          <tr><th scope="row">Largest size</th><td class="us">any size; presets up to 4K on the short side</td><td>3840 px a side</td><td>3840 px a side, by plan</td><td>3840 px a side</td></tr>
+          <tr><th scope="row">For agents</th><td class="us">20 MCP tools locally, 16 over HTTP; <code>check</code> before rendering, <code>review</code> of every frame after</td><td>hosted MCP with OAuth; a CLI and skill that validate edits offline</td><td>hosted and local MCP, 15 tools including <code>validate_movie</code></td><td>hosted MCP with OAuth</td></tr>
+          <tr><th scope="row">Output tokens for a 10 s short</th><td class="us">about 1,234, measured</td><td>about 1,657, measured (validated, not rendered)</td><td>not measured</td><td>not measured</td></tr>
+          <tr><th scope="row">No-code</th><td class="us no">none; call the HTTP API</td><td>not checked for this page</td><td>Make, n8n, Zapier</td><td>Zapier, Make, n8n and about 30 more</td></tr>
+          <tr><th scope="row">Templates and editors</th><td class="us part">five starter documents (<code>uf new</code>); no visual editor</td><td>Studio editor and a templates API</td><td>visual editor and “dozens” of templates</td><td>template editor; embeddable Preview SDK</td></tr>
+          <tr><th scope="row">Voices and transcripts</th><td class="us part">captions from Whisper, SRT or VTT you bring; voiceover with macOS voices or eSpeak NG</td><td>transcription in 99 languages; text to speech</td><td>ElevenLabs and Azure voices; automatic subtitles</td><td>automatic subtitles</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="credit">Shotstack, JSON2Video and Creatomate are trademarks of their owners. Token counts are from the <a class="alink" href="https://github.com/ultrafastmov/benchmarks">benchmark repository</a> (tiktoken o200k_base, the same 10-second short written for each tool). None of the three hosted services can be timed on the same machine as ultrafast, so this page compares no render speeds.</p>
+  </div>
+</section>
+
+<section class="band stock-kraft" id="choose">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="pr " data-plates="blue black"><span class="ln">Which one</span> <span class="ln">to choose.</span></h2>
+      <p class="sub">A hosted API is the right call for many teams. Here is where each side wins.</p>
+    </div>
+    <div class="vsgrid">
+      <div class="verdict">
+        <h3>Choose a hosted API when</h3>
+        <ul>
+          <li>You have no GPU and don't want to run a server. All three take a request and send back a link.</li>
+          <li>You need many renders at once, webhooks or delivery to your own storage. <code>uf serve</code> renders one job at a time on one GPU.</li>
+          <li>Your workflow lives in Zapier, Make or n8n, or non-developers edit templates in a visual editor.</li>
+          <li>You want transcription, stock voices or generated media inside the same API.</li>
+          <li>You want a Claude or ChatGPT connector with OAuth today. ultrafast's comes with <a class="alink" href="/cloud/">ultrafast Cloud</a>, which has a waitlist.</li>
+        </ul>
+      </div>
+      <div class="verdict us">
+        <h3>Choose ultrafast when</h3>
+        <ul>
+          <li>You render a lot and the per-minute bill matters, or the footage can't leave your machine. Inputs are local files.</li>
+          <li>You need ProRes, HEVC, AV1, transparent video or a frame rate other than 25, 30 or 60.</li>
+          <li>The video needs 3D, shaders, particles or real motion blur, not only clips, text and transitions.</li>
+          <li>An agent writes the JSON and should check it before rendering and review every frame after.</li>
+          <li>You want the engine's source under a licence that lets you ship it.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band stock-newsprint" id="self-host">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="pr " data-plates="pink black"><span class="ln">Run the API</span> <span class="ln">yourself.</span></h2>
+      <p class="sub">One container on a machine with an NVIDIA GPU. It prints its API key on first start.</p>
+    </div>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>-v<span class="w"> </span>ultrafast:/data<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>ghcr.io/ultrafastmov/ultrafast:latest<span class="w"> </span>serve
+
+curl<span class="w"> </span>http://localhost:8080/v1/render<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$ULTRAFAST_API_KEY</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;document&quot;: &#39;</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span>video.json<span class="k">)</span><span class="s2">&quot;</span><span class="s1">&#39;, &quot;output&quot;: {&quot;codec&quot;: &quot;h264&quot;, &quot;size&quot;: &quot;1080p&quot;}}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-o<span class="w"> </span>video.mp4</code></pre></div>    <p class="sub" style="max-width:62ch">The same server answers MCP at <code>/mcp</code>, and has endpoints to check a document, render a single frame or a contact sheet, review every frame, and upload footage. Short renders come back in the response; longer ones go to its storage with a signed link. On a laptop or desktop, skip the server: <code>uf export video.json</code> writes the file directly.</p>
+    <p class="credit">Full reference: <a class="alink" href="/docs/api/">HTTP API</a> and <a class="alink" href="https://github.com/ultrafastmov/ultrafast/blob/main/docs/service/SELF_HOST.md">SELF_HOST.md</a>. Limits of the open-source server: one API key, one render at a time with up to 16 waiting, renders stop after 10 minutes, files on local disk.</p>
+  </div>
+</section>
+
+<section class="band stock-cotton" id="moving">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="pr " data-plates="blue black"><span class="ln">Moving an</span> <span class="ln">edit over.</span></h2>
+      <p class="sub">The formats differ: a Shotstack Edit is a timeline of tracks and clips; an ultrafast document is a graph of nodes, each with a timing window. Nothing imports either one directly.</p>
+    </div>
+    <div class="vsgrid">
+      <div class="verdict">
+        <h3>Ask your coding agent</h3>
+        <p style="margin:0;font:16px/1.5 var(--sans);color:var(--body)">Give it the JSON you send today and ask for the same video as an ultrafast document. With the ultrafast skill installed it knows the format, runs <code>uf check</code> until the document is valid, and looks at a contact sheet before it exports.</p>
+      </div>
+      <div class="verdict">
+        <h3>Batch renders from data</h3>
+        <p style="margin:0;font:16px/1.5 var(--sans);color:var(--body)">Merge fields and template variables become a CSV or JSON file of rows: <code>uf batch</code> renders one video per row, changing the fields each row names.</p>
+      </div>
+    </div>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">npx<span class="w"> </span>skills<span class="w"> </span>add<span class="w"> </span>ultrafastmov/ultrafast<span class="w">            </span><span class="c1"># the skill, for your coding agent</span>
+uf<span class="w"> </span>check<span class="w"> </span>video.json<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>uf<span class="w"> </span>sheet<span class="w"> </span>video.json<span class="w"> </span>--out<span class="w"> </span>sheet.png
+uf<span class="w"> </span>batch<span class="w"> </span>video.json<span class="w"> </span>--data<span class="w"> </span>rows.csv<span class="w">              </span><span class="c1"># one video per row</span></code></pre></div>  </div>
+</section>
+
+<section class="band stock-thermal" id="questions">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="pr " data-plates="blue black"><span class="ln">Common questions.</span></h2>
+    </div>
+    <div class="faq">
+  <details open>
+    <summary>Is there an open-source alternative to Shotstack or JSON2Video?</summary>
+    <div class="ans"><p>Yes. ultrafast is an open-source (Apache-2.0 or MIT) engine that renders a JSON document to video on your own GPU, from the command line, over MCP or through a self-hosted HTTP API. Its JSON format is its own, so an existing Shotstack Edit or JSON2Video Movie is rewritten rather than imported; a coding agent with the ultrafast skill can do that.</p></div>
+  </details>
+  <details>
+    <summary>Can I self-host a JSON-to-video API?</summary>
+    <div class="ans"><p>With ultrafast, yes: <code>docker run --gpus all ghcr.io/ultrafastmov/ultrafast serve</code> starts an HTTP API and a remote MCP server on one machine with one API key. It renders one job at a time on its GPU. Shotstack, JSON2Video and Creatomate don't offer a self-hosted renderer.</p></div>
+  </details>
+  <details>
+    <summary>How much does it cost?</summary>
+    <div class="ans"><p>The engine is free, including for commercial use; the cost is your own GPU's time. For comparison, Shotstack lists 5¢ to 20¢ per rendered minute by plan, JSON2Video's one credit per second works out to about 17¢ to 42¢ a minute, and Creatomate's pixel-based credits come to about 84¢ a minute of 1080p at 30 fps on its Essential plan billed yearly.</p></div>
+  </details>
+  <details>
+    <summary>Does ultrafast have a hosted API like Shotstack?</summary>
+    <div class="ans"><p>Not yet. Hosted rendering with OAuth connectors for Claude and ChatGPT comes with <a href="/cloud/">ultrafast Cloud</a>, which has a waitlist. Until then you run it yourself, on a Mac with Apple silicon, Linux with a Vulkan GPU, or the Docker image.</p></div>
+  </details>
+  <details>
+    <summary>Does it work with n8n, Zapier or Make?</summary>
+    <div class="ans"><p>There is no ready-made node or app. Any of them can call the HTTP API of <code>uf serve</code> with an HTTP request step: POST the document to <code>/v1/render</code> with the API key as a bearer token.</p></div>
+  </details>
+</div>
+
+  </div>
+</section>
+
+<section class="band stock-cotton tight" id="sources">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="pr small" data-plates="blue black"><span class="ln">Sources.</span></h2>
+      <p class="sub">All read on 23 November 2026.</p>
+    </div>
+    <div class="prose" style="font-size:16px;max-width:none">
+      <ul>
+        <li><b>Shotstack:</b> <a href="https://shotstack.io/pricing/">pricing</a> (plans, per-minute rates, 4K from Pro, free credits), <a href="https://shotstack.io/docs/api/">API reference</a> (Edit format, asset types, output formats and frame rates), <a href="https://shotstack.io/docs/guide/architecting-an-application/limitations/">limitations</a> (3840 px, sandbox watermark), <a href="https://shotstack.io/docs/guide/architecting-an-application/html5.md">html5 asset</a>, <a href="https://shotstack.io/docs/guide/agents/mcp-server/">MCP server</a>, <a href="https://shotstack.io/docs/guide/agents/cli/">CLI</a>, <a href="https://github.com/shotstack/shotstack-studio-sdk">Studio SDK</a> (licence, browser export).</li>
+        <li><b>JSON2Video:</b> <a href="https://json2video.com/">home</a> (cloud rendering, templates, voices), <a href="https://json2video.com/pricing/">pricing</a>, <a href="https://json2video.com/docs/v2/reference/credits/credit-consumption">credit consumption</a> (one credit per second), <a href="https://json2video.com/docs/v2/reference/credits/plans">plans</a> (free plan terms), <a href="https://json2video.com/docs/v2/reference/json-syntax">JSON syntax</a>, <a href="https://json2video.com/docs/v2/reference/json-syntax/movie">movie</a> (25 fps, sizes), <a href="https://json2video.com/docs/v2/help-for-ai-agents/mcp-server">MCP server</a>, <a href="https://json2video.com/docs/">integrations</a>.</li>
+        <li><b>Creatomate:</b> <a href="https://creatomate.com/pricing">pricing</a>, <a href="https://creatomate.com/docs/account/how-are-credits-calculated">how credits are calculated</a> (1 credit per 100 million pixels), <a href="https://creatomate.com/docs/api/render-script/element-properties">RenderScript elements</a>, <a href="https://creatomate.com/docs/api/render-script/top-level-properties">output properties</a>, <a href="https://creatomate.com/docs/api/reference/limits-and-concurrency">limits</a>, <a href="https://creatomate.com/docs/fundamentals/getting-started/mcp-integration">MCP</a>, <a href="https://github.com/Creatomate/creatomate-preview">Preview SDK</a> (cloud processing).</li>
+        <li><b>Worked-out prices:</b> JSON2Video at one credit per second is 60 credits a minute: Professional billed yearly ($33.30 for 200 minutes) is about 17¢ a minute, Pre-paid A ($49.95 for 120 minutes) about 42¢. Creatomate: 1920 × 1080 × 30 fps × 60 s is 3.73 billion pixels, 37.3 credits a minute; Essential billed yearly ($540 for 24,000 credits) makes that about 84¢.</li>
+        <li><b>ultrafast:</b> <a href="https://github.com/ultrafastmov/ultrafast">repository</a>, <a href="/docs/api/">HTTP API</a>, <a href="https://github.com/ultrafastmov/ultrafast/blob/main/docs/service/SELF_HOST.md">self-hosting</a>, <a href="/docs/mcp/">MCP server</a>, <a href="/docs/ops/">ops</a>, <a href="https://github.com/ultrafastmov/benchmarks">benchmark and token counts</a>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band stock-canary ctaband">
+  <div class="wrap">
+    <h2 class="pr " data-plates="pink blue"><span class="ln">Render one yourself.</span></h2>
+    <p class="sub">Install the engine and export a video on your own GPU.</p>
+    <div class="actions">
+      <button class="chip big" data-copy="curl -fsSL https://ultrafast.mov/install.sh | sh" type="button"><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code><span class="tick" aria-hidden="true">copied</span></button>
+      <a class="btn big" href="/docs/">Read the quickstart</a>
+    </div>
+    <p class="aside">Want it hosted? <a class="alink" href="/cloud/">Join the ultrafast Cloud waitlist</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/learn/can-claude-make-videos/">Can Claude make videos?</a>
+<a href="/blog/">Blog</a>      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+<a href="/changelog/">Changelog</a>      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+      <a href="/alternatives/remotion/">Remotion alternatives</a>
+      <a href="/alternatives/hyperframes/">HyperFrames alternatives</a>
+      <a href="/alternatives/json-to-video-api/">vs JSON-to-video APIs</a>
+      <a href="/benchmarks/">Benchmarks</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code></span>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=c102dd99"></script>
+</body>
+</html>

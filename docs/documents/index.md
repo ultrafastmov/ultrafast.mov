@@ -15,6 +15,11 @@ A video is one JSON file. Here is its whole shape.
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
 
+## Guides
+
+  * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
+  * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+
 ## Reference
 
   * [Ops](<https://ultrafast.mov/docs/ops/>)

@@ -23,6 +23,8 @@ Facts an agent needs:
 
 - [Quickstart](https://ultrafast.mov/docs/index.md): install, first video, the loop, connecting an agent
 - [The document format](https://ultrafast.mov/docs/documents/index.md): the JSON document: format, nodes, animation, timing, components
+- [Render video from JSON: a worked example](https://ultrafast.mov/guides/render-video-from-json/index.md): a worked example: a 21-line document, check and export, one video per CSV row, HTTP, Python and TypeScript, the schema, other JSON video formats
+- [Personalized videos from a CSV, open source](https://ultrafast.mov/guides/personalized-videos-from-csv/index.md): one video per row of a CSV or JSON file: the template, node.param columns, checking every row before rendering, long names, a photo per row, Python and HTTP
 - [Op reference](https://ultrafast.mov/docs/ops/index.md): all 70 ops with ports, params, types and defaults
 - [CLI reference](https://ultrafast.mov/docs/cli/index.md): every command
 - [MCP server](https://ultrafast.mov/docs/mcp/index.md): the 20 MCP tools and client setup
@@ -34,6 +36,7 @@ Facts an agent needs:
 - [Use cases](https://ultrafast.mov/use-cases/index.md): what people make with it, with example prompts
 - [Integrations](https://ultrafast.mov/integrations/index.md): Claude Code, Codex, Cursor, Gemini CLI, SDKs, HTTP, self-hosting
 - [Video MCP server for agents](https://ultrafast.mov/mcp/index.md): the video MCP server: what the agent sees, the 20 tools by group, setup per tested client, the MCP Registry name, limits
+- [Can Claude make videos? Every way, compared](https://ultrafast.mov/learn/can-claude-make-videos/index.md): can Claude make videos: Claude Motion on Team and Enterprise, Claude Code with ultrafast, Remotion or HyperFrames, and connectors, with plans, renderers, costs and what none of them can do
 - [ultrafast Cloud](https://ultrafast.mov/cloud/index.md): ultrafast Cloud, the ChatGPT app and the Claude connector: coming soon, with a waitlist
 - [Examples](https://ultrafast.mov/examples/index.md): example videos with their documents
 
@@ -44,6 +47,8 @@ Facts an agent needs:
 - [ultrafast vs HyperFrames](https://ultrafast.mov/compare/hyperframes/index.md): ultrafast vs HyperFrames
 - [Render benchmark: ultrafast vs Remotion vs HyperFrames](https://ultrafast.mov/benchmarks/index.md): the head-to-head render benchmark on one RTX 5090 and the token count, with the method, the caveats and how to reproduce them
 - [Open source Remotion alternatives, compared](https://ultrafast.mov/alternatives/remotion/index.md): eight open-source tools with their licences, renderers, agent tooling and release dates, and when to choose each
+- [HyperFrames alternatives, compared](https://ultrafast.mov/alternatives/hyperframes/index.md): eight other tools that make video from code, with licences, renderers (which ones use a browser) and agent tooling, and when to choose each
+- [Open-source alternative to Shotstack, JSON2Video and Creatomate](https://ultrafast.mov/alternatives/json-to-video-api/index.md): ultrafast as a self-hosted, open-source alternative to Shotstack, JSON2Video and Creatomate: prices, formats, what the JSON can express, and when a hosted API is the better choice
 
 ## Example films
 

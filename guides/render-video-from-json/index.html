@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Render video from JSON: a worked example · ultrafast</title>
+<meta name="description" content="Render a video from a JSON file on your GPU: a 21-line example, check and export from the CLI, one video per CSV row, the HTTP API, Python and TypeScript, the JSON Schema, and other JSON video formats.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/guides/render-video-from-json/">
+<link rel="alternate" type="text/markdown" href="/guides/render-video-from-json/index.md" title="Render video from JSON: a worked example · ultrafast (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="ultrafast blog"><meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="Render video from JSON">
+<meta property="og:description" content="Render a video from a JSON file on your GPU: a 21-line example, check and export from the CLI, one video per CSV row, the HTTP API, Python and TypeScript, the JSON Schema, and other JSON video formats.">
+<meta property="og:url" content="https://ultrafast.mov/guides/render-video-from-json/">
+<meta property="og:image" content="https://ultrafast.mov/og/guide-render-video-from-json.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Render video from JSON · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Render video from JSON">
+<meta name="twitter:description" content="Render a video from a JSON file on your GPU: a 21-line example, check and export from the CLI, one video per CSV row, the HTTP API, Python and TypeScript, the JSON Schema, and other JSON video formats.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/guide-render-video-from-json.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=c102dd99">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://ultrafast.mov/docs/"},{"@type":"ListItem","position":3,"name":"Render video from JSON","item":"https://ultrafast.mov/guides/render-video-from-json/"}]},{"@type":"TechArticle","@id":"https://ultrafast.mov/guides/render-video-from-json/#article","headline":"Render video from JSON: a worked example","description":"Render a video from a JSON file on your GPU: a 21-line example, check and export from the CLI, one video per CSV row, the HTTP API, Python and TypeScript, the JSON Schema, and other JSON video formats.","url":"https://ultrafast.mov/guides/render-video-from-json/","mainEntityOfPage":"https://ultrafast.mov/guides/render-video-from-json/","image":"https://ultrafast.mov/og/guide-render-video-from-json.jpg","datePublished":"2026-11-23T21:47:41+00:00","dateModified":"2026-11-23T21:47:41+00:00","inLanguage":"en","author":{"@id":"https://ultrafast.mov/#org"},"publisher":{"@id":"https://ultrafast.mov/#org"},"about":{"@id":"https://ultrafast.mov/#app"}}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/" aria-current="page">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="band stock-cotton phead" style="padding-bottom:56px">
+  <div class="sunburst" aria-hidden="true" style="--sx:92%;--sy:40%;--r2:520px"></div>
+  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+<li><a href="/docs/">Docs</a></li>  <li aria-current="page">Render video from JSON</li>
+</ol>
+
+    <p class="eyebrow"><i style="--c:var(--blue)"></i>Docs</p>
+    <h1 class="pr h1" data-plates="blue black"><span class="ln">Render video</span> <span class="ln">from JSON.</span></h1>
+    <p class="lede">One JSON file in, a finished video out, rendered on your GPU. A worked example, then the same document from the command line, over HTTP, from Python or TypeScript, and once per row of a spreadsheet.</p>
+  </div>
+</section>
+<section class="band stock-thermal" style="padding-top:72px">
+  <div class="wrap docs">
+    <nav class="side" aria-label="Docs">
+      <h2>Start</h2>
+      <ul><li><a href="/docs/">Quickstart</a></li><li><a href="/docs/documents/">The document</a></li></ul>
+      <h2>Guides</h2>
+      <ul><li><a href="/guides/render-video-from-json/" aria-current="page">Render video from JSON</a></li><li><a href="/guides/personalized-videos-from-csv/">Personalized videos from a CSV</a></li></ul>
+      <h2>Reference</h2>
+      <ul><li><a href="/docs/ops/">Ops</a></li><li><a href="/docs/cli/">CLI</a></li><li><a href="/docs/mcp/">MCP server</a></li><li><a href="/docs/api/">HTTP API</a></li></ul>
+      <h2>For agents</h2>
+      <ul><li><a href="/llms.txt">llms.txt</a></li><li><a href="/guides/render-video-from-json/index.md">This page as Markdown</a></li></ul>
+    </nav>
+    <article class="prose">
+<nav class="toc" aria-label="On this page"><b>On this page</b><ol>
+  <li><a href="#example">A whole video in 21 lines</a></li><li><a href="#render">Check, look, export</a></li><li><a href="#animate">Animation</a></li>
+  <li><a href="#batch">One video per row</a></li><li><a href="#http">Over HTTP and from code</a></li><li><a href="#agents">From an agent</a></li>
+  <li><a href="#schema">The schema</a></li><li><a href="#formats">Other JSON video formats</a></li>
+</ol></nav>
+
+<h2 id="example">A whole video in 21 lines</h2>
+<p>A 6-second title card at 1920×1080: a moving marble background, darkened, a title whose letters rise into place from the centre out, a subtitle that types itself on, then bloom and film grain. It is the engine's <code>title</code> starter (<code>uf new title card.json</code>) with its two lines of text changed.</p>
+<div class="code"><div class="cbar"><span>card.json</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;fps&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;motion_blur&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;samples&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;shutter&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;output&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;finish&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;nodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;world&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;marble&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;filaments&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.6</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;dim&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;adjust&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;world&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;exposure&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-1.2</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Night Shift&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;font&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Geist&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;weight&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">700</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;align&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;center&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;valign&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;middle&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">960</span><span class="p">,</span><span class="w"> </span><span class="mi">520</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ffffff&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;tracking&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-6</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;stagger&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;stagger_order&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;glyph_offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;ease&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;bezier&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.16</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;glyph_opacity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;sub&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Episode 41 · out Thursday&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;font&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Geist&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">44</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;align&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;center&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;valign&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;middle&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;wiggle&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;frequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amplitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;base&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">960</span><span class="p">,</span><span class="w"> </span><span class="mi">660</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ffffffb0&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;tracking&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reveal&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;l1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;over&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;fg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;title&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;bg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dim&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;l2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;over&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;fg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sub&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;bg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;l1&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;lit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bloom&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;l2&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;intensity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;finish&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grain&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lit&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div><p>Four parts make every document:</p>
+<ul>
+  <li><code>format</code>: size, frame rate, length, and motion blur (here 6 samples over half a frame's shutter).</li>
+  <li><code>nodes</code>: a graph. Each node has an <code>op</code> (one of 70), its <code>params</code>, and <code>inputs</code> naming other nodes. Generators such as <code>marble</code> and <code>text</code> have none; <code>over</code> takes a foreground and a background; effects take a <code>source</code>.</li>
+  <li>Animated params: any param can be a constant, a list of keyframes, a driver such as <code>wiggle</code>, or a formula of <code>t</code>.</li>
+  <li><code>output</code>: the node whose picture is the video.</li>
+</ul>
+<p>There is no timeline of tracks. A node is on screen when its <code>timing</code> says so (all of the film when it has none), and layering is the order of <code>over</code> nodes. The full shape is in <a href="/docs/documents/">the document reference</a>, and every op with its params is in <a href="/docs/ops/">the op reference</a>.</p>
+
+<h2 id="render">Check, look, export</h2>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">curl<span class="w"> </span>-fsSL<span class="w"> </span>https://ultrafast.mov/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w">    </span><span class="c1"># or: brew install ultrafastmov/tap/ultrafast</span>
+uf<span class="w"> </span>check<span class="w"> </span>card.json<span class="w">                                  </span><span class="c1"># {&quot;ok&quot;: true, &quot;issues&quot;: []} before anything renders</span>
+uf<span class="w"> </span>sheet<span class="w"> </span>card.json<span class="w"> </span>--count<span class="w"> </span><span class="m">9</span><span class="w"> </span>--out<span class="w"> </span>sheet.png<span class="w">        </span><span class="c1"># nine labelled frames on one image</span>
+uf<span class="w"> </span>review<span class="w"> </span>card.json<span class="w">                                 </span><span class="c1"># every frame read for unreadable, clipped or too-brief text</span>
+uf<span class="w"> </span><span class="nb">export</span><span class="w"> </span>card.json<span class="w"> </span>card.mp4<span class="w">                        </span><span class="c1"># H.264 MP4; the container follows the file name</span></code></pre></div><p><code>check</code> catches an unknown op or param, an input that points at no node, or a malformed colour before any GPU work, and names the node for each. <code>sheet</code> renders a few frames to one image, which is how an agent or a person sees the motion without watching it. <code>export</code> writes MP4 (H.264, HEVC or AV1), MOV (ProRes up to 4444 XQ, with alpha), WebM, GIF, PNG or EXR sequences, or the sound alone, at any size and frame rate:</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">uf<span class="w"> </span><span class="nb">export</span><span class="w"> </span>card.json<span class="w"> </span>card.mov<span class="w"> </span>--codec<span class="w"> </span>prores<span class="w"> </span>--prores-profile<span class="w"> </span><span class="m">4444</span><span class="w"> </span>--alpha<span class="w">   </span><span class="c1"># a transparent master</span>
+uf<span class="w"> </span><span class="nb">export</span><span class="w"> </span>card.json<span class="w"> </span>card-4k.mp4<span class="w"> </span>--size<span class="w"> </span>4k<span class="w"> </span>--codec<span class="w"> </span>hevc
+uf<span class="w"> </span><span class="nb">export</span><span class="w"> </span>card.json<span class="w"> </span>card.gif<span class="w"> </span>--size<span class="w"> </span>720p</code></pre></div><p>Rendering runs on the GPU: Metal on a Mac with Apple silicon, Vulkan on Linux. The same document renders the same picture on every machine: fonts come with the engine or are fetched by name, and the GPU kernels are the same everywhere. Without a GPU, the Docker image renders on the CPU, much more slowly.</p>
+
+<h2 id="animate">Animation</h2>
+<p>The example uses three of the five ways to set a param. Keyframes move the letters (<code>glyph_offset</code> and <code>glyph_opacity</code>, staggered 0.05 s apart from the centre), a driver keeps the subtitle drifting (<code>wiggle</code>), and keyframes on <code>reveal</code> type it on.</p>
+<div class="code"><div class="cbar"><span>five ways to set a param</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span>
+<span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">540</span><span class="p">,</span><span class="w"> </span><span class="mi">2100</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;ease&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;out_expo&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">540</span><span class="p">,</span><span class="w"> </span><span class="mi">960</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="nt">&quot;rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;repeat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pingpong&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;wiggle&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;frequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amplitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;base&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">540</span><span class="p">,</span><span class="w"> </span><span class="mi">960</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="nt">&quot;opacity&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;expr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.5 + 0.5 * sin(t * 3)&quot;</span><span class="w"> </span><span class="p">}</span></code></pre></div><p>Eases are named (<code>in_out_cubic</code>, <code>out_back</code>, <code>spring</code>...) or a CSS-style bezier. An <code>audio</code> driver makes a param follow a band of the soundtrack. To show a node only part of the time, give it <code>"timing": { "in": 2, "out": 6 }</code>.</p>
+
+<h2 id="batch">One video per row</h2>
+<p>Columns named <code>node.param</code> set that param in each row; other columns fill the output name. Three episode cards from one document:</p>
+<div class="code"><div class="cbar"><span>rows.csv</span><button class="copy" type="button">copy</button></div><pre><code class="hl">name,title.text,sub.text
+ep41,Night Shift,Episode 41 · out Thursday
+ep42,Night Shift,Episode 42 · out 4 December
+ep43,Night Shift,Episode 43 · out 11 December</code></pre></div><div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">uf<span class="w"> </span>batch<span class="w"> </span>card.json<span class="w"> </span>--data<span class="w"> </span>rows.csv<span class="w"> </span>--out<span class="w"> </span><span class="s1">&#39;out/{name}.mp4&#39;</span><span class="w">     </span><span class="c1"># one warm renderer, a video per row</span>
+uf<span class="w"> </span>batch<span class="w"> </span>card.json<span class="w"> </span>--data<span class="w"> </span>rows.csv<span class="w"> </span>--docs<span class="w"> </span>docs/<span class="w">               </span><span class="c1"># or write each row&#39;s document and render later</span></code></pre></div><p>Rows can be CSV, JSON or JSON lines, and a column can change the format too (<code>format.width</code>, <code>format.height</code>), so one sheet can give several sizes; frame-relative layout such as blocks and captions follows the frame.</p>
+
+<h2 id="http">Over HTTP and from code</h2>
+<p><code>uf serve</code> is the same engine behind an HTTP API with one API key, on your own GPU. Short renders come back in the response; longer ones are stored with a signed link.</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>-v<span class="w"> </span>ultrafast:/data<span class="w"> </span>ghcr.io/ultrafastmov/ultrafast:latest<span class="w"> </span>serve
+
+curl<span class="w"> </span>http://localhost:8080/v1/render<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$ULTRAFAST_API_KEY</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;document&quot;: &#39;</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span>card.json<span class="k">)</span><span class="s2">&quot;</span><span class="s1">&#39;, &quot;output&quot;: {&quot;codec&quot;: &quot;h264&quot;, &quot;size&quot;: &quot;1080p&quot;, &quot;inline&quot;: true}}&#39;</span><span class="w"> </span>-o<span class="w"> </span>card.mp4</code></pre></div><p>The Python and TypeScript SDKs wrap the same API, with no dependencies:</p>
+<div class="code"><div class="cbar"><span>Python: pip install ultrafastmov</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="kn">from</span><span class="w"> </span><span class="nn">ultrafastmov</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ultrafast</span>
+
+<span class="n">uf</span> <span class="o">=</span> <span class="n">Ultrafast</span><span class="p">()</span>                      <span class="c1"># the server on this machine; ULTRAFAST_API_KEY</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">uf</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;card.json&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">issue</span> <span class="ow">in</span> <span class="n">uf</span><span class="o">.</span><span class="n">review</span><span class="p">(</span><span class="n">doc</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">issue</span><span class="o">.</span><span class="n">kind</span><span class="p">,</span> <span class="n">issue</span><span class="o">.</span><span class="n">node</span><span class="p">,</span> <span class="n">issue</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+<span class="n">uf</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;card.mp4&quot;</span><span class="p">)</span></code></pre></div><div class="code"><div class="cbar"><span>TypeScript: npm install ultrafastmov</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Ultrafast</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;ultrafastmov&quot;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">uf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Ultrafast</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">doc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">uf</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="s2">&quot;card.json&quot;</span><span class="p">);</span>
+<span class="k">await</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">uf</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">doc</span><span class="p">)).</span><span class="nx">save</span><span class="p">(</span><span class="s2">&quot;card.mp4&quot;</span><span class="p">);</span></code></pre></div><p>Endpoints for checking, single frames, contact sheets, reviews and uploads are in the <a href="/docs/api/">HTTP API reference</a>.</p>
+
+<h2 id="agents">From an agent</h2>
+<p>A JSON document is a good thing for a coding agent to write: it is short, it can be checked before anything renders, and the agent can look at the frames it made. With the skill installed, Claude Code, Codex, Cursor and Gemini CLI know the format and the loop; the MCP server gives any MCP client the same tools without a shell.</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">npx<span class="w"> </span>skills<span class="w"> </span>add<span class="w"> </span>ultrafastmov/ultrafast<span class="w">        </span><span class="c1"># the skill</span>
+claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>ultrafast<span class="w"> </span>--<span class="w"> </span>uf<span class="w"> </span>mcp<span class="w">           </span><span class="c1"># 20 MCP tools, local</span></code></pre></div><p>Measured on the same 10-second short, the ultrafast document took about 1,234 output tokens, against 1,868 for the same video in Remotion and 1,680 in HyperFrames (<a href="https://github.com/ultrafastmov/benchmarks">method</a>). More on the <a href="/mcp/">video MCP server</a> page.</p>
+
+<h2 id="schema">The schema</h2>
+<p>The document format is versioned (<code>"version": 1</code>) and published as JSON Schema at <a href="/schema/v1.json">ultrafast.mov/schema/v1.json</a>. Point your editor at it for completion and inline errors:</p>
+<div class="code"><div class="cbar"><span>json</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://ultrafast.mov/schema/v1.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;nodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;output&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;finish&quot;</span><span class="w"> </span><span class="p">}</span></code></pre></div><p>The schema checks shape; <code>uf check</code> also checks meaning: that ops and params exist, inputs point at real nodes, values are well formed, and shaders compile.</p>
+
+<h2 id="formats">Other JSON video formats</h2>
+<p>Several tools describe a video as JSON. What each one's docs say, as of 23 November 2026:</p>
+<div class="tablewrap">
+<table class="tbl" style="font-size:14px">
+  <thead><tr><th scope="col">Format</th><th scope="col">Shape</th><th scope="col">Where it renders</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">ultrafast document</th><td>a graph of nodes with animated params and timing windows; 3D, shaders and simulations are nodes</td><td>your GPU, locally or with <code>uf serve</code>; open source</td></tr>
+    <tr><th scope="row"><a class="alink" href="https://shotstack.io/docs/api/">Shotstack Edit</a></th><td>a timeline of tracks of clips; 16 asset types; merge fields for templates</td><td>Shotstack's cloud</td></tr>
+    <tr><th scope="row"><a class="alink" href="https://json2video.com/docs/v2/reference/json-syntax">JSON2Video Movie</a></th><td>scenes that play back to back, each with elements; variables, conditions and iteration</td><td>JSON2Video's cloud</td></tr>
+    <tr><th scope="row"><a class="alink" href="https://creatomate.com/docs/api/render-script/element-properties">Creatomate RenderScript</a></th><td>elements on tracks with keyframes; nested compositions</td><td>Creatomate's cloud</td></tr>
+    <tr><th scope="row"><a class="alink" href="https://github.com/mifi/editly#readme">Editly</a></th><td>a JSON5 edit spec of clips and layers</td><td>locally with Node.js and FFmpeg; open source</td></tr>
+    <tr><th scope="row"><a class="alink" href="https://github.com/ybouane/VideoFlow#readme">VideoFlow</a></th><td>TypeScript compiled to a portable JSON format</td><td>headless Chromium on a server, or WebCodecs in the browser; open source</td></tr>
+  </tbody>
+</table>
+</div>
+<p>The hosted services are compared in more depth on <a href="/alternatives/json-to-video-api/">ultrafast vs JSON-to-video APIs</a>, and the open-source tools on <a href="/alternatives/remotion/">Remotion alternatives</a>.</p>
+    </article>
+  </div>
+</section>
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/learn/can-claude-make-videos/">Can Claude make videos?</a>
+<a href="/blog/">Blog</a>      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+<a href="/changelog/">Changelog</a>      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+      <a href="/alternatives/remotion/">Remotion alternatives</a>
+      <a href="/alternatives/hyperframes/">HyperFrames alternatives</a>
+      <a href="/alternatives/json-to-video-api/">vs JSON-to-video APIs</a>
+      <a href="/benchmarks/">Benchmarks</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code></span>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=c102dd99"></script>
+</body>
+</html>

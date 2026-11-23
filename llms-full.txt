@@ -210,7 +210,7 @@ Remotion and HyperFrames draw each frame in headless Chrome and capture it. ultr
 Draws each frame with| GPU kernels, Metal or Vulkan| headless Chrome, a screenshot per frame| headless Chrome, captured frame by frame  
 You write| one JSON document| a React project| HTML, CSS and JavaScript  
 Output tokens for a 10 s short| about 1,234| about 1,868| about 1,680  
-Export, same machine ([benchmark](<https://github.com/ultrafastmov/benchmarks>))| 0.98 s for 10 s of captioned NASA footage, 1080×1920, end to end| 6.69 s at its fastest setting found; 8.53 s with its default command| 4.46 s at its fastest setting found; 5.05 s with its default command  
+Export, same machine ([benchmark](<https://github.com/ultrafastmov/benchmarks>))| 0.78 s for 10 s of captioned NASA footage, 1080×1920, end to end| 6.69 s at its fastest setting found; 8.53 s with its default command| 4.46 s at its fastest setting found; 5.05 s with its default command  
 Agents review their frames| `check`, `review`, `inspect`, frames and contact sheets| no built-in review| no built-in review  
 Licence| Apache-2.0 or MIT| free up to 3 people; companies pay per render or per seat| Apache-2.0  
 Hosted rendering| ultrafast Cloud, coming soon ([waitlist](<https://ultrafast.mov/cloud/>)); `uf serve` on your GPU today| none: Lambda in your AWS account| HeyGen credits, or your own Lambda or Cloud Run  
@@ -296,7 +296,7 @@ Any size and frame rate: 9:16, 1:1, 4:5, 16:9, 21:9 or your own, up to 4K. Expor
 
 How is it different from Remotion or HyperFrames?
 
-They draw each frame in headless Chrome and screenshot it. ultrafast draws on the GPU with no browser. On one RTX 5090 workstation, three 10-second videos exported in 0.85 to 0.98 s; at their fastest settings, Remotion took 2.6 to 6.8 times as long and HyperFrames 3.8 to 4.5 times ([benchmark](<https://github.com/ultrafastmov/benchmarks>)). It also gives agents tools to check and review their videos. See the [comparison](<https://ultrafast.mov/compare/>).
+They draw each frame in headless Chrome and screenshot it. ultrafast draws on the GPU with no browser. On one RTX 5090 workstation, three 10-second videos exported in 0.66 to 0.78 s; at their fastest settings, Remotion took 3.1 to 8.6 times as long and HyperFrames 4.6 to 5.7 times ([benchmark](<https://github.com/ultrafastmov/benchmarks>)). It also gives agents tools to check and review their videos. See the [comparison](<https://ultrafast.mov/compare/>).
 
 Does an agent use fewer tokens with ultrafast?
 
@@ -335,6 +335,11 @@ Install it, make your first video, then hand the loop to your agent.
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+
+## Guides
+
+  * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
+  * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
 
 ## Reference
 
@@ -484,6 +489,11 @@ A video is one JSON file. Here is its whole shape.
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
 
+## Guides
+
+  * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
+  * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+
 ## Reference
 
   * [Ops](<https://ultrafast.mov/docs/ops/>)
@@ -587,6 +597,394 @@ Documents carry `"version": 1`. The JSON Schema is published at [ultrafast.mov/s
 
 ---
 
+# Render video from JSON: a worked example · ultrafast
+
+> Render a video from a JSON file on your GPU: a 21-line example, check and export from the CLI, one video per CSV row, the HTTP API, Python and TypeScript, the JSON Schema, and other JSON video formats.
+
+URL: https://ultrafast.mov/guides/render-video-from-json/
+
+Docs
+
+# Render video from JSON.
+
+One JSON file in, a finished video out, rendered on your GPU. A worked example, then the same document from the command line, over HTTP, from Python or TypeScript, and once per row of a spreadsheet.
+
+## Start
+
+  * [Quickstart](<https://ultrafast.mov/docs/>)
+  * [The document](<https://ultrafast.mov/docs/documents/>)
+
+## Guides
+
+  * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
+  * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+
+## Reference
+
+  * [Ops](<https://ultrafast.mov/docs/ops/>)
+  * [CLI](<https://ultrafast.mov/docs/cli/>)
+  * [MCP server](<https://ultrafast.mov/docs/mcp/>)
+  * [HTTP API](<https://ultrafast.mov/docs/api/>)
+
+## For agents
+
+  * [llms.txt](<https://ultrafast.mov/llms.txt>)
+  * [This page as Markdown](<https://ultrafast.mov/guides/render-video-from-json/index.md>)
+
+**On this page**
+
+  1. A whole video in 21 lines
+  2. Check, look, export
+  3. Animation
+  4. One video per row
+  5. Over HTTP and from code
+  6. From an agent
+  7. The schema
+  8. Other JSON video formats
+
+## A whole video in 21 lines
+
+A 6-second title card at 1920×1080: a moving marble background, darkened, a title whose letters rise into place from the centre out, a subtitle that types itself on, then bloom and film grain. It is the engine's `title` starter (`uf new title card.json`) with its two lines of text changed.
+
+```
+{
+  "version": 1,
+  "format": { "width": 1920, "height": 1080, "fps": 30, "duration": 6, "motion_blur": { "samples": 6, "shutter": 0.5 } },
+  "output": "finish",
+  "nodes": {
+    "world": { "op": "marble", "params": { "filaments": 0.6 } },
+    "dim": { "op": "adjust", "inputs": { "source": "world" }, "params": { "exposure": -1.2 } },
+    "title": { "op": "text", "params": { "text": "Night Shift", "font": "Geist", "weight": 700, "size": 200, "align": "center", "valign": "middle",
+      "position": [960, 520], "color": "#ffffff", "tracking": -6,
+      "stagger": 0.05, "stagger_order": "center",
+      "glyph_offset": { "keys": [ { "t": 0.3, "v": [0, 80], "ease": { "bezier": [0.16, 1, 0.3, 1] } }, { "t": 1.1, "v": [0, 0] } ] },
+      "glyph_opacity": { "keys": [ { "t": 0.3, "v": 0 }, { "t": 0.6, "v": 1 } ] } } },
+    "sub": { "op": "text", "params": { "text": "Episode 41 · out Thursday", "font": "Geist", "size": 44, "align": "center", "valign": "middle",
+      "position": { "wiggle": { "frequency": 0.4, "amplitude": [6, 4], "base": [960, 660] } }, "color": "#ffffffb0", "tracking": 2,
+      "reveal": { "keys": [ { "t": 1.0, "v": 0 }, { "t": 2.0, "v": 24 } ] } } },
+    "l1": { "op": "over", "inputs": { "fg": "title", "bg": "dim" } },
+    "l2": { "op": "over", "inputs": { "fg": "sub", "bg": "l1" } },
+    "lit": { "op": "bloom", "inputs": { "source": "l2" }, "params": { "intensity": 0.5 } },
+    "finish": { "op": "grain", "inputs": { "source": "lit" } }
+  }
+}
+``` 
+
+Four parts make every document:
+
+  * `format`: size, frame rate, length, and motion blur (here 6 samples over half a frame's shutter).
+  * `nodes`: a graph. Each node has an `op` (one of 70), its `params`, and `inputs` naming other nodes. Generators such as `marble` and `text` have none; `over` takes a foreground and a background; effects take a `source`.
+  * Animated params: any param can be a constant, a list of keyframes, a driver such as `wiggle`, or a formula of `t`.
+  * `output`: the node whose picture is the video.
+
+There is no timeline of tracks. A node is on screen when its `timing` says so (all of the film when it has none), and layering is the order of `over` nodes. The full shape is in [the document reference](<https://ultrafast.mov/docs/documents/>), and every op with its params is in [the op reference](<https://ultrafast.mov/docs/ops/>).
+
+## Check, look, export
+
+```
+curl -fsSL https://ultrafast.mov/install.sh | sh    # or: brew install ultrafastmov/tap/ultrafast
+uf check card.json                                  # {"ok": true, "issues": []} before anything renders
+uf sheet card.json --count 9 --out sheet.png        # nine labelled frames on one image
+uf review card.json                                 # every frame read for unreadable, clipped or too-brief text
+uf export card.json card.mp4                        # H.264 MP4; the container follows the file name
+``` 
+
+`check` catches an unknown op or param, an input that points at no node, or a malformed colour before any GPU work, and names the node for each. `sheet` renders a few frames to one image, which is how an agent or a person sees the motion without watching it. `export` writes MP4 (H.264, HEVC or AV1), MOV (ProRes up to 4444 XQ, with alpha), WebM, GIF, PNG or EXR sequences, or the sound alone, at any size and frame rate:
+
+```
+uf export card.json card.mov --codec prores --prores-profile 4444 --alpha   # a transparent master
+uf export card.json card-4k.mp4 --size 4k --codec hevc
+uf export card.json card.gif --size 720p
+``` 
+
+Rendering runs on the GPU: Metal on a Mac with Apple silicon, Vulkan on Linux. The same document renders the same picture on every machine: fonts come with the engine or are fetched by name, and the GPU kernels are the same everywhere. Without a GPU, the Docker image renders on the CPU, much more slowly.
+
+## Animation
+
+The example uses three of the five ways to set a param. Keyframes move the letters (`glyph_offset` and `glyph_opacity`, staggered 0.05 s apart from the centre), a driver keeps the subtitle drifting (`wiggle`), and keyframes on `reveal` type it on.
+
+```
+"size": 64
+"position": { "keys": [ { "t": 0, "v": [540, 2100], "ease": "out_expo" }, { "t": 0.8, "v": [540, 960] } ] }
+"rotation": { "keys": [ { "t": 0, "v": 0 }, { "t": 1, "v": 10 } ], "repeat": "pingpong" }
+"position": { "wiggle": { "frequency": 2, "amplitude": 10, "base": [540, 960] } }
+"opacity":  { "expr": "0.5 + 0.5 * sin(t * 3)" }
+``` 
+
+Eases are named (`in_out_cubic`, `out_back`, `spring`...) or a CSS-style bezier. An `audio` driver makes a param follow a band of the soundtrack. To show a node only part of the time, give it `"timing": { "in": 2, "out": 6 }`.
+
+## One video per row
+
+Columns named `node.param` set that param in each row; other columns fill the output name. Three episode cards from one document:
+
+```
+name,title.text,sub.text
+ep41,Night Shift,Episode 41 · out Thursday
+ep42,Night Shift,Episode 42 · out 4 December
+ep43,Night Shift,Episode 43 · out 11 December
+``` 
+
+```
+uf batch card.json --data rows.csv --out 'out/{name}.mp4'     # one warm renderer, a video per row
+uf batch card.json --data rows.csv --docs docs/               # or write each row's document and render later
+``` 
+
+Rows can be CSV, JSON or JSON lines, and a column can change the format too (`format.width`, `format.height`), so one sheet can give several sizes; frame-relative layout such as blocks and captions follows the frame.
+
+## Over HTTP and from code
+
+`uf serve` is the same engine behind an HTTP API with one API key, on your own GPU. Short renders come back in the response; longer ones are stored with a signed link.
+
+```
+docker run --gpus all -p 8080:8080 -v ultrafast:/data ghcr.io/ultrafastmov/ultrafast:latest serve
+
+curl http://localhost:8080/v1/render -H "Authorization: Bearer $ULTRAFAST_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"document": '"$(cat card.json)"', "output": {"codec": "h264", "size": "1080p", "inline": true}}' -o card.mp4
+``` 
+
+The Python and TypeScript SDKs wrap the same API, with no dependencies:
+
+```
+from ultrafastmov import Ultrafast
+
+uf = Ultrafast()                      # the server on this machine; ULTRAFAST_API_KEY
+doc = uf.load("card.json")
+for issue in uf.review(doc):
+    print(issue.kind, issue.node, issue.message)
+uf.render(doc).save("card.mp4")
+``` 
+
+```
+import { Ultrafast } from "ultrafastmov";
+
+const uf = new Ultrafast();
+const doc = await uf.load("card.json");
+await (await uf.render(doc)).save("card.mp4");
+``` 
+
+Endpoints for checking, single frames, contact sheets, reviews and uploads are in the [HTTP API reference](<https://ultrafast.mov/docs/api/>).
+
+## From an agent
+
+A JSON document is a good thing for a coding agent to write: it is short, it can be checked before anything renders, and the agent can look at the frames it made. With the skill installed, Claude Code, Codex, Cursor and Gemini CLI know the format and the loop; the MCP server gives any MCP client the same tools without a shell.
+
+```
+npx skills add ultrafastmov/ultrafast        # the skill
+claude mcp add ultrafast -- uf mcp           # 20 MCP tools, local
+``` 
+
+Measured on the same 10-second short, the ultrafast document took about 1,234 output tokens, against 1,868 for the same video in Remotion and 1,680 in HyperFrames ([method](<https://github.com/ultrafastmov/benchmarks>)). More on the [video MCP server](<https://ultrafast.mov/mcp/>) page.
+
+## The schema
+
+The document format is versioned (`"version": 1`) and published as JSON Schema at [ultrafast.mov/schema/v1.json](<https://ultrafast.mov/schema/v1.json>). Point your editor at it for completion and inline errors:
+
+```
+{ "$schema": "https://ultrafast.mov/schema/v1.json", "version": 1, "format": { }, "nodes": { }, "output": "finish" }
+``` 
+
+The schema checks shape; `uf check` also checks meaning: that ops and params exist, inputs point at real nodes, values are well formed, and shaders compile.
+
+## Other JSON video formats
+
+Several tools describe a video as JSON. What each one's docs say, as of 23 November 2026:
+
+Format| Shape| Where it renders  
+---|---|---  
+ultrafast document| a graph of nodes with animated params and timing windows; 3D, shaders and simulations are nodes| your GPU, locally or with `uf serve`; open source  
+[Shotstack Edit](<https://shotstack.io/docs/api/>)| a timeline of tracks of clips; 16 asset types; merge fields for templates| Shotstack's cloud  
+[JSON2Video Movie](<https://json2video.com/docs/v2/reference/json-syntax>)| scenes that play back to back, each with elements; variables, conditions and iteration| JSON2Video's cloud  
+[Creatomate RenderScript](<https://creatomate.com/docs/api/render-script/element-properties>)| elements on tracks with keyframes; nested compositions| Creatomate's cloud  
+[Editly](<https://github.com/mifi/editly#readme>)| a JSON5 edit spec of clips and layers| locally with Node.js and FFmpeg; open source  
+[VideoFlow](<https://github.com/ybouane/VideoFlow#readme>)| TypeScript compiled to a portable JSON format| headless Chromium on a server, or WebCodecs in the browser; open source  
+  
+The hosted services are compared in more depth on [ultrafast vs JSON-to-video APIs](<https://ultrafast.mov/alternatives/json-to-video-api/>), and the open-source tools on [Remotion alternatives](<https://ultrafast.mov/alternatives/remotion/>).
+
+
+---
+
+# Personalized videos from a CSV, open source · ultrafast
+
+> Make one personalized video per row of a CSV or JSON file on your own GPU with an open-source engine: the template, the sheet, checking every row before rendering, long names, a photo per row, and the same from Python or HTTP.
+
+URL: https://ultrafast.mov/guides/personalized-videos-from-csv/
+
+Docs
+
+# Personalized videos from a CSV.
+
+A template and a spreadsheet make a finished video per row, each with its own customer name, order number and code. Rendered on your own GPU by an open-source engine, so the rows never leave your machine and no one charges per video.
+
+## Start
+
+  * [Quickstart](<https://ultrafast.mov/docs/>)
+  * [The document](<https://ultrafast.mov/docs/documents/>)
+
+## Guides
+
+  * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
+  * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+
+## Reference
+
+  * [Ops](<https://ultrafast.mov/docs/ops/>)
+  * [CLI](<https://ultrafast.mov/docs/cli/>)
+  * [MCP server](<https://ultrafast.mov/docs/mcp/>)
+  * [HTTP API](<https://ultrafast.mov/docs/api/>)
+
+## For agents
+
+  * [llms.txt](<https://ultrafast.mov/llms.txt>)
+  * [This page as Markdown](<https://ultrafast.mov/guides/personalized-videos-from-csv/index.md>)
+
+**On this page**
+
+  1. The template
+  2. The sheet
+  3. Check every row first
+  4. Long names
+  5. Render the batch
+  6. A photo or clip per row
+  7. From code, a queue or an agent
+  8. Limits
+  9. Questions
+
+## The template
+
+The template is an ordinary ultrafast document: a JSON file with a `format`, a graph of `nodes` and an `output` (the whole shape is in [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)). This one is the engine's vertical starter (`uf new vertical card.json`), a 6-second 1080×1920 card, with its words changed to a thank-you note. Three of its nodes are the parts that change per customer:
+
+```
+"line2": { "op": "text", "params": {
+  "text": "Priya.", "font": "Instrument Serif", "style": "italic", "size": 190, "color": "#ffd7a8",
+  "position": { "keys": [ { "t": 0.55, "v": [84, 1210], "ease": { "bezier": [0.16, 1, 0.3, 1] } },
+                          { "t": 1.25, "v": [84, 1020] } ] } } },
+"label": { "op": "text", "params": {
+  "text": "ORDER 10482", "font": "Geist Mono", "size": 26, "position": [86, 600] } },
+"code": { "op": "text", "params": {
+  "text": "10% off the next one: PRIYA10", "font": "Geist Mono", "size": 36, "color": "#ffd7a8",
+  "position": [86, 1320], "reveal": { "keys": [ { "t": 2.4, "v": 0 }, { "t": 3.6, "v": 30 } ] } } }
+``` 
+
+Nothing in the template marks a field as a variable. Any param of any node can be set from the sheet, so the design stays a normal document you can preview, check and edit like any other.
+
+## The sheet
+
+A column named `node.param` sets that param in each row's copy of the template. Any other column is just data, and can name the output file.
+
+```
+name,line2.text,label.text,code.text,line2.color
+priya,Priya.,ORDER 10482,10% off the next one: PRIYA10,#ffd7a8
+tomas,Tomás.,ORDER 10483,10% off the next one: TOMAS10,#a8e0ff
+mei,Mei.,ORDER 10484,10% off the next one: MEI10,#c8ffa8
+``` 
+
+  * Rows can be CSV, a JSON array of objects, or JSON lines.
+  * Numbers are read as numbers (`line2.size` = `160`), colours as hex text with optional alpha.
+  * `format.width`, `format.height` and the other format fields can be columns too. Layout built from blocks and captions follows the frame; pixel positions such as this card's don't, so give each size its own template.
+  * In `--out`, `{name}` is filled from the `name` column (any column works) and `{row}` is the row number.
+
+## Check every row before anything renders
+
+`uf batch` builds every row's document first and checks each one, so a typo in row 400 stops the run before the first frame. The error names the row and what's wrong:
+
+```
+$ uf batch card.json --data rows.csv --out 'out/{name}.mp4'
+Error: row 1: `nosuch.text`: no node `nosuch` (did you mean `code`?)
+``` 
+
+To see each row's document, write them out instead of rendering, and check them like any other file:
+
+```
+uf batch card.json --data rows.csv --out 'out/{name}.mp4' --docs docs/   # docs/priya.json, docs/tomas.json, docs/mei.json
+for f in docs/*.json; do uf check "$f"; done
+``` 
+
+`check` reports two levels. A missing file is an error (`"severity": "error"`) and stops a batch. A value of the wrong type, such as text in a number column, is a warning: the batch still runs, so read the warnings when a sheet comes from somewhere new.
+
+## Long names
+
+Add a row for `Maximiliana-Josefina.` and `check` still passes: a name too wide for the frame is a valid document. Catching it takes a render. `uf sheet` puts nine frames of one row on a single image, and `uf review` reads every frame for text that is clipped, overlapping, too small or on screen too briefly to read:
+
+```
+uf sheet docs/maximiliana.json --count 9 --out sheet.png
+uf review docs/maximiliana.json --safe social      # also flags text under a social app's buttons and captions
+``` 
+
+For a sheet of unknown names, review the longest few rows before the full run. For full names with spaces, a wrap width (`"width"` on the text node, in pixels) breaks a long one onto a second line instead of running it off the edge.
+
+## Render the batch
+
+```
+uf batch card.json --data rows.csv --out 'out/{name}.mp4'
+uf batch card.json --data rows.csv --out 'out/{name}.mp4' --codec hevc --quality high   # export settings apply to every row
+``` 
+
+One renderer stays warm for the whole sheet, so fonts and GPU pipelines load once for the whole run, not once per video. Each row prints its frame count and time, and the run ends with the total. Every export setting works here: H.264, HEVC or AV1 MP4, ProRes, WebM, GIF, any size and frame rate. `uf estimate card.json` reports the GPU time of one video before you start.
+
+## A photo, a logo or a clip per row
+
+An `image` or `video` node takes its file from `src`, so a column can swap it per row:
+
+```
+name,line2.text,photo.src
+priya,Priya.,photos/priya.jpg
+tomas,Tomás.,photos/tomas.jpg
+``` 
+
+Relative paths resolve from the template's folder. If you write the row documents somewhere else with `--docs`, use absolute paths in the sheet so each document still finds its files. A row whose file is missing fails the check, before rendering starts.
+
+## From code, a queue or an agent
+
+When the rows come from a database or a form instead of a file, set the params in code. `uf serve` runs the same engine behind an HTTP API on your machine, with one API key, and the Python and TypeScript SDKs wrap it:
+
+```
+import csv
+from ultrafastmov import Ultrafast
+
+uf = Ultrafast()                          # your uf serve; ULTRAFAST_API_KEY
+card = uf.load("card.json")
+for row in csv.DictReader(open("customers.csv")):
+    doc = card.copy()                     # a deep copy; relative paths still resolve from card.json's folder
+    doc["nodes"]["line2"]["params"]["text"] = row["first_name"] + "."
+    doc["nodes"]["code"]["params"]["text"] = f"10% off the next one: {row['code']}"
+    uf.render(doc).save(f"out/{row['id']}.mp4")
+``` 
+
+Any tool that can send an HTTP request can do the same with `POST /v1/render` and the row's document ([HTTP API](<https://ultrafast.mov/docs/api/>)). A self-hosted server renders one job at a time on its GPU; send the rows one after another. Agents get the same thing as an MCP tool: `ultrafast_batch` renders one document per row of a data file, or of rows passed inline (up to 20 a call on a remote server, a download link per row; see [MCP server](<https://ultrafast.mov/docs/mcp/>)).
+
+## Limits
+
+  * It needs a Mac with Apple silicon, or Linux with a Vulkan GPU. Without a GPU, the Docker image renders on the CPU, correctly but much more slowly.
+  * There's no hosted service yet: you run the renderer. [ultrafast Cloud](<https://ultrafast.mov/cloud/>) is a waitlist.
+  * One template per batch. Different layouts per segment are separate templates, or a `format` column with layout that follows the frame.
+  * Hosted APIs such as Shotstack, JSON2Video and Creatomate run the render for you and charge per minute; their prices and formats are compared on [ultrafast vs JSON-to-video APIs](<https://ultrafast.mov/alternatives/json-to-video-api/>).
+
+## Questions
+
+Can I make personalized videos from a spreadsheet for free?
+
+Yes, if you have the hardware. ultrafast is open source (Apache-2.0 or MIT) and renders on your own Mac with Apple silicon or Linux machine with a Vulkan GPU, so there is no per-video or per-minute fee: `uf batch card.json --data rows.csv --out 'out/{name}.mp4'` makes one video per row.
+
+Does my customer data leave my machine?
+
+Not with the command line: `uf batch` reads the sheet and renders on the same machine. With `uf serve`, the rows go only to the server you run. Fonts named in a template may be downloaded by name the first time they are used.
+
+Can each row have its own photo or video clip?
+
+Yes. A column such as `photo.src` sets the file of an `image` or `video` node per row. Relative paths resolve from the template's folder, and a row whose file is missing stops the batch before anything renders.
+
+How do I stop long names from running off the frame?
+
+Render and look: `uf review` on the longest rows reports text that runs off the frame, overlaps other text or is too small, and `uf sheet` shows nine frames on one image. A wrap width on the text node breaks a long full name onto a second line. `uf check` alone can't see it, because a long name is a valid document.
+
+Can I do this from n8n, Zapier or my own code?
+
+From your own code, yes: the Python and TypeScript SDKs talk to `uf serve`, so you copy the template, set the params from your data and render. There is no n8n or Zapier node, but their HTTP request step can POST each row's document to `/v1/render` on your server.
+
+
+---
+
 # MCP server · 20 tools · ultrafast docs
 
 > ultrafast as MCP tools for Claude Code, Codex, Cursor, Gemini CLI and any MCP client: local over stdio with uf mcp, or remote over Streamable HTTP from your own uf serve with an API key.
@@ -603,6 +1001,11 @@ Docs
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+
+## Guides
+
+  * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
+  * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
 
 ## Reference
 
@@ -716,6 +1119,11 @@ Docs
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+
+## Guides
+
+  * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
+  * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
 
 ## Reference
 
@@ -851,6 +1259,11 @@ Render documents over HTTP from `uf serve` on your own GPU, with one API key and
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+
+## Guides
+
+  * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
+  * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
 
 ## Reference
 
@@ -1433,7 +1846,7 @@ The ultrafast MCP server gives your agent 20 tools to write a video, look at its
 
 macOS on Apple silicon and Linux x86_64. Every parameter is in the [MCP reference](<https://ultrafast.mov/docs/mcp/>).
 
-ultrafast MCP server, v0.1.1
+ultrafast MCP server, v0.2.0
 
 tools over stdio, uf mcp
     20
@@ -1483,7 +1896,7 @@ The pottery teaser from the [examples](<https://ultrafast.mov/examples/>): its f
 
 ## 20 tools, in six groups.
 
-As `uf mcp` lists them in v0.1.1. The remote server has the 16 that don't read or write files on your machine.
+As `uf mcp` lists them in v0.2.0. The remote server has the 16 that don't read or write files on your machine.
 
 ### Write
 
@@ -1587,11 +2000,13 @@ claude mcp add --transport http ultrafast http://localhost:8080/mcp \
 ```
 io.github.ultrafastmov/ultrafast
 
-ultrafast-0.1.1-macos-arm64.mcpb
-ultrafast-0.1.1-linux-x86_64.mcpb
+ultrafast-0.2.0-macos-arm64.mcpb
+ultrafast-0.2.0-linux-x86_64.mcpb
 ``` 
 
-The name in the [official MCP Registry](<https://registry.modelcontextprotocol.io/v0/servers?search=io.github.ultrafastmov/ultrafast>), which points to the two bundles on the [v0.1.1 release](<https://github.com/ultrafastmov/ultrafast/releases/tag/v0.1.1>): a .mcpb bundle for Claude Desktop on a [Mac with Apple silicon](<https://github.com/ultrafastmov/ultrafast/releases/download/v0.1.1/ultrafast-0.1.1-macos-arm64.mcpb>), and one for [Linux x86_64](<https://github.com/ultrafastmov/ultrafast/releases/download/v0.1.1/ultrafast-0.1.1-linux-x86_64.mcpb>). Each carries the binary and asks for one setting: the folder for documents and videos, `~/ultrafast` by default.
+The name in the [official MCP Registry](<https://registry.modelcontextprotocol.io/v0/servers?search=io.github.ultrafastmov/ultrafast>), which points to the two bundles on the [v0.2.0 release](<https://github.com/ultrafastmov/ultrafast/releases/tag/v0.2.0>), the `ultrafast` crate and the Docker image. The bundles are for Claude Desktop, one for a [Mac with Apple silicon](<https://github.com/ultrafastmov/ultrafast/releases/download/v0.2.0/ultrafast-0.2.0-macos-arm64.mcpb>) and one for [Linux x86_64](<https://github.com/ultrafastmov/ultrafast/releases/download/v0.2.0/ultrafast-0.2.0-linux-x86_64.mcpb>). Each carries the binary and asks for one setting: the folder for documents and videos, `~/ultrafast` by default.
+
+The server is also listed on [Glama](<https://glama.ai/mcp/servers/ultrafastmov/ultrafast>) and [mcpservers.org](<https://mcpservers.org/servers/ultrafastmov/ultrafast>).
 
 Codex and the JSON config for Claude Desktop are in the [MCP reference](<https://ultrafast.mov/docs/mcp/#local>); neither has been tested yet. Any other MCP client that runs a stdio server, or connects over Streamable HTTP with a header, takes the same settings.
 
@@ -1658,6 +2073,166 @@ Not yet. The server runs on your machine (`uf mcp`) or on your own server (`/mcp
 ## Connect your agent.
 
 Install ultrafast, then add `uf mcp` to your client.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Can Claude make videos? Every way, compared · ultrafast
+
+> Yes, as animation built from code. Claude Motion on Team and Enterprise, or Claude Code with ultrafast, Remotion or HyperFrames on any paid plan: plans, renderers, costs and limits.
+
+URL: https://ultrafast.mov/learn/can-claude-make-videos/
+
+# Can Claude make videos?
+
+Yes, as animation written in code, not as generated footage. Claude Motion makes short animations inside Claude on Team and Enterprise plans. On Pro, Max or Ultra, Claude Code writes the video for an engine such as ultrafast, Remotion or HyperFrames, which renders the MP4.
+
+Updated 24 November 2026. ultrafast wrote this page and is one of the engines on it. Facts about Claude are from Anthropic's help, launch and pricing pages; sources are at the end.
+
+## How Claude makes a video.
+
+Claude has no video model. In Anthropic's words, Claude Motion “doesn't use a video generation model, so it doesn't create realistic footage or people.” The same holds for every route on this page.
+
+  1. ### Claude writes it
+
+Code or a document describes every layer: the text, shapes, charts, images and footage, and when each one moves. Change a word or a timing and the rest stays as it was.
+
+  2. ### A renderer draws it
+
+Something turns that description into frames. Claude Motion does this inside Claude. Remotion and HyperFrames load a web page in headless Chrome and capture it. ultrafast draws each frame on the GPU, with no browser.
+
+  3. ### An encoder writes the file
+
+The frames become an MP4 you can download, post or cut into an edit. Engines that run on your computer can also write transparent video, GIFs and image sequences.
+
+## Every route, side by side.
+
+Plans from Anthropic's pricing page, checked 24 November 2026. Claude Code comes with Pro, Max and Ultra, or runs on an API key.
+
+Route| Claude plan| Claude writes| Where it renders| What you get| Cost beyond Claude  
+---|---|---|---|---|---  
+Claude Motion| Team and Enterprise, in beta; off on Enterprise until an owner turns it on| animation code, in an artifact| inside Claude| an MP4 export or a share link; edit by asking or in the editor| none; it counts toward the plan's usage limits  
+Claude Code + [ultrafast](<https://github.com/ultrafastmov/ultrafast>)| Pro, Max, Ultra or an API key| one JSON document, checked before it renders| your GPU: Metal on an Apple silicon Mac, Vulkan on Linux; no browser| MP4 (H.264, HEVC, AV1), ProRes, transparent WebM, GIF, PNG and EXR sequences| none; Apache-2.0 or MIT  
+Claude Code + [Remotion](<https://www.remotion.dev/docs/ai/coding-agents>)| Pro, Max, Ultra or an API key| React components| headless Chrome on your computer, or Remotion Lambda| MP4 and other formats, an embeddable web player| free for individuals and companies of up to 3 people; a company licence from 4  
+Claude Code + [HyperFrames](<https://hyperframes.heygen.com/>)| Pro, Max, Ultra or an API key| HTML, CSS and animation code| headless Chrome on your computer| MP4, WebM or MOV| none; Apache-2.0  
+Claude chat + the HyperFrames connector| any, including Free, according to HyperFrames| a video, through the connector's tools| HeyGen's cloud, on your HeyGen account| an MP4; HyperFrames says videos are planned at up to 90 seconds| a free HeyGen account  
+Claude chat + the ultrafast connector| Not available yet. It comes with [ultrafast Cloud](<https://ultrafast.mov/cloud/>), which has a waitlist. Until then, use Claude Code.  
+  
+Product names belong to their owners. HyperFrames' connector details are from its own page and weren't tested here.
+
+## Which one to use.
+
+Pick by where you already work and what the video has to hold.
+
+### Use Claude Motion when
+
+  * Your organisation is on a Team or Enterprise plan and has it turned on.
+  * You want an animated chart, an explainer or a walkthrough built from a report, data or images you attach.
+  * You'd rather not install anything. To take an animation further, Anthropic names Adobe, Descript, HeyGen, Higgsfield, invideo, Luma AI and Runway.
+
+### Use Remotion when
+
+  * Your team builds in React and wants to reuse its components.
+  * You need a player embedded in a web page.
+  * The licence fits: 3 people or fewer, or a company licence.
+
+### Use HyperFrames when
+
+  * You write HTML, CSS and GSAP, or have compositions in them already.
+  * You want a connector in the ordinary Claude chat today, or HeyGen's avatars, voices and Studio app.
+
+### Use ultrafast when
+
+  * You want the render on your own GPU, with no browser in it.
+  * The video mixes your footage with type, 3D, particles, shaders or a Lottie file.
+  * Claude should check and review its own frames before you watch.
+  * You need one video per row of a spreadsheet, or a licence that doesn't count your headcount.
+
+## Make one with Claude Code.
+
+With ultrafast: install the engine, add the plugin, then ask. The plugin brings the ultrafast skill, which teaches Claude the document and the review loop, and the MCP server with 20 tools.
+
+```
+curl -fsSL https://ultrafast.mov/install.sh | sh          # the engine, as uf
+uf info                                                   # checks the GPU
+claude plugin marketplace add ultrafastmov/ultrafast
+claude plugin install ultrafast@ultrafast                 # the skill and the MCP server
+claude "Make a 10-second vertical teaser for a pottery class from photo.jpg. Review it before you export."
+``` 
+
+  1. ### It writes and looks
+
+Claude writes one JSON document and runs `check`, which catches mistakes before anything renders. Single frames and contact sheets come back to it as images, so it sees the video before you do.
+
+  2. ### It reviews
+
+`review` reads every frame for text that is clipped, unreadable, too small or gone too fast, and for flashing. The [pottery teaser's](<https://ultrafast.mov/mcp/>) first draft had 8 findings; the second had none.
+
+  3. ### It exports
+
+A 10-second export took under a second on an RTX 5090 in the [benchmark](<https://ultrafast.mov/benchmarks/>). Writing the same short took about a third fewer tokens than in Remotion ([token count](<https://ultrafast.mov/benchmarks/#tokens>)).
+
+Codex, Cursor and Gemini CLI work the same way: [setup for each](<https://ultrafast.mov/integrations/>). Other ways to install are in the [quickstart](<https://ultrafast.mov/docs/>).
+
+### Where ultrafast doesn't fit
+
+  * It renders on a GPU: a Mac with Apple silicon, or Linux with a Vulkan GPU. Without one, the Docker image renders on the CPU, much more slowly.
+  * There's no connector for the Claude chat yet, so you need Claude Code or another coding agent.
+  * No HTML or CSS. A video is a JSON document, not a web page.
+  * It is new: the first release came out on 21 November 2026.
+
+## What Claude can't do.
+
+### Film people or places
+
+Every route here builds the picture from text, shapes, charts and your own images and footage. For generated footage or people, use a video generation model.
+
+### Motion on a personal plan
+
+Anthropic's pricing table lists Claude Motion for none of Free, Pro, Max or Ultra as of 24 November 2026. Those plans reach video through Claude Code or a connector.
+
+### Render with nothing behind it
+
+In Claude Code, the video only becomes a file when an engine is installed to render it. Without one, Claude can write the code but has nothing to turn it into frames.
+
+## Common questions.
+
+Can Claude make videos?
+
+Yes, as animation built from code. Claude Motion makes short animations inside Claude on Team and Enterprise plans and exports them as MP4. On any plan with Claude Code, Claude writes the video for an engine such as ultrafast, Remotion or HyperFrames, which renders it on your computer. None of them generates realistic footage or people.
+
+Is Claude Motion available on Pro or Max?
+
+No. Anthropic's pricing page lists Claude Motion, in beta, for Team and Enterprise plans only, and not for Free, Pro, Max or Ultra (checked 24 November 2026). On those plans, Claude Code with a video engine makes the same kind of animated video.
+
+Can Claude Code make videos?
+
+Yes, with a video engine installed. Claude Code writes the video as code or a document, and the engine renders it: ultrafast on your GPU, Remotion and HyperFrames in headless Chrome. With the ultrafast plugin (`claude plugin install ultrafast@ultrafast`), Claude also checks the document, looks at frames and reviews the whole video before it exports.
+
+Can Claude use my own footage?
+
+With an engine on your computer, yes: ultrafast takes video, images, SVG, Lottie, glTF geometry and audio files you point it to. Anthropic's Claude Motion help page talks about attaching reports, data and images.
+
+Is it free?
+
+ultrafast and HyperFrames are free and open source; Remotion is free for individuals and companies of up to 3 people and needs a company licence from 4. Claude Code itself needs a paid Claude plan or an API key, and Claude Motion counts toward a Team or Enterprise plan's usage.
+
+## Sources.
+
+All read on 24 November 2026.
+
+  * **Anthropic:** [Get started with Claude Motion](<https://support.claude.com/en/articles/17454997-get-started-with-claude-motion>) (plans, how it works, no video generation model, MP4 export, usage), [the launch post of 8 October 2026](<https://claude.com/resources/articles/dashboards-and-motion>) (built for explaining your own work; the tools to take it further), [pricing](<https://claude.com/pricing>) (which plans include Claude Motion and Claude Code).
+  * **Remotion:** [prompting videos with coding agents](<https://www.remotion.dev/docs/ai/coding-agents>), [agent skills](<https://www.remotion.dev/docs/ai/skills>), [licence pricing](<https://www.remotion.dev/docs/license/pricing>).
+  * **HyperFrames:** [Can Claude make videos?](<https://hyperframes.heygen.com/blog/can-claude-make-videos>) (the connector, its plans and its 90-second plan, in HyperFrames' words), [deterministic rendering](<https://hyperframes.heygen.com/concepts/determinism>) (headless Chrome).
+  * **ultrafast:** [repository](<https://github.com/ultrafastmov/ultrafast>), [integrations](<https://ultrafast.mov/integrations/>), [MCP server](<https://ultrafast.mov/mcp/>), [benchmark and token count](<https://ultrafast.mov/benchmarks/>), [Remotion alternatives](<https://ultrafast.mov/alternatives/remotion/>), [HyperFrames alternatives](<https://ultrafast.mov/alternatives/hyperframes/>).
+
+## Make one with Claude Code.
+
+Install the engine, add the plugin, and ask for a video.
 
 `curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
@@ -1807,7 +2382,7 @@ At a glance
 Draws each frame with| GPU kernels, Metal or Vulkan; the planner fuses nodes into one kernel per group| headless Chrome; parallel tabs render and screenshot frames| headless Chrome via Puppeteer; 1 to 24 browser workers  
 You write| one JSON document; no build step| a React and TypeScript project| HTML, CSS and JS with a paused GSAP timeline or another adapter  
 Output tokens for a 10 s short| about 1,234| about 1,868| about 1,680  
-Export, same machine ([benchmark](<https://github.com/ultrafastmov/benchmarks>))| 0.98 s for 10 s of captioned NASA footage, 1080×1920, end to end| 6.69 s at its fastest setting found; 8.53 s with its default command| 4.46 s at its fastest setting found; 5.05 s with its default command  
+Export, same machine ([benchmark](<https://github.com/ultrafastmov/benchmarks>))| 0.78 s for 10 s of captioned NASA footage, 1080×1920, end to end| 6.69 s at its fastest setting found; 8.53 s with its default command| 4.46 s at its fastest setting found; 5.05 s with its default command  
 GPU| renders on it| not used by default; none on Lambda| optional, for WebGL and hardware encoding  
 Agents check and review| `check` before rendering; `review` reads every frame for unreadable, clipped or too-brief text and flashing; `inspect` maps pixels to nodes| no built-in review| no built-in review  
 Agent surfaces| 20 MCP tools, local and remote; skills; ChatGPT and Claude apps coming soon| 13 Agent Skills; plugins for 5 coding agents; hosted MCP shut down in October 2026| 9 skills; plugins for 6 agents; Claude connector; ChatGPT Work plugin  
@@ -1839,9 +2414,9 @@ Speed
 
 ## Measured on one machine.
 
-The same 10-second videos, written in each tool the way its docs teach and exported end to end on one RTX 5090 workstation (Ryzen 9 9950X3D2), median of five warm runs. Remotion and HyperFrames at the fastest setting found for each. Title card: 0.85 s, 2.32 s and 3.53 s. Animated chart: 0.88 s, 2.25 s and 3.31 s. Method, every configuration and one script to reproduce it: [the benchmark](<https://github.com/ultrafastmov/benchmarks>). The [benchmark page](<https://ultrafast.mov/benchmarks/>) has every scene, the cold runs, the token count and where ultrafast does worse.
+The same 10-second videos, written in each tool the way its docs teach and exported end to end on one RTX 5090 workstation (Ryzen 9 9950X3D2), median of five warm runs. Remotion and HyperFrames at the fastest setting found for each. Title card: 0.66 s, 2.32 s and 3.53 s. Animated chart: 0.72 s, 2.25 s and 3.31 s. Method, every configuration and one script to reproduce it: [the benchmark](<https://github.com/ultrafastmov/benchmarks>). The [benchmark page](<https://ultrafast.mov/benchmarks/>) has every scene, the cold runs, the token count and where ultrafast does worse.
 
-  1. ultrafast **0.98 s**
+  1. ultrafast **0.78 s**
   2. HyperFrames **4.46 s**
   3. Remotion **6.69 s**
 
@@ -1963,7 +2538,7 @@ ultrafast, measured
 16 s launch film, 3D
     4.88 s
 
-On the same RTX 5090 workstation, three 10-second videos took Remotion 2.32 to 6.69 s at the fastest setting found (2.6 to 6.8 times ultrafast's time) and 4.45 to 8.53 s with its default command ([benchmark](<https://github.com/ultrafastmov/benchmarks>)). Remotion's published Lambda figures: an 80 s video in 15 s; a 1-minute render in 19 s for $0.017 of AWS compute.
+On the same RTX 5090 workstation, three 10-second videos took Remotion 2.25 to 6.69 s at the fastest setting found (3.1 to 8.6 times ultrafast's time) and 4.45 to 8.53 s with its default command ([benchmark](<https://github.com/ultrafastmov/benchmarks>)). Remotion's published Lambda figures: an 80 s video in 15 s; a 1-minute render in 19 s for $0.017 of AWS compute.
 
 Tokens
 
@@ -2153,7 +2728,7 @@ At a glance
 How a frame is made| GPU kernels compiled from the document; encoded on the same GPU| a page laid out in Chrome via Puppeteer, captured per frame, encoded with FFmpeg; 1 to 24 browsers of about 256 MB each  
 You write| one JSON document with a published schema| HTML and CSS with `data-*` timing, and a paused GSAP timeline or another adapter  
 Output tokens for a 10 s short| about 1,234, measured| about 1,680, most of it web code  
-Export, same machine ([benchmark](<https://github.com/ultrafastmov/benchmarks>))| 0.85–0.98 s for three 10-second videos| 3.31–4.46 s at its fastest setting found; 3.71–5.05 s with its default command  
+Export, same machine ([benchmark](<https://github.com/ultrafastmov/benchmarks>))| 0.66–0.78 s for three 10-second videos| 3.31–4.46 s at its fastest setting found; 3.71–5.05 s with its default command  
 Same pixels everywhere| bundled fonts, the same kernels on every machine| fonts and Chrome versions can shift pixels; `--docker` pins them  
 Install| one binary| Node 22+, FFmpeg, a managed Chrome  
 For agents| 20 MCP tools (local and remote) including `check`, `review` and `inspect`; frames returned as images; ChatGPT and Claude apps coming soon| 9 skills; plugins for 6 agents; a Claude connector with `compose` and `render_video`; a ChatGPT Work plugin  
@@ -2165,15 +2740,15 @@ Hosted rendering| your own GPU with `uf serve`; ultrafast Cloud has a [waitlist]
   
 Speed
 
-## About four times faster, measured.
+## About five times faster, measured.
 
-Three 10-second videos written in both tools and exported end to end on one RTX 5090 workstation. At the fastest setting found, HyperFrames took 3.8 to 4.5 times as long; with its default command, 4.2 to 5.1 times. [Method and raw results](<https://github.com/ultrafastmov/benchmarks>).
+Three 10-second videos written in both tools and exported end to end on one RTX 5090 workstation. At the fastest setting found, HyperFrames took 4.6 to 5.7 times as long; with its default command, 5.2 to 6.5 times. [Method and raw results](<https://github.com/ultrafastmov/benchmarks>).
 
-  1. Title card, ultrafast **0.85 s**
+  1. Title card, ultrafast **0.66 s**
   2. Title card, HyperFrames **3.53 s**
-  3. Chart, ultrafast **0.88 s**
+  3. Chart, ultrafast **0.72 s**
   4. Chart, HyperFrames **3.31 s**
-  5. Footage, ultrafast **0.98 s**
+  5. Footage, ultrafast **0.78 s**
   6. Footage, HyperFrames **4.46 s**
 
 Tokens
@@ -2291,7 +2866,7 @@ Questions
 
 Both are open source. What's the difference?
 
-HyperFrames renders HTML and GSAP in headless Chrome; ultrafast renders a JSON document on the GPU. That makes ultrafast about four times faster on the same machine (3.8 to 4.5 times at HyperFrames' fastest setting, in a [public benchmark](<https://github.com/ultrafastmov/benchmarks>)), and lets agents review the frames they made.
+HyperFrames renders HTML and GSAP in headless Chrome; ultrafast renders a JSON document on the GPU. That makes ultrafast about five times faster on the same machine (4.6 to 5.7 times at HyperFrames' fastest setting, in a [public benchmark](<https://github.com/ultrafastmov/benchmarks>)), and lets agents review the frames they made.
 
 Will my video look the same on every machine?
 
@@ -2324,63 +2899,63 @@ Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud
 
 # Render benchmark: ultrafast vs Remotion vs HyperFrames · ultrafast
 
-> Render benchmark on one RTX 5090: 10-second videos in 0.85–0.98 s with ultrafast; Remotion 2.25–6.69 s and HyperFrames 3.31–4.46 s at their fastest settings.
+> Render benchmark on one RTX 5090: 10-second videos in 0.66–0.78 s with ultrafast; Remotion 2.25–6.69 s and HyperFrames 3.31–4.46 s at their fastest settings.
 
 URL: https://ultrafast.mov/benchmarks/
 
 # ultrafast, Remotion and HyperFrames, timed.
 
-Three 10-second videos, exported on one RTX 5090 workstation. ultrafast took 0.85 to 0.98 s. Remotion took 2.25 to 6.69 s and HyperFrames 3.31 to 4.46 s, each at the fastest setting found.
+Three 10-second videos, exported on one RTX 5090 workstation. ultrafast took 0.66 to 0.78 s. Remotion took 2.25 to 6.69 s and HyperFrames 3.31 to 4.46 s, each at the fastest setting found.
 
-Measured 22 November 2026. ultrafast ran the benchmark and wrote this page. The code, every run and the frames are in the [benchmark repository](<https://github.com/ultrafastmov/benchmarks>), with one script to reproduce it.
+Measured 22 November 2026, and ultrafast 0.2.0 again on the night of 23 November 2026. ultrafast ran the benchmark and wrote this page. The code, every run and the frames are in the [benchmark repository](<https://github.com/ultrafastmov/benchmarks>), with one script to reproduce it.
 
 ## Faster in every scene and every setting.
 
-Seconds from the start of each tool's render command to the finished MP4. Median of 5 warm runs, 300 frames each. At the fastest setting found, Remotion took 2.6 to 6.8 times as long as ultrafast, and HyperFrames 3.8 to 4.5 times. With their default commands: 5.1 to 8.7 times, and 4.2 to 5.1 times.
+Seconds from the start of each tool's render command to the finished MP4. Median of 5 warm runs, 300 frames each. At the fastest setting found, Remotion took 3.1 to 8.6 times as long as ultrafast, and HyperFrames 4.6 to 5.7 times. With their default commands: 6.2 to 10.9 times, and 5.2 to 6.5 times.
 
 ### Title card 1080×1920, 10 s, fastest setting found
 
-  1. ultrafast **0.85 s**
+  1. ultrafast **0.66 s**
   2. Remotion **2.32 s**
   3. HyperFrames **3.53 s**
 
 ### Chart 1920×1080, 10 s, fastest setting found
 
-  1. ultrafast **0.88 s**
+  1. ultrafast **0.72 s**
   2. Remotion **2.25 s**
   3. HyperFrames **3.31 s**
 
 ### Footage 1080×1920, 10 s, fastest setting found
 
-  1. ultrafast **0.98 s**
+  1. ultrafast **0.78 s**
   2. Remotion **6.69 s**
   3. HyperFrames **4.46 s**
 
 Scene| ultrafast| Remotion, fastest found| Remotion, default| HyperFrames, fastest found| HyperFrames, default  
 ---|---|---|---|---|---  
-Title card| **0.85**|  2.32 (2.7×)| 4.73 (5.6×)| 3.53 (4.1×)| 3.92 (4.6×)  
-Chart| **0.88**|  2.25 (2.6×)| 4.45 (5.1×)| 3.31 (3.8×)| 3.71 (4.2×)  
-Footage| **0.98**|  6.69 (6.8×)| 8.53 (8.7×)| 4.46 (4.5×)| 5.05 (5.1×)  
+Title card| **0.66**|  2.32 (3.5×)| 4.73 (7.2×)| 3.53 (5.3×)| 3.92 (5.9×)  
+Chart| **0.72**|  2.25 (3.1×)| 4.45 (6.2×)| 3.31 (4.6×)| 3.71 (5.2×)  
+Footage| **0.78**|  6.69 (8.6×)| 8.53 (10.9×)| 4.46 (5.7×)| 5.05 (6.5×)  
   
 Seconds, lower is better. In brackets: that time divided by ultrafast's. “Fastest found” is the quickest of every configuration measured for that tool on that scene (how it was searched). On the title card and the footage, Remotion's fastest run used NVENC at its default quality, which is lower than the CRF 18 used everywhere else. A fourth scene, effects, is reported apart.
 
 ## The first run, and one frame.
 
-A cold first run took 2.5 to 2.6 s with ultrafast, 8.4 to 12.6 s with Remotion and 3.7 to 5.6 s with HyperFrames. One still frame took 0.34 to 0.82 s, against 2.2 to 2.3 s and 1.5 to 2.1 s.
+A cold first run took 1.8 to 2.1 s with ultrafast, 8.4 to 12.6 s with Remotion and 3.7 to 5.6 s with HyperFrames. One still frame took 0.20 to 0.70 s, against 2.2 to 2.3 s and 1.5 to 2.1 s.
 
 Cold first run, default command, seconds Scene| ultrafast| Remotion| HyperFrames  
 ---|---|---|---  
-Title card| 2.49| 8.46| 3.93  
-Chart| 2.63| 8.41| 3.66  
-Footage| 2.62| 12.56| 5.55  
+Title card| 1.77| 8.46| 3.93  
+Chart| 2.09| 8.41| 3.66  
+Footage| 1.99| 12.56| 5.55  
   
 The first render after deleting each tool's own caches. ultrafast compiles its GPU pipelines, Remotion runs webpack without its cache, and HyperFrames extracts the video frames again. The operating system's file cache is kept, so this is not a cold boot.
 
 One still frame at 5 s, warm median, seconds Scene| ultrafast| Remotion| HyperFrames  
 ---|---|---|---  
-Title card| 0.34| 2.19| 1.52  
-Chart| 0.35| 2.16| 1.52  
-Footage| 0.82| 2.29| 2.10  
+Title card| 0.22| 2.19| 1.52  
+Chart| 0.20| 2.16| 1.52  
+Footage| 0.70| 2.29| 2.10  
   
 One PNG of frame 150 from each CLI: `ultrafast render --at 5`, `remotion still --frame=150`, `hyperframes snapshot --at 5`. It stands in for the time to a first preview frame.
 
@@ -2410,7 +2985,7 @@ Each tool ran its own render command on the same workstation, with the clock run
 
 ### The machine
 
-One workstation: an AMD Ryzen 9 9950X3D2 (16 cores, 32 threads), an NVIDIA GeForce RTX 5090 and Fedora Linux 45. ultrafast 0.1.1 (the release binary, on Vulkan), Remotion 4.0.545 and HyperFrames 0.9.79, each with the Chrome headless shell it pins.
+One workstation: an AMD Ryzen 9 9950X3D2 (16 cores, 32 threads), an NVIDIA GeForce RTX 5090 and Fedora Linux 45. ultrafast 0.2.0 (the release binary, on Vulkan), Remotion 4.0.545 and HyperFrames 0.9.79, each with the Chrome headless shell it pins.
 
 ### The videos
 
@@ -2426,7 +3001,7 @@ The number is the wall-clock time of the tool's own render command. It covers ev
 
 ### A quiet machine
 
-Before every run, the harness waited until no other renderer was working, other processes used at most 1.5 of the 32 CPU threads, and the GPU was under 15% busy. If other load showed up during a run, that run was thrown out and repeated. 560 runs counted. None had to be thrown out, and none failed.
+Before every run, the harness waited until no other renderer was working, other processes used at most 1.5 of the 32 CPU threads, and the GPU was under 15% busy. If other load showed up during a run, that run was thrown out and repeated. 560 runs counted, and none failed. ultrafast's rows were measured again with the 0.2.0 release on the night of 23 November 2026, the same way; Remotion and HyperFrames were not re-run. Three of those ultrafast runs were thrown out for other load and repeated, and one cold run was set aside and measured again because it had not started cold. As a control, 0.1.1 ran 3 to 5% slower that night than the night before, so the second night did not favour ultrafast.
 
 Every output was checked with ffprobe: H.264, the right size, exactly 300 decoded frames, 10.0 s, 30 fps. A run counted only if its output passed.
 
@@ -2452,7 +3027,7 @@ Every configuration with its timings, CPU, memory, GPU use and file size is in [
 
 ## The same picture from all three.
 
-The same six moments from each tool's video, one row per tool: ultrafast, then Remotion, then HyperFrames. Over all 300 frames, luma SSIM against ultrafast's video is 0.985 to 0.993 on the title card and chart, and 0.936 to 0.949 on the footage.
+The same six moments from each tool's video, one row per tool: ultrafast, then Remotion, then HyperFrames. Over all 300 frames, luma SSIM against ultrafast's video is 0.985 to 0.993 on the title card and chart, and 0.936 to 0.948 on the footage.
 
 ![Title card frames at 0.5, 1.5, 3, 5, 7 and 9.5 seconds from ultrafast, Remotion and HyperFrames, one row each. A yellow circle, a cyan shape and the words Make it move on a purple-to-pink gradient look the same in all three rows.](https://ultrafast.mov/img/bench/title.webp) Title card, 1080×1920. ![Footage frames at the same six moments from the three tools: NASA footage of the Moon with word-timed captions, one word highlighted in yellow. The rows match.](https://ultrafast.mov/img/bench/footage.webp) Footage, 1080×1920, NASA.
 
@@ -2464,7 +3039,7 @@ A fourth scene, 1920×1080: blurred colour fields, a glowing title, a motion-blu
 
 Blur, glow, motion blur and grain are cheap on a GPU and slow in Chrome. The three looks are also close, not identical: the grain is random noise drawn differently in each, and the blurs are computed differently. The scene shows the size of that effect, nothing more.
 
-Warm median: ultrafast 0.97 s. Remotion 2.98 s at its fastest setting found, 5.95 s with its default command. HyperFrames 5.23 s at its fastest, 6.42 s by default.
+Warm median: ultrafast 0.74 s. Remotion 2.98 s at its fastest setting found, 5.95 s with its default command. HyperFrames 5.23 s at its fastest, 6.42 s by default.
 
 ![Effects frames at six moments from ultrafast, Remotion and HyperFrames: blurred purple, cyan and red fields behind a glowing GLOW title. The blur and the background differ between the rows.](https://ultrafast.mov/img/bench/effects.webp) Effects, 1920×1080: ultrafast, Remotion, HyperFrames. The looks differ.
 
@@ -2472,39 +3047,39 @@ Warm median: ultrafast 0.97 s. Remotion 2.98 s at its fastest setting found, 5.9
 
 Read these before quoting a number.
 
-### Bigger files
+### Larger files than Remotion's
 
-At the same nominal `--crf 18`, ultrafast's NVENC files for the title card, chart and footage are 2.0 to 4.4 times the size of the libx264 files from Remotion and HyperFrames. The title card is 2.7 MB, against 0.6 MB and 1.1 MB. On the effects scene they are about half the size.
+At the same nominal `--crf 18`, ultrafast's NVENC files for the title card, chart and footage are 1.15 to 1.75 times the size of Remotion's libx264 files, and 0.62 to 1.23 times HyperFrames'. The title card is 1.1 MB, against 0.6 MB and 1.1 MB. On the effects scene they are about a tenth of the size.
 
 ### It needs a GPU
 
 A Mac with Apple silicon, or Linux with a Vulkan GPU. Without one, the Docker image renders on the CPU through Mesa's software Vulkan driver, which is much slower. Remotion and HyperFrames need no GPU.
 
-### No colour tags in 0.1.1
+### No prebuilt Windows or Intel Mac build
 
-ultrafast 0.1.1 writes BT.709 H.264 with no colour tags in the file. Players that guess BT.601 for untagged HD video, such as FFmpeg-based tools, show its colours slightly off. A fix is planned for 0.1.2. Remotion writes BT.601 without tags; HyperFrames tags its files as BT.709.
+Releases are for Macs with Apple silicon and for Linux x86_64. On Windows with an NVIDIA GPU, ultrafast is built from source through WSL2. Remotion and HyperFrames run wherever Node and Chrome do.
 
 ### One machine
 
-Every number comes from one workstation with a large GPU, on one night. That is a GPU engine against browser engines on hardware that suits the GPU engine. On a machine without a capable GPU the comparison is different.
+Every number comes from one workstation with a large GPU: Remotion and HyperFrames on 22 November 2026, ultrafast 0.2.0 on the night of 23 November 2026. That is a GPU engine against browser engines on hardware that suits the GPU engine. On a machine without a capable GPU the comparison is different.
 
 ### Other caveats
 
-  * **The encoders differ.** CRF 18 on NVENC is not the same quality as CRF 18 on libx264. Swapping in NVENC barely moved the browser tools: HyperFrames with `--gpu` was 0.1 to 0.4 s slower than with libx264 at the same worker count, and Remotion with NVENC ranged from 0.22 s faster to 0.04 s slower.
-  * **Most of ultrafast's time is start-up.** Of about 0.9 s per render, its own log gives 0.30 to 0.42 s for rendering and encoding the 300 frames. The rest is process and GPU start-up and muxing. Only 10-second videos were measured.
+  * **The encoders differ.** ultrafast 0.2.0 reads `--crf` on libx264's scale: CRF 18 becomes NVENC's constant quality 24, which matched libx264's CRF 18 picture within 0.3 VMAF points on these scenes. Close, not identical. Swapping in NVENC barely moved the browser tools: HyperFrames with `--gpu` was 0.1 to 0.4 s slower than with libx264 at the same worker count, and Remotion with NVENC ranged from 0.22 s faster to 0.04 s slower.
+  * **Most of ultrafast's time is start-up.** Of 0.66 to 0.78 s per render, its own log gives 0.22 to 0.36 s for rendering and encoding the 300 frames. The rest is process and GPU start-up and muxing. Only 10-second videos were measured.
   * **Video decoding differs.** Remotion decodes the clip in every browser tab, so more tabs made it slower on the footage: 8.6 s at 8 tabs, 21.7 s at 32. HyperFrames extracts the frames once and reuses them on warm runs.
-  * **“Cold” is not a cold boot.** ultrafast's cold run compiles its GPU pipelines, which adds about 1.6 to 1.8 s. The operating system's file cache is not dropped, and the browsers stay installed.
+  * **“Cold” is not a cold boot.** ultrafast's cold run compiles its GPU pipelines, which adds about 1.1 to 1.4 s. The operating system's file cache is not dropped, and the browsers stay installed.
   * **Idiomatic, not hand-tuned.** Each scene is written the way the tool's docs teach. Someone who knows a tool well could probably make it faster. The source for all three is in the repository.
 
 ## Run it yourself.
 
-You need Linux with cgroup v2 and systemd, an NVIDIA GPU with `nvidia-smi`, Node 22 or newer, Python 3, FFmpeg and ffprobe, and the ultrafast 0.1.1 release. A full run takes one to two hours.
+You need Linux with cgroup v2 and systemd, an NVIDIA GPU with `nvidia-smi`, Node 22 or newer, Python 3, FFmpeg and ffprobe, and the ultrafast 0.2.0 release. A full run takes one to two hours.
 
 ```
 git clone https://github.com/ultrafastmov/benchmarks
 cd benchmarks
 ./setup.sh                               # the pinned npm packages, browsers and FFmpeg, in this folder
-UF=/path/to/ultrafast ./run.sh --fresh   # the render benchmark; or put ultrafast 0.1.1 on PATH
+UF=/path/to/ultrafast ./run.sh --fresh   # the render benchmark; or put ultrafast 0.2.0 on PATH
 pip install tiktoken && python3 tokens/tokens.py   # the token count
 ``` 
 
@@ -2570,7 +3145,7 @@ Project| Licence| You write| How it renders| Agent tooling| GPU| Latest release 
 [Manim](<https://github.com/ManimCommunity/manim>) Community edition| MIT| Python| Cairo by default, or OpenGL; PyAV (FFmpeg's libraries) writes the video| none found| with the optional OpenGL renderer| v0.22.1, 27 Oct 2026 · 21 Nov 2026| 42,775 3b1b/manim: 96,778  
 [Motion Canvas](<https://github.com/motion-canvas/motion-canvas>)| MIT| TypeScript, with generators| its editor draws each frame on a canvas in your browser; an image sequence, or video through the FFmpeg exporter| none found| no GPU in its requirements| v3.17.2, 14 Dec 2024 · 2 Jul 2026| 20,124  
 [Revideo](<https://github.com/midrender/revideo>)| MIT| TypeScript scenes as generator functions| headless Chrome through Puppeteer draws each frame on a canvas; WebCodecs encodes; FFmpeg adds the audio; parallel workers| none found| none required: it runs where Node and a headless browser run| v0.11.0, 10 Jul 2026 · 15 Jul 2026| 4,223  
-[ultrafast](<https://github.com/ultrafastmov/ultrafast>)| Apache-2.0 or MIT| one JSON document, checked before it renders| GPU kernels on Metal or Vulkan; H.264 and HEVC encoded on the same GPU; no browser| 20 MCP tools, a skill and a Claude Code plugin; `check`, `review` and `inspect`| renders on it; needs an Apple silicon Mac or Linux with a Vulkan GPU| v0.1.1, 21 Nov 2026 · 21 Nov 2026| 0  
+[ultrafast](<https://github.com/ultrafastmov/ultrafast>)| Apache-2.0 or MIT| one JSON document, checked before it renders| GPU kernels on Metal or Vulkan; H.264 and HEVC encoded on the same GPU; no browser| 20 MCP tools, a skill and a Claude Code plugin; `check`, `review` and `inspect`| renders on it; needs an Apple silicon Mac or Linux with a Vulkan GPU| v0.2.0, 23 Nov 2026 · 23 Nov 2026| 0  
 [VideoFlow](<https://github.com/ybouane/VideoFlow>)| Apache-2.0 (its React editor has its own licence)| TypeScript, compiled to a portable JSON format| headless Chromium on a server, or WebCodecs in the browser; WebGL effects| llms.txt and Markdown docs| no GPU in its requirements| 1.3.4, 16 Sep 2026 · 16 Sep 2026| 174  
   
 “None found”: no skills, MCP server or agent plugin in the repository or docs. Dates are UTC. A release is the latest GitHub release, or the latest npm version where the project publishes there. The last commit is on the default branch. Product names belong to their owners.
@@ -2653,7 +3228,7 @@ vertical teaser, 10 s, 3D
 
 Export times for every film are on [examples](<https://ultrafast.mov/examples/>). No other tool on this page has been timed on the same machine, so this page compares no speeds.
 
-Measured on one RTX 5090 workstation, end to end: three 10-second videos (a title card, an animated chart and captioned NASA footage) exported in 0.85 to 0.98 s with ultrafast, against 2.32 to 6.69 s for Remotion and 3.31 to 4.46 s for HyperFrames at the fastest setting found for each. Only these three tools were measured. [Method and raw results](<https://github.com/ultrafastmov/benchmarks>).
+Measured on one RTX 5090 workstation, end to end: three 10-second videos (a title card, an animated chart and captioned NASA footage) exported in 0.66 to 0.78 s with ultrafast, against 2.25 to 6.69 s for Remotion and 3.31 to 4.46 s for HyperFrames at the fastest setting found for each. Only these three tools were measured. [Method and raw results](<https://github.com/ultrafastmov/benchmarks>).
 
 ### Agents see their frames
 
@@ -2709,11 +3284,348 @@ All read on 22 November 2026.
   * **Motion Canvas:** [README](<https://github.com/motion-canvas/motion-canvas#readme>), [quickstart](<https://motion-canvas.io/docs/quickstart>) (requirements), [rendering](<https://motion-canvas.io/docs/rendering/>), [FFmpeg exporter](<https://motion-canvas.io/docs/rendering/video/>).
   * **Revideo:** [README](<https://github.com/midrender/revideo#readme>) (headless rendering, Cloud Run, telemetry), [how rendering works](<https://midrender.com/revideo/docs/guide/rendering-videos>), [renderer source](<https://github.com/midrender/revideo/blob/main/packages/renderer/server/render-video.ts>) (Puppeteer).
   * **VideoFlow:** [README](<https://github.com/ybouane/VideoFlow#readme>) (renderers, WebGL effects), [licence](<https://videoflow.dev/license>), [llms.txt](<https://videoflow.dev/llms.txt>).
-  * **ultrafast:** [repository](<https://github.com/ultrafastmov/ultrafast>) (LICENSE-APACHE, LICENSE-MIT), [v0.1.1 release](<https://github.com/ultrafastmov/ultrafast/releases/tag/v0.1.1>) (macOS arm64 and Linux x86_64), [MCP server](<https://ultrafast.mov/docs/mcp/>), [CLI](<https://ultrafast.mov/docs/cli/>), [ops](<https://ultrafast.mov/docs/ops/>), [skill and plugin](<https://ultrafast.mov/integrations/#coding-agents>), [example films and export times](<https://ultrafast.mov/examples/>), [ultrafast vs Remotion](<https://ultrafast.mov/compare/remotion/>).
+  * **ultrafast:** [repository](<https://github.com/ultrafastmov/ultrafast>) (LICENSE-APACHE, LICENSE-MIT), [v0.2.0 release](<https://github.com/ultrafastmov/ultrafast/releases/tag/v0.2.0>) (macOS arm64 and Linux x86_64), [MCP server](<https://ultrafast.mov/docs/mcp/>), [CLI](<https://ultrafast.mov/docs/cli/>), [ops](<https://ultrafast.mov/docs/ops/>), [skill and plugin](<https://ultrafast.mov/integrations/#coding-agents>), [example films and export times](<https://ultrafast.mov/examples/>), [ultrafast vs Remotion](<https://ultrafast.mov/compare/remotion/>).
 
 ## Make one and time it.
 
 Install the engine and time a render on your own GPU.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# HyperFrames alternatives, compared · ultrafast
+
+> Alternatives to HyperFrames for video from code: Remotion, Revideo, Motion Canvas, Framefields, VideoFlow, Editly, Manim and ultrafast, which renders on the GPU with no browser.
+
+URL: https://ultrafast.mov/alternatives/hyperframes/
+
+# HyperFrames alternatives.
+
+HyperFrames turns HTML into video in headless Chrome. Eight tools that make video from code another way, and when each one fits better.
+
+Updated 23 November 2026. ultrafast wrote this page and is one of the eight. Every figure is from each project's own repository and docs; sources are at the end.
+
+## Why people look elsewhere.
+
+HyperFrames is open source (Apache-2.0) and moves fast: 88,793 stars and a release on 23 November 2026. The reasons to look elsewhere are about the renderer, in HyperFrames' own words.
+
+### A browser draws every frame
+
+“Rendering never plays your video. It asks for one frame at a time.” Each frame is seeked, then “Chrome's `HeadlessExperimental.beginFrame` grabs the pixels,” and “FFmpeg turns the captured frames into the MP4.” Parallel renders use 1 to 24 workers: “Each is a separate Chrome, roughly 256 MB.”
+
+[Deterministic rendering](<https://hyperframes.heygen.com/concepts/determinism>) · [CLI](<https://hyperframes.heygen.com/packages/cli>)
+
+### Render time is page work
+
+Its performance guide times one composition built two ways: “25.0s against 9.8s, taken as the median of three runs at 1920x1080 over 300 frames. One CSS declaration is the whole difference.” Its advice is to “use fewer large `backdrop-filter` and `filter: blur()` layers.”
+
+[Fix a slow preview or render](<https://hyperframes.heygen.com/guides/performance>)
+
+### Pixels can move between machines
+
+“Fonts and Chrome versions differ between computers, so a local render can shift by a pixel from one machine to the next. Render in Docker when you need exact reproducibility.”
+
+[Deterministic rendering](<https://hyperframes.heygen.com/concepts/determinism>)
+
+None of this makes HyperFrames a poor choice. A web page is a good way to lay out type, and the browser's cost is the price of using it. The tools below either draw with something other than a browser, or ask you to describe the video another way.
+
+## Eight alternatives, side by side.
+
+In alphabetical order, with HyperFrames first for reference. Stars, licences and dates from the GitHub API, checked 23 November 2026.
+
+Project| Licence| You write| How it renders| Agent tooling| GPU| Latest release · last commit| Stars  
+---|---|---|---|---|---|---|---  
+[HyperFrames](<https://github.com/heygen-com/hyperframes>) for reference, by HeyGen| Apache-2.0| HTML, CSS and JavaScript with a seekable animation (GSAP or another adapter)| headless Chrome seeks and captures each frame; 1 to 24 workers; FFmpeg encodes| 9 skills; plugins for 6 agents; a hosted MCP server that renders on HeyGen; a Studio app| optional: `--browser-gpu` for capture, `--gpu` for hardware encoding| v0.9.86, 23 Nov 2026 · 23 Nov 2026| 88,793  
+[Editly](<https://github.com/mifi/editly>)| MIT| a JSON5 edit spec, or JavaScript| Node.js and FFmpeg, streaming; Canvas and Fabric.js layers; GL transitions| none found| GL shaders through headless-gl; no GPU in its requirements| v0.15.0-rc.1, 19 Jan 2025 (npm: 0.14.2, Dec 2022) · 20 Feb 2025| 5,647  
+[Framefields](<https://github.com/gatewai-dev/framefields>)| Apache-2.0| TypeScript| WebGPU in Node through Dawn (Metal, Vulkan, D3D12); no browser; hardware-encoded MP4| 7 skills and a Claude Code plugin; agents inspect frame grids| renders on it; a CPU fallback (lavapipe or WARP) is about 10 to 12 times slower| npm 3.0.2, 13 Nov 2026 · 18 Nov 2026| 530  
+[Manim](<https://github.com/ManimCommunity/manim>) Community edition| MIT| Python| Cairo by default, or OpenGL; PyAV (FFmpeg's libraries) writes the video| none found| with the optional OpenGL renderer| v0.22.1, 27 Oct 2026 · 23 Nov 2026| 42,850  
+[Motion Canvas](<https://github.com/motion-canvas/motion-canvas>)| MIT| TypeScript, with generators| its editor draws each frame on a canvas in your browser; an image sequence, or video through the FFmpeg exporter| none found| no GPU in its requirements| v3.17.2, 14 Dec 2024 · 2 Jul 2026| 20,163  
+[Remotion](<https://github.com/remotion-dev/remotion>)| Remotion License, source-available; a company licence from 4 people| React and TypeScript| Chrome Headless Shell; each tab renders the page and screenshots it; FFmpeg encodes| 13 Agent Skills; plugins for 5 coding agents; its hosted MCP server shut down on 26 October 2026| often off in headless Chrome; none on Lambda| v4.0.546, 23 Nov 2026 · 23 Nov 2026| 75,168  
+[Revideo](<https://github.com/midrender/revideo>)| MIT| TypeScript scenes as generator functions| headless Chrome through Puppeteer draws each frame on a canvas; WebCodecs encodes; FFmpeg adds the audio; parallel workers| none found| none required: it runs where Node and a headless browser run| v0.11.0, 10 Jul 2026 · 15 Jul 2026| 4,231  
+[ultrafast](<https://github.com/ultrafastmov/ultrafast>)| Apache-2.0 or MIT| one JSON document, checked before it renders| GPU kernels on Metal or Vulkan; H.264 and HEVC encoded on the same GPU; no browser| 20 MCP tools, a skill and a Claude Code plugin; `check`, `review` and `inspect`| renders on it; an Apple silicon Mac or Linux with a Vulkan GPU, or much slower on the CPU in Docker| v0.2.0, 23 Nov 2026 · 23 Nov 2026| 1  
+[VideoFlow](<https://github.com/ybouane/VideoFlow>)| Apache-2.0 (its React editor has its own licence)| TypeScript, compiled to a portable JSON format| headless Chromium on a server, or WebCodecs in the browser; WebGL effects| llms.txt and Markdown docs| no GPU in its requirements| 1.3.4, 16 Sep 2026 · 16 Sep 2026| 174  
+  
+“None found”: no skills, MCP server or agent plugin in the repository or docs. Dates are UTC. A release is the latest GitHub release, or the latest npm version where the project publishes there. The last commit is on the default branch. Product names belong to their owners.
+
+## Which one to choose.
+
+Each tool is the better fit for some jobs. HyperFrames included.
+
+### Stay with HyperFrames when
+
+  * Your team writes HTML, CSS and GSAP, or has compositions in them already.
+  * You want HeyGen's avatars and voices, its Studio app, or hosted renders on HeyGen.
+  * You need HDR or HLS output today.
+
+### Choose Editly when
+
+  * You are cutting clips, photos, titles and music together from a JSON5 file or the command line.
+  * You want an MIT tool that runs on Windows, macOS and Linux with Node and FFmpeg.
+  * You don't need recent updates: the last commit was in February 2025.
+
+### Choose Framefields when
+
+  * You want to keep writing TypeScript but render on the GPU with no browser.
+  * You need Windows (D3D12), or a CPU fallback for CI.
+  * You can work with beta software. Its AI gateway for generated media and its cloud GPU renders are optional and paid.
+
+### Choose Manim when
+
+  * You are animating maths in Python: equations, graphs and geometry.
+  * You want a large, long-lived community: 42,850 stars on the Community edition.
+
+### Choose Motion Canvas when
+
+  * You make vector explainers timed to a voice-over, in a real-time editor.
+  * You render from the editor, don't need a server or an API, and don't mind that the last release was in December 2024.
+
+### Choose Remotion when
+
+  * Your team builds in React and wants to reuse its components.
+  * You need an embeddable web player.
+  * The licence fits: 3 people or fewer, or a company licence. It still renders in Chrome.
+
+### Choose Revideo when
+
+  * You want generator-based TypeScript scenes rendered from code or an endpoint, with a React player for previews.
+  * You want to split renders across workers on serverless machines. It also renders in headless Chrome.
+
+### Choose VideoFlow when
+
+  * You want one JSON format to render on a server, in the browser, or as live playback with scrubbing.
+  * You build a web app around video. Its core and renderers are Apache-2.0; its React Video Editor needs a company licence beyond 3 employees.
+
+### Choose ultrafast when
+
+  * You want no browser in the render: the frame is drawn and encoded on the GPU.
+  * An agent writes the video and should check and review its own frames before you watch.
+  * You want 3D, particles, fluid and shaders in the same video as the type and the footage, without a page doing the work.
+  * You need the same pixels on every machine without pinning a browser.
+
+## Shot on the GPU.
+
+Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU. Open source, Apache-2.0 or MIT.
+
+Measured on one RTX 5090 workstation, end to end: three 10-second videos (a title card, an animated chart and captioned NASA footage) exported in 0.66 to 0.78 s with ultrafast. At the fastest setting found for each, HyperFrames took 4.6 to 5.7 times as long, and Remotion 3.1 to 8.6 times. No other tool on this page was measured. [Method and results](<https://ultrafast.mov/benchmarks/>).
+
+### Agents see their frames
+
+`check` finds mistakes before rendering. Frames and contact sheets come back as images. `review` reads every frame for unreadable, clipped, overlapping or too-brief text and flashing. `inspect` names the node behind a pixel.
+
+### Built for agents
+
+20 MCP tools over stdio with `uf mcp`, or 16 over HTTP from your own `uf serve`. A skill, and a Claude Code plugin with both. See the [video MCP server](<https://ultrafast.mov/mcp/>).
+
+### Where ultrafast doesn't fit
+
+  * No HTML or CSS. A video is a JSON document, not a web page.
+  * No embeddable web player. The live player is a desktop window; for the web, export an MP4.
+  * It is built for a GPU: a Mac with Apple silicon, or Linux with a Vulkan GPU. Without one, the Docker image renders on the CPU, much more slowly.
+  * No prebuilt Windows or Intel Mac build yet, and no HDR or HLS output.
+  * No hosted rendering yet. ultrafast Cloud has a [waitlist](<https://ultrafast.mov/cloud/>).
+  * It is new: the first release came out on 21 November 2026.
+
+## Moving from HyperFrames.
+
+ultrafast doesn't run HTML, so a HyperFrames composition is rebuilt, not imported. There are two ways to start.
+
+### Ask your coding agent
+
+Give it the composition and ask for the same video in ultrafast. With the ultrafast skill installed, the agent knows the document format and the loop: check, look at the frames, review, export. The skill works in Claude Code, Codex, Cursor and Gemini CLI.
+
+### Reconstruct a render
+
+`uf reconstruct` turns a finished video into an editable draft: shots, text layers in matched fonts, backgrounds and fades, with a report of each decision. A shot it can't explain as a gradient or a still keeps the video itself as its background.
+
+```
+npx skills add ultrafastmov/ultrafast                       # the skill, for your coding agent
+uf reconstruct render.mp4 --out-dir rec                     # writes rec/reconstruction.json
+uf check rec/reconstruction.json && uf sheet rec/reconstruction.json --out rec/sheet.png
+``` 
+
+More in the [CLI reference](<https://ultrafast.mov/docs/cli/>), the head-to-head on [ultrafast vs HyperFrames](<https://ultrafast.mov/compare/hyperframes/>), and the [Remotion alternatives](<https://ultrafast.mov/alternatives/remotion/>).
+
+## Common questions.
+
+Is HyperFrames open source?
+
+Yes. HyperFrames is Apache-2.0, from HeyGen. So are Framefields and VideoFlow's core; Editly, Manim, Motion Canvas and Revideo are MIT; ultrafast is Apache-2.0 or MIT. Remotion is source-available under its own licence, with a company licence from 4 people.
+
+Which HyperFrames alternatives don't use a browser?
+
+ultrafast (GPU kernels on Metal or Vulkan), Framefields (WebGPU in Node through Dawn), Manim (Cairo or OpenGL) and Editly (Node.js, Canvas and FFmpeg). Remotion, Revideo and VideoFlow's server renderer use headless Chrome, and Motion Canvas renders from its editor in your browser.
+
+Which one is fastest?
+
+Only three tools have been timed on the same machine: on one RTX 5090, three 10-second videos exported in 0.66 to 0.78 s with ultrafast, and HyperFrames took 4.6 to 5.7 times as long at its fastest setting found. The method and raw results are in the [benchmark](<https://ultrafast.mov/benchmarks/>). The other tools on this page weren't measured.
+
+Can I bring my HyperFrames compositions to ultrafast?
+
+Not as files: ultrafast doesn't run HTML. Ask your coding agent to rewrite the composition as an ultrafast document (the ultrafast skill teaches it the format), or run `uf reconstruct` on a finished render to get an editable draft.
+
+Do I need a GPU?
+
+For ultrafast and Framefields, a GPU is the fast path. ultrafast runs on a Mac with Apple silicon or Linux with a Vulkan GPU; its Docker image also renders on the CPU, much more slowly. HyperFrames, Remotion, Revideo and VideoFlow run on CPUs, with Chrome doing the drawing.
+
+## Sources.
+
+All read on 23 November 2026.
+
+  * **GitHub API:** stars, licence and default branch from `gh api repos/OWNER/REPO`; releases from `/releases/latest` and `/tags`; last commits from `/commits` on the default branch. Package dates from [npm](<https://www.npmjs.com/>) and [PyPI](<https://pypi.org/project/manim/>).
+  * **HyperFrames:** [README](<https://github.com/heygen-com/hyperframes#readme>), [deterministic rendering](<https://hyperframes.heygen.com/concepts/determinism>) (seek, capture, encode; fonts and Chrome versions), [performance guide](<https://hyperframes.heygen.com/guides/performance>) (25.0 s against 9.8 s), [CLI](<https://hyperframes.heygen.com/packages/cli>) (workers, `--gpu`, `--browser-gpu`, HLS, HDR), [quickstart](<https://hyperframes.heygen.com/quickstart>) (Studio app), [plugins](<https://hyperframes.heygen.com/guides/plugins>), [MCP](<https://hyperframes.heygen.com/guides/mcp>).
+  * **Editly:** [README](<https://github.com/mifi/editly#readme>) (features, requirements).
+  * **Framefields:** [README](<https://github.com/gatewai-dev/framefields#readme>) (rendering, requirements, CPU fallback, AI gateway, status), [Claude Code plugin](<https://github.com/gatewai-dev/framefields/tree/main/plugins/framefields>).
+  * **Manim:** [Community edition README](<https://github.com/ManimCommunity/manim#readme>), [default renderer](<https://github.com/ManimCommunity/manim/blob/main/manim/_config/default.cfg>), [dependencies](<https://github.com/ManimCommunity/manim/blob/main/pyproject.toml>).
+  * **Motion Canvas:** [README](<https://github.com/motion-canvas/motion-canvas#readme>), [quickstart](<https://motion-canvas.io/docs/quickstart>), [rendering](<https://motion-canvas.io/docs/rendering/>).
+  * **Remotion:** [pricing](<https://www.remotion.dev/docs/license/pricing>), [terms (team size)](<https://www.remotion.dev/docs/terms#TeamSize>), [Chrome Headless Shell](<https://www.remotion.dev/docs/miscellaneous/chrome-headless-shell>), [GPU](<https://www.remotion.dev/docs/gpu>), [skills](<https://www.remotion.dev/docs/ai/skills>), [MCP](<https://www.remotion.dev/docs/ai/mcp>).
+  * **Revideo:** [README](<https://github.com/midrender/revideo#readme>), [how rendering works](<https://midrender.com/revideo/docs/guide/rendering-videos>).
+  * **VideoFlow:** [README](<https://github.com/ybouane/VideoFlow#readme>), [licence](<https://videoflow.dev/license>).
+  * **ultrafast:** [repository](<https://github.com/ultrafastmov/ultrafast>), [v0.2.0 release](<https://github.com/ultrafastmov/ultrafast/releases/tag/v0.2.0>), [MCP server](<https://ultrafast.mov/docs/mcp/>), [CLI](<https://ultrafast.mov/docs/cli/>), [benchmark](<https://ultrafast.mov/benchmarks/>).
+
+## Make one and time it.
+
+Install the engine and time a render on your own GPU.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Open-source alternative to Shotstack, JSON2Video and Creatomate · ultrafast
+
+> Render JSON to video on your own GPU instead of a per-minute API: ultrafast compared with Shotstack, JSON2Video and Creatomate on price, formats, 3D, self-hosting and agent tools.
+
+URL: https://ultrafast.mov/alternatives/json-to-video-api/
+
+# JSON to video, on your own GPU.
+
+Shotstack, JSON2Video and Creatomate render your JSON in their cloud and charge by the minute. ultrafast is an open-source engine that renders it on your own GPU. Here is what each one does better, from their own docs.
+
+Updated 23 November 2026. ultrafast wrote this page. Every vendor figure is from that vendor's own pages; sources are at the end. Prices marked “about” are worked out from the vendor's published credit rules.
+
+## Four ways to render a JSON video.
+
+The three APIs are hosted services. ultrafast is a binary, a Docker image and an HTTP server you run yourself.
+
+| ultrafast| Shotstack| JSON2Video| Creatomate  
+---|---|---|---|---  
+Where it renders| your GPU: a Mac with Apple silicon, or Linux with a Vulkan GPU; much more slowly on the CPU in Docker| Shotstack's cloud; the Studio SDK can also export in the browser| JSON2Video's cloud| Creatomate's cloud  
+Self-hosted| `uf serve`: an HTTP API and a remote MCP server on one machine| not offered| not offered| not offered  
+Licence| Apache-2.0 or MIT, engine included| proprietary service; Studio SDK under PolyForm Shield (source-available); CLI Apache-2.0| proprietary service; CLI and SDKs MIT| proprietary service; Preview SDK and libraries MIT  
+Price per rendered minute| no fee; your GPU's time| 5¢ to 20¢, by plan; 4K from the $99 Pro plan| one credit per second: about 17¢ to 42¢| credits by pixels × frames: about 84¢ for 1080p at 30 fps on Essential, billed yearly  
+Free to start| free for any use, commercial included| 10 credits on sign-up, valid 30 days; watermarked sandbox| 600 credits once; watermarked, up to 60 s, no commercial use| 50 credits; renders are previews of up to 480 px  
+The JSON| a graph of nodes with animated params and timing windows, checked against a [published schema](<https://ultrafast.mov/schema/v1.json>)| an Edit: a timeline of tracks and clips, 16 asset types, merge fields| a Movie: scenes played back to back, 9 element types, variables| RenderScript: 6 element types, keyframes, nested compositions  
+3D and shaders| 3D (glTF, extruded type, image-based light, glass), Slang shaders, particles, fluid| not documented| not documented| 3D-style transforms only  
+Lottie| as editable vector nodes| inside the `html5` asset, captured from a browser page, which Shotstack calls “the heaviest to render”| not documented| not documented  
+Output| H.264, HEVC and AV1 MP4; ProRes up to 4444 XQ; transparent ProRes and WebM; GIF; PNG and EXR sequences; sound alone| mp4, gif, mp3, jpg, png, bmp| MP4, and an MP3 audio track on paid plans| mp4, jpg, png, gif  
+Frame rate| any| 12 to 60 fps| “Currently every movie renders at 25 fps”| at most 60 fps  
+Largest size| any size; presets up to 4K on the short side| 3840 px a side| 3840 px a side, by plan| 3840 px a side  
+For agents| 20 MCP tools locally, 16 over HTTP; `check` before rendering, `review` of every frame after| hosted MCP with OAuth; a CLI and skill that validate edits offline| hosted and local MCP, 15 tools including `validate_movie`| hosted MCP with OAuth  
+Output tokens for a 10 s short| about 1,234, measured| about 1,657, measured (validated, not rendered)| not measured| not measured  
+No-code| none; call the HTTP API| not checked for this page| Make, n8n, Zapier| Zapier, Make, n8n and about 30 more  
+Templates and editors| five starter documents (`uf new`); no visual editor| Studio editor and a templates API| visual editor and “dozens” of templates| template editor; embeddable Preview SDK  
+Voices and transcripts| captions from Whisper, SRT or VTT you bring; voiceover with macOS voices or eSpeak NG| transcription in 99 languages; text to speech| ElevenLabs and Azure voices; automatic subtitles| automatic subtitles  
+  
+Shotstack, JSON2Video and Creatomate are trademarks of their owners. Token counts are from the [benchmark repository](<https://github.com/ultrafastmov/benchmarks>) (tiktoken o200k_base, the same 10-second short written for each tool). None of the three hosted services can be timed on the same machine as ultrafast, so this page compares no render speeds.
+
+## Which one to choose.
+
+A hosted API is the right call for many teams. Here is where each side wins.
+
+### Choose a hosted API when
+
+  * You have no GPU and don't want to run a server. All three take a request and send back a link.
+  * You need many renders at once, webhooks or delivery to your own storage. `uf serve` renders one job at a time on one GPU.
+  * Your workflow lives in Zapier, Make or n8n, or non-developers edit templates in a visual editor.
+  * You want transcription, stock voices or generated media inside the same API.
+  * You want a Claude or ChatGPT connector with OAuth today. ultrafast's comes with [ultrafast Cloud](<https://ultrafast.mov/cloud/>), which has a waitlist.
+
+### Choose ultrafast when
+
+  * You render a lot and the per-minute bill matters, or the footage can't leave your machine. Inputs are local files.
+  * You need ProRes, HEVC, AV1, transparent video or a frame rate other than 25, 30 or 60.
+  * The video needs 3D, shaders, particles or real motion blur, not only clips, text and transitions.
+  * An agent writes the JSON and should check it before rendering and review every frame after.
+  * You want the engine's source under a licence that lets you ship it.
+
+## Run the API yourself.
+
+One container on a machine with an NVIDIA GPU. It prints its API key on first start.
+
+```
+docker run --gpus all -p 8080:8080 -v ultrafast:/data \
+  ghcr.io/ultrafastmov/ultrafast:latest serve
+
+curl http://localhost:8080/v1/render \
+  -H "Authorization: Bearer $ULTRAFAST_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"document": '"$(cat video.json)"', "output": {"codec": "h264", "size": "1080p"}}' \
+  -o video.mp4
+``` 
+
+The same server answers MCP at `/mcp`, and has endpoints to check a document, render a single frame or a contact sheet, review every frame, and upload footage. Short renders come back in the response; longer ones go to its storage with a signed link. On a laptop or desktop, skip the server: `uf export video.json` writes the file directly.
+
+Full reference: [HTTP API](<https://ultrafast.mov/docs/api/>) and [SELF_HOST.md](<https://github.com/ultrafastmov/ultrafast/blob/main/docs/service/SELF_HOST.md>). Limits of the open-source server: one API key, one render at a time with up to 16 waiting, renders stop after 10 minutes, files on local disk.
+
+## Moving an edit over.
+
+The formats differ: a Shotstack Edit is a timeline of tracks and clips; an ultrafast document is a graph of nodes, each with a timing window. Nothing imports either one directly.
+
+### Ask your coding agent
+
+Give it the JSON you send today and ask for the same video as an ultrafast document. With the ultrafast skill installed it knows the format, runs `uf check` until the document is valid, and looks at a contact sheet before it exports.
+
+### Batch renders from data
+
+Merge fields and template variables become a CSV or JSON file of rows: `uf batch` renders one video per row, changing the fields each row names.
+
+```
+npx skills add ultrafastmov/ultrafast            # the skill, for your coding agent
+uf check video.json && uf sheet video.json --out sheet.png
+uf batch video.json --data rows.csv              # one video per row
+``` 
+
+## Common questions.
+
+Is there an open-source alternative to Shotstack or JSON2Video?
+
+Yes. ultrafast is an open-source (Apache-2.0 or MIT) engine that renders a JSON document to video on your own GPU, from the command line, over MCP or through a self-hosted HTTP API. Its JSON format is its own, so an existing Shotstack Edit or JSON2Video Movie is rewritten rather than imported; a coding agent with the ultrafast skill can do that.
+
+Can I self-host a JSON-to-video API?
+
+With ultrafast, yes: `docker run --gpus all ghcr.io/ultrafastmov/ultrafast serve` starts an HTTP API and a remote MCP server on one machine with one API key. It renders one job at a time on its GPU. Shotstack, JSON2Video and Creatomate don't offer a self-hosted renderer.
+
+How much does it cost?
+
+The engine is free, including for commercial use; the cost is your own GPU's time. For comparison, Shotstack lists 5¢ to 20¢ per rendered minute by plan, JSON2Video's one credit per second works out to about 17¢ to 42¢ a minute, and Creatomate's pixel-based credits come to about 84¢ a minute of 1080p at 30 fps on its Essential plan billed yearly.
+
+Does ultrafast have a hosted API like Shotstack?
+
+Not yet. Hosted rendering with OAuth connectors for Claude and ChatGPT comes with [ultrafast Cloud](<https://ultrafast.mov/cloud/>), which has a waitlist. Until then you run it yourself, on a Mac with Apple silicon, Linux with a Vulkan GPU, or the Docker image.
+
+Does it work with n8n, Zapier or Make?
+
+There is no ready-made node or app. Any of them can call the HTTP API of `uf serve` with an HTTP request step: POST the document to `/v1/render` with the API key as a bearer token.
+
+## Sources.
+
+All read on 23 November 2026.
+
+  * **Shotstack:** [pricing](<https://shotstack.io/pricing/>) (plans, per-minute rates, 4K from Pro, free credits), [API reference](<https://shotstack.io/docs/api/>) (Edit format, asset types, output formats and frame rates), [limitations](<https://shotstack.io/docs/guide/architecting-an-application/limitations/>) (3840 px, sandbox watermark), [html5 asset](<https://shotstack.io/docs/guide/architecting-an-application/html5.md>), [MCP server](<https://shotstack.io/docs/guide/agents/mcp-server/>), [CLI](<https://shotstack.io/docs/guide/agents/cli/>), [Studio SDK](<https://github.com/shotstack/shotstack-studio-sdk>) (licence, browser export).
+  * **JSON2Video:** [home](<https://json2video.com/>) (cloud rendering, templates, voices), [pricing](<https://json2video.com/pricing/>), [credit consumption](<https://json2video.com/docs/v2/reference/credits/credit-consumption>) (one credit per second), [plans](<https://json2video.com/docs/v2/reference/credits/plans>) (free plan terms), [JSON syntax](<https://json2video.com/docs/v2/reference/json-syntax>), [movie](<https://json2video.com/docs/v2/reference/json-syntax/movie>) (25 fps, sizes), [MCP server](<https://json2video.com/docs/v2/help-for-ai-agents/mcp-server>), [integrations](<https://json2video.com/docs/>).
+  * **Creatomate:** [pricing](<https://creatomate.com/pricing>), [how credits are calculated](<https://creatomate.com/docs/account/how-are-credits-calculated>) (1 credit per 100 million pixels), [RenderScript elements](<https://creatomate.com/docs/api/render-script/element-properties>), [output properties](<https://creatomate.com/docs/api/render-script/top-level-properties>), [limits](<https://creatomate.com/docs/api/reference/limits-and-concurrency>), [MCP](<https://creatomate.com/docs/fundamentals/getting-started/mcp-integration>), [Preview SDK](<https://github.com/Creatomate/creatomate-preview>) (cloud processing).
+  * **Worked-out prices:** JSON2Video at one credit per second is 60 credits a minute: Professional billed yearly ($33.30 for 200 minutes) is about 17¢ a minute, Pre-paid A ($49.95 for 120 minutes) about 42¢. Creatomate: 1920 × 1080 × 30 fps × 60 s is 3.73 billion pixels, 37.3 credits a minute; Essential billed yearly ($540 for 24,000 credits) makes that about 84¢.
+  * **ultrafast:** [repository](<https://github.com/ultrafastmov/ultrafast>), [HTTP API](<https://ultrafast.mov/docs/api/>), [self-hosting](<https://github.com/ultrafastmov/ultrafast/blob/main/docs/service/SELF_HOST.md>), [MCP server](<https://ultrafast.mov/docs/mcp/>), [ops](<https://ultrafast.mov/docs/ops/>), [benchmark and token counts](<https://github.com/ultrafastmov/benchmarks>).
+
+## Render one yourself.
+
+Install the engine and export a video on your own GPU.
 
 `curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 
@@ -3940,6 +4852,11 @@ Every op with its ports, params, types and defaults. `uf ops` prints the same as
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
 
+## Guides
+
+  * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
+  * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+
 ## Reference
 
   * [Ops](<https://ultrafast.mov/docs/ops/>)
@@ -5009,7 +5926,7 @@ Follow one frame through a browser renderer. The page is laid out and painted. T
 
 The usual way out is more browsers. Remotion renders in parallel tabs, and on AWS Lambda it fans one render out across as many as 200 functions, none of which has a GPU. HyperFrames runs up to 24 workers, each its own Chrome of about 256 MB. That buys speed with memory and machines, and it multiplies the overhead along with the work. In the footage test below, Remotion decodes the clip again in every tab, so adding tabs made it slower: 8.6 s at 8 tabs, 21.7 s at 32.
 
-Here is what the difference looks like on one machine, an RTX 5090 workstation, timed from the render command to a finished MP4. Three 10-second videos took ultrafast 0.85 to 0.98 s. Remotion took 2.25 to 6.69 s at the fastest of every setting tried, and HyperFrames 3.31 to 4.46 s. Most of ultrafast's time was process start-up; drawing and encoding the 300 frames took 0.30 to 0.42 s of it. The [benchmark](<https://ultrafast.mov/benchmarks/>) has every run and every configuration, with frames from all three tools side by side, and it says plainly where ultrafast does worse.
+Here is what the difference looks like on one machine, an RTX 5090 workstation, timed from the render command to a finished MP4. Three 10-second videos took ultrafast 0.66 to 0.78 s with its 0.2.0 release (0.85 to 0.98 s with 0.1.1, when this post went up). Remotion took 2.25 to 6.69 s at the fastest of every setting tried, and HyperFrames 3.31 to 4.46 s. Most of ultrafast's time was process start-up; drawing and encoding the 300 frames took 0.22 to 0.36 s of it. The [benchmark](<https://ultrafast.mov/benchmarks/>) has every run and every configuration, with frames from all three tools side by side, and it says plainly where ultrafast does worse.
 
 ![The same six moments of a 10-second clip with word-timed captions over NASA footage of the Moon, rendered by ultrafast, Remotion and HyperFrames, one row each. The three rows match.](https://ultrafast.mov/img/bench/footage.webp) _The footage test from the benchmark: the same frames from all three tools. The pictures match. The times don't._
 
@@ -5021,7 +5938,7 @@ Browsers composite on gamma-encoded sRGB values, because the web always has. Fil
 
 Motion is worse. A browser has no shutter. Each screenshot is an instant, so anything that moves fast strobes across the frames. A real camera smears motion across the time its shutter is open, and that smear is a large part of why filmed motion feels smooth at 24 or 30 frames a second. Remotion's motion blur does the only thing a browser allows: it "samples frames from before and after the current time and blends them together", and every extra sample is more rendering work. HyperFrames' determinism page names motion blur as the exception to its pixel-stability promise.
 
-Then there is the plumbing every video player depends on. Pixels are stored as Y'CbCr rather than RGB, with a BT.709 matrix and a limited range, and the file carries colour tags that tell the player how to decode it. It is easy to get wrong. ultrafast's own 0.1.1 wrote H.264 with no colour tags, so FFmpeg-based players showed its colours slightly off. The next release tags every file. A video engine has to own that whole path, because nobody else will.
+Then there is the plumbing every video player depends on. Pixels are stored as Y'CbCr rather than RGB, with a BT.709 matrix and a limited range, and the file carries colour tags that tell the player how to decode it. It is easy to get wrong. ultrafast's own 0.1.1 wrote H.264 with no colour tags, so FFmpeg-based players showed its colours slightly off. 0.2.0 tags every file. A video engine has to own that whole path, because nobody else will.
 
 ## What the web gets right
 
