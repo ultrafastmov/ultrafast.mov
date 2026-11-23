@@ -27,6 +27,7 @@ Facts an agent needs:
 - [CLI reference](https://ultrafast.mov/docs/cli/index.md): every command
 - [MCP server](https://ultrafast.mov/docs/mcp/index.md): the 20 MCP tools and client setup
 - [HTTP API](https://ultrafast.mov/docs/api/index.md): the HTTP API of uf serve
+- [Changelog](https://ultrafast.mov/changelog/index.md): every release and what it changed, newest first, with the numbers measured
 
 ## Product
 

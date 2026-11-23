@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Changelog · ultrafast release notes</title>
+<meta name="description" content="Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.0, smaller files, sooner.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/changelog/">
+<link rel="alternate" type="text/markdown" href="/changelog/index.md" title="Changelog · ultrafast release notes (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="ultrafast blog"><meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="Every release, measured">
+<meta property="og:description" content="Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.0, smaller files, sooner.">
+<meta property="og:url" content="https://ultrafast.mov/changelog/">
+<meta property="og:image" content="https://ultrafast.mov/og/changelog.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Every release, measured · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Every release, measured">
+<meta name="twitter:description" content="Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.0, smaller files, sooner.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/changelog.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=c102dd99">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://ultrafast.mov/changelog/"}]},{"@type":"WebPage","@id":"https://ultrafast.mov/changelog/#page","name":"Changelog · ultrafast release notes","description":"Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.0, smaller files, sooner.","url":"https://ultrafast.mov/changelog/","isPartOf":{"@id":"https://ultrafast.mov/#site"},"primaryImageOfPage":"https://ultrafast.mov/og/changelog.jpg","inLanguage":"en","datePublished":"2026-11-23T15:59:18+00:00","dateModified":"2026-11-23T15:59:18+00:00"}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="band stock-cotton phead">
+<div class="sunburst" aria-hidden="true"></div>  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+  <li aria-current="page">Changelog</li>
+</ol>
+
+    <p class="eyebrow"><i style="--c:var(--pink)"></i>Changelog</p>
+    <h1 class="pr h1" data-plates="pink black"><span class="ln">Every release,</span> <span class="ln">what changed.</span></h1>
+    <p class="lede">What each ultrafast release changed, newest first, with the numbers measured. The same notes are on <a class="alink" href="https://github.com/ultrafastmov/ultrafast/releases">GitHub releases</a>.</p>
+<ol class="relindex" aria-label="Releases">
+<li><a href="#v0.2.0"><b>0.2.0</b>Smaller files, sooner</a></li><li><a href="#v0.1.1"><b>0.1.1</b>Every deliverable from one document</a></li><li><a href="#v0.1.0"><b>0.1.0</b>The first release</a></li></ol>
+  </div>
+</section>
+
+<section class="band stock-newsprint release" id="v0.2.0" aria-labelledby="v0.2.0-h">
+  <div class="wrap relgrid">
+    <header class="relhead">
+      <p class="relver"><a href="#v0.2.0">0.2.0</a></p>
+      <p class="reldate"><time datetime="2026-11-23T15:41:22+00:00">23 November 2026</time><span class="latest">Latest</span></p>
+      <ul class="rellinks">
+        <li><a class="alink" href="https://github.com/ultrafastmov/ultrafast/releases/tag/v0.2.0">GitHub release</a></li>
+        <li><a class="alink" href="https://github.com/ultrafastmov/ultrafast/compare/v0.1.1...v0.2.0">Every commit</a></li>
+      </ul>
+    </header>
+    <div class="relbody">
+      <h2 class="pr small" data-plates="pink black" id="v0.2.0-h"><span class="ln">Smaller files,</span> <span class="ln">sooner</span></h2>
+      <p class="sub">On NVIDIA, exports come out a fifth to a half the size at the same picture, and in about a fifth less time end to end. First runs are quicker, every file says its colours, and the review follows the camera.</p>
+      <figure class="gi relfilm" style="--ar:1.7778">
+        <div class="sheet"><video class="lazy" muted loop playsinline preload="none" poster="/media/changelog/ultrafast-0.2.0.webp" data-full="/media/changelog/ultrafast-0.2.0.full" aria-label="ultrafast 0.2.0: smaller files, sooner"><source data-src="/media/changelog/ultrafast-0.2.0.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/changelog/ultrafast-0.2.0.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/changelog/ultrafast-0.2.0.mp4" type="video/mp4"></video></div>
+<figcaption class="meta"><span>The benchmark&#39;s captioned-footage scene as 300 prints, one per frame, each as thick as its bytes (1 cm = 1 MB). One ultrafast document, rendered by 0.2.0.</span></figcaption>      </figure>
+      <div class="relcharts">
+        <div class="relchart">
+          <h3>File size at the same picture</h3>
+          <p class="key" aria-hidden="true"><span class="k was">0.1.1</span><span class="k now">0.2.0</span><span>MB, lower is better</span></p>
+          <ol class="pairs">
+            <li><span class="sr">Title card: 2.72 MB in 0.1.1, 1.08 MB in 0.2.0.</span><span class="lbl" aria-hidden="true">Title card</span><span class="bars" aria-hidden="true"><i class="bar was" style="--w:29.2%"></i><b class="was">2.72</b><i class="bar now" style="--w:11.6%"></i><b>1.08</b></span></li>
+            <li><span class="sr">Chart: 0.73 MB in 0.1.1, 0.35 MB in 0.2.0.</span><span class="lbl" aria-hidden="true">Chart</span><span class="bars" aria-hidden="true"><i class="bar was" style="--w:7.8%"></i><b class="was">0.73</b><i class="bar now" style="--w:3.8%"></i><b>0.35</b></span></li>
+            <li><span class="sr">Captioned footage: 9.33 MB in 0.1.1, 2.93 MB in 0.2.0.</span><span class="lbl" aria-hidden="true">Captioned footage</span><span class="bars" aria-hidden="true"><i class="bar was" style="--w:100.0%"></i><b class="was">9.33</b><i class="bar now" style="--w:31.4%"></i><b>2.93</b></span></li>
+            <li><span class="sr">Effects reel: 9.04 MB in 0.1.1, 1.59 MB in 0.2.0.</span><span class="lbl" aria-hidden="true">Effects reel</span><span class="bars" aria-hidden="true"><i class="bar was" style="--w:96.9%"></i><b class="was">9.04</b><i class="bar now" style="--w:17.0%"></i><b>1.59</b></span></li>
+          </ol>
+        </div>
+        <div class="relchart">
+          <h3>Export time, end to end</h3>
+          <p class="key" aria-hidden="true"><span class="k was">0.1.1</span><span class="k now">0.2.0</span><span>s, lower is better</span></p>
+          <ol class="pairs">
+            <li><span class="sr">Title card: 0.88 s in 0.1.1, 0.68 s in 0.2.0.</span><span class="lbl" aria-hidden="true">Title card</span><span class="bars" aria-hidden="true"><i class="bar was" style="--w:88.0%"></i><b class="was">0.88</b><i class="bar now" style="--w:68.0%"></i><b>0.68</b></span></li>
+            <li><span class="sr">Chart: 0.88 s in 0.1.1, 0.70 s in 0.2.0.</span><span class="lbl" aria-hidden="true">Chart</span><span class="bars" aria-hidden="true"><i class="bar was" style="--w:88.0%"></i><b class="was">0.88</b><i class="bar now" style="--w:70.0%"></i><b>0.70</b></span></li>
+            <li><span class="sr">Captioned footage: 1.00 s in 0.1.1, 0.82 s in 0.2.0.</span><span class="lbl" aria-hidden="true">Captioned footage</span><span class="bars" aria-hidden="true"><i class="bar was" style="--w:100.0%"></i><b class="was">1.00</b><i class="bar now" style="--w:82.0%"></i><b>0.82</b></span></li>
+            <li><span class="sr">Effects reel: 0.98 s in 0.1.1, 0.76 s in 0.2.0.</span><span class="lbl" aria-hidden="true">Effects reel</span><span class="bars" aria-hidden="true"><i class="bar was" style="--w:98.0%"></i><b class="was">0.98</b><i class="bar now" style="--w:76.0%"></i><b>0.76</b></span></li>
+          </ol>
+        </div>
+      </div>
+      <p class="credit relnote">The four 10-second scenes of the <a class="alink" href="https://github.com/ultrafastmov/benchmarks">benchmark</a> (300 frames each), exported by 0.1.1 and 0.2.0 on the same RTX 5090 workstation with the same harness, at the standard quality. Times are end to end, from the command to the finished MP4, the median of warm runs.</p>
+      <div class="prose relnotes">
+        <ul>
+<li><strong>Files a fifth to a half the size, at the same picture.</strong> On NVIDIA, <code>--crf</code> now means libx264's scale (libx265's for HEVC), so <code>--crf 18</code> makes the picture libx264 makes at CRF 18. 0.1.1 gave NVENC the number as it was, and its files came out 2 to 4.4 times the size of libx264's. Standard quality also encodes with B-frames and a key frame every 250 frames.</li>
+<li><strong>Faster, end to end.</strong> Each frame is encoded in strips across the GPU's encoder engines, the GPU starts with one queue instead of eight, and the encoder's driver starts while the GPU does. The benchmark's scenes export in 0.68 to 0.82 s, against 0.88 to 1.00 s for 0.1.1 on the same machine and harness; one still frame takes 0.20 s, from 0.35 s.</li>
+<li><strong>Quicker first runs.</strong> Commands that render and exit compile only the kernels their frames use: a first export after an install or an upgrade takes 1.8 to 2.2 s (2.5 to 2.7 s in 0.1.1).</li>
+<li><strong>Colours tagged.</strong> Every YUV export says it is BT.709, limited range, so players don't guess (FFmpeg-based ones guessed BT.601).</li>
+<li><strong><code>uf review</code> follows the camera.</strong> Type under a <code>corner_pin</code> (a screen or a page in perspective) is measured where the pin puts it, at its size on screen; a label faded out far up a deep stack of layers is no longer reviewed as if it showed. On the SQL notebook example the false "never visible" findings went from 30 to 0.</li>
+<li><strong>Fixes.</strong> Two renderers starting at once in one process no longer crash on NVIDIA (the render service's workers could). On macOS, 29.97 fps exports put every frame at its exact time (they were rounded to 1/30 s steps).</li>
+<li><strong>Packaging.</strong> The release builds the Claude Desktop extensions and publishes to the MCP Registry from the tag. A <code>Dockerfile</code> at the root of the repository runs the MCP server over stdio, so MCP directories such as Glama can build it from the repository, and <code>plugin.json</code> and <code>mcp.json</code> at the root describe the plugin in the Agent Plugins format GitHub Copilot CLI reads.</li>
+</ul>
+<p>The SDKs stay at 0.1.2: nothing in their API changed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="band stock-thermal release" id="v0.1.1" aria-labelledby="v0.1.1-h">
+  <div class="wrap relgrid">
+    <header class="relhead">
+      <p class="relver"><a href="#v0.1.1">0.1.1</a></p>
+      <p class="reldate"><time datetime="2026-11-21T20:41:08+00:00">21 November 2026</time></p>
+      <ul class="rellinks">
+        <li><a class="alink" href="https://github.com/ultrafastmov/ultrafast/releases/tag/v0.1.1">GitHub release</a></li>
+        <li><a class="alink" href="https://github.com/ultrafastmov/ultrafast/compare/v0.1.0...v0.1.1">Every commit</a></li>
+      </ul>
+    </header>
+    <div class="relbody">
+      <h2 class="pr small" data-plates="blue black" id="v0.1.1-h"><span class="ln">Every deliverable</span> <span class="ln">from one document</span></h2>
+      <p class="sub">One document exports to every format a delivery asks for, at any size and frame rate, with one quality setting from draft to master.</p>
+      <div class="prose relnotes">
+        <ul>
+<li><strong>Formats and codecs.</strong> H.264, HEVC and AV1 MP4s; ProRes from proxy to 4444 XQ; transparent ProRes 4444 and VP9 WebM (<code>--alpha</code>); GIFs; PNG and EXR sequences; and sound alone (WAV, MP3, M4A, FLAC, Opus). The format follows the file name.</li>
+<li><strong>Quality levels.</strong> <code>--quality draft|standard|high|master</code>: encoder quality, samples and motion blur in one setting. Draft is a fast preview; master is for delivery.</li>
+<li><strong>Any size, sharp.</strong> <code>--size 720p|1080p|4k|WxH</code> or <code>--scale</code>, for <code>export</code>, <code>render</code> and <code>frames</code>. The document is drawn at the new size, not upscaled, so a sharp 4K comes from the same 1080p document.</li>
+<li><strong>Any frame rate.</strong> <code>--fps</code>.</li>
+<li><strong>Estimates as the export will render.</strong> <code>uf estimate</code> counts the output size, frame rate and quality level.</li>
+<li><strong>The same settings everywhere.</strong> The MCP export tool, the <code>uf serve</code> HTTP API and the Python and TypeScript SDKs (0.1.2) take them. The SDKs now default to a local <code>uf serve</code>.</li>
+<li><strong>Fixes.</strong> Transparent EXR is premultiplied with every ffmpeg; sound-only and GIF outputs are named once; <code>uf ops | head</code> exits quietly.</li>
+<li><strong>Releases.</strong> crates.io, PyPI, npm, ghcr.io and the Homebrew tap all publish from the tag with trusted publishing.</li>
+<li><strong>Claude Desktop and the MCP Registry.</strong> Added to the release on 22 November: a <code>.mcpb</code> extension for Claude Desktop on each platform, and the listing <code>io.github.ultrafastmov/ultrafast</code> on the official MCP Registry.</li>
+</ul>
+<div class="code"><div class="cbar"><span>sh</span><button class="copy" type="button">copy</button></div><pre><code class="hl">uf<span class="w"> </span><span class="nb">export</span><span class="w"> </span>film.json<span class="w"> </span>film.mp4
+uf<span class="w"> </span><span class="nb">export</span><span class="w"> </span>film.json<span class="w"> </span>overlay.mov<span class="w"> </span>--codec<span class="w"> </span>prores<span class="w"> </span>--alpha<span class="w"> </span>--size<span class="w"> </span>4k
+uf<span class="w"> </span><span class="nb">export</span><span class="w"> </span>film.json<span class="w"> </span>preview.gif<span class="w"> </span>--quality<span class="w"> </span>draft<span class="w"> </span>--size<span class="w"> </span>480p<span class="w"> </span>--fps<span class="w"> </span><span class="m">15</span></code></pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="band stock-kraft release" id="v0.1.0" aria-labelledby="v0.1.0-h">
+  <div class="wrap relgrid">
+    <header class="relhead">
+      <p class="relver"><a href="#v0.1.0">0.1.0</a></p>
+      <p class="reldate"><time datetime="2026-11-21T19:02:49+00:00">21 November 2026</time></p>
+      <ul class="rellinks">
+        <li><a class="alink" href="https://github.com/ultrafastmov/ultrafast/releases/tag/v0.1.0">GitHub release</a></li>
+        <li><a class="alink" href="https://github.com/ultrafastmov/ultrafast/commits/v0.1.0">Every commit</a></li>
+      </ul>
+    </header>
+    <div class="relbody">
+      <h2 class="pr small" data-plates="pink blue" id="v0.1.0-h"><span class="ln">The first release</span></h2>
+      <p class="sub">The engine, its JSON document and the tools an agent uses to write, check, review and export video, on macOS and Linux.</p>
+      <div class="prose relnotes">
+        <ul>
+<li><strong>The engine.</strong> Every frame is drawn on the GPU, with Metal on macOS and Vulkan on Linux and Windows (WSL2), and no browser in the loop. A video is one JSON document: a format, a graph of nodes, animated params and timing windows.</li>
+<li><strong>70 ops.</strong> Type with variable fonts, glyph animators and text on paths; vector paths, SVG and Lottie; images and video; Slang shaders; 3D with image-based light, shadows, depth of field and glass; particles, fluid and feedback simulations; masks, warps, 19 blend modes and looks such as grain, bloom and film looks. Sound is mixed into exports.</li>
+<li><strong>The loop.</strong> <code>uf new</code> starts from a template, <code>uf check</code> finds mistakes without rendering, <code>uf sheet</code> draws a contact sheet, <code>uf review</code> renders the film and lists text that is unreadable, clipped or on screen too briefly, and flashing, and <code>uf export</code> writes the file through the GPU's hardware encoder.</li>
+<li><strong>Live.</strong> <code>uf live</code> plays a document while an agent edits it over a socket; a parameter edit shows on the next frame.</li>
+<li><strong>For agents.</strong> <code>uf mcp</code> serves 20 MCP tools. A skill, a Claude Code plugin and a Gemini CLI extension teach the document and the loop.</li>
+<li><strong>On your own GPU.</strong> <code>uf serve</code> renders over HTTP with one API key, and the Python and TypeScript SDKs (<code>ultrafastmov</code> on PyPI and npm) talk to it.</li>
+<li><strong>Installs.</strong> Prebuilt archives for macOS on Apple silicon and Linux x86_64, <code>cargo install ultrafast</code>, the Homebrew tap and a Docker image on ghcr.io.</li>
+</ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band stock-canary ctaband">
+  <div class="wrap">
+    <h2 class="pr " data-plates="pink blue"><span class="ln">Get the latest.</span></h2>
+    <p class="sub">The install command fetches the newest release, and running it again upgrades. Or <code>brew upgrade ultrafast</code>.</p>
+    <div class="actions">
+      <button class="chip big" data-copy="curl -fsSL https://ultrafast.mov/install.sh | sh" type="button"><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code><span class="tick" aria-hidden="true">copied</span></button>
+      <a class="btn big" href="/docs/">Read the quickstart</a>
+    </div>
+    <p class="aside">Want it hosted? <a class="alink" href="/cloud/">Join the ultrafast Cloud waitlist</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+<a href="/blog/">Blog</a>      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+<a href="/changelog/">Changelog</a>      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+      <a href="/alternatives/remotion/">Remotion alternatives</a>
+      <a href="/benchmarks/">Benchmarks</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code></span>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=c102dd99"></script>
+</body>
+</html>
