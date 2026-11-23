@@ -2742,7 +2742,7 @@ NASA footage and sound, edited by documents an agent wrote and `review` passed.
 
 [Video: Two launches, one count](https://ultrafast.mov/media/examples/liftoff.mp4)
 
-### Two launches, one count
+### [Two launches, one count](<https://ultrafast.mov/examples/liftoff/>)
 
 Apollo 11 and Artemis I lift off in alternating shots, cut to the 1969 launch commentary, with each number in large type and both launches' clocks counting down to zero.
 
@@ -2750,7 +2750,7 @@ Apollo 11 and Artemis I lift off in alternating shots, cut to the 1969 launch co
 
 [Video: Podcast clip](https://ultrafast.mov/media/examples/podcast.mp4)
 
-### Podcast clip
+### [Podcast clip](<https://ultrafast.mov/examples/podcast/>)
 
 A vertical clip of NASA astronaut Mark Vande Hei aboard the space station, cut out of the station on every frame and set over Earth's limb, cloud tops and stars, with four words set huge behind him and captions timed to his voice.
 
@@ -2764,7 +2764,7 @@ Every figure on screen comes from the source credited below.
 
 [Video: Artemis I's route](https://ultrafast.mov/media/examples/orbit.mp4) 3D rendered by ultrafast
 
-### Artemis I's route
+### [Artemis I's route](<https://ultrafast.mov/examples/orbit/>)
 
 Artemis I's flown route drawn across lit models of the Earth and Moon, with flight-day and distance counters, and Orion's own view of the Moon at the return flyby.
 
@@ -2772,7 +2772,7 @@ Artemis I's flown route drawn across lit models of the Earth and Moon, with flig
 
 [Video: The Keeling Curve](https://ultrafast.mov/media/examples/keeling.mp4)
 
-### The Keeling Curve
+### [The Keeling Curve](<https://ultrafast.mov/examples/keeling/>)
 
 Every monthly mean of carbon dioxide at Mauna Loa since March 1958 draws itself; the camera dives into 2025 to show the seasonal cycle, and the latest month lands large.
 
@@ -2780,7 +2780,7 @@ Every monthly mean of carbon dioxide at Mauna Loa since March 1958 draws itself;
 
 [Video: Year in review](https://ultrafast.mov/media/examples/wrapped.mp4)
 
-### Year in review
+### [Year in review](<https://ultrafast.mov/examples/wrapped/>)
 
 One script writes a cycling club's year-in-review for each member: distance counts up over the days they rode, their favourite loop draws itself on a contour map, and the climbing rises as mountains.
 
@@ -2790,7 +2790,7 @@ One script writes a cycling club's year-in-review for each member: distance coun
 
 [Video: SQL notebook launch](https://ultrafast.mov/media/examples/ui.mp4)
 
-### SQL notebook launch
+### [SQL notebook launch](<https://ultrafast.mov/examples/ui/>)
 
 A query against NASA's Exoplanet Archive is typed, run, charted and shared in an app that glides and tilts in 3D.
 
@@ -2806,7 +2806,7 @@ The 3D, the simulations and the type are rendered by ultrafast from each documen
 
 3D rendered by ultrafast
 
-### Pottery class teaser
+### [Pottery class teaser](<https://ultrafast.mov/examples/clay/>)
 
 A lump of wet terracotta is centred, opened and pulled into a vase on a turning wheel under window light, beside the class title and its details.
 
@@ -2814,7 +2814,7 @@ A lump of wet terracotta is centred, opened and pulled into a vase on a turning 
 
 [Video: Lens launch](https://ultrafast.mov/media/examples/product.mp4) 3D rendered by ultrafast
 
-### Lens launch
+### [Lens launch](<https://ultrafast.mov/examples/product/>)
 
 A camera lens that doesn't exist, lit like a studio product shot: light finds the knurled barrel, the focus scale turns, eleven blades stop down and the optics slide apart under callouts.
 
@@ -2822,7 +2822,7 @@ A camera lens that doesn't exist, lit like a studio product shot: light finds th
 
 [Video: Celadon dish](https://ultrafast.mov/media/examples/bloom.mp4)
 
-### Celadon dish
+### [Celadon dish](<https://ultrafast.mov/examples/bloom/>)
 
 A carving grows across a celadon dish by reaction–diffusion, stepped every frame; the camera closes in on the glaze, then molten glaze floods back over it.
 
@@ -2830,7 +2830,7 @@ A carving grows across a celadon dish by reaction–diffusion, stepped every fra
 
 [Video: Concert poster](https://ultrafast.mov/media/examples/swiss.mp4)
 
-### Concert poster
+### [Concert poster](<https://ultrafast.mov/examples/swiss/>)
 
 A Swiss-style poster for a night of four concerts. Its dial is the score of its own track, and the headline widens and narrows on every beat.
 
@@ -2838,7 +2838,7 @@ A Swiss-style poster for a night of four concerts. Its dial is the score of its 
 
 [Video: Endless zoom](https://ultrafast.mov/media/examples/dive.mp4) 3D rendered by ultrafast
 
-### Endless zoom
+### [Endless zoom](<https://ultrafast.mov/examples/dive/>)
 
 One camera falls through seven nested worlds (type, vector blades, a chrome torus, ink, shader contours and rings of type) to the wordmark, whose dot holds the first frame again.
 
@@ -2846,7 +2846,7 @@ One camera falls through seven nested worlds (type, vector blades, a chrome toru
 
 [Video: Main titles](https://ultrafast.mov/media/examples/meridian.mp4) 3D rendered by ultrafast
 
-### Main titles
+### [Main titles](<https://ultrafast.mov/examples/meridian/>)
 
 Main titles for a drama that doesn't exist: a brass compass, a sea chart with a route inking itself across it, star trails over the sea, an armillary sphere, and a lighthouse whose beam lights the title.
 
@@ -2858,24 +2858,24 @@ Credits
 
 footage and sound| NASA record| used in  
 ---|---|---  
-Apollo 11 25th Anniversary "B" Roll FootageNASA · 1969-07-16| [KSC-19690716-MH-NAS01-0001-Apollo_11_Historical_Footage_and_Broll-DVC_1560](<https://images.nasa.gov/details/KSC-19690716-MH-NAS01-0001-Apollo_11_Historical_Footage_and_Broll-DVC_1560>)| Two launches, one count  
-Video - Apollo 11 Pre-Launch and LaunchNASA · 1969-07-16| [KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372](<https://images.nasa.gov/details/KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372>)| Two launches, one count  
-4K Earth Views, Extended Cut for Earth Day 2021NASA · 2021-04-22| [jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_ 2021_210422-4KMP4](<https://images.nasa.gov/details/jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_%202021_210422-4KMP4>)| Podcast clip  
-NASA Astronaut Answers Social Media Questions About Record Breaking SpaceflightNASA · 2022-03-15| [jsc2022m000083_NTV-VideoFile_Mark_Vande_Hei_Social_Media_Questions_220314-MP4](<https://images.nasa.gov/details/jsc2022m000083_NTV-VideoFile_Mark_Vande_Hei_Social_Media_Questions_220314-MP4>)| Podcast clip  
-Artemis I Launch - Engineering Views - ML DeckNASA · 2022-11-16| [KSC-20221116-MH-NAS01-0001-Artemis_I_Launch_Engineering_Views_ML_Deck_LC_39B-3318973](<https://images.nasa.gov/details/KSC-20221116-MH-NAS01-0001-Artemis_I_Launch_Engineering_Views_ML_Deck_LC_39B-3318973>)| Two launches, one count  
-Artemis I Slow Motion LiftoffNASA/Frank Michuax · 2022-11-16| [KSC-20221116--MH-FMX-01-0001-Artemis_1_slowmo_liftoff-3314595](<https://images.nasa.gov/details/KSC-20221116--MH-FMX-01-0001-Artemis_1_slowmo_liftoff-3314595>)| Two launches, one count  
-Artemis I Launch from NASA Causeway (Slo Mo)NASA/Brandon Hancock · 2022-11-16| [GX010506](<https://images.nasa.gov/details/GX010506>)| Two launches, one count  
-Artemis I Launch ImageryNASA/Walter Lindblom · 2022-11-16| [KSC-20221116-MH-WEL01-0001-Artemis_I_Launch_Imagery-3319254](<https://images.nasa.gov/details/KSC-20221116-MH-WEL01-0001-Artemis_I_Launch_Imagery-3319254>)| Two launches, one count  
-Flight Day 20: To the MoonNASA · 2022-12-05| [FD 20 2](<https://images.nasa.gov/details/FD%2020%202>)| Artemis I's route  
+Apollo 11 25th Anniversary "B" Roll Footage: NASA · 1969-07-16| [KSC-19690716-MH-NAS01-0001-Apollo_11_Historical_Footage_and_Broll-DVC_1560](<https://images.nasa.gov/details/KSC-19690716-MH-NAS01-0001-Apollo_11_Historical_Footage_and_Broll-DVC_1560>)| Two launches, one count  
+Video - Apollo 11 Pre-Launch and Launch: NASA · 1969-07-16| [KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372](<https://images.nasa.gov/details/KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372>)| Two launches, one count  
+4K Earth Views, Extended Cut for Earth Day 2021: NASA · 2021-04-22| [jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_ 2021_210422-4KMP4](<https://images.nasa.gov/details/jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_%202021_210422-4KMP4>)| Podcast clip  
+NASA Astronaut Answers Social Media Questions About Record Breaking Spaceflight: NASA · 2022-03-15| [jsc2022m000083_NTV-VideoFile_Mark_Vande_Hei_Social_Media_Questions_220314-MP4](<https://images.nasa.gov/details/jsc2022m000083_NTV-VideoFile_Mark_Vande_Hei_Social_Media_Questions_220314-MP4>)| Podcast clip  
+Artemis I Launch - Engineering Views - ML Deck: NASA · 2022-11-16| [KSC-20221116-MH-NAS01-0001-Artemis_I_Launch_Engineering_Views_ML_Deck_LC_39B-3318973](<https://images.nasa.gov/details/KSC-20221116-MH-NAS01-0001-Artemis_I_Launch_Engineering_Views_ML_Deck_LC_39B-3318973>)| Two launches, one count  
+Artemis I Slow Motion Liftoff: NASA/Frank Michuax · 2022-11-16| [KSC-20221116--MH-FMX-01-0001-Artemis_1_slowmo_liftoff-3314595](<https://images.nasa.gov/details/KSC-20221116--MH-FMX-01-0001-Artemis_1_slowmo_liftoff-3314595>)| Two launches, one count  
+Artemis I Launch from NASA Causeway (Slo Mo): NASA/Brandon Hancock · 2022-11-16| [GX010506](<https://images.nasa.gov/details/GX010506>)| Two launches, one count  
+Artemis I Launch Imagery: NASA/Walter Lindblom · 2022-11-16| [KSC-20221116-MH-WEL01-0001-Artemis_I_Launch_Imagery-3319254](<https://images.nasa.gov/details/KSC-20221116-MH-WEL01-0001-Artemis_I_Launch_Imagery-3319254>)| Two launches, one count  
+Flight Day 20: To the Moon: NASA · 2022-12-05| [FD 20 2](<https://images.nasa.gov/details/FD%2020%202>)| Artemis I's route  
   
 data and images| source| used in  
 ---|---|---  
-Artemis I as-flown trajectory (spacecraft −1023)NASA/JSC navigation via JPL Horizons · 2022-12-13| [ssd.jpl.nasa.gov](<https://ssd.jpl.nasa.gov/horizons/>)| Artemis I's route  
-Blue Marble: Next Generation, NovemberNASA Earth Observatory · 2004-11| [visibleearth.nasa.gov](<https://visibleearth.nasa.gov/images/74192/november-blue-marble-next-generation>)| Artemis I's route  
-Earth at Night (Black Marble) 2016NASA Earth Observatory · 2016| [visibleearth.nasa.gov](<https://visibleearth.nasa.gov/images/144898/earth-at-night-black-marble-2016-color-maps>)| Artemis I's route  
-CGI Moon KitNASA's Scientific Visualization Studio · 2019| [svs.gsfc.nasa.gov](<https://svs.gsfc.nasa.gov/4720>)| Artemis I's route  
-Monthly mean CO₂ at Mauna Loa (co2_mm_mlo.csv)NOAA Global Monitoring Laboratory; Scripps Institution of Oceanography · 2026-11-19| [gml.noaa.gov](<https://gml.noaa.gov/ccgg/trends/data.html>)| The Keeling Curve  
-NASA Exoplanet Archive: confirmed planets by discovery year and methodNASA Exoplanet Science Institute, Caltech/IPAC · 2026-11-21| [exoplanetarchive.ipac.caltech.edu](<https://exoplanetarchive.ipac.caltech.edu/>)| SQL notebook launch  
+Artemis I as-flown trajectory (spacecraft −1023): NASA/JSC navigation via JPL Horizons · 2022-12-13| [ssd.jpl.nasa.gov](<https://ssd.jpl.nasa.gov/horizons/>)| Artemis I's route  
+Blue Marble: Next Generation, November: NASA Earth Observatory · 2004-11| [visibleearth.nasa.gov](<https://visibleearth.nasa.gov/images/74192/november-blue-marble-next-generation>)| Artemis I's route  
+Earth at Night (Black Marble) 2016: NASA Earth Observatory · 2016| [visibleearth.nasa.gov](<https://visibleearth.nasa.gov/images/144898/earth-at-night-black-marble-2016-color-maps>)| Artemis I's route  
+CGI Moon Kit: NASA's Scientific Visualization Studio · 2019| [svs.gsfc.nasa.gov](<https://svs.gsfc.nasa.gov/4720>)| Artemis I's route  
+Monthly mean CO₂ at Mauna Loa (co2_mm_mlo.csv): NOAA Global Monitoring Laboratory; Scripps Institution of Oceanography · 2026-11-19| [gml.noaa.gov](<https://gml.noaa.gov/ccgg/trends/data.html>)| The Keeling Curve  
+NASA Exoplanet Archive: confirmed planets by discovery year and method: NASA Exoplanet Science Institute, Caltech/IPAC · 2026-11-21| [exoplanetarchive.ipac.caltech.edu](<https://exoplanetarchive.ipac.caltech.edu/>)| SQL notebook launch  
   
 Footage and sound courtesy of NASA. NASA media is generally not subject to copyright in the United States ([NASA media usage guidelines](<https://www.nasa.gov/nasa-brand-center/images-and-media/>)). Its use here does not imply endorsement by NASA. Carbon dioxide data: NOAA Global Monitoring Laboratory and Scripps Institution of Oceanography. This page uses the NASA Exoplanet Archive, operated by the California Institute of Technology under contract with NASA.
 
@@ -2886,6 +2886,921 @@ The documents read footage and data from local files. To render one, download th
 ## Make your own.
 
 Install ultrafast, connect your agent, and give it a brief like one of these.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Two launches, one count · Example video made with ultrafast
+
+> Apollo 11 and Artemis I lift off in alternating shots, cut to the 1969 launch commentary, with each number in large type and both launches' clocks counting down to zero.
+
+URL: https://ultrafast.mov/examples/liftoff/
+
+Real footage
+
+# Two launches, one count
+
+Apollo 11 and Artemis I lift off in alternating shots, cut to the 1969 launch commentary, with each number in large type and both launches' clocks counting down to zero.
+
+[Video: Two launches, one count](https://ultrafast.mov/media/examples/liftoff.mp4)
+
+2.39:1 · 1920×804 · 24 fps · 22.5 s ·  exported in 3.36 s (540 frames) · `review`: 0 findings ·  [document](<https://ultrafast.mov/examples/liftoff.json>)
+
+The document
+
+## One JSON file.
+
+This film is one ultrafast document. Read it, diff it, or hand it to your agent as a starting point.
+
+[Download liftoff.json](<https://ultrafast.mov/examples/liftoff.json>) [How a document is built](<https://ultrafast.mov/docs/documents/>)
+
+### Ops it uses
+
+  * [`adjust`](<https://ultrafast.mov/docs/ops/#op-adjust>)
+  * [`audio`](<https://ultrafast.mov/docs/ops/#op-audio>)
+  * [`blur`](<https://ultrafast.mov/docs/ops/#op-blur>)
+  * [`color_matrix`](<https://ultrafast.mov/docs/ops/#op-color_matrix>)
+  * [`drop_shadow`](<https://ultrafast.mov/docs/ops/#op-drop_shadow>)
+  * [`film_look`](<https://ultrafast.mov/docs/ops/#op-film_look>)
+  * [`gradient`](<https://ultrafast.mov/docs/ops/#op-gradient>)
+  * [`grain`](<https://ultrafast.mov/docs/ops/#op-grain>)
+  * [`over`](<https://ultrafast.mov/docs/ops/#op-over>)
+  * [`shader`](<https://ultrafast.mov/docs/ops/#op-shader>)
+  * [`shape`](<https://ultrafast.mov/docs/ops/#op-shape>)
+  * [`solid`](<https://ultrafast.mov/docs/ops/#op-solid>)
+  * [`text`](<https://ultrafast.mov/docs/ops/#op-text>)
+  * [`transform`](<https://ultrafast.mov/docs/ops/#op-transform>)
+  * [`video`](<https://ultrafast.mov/docs/ops/#op-video>)
+
+### Credits
+
+footage and sound| NASA record  
+---|---  
+Apollo 11 25th Anniversary "B" Roll Footage: NASA · 1969-07-16| [KSC-19690716-MH-NAS01-0001-Apollo_11_Historical_Footage_and_Broll-DVC_1560](<https://images.nasa.gov/details/KSC-19690716-MH-NAS01-0001-Apollo_11_Historical_Footage_and_Broll-DVC_1560>)  
+Video - Apollo 11 Pre-Launch and Launch: NASA · 1969-07-16| [KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372](<https://images.nasa.gov/details/KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372>)  
+Artemis I Launch - Engineering Views - ML Deck: NASA · 2022-11-16| [KSC-20221116-MH-NAS01-0001-Artemis_I_Launch_Engineering_Views_ML_Deck_LC_39B-3318973](<https://images.nasa.gov/details/KSC-20221116-MH-NAS01-0001-Artemis_I_Launch_Engineering_Views_ML_Deck_LC_39B-3318973>)  
+Artemis I Slow Motion Liftoff: NASA/Frank Michuax · 2022-11-16| [KSC-20221116--MH-FMX-01-0001-Artemis_1_slowmo_liftoff-3314595](<https://images.nasa.gov/details/KSC-20221116--MH-FMX-01-0001-Artemis_1_slowmo_liftoff-3314595>)  
+Artemis I Launch from NASA Causeway (Slo Mo): NASA/Brandon Hancock · 2022-11-16| [GX010506](<https://images.nasa.gov/details/GX010506>)  
+Artemis I Launch Imagery: NASA/Walter Lindblom · 2022-11-16| [KSC-20221116-MH-WEL01-0001-Artemis_I_Launch_Imagery-3319254](<https://images.nasa.gov/details/KSC-20221116-MH-WEL01-0001-Artemis_I_Launch_Imagery-3319254>)  
+  
+The document reads its footage and data from local files. To render it, download the source files, or point each `src` at your own. All credits are on [the examples page](<https://ultrafast.mov/examples/#credits>).
+
+More examples
+
+## Every one comes with its document.
+
+  * [![](https://ultrafast.mov/media/examples/podcast.webp)**Podcast clip** 27.5 s · 9:16](<https://ultrafast.mov/examples/podcast/>)
+  * [![](https://ultrafast.mov/media/examples/orbit.webp)**Artemis I's route** 20 s · 16:9](<https://ultrafast.mov/examples/orbit/>)
+  * [![](https://ultrafast.mov/media/examples/keeling.webp)**The Keeling Curve** 16 s · 4:5](<https://ultrafast.mov/examples/keeling/>)
+  * [![](https://ultrafast.mov/media/examples/wrapped.webp)**Year in review** 12 s · 9:16](<https://ultrafast.mov/examples/wrapped/>)
+  * [![](https://ultrafast.mov/media/examples/ui.webp)**SQL notebook launch** 16 s · 16:9](<https://ultrafast.mov/examples/ui/>)
+  * [![](https://ultrafast.mov/media/examples/clay.webp)**Pottery class teaser** 10 s · 9:16](<https://ultrafast.mov/examples/clay/>)
+  * [![](https://ultrafast.mov/media/examples/product.webp)**Lens launch** 16 s · 16:9](<https://ultrafast.mov/examples/product/>)
+  * [![](https://ultrafast.mov/media/examples/bloom.webp)**Celadon dish** 15 s · 1:1](<https://ultrafast.mov/examples/bloom/>)
+  * [![](https://ultrafast.mov/media/examples/swiss.webp)**Concert poster** 12.8 s · 4:5](<https://ultrafast.mov/examples/swiss/>)
+  * [![](https://ultrafast.mov/media/examples/dive.webp)**Endless zoom** 28 s · 16:9](<https://ultrafast.mov/examples/dive/>)
+  * [![](https://ultrafast.mov/media/examples/meridian.webp)**Main titles** 24 s · 2.39:1](<https://ultrafast.mov/examples/meridian/>)
+
+[All 12 films on one page](<https://ultrafast.mov/examples/>)
+
+## Make your own.
+
+Install ultrafast, connect your agent, and give it a brief like this one.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Podcast clip · Example video made with ultrafast
+
+> A vertical clip of NASA astronaut Mark Vande Hei aboard the space station, cut out of the station on every frame and set over Earth's limb, cloud tops and stars, with four words set huge behind him and captions timed to his voice.
+
+URL: https://ultrafast.mov/examples/podcast/
+
+Real footage
+
+# Podcast clip
+
+A vertical clip of NASA astronaut Mark Vande Hei aboard the space station, cut out of the station on every frame and set over Earth's limb, cloud tops and stars, with four words set huge behind him and captions timed to his voice.
+
+[Video: Podcast clip](https://ultrafast.mov/media/examples/podcast.mp4)
+
+9:16 · 1080×1920 · 30 fps · 27.5 s ·  exported in 4.07 s (825 frames) · `review`: 0 findings ·  [document](<https://ultrafast.mov/examples/podcast.json>)
+
+The document
+
+## One JSON file.
+
+This film is one ultrafast document. Read it, diff it, or hand it to your agent as a starting point.
+
+[Download podcast.json](<https://ultrafast.mov/examples/podcast.json>) [How a document is built](<https://ultrafast.mov/docs/documents/>)
+
+### Ops it uses
+
+  * [`adjust`](<https://ultrafast.mov/docs/ops/#op-adjust>)
+  * [`audio`](<https://ultrafast.mov/docs/ops/#op-audio>)
+  * [`blend`](<https://ultrafast.mov/docs/ops/#op-blend>)
+  * [`blur`](<https://ultrafast.mov/docs/ops/#op-blur>)
+  * [`drop_shadow`](<https://ultrafast.mov/docs/ops/#op-drop_shadow>)
+  * [`gradient`](<https://ultrafast.mov/docs/ops/#op-gradient>)
+  * [`grain`](<https://ultrafast.mov/docs/ops/#op-grain>)
+  * [`lut`](<https://ultrafast.mov/docs/ops/#op-lut>)
+  * [`mask`](<https://ultrafast.mov/docs/ops/#op-mask>)
+  * [`mix`](<https://ultrafast.mov/docs/ops/#op-mix>)
+  * [`opacity`](<https://ultrafast.mov/docs/ops/#op-opacity>)
+  * [`over`](<https://ultrafast.mov/docs/ops/#op-over>)
+  * [`path`](<https://ultrafast.mov/docs/ops/#op-path>)
+  * [`shader`](<https://ultrafast.mov/docs/ops/#op-shader>)
+  * [`shape`](<https://ultrafast.mov/docs/ops/#op-shape>)
+  * [`solid`](<https://ultrafast.mov/docs/ops/#op-solid>)
+  * [`text`](<https://ultrafast.mov/docs/ops/#op-text>)
+  * [`transform`](<https://ultrafast.mov/docs/ops/#op-transform>)
+  * [`video`](<https://ultrafast.mov/docs/ops/#op-video>)
+
+### Credits
+
+footage and sound| NASA record  
+---|---  
+4K Earth Views, Extended Cut for Earth Day 2021: NASA · 2021-04-22| [jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_ 2021_210422-4KMP4](<https://images.nasa.gov/details/jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_%202021_210422-4KMP4>)  
+NASA Astronaut Answers Social Media Questions About Record Breaking Spaceflight: NASA · 2022-03-15| [jsc2022m000083_NTV-VideoFile_Mark_Vande_Hei_Social_Media_Questions_220314-MP4](<https://images.nasa.gov/details/jsc2022m000083_NTV-VideoFile_Mark_Vande_Hei_Social_Media_Questions_220314-MP4>)  
+  
+The document reads its footage and data from local files. To render it, download the source files, or point each `src` at your own. All credits are on [the examples page](<https://ultrafast.mov/examples/#credits>).
+
+More examples
+
+## Every one comes with its document.
+
+  * [![](https://ultrafast.mov/media/examples/liftoff.webp)**Two launches, one count** 22.5 s · 2.39:1](<https://ultrafast.mov/examples/liftoff/>)
+  * [![](https://ultrafast.mov/media/examples/orbit.webp)**Artemis I's route** 20 s · 16:9](<https://ultrafast.mov/examples/orbit/>)
+  * [![](https://ultrafast.mov/media/examples/keeling.webp)**The Keeling Curve** 16 s · 4:5](<https://ultrafast.mov/examples/keeling/>)
+  * [![](https://ultrafast.mov/media/examples/wrapped.webp)**Year in review** 12 s · 9:16](<https://ultrafast.mov/examples/wrapped/>)
+  * [![](https://ultrafast.mov/media/examples/ui.webp)**SQL notebook launch** 16 s · 16:9](<https://ultrafast.mov/examples/ui/>)
+  * [![](https://ultrafast.mov/media/examples/clay.webp)**Pottery class teaser** 10 s · 9:16](<https://ultrafast.mov/examples/clay/>)
+  * [![](https://ultrafast.mov/media/examples/product.webp)**Lens launch** 16 s · 16:9](<https://ultrafast.mov/examples/product/>)
+  * [![](https://ultrafast.mov/media/examples/bloom.webp)**Celadon dish** 15 s · 1:1](<https://ultrafast.mov/examples/bloom/>)
+  * [![](https://ultrafast.mov/media/examples/swiss.webp)**Concert poster** 12.8 s · 4:5](<https://ultrafast.mov/examples/swiss/>)
+  * [![](https://ultrafast.mov/media/examples/dive.webp)**Endless zoom** 28 s · 16:9](<https://ultrafast.mov/examples/dive/>)
+  * [![](https://ultrafast.mov/media/examples/meridian.webp)**Main titles** 24 s · 2.39:1](<https://ultrafast.mov/examples/meridian/>)
+
+[All 12 films on one page](<https://ultrafast.mov/examples/>)
+
+## Make your own.
+
+Install ultrafast, connect your agent, and give it a brief like this one.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Artemis I's route · Example video made with ultrafast
+
+> Artemis I's flown route drawn across lit models of the Earth and Moon, with flight-day and distance counters, and Orion's own view of the Moon at the return flyby.
+
+URL: https://ultrafast.mov/examples/orbit/
+
+Data
+
+# Artemis I's route
+
+Artemis I's flown route drawn across lit models of the Earth and Moon, with flight-day and distance counters, and Orion's own view of the Moon at the return flyby.
+
+[Video: Artemis I's route](https://ultrafast.mov/media/examples/orbit.mp4) 3D rendered by ultrafast
+
+16:9 · 1920×1080 · 30 fps · 20 s ·  exported in 7.05 s (600 frames) · `review`: 0 findings ·  [document](<https://ultrafast.mov/examples/orbit.json>)
+
+The document
+
+## One JSON file.
+
+This film is one ultrafast document. Read it, diff it, or hand it to your agent as a starting point.
+
+[Download orbit.json](<https://ultrafast.mov/examples/orbit.json>) [How a document is built](<https://ultrafast.mov/docs/documents/>)
+
+### Ops it uses
+
+  * [`adjust`](<https://ultrafast.mov/docs/ops/#op-adjust>)
+  * [`blend`](<https://ultrafast.mov/docs/ops/#op-blend>)
+  * [`bloom`](<https://ultrafast.mov/docs/ops/#op-bloom>)
+  * [`gradient`](<https://ultrafast.mov/docs/ops/#op-gradient>)
+  * [`image`](<https://ultrafast.mov/docs/ops/#op-image>)
+  * [`mask`](<https://ultrafast.mov/docs/ops/#op-mask>)
+  * [`opacity`](<https://ultrafast.mov/docs/ops/#op-opacity>)
+  * [`over`](<https://ultrafast.mov/docs/ops/#op-over>)
+  * [`path`](<https://ultrafast.mov/docs/ops/#op-path>)
+  * [`shader`](<https://ultrafast.mov/docs/ops/#op-shader>)
+  * [`shape`](<https://ultrafast.mov/docs/ops/#op-shape>)
+  * [`solid`](<https://ultrafast.mov/docs/ops/#op-solid>)
+  * [`text`](<https://ultrafast.mov/docs/ops/#op-text>)
+  * [`transform`](<https://ultrafast.mov/docs/ops/#op-transform>)
+  * [`video`](<https://ultrafast.mov/docs/ops/#op-video>)
+  * [`vignette`](<https://ultrafast.mov/docs/ops/#op-vignette>)
+
+### Credits
+
+footage and sound| NASA record  
+---|---  
+Flight Day 20: To the Moon: NASA · 2022-12-05| [FD 20 2](<https://images.nasa.gov/details/FD%2020%202>)  
+  
+data and images| source  
+---|---  
+Artemis I as-flown trajectory (spacecraft −1023): NASA/JSC navigation via JPL Horizons · 2022-12-13| [ssd.jpl.nasa.gov](<https://ssd.jpl.nasa.gov/horizons/>)  
+Blue Marble: Next Generation, November: NASA Earth Observatory · 2004-11| [visibleearth.nasa.gov](<https://visibleearth.nasa.gov/images/74192/november-blue-marble-next-generation>)  
+Earth at Night (Black Marble) 2016: NASA Earth Observatory · 2016| [visibleearth.nasa.gov](<https://visibleearth.nasa.gov/images/144898/earth-at-night-black-marble-2016-color-maps>)  
+CGI Moon Kit: NASA's Scientific Visualization Studio · 2019| [svs.gsfc.nasa.gov](<https://svs.gsfc.nasa.gov/4720>)  
+  
+The document reads its footage and data from local files. To render it, download the source files, or point each `src` at your own. All credits are on [the examples page](<https://ultrafast.mov/examples/#credits>).
+
+More examples
+
+## Every one comes with its document.
+
+  * [![](https://ultrafast.mov/media/examples/liftoff.webp)**Two launches, one count** 22.5 s · 2.39:1](<https://ultrafast.mov/examples/liftoff/>)
+  * [![](https://ultrafast.mov/media/examples/podcast.webp)**Podcast clip** 27.5 s · 9:16](<https://ultrafast.mov/examples/podcast/>)
+  * [![](https://ultrafast.mov/media/examples/keeling.webp)**The Keeling Curve** 16 s · 4:5](<https://ultrafast.mov/examples/keeling/>)
+  * [![](https://ultrafast.mov/media/examples/wrapped.webp)**Year in review** 12 s · 9:16](<https://ultrafast.mov/examples/wrapped/>)
+  * [![](https://ultrafast.mov/media/examples/ui.webp)**SQL notebook launch** 16 s · 16:9](<https://ultrafast.mov/examples/ui/>)
+  * [![](https://ultrafast.mov/media/examples/clay.webp)**Pottery class teaser** 10 s · 9:16](<https://ultrafast.mov/examples/clay/>)
+  * [![](https://ultrafast.mov/media/examples/product.webp)**Lens launch** 16 s · 16:9](<https://ultrafast.mov/examples/product/>)
+  * [![](https://ultrafast.mov/media/examples/bloom.webp)**Celadon dish** 15 s · 1:1](<https://ultrafast.mov/examples/bloom/>)
+  * [![](https://ultrafast.mov/media/examples/swiss.webp)**Concert poster** 12.8 s · 4:5](<https://ultrafast.mov/examples/swiss/>)
+  * [![](https://ultrafast.mov/media/examples/dive.webp)**Endless zoom** 28 s · 16:9](<https://ultrafast.mov/examples/dive/>)
+  * [![](https://ultrafast.mov/media/examples/meridian.webp)**Main titles** 24 s · 2.39:1](<https://ultrafast.mov/examples/meridian/>)
+
+[All 12 films on one page](<https://ultrafast.mov/examples/>)
+
+## Make your own.
+
+Install ultrafast, connect your agent, and give it a brief like this one.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# The Keeling Curve · Example video made with ultrafast
+
+> Every monthly mean of carbon dioxide at Mauna Loa since March 1958 draws itself; the camera dives into 2025 to show the seasonal cycle, and the latest month lands large.
+
+URL: https://ultrafast.mov/examples/keeling/
+
+Data
+
+# The Keeling Curve
+
+Every monthly mean of carbon dioxide at Mauna Loa since March 1958 draws itself; the camera dives into 2025 to show the seasonal cycle, and the latest month lands large.
+
+[Video: The Keeling Curve](https://ultrafast.mov/media/examples/keeling.mp4)
+
+4:5 · 1080×1350 · 30 fps · 16 s ·  exported in 1.50 s (480 frames) · `review`: 0 findings ·  [document](<https://ultrafast.mov/examples/keeling.json>)
+
+The document
+
+## One JSON file.
+
+This film is one ultrafast document. Read it, diff it, or hand it to your agent as a starting point.
+
+[Download keeling.json](<https://ultrafast.mov/examples/keeling.json>) [How a document is built](<https://ultrafast.mov/docs/documents/>)
+
+### Ops it uses
+
+  * [`blend`](<https://ultrafast.mov/docs/ops/#op-blend>)
+  * [`crop`](<https://ultrafast.mov/docs/ops/#op-crop>)
+  * [`opacity`](<https://ultrafast.mov/docs/ops/#op-opacity>)
+  * [`over`](<https://ultrafast.mov/docs/ops/#op-over>)
+  * [`path`](<https://ultrafast.mov/docs/ops/#op-path>)
+  * [`shader`](<https://ultrafast.mov/docs/ops/#op-shader>)
+  * [`shape`](<https://ultrafast.mov/docs/ops/#op-shape>)
+  * [`solid`](<https://ultrafast.mov/docs/ops/#op-solid>)
+  * [`text`](<https://ultrafast.mov/docs/ops/#op-text>)
+
+### Credits
+
+data and images| source  
+---|---  
+Monthly mean CO₂ at Mauna Loa (co2_mm_mlo.csv): NOAA Global Monitoring Laboratory; Scripps Institution of Oceanography · 2026-11-19| [gml.noaa.gov](<https://gml.noaa.gov/ccgg/trends/data.html>)  
+  
+The document reads its footage and data from local files. To render it, download the source files, or point each `src` at your own. All credits are on [the examples page](<https://ultrafast.mov/examples/#credits>).
+
+More examples
+
+## Every one comes with its document.
+
+  * [![](https://ultrafast.mov/media/examples/liftoff.webp)**Two launches, one count** 22.5 s · 2.39:1](<https://ultrafast.mov/examples/liftoff/>)
+  * [![](https://ultrafast.mov/media/examples/podcast.webp)**Podcast clip** 27.5 s · 9:16](<https://ultrafast.mov/examples/podcast/>)
+  * [![](https://ultrafast.mov/media/examples/orbit.webp)**Artemis I's route** 20 s · 16:9](<https://ultrafast.mov/examples/orbit/>)
+  * [![](https://ultrafast.mov/media/examples/wrapped.webp)**Year in review** 12 s · 9:16](<https://ultrafast.mov/examples/wrapped/>)
+  * [![](https://ultrafast.mov/media/examples/ui.webp)**SQL notebook launch** 16 s · 16:9](<https://ultrafast.mov/examples/ui/>)
+  * [![](https://ultrafast.mov/media/examples/clay.webp)**Pottery class teaser** 10 s · 9:16](<https://ultrafast.mov/examples/clay/>)
+  * [![](https://ultrafast.mov/media/examples/product.webp)**Lens launch** 16 s · 16:9](<https://ultrafast.mov/examples/product/>)
+  * [![](https://ultrafast.mov/media/examples/bloom.webp)**Celadon dish** 15 s · 1:1](<https://ultrafast.mov/examples/bloom/>)
+  * [![](https://ultrafast.mov/media/examples/swiss.webp)**Concert poster** 12.8 s · 4:5](<https://ultrafast.mov/examples/swiss/>)
+  * [![](https://ultrafast.mov/media/examples/dive.webp)**Endless zoom** 28 s · 16:9](<https://ultrafast.mov/examples/dive/>)
+  * [![](https://ultrafast.mov/media/examples/meridian.webp)**Main titles** 24 s · 2.39:1](<https://ultrafast.mov/examples/meridian/>)
+
+[All 12 films on one page](<https://ultrafast.mov/examples/>)
+
+## Make your own.
+
+Install ultrafast, connect your agent, and give it a brief like this one.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Year in review · Example video made with ultrafast
+
+> One script writes a cycling club's year-in-review for each member: distance counts up over the days they rode, their favourite loop draws itself on a contour map, and the climbing rises as mountains.
+
+URL: https://ultrafast.mov/examples/wrapped/
+
+Data
+
+# Year in review
+
+One script writes a cycling club's year-in-review for each member: distance counts up over the days they rode, their favourite loop draws itself on a contour map, and the climbing rises as mountains.
+
+[Video: Year in review](https://ultrafast.mov/media/examples/wrapped.mp4)
+
+9:16 · 1080×1920 · 30 fps · 12 s ·  exported in 1.37 s (360 frames) · `review`: 0 findings ·  [document](<https://ultrafast.mov/examples/wrapped.json>)
+
+The document
+
+## One JSON file.
+
+This film is one ultrafast document. Read it, diff it, or hand it to your agent as a starting point.
+
+[Download wrapped.json](<https://ultrafast.mov/examples/wrapped.json>) [How a document is built](<https://ultrafast.mov/docs/documents/>)
+
+### Ops it uses
+
+  * [`crop`](<https://ultrafast.mov/docs/ops/#op-crop>)
+  * [`gradient`](<https://ultrafast.mov/docs/ops/#op-gradient>)
+  * [`grain`](<https://ultrafast.mov/docs/ops/#op-grain>)
+  * [`mask`](<https://ultrafast.mov/docs/ops/#op-mask>)
+  * [`opacity`](<https://ultrafast.mov/docs/ops/#op-opacity>)
+  * [`over`](<https://ultrafast.mov/docs/ops/#op-over>)
+  * [`path`](<https://ultrafast.mov/docs/ops/#op-path>)
+  * [`shader`](<https://ultrafast.mov/docs/ops/#op-shader>)
+  * [`shape`](<https://ultrafast.mov/docs/ops/#op-shape>)
+  * [`solid`](<https://ultrafast.mov/docs/ops/#op-solid>)
+  * [`text`](<https://ultrafast.mov/docs/ops/#op-text>)
+  * [`transform`](<https://ultrafast.mov/docs/ops/#op-transform>)
+  * [`transition`](<https://ultrafast.mov/docs/ops/#op-transition>)
+
+### Versions
+
+[Video: Year in review: Tomás](https://ultrafast.mov/media/examples/wrapped-tomas.mp4)
+
+### Tomás
+
+exported in 1.37 s · [document](<https://ultrafast.mov/examples/wrapped-tomas.json>)
+
+[Video: Year in review: Oluwaseun](https://ultrafast.mov/media/examples/wrapped-oluwaseun.mp4)
+
+### Oluwaseun
+
+exported in 1.52 s · [document](<https://ultrafast.mov/examples/wrapped-oluwaseun.json>)
+
+[Video: Year in review: Bea](https://ultrafast.mov/media/examples/wrapped-bea.mp4)
+
+### Bea
+
+exported in 1.57 s · [document](<https://ultrafast.mov/examples/wrapped-bea.json>)
+
+More examples
+
+## Every one comes with its document.
+
+  * [![](https://ultrafast.mov/media/examples/liftoff.webp)**Two launches, one count** 22.5 s · 2.39:1](<https://ultrafast.mov/examples/liftoff/>)
+  * [![](https://ultrafast.mov/media/examples/podcast.webp)**Podcast clip** 27.5 s · 9:16](<https://ultrafast.mov/examples/podcast/>)
+  * [![](https://ultrafast.mov/media/examples/orbit.webp)**Artemis I's route** 20 s · 16:9](<https://ultrafast.mov/examples/orbit/>)
+  * [![](https://ultrafast.mov/media/examples/keeling.webp)**The Keeling Curve** 16 s · 4:5](<https://ultrafast.mov/examples/keeling/>)
+  * [![](https://ultrafast.mov/media/examples/ui.webp)**SQL notebook launch** 16 s · 16:9](<https://ultrafast.mov/examples/ui/>)
+  * [![](https://ultrafast.mov/media/examples/clay.webp)**Pottery class teaser** 10 s · 9:16](<https://ultrafast.mov/examples/clay/>)
+  * [![](https://ultrafast.mov/media/examples/product.webp)**Lens launch** 16 s · 16:9](<https://ultrafast.mov/examples/product/>)
+  * [![](https://ultrafast.mov/media/examples/bloom.webp)**Celadon dish** 15 s · 1:1](<https://ultrafast.mov/examples/bloom/>)
+  * [![](https://ultrafast.mov/media/examples/swiss.webp)**Concert poster** 12.8 s · 4:5](<https://ultrafast.mov/examples/swiss/>)
+  * [![](https://ultrafast.mov/media/examples/dive.webp)**Endless zoom** 28 s · 16:9](<https://ultrafast.mov/examples/dive/>)
+  * [![](https://ultrafast.mov/media/examples/meridian.webp)**Main titles** 24 s · 2.39:1](<https://ultrafast.mov/examples/meridian/>)
+
+[All 12 films on one page](<https://ultrafast.mov/examples/>)
+
+## Make your own.
+
+Install ultrafast, connect your agent, and give it a brief like this one.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# SQL notebook launch · Example video made with ultrafast
+
+> A query against NASA's Exoplanet Archive is typed, run, charted and shared in an app that glides and tilts in 3D.
+
+URL: https://ultrafast.mov/examples/ui/
+
+Data
+
+# SQL notebook launch
+
+A query against NASA's Exoplanet Archive is typed, run, charted and shared in an app that glides and tilts in 3D.
+
+[Video: SQL notebook launch](https://ultrafast.mov/media/examples/ui.mp4)
+
+16:9 · 1920×1080 · 30 fps · 16 s ·  exported in 6.00 s (480 frames) ·  [document](<https://ultrafast.mov/examples/ui.json>)
+
+The document
+
+## One JSON file.
+
+This film is one ultrafast document. Read it, diff it, or hand it to your agent as a starting point.
+
+[Download ui.json](<https://ultrafast.mov/examples/ui.json>) [How a document is built](<https://ultrafast.mov/docs/documents/>)
+
+### Ops it uses
+
+  * [`aberration`](<https://ultrafast.mov/docs/ops/#op-aberration>)
+  * [`adjust`](<https://ultrafast.mov/docs/ops/#op-adjust>)
+  * [`blend`](<https://ultrafast.mov/docs/ops/#op-blend>)
+  * [`bloom`](<https://ultrafast.mov/docs/ops/#op-bloom>)
+  * [`blur`](<https://ultrafast.mov/docs/ops/#op-blur>)
+  * [`corner_pin`](<https://ultrafast.mov/docs/ops/#op-corner_pin>)
+  * [`crop`](<https://ultrafast.mov/docs/ops/#op-crop>)
+  * [`gradient`](<https://ultrafast.mov/docs/ops/#op-gradient>)
+  * [`grain`](<https://ultrafast.mov/docs/ops/#op-grain>)
+  * [`mask`](<https://ultrafast.mov/docs/ops/#op-mask>)
+  * [`opacity`](<https://ultrafast.mov/docs/ops/#op-opacity>)
+  * [`over`](<https://ultrafast.mov/docs/ops/#op-over>)
+  * [`path`](<https://ultrafast.mov/docs/ops/#op-path>)
+  * [`shader`](<https://ultrafast.mov/docs/ops/#op-shader>)
+  * [`shape`](<https://ultrafast.mov/docs/ops/#op-shape>)
+  * [`solid`](<https://ultrafast.mov/docs/ops/#op-solid>)
+  * [`text`](<https://ultrafast.mov/docs/ops/#op-text>)
+  * [`transform`](<https://ultrafast.mov/docs/ops/#op-transform>)
+  * [`vignette`](<https://ultrafast.mov/docs/ops/#op-vignette>)
+
+### Credits
+
+data and images| source  
+---|---  
+NASA Exoplanet Archive: confirmed planets by discovery year and method: NASA Exoplanet Science Institute, Caltech/IPAC · 2026-11-21| [exoplanetarchive.ipac.caltech.edu](<https://exoplanetarchive.ipac.caltech.edu/>)  
+  
+The document reads its footage and data from local files. To render it, download the source files, or point each `src` at your own. All credits are on [the examples page](<https://ultrafast.mov/examples/#credits>).
+
+More examples
+
+## Every one comes with its document.
+
+  * [![](https://ultrafast.mov/media/examples/liftoff.webp)**Two launches, one count** 22.5 s · 2.39:1](<https://ultrafast.mov/examples/liftoff/>)
+  * [![](https://ultrafast.mov/media/examples/podcast.webp)**Podcast clip** 27.5 s · 9:16](<https://ultrafast.mov/examples/podcast/>)
+  * [![](https://ultrafast.mov/media/examples/orbit.webp)**Artemis I's route** 20 s · 16:9](<https://ultrafast.mov/examples/orbit/>)
+  * [![](https://ultrafast.mov/media/examples/keeling.webp)**The Keeling Curve** 16 s · 4:5](<https://ultrafast.mov/examples/keeling/>)
+  * [![](https://ultrafast.mov/media/examples/wrapped.webp)**Year in review** 12 s · 9:16](<https://ultrafast.mov/examples/wrapped/>)
+  * [![](https://ultrafast.mov/media/examples/clay.webp)**Pottery class teaser** 10 s · 9:16](<https://ultrafast.mov/examples/clay/>)
+  * [![](https://ultrafast.mov/media/examples/product.webp)**Lens launch** 16 s · 16:9](<https://ultrafast.mov/examples/product/>)
+  * [![](https://ultrafast.mov/media/examples/bloom.webp)**Celadon dish** 15 s · 1:1](<https://ultrafast.mov/examples/bloom/>)
+  * [![](https://ultrafast.mov/media/examples/swiss.webp)**Concert poster** 12.8 s · 4:5](<https://ultrafast.mov/examples/swiss/>)
+  * [![](https://ultrafast.mov/media/examples/dive.webp)**Endless zoom** 28 s · 16:9](<https://ultrafast.mov/examples/dive/>)
+  * [![](https://ultrafast.mov/media/examples/meridian.webp)**Main titles** 24 s · 2.39:1](<https://ultrafast.mov/examples/meridian/>)
+
+[All 12 films on one page](<https://ultrafast.mov/examples/>)
+
+## Make your own.
+
+Install ultrafast, connect your agent, and give it a brief like this one.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Pottery class teaser · Example video made with ultrafast
+
+> A lump of wet terracotta is centred, opened and pulled into a vase on a turning wheel under window light, beside the class title and its details.
+
+URL: https://ultrafast.mov/examples/clay/
+
+No footage
+
+# Pottery class teaser
+
+A lump of wet terracotta is centred, opened and pulled into a vase on a turning wheel under window light, beside the class title and its details.
+
+[Video: Pottery class teaser](https://ultrafast.mov/media/examples/clay.mp4) 3D rendered by ultrafast
+
+9:16 · 1080×1920 · 30 fps · 10 s ·  exported in 1.68 s (300 frames) · `review`: 0 findings ·  [document](<https://ultrafast.mov/examples/clay.json>)
+
+The document
+
+## One JSON file.
+
+This film is one ultrafast document. Read it, diff it, or hand it to your agent as a starting point.
+
+[Download clay.json](<https://ultrafast.mov/examples/clay.json>) [How a document is built](<https://ultrafast.mov/docs/documents/>)
+
+### Ops it uses
+
+  * [`blend`](<https://ultrafast.mov/docs/ops/#op-blend>)
+  * [`bloom`](<https://ultrafast.mov/docs/ops/#op-bloom>)
+  * [`blur`](<https://ultrafast.mov/docs/ops/#op-blur>)
+  * [`gradient`](<https://ultrafast.mov/docs/ops/#op-gradient>)
+  * [`grain`](<https://ultrafast.mov/docs/ops/#op-grain>)
+  * [`mask`](<https://ultrafast.mov/docs/ops/#op-mask>)
+  * [`over`](<https://ultrafast.mov/docs/ops/#op-over>)
+  * [`particles`](<https://ultrafast.mov/docs/ops/#op-particles>)
+  * [`shader`](<https://ultrafast.mov/docs/ops/#op-shader>)
+  * [`solid`](<https://ultrafast.mov/docs/ops/#op-solid>)
+  * [`stack`](<https://ultrafast.mov/docs/ops/#op-stack>)
+  * [`text`](<https://ultrafast.mov/docs/ops/#op-text>)
+  * [`vignette`](<https://ultrafast.mov/docs/ops/#op-vignette>)
+
+More examples
+
+## Every one comes with its document.
+
+  * [![](https://ultrafast.mov/media/examples/liftoff.webp)**Two launches, one count** 22.5 s · 2.39:1](<https://ultrafast.mov/examples/liftoff/>)
+  * [![](https://ultrafast.mov/media/examples/podcast.webp)**Podcast clip** 27.5 s · 9:16](<https://ultrafast.mov/examples/podcast/>)
+  * [![](https://ultrafast.mov/media/examples/orbit.webp)**Artemis I's route** 20 s · 16:9](<https://ultrafast.mov/examples/orbit/>)
+  * [![](https://ultrafast.mov/media/examples/keeling.webp)**The Keeling Curve** 16 s · 4:5](<https://ultrafast.mov/examples/keeling/>)
+  * [![](https://ultrafast.mov/media/examples/wrapped.webp)**Year in review** 12 s · 9:16](<https://ultrafast.mov/examples/wrapped/>)
+  * [![](https://ultrafast.mov/media/examples/ui.webp)**SQL notebook launch** 16 s · 16:9](<https://ultrafast.mov/examples/ui/>)
+  * [![](https://ultrafast.mov/media/examples/product.webp)**Lens launch** 16 s · 16:9](<https://ultrafast.mov/examples/product/>)
+  * [![](https://ultrafast.mov/media/examples/bloom.webp)**Celadon dish** 15 s · 1:1](<https://ultrafast.mov/examples/bloom/>)
+  * [![](https://ultrafast.mov/media/examples/swiss.webp)**Concert poster** 12.8 s · 4:5](<https://ultrafast.mov/examples/swiss/>)
+  * [![](https://ultrafast.mov/media/examples/dive.webp)**Endless zoom** 28 s · 16:9](<https://ultrafast.mov/examples/dive/>)
+  * [![](https://ultrafast.mov/media/examples/meridian.webp)**Main titles** 24 s · 2.39:1](<https://ultrafast.mov/examples/meridian/>)
+
+[All 12 films on one page](<https://ultrafast.mov/examples/>)
+
+## Make your own.
+
+Install ultrafast, connect your agent, and give it a brief like this one.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Lens launch · Example video made with ultrafast
+
+> A camera lens that doesn't exist, lit like a studio product shot: light finds the knurled barrel, the focus scale turns, eleven blades stop down and the optics slide apart under callouts.
+
+URL: https://ultrafast.mov/examples/product/
+
+No footage
+
+# Lens launch
+
+A camera lens that doesn't exist, lit like a studio product shot: light finds the knurled barrel, the focus scale turns, eleven blades stop down and the optics slide apart under callouts.
+
+[Video: Lens launch](https://ultrafast.mov/media/examples/product.mp4) 3D rendered by ultrafast
+
+16:9 · 1920×1080 · 30 fps · 16 s ·  exported in 4.88 s (480 frames) · `review`: 0 findings ·  [document](<https://ultrafast.mov/examples/product.json>)
+
+The document
+
+## One JSON file.
+
+This film is one ultrafast document. Read it, diff it, or hand it to your agent as a starting point.
+
+[Download product.json](<https://ultrafast.mov/examples/product.json>) [How a document is built](<https://ultrafast.mov/docs/documents/>)
+
+### Ops it uses
+
+  * [`aberration`](<https://ultrafast.mov/docs/ops/#op-aberration>)
+  * [`bloom`](<https://ultrafast.mov/docs/ops/#op-bloom>)
+  * [`film_look`](<https://ultrafast.mov/docs/ops/#op-film_look>)
+  * [`grain`](<https://ultrafast.mov/docs/ops/#op-grain>)
+  * [`over`](<https://ultrafast.mov/docs/ops/#op-over>)
+  * [`path`](<https://ultrafast.mov/docs/ops/#op-path>)
+  * [`shader`](<https://ultrafast.mov/docs/ops/#op-shader>)
+  * [`shape`](<https://ultrafast.mov/docs/ops/#op-shape>)
+  * [`solid`](<https://ultrafast.mov/docs/ops/#op-solid>)
+  * [`text`](<https://ultrafast.mov/docs/ops/#op-text>)
+  * [`transition`](<https://ultrafast.mov/docs/ops/#op-transition>)
+
+More examples
+
+## Every one comes with its document.
+
+  * [![](https://ultrafast.mov/media/examples/liftoff.webp)**Two launches, one count** 22.5 s · 2.39:1](<https://ultrafast.mov/examples/liftoff/>)
+  * [![](https://ultrafast.mov/media/examples/podcast.webp)**Podcast clip** 27.5 s · 9:16](<https://ultrafast.mov/examples/podcast/>)
+  * [![](https://ultrafast.mov/media/examples/orbit.webp)**Artemis I's route** 20 s · 16:9](<https://ultrafast.mov/examples/orbit/>)
+  * [![](https://ultrafast.mov/media/examples/keeling.webp)**The Keeling Curve** 16 s · 4:5](<https://ultrafast.mov/examples/keeling/>)
+  * [![](https://ultrafast.mov/media/examples/wrapped.webp)**Year in review** 12 s · 9:16](<https://ultrafast.mov/examples/wrapped/>)
+  * [![](https://ultrafast.mov/media/examples/ui.webp)**SQL notebook launch** 16 s · 16:9](<https://ultrafast.mov/examples/ui/>)
+  * [![](https://ultrafast.mov/media/examples/clay.webp)**Pottery class teaser** 10 s · 9:16](<https://ultrafast.mov/examples/clay/>)
+  * [![](https://ultrafast.mov/media/examples/bloom.webp)**Celadon dish** 15 s · 1:1](<https://ultrafast.mov/examples/bloom/>)
+  * [![](https://ultrafast.mov/media/examples/swiss.webp)**Concert poster** 12.8 s · 4:5](<https://ultrafast.mov/examples/swiss/>)
+  * [![](https://ultrafast.mov/media/examples/dive.webp)**Endless zoom** 28 s · 16:9](<https://ultrafast.mov/examples/dive/>)
+  * [![](https://ultrafast.mov/media/examples/meridian.webp)**Main titles** 24 s · 2.39:1](<https://ultrafast.mov/examples/meridian/>)
+
+[All 12 films on one page](<https://ultrafast.mov/examples/>)
+
+## Make your own.
+
+Install ultrafast, connect your agent, and give it a brief like this one.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Celadon dish · Example video made with ultrafast
+
+> A carving grows across a celadon dish by reaction–diffusion, stepped every frame; the camera closes in on the glaze, then molten glaze floods back over it.
+
+URL: https://ultrafast.mov/examples/bloom/
+
+No footage
+
+# Celadon dish
+
+A carving grows across a celadon dish by reaction–diffusion, stepped every frame; the camera closes in on the glaze, then molten glaze floods back over it.
+
+[Video: Celadon dish](https://ultrafast.mov/media/examples/bloom.mp4)
+
+1:1 · 1080×1080 · 30 fps · 15 s ·  exported in 1.06 s (450 frames) · `review`: 0 findings ·  [document](<https://ultrafast.mov/examples/bloom.json>)
+
+The document
+
+## One JSON file.
+
+This film is one ultrafast document. Read it, diff it, or hand it to your agent as a starting point.
+
+[Download bloom.json](<https://ultrafast.mov/examples/bloom.json>) [How a document is built](<https://ultrafast.mov/docs/documents/>)
+
+### Ops it uses
+
+  * [`adjust`](<https://ultrafast.mov/docs/ops/#op-adjust>)
+  * [`blend`](<https://ultrafast.mov/docs/ops/#op-blend>)
+  * [`bloom`](<https://ultrafast.mov/docs/ops/#op-bloom>)
+  * [`blur`](<https://ultrafast.mov/docs/ops/#op-blur>)
+  * [`feedback`](<https://ultrafast.mov/docs/ops/#op-feedback>)
+  * [`gradient`](<https://ultrafast.mov/docs/ops/#op-gradient>)
+  * [`mask`](<https://ultrafast.mov/docs/ops/#op-mask>)
+  * [`over`](<https://ultrafast.mov/docs/ops/#op-over>)
+  * [`shader`](<https://ultrafast.mov/docs/ops/#op-shader>)
+  * [`shape`](<https://ultrafast.mov/docs/ops/#op-shape>)
+  * [`vignette`](<https://ultrafast.mov/docs/ops/#op-vignette>)
+
+More examples
+
+## Every one comes with its document.
+
+  * [![](https://ultrafast.mov/media/examples/liftoff.webp)**Two launches, one count** 22.5 s · 2.39:1](<https://ultrafast.mov/examples/liftoff/>)
+  * [![](https://ultrafast.mov/media/examples/podcast.webp)**Podcast clip** 27.5 s · 9:16](<https://ultrafast.mov/examples/podcast/>)
+  * [![](https://ultrafast.mov/media/examples/orbit.webp)**Artemis I's route** 20 s · 16:9](<https://ultrafast.mov/examples/orbit/>)
+  * [![](https://ultrafast.mov/media/examples/keeling.webp)**The Keeling Curve** 16 s · 4:5](<https://ultrafast.mov/examples/keeling/>)
+  * [![](https://ultrafast.mov/media/examples/wrapped.webp)**Year in review** 12 s · 9:16](<https://ultrafast.mov/examples/wrapped/>)
+  * [![](https://ultrafast.mov/media/examples/ui.webp)**SQL notebook launch** 16 s · 16:9](<https://ultrafast.mov/examples/ui/>)
+  * [![](https://ultrafast.mov/media/examples/clay.webp)**Pottery class teaser** 10 s · 9:16](<https://ultrafast.mov/examples/clay/>)
+  * [![](https://ultrafast.mov/media/examples/product.webp)**Lens launch** 16 s · 16:9](<https://ultrafast.mov/examples/product/>)
+  * [![](https://ultrafast.mov/media/examples/swiss.webp)**Concert poster** 12.8 s · 4:5](<https://ultrafast.mov/examples/swiss/>)
+  * [![](https://ultrafast.mov/media/examples/dive.webp)**Endless zoom** 28 s · 16:9](<https://ultrafast.mov/examples/dive/>)
+  * [![](https://ultrafast.mov/media/examples/meridian.webp)**Main titles** 24 s · 2.39:1](<https://ultrafast.mov/examples/meridian/>)
+
+[All 12 films on one page](<https://ultrafast.mov/examples/>)
+
+## Make your own.
+
+Install ultrafast, connect your agent, and give it a brief like this one.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Concert poster · Example video made with ultrafast
+
+> A Swiss-style poster for a night of four concerts. Its dial is the score of its own track, and the headline widens and narrows on every beat.
+
+URL: https://ultrafast.mov/examples/swiss/
+
+No footage
+
+# Concert poster
+
+A Swiss-style poster for a night of four concerts. Its dial is the score of its own track, and the headline widens and narrows on every beat.
+
+[Video: Concert poster](https://ultrafast.mov/media/examples/swiss.mp4)
+
+4:5 · 1080×1350 · 30 fps · 12.8 s ·  exported in 0.72 s (384 frames) · `review`: 0 findings ·  [document](<https://ultrafast.mov/examples/swiss.json>)
+
+The document
+
+## One JSON file.
+
+This film is one ultrafast document. Read it, diff it, or hand it to your agent as a starting point.
+
+[Download swiss.json](<https://ultrafast.mov/examples/swiss.json>) [How a document is built](<https://ultrafast.mov/docs/documents/>)
+
+### Ops it uses
+
+  * [`audio`](<https://ultrafast.mov/docs/ops/#op-audio>)
+  * [`blend`](<https://ultrafast.mov/docs/ops/#op-blend>)
+  * [`color_matrix`](<https://ultrafast.mov/docs/ops/#op-color_matrix>)
+  * [`noise`](<https://ultrafast.mov/docs/ops/#op-noise>)
+  * [`over`](<https://ultrafast.mov/docs/ops/#op-over>)
+  * [`path`](<https://ultrafast.mov/docs/ops/#op-path>)
+  * [`shader`](<https://ultrafast.mov/docs/ops/#op-shader>)
+  * [`shape`](<https://ultrafast.mov/docs/ops/#op-shape>)
+  * [`solid`](<https://ultrafast.mov/docs/ops/#op-solid>)
+  * [`text`](<https://ultrafast.mov/docs/ops/#op-text>)
+  * [`transform`](<https://ultrafast.mov/docs/ops/#op-transform>)
+
+More examples
+
+## Every one comes with its document.
+
+  * [![](https://ultrafast.mov/media/examples/liftoff.webp)**Two launches, one count** 22.5 s · 2.39:1](<https://ultrafast.mov/examples/liftoff/>)
+  * [![](https://ultrafast.mov/media/examples/podcast.webp)**Podcast clip** 27.5 s · 9:16](<https://ultrafast.mov/examples/podcast/>)
+  * [![](https://ultrafast.mov/media/examples/orbit.webp)**Artemis I's route** 20 s · 16:9](<https://ultrafast.mov/examples/orbit/>)
+  * [![](https://ultrafast.mov/media/examples/keeling.webp)**The Keeling Curve** 16 s · 4:5](<https://ultrafast.mov/examples/keeling/>)
+  * [![](https://ultrafast.mov/media/examples/wrapped.webp)**Year in review** 12 s · 9:16](<https://ultrafast.mov/examples/wrapped/>)
+  * [![](https://ultrafast.mov/media/examples/ui.webp)**SQL notebook launch** 16 s · 16:9](<https://ultrafast.mov/examples/ui/>)
+  * [![](https://ultrafast.mov/media/examples/clay.webp)**Pottery class teaser** 10 s · 9:16](<https://ultrafast.mov/examples/clay/>)
+  * [![](https://ultrafast.mov/media/examples/product.webp)**Lens launch** 16 s · 16:9](<https://ultrafast.mov/examples/product/>)
+  * [![](https://ultrafast.mov/media/examples/bloom.webp)**Celadon dish** 15 s · 1:1](<https://ultrafast.mov/examples/bloom/>)
+  * [![](https://ultrafast.mov/media/examples/dive.webp)**Endless zoom** 28 s · 16:9](<https://ultrafast.mov/examples/dive/>)
+  * [![](https://ultrafast.mov/media/examples/meridian.webp)**Main titles** 24 s · 2.39:1](<https://ultrafast.mov/examples/meridian/>)
+
+[All 12 films on one page](<https://ultrafast.mov/examples/>)
+
+## Make your own.
+
+Install ultrafast, connect your agent, and give it a brief like this one.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Endless zoom · Example video made with ultrafast
+
+> One camera falls through seven nested worlds (type, vector blades, a chrome torus, ink, shader contours and rings of type) to the wordmark, whose dot holds the first frame again.
+
+URL: https://ultrafast.mov/examples/dive/
+
+No footage
+
+# Endless zoom
+
+One camera falls through seven nested worlds (type, vector blades, a chrome torus, ink, shader contours and rings of type) to the wordmark, whose dot holds the first frame again.
+
+[Video: Endless zoom](https://ultrafast.mov/media/examples/dive.mp4) 3D rendered by ultrafast
+
+16:9 · 1920×1080 · 30 fps · 28 s ·  exported in 5.65 s (840 frames) · `review`: 0 findings ·  [document](<https://ultrafast.mov/examples/dive.json>)
+
+The document
+
+## One JSON file.
+
+This film is one ultrafast document. Read it, diff it, or hand it to your agent as a starting point.
+
+[Download dive.json](<https://ultrafast.mov/examples/dive.json>) [How a document is built](<https://ultrafast.mov/docs/documents/>)
+
+### Ops it uses
+
+  * [`bloom`](<https://ultrafast.mov/docs/ops/#op-bloom>)
+  * [`fluid`](<https://ultrafast.mov/docs/ops/#op-fluid>)
+  * [`grain`](<https://ultrafast.mov/docs/ops/#op-grain>)
+  * [`mask`](<https://ultrafast.mov/docs/ops/#op-mask>)
+  * [`over`](<https://ultrafast.mov/docs/ops/#op-over>)
+  * [`path`](<https://ultrafast.mov/docs/ops/#op-path>)
+  * [`raymarch`](<https://ultrafast.mov/docs/ops/#op-raymarch>)
+  * [`shader`](<https://ultrafast.mov/docs/ops/#op-shader>)
+  * [`shape`](<https://ultrafast.mov/docs/ops/#op-shape>)
+  * [`solid`](<https://ultrafast.mov/docs/ops/#op-solid>)
+  * [`transform`](<https://ultrafast.mov/docs/ops/#op-transform>)
+
+More examples
+
+## Every one comes with its document.
+
+  * [![](https://ultrafast.mov/media/examples/liftoff.webp)**Two launches, one count** 22.5 s · 2.39:1](<https://ultrafast.mov/examples/liftoff/>)
+  * [![](https://ultrafast.mov/media/examples/podcast.webp)**Podcast clip** 27.5 s · 9:16](<https://ultrafast.mov/examples/podcast/>)
+  * [![](https://ultrafast.mov/media/examples/orbit.webp)**Artemis I's route** 20 s · 16:9](<https://ultrafast.mov/examples/orbit/>)
+  * [![](https://ultrafast.mov/media/examples/keeling.webp)**The Keeling Curve** 16 s · 4:5](<https://ultrafast.mov/examples/keeling/>)
+  * [![](https://ultrafast.mov/media/examples/wrapped.webp)**Year in review** 12 s · 9:16](<https://ultrafast.mov/examples/wrapped/>)
+  * [![](https://ultrafast.mov/media/examples/ui.webp)**SQL notebook launch** 16 s · 16:9](<https://ultrafast.mov/examples/ui/>)
+  * [![](https://ultrafast.mov/media/examples/clay.webp)**Pottery class teaser** 10 s · 9:16](<https://ultrafast.mov/examples/clay/>)
+  * [![](https://ultrafast.mov/media/examples/product.webp)**Lens launch** 16 s · 16:9](<https://ultrafast.mov/examples/product/>)
+  * [![](https://ultrafast.mov/media/examples/bloom.webp)**Celadon dish** 15 s · 1:1](<https://ultrafast.mov/examples/bloom/>)
+  * [![](https://ultrafast.mov/media/examples/swiss.webp)**Concert poster** 12.8 s · 4:5](<https://ultrafast.mov/examples/swiss/>)
+  * [![](https://ultrafast.mov/media/examples/meridian.webp)**Main titles** 24 s · 2.39:1](<https://ultrafast.mov/examples/meridian/>)
+
+[All 12 films on one page](<https://ultrafast.mov/examples/>)
+
+## Make your own.
+
+Install ultrafast, connect your agent, and give it a brief like this one.
+
+`curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
+
+Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud/>).
+
+
+---
+
+# Main titles · Example video made with ultrafast
+
+> Main titles for a drama that doesn't exist: a brass compass, a sea chart with a route inking itself across it, star trails over the sea, an armillary sphere, and a lighthouse whose beam lights the title.
+
+URL: https://ultrafast.mov/examples/meridian/
+
+No footage
+
+# Main titles
+
+Main titles for a drama that doesn't exist: a brass compass, a sea chart with a route inking itself across it, star trails over the sea, an armillary sphere, and a lighthouse whose beam lights the title.
+
+[Video: Main titles](https://ultrafast.mov/media/examples/meridian.mp4) 3D rendered by ultrafast
+
+2.39:1 · 1920×804 · 30 fps · 24 s ·  exported in 1.44 s (720 frames) · `review`: 0 findings ·  [document](<https://ultrafast.mov/examples/meridian.json>)
+
+The document
+
+## One JSON file.
+
+This film is one ultrafast document. Read it, diff it, or hand it to your agent as a starting point.
+
+[Download meridian.json](<https://ultrafast.mov/examples/meridian.json>) [How a document is built](<https://ultrafast.mov/docs/documents/>)
+
+### Ops it uses
+
+  * [`aberration`](<https://ultrafast.mov/docs/ops/#op-aberration>)
+  * [`adjust`](<https://ultrafast.mov/docs/ops/#op-adjust>)
+  * [`blend`](<https://ultrafast.mov/docs/ops/#op-blend>)
+  * [`bloom`](<https://ultrafast.mov/docs/ops/#op-bloom>)
+  * [`blur`](<https://ultrafast.mov/docs/ops/#op-blur>)
+  * [`corner_pin`](<https://ultrafast.mov/docs/ops/#op-corner_pin>)
+  * [`glow`](<https://ultrafast.mov/docs/ops/#op-glow>)
+  * [`gradient`](<https://ultrafast.mov/docs/ops/#op-gradient>)
+  * [`grain`](<https://ultrafast.mov/docs/ops/#op-grain>)
+  * [`mask`](<https://ultrafast.mov/docs/ops/#op-mask>)
+  * [`over`](<https://ultrafast.mov/docs/ops/#op-over>)
+  * [`particles`](<https://ultrafast.mov/docs/ops/#op-particles>)
+  * [`path`](<https://ultrafast.mov/docs/ops/#op-path>)
+  * [`raymarch`](<https://ultrafast.mov/docs/ops/#op-raymarch>)
+  * [`repeater`](<https://ultrafast.mov/docs/ops/#op-repeater>)
+  * [`shader`](<https://ultrafast.mov/docs/ops/#op-shader>)
+  * [`shape`](<https://ultrafast.mov/docs/ops/#op-shape>)
+  * [`solid`](<https://ultrafast.mov/docs/ops/#op-solid>)
+  * [`text`](<https://ultrafast.mov/docs/ops/#op-text>)
+  * [`transform`](<https://ultrafast.mov/docs/ops/#op-transform>)
+  * [`transition`](<https://ultrafast.mov/docs/ops/#op-transition>)
+  * [`vignette`](<https://ultrafast.mov/docs/ops/#op-vignette>)
+
+More examples
+
+## Every one comes with its document.
+
+  * [![](https://ultrafast.mov/media/examples/liftoff.webp)**Two launches, one count** 22.5 s · 2.39:1](<https://ultrafast.mov/examples/liftoff/>)
+  * [![](https://ultrafast.mov/media/examples/podcast.webp)**Podcast clip** 27.5 s · 9:16](<https://ultrafast.mov/examples/podcast/>)
+  * [![](https://ultrafast.mov/media/examples/orbit.webp)**Artemis I's route** 20 s · 16:9](<https://ultrafast.mov/examples/orbit/>)
+  * [![](https://ultrafast.mov/media/examples/keeling.webp)**The Keeling Curve** 16 s · 4:5](<https://ultrafast.mov/examples/keeling/>)
+  * [![](https://ultrafast.mov/media/examples/wrapped.webp)**Year in review** 12 s · 9:16](<https://ultrafast.mov/examples/wrapped/>)
+  * [![](https://ultrafast.mov/media/examples/ui.webp)**SQL notebook launch** 16 s · 16:9](<https://ultrafast.mov/examples/ui/>)
+  * [![](https://ultrafast.mov/media/examples/clay.webp)**Pottery class teaser** 10 s · 9:16](<https://ultrafast.mov/examples/clay/>)
+  * [![](https://ultrafast.mov/media/examples/product.webp)**Lens launch** 16 s · 16:9](<https://ultrafast.mov/examples/product/>)
+  * [![](https://ultrafast.mov/media/examples/bloom.webp)**Celadon dish** 15 s · 1:1](<https://ultrafast.mov/examples/bloom/>)
+  * [![](https://ultrafast.mov/media/examples/swiss.webp)**Concert poster** 12.8 s · 4:5](<https://ultrafast.mov/examples/swiss/>)
+  * [![](https://ultrafast.mov/media/examples/dive.webp)**Endless zoom** 28 s · 16:9](<https://ultrafast.mov/examples/dive/>)
+
+[All 12 films on one page](<https://ultrafast.mov/examples/>)
+
+## Make your own.
+
+Install ultrafast, connect your agent, and give it a brief like this one.
 
 `curl -fsSL https://ultrafast.mov/install.sh | sh` [Read the quickstart](<https://ultrafast.mov/docs/>)
 

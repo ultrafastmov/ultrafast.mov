@@ -44,6 +44,23 @@ Facts an agent needs:
 - [Render benchmark: ultrafast vs Remotion vs HyperFrames](https://ultrafast.mov/benchmarks/index.md): the head-to-head render benchmark on one RTX 5090 and the token count, with the method, the caveats and how to reproduce them
 - [Open source Remotion alternatives, compared](https://ultrafast.mov/alternatives/remotion/index.md): eight open-source tools with their licences, renderers, agent tooling and release dates, and when to choose each
 
+## Example films
+
+Each film has a watch page (as Markdown below) and the JSON document that made it.
+
+- [Two launches, one count](https://ultrafast.mov/examples/liftoff/index.md): Apollo 11 and Artemis I lift off in alternating shots, cut to the 1969 launch commentary, with each number in large type and both launches' clocks counting down to zero. Document: https://ultrafast.mov/examples/liftoff.json
+- [Podcast clip](https://ultrafast.mov/examples/podcast/index.md): A vertical clip of NASA astronaut Mark Vande Hei aboard the space station, cut out of the station on every frame and set over Earth's limb, cloud tops and stars, with four words set huge behind him and captions timed to his voice. Document: https://ultrafast.mov/examples/podcast.json
+- [Artemis I's route](https://ultrafast.mov/examples/orbit/index.md): Artemis I's flown route drawn across lit models of the Earth and Moon, with flight-day and distance counters, and Orion's own view of the Moon at the return flyby. Document: https://ultrafast.mov/examples/orbit.json
+- [The Keeling Curve](https://ultrafast.mov/examples/keeling/index.md): Every monthly mean of carbon dioxide at Mauna Loa since March 1958 draws itself; the camera dives into 2025 to show the seasonal cycle, and the latest month lands large. Document: https://ultrafast.mov/examples/keeling.json
+- [Year in review](https://ultrafast.mov/examples/wrapped/index.md): One script writes a cycling club's year-in-review for each member: distance counts up over the days they rode, their favourite loop draws itself on a contour map, and the climbing rises as mountains. Document: https://ultrafast.mov/examples/wrapped.json
+- [SQL notebook launch](https://ultrafast.mov/examples/ui/index.md): A query against NASA's Exoplanet Archive is typed, run, charted and shared in an app that glides and tilts in 3D. Document: https://ultrafast.mov/examples/ui.json
+- [Pottery class teaser](https://ultrafast.mov/examples/clay/index.md): A lump of wet terracotta is centred, opened and pulled into a vase on a turning wheel under window light, beside the class title and its details. Document: https://ultrafast.mov/examples/clay.json
+- [Lens launch](https://ultrafast.mov/examples/product/index.md): A camera lens that doesn't exist, lit like a studio product shot: light finds the knurled barrel, the focus scale turns, eleven blades stop down and the optics slide apart under callouts. Document: https://ultrafast.mov/examples/product.json
+- [Celadon dish](https://ultrafast.mov/examples/bloom/index.md): A carving grows across a celadon dish by reaction–diffusion, stepped every frame; the camera closes in on the glaze, then molten glaze floods back over it. Document: https://ultrafast.mov/examples/bloom.json
+- [Concert poster](https://ultrafast.mov/examples/swiss/index.md): A Swiss-style poster for a night of four concerts. Its dial is the score of its own track, and the headline widens and narrows on every beat. Document: https://ultrafast.mov/examples/swiss.json
+- [Endless zoom](https://ultrafast.mov/examples/dive/index.md): One camera falls through seven nested worlds (type, vector blades, a chrome torus, ink, shader contours and rings of type) to the wordmark, whose dot holds the first frame again. Document: https://ultrafast.mov/examples/dive.json
+- [Main titles](https://ultrafast.mov/examples/meridian/index.md): Main titles for a drama that doesn't exist: a brass compass, a sea chart with a route inking itself across it, star trails over the sea, an armillary sphere, and a lighthouse whose beam lights the title. Document: https://ultrafast.mov/examples/meridian.json
+
 ## Optional
 
 - [Full text of this site](https://ultrafast.mov/llms-full.txt): every page above as Markdown, in one file

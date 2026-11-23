@@ -754,3 +754,47 @@ html:has(.lightbox[open]) { overflow: hidden; }
   .stamp, .notes li, .slip li::after, .wheel .strip, .redpen path { transition: none !important; }
   #nav .links a::after { transition: none; }
 }
+
+/* ---------- a film's watch page (/examples/<id>/) ---------- */
+.watch .wfilm { margin-top: 44px; max-width: min(100%, calc(var(--ar) * 72vh)); }
+.watch .wfilm.tall { max-width: min(100%, calc(var(--ar) * 72vh + 272px)); }
+.watch .wfilm .meta { margin-top: 14px; }
+.watch .wfilm.tall .meta { margin-top: 0; flex-direction: column; gap: 6px; }
+.wmade .actions { align-items: center; margin-top: 0; }
+.wmade .gallery { margin-top: 8px; }
+.wmade .gi.tall { flex-grow: 0; flex-basis: calc(var(--ar) * 330px + 250px); }
+.wh { margin: 56px 0 16px; font: 900 24px/1.05 var(--wood); font-stretch: 112%; }
+.opchips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.opchips a { display: inline-block; padding: 6px 10px 5px; background: rgba(29, 27, 25, .07); text-decoration: none; }
+.opchips a:hover { background: var(--yellow); }
+.opchips code { font: 13.5px/1 var(--mono); }
+.filmgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 30px 26px; margin: 0; padding: 0; list-style: none; }
+.filmgrid a { display: block; text-decoration: none; color: var(--black); }
+.filmgrid .pv { display: block; aspect-ratio: 4 / 3; padding: 6px; background: #fff; box-shadow: 0 1px 0 rgba(0, 0, 0, .18), 0 14px 22px -18px rgba(0, 0, 0, .6); }
+.filmgrid img { display: block; width: 100%; height: 100%; object-fit: cover; background: #1d1b19; }
+.filmgrid b { display: block; margin-top: 12px; font: 900 18px/1.05 var(--wood); font-stretch: 112%; }
+.filmgrid .m { display: block; margin-top: 5px; font: 12.5px/1.4 var(--mono); color: var(--muted); }
+.filmgrid a:hover b { text-decoration: underline; text-decoration-color: var(--pink); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.wmore .aside { text-align: left; }
+@media (max-width: 600px) {
+  .watch .wfilm.tall { display: block; max-width: none; }
+  .watch .wfilm.tall .sheet { width: min(78%, 330px); }
+  .watch .wfilm.tall .meta { margin-top: 12px; flex-direction: row; }
+  .filmgrid { grid-template-columns: repeat(2, 1fr); gap: 22px 16px; }
+}
+
+/* ---------- blog ---------- */
+.postlist { margin: 0; padding: 0; list-style: none; border-top: 1.5px solid var(--black); max-width: 860px; }
+.postlist li { padding: 26px 0 28px; border-bottom: 1px dashed rgba(29, 27, 25, .35); }
+.postlist h2 { margin: 6px 0 8px; font: 900 clamp(24px, 2.4vw, 32px)/1.05 var(--wood); font-stretch: 112%; }
+.postlist h2 a { text-decoration: none; }
+.postlist h2 a:hover { text-decoration: underline; text-decoration-color: var(--pink); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+.postlist p { margin: 0; max-width: 64ch; font: 17px/1.5 var(--sans); color: var(--body); }
+.postmeta { display: flex; flex-wrap: wrap; gap: 4px 14px; font: 13px/1.4 var(--mono); color: var(--muted); }
+.phead .postmeta { margin-top: 26px; }
+.post .prose { margin: 0; }
+.post .prose img, .post .prose video { display: block; max-width: 100%; height: auto; margin: 26px 0; box-shadow: 0 0 0 6px #fff, 0 16px 24px -18px rgba(0, 0, 0, .6); }
+.post .prose table { width: 100%; border-collapse: collapse; margin: 24px 0; font: 15px/1.45 var(--sans); }
+.post .prose th, .post .prose td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid rgba(29, 27, 25, .13); }
+.post .prose thead th { border-bottom: 2px solid var(--black); }
+.feedlink { margin-top: 30px; font: 14px/1.4 var(--mono); }
