@@ -53,6 +53,6 @@
   <url><loc>https://ultrafast.mov/examples/meridian/</loc><lastmod>2026-11-23T11:00:39+00:00</lastmod><priority>0.7</priority>
     <video:video><video:thumbnail_loc>https://ultrafast.mov/media/examples/meridian.jpg</video:thumbnail_loc><video:title>Main titles</video:title><video:description>Main titles for a drama that doesn't exist: a brass compass, a sea chart with a route inking itself across it, star trails over the sea, an armillary sphere, and a lighthouse whose beam lights the title.</video:description><video:content_loc>https://ultrafast.mov/media/examples/meridian.mp4</video:content_loc><video:duration>24</video:duration><video:publication_date>2026-11-21T21:10:04+00:00</video:publication_date><video:family_friendly>yes</video:family_friendly><video:requires_subscription>no</video:requires_subscription><video:uploader info="https://ultrafast.mov/">ultrafast</video:uploader><video:live>no</video:live></video:video>
   </url>
-  <url><loc>https://ultrafast.mov/blog/</loc><lastmod>2026-11-24T09:00:00+00:00</lastmod><priority>0.7</priority></url>
-  <url><loc>https://ultrafast.mov/blog/a-video-is-not-a-web-page/</loc><lastmod>2026-11-24T09:00:00+00:00</lastmod><priority>0.7</priority></url>
+  <url><loc>https://ultrafast.mov/blog/</loc><lastmod>2026-11-23T11:35:54+00:00</lastmod><priority>0.7</priority></url>
+  <url><loc>https://ultrafast.mov/blog/a-video-is-not-a-web-page/</loc><lastmod>2026-11-23T11:00:00+00:00</lastmod><priority>0.7</priority></url>
 </urlset>

@@ -4842,7 +4842,7 @@ Blog
 
 Posts about ultrafast, the open-source GPU video engine for agents.
 
-  1. 2026-11-248 min readrenderingbrowsersremotionhyperframesgpu
+  1. 2026-11-238 min readrenderingbrowsersremotionhyperframesgpu
 
 ## [A video is not a web page](<https://ultrafast.mov/blog/a-video-is-not-a-web-page/>)
 
@@ -4873,7 +4873,7 @@ Blog
 
 Remotion and HyperFrames make video by screenshotting a web page, frame after frame. Why that design is slow and fragile, what the web still gets right, and what an engine made for video does instead.
 
-2026-11-248 min read
+2026-11-238 min read
 
 Every browser-based video tool has the same loop at its heart. Open a page. Set the clock to frame 0 and take a screenshot. Set it to frame 1 and take another. Three hundred screenshots later, hand the pile to FFmpeg and call it a video.
 

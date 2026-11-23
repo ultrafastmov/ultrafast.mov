@@ -10,7 +10,7 @@ Blog
 
 Posts about ultrafast, the open-source GPU video engine for agents.
 
-  1. 2026-11-248 min readrenderingbrowsersremotionhyperframesgpu
+  1. 2026-11-238 min readrenderingbrowsersremotionhyperframesgpu
 
 ## [A video is not a web page](<https://ultrafast.mov/blog/a-video-is-not-a-web-page/>)
 
