@@ -703,14 +703,14 @@ Template| Frame| Length| What's in it| Export
 ---|---|---|---|---  
 `vertical`| 1080×1920| 6 s| Two lines of serif type rising through masks, a label, a rule drawing in, bloom, vignette, grain| 0.16 s  
 `title`| 1920×1080| 6 s| A title rising letter by letter from the middle out over moving marble, a subtitle that types on| 0.34 s  
-`square`| 1080×1080| 6 s| A disc and a word in two halftone inks, multiplied onto paper like a two-colour print| 0.12 s  
+`square`| 1080×1080| 6 s| A disc and a word in two halftone inks, multiplied onto paper like a two-colour print| 0.11 s  
 `promo`| 1080×1920| 13 s| Title, stat, quote and end card with a button, joined by a push, a dissolve and an iris| 0.43 s  
 `explainer`| 1920×1080| 12 s| Chapter card, key idea with a lower third, a stat that counts up, a wipe and a slide| 0.27 s  
 `product`| 1920×1080| 8 s| A 3D speaker in a studio with the camera orbiting, a name, a line and a price, a film look| 0.24 s  
   
-All six are 30 fps, and all but the explainer have motion blur on. Export times are the median of five runs, 0.12 to 0.43 s, with the published 0.2.1 binary on one RTX 5090 workstation, each encoded on the GPU with no frame copied back to the CPU. From pressing Enter to a finished file took 0.51 to 0.84 s.
+All six are 30 fps, and all but the explainer have motion blur on. Export times are the median of five runs, 0.11 to 0.43 s, with ultrafast 0.2.2 on one RTX 5090 workstation, each encoded on the GPU with no frame copied back to the CPU. From pressing Enter to a finished file took 0.50 to 0.81 s.
 
-`uf check` passes all six as they come. `uf review`, which renders the film and looks for text a viewer would trip over, has nothing to say about three of them. For the other three it points at small grey type on the product shot, two placeholder lines in the promo that leave the screen too soon, and the square's word entering from below the frame. Run it again after every edit: it's the quickest way to find what your own words broke.
+`uf check` passes all six as they come, and `uf review`, which renders the film and looks for text a viewer would trip over, has nothing to say about any of them. Run it again after every edit: it's the quickest way to find what your own words broke.
 
 Each section below shows the film and names the nodes to change. Every node has a name, so `line1`'s `text` is a param you can set by hand, from a script, from a spreadsheet or from an agent. The JSON files are also here to read without installing anything.
 
@@ -750,7 +750,7 @@ A feed post or a cover in the look of a two-ink risograph print.
   * `pink` and `blue`: `halftone` nodes, each an ink. `r`, `g` and `b` set the ink's colour, `cell` the dot size, `angle` the screen.
   * The inks `multiply` onto `paper`, so where they overlap they darken the way real ink does.
 
-[square.json](<https://ultrafast.mov/templates/square.json>) · 8 nodes · 0.12 s
+[square.json](<https://ultrafast.mov/templates/square.json>) · 8 nodes · 0.11 s
 
 ## Promo: `promo`
 
@@ -790,7 +790,7 @@ The film at the top of this page. The speaker isn't a model file: a `raymarch` n
   * The materials are numbered in the scene's first comment: 7 ceramic and 4 gold are presets, 20 the fabric and 21 the sweep.
   * `finish` is a `film_look`: halation, grain, a vignette and a little chromatic aberration.
 
-`uf review` rates the grey line at 2.9:1 against the sweep and the price at 2.0:1, under the 3:1 it wants. Setting both `color`s to `#1d1d1f`, the name's colour, clears it.
+All three lines are set in the name's ink, `#1d1d1f`. If you change the type's `color` or the sweep, `uf review` reports any line under 3:1 contrast against what's behind it.
 
 [product.json](<https://ultrafast.mov/templates/product.json>) · 8 nodes · 0.24 s
 
@@ -838,7 +838,7 @@ $ uf review launch.json
   ],
   "frames": 390,
   "texts": 11,
-  "seconds": 1.5153431
+  "seconds": 1.584898703
 }
 ``` 
 
@@ -849,10 +849,10 @@ $ uf edit launch.json shorter.json --out launch.json
 Params
 $ uf review launch.json            # "issues": []
 $ uf export launch.json launch.mp4
-exported 390 frames (1080x1920 @ 30 fps, mp4 h264, standard) in 0.41 s = 953 fps, 0 readbacks -> launch.mp4
+exported 390 frames (1080x1920 @ 30 fps, mp4 h264, standard) in 0.42 s = 928 fps, 0 readbacks -> launch.mp4
 ``` 
 
-[Video: The promo template with new words over dark purple marble: NOW IN BETA, Tidewell, Notes that file themselves; 4 apps, REPLACED BY ONE; a quote, I haven't opened a folder since, from Priya, product designer; an end card reading tidewell, write first, sort later, with a pink Join the beta button](https://ultrafast.mov/media/guides/template-promo-tidewell.mp4) Tidewell, from the promo template and eleven edits, exported in 0.41 s.
+[Video: The promo template with new words over dark purple marble: NOW IN BETA, Tidewell, Notes that file themselves; 4 apps, REPLACED BY ONE; a quote, I haven't opened a folder since, from Priya, product designer; an end card reading tidewell, write first, sort later, with a pink Join the beta button](https://ultrafast.mov/media/guides/template-promo-tidewell.mp4) Tidewell, from the promo template and eleven edits, exported in 0.42 s.
 
 Both files are here: [tidewell-edits.json](<https://ultrafast.mov/templates/tidewell-edits.json>) and the finished [tidewell.json](<https://ultrafast.mov/templates/tidewell.json>). To look at frames before you export, `uf sheet launch.json` writes a labelled contact sheet.
 
@@ -926,7 +926,7 @@ Remotion's templates are React projects you start with `npx create-video`, and m
 
 All read or run on 24 November 2026.
 
-  * **ultrafast:** the templates as the published 0.2.1 binary writes them (`uf new`), and their source in [crates/ultrafast-ops/templates](<https://github.com/ultrafastmov/ultrafast/tree/main/crates/ultrafast-ops/templates>).
+  * **ultrafast:** the templates as ultrafast 0.2.2 writes them (`uf new`), and their source in [crates/ultrafast-ops/templates](<https://github.com/ultrafastmov/ultrafast/tree/main/crates/ultrafast-ops/templates>).
   * **Remotion:** [Starter templates](<https://www.remotion.dev/templates>) and the [TikTok template](<https://www.remotion.dev/templates/tiktok>) page.
 
 

@@ -56,7 +56,7 @@
     "kind": "title",
     "kicker": "INTRODUCING",
     "title": "Your product, in one line",
-    "subtitle": "One sentence on what it does and who it is for.",
+    "subtitle": "What it does, and for whom.",
     "duration": 3.2
    },
    "timing": {
@@ -78,10 +78,10 @@
     "suffix": "x",
     "label": "FASTER THAN BEFORE",
     "accent": "#2ee6c5",
-    "duration": 2.6
+    "duration": 3.0
    },
    "timing": {
-    "offset": 4.2
+    "offset": 3.8
    }
   },
   "s2": {
@@ -95,7 +95,7 @@
    "op": "block",
    "params": {
     "kind": "quote",
-    "quote": "A short line from a happy customer goes here.",
+    "quote": "A line from a happy customer.",
     "author": "Name, Company",
     "duration": 2.6,
     "width": 860
@@ -120,7 +120,7 @@
     "cta": "Try it free"
    },
    "timing": {
-    "offset": 10.6
+    "offset": 10.1
    }
   },
   "s4": {

@@ -130,7 +130,7 @@
     "font": "ultrafast:sans",
     "weight": 450,
     "size": 40,
-    "color": "#3a3a3c",
+    "color": "#1d1d1f",
     "position": [
      156,
      545
@@ -162,7 +162,7 @@
     "font": "ultrafast:mono",
     "size": 26,
     "tracking": 3,
-    "color": "#6e6e73",
+    "color": "#1d1d1f",
     "position": [
      156,
      640

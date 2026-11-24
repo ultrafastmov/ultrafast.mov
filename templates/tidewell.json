@@ -71,7 +71,7 @@
         "title": "tidewell"
       },
       "timing": {
-        "offset": 10.6
+        "offset": 10.1
       }
     },
     "finish": {
@@ -154,14 +154,14 @@
       "op": "block",
       "params": {
         "accent": "#2ee6c5",
-        "duration": 2.6,
+        "duration": 3.0,
         "kind": "stat",
         "label": "REPLACED BY ONE",
         "suffix": " apps",
         "value": 4.0
       },
       "timing": {
-        "offset": 4.2
+        "offset": 3.8
       }
     },
     "title": {

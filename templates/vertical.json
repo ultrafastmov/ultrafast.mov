@@ -6,10 +6,10 @@
     "ground": { "op": "gradient", "params": { "kind": "radial", "center": [540, 900], "radius": 1300, "stops": "0:#1b1a24, 1:#070709" } },
 
     "line1": { "op": "text", "params": { "text": "Say the", "font": "Instrument Serif", "size": 190, "color": "#f1eee8", "valign": "baseline", "tracking": -4,
-      "position": { "keys": [ { "t": 0.4, "v": [84, 1010], "ease": { "bezier": [0.16, 1, 0.3, 1] } }, { "t": 1.1, "v": [84, 820] } ] } } },
+      "position": { "keys": [ { "t": 0.4, "v": [84, 1090], "ease": { "bezier": [0.16, 1, 0.3, 1] } }, { "t": 1.1, "v": [84, 820] } ] } } },
     "line1_mask": { "op": "crop", "inputs": { "source": "line1" }, "params": { "rect": [0, 640, 1080, 250] } },
     "line2": { "op": "text", "params": { "text": "one thing.", "font": "Instrument Serif", "style": "italic", "size": 190, "color": "#ffd7a8", "valign": "baseline", "tracking": -4,
-      "position": { "keys": [ { "t": 0.55, "v": [84, 1210], "ease": { "bezier": [0.16, 1, 0.3, 1] } }, { "t": 1.25, "v": [84, 1020] } ] } } },
+      "position": { "keys": [ { "t": 0.55, "v": [84, 1290], "ease": { "bezier": [0.16, 1, 0.3, 1] } }, { "t": 1.25, "v": [84, 1020] } ] } } },
     "line2_mask": { "op": "crop", "inputs": { "source": "line2" }, "params": { "rect": [0, 840, 1080, 250] } },
 
     "label": { "op": "text", "params": { "text": "CHAPTER 01", "font": "Geist Mono", "size": 26, "color": "#f1eee890", "valign": "baseline", "tracking": 3,
