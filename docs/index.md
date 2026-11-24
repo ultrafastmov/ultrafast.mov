@@ -24,6 +24,7 @@ Install it, make your first video, then hand the loop to your agent.
   * [Animated captions from Whisper or SRT](<https://ultrafast.mov/guides/animated-captions/>)
   * [Motion graphics with code](<https://ultrafast.mov/guides/motion-graphics-with-code/>)
   * [Animated chart videos from a CSV](<https://ultrafast.mov/guides/animated-chart-video/>)
+  * [Animate an SVG logo](<https://ultrafast.mov/guides/animate-svg-logo/>)
 
 ## Reference
 

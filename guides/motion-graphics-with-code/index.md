@@ -24,6 +24,7 @@ Motion graphics written as code or data instead of keyframed by hand: the tools 
   * [Animated captions from Whisper or SRT](<https://ultrafast.mov/guides/animated-captions/>)
   * [Motion graphics with code](<https://ultrafast.mov/guides/motion-graphics-with-code/>)
   * [Animated chart videos from a CSV](<https://ultrafast.mov/guides/animated-chart-video/>)
+  * [Animate an SVG logo](<https://ultrafast.mov/guides/animate-svg-logo/>)
 
 ## Reference
 
@@ -132,7 +133,7 @@ A stroke that draws itself is one animated param: `trim_end` from 0 to 1. Animat
   "trim_start": { "keys": [ { "t": 1.1, "v": 0, "ease": "in_out_sine" }, { "t": 2.6, "v": 1 } ] } } },
 ``` 
 
-  * `d` is SVG path data, so a path copied out of an SVG file works as it is. `uf import-svg logo.svg` turns a whole file into named paths you can animate one by one.
+  * `d` is SVG path data, so a path copied out of an SVG file works as it is. `uf import-svg logo.svg` turns a whole file into named paths you can animate one by one, as in [Animate an SVG logo](<https://ultrafast.mov/guides/animate-svg-logo/>).
   * `dash` and an animated `dash_offset` give marching dashes; `morph` with `to` blends one shape into another.
   * The rest of the file is a cream `solid`, the text, and three `over` nodes that stack the paths on it.
 

@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Animate an SVG logo and export it as MP4, ProRes or GIF · ultrafast</title>
+<meta name="description" content="Turn a static SVG logo into a logo reveal with code: one svg node for a quick fade, or every shape as a named part with uf import-svg, then MP4, 4K, transparent ProRes 4444 or WebM, or a GIF, with measured render times.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/guides/animate-svg-logo/">
+<link rel="alternate" type="text/markdown" href="/guides/animate-svg-logo/index.md" title="Animate an SVG logo and export it as MP4, ProRes or GIF · ultrafast (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="ultrafast blog"><meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="Animate an SVG logo">
+<meta property="og:description" content="Turn a static SVG logo into a logo reveal with code: one svg node for a quick fade, or every shape as a named part with uf import-svg, then MP4, 4K, transparent ProRes 4444 or WebM, or a GIF, with measured render times.">
+<meta property="og:url" content="https://ultrafast.mov/guides/animate-svg-logo/">
+<meta property="og:image" content="https://ultrafast.mov/og/guide-animate-svg-logo.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Animate an SVG logo · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Animate an SVG logo">
+<meta name="twitter:description" content="Turn a static SVG logo into a logo reveal with code: one svg node for a quick fade, or every shape as a named part with uf import-svg, then MP4, 4K, transparent ProRes 4444 or WebM, or a GIF, with measured render times.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/guide-animate-svg-logo.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=c898dbcc">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://ultrafast.mov/docs/"},{"@type":"ListItem","position":3,"name":"Animate an SVG logo","item":"https://ultrafast.mov/guides/animate-svg-logo/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I turn an SVG logo into an MP4?","acceptedAnswer":{"@type":"Answer","text":"Put the SVG in a short ultrafast document with an svg node, add keys to its scale and opacity, and run uf export logo.json logo.mp4. On one RTX 5090 workstation with ultrafast 0.2.1, a 3-second 1080p reveal took 0.56 to 0.58 s from the command to the file."}},{"@type":"Question","name":"How do I animate each part of a logo separately?","acceptedAnswer":{"@type":"Answer","text":"Run uf import-svg logo.svg. It gives every shape as its own node, named after its id in the SVG, and you set keys on the parts you want to move: trim_end to draw a stroke on, scale around a pivot to pop a shape in, position and opacity to stagger letters."}},{"@type":"Question","name":"Can I export a logo animation with a transparent background?","acceptedAnswer":{"@type":"Answer","text":"Yes. Leave the background out of the document's output and export with --alpha: --codec prores gives ProRes 4444 with 12-bit alpha for video editors, and a .webm name gives VP9 with alpha for web pages."}},{"@type":"Question","name":"Can ultrafast convert an animated SVG to video?","acceptedAnswer":{"@type":"Answer","text":"No. It reads an SVG as a still image and doesn't play SMIL or CSS animation. A tool that plays the SVG in headless Chrome and records it keeps that animation; ultrafast is for animating a static logo."}},{"@type":"Question","name":"Why is the text in my SVG missing?","acceptedAnswer":{"@type":"Answer","text":"SVG text is drawn only when its font is installed on the machine that renders it. In ultrafast 0.2.1 a font that isn't installed draws nothing, with no warning. Convert the text to outlines in Figma, Illustrator or Inkscape before exporting the SVG."}}]},{"@type":"TechArticle","@id":"https://ultrafast.mov/guides/animate-svg-logo/#article","headline":"Animate an SVG logo and export it as MP4, ProRes or GIF","description":"Turn a static SVG logo into a logo reveal with code: one svg node for a quick fade, or every shape as a named part with uf import-svg, then MP4, 4K, transparent ProRes 4444 or WebM, or a GIF, with measured render times.","url":"https://ultrafast.mov/guides/animate-svg-logo/","mainEntityOfPage":"https://ultrafast.mov/guides/animate-svg-logo/","image":"https://ultrafast.mov/og/guide-animate-svg-logo.jpg","datePublished":"2026-11-24T05:05:21+00:00","dateModified":"2026-11-24T05:05:21+00:00","inLanguage":"en","author":{"@id":"https://ultrafast.mov/#org"},"publisher":{"@id":"https://ultrafast.mov/#org"},"about":{"@id":"https://ultrafast.mov/#app"}}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/" aria-current="page">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="band stock-cotton phead" style="padding-bottom:56px">
+  <div class="sunburst" aria-hidden="true" style="--sx:92%;--sy:40%;--r2:520px"></div>
+  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+<li><a href="/docs/">Docs</a></li>  <li aria-current="page">Animate an SVG logo</li>
+</ol>
+
+    <p class="eyebrow"><i style="--c:var(--blue)"></i>Docs</p>
+    <h1 class="pr h1" data-plates="blue black"><span class="ln">Animate an SVG logo,</span> <span class="ln">export it as video.</span></h1>
+    <p class="lede">Turn a static SVG logo into a logo reveal and export it as an MP4, a transparent ProRes or WebM, or a GIF, rendered on your own GPU by an open-source engine. Every shape in the file becomes a named part you can animate, and the artwork stays vector, so the logo is as sharp at 4K as at 1080p.</p>
+  </div>
+</section>
+<section class="band stock-thermal" style="padding-top:72px">
+  <div class="wrap docs">
+    <nav class="side" aria-label="Docs">
+      <h2>Start</h2>
+      <ul><li><a href="/docs/">Quickstart</a></li><li><a href="/docs/documents/">The document</a></li></ul>
+      <h2>Guides</h2>
+      <ul><li><a href="/guides/render-video-from-json/">Render video from JSON</a></li><li><a href="/guides/personalized-videos-from-csv/">Personalized videos from a CSV</a></li><li><a href="/guides/claude-code/">Make a video with Claude Code</a></li><li><a href="/guides/lottie-to-mp4/">Lottie to MP4, WebM or ProRes</a></li><li><a href="/guides/animated-captions/">Animated captions from Whisper or SRT</a></li><li><a href="/guides/motion-graphics-with-code/">Motion graphics with code</a></li><li><a href="/guides/animated-chart-video/">Animated chart videos from a CSV</a></li><li><a href="/guides/animate-svg-logo/" aria-current="page">Animate an SVG logo</a></li></ul>
+      <h2>Reference</h2>
+      <ul><li><a href="/docs/ops/">Ops</a></li><li><a href="/docs/cli/">CLI</a></li><li><a href="/docs/mcp/">MCP server</a></li><li><a href="/docs/api/">HTTP API</a></li></ul>
+      <h2>For agents</h2>
+      <ul><li><a href="/llms.txt">llms.txt</a></li><li><a href="/guides/animate-svg-logo/index.md">This page as Markdown</a></li></ul>
+    </nav>
+    <article class="prose">
+<figure class="clip"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/svg-logo-reveal.webp" width="1280" height="720" aria-label="A logo reveal on cream: a green rounded square pops up in the middle of the frame, a white stem draws itself upward and six leaves unfold from it, then the mark slides left as the letters of fernway rise into place one by one and a green underline draws beneath them"><source data-src="/media/guides/svg-logo-reveal.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/svg-logo-reveal.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/svg-logo-reveal.mp4" type="video/mp4"></video>
+  <figcaption>fernway, a made-up logo: one SVG file, its 16 shapes animated one at a time, exported at 1080p in 0.62–0.64 s.</figcaption></figure>
+
+<nav class="toc" aria-label="On this page"><b>On this page</b><ol>
+  <li><a href="#quick">The quick way: one node</a></li><li><a href="#parts">Animate each part</a></li><li><a href="#export">MP4, ProRes, WebM or GIF</a></li>
+  <li><a href="#prepare">Prepare the SVG</a></li><li><a href="#imports">What imports</a></li><li><a href="#agent">With an agent</a></li>
+  <li><a href="#others">Other ways</a></li><li><a href="#faq">Questions</a></li>
+</ol></nav>
+
+<h2 id="quick">The quick way: one node</h2>
+<p>Install <code>uf</code> (a Mac with Apple silicon, or Linux with a Vulkan GPU; Windows through WSL2):</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">curl<span class="w"> </span>-fsSL<span class="w"> </span>https://ultrafast.mov/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w">     </span><span class="c1"># or: brew install ultrafastmov/tap/ultrafast</span></code></pre></div><p>ultrafast renders documents: a frame size, a frame rate, a length, and nodes. An <code>svg</code> node places the whole logo, and keyframes on its <code>scale</code> and <code>opacity</code> make a simple reveal:</p>
+<div class="code"><div class="cbar"><span>quick.json</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;fps&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;output&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;out&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;nodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;paper&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;solid&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#f4f1ea&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;logo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;svg&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;src&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fernway.svg&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1300</span><span class="p">,</span><span class="w"> </span><span class="mi">400</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;anchor&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">650</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">960</span><span class="p">,</span><span class="w"> </span><span class="mi">540</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;scale&quot;</span><span class="p">:</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.85</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;ease&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;out_back&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;opacity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;ease&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;out_cubic&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;out&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;over&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;fg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;logo&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;bg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;paper&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div><div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">$ uf check quick.json &amp;&amp; uf export quick.json quick.mp4
+exported 90 frames (1920x1080 @ 30 fps, mp4 h264, standard) in 0.10 s = 888 fps, 0 readbacks -&gt; quick.mp4</code></pre></div><ul>
+  <li><code>size</code> fits the artwork inside a box and keeps its proportions. The paths are drawn at that size, not scaled up from pixels, so a 780×240 SVG is sharp at 1300×400 or at 4K.</li>
+  <li><code>anchor</code> is the point the logo scales and turns around, in the artwork's pixels after <code>size</code>: <code>[650, 200]</code> is the middle of 1300×400. <code>position</code> puts that point in the middle of the frame.</li>
+  <li>Each key sets a value at a time in seconds, and its <code>ease</code> shapes the move to the next key. <code>out_back</code> overshoots a little and settles, which reads as a pop.</li>
+  <li><code>uf check</code> reads the SVG and lists anything in it that won't import, before you render.</li>
+</ul>
+<p>From pressing Enter to a finished file took 0.56–0.58 s warm on one RTX 5090 workstation with the published 0.2.1 binary, of which 0.09–0.10 s was the export itself.</p>
+<figure class="clip"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/svg-logo-quick.webp" width="1280" height="720" aria-label="The fernway logo, a green leaf mark and the word fernway, fades in and grows to full size in the middle of a cream frame with a slight overshoot"><source data-src="/media/guides/svg-logo-quick.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/svg-logo-quick.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/svg-logo-quick.mp4" type="video/mp4"></video></figure>
+
+<h2 id="parts">Animate each part</h2>
+<p>A reveal that builds the logo piece by piece needs the pieces. <code>uf import-svg</code> reads the file and prints it as a component: one node per shape, named after the shape's <code>id</code> in the SVG.</p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">$ uf import-svg fernway.svg --size 1300,400</code></pre></div><p>For this logo that gives 16 shapes, 35 nodes in all with the ones that stack them:</p>
+<div class="tablewrap"><table class="tbl">
+  <thead><tr><th scope="col">In the SVG</th><th scope="col">Nodes</th></tr></thead>
+  <tbody>
+    <tr><th scope="row"><code>&lt;rect id="tile"&gt;</code> with a gradient fill</th><td><code>tile_shape</code> (the rounded square), <code>tile_gradient</code> and <code>tile_gradient_placed</code> (its fill), and <code>tile</code>, the gradient cut to the shape</td></tr>
+    <tr><th scope="row"><code>&lt;path id="stem"&gt;</code>, a stroke</th><td><code>stem_stroke</code></td></tr>
+    <tr><th scope="row">six <code>&lt;path id="leaf-1"&gt;</code> … with transforms</th><td><code>leaf-1</code> … <code>leaf-6</code>, transforms applied to the paths</td></tr>
+    <tr><th scope="row">seven outlined letters</th><td><code>letter-f</code>, <code>letter-e</code> … <code>letter-y</code></td></tr>
+    <tr><th scope="row"><code>&lt;path id="swoosh"&gt;</code>, a stroke</th><td><code>swoosh_stroke</code></td></tr>
+  </tbody>
+</table></div>
+<p>Every part's placement reads the component's own params, written <code>"$position"</code>, <code>"$scale"</code> and so on, so the logo moves as one. To animate one part by itself, give it values of its own, in the logo's pixels. This script imports the logo, sets keys on the parts, and writes the document:</p>
+<div class="code"><div class="cbar"><span>animate.py</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="kn">import</span><span class="w"> </span><span class="nn">json</span><span class="o">,</span><span class="w"> </span><span class="nn">subprocess</span>
+
+<span class="c1"># Import the logo as named parts: one path per shape, named after the SVG&#39;s ids.</span>
+<span class="n">parts</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;uf&quot;</span><span class="p">,</span> <span class="s2">&quot;import-svg&quot;</span><span class="p">,</span> <span class="s2">&quot;fernway.svg&quot;</span><span class="p">,</span> <span class="s2">&quot;--size&quot;</span><span class="p">,</span> <span class="s2">&quot;1300,400&quot;</span><span class="p">],</span>
+                                  <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="s2">&quot;nodes&quot;</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">keys</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">v0</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">ease</span><span class="o">=</span><span class="s2">&quot;out_cubic&quot;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;keys&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="n">t0</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">:</span> <span class="n">v0</span><span class="p">,</span> <span class="s2">&quot;ease&quot;</span><span class="p">:</span> <span class="n">ease</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="n">t1</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">:</span> <span class="n">v1</span><span class="p">}]}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pop</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">pivot</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="c1"># grow from a point in the logo&#39;s own space (out_back overshoots a little)</span>
+    <span class="n">nodes</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;params&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;anchor&quot;</span><span class="p">:</span> <span class="n">pivot</span><span class="p">,</span> <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="n">pivot</span><span class="p">,</span>
+                              <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="n">keys</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span> <span class="o">+</span> <span class="n">length</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;out_back&quot;</span><span class="p">)}</span>
+
+<span class="c1"># 1. the tile grows from its centre (its gradient fill is a second node that moves with it)</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;tile_shape&quot;</span><span class="p">,</span> <span class="s2">&quot;tile_gradient_placed&quot;</span><span class="p">]:</span>
+    <span class="n">pop</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">[</span><span class="mf">183.33</span><span class="p">,</span> <span class="mf">183.33</span><span class="p">],</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+
+<span class="c1"># 2. the stem draws itself upward</span>
+<span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;stem_stroke&quot;</span><span class="p">][</span><span class="s2">&quot;params&quot;</span><span class="p">][</span><span class="s2">&quot;trim_end&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">keys</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;in_out_cubic&quot;</span><span class="p">)</span>
+
+<span class="c1"># 3. the leaves unfold from where they meet the stem, one after another</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;leaf-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="s2">&quot;params&quot;</span><span class="p">][</span><span class="s2">&quot;d&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">pop</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;leaf-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">2</span><span class="p">])],</span> <span class="mf">0.7</span> <span class="o">+</span> <span class="mf">0.09</span> <span class="o">*</span> <span class="n">i</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">)</span>
+
+<span class="c1"># 4. the letters rise into place and fade in, 60 ms apart</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="s2">&quot;fernway&quot;</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mf">1.05</span> <span class="o">+</span> <span class="mf">0.06</span> <span class="o">*</span> <span class="n">i</span>
+    <span class="n">nodes</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;letter-</span><span class="si">{</span><span class="n">ch</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="s2">&quot;params&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="n">keys</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">36</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
+                                        <span class="s2">&quot;opacity&quot;</span><span class="p">:</span> <span class="n">keys</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)}</span>
+
+<span class="c1"># 5. the underline draws left to right</span>
+<span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;swoosh_stroke&quot;</span><span class="p">][</span><span class="s2">&quot;params&quot;</span><span class="p">][</span><span class="s2">&quot;trim_end&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">keys</span><span class="p">(</span><span class="mf">1.6</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">doc</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="mi">1920</span><span class="p">,</span> <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="mi">1080</span><span class="p">,</span> <span class="s2">&quot;fps&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mf">3.5</span><span class="p">,</span>
+               <span class="s2">&quot;motion_blur&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;samples&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;shutter&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;max_samples&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">}},</span>
+    <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;out&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;components&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;fernway&quot;</span><span class="p">:</span> <span class="n">parts</span><span class="p">},</span>
+    <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;paper&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;solid&quot;</span><span class="p">,</span> <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#f4f1ea&quot;</span><span class="p">}},</span>
+        <span class="s2">&quot;logo&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;fernway&quot;</span><span class="p">},</span>
+        <span class="c1"># the tile starts in the middle of the frame, then the logo slides left as the name arrives</span>
+        <span class="s2">&quot;placed&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;transform&quot;</span><span class="p">,</span> <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;logo&quot;</span><span class="p">},</span>
+                   <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;anchor&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">650</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span>
+                              <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="n">keys</span><span class="p">(</span><span class="mf">0.85</span><span class="p">,</span> <span class="mf">1.65</span><span class="p">,</span> <span class="p">[</span><span class="mf">1426.67</span><span class="p">,</span> <span class="mi">540</span><span class="p">],</span> <span class="p">[</span><span class="mi">960</span><span class="p">,</span> <span class="mi">540</span><span class="p">],</span> <span class="s2">&quot;in_out_cubic&quot;</span><span class="p">),</span>
+                              <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="n">keys</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">0.96</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;out_sine&quot;</span><span class="p">)}},</span>
+        <span class="s2">&quot;out&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;op&quot;</span><span class="p">:</span> <span class="s2">&quot;over&quot;</span><span class="p">,</span> <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;placed&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;paper&quot;</span><span class="p">}},</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+<span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;reveal.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code></pre></div><p>After the script, the first letter looks like this (its path data cut short here):</p>
+<div class="code"><div class="cbar"><span>json</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="nt">&quot;letter-f&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;d&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;M 432.40 238.33 L 432.40 117.67 Q 432.40 113.15 432.73 107.7 …&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#10261dff&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;fill_rule&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nonzero&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;anchor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$anchor&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$rotation&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;scale&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$scale&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.05</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">36</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;ease&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;out_cubic&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.55</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;opacity&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.05</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;ease&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;out_cubic&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.35</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span></code></pre></div><div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">$ python3 animate.py &amp;&amp; uf check reveal.json &amp;&amp; uf sheet reveal.json --count 10
+$ uf export reveal.json reveal.mp4
+exported 105 frames (1920x1080 @ 30 fps, mp4 h264, standard) in 0.18 s = 574 fps, 0 readbacks -&gt; reveal.mp4</code></pre></div><ul>
+  <li><code>trim_end</code> draws a stroke along its length, from where the path starts. The stem's path starts at the bottom, so it grows upward; the underline's starts on the left.</li>
+  <li>Each leaf grows from the first point of its path, which is where it meets the stem. A pivot from the path data is often the right one: designers tend to start a shape where it attaches.</li>
+  <li>The whole logo is placed once, by the <code>transform</code> node around it, so every key inside stays in the logo's own pixels. Paths under a transform are drawn at their final size, so nothing goes soft.</li>
+  <li>Motion blur is on. At the default six samples the slide showed as separate copies of the logo; <code>max_samples</code> lets a frame take one sample for every 2 px its fastest layer moves, up to 32, so fast frames blur smoothly and still frames stay cheap.</li>
+  <li><code>uf sheet</code> puts frames from across the reveal on one image, which is the quickest way to check the timing. The letters are outlines, not text, so <code>uf review</code>'s text checks (size, contrast, clipping) don't apply to them; it found no other problems here.</li>
+</ul>
+<p>The export took 0.62–0.64 s from Enter to file, warm. The document is 18 KB, most of it path data, and it renders the same every time.</p>
+
+<h2 id="export">MP4, ProRes, WebM or GIF</h2>
+<p>The output format follows the file name, and flags set the codec, size and transparency. For a transparent background, render the logo without the paper behind it: point the document's output at the placed logo.</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">jq<span class="w"> </span><span class="s1">&#39;.output = &quot;placed&quot;&#39;</span><span class="w"> </span>reveal.json<span class="w"> </span>&gt;<span class="w"> </span>reveal-alpha.json</code></pre></div><p>Times are wall clock from the command to the file, warm, on one RTX 5090 workstation with the published 0.2.1 binary, three runs each. Every file is the 3.5 s reveal.</p>
+<div class="tablewrap"><table class="tbl">
+  <thead><tr><th scope="col">Output</th><th scope="col">Command</th><th scope="col">Time</th><th scope="col">File</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">MP4, H.264, 1920×1080</th><td><code>uf export reveal.json reveal.mp4</code></td><td>0.62–0.64 s</td><td>261 KB</td></tr>
+    <tr><th scope="row">MP4, 4K (3840×2160)</th><td><code>uf export reveal.json reveal-4k.mp4 --size 4k</code></td><td>1.0 s</td><td>600 KB</td></tr>
+    <tr><th scope="row">ProRes 4444 with alpha</th><td><code>uf export reveal-alpha.json reveal.mov --codec prores --alpha</code></td><td>1.36–1.39 s</td><td>21 MB</td></tr>
+    <tr><th scope="row">WebM (VP9) with alpha</th><td><code>uf export reveal-alpha.json reveal.webm --alpha</code></td><td>2.1 s</td><td>273 KB</td></tr>
+    <tr><th scope="row">GIF, 960×540</th><td><code>uf export reveal.json reveal.gif --size 960x540</code></td><td>1.0 s</td><td>918 KB</td></tr>
+  </tbody>
+</table></div>
+<ul>
+  <li>H.264 is encoded on the GPU straight from the rendered frames. ProRes, VP9 and GIF are encoded on the CPU, which is why they take longer.</li>
+  <li>The transparent files are really transparent: the ProRes is 4444 with 12-bit alpha (<code>yuva444p12le</code>), and the WebM carries VP9's alpha channel. In a frame decoded from each at 3 s, near the end of the reveal, over 91 % of the pixels are fully transparent. The ProRes drops into Premiere Pro, Final Cut Pro, DaVinci Resolve or After Effects as a logo layer over footage, and the WebM plays over a web page in Chrome and Firefox.</li>
+  <li>4K is drawn at 3840×2160 from the vector paths, not scaled up from the 1080p frames.</li>
+  <li>A GIF for a README or an email is better small: <code>--size 960x540</code> keeps it to 918 KB.</li>
+  <li><code>--fps 60</code> renders more frames for smoother motion, and <code>--from</code> and <code>--to</code> export part of the timeline. The full list is in the <a href="/docs/cli/">CLI reference</a>.</li>
+</ul>
+
+<h2 id="prepare">Prepare the SVG</h2>
+<ul>
+  <li><b>Name the parts you'll animate.</b> The nodes take their names from the SVG's <code>id</code> attributes, so <code>letter-f</code> beats <code>path12</code>. In Figma, turn on <i>Include "id" attribute</i> in the SVG export settings; in Illustrator, choose <i>Object IDs: Layer Names</i> in the SVG options; in Inkscape, set the ID in Object Properties.</li>
+  <li><b>Turn text into outlines.</b> SVG text imports only when its font is installed on the machine that renders. In 0.2.1, text in a font that isn't installed draws nothing, with no warning. Outline it before you export: <i>Outline text</i> in Figma's SVG export settings, <i>Type &gt; Create Outlines</i> in Illustrator, <i>Path &gt; Object to Path</i> in Inkscape.</li>
+  <li><b>One path per piece that moves.</b> Letters you want to move one at a time each need their own path. Outlined text is often grouped by word or line, so ungroup it before you export.</li>
+  <li><b>Keep it flat.</b> Images, pattern fills and filter effects don't come through (next section). Leave the drop shadow or glow out of the SVG and add it in ultrafast with <code>drop_shadow</code> or <code>glow</code>, where it can be animated too.</li>
+</ul>
+
+<h2 id="imports">What imports</h2>
+<p>These were tested one feature at a time with 0.2.1, each file rendered by ultrafast and by Chromium. Drawn the same as in the browser: paths and basic shapes; fills and strokes with dashes, caps and joins; linear and radial gradients on fills and strokes; even-odd fills; groups, transforms and <code>&lt;use&gt;</code>; CSS classes in a <code>&lt;style&gt;</code> block; clip paths and masks; Gaussian blur. The rest:</p>
+<div class="tablewrap"><table class="tbl">
+  <thead><tr><th scope="col">In the SVG</th><th scope="col">What 0.2.1 does</th><th scope="col">Warned</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">Text</th><td>Drawn as outlines when its font is installed. A font that isn't installed, or a generic family such as <code>sans-serif</code>, draws nothing.</td><td>No</td></tr>
+    <tr><th scope="row">Opacity below 1</th><td>Blended in linear light, as everything in ultrafast is, so it comes out lighter than in a browser: a red circle at 50 % over white is (255, 188, 188) rather than (255, 126, 126).</td><td>No</td></tr>
+    <tr><th scope="row"><code>mix-blend-mode</code></th><td>Ignored; the shape is drawn normally. A <code>blend</code> node does multiply, screen and the other modes.</td><td>No</td></tr>
+    <tr><th scope="row">Radial gradient focal point</th><td>Drawn centred</td><td>Yes</td></tr>
+    <tr><th scope="row">Pattern fills</th><td>Skipped</td><td>Yes</td></tr>
+    <tr><th scope="row">Embedded images</th><td>Skipped; place the image with an <code>image</code> node</td><td>Yes</td></tr>
+    <tr><th scope="row">Filters other than a plain blur, such as drop shadows</th><td>Skipped; add <code>drop_shadow</code> or <code>glow</code></td><td>Yes</td></tr>
+    <tr><th scope="row">SMIL or CSS animation</th><td>Ignored: the SVG is read as a still</td><td>No</td></tr>
+  </tbody>
+</table></div>
+<p>To see what your own file does, run <code>uf import-svg logo.svg</code> (warnings go to the terminal, the parts to the output) and render a still with <code>uf render quick.json --at 1 --out still.png</code> to compare with the file open in a browser.</p>
+
+<h2 id="agent">With an agent</h2>
+<p>The same steps work from a coding agent. ultrafast's <a href="/mcp/">MCP server</a> has an <code>ultrafast_import_svg</code> tool that returns the parts, or adds them to a document, and the skill's reference tells agents that SVG artwork imports as a component with every part editable. The agent writes the keys, looks at a contact sheet, and exports. A prompt to start from:</p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">Animate logo.svg as a 3-second logo reveal for a 1080p video intro: the mark pops in
+first, then the name rises in letter by letter. Check the timing with a contact sheet,
+then export reveal.mp4 and a transparent ProRes 4444 reveal.mov.</code></pre></div><p>Setup for Claude Code, Codex, Cursor and Gemini CLI is on the <a href="/integrations/">Integrations</a> page, and a recorded session from prompt to MP4 is in <a href="/guides/claude-code/">Make a video with Claude Code</a>.</p>
+
+<h2 id="others">Other ways to animate an SVG logo</h2>
+<ul>
+  <li><b>SVGator</b> is a web app for animating SVGs on a timeline. Video and GIF export are on its Pro and Team plans; the free plan exports static SVG only, and Starter exports animated SVG, Lottie, React Native and Flutter. Video comes out as MP4, AVI, MKV, MOV or WebM.</li>
+  <li><b>After Effects</b> imports an SVG as footage or as a composition of editable shape layers, one per element, which you keyframe on the timeline and render from After Effects or Media Encoder. Ways to automate it, or replace it with code, are compared in <a href="/alternatives/after-effects/">After Effects alternatives</a>.</li>
+  <li><b>Lottie:</b> animate the logo in After Effects with Bodymovin or in a Lottie editor, then render the Lottie to video; see <a href="/guides/lottie-to-mp4/">Lottie to MP4</a>.</li>
+  <li><b>Browser capture:</b> if the SVG already animates with CSS or SMIL, a tool that plays it in headless Chrome and records the frames keeps that animation. HyperFrames has a <a href="https://hyperframes.heygen.com/tools/svg-animation-to-mp4" rel="nofollow">converter for this</a>. ultrafast reads an SVG as a still, so it doesn't play those animations.</li>
+</ul>
+<p>Use ultrafast when you have a static logo and want the reveal written down: a script or an agent sets the keys, the same document renders the same every time, and one command gives MP4, ProRes, WebM or GIF in seconds. It also fits when the logo is one layer of a longer video. Use SVGator or After Effects to keyframe by hand on a timeline, and browser capture when the SVG already moves.</p>
+
+<h2 id="faq">Questions</h2>
+<div class="faq">
+  <details open>
+    <summary>How do I turn an SVG logo into an MP4?</summary>
+    <div class="ans"><p>Put the SVG in a short ultrafast document with an <code>svg</code> node, add keys to its <code>scale</code> and <code>opacity</code>, and run <code>uf export logo.json logo.mp4</code>. On one RTX 5090 workstation with ultrafast 0.2.1, a 3-second 1080p reveal took 0.56 to 0.58 s from the command to the file.</p></div>
+  </details>
+  <details>
+    <summary>How do I animate each part of a logo separately?</summary>
+    <div class="ans"><p>Run <code>uf import-svg logo.svg</code>. It gives every shape as its own node, named after its <code>id</code> in the SVG, and you set keys on the parts you want to move: <code>trim_end</code> to draw a stroke on, <code>scale</code> around a pivot to pop a shape in, <code>position</code> and <code>opacity</code> to stagger letters.</p></div>
+  </details>
+  <details>
+    <summary>Can I export a logo animation with a transparent background?</summary>
+    <div class="ans"><p>Yes. Leave the background out of the document's output and export with <code>--alpha</code>: <code>--codec prores</code> gives ProRes 4444 with 12-bit alpha for video editors, and a <code>.webm</code> name gives VP9 with alpha for web pages.</p></div>
+  </details>
+  <details>
+    <summary>Can ultrafast convert an animated SVG to video?</summary>
+    <div class="ans"><p>No. It reads an SVG as a still image and doesn't play SMIL or CSS animation. A tool that plays the SVG in headless Chrome and records it keeps that animation; ultrafast is for animating a static logo.</p></div>
+  </details>
+  <details>
+    <summary>Why is the text in my SVG missing?</summary>
+    <div class="ans"><p>SVG text is drawn only when its font is installed on the machine that renders it. In ultrafast 0.2.1 a font that isn't installed draws nothing, with no warning. Convert the text to outlines in Figma, Illustrator or Inkscape before exporting the SVG.</p></div>
+  </details>
+</div>
+
+    </article>
+  </div>
+</section>
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/learn/can-claude-make-videos/">Can Claude make videos?</a>
+<a href="/blog/">Blog</a>      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+<a href="/changelog/">Changelog</a>      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+      <a href="/alternatives/remotion/">Remotion alternatives</a>
+      <a href="/alternatives/hyperframes/">HyperFrames alternatives</a>
+      <a href="/alternatives/json-to-video-api/">vs JSON-to-video APIs</a>
+      <a href="/benchmarks/">Benchmarks</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code></span>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=c898dbcc"></script>
+</body>
+</html>
