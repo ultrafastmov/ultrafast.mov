@@ -207,7 +207,7 @@ A document is plain JSON, so any language can write one. This Python script turn
 import json, subprocess
 
 rhythm = json.loads(subprocess.run(["uf", "beats", "loop.wav"], capture_output=True, text=True, check=True).stdout)
-cuts = [0.0] + [b for b in rhythm["beats"] if b < rhythm["duration"] - 0.25]
+cuts = sorted({0.0, *(b for b in rhythm["beats"] if b < rhythm["duration"] - 0.25)})
 ends = cuts[1:] + [rhythm["duration"]]
 words = "every cut in this clip lands on a beat that uf beats found in the track".split()
 cards = [("#ff5c7a", "#14121c"), ("#14121c", "#f6f3ee"), ("#f6f3ee", "#14121c"), ("#2ee6c5", "#14121c")]
