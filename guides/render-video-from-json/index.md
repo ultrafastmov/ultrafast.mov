@@ -19,6 +19,8 @@ One JSON file in, a finished video out, rendered on your GPU. A worked example, 
 
   * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
 
 ## Reference
 
@@ -62,7 +64,7 @@ A 6-second title card at 1920×1080: a moving marble background, darkened, a tit
       "glyph_opacity": { "keys": [ { "t": 0.3, "v": 0 }, { "t": 0.6, "v": 1 } ] } } },
     "sub": { "op": "text", "params": { "text": "Episode 41 · out Thursday", "font": "Geist", "size": 44, "align": "center", "valign": "middle",
       "position": { "wiggle": { "frequency": 0.4, "amplitude": [6, 4], "base": [960, 660] } }, "color": "#ffffffb0", "tracking": 2,
-      "reveal": { "keys": [ { "t": 1.0, "v": 0 }, { "t": 2.0, "v": 24 } ] } } },
+      "reveal": { "keys": [ { "t": 1.0, "v": 0 }, { "t": 2.2, "v": 30 } ] } } },
     "l1": { "op": "over", "inputs": { "fg": "title", "bg": "dim" } },
     "l2": { "op": "over", "inputs": { "fg": "sub", "bg": "l1" } },
     "lit": { "op": "bloom", "inputs": { "source": "l2" }, "params": { "intensity": 0.5 } },
@@ -70,6 +72,8 @@ A 6-second title card at 1920×1080: a moving marble background, darkened, a tit
   }
 }
 ``` 
+
+[Video: The title card the JSON describes: Night Shift rises letter by letter over moving marble, then Episode 41, out Thursday types on](https://ultrafast.mov/media/guides/json-card.mp4) card.json, exported. About 0.7 s from the command to the finished MP4 on one RTX 5090, and `uf review` found nothing to fix.
 
 Four parts make every document:
 
@@ -129,6 +133,8 @@ ep43,Night Shift,Episode 43 · out 11 December
 uf batch card.json --data rows.csv --out 'out/{name}.mp4'     # one warm renderer, a video per row
 uf batch card.json --data rows.csv --docs docs/               # or write each row's document and render later
 ``` 
+
+The subtitle's `reveal` runs to 30 glyphs, so the longest row's 28 type on in full. A reveal counts glyphs, so give it room for the longest row's text.
 
 Rows can be CSV, JSON or JSON lines, and a column can change the format too (`format.width`, `format.height`), so one sheet can give several sizes; frame-relative layout such as blocks and captions follows the frame.
 

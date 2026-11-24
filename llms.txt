@@ -25,6 +25,8 @@ Facts an agent needs:
 - [The document format](https://ultrafast.mov/docs/documents/index.md): the JSON document: format, nodes, animation, timing, components
 - [Render video from JSON: a worked example](https://ultrafast.mov/guides/render-video-from-json/index.md): a worked example: a 21-line document, check and export, one video per CSV row, HTTP, Python and TypeScript, the schema, other JSON video formats
 - [Personalized videos from a CSV, open source](https://ultrafast.mov/guides/personalized-videos-from-csv/index.md): one video per row of a CSV or JSON file: the template, node.param columns, checking every row before rendering, long names, a photo per row, Python and HTTP
+- [Make a video with Claude Code: a real session](https://ultrafast.mov/guides/claude-code/index.md): a recorded Claude Code session from prompt to MP4: plugin install, the prompt, every tool call, the contact sheets, an edit by asking, time and tokens, troubleshooting
+- [Lottie to MP4, transparent WebM or ProRes 4444 on your GPU](https://ultrafast.mov/guides/lottie-to-mp4/index.md): Lottie JSON to MP4, transparent WebM, ProRes 4444, GIF or PNG frames: the document, measured times per format, a whole folder with uf batch, recolouring with import-lottie and jq, what does not import, a 217-file comparison with lottie-web
 - [Op reference](https://ultrafast.mov/docs/ops/index.md): all 70 ops with ports, params, types and defaults
 - [CLI reference](https://ultrafast.mov/docs/cli/index.md): every command
 - [MCP server](https://ultrafast.mov/docs/mcp/index.md): the 20 MCP tools and client setup

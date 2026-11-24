@@ -449,6 +449,10 @@ a.tk:hover { box-shadow: 0 1px 0 rgba(0, 0, 0, .15), 0 22px 26px -16px rgba(0, 0
 .prose blockquote { margin: 26px 0; padding: 4px 0 4px 20px; border-left: 4px solid var(--yellow); font-style: italic; color: var(--muted); }
 .prose hr { border: 0; border-top: 1.5px dashed rgba(29, 27, 25, .3); margin: 48px 0; }
 .prose .lead { font-size: 21px; line-height: 1.5; color: #2f2b27; }
+.prose figure.clip { margin: 8px 0 40px; }
+.prose figure.clip video, .prose figure.clip img { display: block; width: 100%; height: auto; background: #ece6da; box-shadow: 0 0 0 6px #fff, 0 16px 24px -18px rgba(0, 0, 0, .6); }
+.prose figure.clip figcaption { margin-top: 16px; font: 13px/1.5 var(--mono); color: var(--muted); }
+.prose figure.clip.tall { position: relative; width: min(360px, 100%); }
 
 .code { position: relative; margin: 22px 0 26px; background: var(--tex-thermal, none) 0 0 / 768px, #fbf8ef; box-shadow: 0 0 0 1px rgba(29, 27, 25, .16), 0 14px 26px -22px rgba(0, 0, 0, .5); border-radius: 2px; }
 .code .cbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 7px 8px 7px 14px; font: 12.5px/1 var(--mono); color: #6b6358; border-bottom: 1px dashed rgba(29, 27, 25, .25); }

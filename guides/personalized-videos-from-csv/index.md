@@ -19,6 +19,8 @@ A template and a spreadsheet make a finished video per row, each with its own cu
 
   * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
 
 ## Reference
 
@@ -32,7 +34,7 @@ A template and a spreadsheet make a finished video per row, each with its own cu
   * [llms.txt](<https://ultrafast.mov/llms.txt>)
   * [This page as Markdown](<https://ultrafast.mov/guides/personalized-videos-from-csv/index.md>)
 
-**On this page**
+[Video: Twelve thank-you videos playing side by side, each with its own name, colour, order number and discount code](https://ultrafast.mov/media/guides/csv-batch.mp4) Twelve of 100 videos made from one template and a 100-row sheet. All 100 exported in 18.0 s on one RTX 5090. **On this page**
 
   1. The template
   2. The sheet
@@ -57,7 +59,7 @@ The template is an ordinary ultrafast document: a JSON file with a `format`, a g
   "text": "ORDER 10482", "font": "Geist Mono", "size": 26, "position": [86, 600] } },
 "code": { "op": "text", "params": {
   "text": "10% off the next one: PRIYA10", "font": "Geist Mono", "size": 36, "color": "#ffd7a8",
-  "position": [86, 1320], "reveal": { "keys": [ { "t": 2.4, "v": 0 }, { "t": 3.6, "v": 30 } ] } } }
+  "position": [86, 1320], "reveal": { "keys": [ { "t": 2.4, "v": 0 }, { "t": 4.4, "v": 50 } ] } } }
 ``` 
 
 Nothing in the template marks a field as a variable. Any param of any node can be set from the sheet, so the design stays a normal document you can preview, check and edit like any other.
@@ -76,7 +78,7 @@ mei,Mei.,ORDER 10484,10% off the next one: MEI10,#c8ffa8
   * Rows can be CSV, a JSON array of objects, or JSON lines.
   * Numbers are read as numbers (`line2.size` = `160`), colours as hex text with optional alpha.
   * `format.width`, `format.height` and the other format fields can be columns too. Layout built from blocks and captions follows the frame; pixel positions such as this card's don't, so give each size its own template.
-  * In `--out`, `{name}` is filled from the `name` column (any column works) and `{row}` is the row number.
+  * In `--out`, `{name}` is filled from the `name` column (any column works) and `{row}` is the row number. Two rows that would write the same file stop the batch before it starts (`Error: row 97: writes out/ines.mp4 again`, from an Inès and an Ines), so add `{row}` when names can repeat.
 
 ## Check every row before anything renders
 
@@ -107,6 +109,8 @@ uf review docs/maximiliana.json --safe social      # also flags text under a soc
 
 For a sheet of unknown names, review the longest few rows before the full run. For full names with spaces, a wrap width (`"width"` on the text node, in pixels) breaks a long one onto a second line instead of running it off the edge.
 
+Text that types itself on needs the same care. `reveal` counts glyphs, so its last key must be at least as long as the longest row's text. This card's code first stopped at 30, and `10% off the next one: ISABELA10`, 31 glyphs, ended on `ISABELA1`. Neither `check` nor `review` reports a reveal that stops short, so the card now types on at the same speed up to 50, and the sheet of the longest row is the place to see it.
+
 ## Render the batch
 
 ```
@@ -114,7 +118,18 @@ uf batch card.json --data rows.csv --out 'out/{name}.mp4'
 uf batch card.json --data rows.csv --out 'out/{name}.mp4' --codec hevc --quality high   # export settings apply to every row
 ``` 
 
-One renderer stays warm for the whole sheet, so fonts and GPU pipelines load once for the whole run, not once per video. Each row prints its frame count and time, and the run ends with the total. Every export setting works here: H.264, HEVC or AV1 MP4, ProRes, WebM, GIF, any size and frame rate. `uf estimate card.json` reports the GPU time of one video before you start.
+One renderer stays warm for the whole sheet, so fonts and GPU pipelines load once for the whole run, not once per video. Each row prints its frame count and time, and the run ends with the total. With this card and a 100-row sheet, on one RTX 5090 workstation:
+
+```
+$ uf batch card.json --data rows.csv --out 'out/{name}.mp4'
+1/100 out/priya.mp4: 180 frames in 0.33 s
+2/100 out/tomas.mp4: 180 frames in 0.18 s
+3/100 out/mei.mp4: 180 frames in 0.18 s
+...
+100 videos in 18.0 s
+``` 
+
+That's 18.0 s for 100 six-second 1080×1920 videos, the same in each of three runs. After the first row, each video took 0.17 or 0.18 s. A longer or busier template takes longer per row. Every export setting works here: H.264, HEVC or AV1 MP4, ProRes, WebM, GIF, any size and frame rate. `uf estimate card.json` reports the GPU time of one video before you start.
 
 ## A photo, a logo or a clip per row
 
@@ -171,6 +186,10 @@ Yes. A column such as `photo.src` sets the file of an `image` or `video` node pe
 How do I stop long names from running off the frame?
 
 Render and look: `uf review` on the longest rows reports text that runs off the frame, overlaps other text or is too small, and `uf sheet` shows nine frames on one image. A wrap width on the text node breaks a long full name onto a second line. `uf check` alone can't see it, because a long name is a valid document.
+
+How long does it take to render 100 personalized videos?
+
+It depends on the template and the GPU. The 6-second 1080×1920 card in this guide took 18.0 s for a 100-row sheet on one RTX 5090 workstation, about 0.18 s per video after the first. `uf estimate card.json` reports one video's GPU time on your machine before you run the batch.
 
 Can I do this from n8n, Zapier or my own code?
 

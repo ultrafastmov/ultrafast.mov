@@ -19,6 +19,8 @@ Docs
 
   * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
 
 ## Reference
 
@@ -103,7 +105,7 @@ uf export film.json plates/ --alpha                           # PNG frames and a
 
 `uf import-svg <file.svg>`| An SVG as an editable component: one path per shape, gradients, strokes, text as outlines.  
 ---|---  
-`uf import-lottie <anim.json>`| A Lottie animation as editable paths and keyframes.  
+`uf import-lottie <anim.json>`| A Lottie animation as editable paths and keyframes. To render one as video, see [Lottie to MP4](<https://ultrafast.mov/guides/lottie-to-mp4/>).  
 `uf decompose <video> --out-dir DIR`| Split a motion-graphics video into a still plate and vector layers keyed frame by frame.  
 `uf reconstruct <video> --out-dir DIR`| A whole video as an editable draft: shots, text layers with matched fonts, backgrounds, fades.  
 `uf probe`, `extract`, `compare`, `fit`, `fit-motion`, `match-font`, `plate`, `ocr`, `matte`| Refine a reconstruction: shots, reference frames, PSNR and SSIM, fitted params and motion, fonts, plates, text, mattes. Text is read with Apple Vision on macOS and Tesseract elsewhere; `matte` needs macOS.  

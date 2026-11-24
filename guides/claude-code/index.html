@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Make a video with Claude Code: a real session · ultrafast</title>
+<meta name="description" content="Make videos with Claude Code and ultrafast: install the plugin, the exact prompt, every tool call the agent made, the contact sheets it looked at, an edit by asking, and the time and tokens it took.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/guides/claude-code/">
+<link rel="alternate" type="text/markdown" href="/guides/claude-code/index.md" title="Make a video with Claude Code: a real session · ultrafast (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="ultrafast blog"><meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="Make a video with Claude Code">
+<meta property="og:description" content="Make videos with Claude Code and ultrafast: install the plugin, the exact prompt, every tool call the agent made, the contact sheets it looked at, an edit by asking, and the time and tokens it took.">
+<meta property="og:url" content="https://ultrafast.mov/guides/claude-code/">
+<meta property="og:image" content="https://ultrafast.mov/og/guide-claude-code.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Make a video with Claude Code · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Make a video with Claude Code">
+<meta name="twitter:description" content="Make videos with Claude Code and ultrafast: install the plugin, the exact prompt, every tool call the agent made, the contact sheets it looked at, an edit by asking, and the time and tokens it took.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/guide-claude-code.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=c898dbcc">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://ultrafast.mov/docs/"},{"@type":"ListItem","position":3,"name":"Make a video with Claude Code","item":"https://ultrafast.mov/guides/claude-code/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can Claude Code make videos?","acceptedAnswer":{"@type":"Answer","text":"Yes, with a video engine to write for. With the ultrafast plugin, Claude Code writes the video as a JSON document, checks it, looks at its frames, reviews every frame and exports an MP4 on your GPU. In the session on this page that took 53.1 s from the prompt to a 10-second 1080×1920 MP4."}},{"@type":"Question","name":"What do I need to install?","acceptedAnswer":{"@type":"Answer","text":"The uf engine (curl -fsSL https://ultrafast.mov/install.sh | sh or Homebrew) and the plugin: claude plugin marketplace add ultrafastmov/ultrafast, then claude plugin install ultrafast@ultrafast. It renders on a Mac with Apple silicon or on Linux with a Vulkan GPU."}},{"@type":"Question","name":"How many tokens does a video take?","acceptedAnswer":{"@type":"Answer","text":"In this session, 4,719 output tokens for the first 10-second video and 2,597 for an edit, with Claude Opus 5.5. A longer or busier video takes more. Measured on the same 10-second short, an ultrafast document was about 1,234 output tokens against 1,868 for Remotion."}},{"@type":"Question","name":"Does Claude Code see the video it makes?","acceptedAnswer":{"@type":"Answer","text":"It sees frames. ultrafast_sheet returns several frames on one image and ultrafast_frame one frame at full size, and ultrafast_review reads all of them for clipped, low-contrast, overlapping, too-small or too-brief text. In this session Claude spotted a line sitting too close to another on a contact sheet and moved it before exporting."}},{"@type":"Question","name":"Can I edit the video after it's made?","acceptedAnswer":{"@type":"Answer","text":"Yes, by asking in the same session. Claude changes the document with ultrafast_edit (set a param, add or remove a node, rewire) instead of rewriting it, then checks, reviews and exports again. The edit on this page took 31.2 s."}},{"@type":"Question","name":"Does it work on Windows?","acceptedAnswer":{"@type":"Answer","text":"Through WSL2 on a machine with a Vulkan GPU. There is no native Windows build."}}]},{"@type":"TechArticle","@id":"https://ultrafast.mov/guides/claude-code/#article","headline":"Make a video with Claude Code: a real session","description":"Make videos with Claude Code and ultrafast: install the plugin, the exact prompt, every tool call the agent made, the contact sheets it looked at, an edit by asking, and the time and tokens it took.","url":"https://ultrafast.mov/guides/claude-code/","mainEntityOfPage":"https://ultrafast.mov/guides/claude-code/","image":"https://ultrafast.mov/og/guide-claude-code.jpg","datePublished":"2026-11-24T00:03:29+00:00","dateModified":"2026-11-24T00:03:29+00:00","inLanguage":"en","author":{"@id":"https://ultrafast.mov/#org"},"publisher":{"@id":"https://ultrafast.mov/#org"},"about":{"@id":"https://ultrafast.mov/#app"}}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/" aria-current="page">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="band stock-cotton phead" style="padding-bottom:56px">
+  <div class="sunburst" aria-hidden="true" style="--sx:92%;--sy:40%;--r2:520px"></div>
+  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+<li><a href="/docs/">Docs</a></li>  <li aria-current="page">Make a video with Claude Code</li>
+</ol>
+
+    <p class="eyebrow"><i style="--c:var(--blue)"></i>Docs</p>
+    <h1 class="pr h1" data-plates="blue black"><span class="ln">Make a video</span> <span class="ln">with Claude Code.</span></h1>
+    <p class="lede">Claude Code can make real videos when it has a video engine to write for. Here is one session from start to finish: a 10-second vertical video for a coffee roastery, from the prompt to the MP4, with every tool call it made, what it looked at, the edit after, and how long each part took.</p>
+  </div>
+</section>
+<section class="band stock-thermal" style="padding-top:72px">
+  <div class="wrap docs">
+    <nav class="side" aria-label="Docs">
+      <h2>Start</h2>
+      <ul><li><a href="/docs/">Quickstart</a></li><li><a href="/docs/documents/">The document</a></li></ul>
+      <h2>Guides</h2>
+      <ul><li><a href="/guides/render-video-from-json/">Render video from JSON</a></li><li><a href="/guides/personalized-videos-from-csv/">Personalized videos from a CSV</a></li><li><a href="/guides/claude-code/" aria-current="page">Make a video with Claude Code</a></li><li><a href="/guides/lottie-to-mp4/">Lottie to MP4, WebM or ProRes</a></li></ul>
+      <h2>Reference</h2>
+      <ul><li><a href="/docs/ops/">Ops</a></li><li><a href="/docs/cli/">CLI</a></li><li><a href="/docs/mcp/">MCP server</a></li><li><a href="/docs/api/">HTTP API</a></li></ul>
+      <h2>For agents</h2>
+      <ul><li><a href="/llms.txt">llms.txt</a></li><li><a href="/guides/claude-code/index.md">This page as Markdown</a></li></ul>
+    </nav>
+    <article class="prose">
+<figure class="clip tall"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/claude-code-third-crack.webp" width="720" height="1280" aria-label="A 10-second vertical video: NOW OPEN, Third Crack, Roasted on Thursdays, 14 Mill Lane, Thursday to Sunday, 8 to 2, in cream and amber type on a warm brown background"><source data-src="/media/guides/claude-code-third-crack.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/claude-code-third-crack.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/claude-code-third-crack.mp4" type="video/mp4"></video>
+  <figcaption>Made by Claude Code with ultrafast from the two prompts on this page: 53.1 s for the first version, 31.2 s for the edit.</figcaption></figure>
+
+<nav class="toc" aria-label="On this page"><b>On this page</b><ol>
+  <li><a href="#install">Install</a></li><li><a href="#prompt">The prompt</a></li><li><a href="#session">What Claude did</a></li>
+  <li><a href="#review">When the review finds something</a></li><li><a href="#edit">Changing it by asking</a></li><li><a href="#numbers">Time and tokens</a></li>
+  <li><a href="#prompts">Prompts to try</a></li><li><a href="#trouble">If it doesn't work</a></li><li><a href="#others">Remotion, HyperFrames and other agents</a></li><li><a href="#faq">Questions</a></li>
+</ol></nav>
+
+<h2 id="install">Install</h2>
+<p>Two parts: <code>uf</code>, the engine that renders on your GPU, and the ultrafast plugin for Claude Code, which brings the skill (how to write and check a video document) and the MCP server (<code>uf mcp</code>, the tools Claude calls).</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">curl<span class="w"> </span>-fsSL<span class="w"> </span>https://ultrafast.mov/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w">        </span><span class="c1"># or: brew install ultrafastmov/tap/ultrafast</span>
+claude<span class="w"> </span>plugin<span class="w"> </span>marketplace<span class="w"> </span>add<span class="w"> </span>ultrafastmov/ultrafast
+claude<span class="w"> </span>plugin<span class="w"> </span>install<span class="w"> </span>ultrafast@ultrafast</code></pre></div><p>It runs on a Mac with Apple silicon or on Linux with a Vulkan GPU. To confirm Claude Code can reach the engine:</p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">$ claude mcp list
+plugin:ultrafast:ultrafast: uf mcp - ✔ Connected</code></pre></div><p>Without the plugin, the same two parts install separately: <code>npx skills add ultrafastmov/ultrafast</code> for the skill and <code>claude mcp add ultrafast -- uf mcp</code> for the server. The session below used that route, in an empty folder with no other settings, so nothing else on the machine shaped the result.</p>
+
+<h2 id="prompt">The prompt</h2>
+<p>One message, sent as written:</p>
+<div class="code"><div class="cbar"><span>prompt</span><button class="copy" type="button">copy</button></div><pre><code class="hl">Make a 10-second vertical video (1080x1920) announcing the opening of a small coffee roastery
+called Third Crack: its name, the line &quot;Roasted on Thursdays&quot;, and the address 14 Mill Lane.
+Warm, slow and confident. Check it, look at the frames, fix anything the review finds, and
+export an MP4.</code></pre></div><p>The last sentence names the loop the skill teaches: check the document, look at frames, review every frame, then export.</p>
+
+<h2 id="session">What Claude did</h2>
+<p>Every step below is a tool call from the session's log, in order, with what came back.</p>
+<ol>
+  <li><b>Loaded the ultrafast skill</b> and asked <code>ultrafast_ops</code> for the parameters of the ops it planned to use: <code>gradient</code>, <code>noise</code>, <code>text</code>, <code>shape</code>, <code>over</code>, <code>vignette</code> and <code>grain</code>.</li>
+  <li><b>Wrote <code>third-crack.json</code></b> in one go: a radial brown gradient, slow noise drifting upward as smoke, five layers of type and a thin rule, each with its own timing, then a vignette and film grain. The name rises in letter by letter:
+<div class="code"><div class="cbar"><span>third-crack.json: the name, as Claude wrote it</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Third\nCrack&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;font&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fraunces&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;weight&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">190</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;line_height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.98</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#f3e6d3&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;align&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;center&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;valign&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;middle&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">540</span><span class="p">,</span><span class="w"> </span><span class="mi">860</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;stagger&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.08</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;glyph_opacity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;ease&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;in_out_sine&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;glyph_offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">36</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;ease&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;bezier&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.16</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.4</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;v&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">}]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span></code></pre></div></li>
+  <li><b>Fixed its own slip.</b> It had given the tagline two <code>position</code> keys, a fixed one and an animated one, and deleted the fixed one before going on.</li>
+  <li><b><code>ultrafast_check</code></b> on the document, without rendering: <code>{"issues": []}</code>.</li>
+  <li><b><code>ultrafast_sheet</code></b>: eight frames from 0.5 s to 9.9 s on one image, which Claude looked at. Its note: "Looks right: warm, centered, everything spelled correctly."</li>
+  <li><b><code>ultrafast_review</code></b> with <code>"safe": "social"</code>, which reads every frame for clipped, overlapping, low-contrast, too-small or too-brief text and for text under a social app's buttons: <code>{"frames": 300, "issues": [], "seconds": 2.02, "texts": 4}</code>.</li>
+  <li><b><code>ultrafast_frame</code></b> at 9 s, to see the finished card at full size.</li>
+  <li><b><code>ultrafast_export</code></b>: <code>exported 300 frames (1080x1920 @ 30 fps, mp4 h264, high) in 0.36 s (823 fps)</code>.</li>
+  <li><b>Checked the file</b> with <code>ffprobe</code> (H.264, 1080×1920, 30 fps, 10.0 s, 1.7 MB) and summed up, including one choice it made on its own: "I added "NOW OPEN" myself to make it read as an opening announcement, so remove it if you'd rather keep to just the three lines you gave me."</li>
+</ol>
+<figure class="clip"><img src="/img/guides/claude-code-sheet-1.webp" width="1400" height="1236" loading="lazy" alt="Contact sheet of eight frames from 0.5 to 9.9 seconds: NOW OPEN fades in, Third Crack rises in letter by letter, a rule draws under it, then Roasted on Thursdays and 14 Mill Lane fade in on a warm brown background.">
+  <figcaption>The contact sheet Claude looked at before the review, as <code>ultrafast_sheet</code> returned it.</figcaption></figure>
+
+<h2 id="review">When the review finds something</h2>
+<p>This draft passed the review on the first try, so there was nothing to fix. Drafts often don't. The first draft of the pottery class teaser on the <a href="/#agents">home page</a> came back with eight findings, among them:</p>
+<div class="code"><div class="cbar"><span>uf review: findings from another first draft</span><button class="copy" type="button">copy</button></div><pre><code class="hl">clipped        &quot;Pottery class&quot; runs off the frame (right by 40 px)
+low contrast   &quot;HALDEN CLAY STUDIO&quot; never reaches readable contrast (best 1.6:1, want 3:1 or more)
+too brief      &quot;First class free&quot; is readable for 0.4 s; 3 words need about 0.9 s
+flashing       more than 3 flashes per second: a photosensitive seizure risk (WCAG 2.3.1)</code></pre></div><p>Each finding names the text and the problem, so Claude can fix the document and run the review again until it comes back empty. That loop is why to ask for it: the agent sees its own mistakes before you do.</p>
+
+<h2 id="edit">Changing it by asking</h2>
+<p>A second message, in the same session:</p>
+<div class="code"><div class="cbar"><span>prompt</span><button class="copy" type="button">copy</button></div><pre><code class="hl">Make the address a little bigger, and add a line under it: Thursday to Sunday, 8 to 2.
+Then check, review and export again.</code></pre></div><p>Claude didn't rewrite the file. It sent <code>ultrafast_edit</code> ten changes in one call: it made the address larger, added the new line as a node and wired it into the picture, and moved the other lines up by about 40 px to keep the block centred. Five of the ten:</p>
+<div class="code"><div class="cbar"><span>ultrafast_edit: part of the call</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set_param&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;address&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;param&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;size&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="p">},</span>
+<span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set_param&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;address&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;param&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;position&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">540</span><span class="p">,</span><span class="w"> </span><span class="mi">1255</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add_node&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hours&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Thursday to Sunday, 8 to 2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;font&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DM Mono&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#e8c79a&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;align&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;center&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;valign&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;middle&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">540</span><span class="p">,</span><span class="w"> </span><span class="mi">1330</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add_node&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;c6&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;over&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;fg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hours&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;bg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;c5&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;connect&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vig&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;c6&quot;</span><span class="w"> </span><span class="p">}</span></code></pre></div><p>The check passed. Then the contact sheet showed something the check couldn't: "The hours line sits a bit tight under the address, so I'll give it a little more room before reviewing." A second edit moved it down 15 px and set it 2 px larger. The review read all 300 frames and 5 texts with no findings, and the export took 0.37 s.</p>
+<figure class="clip"><img src="/img/guides/claude-code-sheet-2.webp" width="1400" height="1236" loading="lazy" alt="Contact sheet of the edited video, eight frames from 1.4 to 9.9 seconds: the address is larger and a line reading Thursday to Sunday, 8 to 2 fades in under it.">
+  <figcaption>The sheet after the edit, where Claude saw the new line sitting too close to the address.</figcaption></figure>
+
+<h2 id="numbers">Time and tokens</h2>
+<p>Wall time runs from starting Claude Code to its exit, so it includes start-up, every model turn and every tool call.</p>
+<div class="tablewrap"><table class="tbl">
+  <thead><tr><th scope="col"></th><th scope="col">First video</th><th scope="col">The edit</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">Wall time</th><td>53.1 s</td><td>31.2 s</td></tr>
+    <tr><th scope="row">Model turns</th><td>15</td><td>10</td></tr>
+    <tr><th scope="row">Output tokens</th><td>4,719</td><td>2,597</td></tr>
+    <tr><th scope="row">Review</th><td>300 frames, 0 issues, 2.0 s</td><td>300 frames, 0 issues, 1.8 s</td></tr>
+    <tr><th scope="row">Export</th><td>0.36 s</td><td>0.37 s</td></tr>
+    <tr><th scope="row">Cost at API list prices</th><td>$0.46</td><td>$0.67</td></tr>
+  </tbody>
+</table></div>
+<p>Claude Code 2.1.325 with Claude Opus 5.5 and ultrafast 0.2.0; both exports took under 0.4 s on one RTX 5090 workstation. The costs are what Claude Code reported at API list prices. On a Pro or Max plan the session counts toward the plan's usage instead. Most of the wall time is the model thinking and writing; the engine's share, from check to export, was a few seconds per turn.</p>
+
+<h2 id="prompts">Prompts to try</h2>
+<p>Each of these briefs made one of the films on the <a href="/examples/">examples page</a>, where the document behind each one is published:</p>
+<ul>
+  <li>"A 10-second vertical teaser for my pottery class. Saturdays, first class free."</li>
+  <li>"Turn NOAA's Mauna Loa CO₂ file into a chart for Instagram."</li>
+  <li>"Show how Artemis I got to the Moon and back, from NASA's trajectory data."</li>
+  <li>"Make every member their year in review from this spreadsheet."</li>
+  <li>"A 15-second loop for the album cover: something growing, in celadon."</li>
+</ul>
+<p>Say what it's for, how long, the size, and the words that must appear. Give Claude the files it should use (footage, a logo, a data file) by path. For one video per row of a spreadsheet, see <a href="/guides/personalized-videos-from-csv/">Personalized videos from a CSV</a>.</p>
+
+<h2 id="trouble">If it doesn't work</h2>
+<ul>
+  <li><b><code>✘ Failed to connect — ENOENT: Executable not found in $PATH: "uf"</code></b> in <code>claude mcp list</code>: the plugin is installed but Claude Code was started without <code>uf</code> on its PATH. Open a new terminal after installing, or add the folder the installer printed to your PATH, then start Claude Code again.</li>
+  <li><b>Which GPU will it use?</b> <code>uf info</code> names the GPU it will render on. ultrafast needs one: Apple silicon on a Mac, or a Vulkan GPU on Linux.</li>
+  <li><b>Fonts.</b> The session used Fraunces and DM Mono by name. Fonts named in a document may be downloaded by name the first time they're used, so the first render with a new font needs a network connection.</li>
+  <li><b>Claude doesn't use the tools.</b> Check that the plugin is enabled (<code>claude plugin list</code>) and name the loop in the prompt: "check it, look at the frames, review it, then export".</li>
+</ul>
+
+<h2 id="others">Remotion, HyperFrames and other agents</h2>
+<p>Claude Code also makes video with Remotion (React rendered in headless Chrome) and HyperFrames (HTML and GSAP in headless Chrome). On one RTX 5090, the same three 10-second videos exported in 0.66–0.78 s with ultrafast; Remotion took 3.1–8.6 times as long at its fastest settings, and HyperFrames 4.6–5.7 times (<a href="/benchmarks/">benchmark</a>). For the same 10-second short, the ultrafast document took about 1,234 output tokens against 1,868 for Remotion. Head-to-head pages: <a href="/compare/remotion/">ultrafast vs Remotion</a>, <a href="/compare/hyperframes/">ultrafast vs HyperFrames</a>. For every way Claude can make video, including Claude Motion, see <a href="/learn/can-claude-make-videos/">Can Claude make videos?</a></p>
+<p>The same skill and MCP server work in Codex, Cursor, Gemini CLI and any MCP client: setup for each is on <a href="/integrations/">Integrations</a>, and the tools are listed in <a href="/docs/mcp/">MCP server</a>.</p>
+
+<h2 id="faq">Questions</h2>
+<div class="faq">
+  <details open>
+    <summary>Can Claude Code make videos?</summary>
+    <div class="ans"><p>Yes, with a video engine to write for. With the ultrafast plugin, Claude Code writes the video as a JSON document, checks it, looks at its frames, reviews every frame and exports an MP4 on your GPU. In the session on this page that took 53.1 s from the prompt to a 10-second 1080×1920 MP4.</p></div>
+  </details>
+  <details>
+    <summary>What do I need to install?</summary>
+    <div class="ans"><p>The <code>uf</code> engine (<code>curl -fsSL https://ultrafast.mov/install.sh | sh</code> or Homebrew) and the plugin: <code>claude plugin marketplace add ultrafastmov/ultrafast</code>, then <code>claude plugin install ultrafast@ultrafast</code>. It renders on a Mac with Apple silicon or on Linux with a Vulkan GPU.</p></div>
+  </details>
+  <details>
+    <summary>How many tokens does a video take?</summary>
+    <div class="ans"><p>In this session, 4,719 output tokens for the first 10-second video and 2,597 for an edit, with Claude Opus 5.5. A longer or busier video takes more. Measured on the same 10-second short, an ultrafast document was about 1,234 output tokens against 1,868 for Remotion.</p></div>
+  </details>
+  <details>
+    <summary>Does Claude Code see the video it makes?</summary>
+    <div class="ans"><p>It sees frames. <code>ultrafast_sheet</code> returns several frames on one image and <code>ultrafast_frame</code> one frame at full size, and <code>ultrafast_review</code> reads all of them for clipped, low-contrast, overlapping, too-small or too-brief text. In this session Claude spotted a line sitting too close to another on a contact sheet and moved it before exporting.</p></div>
+  </details>
+  <details>
+    <summary>Can I edit the video after it&#39;s made?</summary>
+    <div class="ans"><p>Yes, by asking in the same session. Claude changes the document with <code>ultrafast_edit</code> (set a param, add or remove a node, rewire) instead of rewriting it, then checks, reviews and exports again. The edit on this page took 31.2 s.</p></div>
+  </details>
+  <details>
+    <summary>Does it work on Windows?</summary>
+    <div class="ans"><p>Through WSL2 on a machine with a Vulkan GPU. There is no native Windows build.</p></div>
+  </details>
+</div>
+
+    </article>
+  </div>
+</section>
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/learn/can-claude-make-videos/">Can Claude make videos?</a>
+<a href="/blog/">Blog</a>      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+<a href="/changelog/">Changelog</a>      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+      <a href="/alternatives/remotion/">Remotion alternatives</a>
+      <a href="/alternatives/hyperframes/">HyperFrames alternatives</a>
+      <a href="/alternatives/json-to-video-api/">vs JSON-to-video APIs</a>
+      <a href="/benchmarks/">Benchmarks</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code></span>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=c898dbcc"></script>
+</body>
+</html>

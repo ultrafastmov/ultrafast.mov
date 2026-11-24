@@ -119,7 +119,7 @@ claude plugin marketplace add ultrafastmov/ultrafast
 claude plugin install ultrafast@ultrafast
 ``` 
 
-The ultrafast skill and `uf mcp` together. Tested: the plugin installs from the repo. With the skill, Claude Code went from a one-line request to an exported video with 0 review findings.
+The ultrafast skill and `uf mcp` together. Tested: the plugin installs from the repo. With the skill, Claude Code went from a one-line request to an exported video with 0 review findings. [The whole session, step by step](<https://ultrafast.mov/guides/claude-code/>).
 
 ### Claude Code, the MCP server alone
 
@@ -214,7 +214,7 @@ What to know before you connect it. Checked 22 November 2026.
   * On Linux, exports need ffmpeg; `ultrafast_voiceover` needs espeak-ng and `ultrafast_ocr` needs Tesseract.
   * The remote server at `/mcp` takes one API key as a bearer token. There is no OAuth sign-in on it.
   * OAuth sign-in and hosted rendering come with ultrafast Cloud, and so do the Claude connector and the ChatGPT app. Cloud has a [waitlist](<https://ultrafast.mov/cloud/>).
-  * Lottie import is in the CLI only (`uf import-lottie`). A document can still use a `lottie` node.
+  * Lottie import is in the CLI only (`uf import-lottie`). A document can still use a `lottie` node ([Lottie to MP4](<https://ultrafast.mov/guides/lottie-to-mp4/>)).
 
 ## Questions about the MCP server.
 

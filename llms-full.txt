@@ -340,6 +340,8 @@ Install it, make your first video, then hand the loop to your agent.
 
   * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
 
 ## Reference
 
@@ -493,6 +495,8 @@ A video is one JSON file. Here is its whole shape.
 
   * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
 
 ## Reference
 
@@ -618,6 +622,8 @@ One JSON file in, a finished video out, rendered on your GPU. A worked example, 
 
   * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
 
 ## Reference
 
@@ -661,7 +667,7 @@ A 6-second title card at 1920×1080: a moving marble background, darkened, a tit
       "glyph_opacity": { "keys": [ { "t": 0.3, "v": 0 }, { "t": 0.6, "v": 1 } ] } } },
     "sub": { "op": "text", "params": { "text": "Episode 41 · out Thursday", "font": "Geist", "size": 44, "align": "center", "valign": "middle",
       "position": { "wiggle": { "frequency": 0.4, "amplitude": [6, 4], "base": [960, 660] } }, "color": "#ffffffb0", "tracking": 2,
-      "reveal": { "keys": [ { "t": 1.0, "v": 0 }, { "t": 2.0, "v": 24 } ] } } },
+      "reveal": { "keys": [ { "t": 1.0, "v": 0 }, { "t": 2.2, "v": 30 } ] } } },
     "l1": { "op": "over", "inputs": { "fg": "title", "bg": "dim" } },
     "l2": { "op": "over", "inputs": { "fg": "sub", "bg": "l1" } },
     "lit": { "op": "bloom", "inputs": { "source": "l2" }, "params": { "intensity": 0.5 } },
@@ -669,6 +675,8 @@ A 6-second title card at 1920×1080: a moving marble background, darkened, a tit
   }
 }
 ``` 
+
+[Video: The title card the JSON describes: Night Shift rises letter by letter over moving marble, then Episode 41, out Thursday types on](https://ultrafast.mov/media/guides/json-card.mp4) card.json, exported. About 0.7 s from the command to the finished MP4 on one RTX 5090, and `uf review` found nothing to fix.
 
 Four parts make every document:
 
@@ -728,6 +736,8 @@ ep43,Night Shift,Episode 43 · out 11 December
 uf batch card.json --data rows.csv --out 'out/{name}.mp4'     # one warm renderer, a video per row
 uf batch card.json --data rows.csv --docs docs/               # or write each row's document and render later
 ``` 
+
+The subtitle's `reveal` runs to 30 glyphs, so the longest row's 28 type on in full. A reveal counts glyphs, so give it room for the longest row's text.
 
 Rows can be CSV, JSON or JSON lines, and a column can change the format too (`format.width`, `format.height`), so one sheet can give several sizes; frame-relative layout such as blocks and captions follows the frame.
 
@@ -825,6 +835,8 @@ A template and a spreadsheet make a finished video per row, each with its own cu
 
   * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
 
 ## Reference
 
@@ -838,7 +850,7 @@ A template and a spreadsheet make a finished video per row, each with its own cu
   * [llms.txt](<https://ultrafast.mov/llms.txt>)
   * [This page as Markdown](<https://ultrafast.mov/guides/personalized-videos-from-csv/index.md>)
 
-**On this page**
+[Video: Twelve thank-you videos playing side by side, each with its own name, colour, order number and discount code](https://ultrafast.mov/media/guides/csv-batch.mp4) Twelve of 100 videos made from one template and a 100-row sheet. All 100 exported in 18.0 s on one RTX 5090. **On this page**
 
   1. The template
   2. The sheet
@@ -863,7 +875,7 @@ The template is an ordinary ultrafast document: a JSON file with a `format`, a g
   "text": "ORDER 10482", "font": "Geist Mono", "size": 26, "position": [86, 600] } },
 "code": { "op": "text", "params": {
   "text": "10% off the next one: PRIYA10", "font": "Geist Mono", "size": 36, "color": "#ffd7a8",
-  "position": [86, 1320], "reveal": { "keys": [ { "t": 2.4, "v": 0 }, { "t": 3.6, "v": 30 } ] } } }
+  "position": [86, 1320], "reveal": { "keys": [ { "t": 2.4, "v": 0 }, { "t": 4.4, "v": 50 } ] } } }
 ``` 
 
 Nothing in the template marks a field as a variable. Any param of any node can be set from the sheet, so the design stays a normal document you can preview, check and edit like any other.
@@ -882,7 +894,7 @@ mei,Mei.,ORDER 10484,10% off the next one: MEI10,#c8ffa8
   * Rows can be CSV, a JSON array of objects, or JSON lines.
   * Numbers are read as numbers (`line2.size` = `160`), colours as hex text with optional alpha.
   * `format.width`, `format.height` and the other format fields can be columns too. Layout built from blocks and captions follows the frame; pixel positions such as this card's don't, so give each size its own template.
-  * In `--out`, `{name}` is filled from the `name` column (any column works) and `{row}` is the row number.
+  * In `--out`, `{name}` is filled from the `name` column (any column works) and `{row}` is the row number. Two rows that would write the same file stop the batch before it starts (`Error: row 97: writes out/ines.mp4 again`, from an Inès and an Ines), so add `{row}` when names can repeat.
 
 ## Check every row before anything renders
 
@@ -913,6 +925,8 @@ uf review docs/maximiliana.json --safe social      # also flags text under a soc
 
 For a sheet of unknown names, review the longest few rows before the full run. For full names with spaces, a wrap width (`"width"` on the text node, in pixels) breaks a long one onto a second line instead of running it off the edge.
 
+Text that types itself on needs the same care. `reveal` counts glyphs, so its last key must be at least as long as the longest row's text. This card's code first stopped at 30, and `10% off the next one: ISABELA10`, 31 glyphs, ended on `ISABELA1`. Neither `check` nor `review` reports a reveal that stops short, so the card now types on at the same speed up to 50, and the sheet of the longest row is the place to see it.
+
 ## Render the batch
 
 ```
@@ -920,7 +934,18 @@ uf batch card.json --data rows.csv --out 'out/{name}.mp4'
 uf batch card.json --data rows.csv --out 'out/{name}.mp4' --codec hevc --quality high   # export settings apply to every row
 ``` 
 
-One renderer stays warm for the whole sheet, so fonts and GPU pipelines load once for the whole run, not once per video. Each row prints its frame count and time, and the run ends with the total. Every export setting works here: H.264, HEVC or AV1 MP4, ProRes, WebM, GIF, any size and frame rate. `uf estimate card.json` reports the GPU time of one video before you start.
+One renderer stays warm for the whole sheet, so fonts and GPU pipelines load once for the whole run, not once per video. Each row prints its frame count and time, and the run ends with the total. With this card and a 100-row sheet, on one RTX 5090 workstation:
+
+```
+$ uf batch card.json --data rows.csv --out 'out/{name}.mp4'
+1/100 out/priya.mp4: 180 frames in 0.33 s
+2/100 out/tomas.mp4: 180 frames in 0.18 s
+3/100 out/mei.mp4: 180 frames in 0.18 s
+...
+100 videos in 18.0 s
+``` 
+
+That's 18.0 s for 100 six-second 1080×1920 videos, the same in each of three runs. After the first row, each video took 0.17 or 0.18 s. A longer or busier template takes longer per row. Every export setting works here: H.264, HEVC or AV1 MP4, ProRes, WebM, GIF, any size and frame rate. `uf estimate card.json` reports the GPU time of one video before you start.
 
 ## A photo, a logo or a clip per row
 
@@ -978,9 +1003,490 @@ How do I stop long names from running off the frame?
 
 Render and look: `uf review` on the longest rows reports text that runs off the frame, overlaps other text or is too small, and `uf sheet` shows nine frames on one image. A wrap width on the text node breaks a long full name onto a second line. `uf check` alone can't see it, because a long name is a valid document.
 
+How long does it take to render 100 personalized videos?
+
+It depends on the template and the GPU. The 6-second 1080×1920 card in this guide took 18.0 s for a 100-row sheet on one RTX 5090 workstation, about 0.18 s per video after the first. `uf estimate card.json` reports one video's GPU time on your machine before you run the batch.
+
 Can I do this from n8n, Zapier or my own code?
 
 From your own code, yes: the Python and TypeScript SDKs talk to `uf serve`, so you copy the template, set the params from your data and render. There is no n8n or Zapier node, but their HTTP request step can POST each row's document to `/v1/render` on your server.
+
+
+---
+
+# Make a video with Claude Code: a real session · ultrafast
+
+> Make videos with Claude Code and ultrafast: install the plugin, the exact prompt, every tool call the agent made, the contact sheets it looked at, an edit by asking, and the time and tokens it took.
+
+URL: https://ultrafast.mov/guides/claude-code/
+
+Docs
+
+# Make a video with Claude Code.
+
+Claude Code can make real videos when it has a video engine to write for. Here is one session from start to finish: a 10-second vertical video for a coffee roastery, from the prompt to the MP4, with every tool call it made, what it looked at, the edit after, and how long each part took.
+
+## Start
+
+  * [Quickstart](<https://ultrafast.mov/docs/>)
+  * [The document](<https://ultrafast.mov/docs/documents/>)
+
+## Guides
+
+  * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
+  * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
+
+## Reference
+
+  * [Ops](<https://ultrafast.mov/docs/ops/>)
+  * [CLI](<https://ultrafast.mov/docs/cli/>)
+  * [MCP server](<https://ultrafast.mov/docs/mcp/>)
+  * [HTTP API](<https://ultrafast.mov/docs/api/>)
+
+## For agents
+
+  * [llms.txt](<https://ultrafast.mov/llms.txt>)
+  * [This page as Markdown](<https://ultrafast.mov/guides/claude-code/index.md>)
+
+[Video: A 10-second vertical video: NOW OPEN, Third Crack, Roasted on Thursdays, 14 Mill Lane, Thursday to Sunday, 8 to 2, in cream and amber type on a warm brown background](https://ultrafast.mov/media/guides/claude-code-third-crack.mp4) Made by Claude Code with ultrafast from the two prompts on this page: 53.1 s for the first version, 31.2 s for the edit. **On this page**
+
+  1. Install
+  2. The prompt
+  3. What Claude did
+  4. When the review finds something
+  5. Changing it by asking
+  6. Time and tokens
+  7. Prompts to try
+  8. If it doesn't work
+  9. Remotion, HyperFrames and other agents
+  10. Questions
+
+## Install
+
+Two parts: `uf`, the engine that renders on your GPU, and the ultrafast plugin for Claude Code, which brings the skill (how to write and check a video document) and the MCP server (`uf mcp`, the tools Claude calls).
+
+```
+curl -fsSL https://ultrafast.mov/install.sh | sh        # or: brew install ultrafastmov/tap/ultrafast
+claude plugin marketplace add ultrafastmov/ultrafast
+claude plugin install ultrafast@ultrafast
+``` 
+
+It runs on a Mac with Apple silicon or on Linux with a Vulkan GPU. To confirm Claude Code can reach the engine:
+
+```
+$ claude mcp list
+plugin:ultrafast:ultrafast: uf mcp - ✔ Connected
+``` 
+
+Without the plugin, the same two parts install separately: `npx skills add ultrafastmov/ultrafast` for the skill and `claude mcp add ultrafast -- uf mcp` for the server. The session below used that route, in an empty folder with no other settings, so nothing else on the machine shaped the result.
+
+## The prompt
+
+One message, sent as written:
+
+```
+Make a 10-second vertical video (1080x1920) announcing the opening of a small coffee roastery
+called Third Crack: its name, the line "Roasted on Thursdays", and the address 14 Mill Lane.
+Warm, slow and confident. Check it, look at the frames, fix anything the review finds, and
+export an MP4.
+``` 
+
+The last sentence names the loop the skill teaches: check the document, look at frames, review every frame, then export.
+
+## What Claude did
+
+Every step below is a tool call from the session's log, in order, with what came back.
+
+  1. **Loaded the ultrafast skill** and asked `ultrafast_ops` for the parameters of the ops it planned to use: `gradient`, `noise`, `text`, `shape`, `over`, `vignette` and `grain`.
+  2. **Wrote`third-crack.json`** in one go: a radial brown gradient, slow noise drifting upward as smoke, five layers of type and a thin rule, each with its own timing, then a vignette and film grain. The name rises in letter by letter: 
+
+```
+"name": { "op": "text", "params": {
+  "text": "Third\nCrack", "font": "Fraunces", "weight": 600, "size": 190, "line_height": 0.98,
+  "color": "#f3e6d3", "align": "center", "valign": "middle", "position": [540, 860],
+  "stagger": 0.08,
+  "glyph_opacity": { "keys": [{ "t": 0.9, "v": 0, "ease": "in_out_sine" }, { "t": 2.1, "v": 1 }] },
+  "glyph_offset": { "keys": [{ "t": 0.9, "v": [0, 36], "ease": { "bezier": [0.16, 1, 0.3, 1] } }, { "t": 2.4, "v": [0, 0] }] } } }
+``` 
+
+  3. **Fixed its own slip.** It had given the tagline two `position` keys, a fixed one and an animated one, and deleted the fixed one before going on.
+  4. **`ultrafast_check`** on the document, without rendering: `{"issues": []}`.
+  5. **`ultrafast_sheet`** : eight frames from 0.5 s to 9.9 s on one image, which Claude looked at. Its note: "Looks right: warm, centered, everything spelled correctly."
+  6. **`ultrafast_review`** with `"safe": "social"`, which reads every frame for clipped, overlapping, low-contrast, too-small or too-brief text and for text under a social app's buttons: `{"frames": 300, "issues": [], "seconds": 2.02, "texts": 4}`.
+  7. **`ultrafast_frame`** at 9 s, to see the finished card at full size.
+  8. **`ultrafast_export`** : `exported 300 frames (1080x1920 @ 30 fps, mp4 h264, high) in 0.36 s (823 fps)`.
+  9. **Checked the file** with `ffprobe` (H.264, 1080×1920, 30 fps, 10.0 s, 1.7 MB) and summed up, including one choice it made on its own: "I added "NOW OPEN" myself to make it read as an opening announcement, so remove it if you'd rather keep to just the three lines you gave me."
+
+![Contact sheet of eight frames from 0.5 to 9.9 seconds: NOW OPEN fades in, Third Crack rises in letter by letter, a rule draws under it, then Roasted on Thursdays and 14 Mill Lane fade in on a warm brown background.](https://ultrafast.mov/img/guides/claude-code-sheet-1.webp) The contact sheet Claude looked at before the review, as `ultrafast_sheet` returned it.
+
+## When the review finds something
+
+This draft passed the review on the first try, so there was nothing to fix. Drafts often don't. The first draft of the pottery class teaser on the [home page](<https://ultrafast.mov/#agents>) came back with eight findings, among them:
+
+```
+clipped        "Pottery class" runs off the frame (right by 40 px)
+low contrast   "HALDEN CLAY STUDIO" never reaches readable contrast (best 1.6:1, want 3:1 or more)
+too brief      "First class free" is readable for 0.4 s; 3 words need about 0.9 s
+flashing       more than 3 flashes per second: a photosensitive seizure risk (WCAG 2.3.1)
+``` 
+
+Each finding names the text and the problem, so Claude can fix the document and run the review again until it comes back empty. That loop is why to ask for it: the agent sees its own mistakes before you do.
+
+## Changing it by asking
+
+A second message, in the same session:
+
+```
+Make the address a little bigger, and add a line under it: Thursday to Sunday, 8 to 2.
+Then check, review and export again.
+``` 
+
+Claude didn't rewrite the file. It sent `ultrafast_edit` ten changes in one call: it made the address larger, added the new line as a node and wired it into the picture, and moved the other lines up by about 40 px to keep the block centred. Five of the ten:
+
+```
+{ "edit": "set_param", "node": "address", "param": "size", "value": 50 },
+{ "edit": "set_param", "node": "address", "param": "position", "value": [540, 1255] },
+{ "edit": "add_node", "id": "hours", "node": { "op": "text", "params": {
+    "text": "Thursday to Sunday, 8 to 2", "font": "DM Mono", "size": 34, "color": "#e8c79a",
+    "align": "center", "valign": "middle", "position": [540, 1330] } } },
+{ "edit": "add_node", "id": "c6", "node": { "op": "over", "inputs": { "fg": "hours", "bg": "c5" } } },
+{ "edit": "connect", "node": "vig", "port": "source", "source": "c6" }
+``` 
+
+The check passed. Then the contact sheet showed something the check couldn't: "The hours line sits a bit tight under the address, so I'll give it a little more room before reviewing." A second edit moved it down 15 px and set it 2 px larger. The review read all 300 frames and 5 texts with no findings, and the export took 0.37 s.
+
+![Contact sheet of the edited video, eight frames from 1.4 to 9.9 seconds: the address is larger and a line reading Thursday to Sunday, 8 to 2 fades in under it.](https://ultrafast.mov/img/guides/claude-code-sheet-2.webp) The sheet after the edit, where Claude saw the new line sitting too close to the address.
+
+## Time and tokens
+
+Wall time runs from starting Claude Code to its exit, so it includes start-up, every model turn and every tool call.
+
+| First video| The edit  
+---|---|---  
+Wall time| 53.1 s| 31.2 s  
+Model turns| 15| 10  
+Output tokens| 4,719| 2,597  
+Review| 300 frames, 0 issues, 2.0 s| 300 frames, 0 issues, 1.8 s  
+Export| 0.36 s| 0.37 s  
+Cost at API list prices| $0.46| $0.67  
+  
+Claude Code 2.1.325 with Claude Opus 5.5 and ultrafast 0.2.0; both exports took under 0.4 s on one RTX 5090 workstation. The costs are what Claude Code reported at API list prices. On a Pro or Max plan the session counts toward the plan's usage instead. Most of the wall time is the model thinking and writing; the engine's share, from check to export, was a few seconds per turn.
+
+## Prompts to try
+
+Each of these briefs made one of the films on the [examples page](<https://ultrafast.mov/examples/>), where the document behind each one is published:
+
+  * "A 10-second vertical teaser for my pottery class. Saturdays, first class free."
+  * "Turn NOAA's Mauna Loa CO₂ file into a chart for Instagram."
+  * "Show how Artemis I got to the Moon and back, from NASA's trajectory data."
+  * "Make every member their year in review from this spreadsheet."
+  * "A 15-second loop for the album cover: something growing, in celadon."
+
+Say what it's for, how long, the size, and the words that must appear. Give Claude the files it should use (footage, a logo, a data file) by path. For one video per row of a spreadsheet, see [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>).
+
+## If it doesn't work
+
+  * **`✘ Failed to connect — ENOENT: Executable not found in $PATH: "uf"`** in `claude mcp list`: the plugin is installed but Claude Code was started without `uf` on its PATH. Open a new terminal after installing, or add the folder the installer printed to your PATH, then start Claude Code again.
+  * **Which GPU will it use?** `uf info` names the GPU it will render on. ultrafast needs one: Apple silicon on a Mac, or a Vulkan GPU on Linux.
+  * **Fonts.** The session used Fraunces and DM Mono by name. Fonts named in a document may be downloaded by name the first time they're used, so the first render with a new font needs a network connection.
+  * **Claude doesn't use the tools.** Check that the plugin is enabled (`claude plugin list`) and name the loop in the prompt: "check it, look at the frames, review it, then export".
+
+## Remotion, HyperFrames and other agents
+
+Claude Code also makes video with Remotion (React rendered in headless Chrome) and HyperFrames (HTML and GSAP in headless Chrome). On one RTX 5090, the same three 10-second videos exported in 0.66–0.78 s with ultrafast; Remotion took 3.1–8.6 times as long at its fastest settings, and HyperFrames 4.6–5.7 times ([benchmark](<https://ultrafast.mov/benchmarks/>)). For the same 10-second short, the ultrafast document took about 1,234 output tokens against 1,868 for Remotion. Head-to-head pages: [ultrafast vs Remotion](<https://ultrafast.mov/compare/remotion/>), [ultrafast vs HyperFrames](<https://ultrafast.mov/compare/hyperframes/>). For every way Claude can make video, including Claude Motion, see [Can Claude make videos?](<https://ultrafast.mov/learn/can-claude-make-videos/>)
+
+The same skill and MCP server work in Codex, Cursor, Gemini CLI and any MCP client: setup for each is on [Integrations](<https://ultrafast.mov/integrations/>), and the tools are listed in [MCP server](<https://ultrafast.mov/docs/mcp/>).
+
+## Questions
+
+Can Claude Code make videos?
+
+Yes, with a video engine to write for. With the ultrafast plugin, Claude Code writes the video as a JSON document, checks it, looks at its frames, reviews every frame and exports an MP4 on your GPU. In the session on this page that took 53.1 s from the prompt to a 10-second 1080×1920 MP4.
+
+What do I need to install?
+
+The `uf` engine (`curl -fsSL https://ultrafast.mov/install.sh | sh` or Homebrew) and the plugin: `claude plugin marketplace add ultrafastmov/ultrafast`, then `claude plugin install ultrafast@ultrafast`. It renders on a Mac with Apple silicon or on Linux with a Vulkan GPU.
+
+How many tokens does a video take?
+
+In this session, 4,719 output tokens for the first 10-second video and 2,597 for an edit, with Claude Opus 5.5. A longer or busier video takes more. Measured on the same 10-second short, an ultrafast document was about 1,234 output tokens against 1,868 for Remotion.
+
+Does Claude Code see the video it makes?
+
+It sees frames. `ultrafast_sheet` returns several frames on one image and `ultrafast_frame` one frame at full size, and `ultrafast_review` reads all of them for clipped, low-contrast, overlapping, too-small or too-brief text. In this session Claude spotted a line sitting too close to another on a contact sheet and moved it before exporting.
+
+Can I edit the video after it's made?
+
+Yes, by asking in the same session. Claude changes the document with `ultrafast_edit` (set a param, add or remove a node, rewire) instead of rewriting it, then checks, reviews and exports again. The edit on this page took 31.2 s.
+
+Does it work on Windows?
+
+Through WSL2 on a machine with a Vulkan GPU. There is no native Windows build.
+
+
+---
+
+# Lottie to MP4, transparent WebM or ProRes 4444 on your GPU · ultrafast
+
+> Convert Lottie JSON to MP4, transparent WebM, ProRes 4444, GIF or PNG frames with one open-source command on your own GPU: measured times, a whole folder at once, recolouring, and how closely it matches lottie-web across 217 files.
+
+URL: https://ultrafast.mov/guides/lottie-to-mp4/
+
+Docs
+
+# Lottie to MP4, WebM or ProRes.
+
+Turn a Lottie JSON file into an MP4, a transparent WebM, ProRes 4444, a GIF or PNG frames with one command, rendered on your own GPU by an open-source engine. The animation comes in as vector paths, so it stays sharp at 4K and every colour in it can be changed.
+
+## Start
+
+  * [Quickstart](<https://ultrafast.mov/docs/>)
+  * [The document](<https://ultrafast.mov/docs/documents/>)
+
+## Guides
+
+  * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
+  * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
+
+## Reference
+
+  * [Ops](<https://ultrafast.mov/docs/ops/>)
+  * [CLI](<https://ultrafast.mov/docs/cli/>)
+  * [MCP server](<https://ultrafast.mov/docs/mcp/>)
+  * [HTTP API](<https://ultrafast.mov/docs/api/>)
+
+## For agents
+
+  * [llms.txt](<https://ultrafast.mov/llms.txt>)
+  * [This page as Markdown](<https://ultrafast.mov/guides/lottie-to-mp4/index.md>)
+
+[Video: Three vertical panels: the Lottie logo animation on teal, the same animation in ink and orange on cream, and a second Lottie animation of teal strokes over a checkerboard that shows its transparent background](https://ultrafast.mov/media/guides/lottie-to-mp4.mp4) Two Lottie files from lottie-android (Apache-2.0), in one ultrafast render: as designed, recoloured with one jq command, and with its transparent background kept. **On this page**
+
+  1. Convert one file
+  2. Every format
+  3. A whole folder
+  4. Change the colours
+  5. Inside a longer video
+  6. How close it is to lottie-web
+  7. If something looks wrong
+  8. Other ways to convert
+  9. Questions
+
+## Convert one file
+
+Install `uf` (a Mac with Apple silicon, or Linux with a Vulkan GPU; Windows through WSL2):
+
+```
+curl -fsSL https://ultrafast.mov/install.sh | sh     # or: brew install ultrafastmov/tap/ultrafast
+``` 
+
+ultrafast renders documents, so the Lottie goes into a short one: a frame size, a frame rate, a length, and a `lottie` node pointing at the file.
+
+```
+{
+  "version": 1,
+  "format": { "width": 1080, "height": 1920, "fps": 30, "duration": 5.967 },
+  "output": "logo",
+  "nodes": {
+    "logo": { "op": "lottie", "params": { "src": "lottie-logo.json", "size": [1080, 1920], "loop": false } }
+  }
+}
+``` 
+
+```
+$ uf export logo.json logo.mp4
+exported 179 frames (1080x1920 @ 30 fps, mp4 h264, standard) in 0.15 s = 1167 fps, 0 readbacks -> logo.mp4
+``` 
+
+  * `duration` is the Lottie's frame count over its frame rate: its `op` minus `ip`, divided by `fr`. This file has 179 frames at 30 fps, so 5.967 s.
+  * `size` fits the animation into a box, keeping its proportions. The paths are drawn again at that size, not scaled up from pixels, so a 375×667 animation is as sharp at 1080×1920 or 4K as at its own size.
+  * `loop` is on by default and repeats the animation to fill a longer video; with `false` it plays once.
+  * `uf check logo.json` lists anything in the file that won't import, before you render.
+
+From pressing Enter to a finished file took 0.51 s warm, of which 0.15 s was the export itself and the rest was start-up.
+
+## Every format from the same document
+
+The output format follows the file name; flags set the codec, size and transparency. Times are wall clock from the command to the file, warm, on one RTX 5090 workstation with the published 0.2.0 binary. The first four rows export `logo.json` from above (5.967 s). The rest export `logo2.json`, the same document pointed at `lottie-logo-2.json` (12.6 s), whose background is transparent.
+
+Output| Command| Time| File  
+---|---|---|---  
+MP4, H.264, 1080×1920| `uf export logo.json logo.mp4`| 0.51 s| 118 KB  
+MP4, HEVC| `uf export logo.json logo.mp4 --codec hevc`| 0.50 s| 88 KB  
+MP4, 4K (2160×3840)| `uf export logo.json logo-4k.mp4 --size 4k`| 1.2–1.3 s| 255 KB  
+GIF, 540×960| `uf export logo.json logo.gif --size 540x960`| 1.3 s| 104 KB  
+MP4, H.264, 12.6 s| `uf export logo2.json logo2.mp4`| 0.64 s| 1.5 MB  
+ProRes 4444 with alpha| `uf export logo2.json logo2.mov --codec prores --alpha`| 3.6 s| 124 MB  
+WebM (VP9) with alpha| `uf export logo2.json logo2.webm --alpha`| 6.1 s| 1.4 MB  
+PNG frames with alpha| `uf export logo2.json 'frames/{frame:05}.png' --alpha`| 1.4–1.5 s| 378 files  
+  
+  * H.264 and HEVC are encoded on the GPU straight from the rendered frames. ProRes, VP9, GIF and PNG are encoded on the CPU, which is why they take longer. ProRes varied the most: a median of 3.6 s over six runs, between 3.4 and 8.3 s.
+  * The transparent files are really transparent: the ProRes is 4444 with 12-bit alpha (`yuva444p12le`), and the WebM carries VP9's alpha channel. In a frame decoded from each, 85 % of the pixels are fully transparent. They drop into Premiere Pro, Final Cut Pro, DaVinci Resolve or a web page.
+  * `--fps 60` renders more frames between the Lottie's keyframes, and `--from` and `--to` export part of it. The full list is in the [CLI reference](<https://ultrafast.mov/docs/cli/>).
+
+## A whole folder of Lottie files
+
+`uf batch` renders one video per row of a sheet, and each row can set the file, the size, the frame rate and the length. The template is the same short document, on white:
+
+```
+{
+  "version": 1,
+  "format": { "width": 512, "height": 512, "fps": 30, "duration": 3 },
+  "output": "out",
+  "nodes": {
+    "bg": { "op": "solid", "params": { "color": "#ffffff" } },
+    "anim": { "op": "lottie", "params": { "src": "anim.json", "loop": false } },
+    "out": { "op": "over", "inputs": { "fg": "anim", "bg": "bg" } }
+  }
+}
+``` 
+
+A few lines of Python read each file's size, frame rate and length and write the sheet:
+
+```
+import csv, glob, json, os, sys
+
+rows = []
+for path in sorted(glob.glob("lottie/*.json")):
+    a = json.load(open(path))
+    scale = max(1, 512 / max(a["w"], a["h"]))           # draw small icons at 512 px or more
+    w, h = round(a["w"] * scale / 2) * 2, round(a["h"] * scale / 2) * 2   # even sizes for H.264
+    rows.append({"name": os.path.basename(path)[:-5], "anim.src": os.path.abspath(path),
+                 "anim.size": json.dumps([w, h]), "format.width": w, "format.height": h,
+                 "format.fps": a["fr"], "format.duration": (a["op"] - a["ip"]) / a["fr"]})
+out = csv.DictWriter(sys.stdout, fieldnames=list(rows[0]))
+out.writeheader()
+out.writerows(rows)
+``` 
+
+```
+$ python3 rows.py > rows.csv
+$ uf batch template.json --data rows.csv --out 'mp4/{name}.mp4'
+1/208 mp4/AndroidWave.mp4: 123 frames in ...
+...
+208 videos in 35.6 s
+``` 
+
+That run converted 208 Lottie files from lottie-android's test set, 888 seconds of animation, in 35.6 s; the next two runs took 35.6 and 39.2 s. `uf batch` checks every row before it renders the first one, so a file that can't load stops the run with its row number instead of failing halfway. Swap `.mp4` for `.webm` and add `--alpha` (and drop the white `bg`) to get transparent files instead. How the sheet works is in [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>).
+
+## Change the colours, or anything else
+
+The `lottie` node keeps the file as it is. To change it, `uf import-lottie` brings the animation into your document as ordinary nodes: every shape a `path` with its own colour, stroke, trim and keyframes, and every group and layer transform a `transform` node. The Lottie logo came in as 49 paths, 244 transforms, 47 `over` nodes that stack them, and a mask.
+
+```
+uf import-lottie lottie-logo.json --size 1080,1920 --name logo --into restyle.json
+# then place it: { "op": "logo", "params": { "position": [0, 0] } }
+``` 
+
+The document is plain JSON, so a palette swap is one jq command. This is the one that made the middle panel of the clip above:
+
+```
+jq '(.components.logo.nodes[] | select(.op == "path") | .params.color) |=
+  if . == [0, 0.82, 0.76, 1] then "#f3e9d6"
+  elif . == [0, 0.48, 0.53, 1] then "#ff5a1f"
+  elif . == [1, 1, 1, 1] or . == "#ffffff" then "#1d1a16"
+  else . end' restyle.json > restyled.json
+uf check restyled.json && uf export restyled.json restyled.mp4
+``` 
+
+A coding agent can make the same kind of change from a sentence ("make the teal background cream and the dark strokes orange"), because each colour, stroke width and keyframe is a field it can read and set. To look before exporting, `uf sheet restyled.json` puts nine frames on one image.
+
+## Inside a longer video
+
+A `lottie` node is a layer like any other. Give it a `position`, `scale` or `opacity`, put it over footage, a title or a background with an `over` node, and time it with a timing window. The clip at the top of this page is one document: two `lottie` nodes, the imported and recoloured copy, a checkerboard and three labels, exported in one pass.
+
+```
+"p1": { "op": "lottie", "params": { "src": "lottie-logo.json", "size": [315, 560], "position": [84, 60], "loop": false } },
+"p3": { "op": "lottie", "params": { "src": "lottie-logo-2.json", "size": [315, 560], "position": [882, 60], "loop": false } },
+"o1": { "op": "over", "inputs": { "fg": "p1", "bg": "bg" } }
+``` 
+
+Captions, music, a voiceover, grain and the rest of the engine's 70 ops work around it in the same render. The document format is in [The document](<https://ultrafast.mov/docs/documents/>).
+
+## How close it is to lottie-web
+
+ultrafast doesn't run lottie-web, the reference player. It reads the Lottie file itself and draws it with its own renderer, so the fair question is how often the two agree. To measure it, the 217 Lottie files in lottie-android's snapshot tests (its `lottiefiles` folder plus the four samples) were rendered at 10, 30, 50, 70 and 90 % of their length, by ultrafast 0.2.0 and by lottie-web 5.13.0's SVG renderer in headless Chromium, both on white at the file's own size. A pixel counts as different when any colour channel is off by more than 40 of 255.
+
+![Three Lottie samples rendered by ultrafast in the top row and by lottie-web in the bottom row: the Lottie logo on teal, teal strokes from the second logo animation, and a purple arrow. The two rows look the same.](https://ultrafast.mov/img/guides/lottie-vs-lottie-web.webp) The three Apache-2.0 samples, middle frame. At their worst frame, 0.02 %, 0.77 % and 0.17 % of pixels differ.
+
+Of 217 files| Files  
+---|---  
+Imported with no warnings| 103  
+Didn't load: image files missing from the test set| 5  
+Didn't load: a layer scaled to exactly 0 (see below)| 4  
+Compared with lottie-web| 208  
+… worst frame within 1 % of pixels| 113  
+… within 2 %| 137  
+… within 5 %| 165  
+  
+Files that import without warnings match more often: 89 of 99 are within 5 %, against 76 of the 109 files with warnings. Of the 43 files that differ by more than 5 %, 33 raised a warning when they were imported. These are the warnings in the set, with how many files raised each one:
+
+Warning| Files| What you get instead  
+---|---|---  
+merge paths are not imported| 58| the shapes are drawn without being merged  
+layer effects are not imported| 29| no After Effects effects (blurs, glows, fills)  
+After Effects expressions are not run| 23| `loopOut`, `wiggle` and `time` run; other expressions keep their keyframes  
+separated x/y position keys are merged| 14| x and y are keyed together at every key time of either, so the easing between keys can differ  
+3D layers are flattened| 7| drawn flat  
+time remapping is not imported| 7| the layer plays at its own speed  
+gradient strokes use a solid stroke| 6| one colour  
+mask modes other than add combine as add| 4| subtract and intersect masks add  
+rounded corners on paths are not imported| 4| sharp corners  
+skew is not imported| 3| no skew  
+paragraph text boxes are set as point text| 3| no wrapping box  
+animated gradient colours use their first key| 2| a still gradient  
+  
+Some differences come with no warning: 10 of the 99 warning-free files differ by more than 5 %. Two causes found in this test: a stroke with a width of 0, which lottie-web doesn't draw, is filled in the stroke's colour in 0.2.0; and a layer whose scale is keyed to exactly 0, a common way to pop something in, stops `uf check` and the render with `transform is not invertible (zero scale)`, naming the node.
+
+To check your own file, run `uf check` on a document that uses it (it lists every warning), then look: `uf sheet logo.json` renders nine frames onto one image to compare with the file playing in a browser.
+
+## If something looks wrong
+
+  * **A .lottie file.** dotLottie files aren't read directly. A `.lottie` file is a zip archive: unzip it and point `src` at the JSON inside its `animations` folder.
+  * **Missing images.** Images embedded in the JSON (base64) import as they are. Images the file links to are looked for next to the JSON, in the folder its asset names. `uf check` reports a missing one by path.
+  * **Text in the wrong font.** Text layers use the family named in the file's font list: an installed font of that name, or else the Google Fonts family of that name, downloaded once. If it's neither, install the font, or change the family on the imported `text` node.
+  * **A tiny frame fails to encode.** On NVIDIA GPUs, 0.2.0 can't encode H.264 at very small sizes such as 72×72. Render icons at 512 px or more; the paths stay sharp.
+  * **Anything listed in the warnings above.** If the effect matters, fix it in the source file (expand the merge, bake the expression to keyframes) and export again from After Effects or your Lottie editor.
+  * **No GPU.** The Docker image renders on the CPU through Mesa, correctly but much more slowly.
+
+## Other ways to convert Lottie to video
+
+  * **lottie-web in headless Chrome:** puppeteer-lottie, Remotion's `@remotion/lottie` and HyperFrames' Lottie converter play the file in the reference player and capture each frame from a browser page. Whatever lottie-web supports comes out as it does in a browser, and HyperFrames also reads dotLottie files. How browser capture compares with ultrafast on ordinary videos is in [Benchmarks](<https://ultrafast.mov/benchmarks/>).
+  * **rlottie converters** , such as the ones made for Telegram stickers, write WebM, WebP or GIF.
+  * **Upload sites** convert one file at a time in the browser, usually with a size limit and sometimes a sign-in.
+  * **After Effects** itself, if you have the project the Lottie was exported from: render from the source and nothing is lost.
+
+Use ultrafast when you want speed on your own machine, many files at once, ProRes 4444 or WebM with alpha from one command, the animation recoloured or edited before rendering, or the Lottie as one layer of a longer video. Use a lottie-web renderer when a file depends on effects, merge paths or expressions that ultrafast doesn't import, or when you need dotLottie support.
+
+## Questions
+
+How do I convert a Lottie JSON file to MP4?
+
+Put the file in a short ultrafast document (a frame size, frame rate and length, and a `lottie` node whose `src` is the file), then run `uf export logo.json logo.mp4`. A 6-second 1080×1920 export took 0.51 s on an RTX 5090 workstation. The engine is open source and renders on your own Mac with Apple silicon or Linux machine with a Vulkan GPU.
+
+Can I export a Lottie animation with a transparent background?
+
+Yes. `uf export logo.json logo.mov --codec prores --alpha` writes ProRes 4444 with 12-bit alpha, `uf export logo.json logo.webm --alpha` writes VP9 WebM with alpha, and `'frames/{frame:05}.png' --alpha` writes transparent PNG frames. Leave out any background node so the empty parts stay transparent.
+
+Does it read dotLottie (.lottie) files?
+
+Not directly. A .lottie file is a zip archive: unzip it and point the `lottie` node at the JSON inside its `animations` folder.
+
+Does the video look exactly like the Lottie in a browser?
+
+Often, not always. ultrafast draws the file with its own renderer, not lottie-web. Across 208 files from lottie-android's test set, 113 had no frame with more than 1 % of pixels different from lottie-web and 165 were within 5 %. Merge paths, layer effects, most expressions, time remapping and 3D layers don't import, and `uf check` lists them for your file.
+
+Can I convert a whole folder of Lottie files at once?
+
+Yes: write a sheet with one row per file (its path, size, frame rate and length) and run `uf batch template.json --data rows.csv --out 'mp4/{name}.mp4'`. 208 files, 888 seconds of animation, took 35.6 s on one RTX 5090 workstation.
+
+Can I change a Lottie's colours before rendering it?
+
+Yes. `uf import-lottie` brings the animation into the document as ordinary nodes, each shape a path with its own colour, so a palette swap is a find-and-replace over the JSON (one jq command), or a sentence to a coding agent.
 
 
 ---
@@ -1006,6 +1512,8 @@ Docs
 
   * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
 
 ## Reference
 
@@ -1124,6 +1632,8 @@ Docs
 
   * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
 
 ## Reference
 
@@ -1208,7 +1718,7 @@ uf export film.json plates/ --alpha                           # PNG frames and a
 
 `uf import-svg <file.svg>`| An SVG as an editable component: one path per shape, gradients, strokes, text as outlines.  
 ---|---  
-`uf import-lottie <anim.json>`| A Lottie animation as editable paths and keyframes.  
+`uf import-lottie <anim.json>`| A Lottie animation as editable paths and keyframes. To render one as video, see [Lottie to MP4](<https://ultrafast.mov/guides/lottie-to-mp4/>).  
 `uf decompose <video> --out-dir DIR`| Split a motion-graphics video into a still plate and vector layers keyed frame by frame.  
 `uf reconstruct <video> --out-dir DIR`| A whole video as an editable draft: shots, text layers with matched fonts, backgrounds, fades.  
 `uf probe`, `extract`, `compare`, `fit`, `fit-motion`, `match-font`, `plate`, `ocr`, `matte`| Refine a reconstruction: shots, reference frames, PSNR and SSIM, fitted params and motion, fonts, plates, text, mattes. Text is read with Apple Vision on macOS and Tesseract elsewhere; `matte` needs macOS.  
@@ -1264,6 +1774,8 @@ Render documents over HTTP from `uf serve` on your own GPU, with one API key and
 
   * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
 
 ## Reference
 
@@ -1951,7 +2463,7 @@ claude plugin marketplace add ultrafastmov/ultrafast
 claude plugin install ultrafast@ultrafast
 ``` 
 
-The ultrafast skill and `uf mcp` together. Tested: the plugin installs from the repo. With the skill, Claude Code went from a one-line request to an exported video with 0 review findings.
+The ultrafast skill and `uf mcp` together. Tested: the plugin installs from the repo. With the skill, Claude Code went from a one-line request to an exported video with 0 review findings. [The whole session, step by step](<https://ultrafast.mov/guides/claude-code/>).
 
 ### Claude Code, the MCP server alone
 
@@ -2046,7 +2558,7 @@ What to know before you connect it. Checked 22 November 2026.
   * On Linux, exports need ffmpeg; `ultrafast_voiceover` needs espeak-ng and `ultrafast_ocr` needs Tesseract.
   * The remote server at `/mcp` takes one API key as a bearer token. There is no OAuth sign-in on it.
   * OAuth sign-in and hosted rendering come with ultrafast Cloud, and so do the Claude connector and the ChatGPT app. Cloud has a [waitlist](<https://ultrafast.mov/cloud/>).
-  * Lottie import is in the CLI only (`uf import-lottie`). A document can still use a `lottie` node.
+  * Lottie import is in the CLI only (`uf import-lottie`). A document can still use a `lottie` node ([Lottie to MP4](<https://ultrafast.mov/guides/lottie-to-mp4/>)).
 
 ## Questions about the MCP server.
 
@@ -2176,7 +2688,7 @@ Claude writes one JSON document and runs `check`, which catches mistakes before 
 
 A 10-second export took under a second on an RTX 5090 in the [benchmark](<https://ultrafast.mov/benchmarks/>). Writing the same short took about a third fewer tokens than in Remotion ([token count](<https://ultrafast.mov/benchmarks/#tokens>)).
 
-Codex, Cursor and Gemini CLI work the same way: [setup for each](<https://ultrafast.mov/integrations/>). Other ways to install are in the [quickstart](<https://ultrafast.mov/docs/>).
+A whole recorded session, with every tool call, the frames Claude looked at and the time each step took, is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>). Codex, Cursor and Gemini CLI work the same way: [setup for each](<https://ultrafast.mov/integrations/>). Other ways to install are in the [quickstart](<https://ultrafast.mov/docs/>).
 
 ### Where ultrafast doesn't fit
 
@@ -3522,7 +4034,7 @@ Price per rendered minute| no fee; your GPU's time| 5¢ to 20¢, by plan; 4K fro
 Free to start| free for any use, commercial included| 10 credits on sign-up, valid 30 days; watermarked sandbox| 600 credits once; watermarked, up to 60 s, no commercial use| 50 credits; renders are previews of up to 480 px  
 The JSON| a graph of nodes with animated params and timing windows, checked against a [published schema](<https://ultrafast.mov/schema/v1.json>)| an Edit: a timeline of tracks and clips, 16 asset types, merge fields| a Movie: scenes played back to back, 9 element types, variables| RenderScript: 6 element types, keyframes, nested compositions  
 3D and shaders| 3D (glTF, extruded type, image-based light, glass), Slang shaders, particles, fluid| not documented| not documented| 3D-style transforms only  
-Lottie| as editable vector nodes| inside the `html5` asset, captured from a browser page, which Shotstack calls “the heaviest to render”| not documented| not documented  
+Lottie| as editable vector nodes ([guide](<https://ultrafast.mov/guides/lottie-to-mp4/>))| inside the `html5` asset, captured from a browser page, which Shotstack calls “the heaviest to render”| not documented| not documented  
 Output| H.264, HEVC and AV1 MP4; ProRes up to 4444 XQ; transparent ProRes and WebM; GIF; PNG and EXR sequences; sound alone| mp4, gif, mp3, jpg, png, bmp| MP4, and an MP3 audio track on paid plans| mp4, jpg, png, gif  
 Frame rate| any| 12 to 60 fps| “Currently every movie renders at 25 fps”| at most 60 fps  
 Largest size| any size; presets up to 4K on the short side| 3840 px a side| 3840 px a side, by plan| 3840 px a side  
@@ -4856,6 +5368,8 @@ Every op with its ports, params, types and defaults. `uf ops` prints the same as
 
   * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
 
 ## Reference
 

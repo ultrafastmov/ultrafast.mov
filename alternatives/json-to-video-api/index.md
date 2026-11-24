@@ -23,7 +23,7 @@ Price per rendered minute| no fee; your GPU's time| 5¢ to 20¢, by plan; 4K fro
 Free to start| free for any use, commercial included| 10 credits on sign-up, valid 30 days; watermarked sandbox| 600 credits once; watermarked, up to 60 s, no commercial use| 50 credits; renders are previews of up to 480 px  
 The JSON| a graph of nodes with animated params and timing windows, checked against a [published schema](<https://ultrafast.mov/schema/v1.json>)| an Edit: a timeline of tracks and clips, 16 asset types, merge fields| a Movie: scenes played back to back, 9 element types, variables| RenderScript: 6 element types, keyframes, nested compositions  
 3D and shaders| 3D (glTF, extruded type, image-based light, glass), Slang shaders, particles, fluid| not documented| not documented| 3D-style transforms only  
-Lottie| as editable vector nodes| inside the `html5` asset, captured from a browser page, which Shotstack calls “the heaviest to render”| not documented| not documented  
+Lottie| as editable vector nodes ([guide](<https://ultrafast.mov/guides/lottie-to-mp4/>))| inside the `html5` asset, captured from a browser page, which Shotstack calls “the heaviest to render”| not documented| not documented  
 Output| H.264, HEVC and AV1 MP4; ProRes up to 4444 XQ; transparent ProRes and WebM; GIF; PNG and EXR sequences; sound alone| mp4, gif, mp3, jpg, png, bmp| MP4, and an MP3 audio track on paid plans| mp4, jpg, png, gif  
 Frame rate| any| 12 to 60 fps| “Currently every movie renders at 25 fps”| at most 60 fps  
 Largest size| any size; presets up to 4K on the short side| 3840 px a side| 3840 px a side, by plan| 3840 px a side  

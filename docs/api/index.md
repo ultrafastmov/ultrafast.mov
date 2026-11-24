@@ -19,6 +19,8 @@ Render documents over HTTP from `uf serve` on your own GPU, with one API key and
 
   * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
 
 ## Reference
 
