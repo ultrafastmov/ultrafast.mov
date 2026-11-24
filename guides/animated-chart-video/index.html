@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Animated chart videos from a CSV: bar, line and donut · ultrafast</title>
+<meta name="description" content="Make animated bar, line and donut chart videos from a CSV with code: one JSON node per chart, a video per row with uf batch, 16:9, 4:5 and 9:16 from one document, and a review pass before you post. Real data, measured render times.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/guides/animated-chart-video/">
+<link rel="alternate" type="text/markdown" href="/guides/animated-chart-video/index.md" title="Animated chart videos from a CSV: bar, line and donut · ultrafast (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="ultrafast blog"><meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="Animated chart videos">
+<meta property="og:description" content="Make animated bar, line and donut chart videos from a CSV with code: one JSON node per chart, a video per row with uf batch, 16:9, 4:5 and 9:16 from one document, and a review pass before you post. Real data, measured render times.">
+<meta property="og:url" content="https://ultrafast.mov/guides/animated-chart-video/">
+<meta property="og:image" content="https://ultrafast.mov/og/guide-animated-chart-video.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Animated chart videos · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Animated chart videos">
+<meta name="twitter:description" content="Make animated bar, line and donut chart videos from a CSV with code: one JSON node per chart, a video per row with uf batch, 16:9, 4:5 and 9:16 from one document, and a review pass before you post. Real data, measured render times.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/guide-animated-chart-video.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=c898dbcc">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://ultrafast.mov/docs/"},{"@type":"ListItem","position":3,"name":"Animated chart videos","item":"https://ultrafast.mov/guides/animated-chart-video/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I turn a CSV into an animated chart video?","acceptedAnswer":{"@type":"Answer","text":"Put the numbers in a chart block's values and the categories in labels, then run uf export chart.json chart.mp4. A few lines of Python can read the CSV and fill the document, and uf batch chart.json --data rows.csv makes one video per row, with a chart.values column setting each row's numbers."}},{"@type":"Question","name":"Can I make a bar chart race?","acceptedAnswer":{"@type":"Answer","text":"Not with a ready-made block. bar_chart draws one set of values that rise in turn; there's no block for bars that reorder over time."}},{"@type":"Question","name":"Can I make animated chart videos with Python?","acceptedAnswer":{"@type":"Answer","text":"Yes. Python can write the ultrafast document, as fill_line.py and make_rows.py do on this page, and ultrafast renders it on the GPU. matplotlib's animation module is the other common route: it draws each frame on the CPU and saves the video through FFmpeg."}},{"@type":"Question","name":"What size should a chart video be for YouTube, Instagram and Shorts?","acceptedAnswer":{"@type":"Answer","text":"1920×1080 (16:9) for YouTube, 1080×1350 (4:5) for an Instagram post, and 1080×1920 (9:16) for Shorts, Reels and TikTok. Chart blocks lay themselves out from the frame, so one document makes all three with format.width and format.height columns in a batch."}},{"@type":"Question","name":"How long does a chart video take to render?","acceptedAnswer":{"@type":"Answer","text":"On one RTX 5090 workstation with ultrafast 0.2.1, each 6-second 1080p chart on this page exported in 0.51 to 0.57 s, and eight 4:5 videos, one per country, took 1.68 to 1.70 s as a batch."}}]},{"@type":"TechArticle","@id":"https://ultrafast.mov/guides/animated-chart-video/#article","headline":"Animated chart videos from a CSV: bar, line and donut","description":"Make animated bar, line and donut chart videos from a CSV with code: one JSON node per chart, a video per row with uf batch, 16:9, 4:5 and 9:16 from one document, and a review pass before you post. Real data, measured render times.","url":"https://ultrafast.mov/guides/animated-chart-video/","mainEntityOfPage":"https://ultrafast.mov/guides/animated-chart-video/","image":"https://ultrafast.mov/og/guide-animated-chart-video.jpg","datePublished":"2026-11-24T03:43:19+00:00","dateModified":"2026-11-24T03:43:19+00:00","inLanguage":"en","author":{"@id":"https://ultrafast.mov/#org"},"publisher":{"@id":"https://ultrafast.mov/#org"},"about":{"@id":"https://ultrafast.mov/#app"}}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/" aria-current="page">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="band stock-cotton phead" style="padding-bottom:56px">
+  <div class="sunburst" aria-hidden="true" style="--sx:92%;--sy:40%;--r2:520px"></div>
+  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+<li><a href="/docs/">Docs</a></li>  <li aria-current="page">Animated chart videos</li>
+</ol>
+
+    <p class="eyebrow"><i style="--c:var(--blue)"></i>Docs</p>
+    <h1 class="pr h1" data-plates="blue black"><span class="ln">Animated charts</span> <span class="ln">from a CSV.</span></h1>
+    <p class="lede">Bar, line and donut charts that build themselves on screen, rendered to MP4 on your own GPU from the numbers in a CSV. Every chart on this page uses real data, solar's share of electricity from Ember via Our World in Data, and each one comes with its document, its clip and how long the export took.</p>
+  </div>
+</section>
+<section class="band stock-thermal" style="padding-top:72px">
+  <div class="wrap docs">
+    <nav class="side" aria-label="Docs">
+      <h2>Start</h2>
+      <ul><li><a href="/docs/">Quickstart</a></li><li><a href="/docs/documents/">The document</a></li></ul>
+      <h2>Guides</h2>
+      <ul><li><a href="/guides/render-video-from-json/">Render video from JSON</a></li><li><a href="/guides/personalized-videos-from-csv/">Personalized videos from a CSV</a></li><li><a href="/guides/claude-code/">Make a video with Claude Code</a></li><li><a href="/guides/lottie-to-mp4/">Lottie to MP4, WebM or ProRes</a></li><li><a href="/guides/animated-captions/">Animated captions from Whisper or SRT</a></li><li><a href="/guides/motion-graphics-with-code/">Motion graphics with code</a></li><li><a href="/guides/animated-chart-video/" aria-current="page">Animated chart videos from a CSV</a></li></ul>
+      <h2>Reference</h2>
+      <ul><li><a href="/docs/ops/">Ops</a></li><li><a href="/docs/cli/">CLI</a></li><li><a href="/docs/mcp/">MCP server</a></li><li><a href="/docs/api/">HTTP API</a></li></ul>
+      <h2>For agents</h2>
+      <ul><li><a href="/llms.txt">llms.txt</a></li><li><a href="/guides/animated-chart-video/index.md">This page as Markdown</a></li></ul>
+    </nav>
+    <article class="prose">
+<figure class="clip"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/chart-video-bar.webp" width="1280" height="720" aria-label="A bar chart titled Where the sun does the most work: seven bars rise one after another, Chile first in amber at 25.1 percent, then Spain, Australia, Germany, China, India and the United States in cream, each value counting up as its bar grows"><source data-src="/media/guides/chart-video-bar.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/chart-video-bar.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/chart-video-bar.mp4" type="video/mp4"></video>
+  <figcaption>A bar chart from seven numbers and their labels, exported in about half a second.</figcaption></figure>
+
+<nav class="toc" aria-label="On this page"><b>On this page</b><ol>
+  <li><a href="#line">A chart is one node</a></li><li><a href="#bar">Bar charts</a></li><li><a href="#donut">Donuts</a></li>
+  <li><a href="#csv">Values from a CSV</a></li><li><a href="#batch">A video per row</a></li><li><a href="#review">Check before you post</a></li>
+  <li><a href="#shapes">16:9, 4:5 and 9:16</a></li><li><a href="#custom">Charts the blocks don't draw</a></li>
+  <li><a href="#times">Render times</a></li><li><a href="#limits">Limits</a></li><li><a href="#faq">Questions</a></li>
+</ol></nav>
+
+<h2 id="line">A chart is one node</h2>
+<p>ultrafast has three ready-made charts: <code>bar_chart</code>, <code>line_chart</code> and <code>donut</code>. Each is a <code>block</code> node. You give it the values and labels, and it builds the axis, the marks, the numbers and the animation in one house style. This is the whole document for the line chart below:</p>
+<div class="code"><div class="cbar"><span>line.json</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;fps&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;output&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;out&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;nodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;bg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;solid&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#0e1116&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;chart&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;block&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;line_chart&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;kicker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WORLD, 2015 TO 2025&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Solar&#39;s share of electricity&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">1.1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.3</span><span class="p">,</span><span class="w"> </span><span class="mf">1.7</span><span class="p">,</span><span class="w"> </span><span class="mf">2.2</span><span class="p">,</span><span class="w"> </span><span class="mf">2.6</span><span class="p">,</span><span class="w"> </span><span class="mf">3.2</span><span class="p">,</span><span class="w"> </span><span class="mf">3.7</span><span class="p">,</span><span class="w"> </span><span class="mf">4.6</span><span class="p">,</span><span class="w"> </span><span class="mf">5.6</span><span class="p">,</span><span class="w"> </span><span class="mf">6.9</span><span class="p">,</span><span class="w"> </span><span class="mf">8.7</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;labels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;decimals&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;draw_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.2</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;ink&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#f4efe6&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;accent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ffb21e&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Data: Ember and others, via Our World in Data (CC BY 4.0)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;font&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ultrafast:mono&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#8a8f98&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">192</span><span class="p">,</span><span class="w"> </span><span class="mi">983</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;a&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;over&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;fg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;chart&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;bg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bg&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;out&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;over&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;fg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;bg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div><div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">uf check line.json &amp;&amp; uf export line.json line.mp4</code></pre></div><figure class="clip"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/chart-video-line.webp" width="1280" height="720" aria-label="A line chart titled Solar&#39;s share of electricity, world, 2015 to 2025: the amber line draws itself from left to right with the area under it filling in, a dot pops at each year, and 8.7 percent appears over the last point"><source data-src="/media/guides/chart-video-line.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/chart-video-line.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/chart-video-line.mp4" type="video/mp4"></video></figure>
+<ul>
+  <li>The line draws on over <code>draw_time</code> seconds, a dot pops as the line reaches each value, and the area underneath fills in behind it (<code>"area": false</code> leaves it out).</li>
+  <li><code>highlight</code> picks the point that gets the large dot and its value; for a line it defaults to the last. <code>suffix</code>, <code>prefix</code> and <code>decimals</code> format the numbers.</li>
+  <li>The plot runs from 0 (or the smallest value, if it's negative) to the largest value. Set <code>min</code> and <code>max</code> to fix the scale.</li>
+  <li>The chart stays for <code>duration</code> seconds (5 by default), then leaves. Put it later in a longer film with <code>"timing": {"offset": 12}</code> on the node.</li>
+  <li><code>ink</code>, <code>muted</code> and <code>accent</code> set the colours; <code>display_font</code>, <code>text_font</code> and <code>mono_font</code> the type. Sizes follow the frame.</li>
+</ul>
+
+<h2 id="bar">Bar charts</h2>
+<p>Swap the <code>kind</code> and the data. Bars rise one after another and each value counts up on top of its bar. The largest is drawn in the accent colour unless <code>highlight</code> names another index (<code>-1</code> for none). The clip at the top of the page is this node:</p>
+<div class="code"><div class="cbar"><span>bar.json, the chart node</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="nt">&quot;chart&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;block&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bar_chart&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;kicker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SHARE OF ELECTRICITY FROM SOLAR, 2025&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Where the sun does the most work&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">25.1</span><span class="p">,</span><span class="w"> </span><span class="mf">21.8</span><span class="p">,</span><span class="w"> </span><span class="mf">19.6</span><span class="p">,</span><span class="w"> </span><span class="mf">17.9</span><span class="p">,</span><span class="w"> </span><span class="mf">11.1</span><span class="p">,</span><span class="w"> </span><span class="mf">9.4</span><span class="p">,</span><span class="w"> </span><span class="mf">8.6</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;labels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Chile,Spain,Australia,Germany,China,India,US&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;decimals&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ink&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#f4efe6&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;accent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ffb21e&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span></code></pre></div><p><code>color</code> sets the other bars. Labels are comma-separated; when a label holds a comma, separate them with <code>|</code> instead.</p>
+
+<h2 id="donut">Donuts</h2>
+<figure class="clip"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/chart-video-donut.webp" width="1280" height="720" aria-label="A donut chart titled Where electricity comes from, world, 2025: seven segments sweep round in turn, solar in amber, then coal, gas, hydro, nuclear, wind and other, with a legend of shares beside it and 9 percent, solar, counting up in the middle"><source data-src="/media/guides/chart-video-donut.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/chart-video-donut.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/chart-video-donut.mp4" type="video/mp4"></video></figure>
+<div class="code"><div class="cbar"><span>donut.json, the chart node</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="nt">&quot;chart&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;block&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;donut&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;kicker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WORLD, 2025&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Where electricity comes from&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">8.75</span><span class="p">,</span><span class="w"> </span><span class="mf">32.96</span><span class="p">,</span><span class="w"> </span><span class="mf">21.78</span><span class="p">,</span><span class="w"> </span><span class="mf">13.96</span><span class="p">,</span><span class="w"> </span><span class="mf">8.85</span><span class="p">,</span><span class="w"> </span><span class="mf">8.54</span><span class="p">,</span><span class="w"> </span><span class="mf">5.17</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;labels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Solar,Coal,Gas,Hydro,Nuclear,Wind,Other&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;highlight&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">520</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ink&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#f4efe6&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;accent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ffb21e&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span></code></pre></div><ul>
+  <li>Values are shares of their total, so they don't have to add up to 100. The middle counts up to the highlighted segment's share, here solar.</li>
+  <li>The legend rounds each share to a whole percent. Pass two decimals, as here: rounded to one, wind's 8.54 becomes 8.5, which rounds down to 8% while its real share is nearer 9%.</li>
+  <li><code>colors</code> takes a comma-separated list of segment colours; by default the accent comes first, then a built-in palette. <code>radius</code> and <code>thickness</code> size the ring.</li>
+</ul>
+
+<h2 id="csv">Values from a CSV</h2>
+<p>The numbers above come from Our World in Data's download of Ember's electricity data, a plain CSV with one row per country and year:</p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">$ curl -L -o share-electricity-solar.csv \
+    &quot;https://ourworldindata.org/grapher/share-electricity-solar.csv?v=1&amp;csvType=full&amp;useColumnShortNames=true&quot;
+$ head -3 share-electricity-solar.csv
+entity,code,year,solar_share_of_electricity__pct
+ASEAN (Ember),,2000,0
+ASEAN (Ember),,2001,0</code></pre></div><p>A document is JSON, so filling a chart from a file is a few lines in any language. This script puts the world's last eleven years into <code>line.json</code>:</p>
+<div class="code"><div class="cbar"><span>fill_line.py</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="c1"># fill_line.py: the world&#39;s share of electricity from solar, 2015 to 2025, into line.json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span><span class="o">,</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;share-electricity-solar.csv&quot;</span><span class="p">))</span>
+<span class="n">share</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]):</span> <span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;solar_share_of_electricity__pct&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;entity&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;World&quot;</span><span class="p">}</span>
+<span class="n">years</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2026</span><span class="p">)</span>
+
+<span class="n">doc</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;line.json&quot;</span><span class="p">))</span>
+<span class="n">chart</span> <span class="o">=</span> <span class="n">doc</span><span class="p">[</span><span class="s2">&quot;nodes&quot;</span><span class="p">][</span><span class="s2">&quot;chart&quot;</span><span class="p">][</span><span class="s2">&quot;params&quot;</span><span class="p">]</span>
+<span class="n">chart</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">share</span><span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">years</span><span class="p">]</span>
+<span class="n">chart</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">years</span><span class="p">)</span>
+<span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;line.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chart</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">])</span></code></pre></div><div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">$ python fill_line.py
+[1.1, 1.3, 1.7, 2.2, 2.6, 3.2, 3.7, 4.6, 5.6, 6.9, 8.7]</code></pre></div>
+<h2 id="batch">A video per row</h2>
+<figure class="clip"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/chart-video-batch.webp" width="1440" height="900" aria-label="Eight portrait line charts in a four by two grid, one each for the world, Chile, Spain, Australia, Germany, China, India and the United States, all drawing at once on the same 0 to 30 percent scale; Chile climbs highest, to 25.1 percent"><source data-src="/media/guides/chart-video-batch.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/chart-video-batch.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/chart-video-batch.mp4" type="video/mp4"></video>
+  <figcaption>Eight 4:5 videos from one template and an eight-row CSV, made in 1.7 s.</figcaption></figure>
+<p>For many charts of the same kind, keep one template and let <code>uf batch</code> fill it from a CSV. A column named <code>node.param</code> sets that param on that node; other columns, like <code>name</code>, only name the output files. The template is a 4:5 version of the line chart:</p>
+<div class="code"><div class="cbar"><span>country.json, what differs from line.json</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1350</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;fps&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="p">},</span>
+<span class="err">...</span>
+<span class="nt">&quot;chart&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;block&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;line_chart&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;kicker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2015 TO 2025&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Solar&#39;s share of electricity&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">1.1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.3</span><span class="p">,</span><span class="w"> </span><span class="mf">1.7</span><span class="p">,</span><span class="w"> </span><span class="mf">2.2</span><span class="p">,</span><span class="w"> </span><span class="mf">2.6</span><span class="p">,</span><span class="w"> </span><span class="mf">3.2</span><span class="p">,</span><span class="w"> </span><span class="mf">3.7</span><span class="p">,</span><span class="w"> </span><span class="mf">4.6</span><span class="p">,</span><span class="w"> </span><span class="mf">5.6</span><span class="p">,</span><span class="w"> </span><span class="mf">6.9</span><span class="p">,</span><span class="w"> </span><span class="mf">8.7</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;labels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;decimals&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">640</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;draw_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.2</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ink&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#f4efe6&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;accent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ffb21e&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">108</span><span class="p">,</span><span class="w"> </span><span class="mi">1262</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span></code></pre></div><div class="code"><div class="cbar"><span>make_rows.py</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="c1"># make_rows.py: one row per country for uf batch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+
+<span class="n">src</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;share-electricity-solar.csv&quot;</span><span class="p">)))</span>
+<span class="n">places</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;World&quot;</span><span class="p">,</span> <span class="s2">&quot;Chile&quot;</span><span class="p">,</span> <span class="s2">&quot;Spain&quot;</span><span class="p">,</span> <span class="s2">&quot;Australia&quot;</span><span class="p">,</span> <span class="s2">&quot;Germany&quot;</span><span class="p">,</span> <span class="s2">&quot;China&quot;</span><span class="p">,</span> <span class="s2">&quot;India&quot;</span><span class="p">,</span> <span class="s2">&quot;United States&quot;</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;rows.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;chart.kicker&quot;</span><span class="p">,</span> <span class="s2">&quot;chart.values&quot;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">place</span> <span class="ow">in</span> <span class="n">places</span><span class="p">:</span>
+        <span class="n">share</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]):</span> <span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;solar_share_of_electricity__pct&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">src</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;entity&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">place</span><span class="p">}</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">place</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">place</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">, 2015 TO 2025&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">share</span><span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2026</span><span class="p">))])</span></code></pre></div><div class="code"><div class="cbar"><span>rows.csv</span><button class="copy" type="button">copy</button></div><pre><code class="hl">name,chart.kicker,chart.values
+world,&quot;WORLD, 2015 TO 2025&quot;,&quot;1.1,1.3,1.7,2.2,2.6,3.2,3.7,4.6,5.6,6.9,8.7&quot;
+chile,&quot;CHILE, 2015 TO 2025&quot;,&quot;1.7,3.3,4.9,6.3,7.5,9.0,12.0,17.3,20.1,22.8,25.1&quot;
+spain,&quot;SPAIN, 2015 TO 2025&quot;,&quot;5.0,5.0,5.3,4.7,5.6,8.0,10.0,12.4,17.4,20.7,21.8&quot;
+...</code></pre></div><div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">$ uf batch country.json --data rows.csv --out &#39;out/{name}.mp4&#39;
+1/8 out/world.mp4: 180 frames in 0.29 s
+2/8 out/chile.mp4: 180 frames in 0.15 s
+3/8 out/spain.mp4: 180 frames in 0.15 s
+...
+8/8 out/united-states.mp4: 180 frames in 0.15 s
+8 videos in 1.4 s</code></pre></div><ul>
+  <li>A cell of numbers separated by commas becomes the list of values. Quote it in the CSV, as Python's <code>csv</code> module does, because it holds commas.</li>
+  <li><code>"max": 30</code> in the template puts every country on the same scale. Without it, each chart scales to its own peak, and the world's 8.7% would look as tall as Chile's 25.1%.</li>
+  <li>A column that names a node the template doesn't have stops the batch before the first frame: <code>Error: row 1: `chrat.values`: no node `chrat` (did you mean `chart`?)</code>. A misspelled param on a real node doesn't. In 0.2.1, <code>chart.valeus</code> rendered every video with the template's values and said nothing. Write the row documents with <code>--docs</code> and run <code>uf check</code> on one first: it warns <code>`block` has no param `valeus`</code>.</li>
+  <li>An empty cell keeps the template's value. More on templates, names and photos per row in <a href="/guides/personalized-videos-from-csv/">personalized videos from a CSV</a>.</li>
+</ul>
+
+<h2 id="review">Check before you post</h2>
+<p><code>uf review</code> reads every frame and reports text that is clipped, too small, too brief, low in contrast or outside the safe areas. On the first version of these charts it caught the source line twice. At 22 px:</p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">&quot;kind&quot;: &quot;small_text&quot;, &quot;node&quot;: &quot;source&quot;,
+&quot;message&quot;: &quot;\&quot;Data: Ember and others, via Our World in…\&quot; is set at 22 px; below about 24 px it is hard to read on a phone&quot;</code></pre></div><p>And once it was 26 px, still sitting near the bottom edge of the 16:9 frame:</p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">&quot;kind&quot;: &quot;unsafe_area&quot;, &quot;node&quot;: &quot;source&quot;,
+&quot;message&quot;: &quot;\&quot;Data: Ember and others, via Our World in…\&quot; sits in the safe margin (bounds 195,1017 to 1075,1037)&quot;</code></pre></div><p>Moving it up to y 983 cleared both. All four documents on this page, and the eight row documents the batch made (<code>uf batch ... --docs DIR</code> writes them out), now review with no issues.</p>
+
+<h2 id="shapes">16:9, 4:5 and 9:16 from one document</h2>
+<figure class="clip"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/chart-video-shapes.webp" width="1440" height="452" aria-label="The same line chart three times side by side, in a wide 16:9 frame, a 4:5 portrait frame and a tall 9:16 frame, each laid out to fit its own shape"><source data-src="/media/guides/chart-video-shapes.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/chart-video-shapes.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/chart-video-shapes.mp4" type="video/mp4"></video></figure>
+<p>Charts lay themselves out from the frame, so the same document renders for YouTube, an Instagram post and Shorts or Reels. <code>format.width</code> and <code>format.height</code> work as batch columns too, so one CSV gives all three:</p>
+<div class="code"><div class="cbar"><span>shapes.csv</span><button class="copy" type="button">copy</button></div><pre><code class="hl">name,format.width,format.height,chart.height,source.position
+youtube,1920,1080,500,&quot;192,983&quot;
+instagram,1080,1350,640,&quot;108,1262&quot;
+shorts,1080,1920,900,&quot;108,1800&quot;</code></pre></div><div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">$ uf batch line.json --data shapes.csv --out &#39;{name}.mp4&#39;
+1/3 youtube.mp4: 180 frames in 0.33 s
+2/3 instagram.mp4: 180 frames in 0.15 s
+3/3 shorts.mp4: 180 frames in 0.19 s
+3 videos in 0.7 s</code></pre></div><p>The chart's own <code>height</code> and the source line's <code>position</code> are in pixels, so they change with the shape. The title, labels and numbers scale with the frame on their own.</p>
+
+<h2 id="custom">Charts the blocks don't draw</h2>
+<p>A chart block expands into ordinary <code>path</code>, <code>shape</code> and <code>text</code> nodes, and you can write those yourself for any chart the blocks don't cover. <a href="/examples/keeling/">The Keeling Curve</a> example does this: every monthly mean of carbon dioxide at Mauna Loa since March 1958, 824 values, is one <code>path</code> whose <code>d</code> a script wrote from NOAA's file. Keying its <code>trim_end</code> up to 1 draws the curve on, and <code>morph</code> blends it into a stretched copy of itself (<code>to</code>) for the dive into 2025. Its full document is <a href="/examples/keeling.json">keeling.json</a>.</p>
+<p>The same parts make other charts: a <code>shape</code> per point for a scatter plot, one <code>path</code> per series for several lines, <code>text</code> with a keyed <code>number</code> for a counter that tracks a value.</p>
+
+<h2 id="times">Render times</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th scope="col">Command</th><th scope="col">Frames</th><th scope="col">Time</th></tr></thead>
+  <tbody>
+    <tr><th scope="row"><code>uf export line.json</code></th><td>180</td><td>0.54–0.57&nbsp;s</td></tr>
+    <tr><th scope="row"><code>uf export bar.json</code></th><td>180</td><td>0.51–0.57&nbsp;s</td></tr>
+    <tr><th scope="row"><code>uf export donut.json</code></th><td>180</td><td>0.52–0.55&nbsp;s</td></tr>
+    <tr><th scope="row"><code>uf export country.json</code>, 1080×1350</th><td>180</td><td>0.57–0.62&nbsp;s</td></tr>
+    <tr><th scope="row"><code>uf batch country.json</code>, 8 rows</th><td>8 × 180</td><td>1.68–1.70&nbsp;s</td></tr>
+    <tr><th scope="row"><code>uf batch line.json</code>, 3 shapes</th><td>3 × 180</td><td>1.00–1.46&nbsp;s</td></tr>
+  </tbody>
+</table></div>
+<p>Wall clock from the command to the last file, warm, three runs each (five for the eight-row batch, six for the shapes), on one RTX 5090 workstation with the published 0.2.1 binary, 6-second videos at 30 fps to H.264. The time inside a batch's own report leaves out start-up, which is why it says 1.3 or 1.4 s. The clips on this page are smaller web copies of these exports.</p>
+
+<h2 id="limits">Limits</h2>
+<ul>
+  <li><b>One series per chart.</b> <code>bar_chart</code> and <code>line_chart</code> take one list of values: no grouped or stacked bars and no second line. Build those from paths and shapes, as above.</li>
+  <li><b>No bar chart race.</b> There's no block for bars that reorder over time.</li>
+  <li><b>No y axis or gridlines.</b> Bars carry their own values and the line labels its highlighted point.</li>
+  <li><b>Up to about nine x labels.</b> With more values, the chart shows every second or third label and always the last. Blank labels count in that thinning, so pass every label and let the chart pick; a hand-thinned list like <code>2015,,,,,2020,,,,,2025</code> loses 2020.</li>
+  <li><b>Video, not a web chart.</b> For a chart people can hover and zoom on a page, use a charting library. ultrafast makes video files, and it needs a GPU: an Apple silicon Mac, or Linux or WSL2 with Vulkan.</li>
+</ul>
+
+<h2 id="faq">Questions</h2>
+<div class="faq">
+  <details open>
+    <summary>How do I turn a CSV into an animated chart video?</summary>
+    <div class="ans"><p>Put the numbers in a chart block's <code>values</code> and the categories in <code>labels</code>, then run <code>uf export chart.json chart.mp4</code>. A few lines of Python can read the CSV and fill the document, and <code>uf batch chart.json --data rows.csv</code> makes one video per row, with a <code>chart.values</code> column setting each row's numbers.</p></div>
+  </details>
+  <details>
+    <summary>Can I make a bar chart race?</summary>
+    <div class="ans"><p>Not with a ready-made block. <code>bar_chart</code> draws one set of values that rise in turn; there's no block for bars that reorder over time.</p></div>
+  </details>
+  <details>
+    <summary>Can I make animated chart videos with Python?</summary>
+    <div class="ans"><p>Yes. Python can write the ultrafast document, as <code>fill_line.py</code> and <code>make_rows.py</code> do on this page, and ultrafast renders it on the GPU. matplotlib's animation module is the other common route: it draws each frame on the CPU and saves the video through FFmpeg.</p></div>
+  </details>
+  <details>
+    <summary>What size should a chart video be for YouTube, Instagram and Shorts?</summary>
+    <div class="ans"><p>1920×1080 (16:9) for YouTube, 1080×1350 (4:5) for an Instagram post, and 1080×1920 (9:16) for Shorts, Reels and TikTok. Chart blocks lay themselves out from the frame, so one document makes all three with <code>format.width</code> and <code>format.height</code> columns in a batch.</p></div>
+  </details>
+  <details>
+    <summary>How long does a chart video take to render?</summary>
+    <div class="ans"><p>On one RTX 5090 workstation with ultrafast 0.2.1, each 6-second 1080p chart on this page exported in 0.51 to 0.57 s, and eight 4:5 videos, one per country, took 1.68 to 1.70 s as a batch.</p></div>
+  </details>
+</div>
+
+    </article>
+  </div>
+</section>
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/learn/can-claude-make-videos/">Can Claude make videos?</a>
+<a href="/blog/">Blog</a>      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+<a href="/changelog/">Changelog</a>      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+      <a href="/alternatives/remotion/">Remotion alternatives</a>
+      <a href="/alternatives/hyperframes/">HyperFrames alternatives</a>
+      <a href="/alternatives/json-to-video-api/">vs JSON-to-video APIs</a>
+      <a href="/benchmarks/">Benchmarks</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code></span>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=c898dbcc"></script>
+</body>
+</html>

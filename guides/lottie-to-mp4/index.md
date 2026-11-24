@@ -23,6 +23,7 @@ Turn a Lottie JSON file into an MP4, a transparent WebM, ProRes 4444, a GIF or P
   * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
   * [Animated captions from Whisper or SRT](<https://ultrafast.mov/guides/animated-captions/>)
   * [Motion graphics with code](<https://ultrafast.mov/guides/motion-graphics-with-code/>)
+  * [Animated chart videos from a CSV](<https://ultrafast.mov/guides/animated-chart-video/>)
 
 ## Reference
 

@@ -23,6 +23,7 @@ Burn word-by-word captions into a video from a Whisper transcript, an SRT or a V
   * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
   * [Animated captions from Whisper or SRT](<https://ultrafast.mov/guides/animated-captions/>)
   * [Motion graphics with code](<https://ultrafast.mov/guides/motion-graphics-with-code/>)
+  * [Animated chart videos from a CSV](<https://ultrafast.mov/guides/animated-chart-video/>)
 
 ## Reference
 
