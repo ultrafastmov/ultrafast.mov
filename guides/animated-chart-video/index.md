@@ -25,6 +25,7 @@ Bar, line and donut charts that build themselves on screen, rendered to MP4 on y
   * [Motion graphics with code](<https://ultrafast.mov/guides/motion-graphics-with-code/>)
   * [Animated chart videos from a CSV](<https://ultrafast.mov/guides/animated-chart-video/>)
   * [Animate an SVG logo](<https://ultrafast.mov/guides/animate-svg-logo/>)
+  * [A film of a GitHub repo](<https://ultrafast.mov/guides/github-repo-video/>)
 
 ## Reference
 
@@ -269,6 +270,8 @@ The chart's own `height` and the source line's `position` are in pixels, so they
 A chart block expands into ordinary `path`, `shape` and `text` nodes, and you can write those yourself for any chart the blocks don't cover. [The Keeling Curve](<https://ultrafast.mov/examples/keeling/>) example does this: every monthly mean of carbon dioxide at Mauna Loa since March 1958, 824 values, is one `path` whose `d` a script wrote from NOAA's file. Keying its `trim_end` up to 1 draws the curve on, and `morph` blends it into a stretched copy of itself (`to`) for the dive into 2025. Its full document is [keeling.json](<https://ultrafast.mov/examples/keeling.json>).
 
 The same parts make other charts: a `shape` per point for a scatter plot, one `path` per series for several lines, `text` with a keyed `number` for a counter that tracks a value.
+
+Data from an API works the same way as data from a CSV. [A film of a GitHub repo](<https://ultrafast.mov/guides/github-repo-video/>) fills a line chart, a bar chart and a donut from the GitHub API and puts them in one film with a title and an end card.
 
 ## Render times
 

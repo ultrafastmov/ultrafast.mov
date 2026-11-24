@@ -25,6 +25,7 @@ Render documents over HTTP from `uf serve` on your own GPU, with one API key and
   * [Motion graphics with code](<https://ultrafast.mov/guides/motion-graphics-with-code/>)
   * [Animated chart videos from a CSV](<https://ultrafast.mov/guides/animated-chart-video/>)
   * [Animate an SVG logo](<https://ultrafast.mov/guides/animate-svg-logo/>)
+  * [A film of a GitHub repo](<https://ultrafast.mov/guides/github-repo-video/>)
 
 ## Reference
 

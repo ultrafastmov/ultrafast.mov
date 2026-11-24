@@ -25,6 +25,7 @@ One JSON file in, a finished video out, rendered on your GPU. A worked example, 
   * [Motion graphics with code](<https://ultrafast.mov/guides/motion-graphics-with-code/>)
   * [Animated chart videos from a CSV](<https://ultrafast.mov/guides/animated-chart-video/>)
   * [Animate an SVG logo](<https://ultrafast.mov/guides/animate-svg-logo/>)
+  * [A film of a GitHub repo](<https://ultrafast.mov/guides/github-repo-video/>)
 
 ## Reference
 
@@ -175,6 +176,8 @@ await (await uf.render(doc)).save("card.mp4");
 ``` 
 
 Endpoints for checking, single frames, contact sheets, reviews and uploads are in the [HTTP API reference](<https://ultrafast.mov/docs/api/>).
+
+A script can also write the document and hand it to `uf export`. [A film of a GitHub repo](<https://ultrafast.mov/guides/github-repo-video/>) is a worked example: a Python script with no dependencies reads the GitHub API, writes a document of five shots and renders it in about a second.
 
 ## From an agent
 

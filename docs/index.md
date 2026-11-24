@@ -25,6 +25,7 @@ Install it, make your first video, then hand the loop to your agent.
   * [Motion graphics with code](<https://ultrafast.mov/guides/motion-graphics-with-code/>)
   * [Animated chart videos from a CSV](<https://ultrafast.mov/guides/animated-chart-video/>)
   * [Animate an SVG logo](<https://ultrafast.mov/guides/animate-svg-logo/>)
+  * [A film of a GitHub repo](<https://ultrafast.mov/guides/github-repo-video/>)
 
 ## Reference
 
