@@ -1470,7 +1470,7 @@ It also runs from the Docker image, `docker run --gpus all -p 8080:8080 -v ultra
 
 ## Import the workflow
 
-  1. Download [ultrafast-n8n-workflow.json](<https://ultrafast.mov/guides/n8n-video-automation/ultrafast-n8n-workflow.json>). In a new n8n workflow, open the **…** menu, choose **Import** , then **From file**.
+  1. In a new n8n workflow, open the **…** menu, choose **Import** , then **From URL** , and paste the link to [ultrafast-n8n-workflow.json](<https://ultrafast.mov/guides/n8n-video-automation/ultrafast-n8n-workflow.json>). Or download the file and choose **From file**.
   2. Create a **Header Auth** credential called `ultrafast serve`, with **Name** `Authorization` and **Value** `Bearer uf_live_...` (the key from above). Pick it in the two HTTP Request nodes, **Get template** and **Render**.
   3. In **Fill template** , set `folder` to where the MP4s should go (see below), then click **Execute workflow**.
 
