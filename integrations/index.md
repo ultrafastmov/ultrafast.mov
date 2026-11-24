@@ -39,6 +39,7 @@ claude mcp add ultrafast -- uf mcp
 [mcp_servers.ultrafast]
 command = "uf"
 args = ["mcp"]
+tool_timeout_sec = 300
 default_tools_approval_mode = "approve"
 ``` 
 
@@ -149,7 +150,7 @@ HTTP API
 
 ## One request, one video.
 
-POST a document to your `uf serve`, get an MP4 back.
+POST a document to your `uf serve`, get an MP4 back. From n8n it's one HTTP Request node: [a workflow that renders a video for every row](<https://ultrafast.mov/guides/n8n-video-automation/>).
 
 [HTTP API docs](<https://ultrafast.mov/docs/api/>)
 

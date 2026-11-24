@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>n8n video automation on your own GPU: a video for every row · ultrafast</title>
+<meta name="description" content="An n8n workflow that renders a video for every row on your own GPU with uf serve: 100 vertical videos in 18.8 s, no per-minute fees. Import it and run it.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/guides/n8n-video-automation/">
+<link rel="alternate" type="text/markdown" href="/guides/n8n-video-automation/index.md" title="n8n video automation on your own GPU: a video for every row · ultrafast (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="ultrafast blog"><meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="Videos from n8n, on your GPU">
+<meta property="og:description" content="An n8n workflow that renders a video for every row on your own GPU with uf serve: 100 vertical videos in 18.8 s, no per-minute fees. Import it and run it.">
+<meta property="og:url" content="https://ultrafast.mov/guides/n8n-video-automation/">
+<meta property="og:image" content="https://ultrafast.mov/og/guide-n8n-video-automation.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Videos from n8n, on your GPU · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Videos from n8n, on your GPU">
+<meta name="twitter:description" content="An n8n workflow that renders a video for every row on your own GPU with uf serve: 100 vertical videos in 18.8 s, no per-minute fees. Import it and run it.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/guide-n8n-video-automation.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=c898dbcc">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://ultrafast.mov/docs/"},{"@type":"ListItem","position":3,"name":"Videos from n8n","item":"https://ultrafast.mov/guides/n8n-video-automation/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can n8n make videos without a paid video API?","acceptedAnswer":{"@type":"Answer","text":"Yes, with a render server of your own. uf serve, the self-hosted server that comes with the open-source ultrafast engine, takes a JSON document over HTTP and sends back the MP4, so an n8n HTTP Request node can make a video per row with no per-minute fee. It renders on your GPU: a Mac with Apple silicon, or Linux with a Vulkan GPU."}},{"@type":"Question","name":"How fast is it?","acceptedAnswer":{"@type":"Answer","text":"In the tested workflow, three 6-second 1080×1920 videos took 0.99 s from n8n's start to finish and a hundred took 18.8 s, about 0.18 s a video, on one RTX 5090. That's about the same per video as uf batch on the command line, so n8n adds very little."}},{"@type":"Question","name":"Does it work on n8n Cloud?","acceptedAnswer":{"@type":"Answer","text":"Only if n8n Cloud can reach your uf serve, which means putting the server on the internet with its API key. The workflow on this page was tested with a self-hosted n8n on the same machine as the server."}},{"@type":"Question","name":"Can it make a video for every row of a Google Sheet?","acceptedAnswer":{"@type":"Answer","text":"Yes. Put the sheet's node in place of the Rows node and name its columns node.param, such as line1.text, plus file for the file name. The Fill template node copies the template per row, sets those params, and stops the run if a column names a node or a param the template doesn't have."}},{"@type":"Question","name":"Why does the workflow loop over items one at a time?","acceptedAnswer":{"@type":"Answer","text":"uf serve renders one request at a time and queues up to 16, then answers 429. n8n's HTTP Request node sends every item at once, so 100 rows without the loop were refused. Looping one at a time keeps the GPU busy without overfilling the queue: 18.3 of the 18.8 s for 100 rows was rendering."}},{"@type":"Question","name":"Why 127.0.0.1 and not localhost?","acceptedAnswer":{"@type":"Answer","text":"With localhost, n8n's HTTP Request node tried the IPv6 address first and got \"The service refused the connection\", because uf serve listens on IPv4. 127.0.0.1 works."}}]},{"@type":"TechArticle","@id":"https://ultrafast.mov/guides/n8n-video-automation/#article","headline":"n8n video automation on your own GPU: a video for every row","description":"An n8n workflow that renders a video for every row on your own GPU with uf serve: 100 vertical videos in 18.8 s, no per-minute fees. Import it and run it.","url":"https://ultrafast.mov/guides/n8n-video-automation/","mainEntityOfPage":"https://ultrafast.mov/guides/n8n-video-automation/","image":"https://ultrafast.mov/og/guide-n8n-video-automation.jpg","datePublished":"2026-11-24T20:53:44+00:00","dateModified":"2026-11-24T20:53:44+00:00","inLanguage":"en","author":{"@id":"https://ultrafast.mov/#org"},"publisher":{"@id":"https://ultrafast.mov/#org"},"about":{"@id":"https://ultrafast.mov/#app"}}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/" aria-current="page">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="band stock-cotton phead" style="padding-bottom:56px">
+  <div class="sunburst" aria-hidden="true" style="--sx:92%;--sy:40%;--r2:520px"></div>
+  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+<li><a href="/docs/">Docs</a></li>  <li aria-current="page">Videos from n8n</li>
+</ol>
+
+    <p class="eyebrow"><i style="--c:var(--blue)"></i>Docs</p>
+    <h1 class="pr h1" data-plates="blue black"><span class="ln">Videos from n8n,</span> <span class="ln">on your own GPU.</span></h1>
+    <p class="lede">n8n can make videos without a per-minute API. This workflow fills a video template from each row of data and renders it on your own GPU with <code>uf serve</code>, the self-hosted render server that comes with ultrafast: one HTTP request per video, an MP4 back. Tested end to end with n8n 2.49 and ultrafast 0.2.1: three vertical videos in 0.99 s, a hundred in 18.8 s.</p>
+  </div>
+</section>
+<section class="band stock-thermal" style="padding-top:72px">
+  <div class="wrap docs">
+    <nav class="side" aria-label="Docs">
+      <h2>Start</h2>
+      <ul><li><a href="/docs/">Quickstart</a></li><li><a href="/docs/documents/">The document</a></li><li><a href="/templates/">Templates</a></li></ul>
+      <h2>Guides</h2>
+      <ul><li><a href="/guides/render-video-from-json/">Render video from JSON</a></li><li><a href="/guides/personalized-videos-from-csv/">Personalized videos from a CSV</a></li><li><a href="/guides/n8n-video-automation/" aria-current="page">Videos from n8n</a></li><li><a href="/guides/claude-code/">Make a video with Claude Code</a></li><li><a href="/guides/codex/">Make a video with Codex</a></li><li><a href="/guides/lottie-to-mp4/">Lottie to MP4, WebM or ProRes</a></li><li><a href="/guides/animated-captions/">Animated captions from Whisper or SRT</a></li><li><a href="/guides/motion-graphics-with-code/">Motion graphics with code</a></li><li><a href="/guides/animated-chart-video/">Animated chart videos from a CSV</a></li><li><a href="/guides/animate-svg-logo/">Animate an SVG logo</a></li><li><a href="/guides/github-repo-video/">A film of a GitHub repo</a></li></ul>
+      <h2>Learn</h2>
+      <ul><li><a href="/learn/gpu-video-rendering/">Video rendering without a browser</a></li></ul>
+      <h2>Reference</h2>
+      <ul><li><a href="/docs/ops/">Ops</a></li><li><a href="/docs/cli/">CLI</a></li><li><a href="/docs/mcp/">MCP server</a></li><li><a href="/docs/api/">HTTP API</a></li></ul>
+      <h2>For agents</h2>
+      <ul><li><a href="/llms.txt">llms.txt</a></li><li><a href="/guides/n8n-video-automation/index.md">This page as Markdown</a></li></ul>
+    </nav>
+    <article class="prose">
+<figure class="clip"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/n8n-tips.webp" width="1280" height="720" aria-label="Three vertical videos side by side on a dark grey background, each a dark card with a small label, TIP 01, TIP 02 and TIP 03, and two lines of serif type: Ship the small version, Write the test first, Delete the dead code"><source data-src="/media/guides/n8n-tips.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/n8n-tips.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/n8n-tips.mp4" type="video/mp4"></video>
+  <figcaption>Three of the videos the workflow made, one per row: 1080×1920, 6 s each. The three took 0.56 s in the Render node.</figcaption></figure>
+
+<nav class="toc" aria-label="On this page"><b>On this page</b><ol>
+  <li><a href="#need">What you need</a></li><li><a href="#serve">Start the render server</a></li><li><a href="#import">Import the workflow</a></li>
+  <li><a href="#how">How it works</a></li><li><a href="#rows">Rows from a sheet or a form</a></li><li><a href="#design">Your own design</a></li>
+  <li><a href="#loop">Why one at a time</a></li><li><a href="#numbers">How long it takes</a></li><li><a href="#trouble">If it doesn't work</a></li>
+  <li><a href="#hosted">Hosted video APIs</a></li><li><a href="#faq">Questions</a></li>
+</ol></nav>
+
+<h2 id="need">What you need</h2>
+<ul>
+  <li><b>A GPU that ultrafast runs on:</b> a Mac with Apple silicon, or Linux (or Windows through WSL2) with a Vulkan GPU. On NVIDIA, exports are encoded on the GPU with no copy back to the CPU.</li>
+  <li><b>n8n that can reach that machine.</b> A self-hosted n8n on the same computer is simplest. n8n Cloud runs on n8n's servers, so it can only reach <code>uf serve</code> if you put the server on the internet, with its key.</li>
+</ul>
+<p>Everything on this page was run with n8n 2.49.5 installed from npm and ultrafast 0.2.1 on Linux, where an RTX 5090 rendered each 6-second vertical video in about 0.18 s.</p>
+
+<h2 id="serve">Start the render server</h2>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">curl<span class="w"> </span>-fsSL<span class="w"> </span>https://ultrafast.mov/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w">        </span><span class="c1"># or: brew install ultrafastmov/tap/ultrafast</span>
+uf<span class="w"> </span>serve<span class="w">                                                </span><span class="c1"># 0.0.0.0:8080; --port and --host to change</span></code></pre></div><p>On its first start it makes an API key, saves it, and prints it:</p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">========================================================================
+ultrafast serve: API key (no ULTRAFAST_API_KEY set, so one was made)
+    ULTRAFAST_API_KEY=uf_live_...
+Saved in ~/.local/share/ultrafast/api-key. Send it as `Authorization: Bearer &lt;key&gt;`.
+Set ULTRAFAST_API_KEY to choose your own, or ULTRAFAST_AUTH=none to turn auth off.
+========================================================================
+{&quot;message&quot;:&quot;ultrafast serve ready (NVIDIA GeForce RTX 5090, vulkan) in 0.11 s&quot;,&quot;severity&quot;:&quot;INFO&quot;}</code></pre></div><p>It also runs from the Docker image, <code>docker run --gpus all -p 8080:8080 -v ultrafast:/data ghcr.io/ultrafastmov/ultrafast:latest serve</code>. The settings are in <a href="https://github.com/ultrafastmov/ultrafast/blob/main/docs/service/SELF_HOST.md">SELF_HOST.md</a>, and every endpoint is in the <a href="/docs/api/">HTTP API reference</a>.</p>
+
+<h2 id="import">Import the workflow</h2>
+<ol>
+  <li>Download <a href="/guides/n8n-video-automation/ultrafast-n8n-workflow.json" download>ultrafast-n8n-workflow.json</a>. In a new n8n workflow, open the <b>…</b> menu, choose <b>Import</b>, then <b>From file</b>.</li>
+  <li>Create a <b>Header Auth</b> credential called <code>ultrafast serve</code>, with <b>Name</b> <code>Authorization</code> and <b>Value</b> <code>Bearer uf_live_...</code> (the key from above). Pick it in the two HTTP Request nodes, <b>Get template</b> and <b>Render</b>.</li>
+  <li>In <b>Fill template</b>, set <code>folder</code> to where the MP4s should go (see <a href="#trouble">below</a>), then click <b>Execute workflow</b>.</li>
+</ol>
+<figure class="clip"><img src="/img/guides/n8n-workflow.webp" width="1400" height="281" loading="lazy" alt="The workflow in the n8n editor after a run: Start, Get template, Rows, Fill template, then a One at a time loop that sends each item to Render and Save MP4 and back, with 3 items through each step and green checks on every node.">
+  <figcaption>The workflow after a run in the n8n editor: one template, three rows, three renders, three files.</figcaption></figure>
+
+<h2 id="how">How it works</h2>
+<div class="tablewrap"><table class="tbl">
+  <thead><tr><th scope="col">Node</th><th scope="col">Type</th><th scope="col">What it does</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">Get template</th><td>HTTP Request</td><td><code>GET /v1/templates/vertical</code>: one of the six starter documents, as JSON</td></tr>
+    <tr><th scope="row">Rows</th><td>Code</td><td>one item per video; stands in for a sheet, a form or a database</td></tr>
+    <tr><th scope="row">Fill template</th><td>Code</td><td>a copy of the template per row, with the row's values set in it</td></tr>
+    <tr><th scope="row">One at a time</th><td>Loop Over Items</td><td>sends the rows on one by one (<a href="#loop">why</a>)</td></tr>
+    <tr><th scope="row">Render</th><td>HTTP Request</td><td><code>POST /v1/render</code>; the MP4 comes back as the response, as a file</td></tr>
+    <tr><th scope="row">Save MP4</th><td>Read/Write Files from Disk</td><td>writes it to the row's path, then the loop takes the next row</td></tr>
+  </tbody>
+</table></div>
+<p>A video here is a JSON document: nodes such as <code>text</code>, <code>gradient</code> and <code>over</code>, each with params, some of them animated. The template is an ordinary document, so nothing in it is marked as a variable; a row can set any param of any node. A column named <code>node.param</code> sets that param, and <code>file</code> names the MP4:</p>
+<div class="code"><div class="cbar"><span>Rows</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="k">return</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">json</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">file</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;tip-01.mp4&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;label.text&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;TIP 01&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;line1.text&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Ship the&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;line2.text&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;small version.&#39;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">json</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">file</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;tip-02.mp4&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;label.text&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;TIP 02&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;line1.text&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Write the&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;line2.text&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;test first.&#39;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">json</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">file</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;tip-03.mp4&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;label.text&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;TIP 03&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;line1.text&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Delete the&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;line2.text&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;dead code.&#39;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="p">];</span></code></pre></div><div class="code"><div class="cbar"><span>Fill template</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="kd">const</span><span class="w"> </span><span class="nx">folder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/home/node/.n8n-files&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// where Save MP4 writes; n8n only writes inside ~/.n8n-files</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;Get template&#39;</span><span class="p">).</span><span class="nx">first</span><span class="p">().</span><span class="nx">json</span><span class="p">;</span>
+<span class="k">return</span><span class="w"> </span><span class="nx">$input</span><span class="p">.</span><span class="nx">all</span><span class="p">().</span><span class="nx">map</span><span class="p">(({</span><span class="w"> </span><span class="nx">json</span><span class="o">:</span><span class="w"> </span><span class="nx">row</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nb">document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">template</span><span class="p">));</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">column</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">row</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">column</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span><span class="w"> </span><span class="c1">// &quot;file&quot; and other plain columns are just data</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">node</span><span class="p">,</span><span class="w"> </span><span class="nx">param</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">column</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">nodes</span><span class="p">[</span><span class="nx">node</span><span class="p">]</span><span class="o">?</span><span class="p">.</span><span class="nx">params</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">params</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`Column </span><span class="si">${</span><span class="nx">column</span><span class="si">}</span><span class="sb">: the template has no node &quot;</span><span class="si">${</span><span class="nx">node</span><span class="si">}</span><span class="sb">&quot;`</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">param</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">params</span><span class="p">))</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`Column </span><span class="si">${</span><span class="nx">column</span><span class="si">}</span><span class="sb">: &quot;</span><span class="si">${</span><span class="nx">node</span><span class="si">}</span><span class="sb">&quot; has no param &quot;</span><span class="si">${</span><span class="nx">param</span><span class="si">}</span><span class="sb">&quot; (it has </span><span class="si">${</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">params</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span><span class="si">}</span><span class="sb">)`</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">params</span><span class="p">[</span><span class="nx">param</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">row</span><span class="p">.</span><span class="nx">file</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="sb">`video-</span><span class="si">${</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="si">}</span><span class="sb">.mp4`</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">json</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">folder</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">file</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span><span class="w"> </span><span class="nb">document</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span>
+<span class="p">});</span></code></pre></div><p><b>Render</b> sends the document with <code>inline: true</code>, which puts the video in the response body, and its <b>Response Format</b> is <b>File</b>, so the MP4 arrives as binary data that any later node can take: a disk, a bucket, a drive, an upload.</p>
+<div class="code"><div class="cbar"><span>Render: JSON body</span><button class="copy" type="button">copy</button></div><pre><code class="hl">{{ JSON.stringify({ document: $json.document, output: { inline: true, name: $json.file } }) }}</code></pre></div><p>The <code>output</code> object takes the same settings as <code>uf export</code>: <code>size</code> (<code>720p</code> to <code>4k</code>), <code>fps</code>, <code>codec</code> (H.264, HEVC, AV1, VP9, ProRes), <code>quality</code>, a WebM or GIF by <code>name</code>. They're listed in the <a href="/docs/api/">HTTP API reference</a>.</p>
+
+<h2 id="rows">Rows from a sheet or a form</h2>
+<p>Replace <b>Rows</b> with whatever holds your data: a Google Sheets or Airtable node, a form trigger, a database query. <b>Fill template</b> reads whichever items arrive, so a sheet whose header row reads <code>file</code>, <code>label.text</code>, <code>line1.text</code>, <code>line2.text</code> makes one video per row. Columns without a dot, such as an email address to send the video to, pass through untouched.</p>
+<p>A column that names a node or a param the template doesn't have stops the run at <b>Fill template</b>, before anything renders:</p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">Column line3.text: the template has no node &quot;line3&quot;
+Column line1.txt: &quot;line1&quot; has no param &quot;txt&quot; (it has text, font, size, color, valign, tracking, position)</code></pre></div><p>That second check matters: the engine ignores a param it doesn't know, so without it a misspelled column renders the template's own words with no error. <code>POST /v1/check</code> reports it as a warning if you want to check documents another way.</p>
+
+<h2 id="design">Your own design</h2>
+<p><b>Get template</b> asks your server for <code>vertical</code>; <code>title</code>, <code>square</code>, <code>promo</code>, <code>explainer</code> and <code>product</code> are the other starters, all on the <a href="/templates/">templates page</a> with the nodes and params each one has. For a design of your own, write the document (by hand, from <code>uf new vertical my.json</code>, or with a coding agent; see the <a href="/guides/claude-code/">Claude Code</a> and <a href="/guides/codex/">Codex</a> guides), check it with <code>uf check</code> and <code>uf review</code>, put it anywhere that serves JSON, and point <b>Get template</b> at that URL. The column names then follow your node names.</p>
+<p>The <a href="/guides/personalized-videos-from-csv/">CSV guide</a> uses the same <code>node.param</code> idea with <code>uf batch</code> on the command line, including a photo per row and checking every row before rendering.</p>
+
+<h2 id="loop">Why one at a time</h2>
+<p><code>uf serve</code> renders one request at a time on its GPU. Others wait their turn, and once 16 are waiting (<code>ULTRAFAST_QUEUE</code>) it answers <code>429 busy</code>. n8n's HTTP Request node sends every item at once, so a first try at 100 rows without the loop failed with:</p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">The service is receiving too many requests from you</code></pre></div><p><b>One at a time</b> (Loop Over Items, batch size 1) sends the next request when the last MP4 is saved. The GPU still never waits: the 100-row run below spent 18.3 of its 18.8 s rendering. The HTTP Request node's own <b>Batching</b> option spaces out when requests start, but they still overlap.</p>
+
+<h2 id="numbers">How long it takes</h2>
+<div class="tablewrap"><table class="tbl">
+  <thead><tr><th scope="col"></th><th scope="col">3 rows</th><th scope="col">100 rows</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">Whole run</th><td>0.99 s</td><td>18.8 s</td></tr>
+    <tr><th scope="row">Render node, all rows</th><td>0.56 s</td><td>18.3 s</td></tr>
+    <tr><th scope="row">Per video</th><td>0.19 s</td><td>0.18 s</td></tr>
+    <tr><th scope="row">Output</th><td colspan="2">MP4, H.264, 1080×1920, 30 fps, 6 s; 0.21 to 0.28 MB each</td></tr>
+  </tbody>
+</table></div>
+<p>Medians of five runs (three for 100 rows) with the RTX 5090 otherwise idle, timed from n8n's own start and stop times for the run, so n8n's start-up isn't counted. The first run after starting <code>uf serve</code> took 1.13 s for the three, while it set up the GPU. That's about the same per video as <code>uf batch</code> on the command line (0.17 to 0.18 s a row in the <a href="/guides/personalized-videos-from-csv/">CSV guide</a>), so n8n adds very little.</p>
+
+<h2 id="trouble">If it doesn't work</h2>
+<ul>
+  <li><b>"The service refused the connection - perhaps it is offline"</b> with <code>uf serve</code> running: use <code>127.0.0.1</code> in the URLs, as the workflow does, not <code>localhost</code>. n8n's HTTP Request node tried the IPv6 address for <code>localhost</code> first, and <code>uf serve</code> listens on IPv4.</li>
+  <li><b>"Access to the file is not allowed"</b> at Save MP4: n8n 2 only reads and writes files inside <code>~/.n8n-files</code> (the <code>N8N_RESTRICT_FILE_ACCESS_TO</code> setting). The workflow's <code>folder</code> is the Docker image's, <code>/home/node/.n8n-files</code>; for an npm install, write your home folder's full path (<code>~</code> isn't expanded).</li>
+  <li><b>n8n in Docker</b> (not tested here): inside the container, <code>127.0.0.1</code> is the container. Reach a <code>uf serve</code> on the host through <code>host.docker.internal</code> (on Linux, start the container with <code>--add-host=host.docker.internal:host-gateway</code>), and mount a volume at <code>/home/node/.n8n-files</code> to get the MP4s out.</li>
+  <li><b>401</b>: the credential's value is <code>Bearer</code>, a space, then the key.</li>
+  <li><b>413 over_limit</b>: a video in the response body can be up to 32 MiB. For longer or bigger videos, drop <code>inline</code>; the response is then a receipt with a <code>url</code> to download the file from, valid for 7 days.</li>
+</ul>
+
+<h2 id="hosted">Hosted video APIs</h2>
+<p>JSON2Video and Creatomate have their own n8n nodes, and Shotstack is called from the HTTP Request node in community workflows. All three render in their cloud, so they need no GPU of yours, and they bring stock media, voices and template editors; they charge by the minute or in credits. With <code>uf serve</code> the GPU is yours, a render costs nothing per video, and the document can hold 3D, shaders, particles and Lottie. There's no hosted ultrafast API yet. <a href="/alternatives/json-to-video-api/">The comparison page</a> has their prices and formats side by side, and when each is the better choice.</p>
+
+<h2 id="faq">Questions</h2>
+<div class="faq">
+  <details open>
+    <summary>Can n8n make videos without a paid video API?</summary>
+    <div class="ans"><p>Yes, with a render server of your own. <code>uf serve</code>, the self-hosted server that comes with the open-source ultrafast engine, takes a JSON document over HTTP and sends back the MP4, so an n8n HTTP Request node can make a video per row with no per-minute fee. It renders on your GPU: a Mac with Apple silicon, or Linux with a Vulkan GPU.</p></div>
+  </details>
+  <details>
+    <summary>How fast is it?</summary>
+    <div class="ans"><p>In the tested workflow, three 6-second 1080×1920 videos took 0.99 s from n8n's start to finish and a hundred took 18.8 s, about 0.18 s a video, on one RTX 5090. That's about the same per video as <code>uf batch</code> on the command line, so n8n adds very little.</p></div>
+  </details>
+  <details>
+    <summary>Does it work on n8n Cloud?</summary>
+    <div class="ans"><p>Only if n8n Cloud can reach your <code>uf serve</code>, which means putting the server on the internet with its API key. The workflow on this page was tested with a self-hosted n8n on the same machine as the server.</p></div>
+  </details>
+  <details>
+    <summary>Can it make a video for every row of a Google Sheet?</summary>
+    <div class="ans"><p>Yes. Put the sheet's node in place of the Rows node and name its columns <code>node.param</code>, such as <code>line1.text</code>, plus <code>file</code> for the file name. The Fill template node copies the template per row, sets those params, and stops the run if a column names a node or a param the template doesn't have.</p></div>
+  </details>
+  <details>
+    <summary>Why does the workflow loop over items one at a time?</summary>
+    <div class="ans"><p><code>uf serve</code> renders one request at a time and queues up to 16, then answers 429. n8n's HTTP Request node sends every item at once, so 100 rows without the loop were refused. Looping one at a time keeps the GPU busy without overfilling the queue: 18.3 of the 18.8 s for 100 rows was rendering.</p></div>
+  </details>
+  <details>
+    <summary>Why 127.0.0.1 and not localhost?</summary>
+    <div class="ans"><p>With <code>localhost</code>, n8n's HTTP Request node tried the IPv6 address first and got "The service refused the connection", because <code>uf serve</code> listens on IPv4. <code>127.0.0.1</code> works.</p></div>
+  </details>
+</div>
+
+    </article>
+  </div>
+</section>
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/learn/can-claude-make-videos/">Can Claude make videos?</a>
+<a href="/blog/">Blog</a>      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+<a href="/changelog/">Changelog</a>      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+      <a href="/alternatives/remotion/">Remotion alternatives</a>
+      <a href="/alternatives/hyperframes/">HyperFrames alternatives</a>
+      <a href="/alternatives/json-to-video-api/">vs JSON-to-video APIs</a>
+      <a href="/benchmarks/">Benchmarks</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code></span>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=c898dbcc"></script>
+</body>
+</html>

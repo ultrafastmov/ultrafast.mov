@@ -20,6 +20,7 @@ A template and a spreadsheet make a finished video per row, each with its own cu
 
   * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
+  * [Videos from n8n](<https://ultrafast.mov/guides/n8n-video-automation/>)
   * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
   * [Make a video with Codex](<https://ultrafast.mov/guides/codex/>)
   * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
@@ -178,7 +179,7 @@ for row in csv.DictReader(open("customers.csv")):
     uf.render(doc).save(f"out/{row['id']}.mp4")
 ``` 
 
-Any tool that can send an HTTP request can do the same with `POST /v1/render` and the row's document ([HTTP API](<https://ultrafast.mov/docs/api/>)). A self-hosted server renders one job at a time on its GPU; send the rows one after another. Agents get the same thing as an MCP tool: `ultrafast_batch` renders one document per row of a data file, or of rows passed inline (up to 20 a call on a remote server, a download link per row; see [MCP server](<https://ultrafast.mov/docs/mcp/>)).
+Any tool that can send an HTTP request can do the same with `POST /v1/render` and the row's document ([HTTP API](<https://ultrafast.mov/docs/api/>)). In n8n that's [one HTTP Request node in a loop](<https://ultrafast.mov/guides/n8n-video-automation/>), with a Code node that sets the same `node.param` columns. A self-hosted server renders one job at a time on its GPU; send the rows one after another. Agents get the same thing as an MCP tool: `ultrafast_batch` renders one document per row of a data file, or of rows passed inline (up to 20 a call on a remote server, a download link per row; see [MCP server](<https://ultrafast.mov/docs/mcp/>)).
 
 ## Limits
 

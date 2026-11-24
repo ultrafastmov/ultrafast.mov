@@ -1,0 +1,214 @@
+{
+  "name": "ultrafast: a video for every row",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "257f6ce4-c8f2-5bfe-bf12-6187bb38c200",
+      "name": "Start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "url": "http://127.0.0.1:8080/v1/templates/vertical",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "915abc59-d41d-530c-a802-d4545b44abb6",
+      "name": "Get template",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ufServeKey0001",
+          "name": "ultrafast serve"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// One item per video. A column named node.param sets that param of that node in the\n// template; \"file\" names the MP4. Swap this node for Google Sheets, Airtable or a form.\nreturn [\n  { json: { file: 'tip-01.mp4', 'label.text': 'TIP 01', 'line1.text': 'Ship the', 'line2.text': 'small version.' } },\n  { json: { file: 'tip-02.mp4', 'label.text': 'TIP 02', 'line1.text': 'Write the', 'line2.text': 'test first.' } },\n  { json: { file: 'tip-03.mp4', 'label.text': 'TIP 03', 'line1.text': 'Delete the', 'line2.text': 'dead code.' } },\n];"
+      },
+      "id": "5e8fe001-5cf2-5836-a65c-3033febf75c4",
+      "name": "Rows",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Copies the template once per row and sets the params the row's columns name.\nconst folder = '/home/node/.n8n-files'; // where Save MP4 writes; n8n only writes inside ~/.n8n-files\nconst template = $('Get template').first().json;\nreturn $input.all().map(({ json: row }, i) => {\n  const document = JSON.parse(JSON.stringify(template));\n  for (const [column, value] of Object.entries(row)) {\n    if (!column.includes('.')) continue; // \"file\" and other plain columns are just data\n    const [node, param] = column.split('.');\n    const params = document.nodes[node]?.params;\n    if (!params) throw new Error(`Column ${column}: the template has no node \"${node}\"`);\n    if (!(param in params)) throw new Error(`Column ${column}: \"${node}\" has no param \"${param}\" (it has ${Object.keys(params).join(', ')})`);\n    params[param] = value;\n  }\n  const file = row.file || `video-${i + 1}.mp4`;\n  return { json: { file, path: `${folder}/${file}`, document } };\n});"
+      },
+      "id": "8b70f4ae-4faa-52c2-a0ab-5e2764123d06",
+      "name": "Fill template",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "6a8ae7f5-652d-5c56-bada-78f62931ce48",
+      "name": "One at a time",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        880,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8080/v1/render",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ document: $json.document, output: { inline: true, name: $json.file } }) }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          },
+          "timeout": 600000
+        }
+      },
+      "id": "350aea17-ee85-55a7-9da9-3262645ff495",
+      "name": "Render",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        100
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ufServeKey0001",
+          "name": "ultrafast serve"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{ $('One at a time').item.json.path }}",
+        "dataPropertyName": "data",
+        "options": {}
+      },
+      "id": "02c2f38d-63c9-5054-ba67-6d781c230e4e",
+      "name": "Save MP4",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        1320,
+        100
+      ]
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Get template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get template": {
+      "main": [
+        [
+          {
+            "node": "Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rows": {
+      "main": [
+        [
+          {
+            "node": "Fill template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fill template": {
+      "main": [
+        [
+          {
+            "node": "One at a time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "One at a time": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Render",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Render": {
+      "main": [
+        [
+          {
+            "node": "Save MP4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save MP4": {
+      "main": [
+        [
+          {
+            "node": "One at a time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}
