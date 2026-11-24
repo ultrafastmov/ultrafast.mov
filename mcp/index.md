@@ -14,7 +14,7 @@ The ultrafast MCP server gives your agent 20 tools to write a video, look at its
 
 macOS on Apple silicon and Linux x86_64. Every parameter is in the [MCP reference](<https://ultrafast.mov/docs/mcp/>).
 
-ultrafast MCP server, v0.2.0
+ultrafast MCP server, v0.2.1
 
 tools over stdio, uf mcp
     20
@@ -64,7 +64,7 @@ The pottery teaser from the [examples](<https://ultrafast.mov/examples/>): its f
 
 ## 20 tools, in six groups.
 
-As `uf mcp` lists them in v0.2.0. The remote server has the 16 that don't read or write files on your machine.
+As `uf mcp` lists them in v0.2.1. The remote server has the 16 that don't read or write files on your machine.
 
 ### Write
 
@@ -168,11 +168,11 @@ claude mcp add --transport http ultrafast http://localhost:8080/mcp \
 ```
 io.github.ultrafastmov/ultrafast
 
-ultrafast-0.2.0-macos-arm64.mcpb
-ultrafast-0.2.0-linux-x86_64.mcpb
+ultrafast-0.2.1-macos-arm64.mcpb
+ultrafast-0.2.1-linux-x86_64.mcpb
 ``` 
 
-The name in the [official MCP Registry](<https://registry.modelcontextprotocol.io/v0/servers?search=io.github.ultrafastmov/ultrafast>), which points to the two bundles on the [v0.2.0 release](<https://github.com/ultrafastmov/ultrafast/releases/tag/v0.2.0>), the `ultrafast` crate and the Docker image. The bundles are for Claude Desktop, one for a [Mac with Apple silicon](<https://github.com/ultrafastmov/ultrafast/releases/download/v0.2.0/ultrafast-0.2.0-macos-arm64.mcpb>) and one for [Linux x86_64](<https://github.com/ultrafastmov/ultrafast/releases/download/v0.2.0/ultrafast-0.2.0-linux-x86_64.mcpb>). Each carries the binary and asks for one setting: the folder for documents and videos, `~/ultrafast` by default.
+The name in the [official MCP Registry](<https://registry.modelcontextprotocol.io/v0/servers?search=io.github.ultrafastmov/ultrafast>), which points to the two bundles on the [v0.2.1 release](<https://github.com/ultrafastmov/ultrafast/releases/tag/v0.2.1>), the `ultrafast` crate and the Docker image. The bundles are for Claude Desktop, one for a [Mac with Apple silicon](<https://github.com/ultrafastmov/ultrafast/releases/download/v0.2.1/ultrafast-0.2.1-macos-arm64.mcpb>) and one for [Linux x86_64](<https://github.com/ultrafastmov/ultrafast/releases/download/v0.2.1/ultrafast-0.2.1-linux-x86_64.mcpb>). Each carries the binary and asks for one setting: the folder for documents and videos, `~/ultrafast` by default.
 
 The server is also listed on [Glama](<https://glama.ai/mcp/servers/ultrafastmov/ultrafast>) and [mcpservers.org](<https://mcpservers.org/servers/ultrafastmov/ultrafast>).
 

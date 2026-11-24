@@ -102,7 +102,7 @@ Transcribe the whole recording once, then cut as many clips from it as you like.
 
 ```
 $ uf export vertical.json vertical.mp4
-exported 555 frames (1080x1920 @ 30 fps, mp4 h264, standard) in 3.14 s = 177 fps, 0 readbacks -> vertical.mp4
+exported 555 frames (1080x1920 @ 30 fps, mp4 h264, standard) in 3.09 s = 180 fps, 0 readbacks -> vertical.mp4
 ``` 
 
   * `start` on the video and the audio picks where the clip begins in the source. `"timing": {"offset": -48.3}` shifts the captions by the same amount, so the transcript's times line up with the clip. To cut another clip, change those three numbers and `duration`.
@@ -147,7 +147,7 @@ An SRT or VTT file works in the same `src`. This burns NASA's own SRT into the w
 
 ```
 $ uf export film.json film.mp4
-exported 3375 frames (1920x1080 @ 30 fps, mp4 h264, standard) in 17.30 s = 195 fps, 0 readbacks -> film.mp4
+exported 3375 frames (1920x1080 @ 30 fps, mp4 h264, standard) in 17.17 s = 197 fps, 0 readbacks -> film.mp4
 ``` 
 
 A subtitle file has times for each cue, not for each word, so ultrafast shares a cue's time among its words by their length. On this film, those estimated word starts were within 0.25 s of Whisper's for 201 of the 259 words found in both, with a median gap of 0.12 s and the largest 0.72 s. That's fine for `plain` and `reveal`. For a karaoke highlight that lands on each syllable, use Whisper's word times. Pages are laid out again from the words, so they don't follow the file's own cue breaks. Simple markup such as `<i>` and `{\an8}` is removed.
@@ -183,13 +183,13 @@ With the clip starting at 48.0 s, the same command listed four words, OTHER, REA
 
 Document| Command| Time  
 ---|---|---  
-`vertical.json`: 18.5 s at 1080×1920| `uf export vertical.json vertical.mp4`| 3.7 s  
-`styles.json`: 10 s at 1920×1080, four videos and four caption tracks| `uf export styles.json styles.mp4`| 4.9–5.3 s  
-`film.json`: the whole 112.5 s at 1920×1080, from the SRT| `uf export film.json film.mp4`| 18.0–18.2 s  
+`vertical.json`: 18.5 s at 1080×1920| `uf export vertical.json vertical.mp4`| 3.6–3.7 s  
+`styles.json`: 10 s at 1920×1080, four videos and four caption tracks| `uf export styles.json styles.mp4`| 5.0–5.2 s  
+`film.json`: the whole 112.5 s at 1920×1080, from the SRT| `uf export film.json film.mp4`| 17.9–18.2 s  
 The captions of `vertical.json` alone, as a transparent overlay| `uf export overlay.json overlay.mov --codec prores --alpha`| 4.8–4.9 s  
-The check of `vertical.json`| `uf review vertical.json --safe social`| 3.7 s  
+The check of `vertical.json`| `uf review vertical.json --safe social`| 3.6 s  
   
-Times are wall clock from the command to the file, warm, on the same workstation as the Whisper runs, with the published 0.2.0 binary. The export lines above are what `uf` printed. For the overlay, `overlay.json` is `vertical.json` without the footage and voice nodes and with `"output": "shade"`: ProRes 4444 with 12-bit alpha, to lay over the edit in another editor.
+Times are wall clock from the command to the file, warm, on the same workstation as the Whisper runs, with the published 0.2.1 binary. The export lines above are what `uf` printed. For the overlay, `overlay.json` is `vertical.json` without the footage and voice nodes and with `"output": "shade"`: ProRes 4444 with 12-bit alpha, to lay over the edit in another editor.
 
 ## Other ways to add animated captions
 

@@ -110,7 +110,14 @@ uf review docs/maximiliana.json --safe social      # also flags text under a soc
 
 For a sheet of unknown names, review the longest few rows before the full run. For full names with spaces, a wrap width (`"width"` on the text node, in pixels) breaks a long one onto a second line instead of running it off the edge.
 
-Text that types itself on needs the same care. `reveal` counts glyphs, so its last key must be at least as long as the longest row's text. This card's code first stopped at 30, and `10% off the next one: ISABELA10`, 31 glyphs, ended on `ISABELA1`. Neither `check` nor `review` reports a reveal that stops short, so the card now types on at the same speed up to 50, and the sheet of the longest row is the place to see it.
+Text that types itself on needs the same care. `reveal` counts glyphs, so its last key must be at least as long as the longest row's text. This card's code first stopped at 30, and `10% off the next one: ISABELA10`, 31 glyphs, ended on `ISABELA1`. The batch still exports that row, and from 0.2.1 it says which row it is:
+
+```
+36/100 out/isabela.mp4: 180 frames in 0.19 s
+warning: row 36: node `code`: text: its `reveal` keys stop at 30, so the last 1 of its 31 glyphs never show in full: key it up to 31
+``` 
+
+`uf check` gives the same warning on that row's document, so check the documents from `--docs` before a long run. This card now types on at the same speed up to 50.
 
 ## Render the batch
 
@@ -142,7 +149,7 @@ priya,Priya.,photos/priya.jpg
 tomas,Tomás.,photos/tomas.jpg
 ``` 
 
-Relative paths resolve from the template's folder. If you write the row documents somewhere else with `--docs`, use absolute paths in the sheet so each document still finds its files. A row whose file is missing fails the check, before rendering starts.
+Relative paths resolve from the template's folder. When `--docs` writes the row documents to another folder, it rewrites those paths so each document still finds its files. A row whose file is missing fails the check, before rendering starts.
 
 ## From code, a queue or an agent
 
