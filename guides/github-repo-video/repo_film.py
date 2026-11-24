@@ -9,7 +9,7 @@ rendered on your GPU by ultrafast (https://ultrafast.mov).
 
 Five shots: the name and description, stars over time, commits per month for the
 last year, the languages, and an end card. Every number comes from the GitHub API
-on the day you run it. A film takes 6 to 40 API requests (more for older repositories);
+on the day you run it. A film takes 7 to 41 API requests (more for older repositories);
 without a token GitHub allows 60 an hour, so set GITHUB_TOKEN if you make several.
 Needs Python 3.9+ and `uf` on your PATH (or --uf). Apache-2.0 OR MIT, like ultrafast.
 """
@@ -106,6 +106,33 @@ def star_history(full, now, pool):
     return points
 
 
+LICENCE_FILES = {"MIT": "MIT", "APACHE": "Apache-2.0", "APACHE2": "Apache-2.0", "APACHE-2.0": "Apache-2.0",
+                 "UNLICENSE": "Unlicense", "BSL": "BSL-1.0", "BOOST": "BSL-1.0", "ZLIB": "Zlib", "ISC": "ISC",
+                 "0BSD": "0BSD", "CC0": "CC0-1.0", "MPL": "MPL-2.0", "MPL-2.0": "MPL-2.0"}
+
+
+def licence(spdx, root):
+    """GitHub's API names one licence even when a repository offers two (LICENSE-MIT and
+    LICENSE-APACHE, or UNLICENSE and LICENSE-MIT, as many Rust projects do). Read the
+    licence files in the top folder and name each one, GitHub's pick first."""
+    found = []
+    for f in root if isinstance(root, list) else []:
+        if f.get("type") != "file":
+            continue
+        base = re.sub(r"\.(TXT|MD)$", "", f["name"].upper())
+        m = re.fullmatch(r"(?:LICEN[CS]E|COPYING)[-_.](.+)", base)
+        key = "UNLICENSE" if base == "UNLICENSE" else (m.group(1) if m else None)
+        name = key and (LICENCE_FILES.get(key) or LICENCE_FILES.get(key.split("-")[0]))
+        if name and name not in found:
+            found.append(name)
+    if len(found) < 2:
+        return spdx
+    if spdx in found:
+        found.remove(spdx)
+        found.insert(0, spdx)
+    return " OR ".join(found)
+
+
 def fetch(full):
     repo, _ = get(f"/repos/{full}")
     if not repo:
@@ -117,9 +144,11 @@ def fetch(full):
         weeks = pool.submit(get, f"/repos/{full}/stats/commit_activity")
         release = pool.submit(get, f"/repos/{full}/releases/latest")
         people = pool.submit(get, f"/repos/{full}/contributors?per_page=1&anon=1")
+        root = pool.submit(get, f"/repos/{full}/contents")
         history = star_history(full, now, pool)
         langs, weeks, release = langs.result()[0], weeks.result()[0], release.result()[0]
         data, headers = people.result()
+        root = root.result()[0]
     contributors = last_page(headers) if data else None
     return {
         "full_name": full,
@@ -130,7 +159,7 @@ def fetch(full):
         "stars": repo["stargazers_count"],
         "forks": repo["forks_count"],
         "language": repo.get("language") or "",
-        "license": (repo.get("license") or {}).get("spdx_id") or "",
+        "license": licence((repo.get("license") or {}).get("spdx_id") or "", root),
         "created": repo["created_at"],
         "fetched": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "languages": langs or {},
@@ -305,8 +334,9 @@ def build(stats, vertical=False, credit=True):
                                      stats["license"] if stats["license"] not in ("", "NOASSERTION") else ""] if x)
     end_len = 3.4
     p = dict(look)
+    # the tagline's italic runs about 19 px a character at scale 1: shrink the card when it would leave the safe area
     p.update({"kind": "end_card", "title": stats["name"], "tagline": tagline, "cta": f"github.com/{full}",
-              "scale": big * (1.2 if vertical else 1.0)})
+              "scale": round(min(big * (1.2 if vertical else 1.0), 0.84 * W / (19.5 * max(len(tagline), 1))), 3)})
     add("s_end", "block", p, timing={"offset": round(t, 2)})
     shots.append("s_end")
     t += end_len

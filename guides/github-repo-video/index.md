@@ -27,6 +27,10 @@ Turn a public GitHub repository into a 17-second film: its name and description,
   * [Animate an SVG logo](<https://ultrafast.mov/guides/animate-svg-logo/>)
   * [A film of a GitHub repo](<https://ultrafast.mov/guides/github-repo-video/>)
 
+## Learn
+
+  * [Video rendering without a browser](<https://ultrafast.mov/learn/gpu-video-rendering/>)
+
 ## Reference
 
   * [Ops](<https://ultrafast.mov/docs/ops/>)
@@ -70,10 +74,10 @@ exported 528 frames (1920x1080 @ 30 fps, mp4 h264, standard) in 0.51 s = 1035 fp
 BurntSushi-ripgrep.mp4 in 0.9 s
 ``` 
 
-The script is about 370 lines of Python with no dependencies outside the standard library (Python 3.9 or newer), under the same Apache-2.0 or MIT licence as ultrafast. It writes three files: the stats it read (`BurntSushi-ripgrep.stats.json`), the document (`BurntSushi-ripgrep.json`), and the film. `uf check` runs on the document before it renders.
+The script is about 400 lines of Python with no dependencies outside the standard library (Python 3.9 or newer), under the same Apache-2.0 or MIT licence as ultrafast. It writes three files: the stats it read (`BurntSushi-ripgrep.stats.json`), the document (`BurntSushi-ripgrep.json`), and the film. `uf check` runs on the document before it renders.
 
   * **Time.** On one RTX 5090 workstation with ultrafast 0.2.1, the whole run took 3.7 s for ripgrep: the API reads, then the export, which took 0.98 to 1.00 s over three runs. microsoft/vscode and rust-lang/rust took 4.3 and 4.4 s on their first runs. GitHub computes commit stats on demand and answers "202, not ready" until it has them; the script waits and asks again.
-  * **A token.** A film takes between 6 and 40 API requests, more for older repositories, and GitHub allows 60 an hour without a token. Set `GITHUB_TOKEN` (or run `export GITHUB_TOKEN=$(gh auth token)` if you use the GitHub CLI) to make several in a row.
+  * **A token.** A film takes between 7 and 41 API requests, more for older repositories, and GitHub allows 60 an hour without a token. Set `GITHUB_TOKEN` (or run `export GITHUB_TOKEN=$(gh auth token)` if you use the GitHub CLI) to make several in a row.
   * **Options.** `--vertical` makes a 1080×1920 film, `--out film.webm` (or `.mov`, `.gif`) picks the format, `--json-only` writes the document without rendering, `--stats FILE` rebuilds from saved stats without calling the API, and `--no-credit` takes "rendered with ultrafast" off the footer.
 
 ## What's in the film
@@ -86,7 +90,7 @@ Owner, name and description| `/repos/{owner}/{repo}`. The description is cut to 
 Stars over time, a line chart| `/stargazers/history`: new stars per week since the first one. The weeks add up to the repository's star count.| Under 50 stars, or under eight weeks of stars  
 Commits per month, a bar chart| `/stats/commit_activity`: commits to the default branch per week for the last 52 weeks. The bars are whole months, the busiest in colour; the title counts all 52 weeks.| Fewer than six whole months, or no commits  
 Languages, a donut| `/languages`: bytes of code per language; the top four, the rest as Other.| Only one language  
-End card| Stars, contributors (from `/contributors`), the licence, and the link| Never  
+End card| Stars, contributors (from `/contributors`), the licence, and the link. GitHub names one licence even for a dual-licensed repository, so the script also reads the licence files in the top folder (`LICENSE-MIT`, `LICENSE-APACHE`, `UNLICENSE`) and names both, as in "Apache-2.0 OR MIT".| Never  
   
 Every film uses the main language's colour from GitHub (Rust's copper, C's grey-blue, Python's blue) as its accent, and the footer gives the date the data was read.
 
@@ -168,7 +172,7 @@ Yes. The script uses GitHub's `/stargazers/history` endpoint, added in September
 
 Do I need a GitHub token?
 
-Not for one film. A film takes between 6 and 40 API requests and GitHub allows 60 an hour without a token. Set `GITHUB_TOKEN` to make several in a row.
+Not for one film. A film takes between 7 and 41 API requests and GitHub allows 60 an hour without a token. Set `GITHUB_TOKEN` to make several in a row.
 
 Can I make a vertical version for Shorts, Reels or TikTok?
 

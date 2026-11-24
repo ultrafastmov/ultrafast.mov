@@ -27,6 +27,10 @@ One JSON file in, a finished video out, rendered on your GPU. A worked example, 
   * [Animate an SVG logo](<https://ultrafast.mov/guides/animate-svg-logo/>)
   * [A film of a GitHub repo](<https://ultrafast.mov/guides/github-repo-video/>)
 
+## Learn
+
+  * [Video rendering without a browser](<https://ultrafast.mov/learn/gpu-video-rendering/>)
+
 ## Reference
 
   * [Ops](<https://ultrafast.mov/docs/ops/>)

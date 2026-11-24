@@ -89,7 +89,7 @@ Which one
   * You need HDR or HLS output today.
   * You have no GPU and don't want to use a hosted service.
 
-For more options, the page on [open-source Remotion alternatives](<https://ultrafast.mov/alternatives/remotion/>) compares eight tools, with when to choose each. Coming from After Effects? See [After Effects alternatives for code](<https://ultrafast.mov/alternatives/after-effects/>).
+For more options, the page on [open-source Remotion alternatives](<https://ultrafast.mov/alternatives/remotion/>) compares eight tools, with when to choose each. Coming from After Effects? See [After Effects alternatives for code](<https://ultrafast.mov/alternatives/after-effects/>). Why there's no browser in ultrafast, step by step and measured: [video rendering without a browser](<https://ultrafast.mov/learn/gpu-video-rendering/>).
 
 Questions
 
