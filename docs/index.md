@@ -21,6 +21,7 @@ Install it, make your first video, then hand the loop to your agent.
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
   * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
   * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
+  * [Animated captions from Whisper or SRT](<https://ultrafast.mov/guides/animated-captions/>)
 
 ## Reference
 

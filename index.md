@@ -280,7 +280,7 @@ Yes, for now: a Mac with Apple silicon, or a computer with a Vulkan GPU on Linux
 
 Can it edit my own footage?
 
-Yes. Cut, trim, speed-ramp, reframe, grade, key and caption video files, mix in music and voiceover, and add titles, logos and charts. The [footage examples](<https://ultrafast.mov/examples/#footage>) cut, caption and grade NASA film and sound.
+Yes. Cut, trim, speed-ramp, reframe, grade, key and [caption](<https://ultrafast.mov/guides/animated-captions/>) video files, mix in music and voiceover, and add titles, logos and charts. The [footage examples](<https://ultrafast.mov/examples/#footage>) cut, caption and grade NASA film and sound.
 
 Is the 3D in the examples rendered by ultrafast?
 

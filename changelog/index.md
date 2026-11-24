@@ -1,6 +1,6 @@
 # Changelog · ultrafast release notes
 
-> Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.0, smaller files, sooner.
+> Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.1, fixes found converting Lottie files.
 
 URL: https://ultrafast.mov/changelog/
 
@@ -10,13 +10,34 @@ Changelog
 
 What each ultrafast release changed, newest first, with the numbers measured. The same notes are on [GitHub releases](<https://github.com/ultrafastmov/ultrafast/releases>).
 
-  1. **0.2.0** Smaller files, sooner
-  2. **0.1.1** Every deliverable from one document
-  3. **0.1.0** The first release
+  1. **0.2.1** Fixes found converting Lottie files
+  2. **0.2.0** Smaller files, sooner
+  3. **0.1.1** Every deliverable from one document
+  4. **0.1.0** The first release
+
+0.2.1
+
+24 November 2026Latest
+
+  * [GitHub release](<https://github.com/ultrafastmov/ultrafast/releases/tag/v0.2.1>)
+  * [Every commit](<https://github.com/ultrafastmov/ultrafast/compare/v0.2.0...v0.2.1>)
+
+## Fixes found converting Lottie files
+
+Layers that grow from nothing render, Lottie files match lottie-web more often, small videos export on NVIDIA, and `uf check` warns about text that never shows in full and keys written twice.
+
+  * **Layers that grow from nothing render.** A `transform` whose scale is exactly 0 at some moment, the usual way to pop something in, stopped `check`, `render` and `export` with "transform is not invertible (zero scale)". At that moment the layer now shows nothing, and it grows as keyed. A `corner_pin` whose corners meet on a point or a line is treated the same way.
+  * **Closer to lottie-web.** A Lottie stroke with a width of 0 was filled in the stroke's colour, and lottie-web draws nothing; ultrafast now draws nothing too. On lottie-android's 217 test files, compared with lottie-web 5.13.0 at five frames each, files whose worst frame differs by less than 1 % of pixels went from 118 to 132, and by less than 5 % from 172 to 182. The four files that wouldn't load now render, and no frame got worse.
+  * **`uf check` no longer crashes after a failed render.** When the render failed while kernels were still compiling, `uf check` printed its report, then sometimes aborted or segfaulted on exit instead of exiting with 1.
+  * **Small videos on NVIDIA.** NVENC refuses frames below a minimum size (145×49 for H.264 on an RTX 5090), and a 72×72 MP4 failed. Exports below the minimum now use a software encoder. When ffmpeg has no libx264 (Fedora's ffmpeg-free), H.264 is encoded with OpenH264.
+  * **Clearer errors and warnings.** When a frame fails to render during an export, the error is the render's, not "ffmpeg failed". `uf check` now warns about a text whose `reveal` keys stop before its last glyph, as happens when a CSV row's text is longer than the template's, and about a key written twice in a document. `render`, `export` and `batch` print the reveal warning too, and `batch` says which row has it.
+  * **`uf batch --docs DIR`** writes each row's document so its files resolve from `DIR`.
+
+The SDKs stay at 0.1.2: nothing in their API changed.
 
 0.2.0
 
-23 November 2026Latest
+23 November 2026
 
   * [GitHub release](<https://github.com/ultrafastmov/ultrafast/releases/tag/v0.2.0>)
   * [Every commit](<https://github.com/ultrafastmov/ultrafast/compare/v0.1.1...v0.2.0>)

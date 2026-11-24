@@ -31,7 +31,7 @@ For agents| 20 MCP tools locally, 16 over HTTP; `check` before rendering, `revie
 Output tokens for a 10 s short| about 1,234, measured| about 1,657, measured (validated, not rendered)| not measured| not measured  
 No-code| none; call the HTTP API| not checked for this page| Make, n8n, Zapier| Zapier, Make, n8n and about 30 more  
 Templates and editors| five starter documents (`uf new`); no visual editor| Studio editor and a templates API| visual editor and “dozens” of templates| template editor; embeddable Preview SDK  
-Voices and transcripts| captions from Whisper, SRT or VTT you bring; voiceover with macOS voices or eSpeak NG| transcription in 99 languages; text to speech| ElevenLabs and Azure voices; automatic subtitles| automatic subtitles  
+Voices and transcripts| [captions from Whisper, SRT or VTT](<https://ultrafast.mov/guides/animated-captions/>) you bring; voiceover with macOS voices or eSpeak NG| transcription in 99 languages; text to speech| ElevenLabs and Azure voices; automatic subtitles| automatic subtitles  
   
 Shotstack, JSON2Video and Creatomate are trademarks of their owners. Token counts are from the [benchmark repository](<https://github.com/ultrafastmov/benchmarks>) (tiktoken o200k_base, the same 10-second short written for each tool). None of the three hosted services can be timed on the same machine as ultrafast, so this page compares no render speeds.
 

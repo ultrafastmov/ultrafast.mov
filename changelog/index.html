@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Changelog · ultrafast release notes</title>
-<meta name="description" content="Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.0, smaller files, sooner.">
+<meta name="description" content="Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.1, fixes found converting Lottie files.">
 <meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
 <link rel="canonical" href="https://ultrafast.mov/changelog/">
 <link rel="alternate" type="text/markdown" href="/changelog/index.md" title="Changelog · ultrafast release notes (Markdown)">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ultrafast">
 <meta property="og:title" content="Every release, measured">
-<meta property="og:description" content="Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.0, smaller files, sooner.">
+<meta property="og:description" content="Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.1, fixes found converting Lottie files.">
 <meta property="og:url" content="https://ultrafast.mov/changelog/">
 <meta property="og:image" content="https://ultrafast.mov/og/changelog.jpg">
 <meta property="og:image:width" content="1200">
@@ -25,13 +25,13 @@
 <meta property="og:image:alt" content="Every release, measured · ultrafast">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Every release, measured">
-<meta name="twitter:description" content="Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.0, smaller files, sooner.">
+<meta name="twitter:description" content="Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.1, fixes found converting Lottie files.">
 <meta name="twitter:image" content="https://ultrafast.mov/og/changelog.jpg">
 <link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/site.css?v=c898dbcc">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://ultrafast.mov/changelog/"}]},{"@type":"WebPage","@id":"https://ultrafast.mov/changelog/#page","name":"Changelog · ultrafast release notes","description":"Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.0, smaller files, sooner.","url":"https://ultrafast.mov/changelog/","isPartOf":{"@id":"https://ultrafast.mov/#site"},"primaryImageOfPage":"https://ultrafast.mov/og/changelog.jpg","inLanguage":"en","datePublished":"2026-11-23T15:59:20+00:00","dateModified":"2026-11-23T15:59:20+00:00"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://ultrafast.mov/changelog/"}]},{"@type":"WebPage","@id":"https://ultrafast.mov/changelog/#page","name":"Changelog · ultrafast release notes","description":"Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.1, fixes found converting Lottie files.","url":"https://ultrafast.mov/changelog/","isPartOf":{"@id":"https://ultrafast.mov/#site"},"primaryImageOfPage":"https://ultrafast.mov/og/changelog.jpg","inLanguage":"en","datePublished":"2026-11-23T15:59:20+00:00","dateModified":"2026-11-24T01:16:06+00:00"}]}</script>
 </head>
 <body>
 <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
@@ -88,22 +88,49 @@
     <h1 class="pr h1" data-plates="pink black"><span class="ln">Every release,</span> <span class="ln">what changed.</span></h1>
     <p class="lede">What each ultrafast release changed, newest first, with the numbers measured. The same notes are on <a class="alink" href="https://github.com/ultrafastmov/ultrafast/releases">GitHub releases</a>.</p>
 <ol class="relindex" aria-label="Releases">
-<li><a href="#v0.2.0"><b>0.2.0</b>Smaller files, sooner</a></li><li><a href="#v0.1.1"><b>0.1.1</b>Every deliverable from one document</a></li><li><a href="#v0.1.0"><b>0.1.0</b>The first release</a></li></ol>
+<li><a href="#v0.2.1"><b>0.2.1</b>Fixes found converting Lottie files</a></li><li><a href="#v0.2.0"><b>0.2.0</b>Smaller files, sooner</a></li><li><a href="#v0.1.1"><b>0.1.1</b>Every deliverable from one document</a></li><li><a href="#v0.1.0"><b>0.1.0</b>The first release</a></li></ol>
   </div>
 </section>
 
-<section class="band stock-newsprint release" id="v0.2.0" aria-labelledby="v0.2.0-h">
+<section class="band stock-newsprint release" id="v0.2.1" aria-labelledby="v0.2.1-h">
+  <div class="wrap relgrid">
+    <header class="relhead">
+      <p class="relver"><a href="#v0.2.1">0.2.1</a></p>
+      <p class="reldate"><time datetime="2026-11-24T01:14:44+00:00">24 November 2026</time><span class="latest">Latest</span></p>
+      <ul class="rellinks">
+        <li><a class="alink" href="https://github.com/ultrafastmov/ultrafast/releases/tag/v0.2.1">GitHub release</a></li>
+        <li><a class="alink" href="https://github.com/ultrafastmov/ultrafast/compare/v0.2.0...v0.2.1">Every commit</a></li>
+      </ul>
+    </header>
+    <div class="relbody">
+      <h2 class="pr small" data-plates="pink black" id="v0.2.1-h"><span class="ln">Fixes found</span> <span class="ln">converting Lottie</span> <span class="ln">files</span></h2>
+      <p class="sub">Layers that grow from nothing render, Lottie files match lottie-web more often, small videos export on NVIDIA, and `uf check` warns about text that never shows in full and keys written twice.</p>
+      <div class="prose relnotes">
+        <ul>
+<li><strong>Layers that grow from nothing render.</strong> A <code>transform</code> whose scale is exactly 0 at some moment, the usual way to pop something in, stopped <code>check</code>, <code>render</code> and <code>export</code> with "transform is not invertible (zero scale)". At that moment the layer now shows nothing, and it grows as keyed. A <code>corner_pin</code> whose corners meet on a point or a line is treated the same way.</li>
+<li><strong>Closer to lottie-web.</strong> A Lottie stroke with a width of 0 was filled in the stroke's colour, and lottie-web draws nothing; ultrafast now draws nothing too. On lottie-android's 217 test files, compared with lottie-web 5.13.0 at five frames each, files whose worst frame differs by less than 1 % of pixels went from 118 to 132, and by less than 5 % from 172 to 182. The four files that wouldn't load now render, and no frame got worse.</li>
+<li><strong><code>uf check</code> no longer crashes after a failed render.</strong> When the render failed while kernels were still compiling, <code>uf check</code> printed its report, then sometimes aborted or segfaulted on exit instead of exiting with 1.</li>
+<li><strong>Small videos on NVIDIA.</strong> NVENC refuses frames below a minimum size (145×49 for H.264 on an RTX 5090), and a 72×72 MP4 failed. Exports below the minimum now use a software encoder. When ffmpeg has no libx264 (Fedora's ffmpeg-free), H.264 is encoded with OpenH264.</li>
+<li><strong>Clearer errors and warnings.</strong> When a frame fails to render during an export, the error is the render's, not "ffmpeg failed". <code>uf check</code> now warns about a text whose <code>reveal</code> keys stop before its last glyph, as happens when a CSV row's text is longer than the template's, and about a key written twice in a document. <code>render</code>, <code>export</code> and <code>batch</code> print the reveal warning too, and <code>batch</code> says which row has it.</li>
+<li><strong><code>uf batch --docs DIR</code></strong> writes each row's document so its files resolve from <code>DIR</code>.</li>
+</ul>
+<p>The SDKs stay at 0.1.2: nothing in their API changed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="band stock-thermal release" id="v0.2.0" aria-labelledby="v0.2.0-h">
   <div class="wrap relgrid">
     <header class="relhead">
       <p class="relver"><a href="#v0.2.0">0.2.0</a></p>
-      <p class="reldate"><time datetime="2026-11-23T15:41:22+00:00">23 November 2026</time><span class="latest">Latest</span></p>
+      <p class="reldate"><time datetime="2026-11-23T15:41:22+00:00">23 November 2026</time></p>
       <ul class="rellinks">
         <li><a class="alink" href="https://github.com/ultrafastmov/ultrafast/releases/tag/v0.2.0">GitHub release</a></li>
         <li><a class="alink" href="https://github.com/ultrafastmov/ultrafast/compare/v0.1.1...v0.2.0">Every commit</a></li>
       </ul>
     </header>
     <div class="relbody">
-      <h2 class="pr small" data-plates="pink black" id="v0.2.0-h"><span class="ln">Smaller files,</span> <span class="ln">sooner</span></h2>
+      <h2 class="pr small" data-plates="blue black" id="v0.2.0-h"><span class="ln">Smaller files,</span> <span class="ln">sooner</span></h2>
       <p class="sub">On NVIDIA, exports come out a fifth to a half the size at the same picture, and in about a fifth less time end to end. First runs are quicker, every file says its colours, and the review follows the camera.</p>
       <figure class="gi relfilm" style="--ar:1.7778">
         <div class="sheet"><video class="lazy" muted loop playsinline preload="none" poster="/media/changelog/ultrafast-0.2.0.webp" data-full="/media/changelog/ultrafast-0.2.0.full" aria-label="ultrafast 0.2.0: smaller files, sooner"><source data-src="/media/changelog/ultrafast-0.2.0.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/changelog/ultrafast-0.2.0.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/changelog/ultrafast-0.2.0.mp4" type="video/mp4"></video></div>
@@ -146,7 +173,7 @@
     </div>
   </div>
 </section>
-<section class="band stock-thermal release" id="v0.1.1" aria-labelledby="v0.1.1-h">
+<section class="band stock-kraft release" id="v0.1.1" aria-labelledby="v0.1.1-h">
   <div class="wrap relgrid">
     <header class="relhead">
       <p class="relver"><a href="#v0.1.1">0.1.1</a></p>
@@ -157,7 +184,7 @@
       </ul>
     </header>
     <div class="relbody">
-      <h2 class="pr small" data-plates="blue black" id="v0.1.1-h"><span class="ln">Every deliverable</span> <span class="ln">from one document</span></h2>
+      <h2 class="pr small" data-plates="pink blue" id="v0.1.1-h"><span class="ln">Every deliverable</span> <span class="ln">from one document</span></h2>
       <p class="sub">One document exports to every format a delivery asks for, at any size and frame rate, with one quality setting from draft to master.</p>
       <div class="prose relnotes">
         <ul>
@@ -178,7 +205,7 @@ uf<span class="w"> </span><span class="nb">export</span><span class="w"> </span>
     </div>
   </div>
 </section>
-<section class="band stock-kraft release" id="v0.1.0" aria-labelledby="v0.1.0-h">
+<section class="band stock-newsprint release" id="v0.1.0" aria-labelledby="v0.1.0-h">
   <div class="wrap relgrid">
     <header class="relhead">
       <p class="relver"><a href="#v0.1.0">0.1.0</a></p>
@@ -189,7 +216,7 @@ uf<span class="w"> </span><span class="nb">export</span><span class="w"> </span>
       </ul>
     </header>
     <div class="relbody">
-      <h2 class="pr small" data-plates="pink blue" id="v0.1.0-h"><span class="ln">The first release</span></h2>
+      <h2 class="pr small" data-plates="pink black" id="v0.1.0-h"><span class="ln">The first release</span></h2>
       <p class="sub">The engine, its JSON document and the tools an agent uses to write, check, review and export video, on macOS and Linux.</p>
       <div class="prose relnotes">
         <ul>

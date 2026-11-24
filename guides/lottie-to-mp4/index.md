@@ -21,6 +21,7 @@ Turn a Lottie JSON file into an MP4, a transparent WebM, ProRes 4444, a GIF or P
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
   * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
   * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
+  * [Animated captions from Whisper or SRT](<https://ultrafast.mov/guides/animated-captions/>)
 
 ## Reference
 
@@ -175,7 +176,7 @@ A `lottie` node is a layer like any other. Give it a `position`, `scale` or `opa
 "o1": { "op": "over", "inputs": { "fg": "p1", "bg": "bg" } }
 ``` 
 
-Captions, music, a voiceover, grain and the rest of the engine's 70 ops work around it in the same render. The document format is in [The document](<https://ultrafast.mov/docs/documents/>).
+[Captions](<https://ultrafast.mov/guides/animated-captions/>), music, a voiceover, grain and the rest of the engine's 70 ops work around it in the same render. The document format is in [The document](<https://ultrafast.mov/docs/documents/>).
 
 ## How close it is to lottie-web
 
