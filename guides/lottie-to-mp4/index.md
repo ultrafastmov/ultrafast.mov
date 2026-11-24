@@ -231,7 +231,7 @@ To check your own file, run `uf check` on a document that uses it (it lists ever
   * **lottie-web in headless Chrome:** puppeteer-lottie, Remotion's `@remotion/lottie` and HyperFrames' Lottie converter play the file in the reference player and capture each frame from a browser page. Whatever lottie-web supports comes out as it does in a browser, and HyperFrames also reads dotLottie files. How browser capture compares with ultrafast on ordinary videos is in [Benchmarks](<https://ultrafast.mov/benchmarks/>).
   * **rlottie converters** , such as the ones made for Telegram stickers, write WebM, WebP or GIF.
   * **Upload sites** convert one file at a time in the browser, usually with a size limit and sometimes a sign-in.
-  * **After Effects** itself, if you have the project the Lottie was exported from: render from the source and nothing is lost.
+  * **After Effects** itself, if you have the project the Lottie was exported from: render from the source and nothing is lost. The ways to automate it, and to replace it with code, are compared in [After Effects alternatives](<https://ultrafast.mov/alternatives/after-effects/>).
 
 Use ultrafast when you want speed on your own machine, many files at once, ProRes 4444 or WebM with alpha from one command, the animation recoloured or edited before rendering, or the Lottie as one layer of a longer video. Use a lottie-web renderer when a file depends on effects, merge paths or expressions that ultrafast doesn't import, or when you need dotLottie support.
 

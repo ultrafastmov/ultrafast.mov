@@ -54,6 +54,7 @@ Facts an agent needs:
 - [Open source Remotion alternatives, compared](https://ultrafast.mov/alternatives/remotion/index.md): eight open-source tools with their licences, renderers, agent tooling and release dates, and when to choose each
 - [HyperFrames alternatives, compared](https://ultrafast.mov/alternatives/hyperframes/index.md): eight other tools that make video from code, with licences, renderers (which ones use a browser) and agent tooling, and when to choose each
 - [Open-source alternative to Shotstack, JSON2Video and Creatomate](https://ultrafast.mov/alternatives/json-to-video-api/index.md): ultrafast as a self-hosted, open-source alternative to Shotstack, JSON2Video and Creatomate: prices, formats, what the JSON can express, and when a hosted API is the better choice
+- [After Effects alternatives for code and agents](https://ultrafast.mov/alternatives/after-effects/index.md): motion graphics from code instead of the After Effects timeline: automating After Effects (aerender, nexrender, hosted template renderers), Cavalry, and ultrafast; a table of After Effects features and their ultrafast ops, the Bodymovin/Lottie route and what it loses, and when to keep After Effects
 
 ## Example films
 

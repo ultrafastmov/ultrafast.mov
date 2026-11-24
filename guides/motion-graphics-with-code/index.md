@@ -264,7 +264,7 @@ Wall clock from the command to the file, warm, three runs each, on one RTX 5090 
 
   * **Timing judged by eye.** If a designer is nudging a curve until it feels right, a graph editor is faster than editing numbers. ultrafast's live player (`uf live`) applies edits on the next frame, which helps, but it isn't a graph editor.
   * **Character animation, rotoscoping and plugin looks.** Rigs, hand-drawn frames and third-party After Effects plugins have no equivalent in a document.
-  * **Work that already lives in After Effects.** Keep the project and automate it with nexrender, or export the parts that Bodymovin supports to Lottie and bring them in: [Lottie to MP4](<https://ultrafast.mov/guides/lottie-to-mp4/>) lists what carries over and what doesn't.
+  * **Work that already lives in After Effects.** Keep the project and automate it with nexrender, or export the parts that Bodymovin supports to Lottie and bring them in: [Lottie to MP4](<https://ultrafast.mov/guides/lottie-to-mp4/>) lists what carries over and what doesn't. Which After Effects features have an ultrafast equivalent is in [After Effects alternatives](<https://ultrafast.mov/alternatives/after-effects/>).
   * **Where ultrafast itself doesn't fit:** it needs a GPU, on an Apple silicon Mac or on Linux or WSL2 with Vulkan. Videos are JSON documents, not React components, its player is a desktop window you can't embed in a web page, and hosted rendering is still on a [waitlist](<https://ultrafast.mov/cloud/>).
 
 ## Questions
