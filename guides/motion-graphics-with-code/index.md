@@ -203,7 +203,7 @@ Each moving layer is blurred on its own, by what its animated params do. Layers 
 $ uf beats loop.wav
 {
   "bpm": 120.0,
-  "beats": [ 0.499, 0.999, 1.498, 1.998, 2.498, 2.998, 3.498, 3.998, 4.498, ... 7.997 ],
+  "beats": [ 0.0, 0.499, 0.999, 1.499, 1.998, 2.498, 2.998, 3.498, 3.998, ... 7.997 ],
   "downbeats": [ ... ],
   "onsets": [ ... ],
   "duration": 8.0
@@ -253,7 +253,7 @@ exported 240 frames (1920x1080 @ 30 fps, mp4 h264, standard) in 0.34 s = 701 fps
 
   * Each shot's `timing` window puts it on screen from its beat to the next. Outside its window, an `over` passes the shot below it through and costs nothing.
   * `"offset": start` starts each word's own clock at its cut, so the same scale keys make every word pop as it lands.
-  * The loop was made for this page: kick, snare and hi-hats at 120 BPM, written by a short NumPy script. `uf beats` read it in 0.13 s. Its list starts at 0.5 s, without the first kick at 0 s, so the script adds the cut at 0.0 itself, and it drops the last entry, 7.997 s, which is the end of the loop.
+  * The loop was made for this page: kick, snare and hi-hats at 120 BPM, written by a short NumPy script. `uf beats` read it in 0.13 s. Its list starts at 0.0, on the first kick, and the script drops the last entry, 7.997 s, which is the end of the loop. (Before 0.2.2 the list started at 0.5 s; the script's set adds 0.0 once either way.)
   * To pulse a param with the music instead of cutting, use an `audio` driver; it follows one band of the soundtrack. `downbeats` and `onsets` are in the same output for cuts on the bar or on every hit.
 
 ## Render times

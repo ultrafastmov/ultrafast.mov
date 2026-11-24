@@ -7679,6 +7679,20 @@
           ],
           "description": "title / chapter / end_card / charts (above the chart)"
          },
+         "title_font": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "$ref": "#/$defs/animated"
+           },
+           {
+            "$ref": "#/$defs/component_param"
+           }
+          ],
+          "description": "end_card: the title's face. Default: ultrafast:wide."
+         },
          "value": {
           "anyOf": [
            {

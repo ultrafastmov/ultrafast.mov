@@ -227,7 +227,7 @@ GIF, 960×540| `uf export reveal.json reveal.gif --size 960x540`| 1.0 s| 918 KB
 ## Prepare the SVG
 
   * **Name the parts you'll animate.** The nodes take their names from the SVG's `id` attributes, so `letter-f` beats `path12`. In Figma, turn on _Include "id" attribute_ in the SVG export settings; in Illustrator, choose _Object IDs: Layer Names_ in the SVG options; in Inkscape, set the ID in Object Properties.
-  * **Turn text into outlines.** SVG text imports only when its font is installed on the machine that renders. In 0.2.1, text in a font that isn't installed draws nothing, with no warning. Outline it before you export: _Outline text_ in Figma's SVG export settings, _Type > Create Outlines_ in Illustrator, _Path > Object to Path_ in Inkscape.
+  * **Turn text into outlines.** SVG text is set in the fonts the `text` op finds: installed ones, ultrafast's own, and Google Fonts, fetched the first time. A font none of them has is replaced, with a warning. For the exact letterforms, and to move letters one at a time, outline it before you export: _Outline text_ in Figma's SVG export settings, _Type > Create Outlines_ in Illustrator, _Path > Object to Path_ in Inkscape.
   * **One path per piece that moves.** Letters you want to move one at a time each need their own path. Outlined text is often grouped by word or line, so ungroup it before you export.
   * **Keep it flat.** Images, pattern fills and filter effects don't come through (next section). Leave the drop shadow or glow out of the SVG and add it in ultrafast with `drop_shadow` or `glow`, where it can be animated too.
 

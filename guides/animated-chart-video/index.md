@@ -228,7 +228,7 @@ $ uf batch country.json --data rows.csv --out 'out/{name}.mp4'
 
   * A cell of numbers separated by commas becomes the list of values. Quote it in the CSV, as Python's `csv` module does, because it holds commas.
   * `"max": 30` in the template puts every country on the same scale. Without it, each chart scales to its own peak, and the world's 8.7% would look as tall as Chile's 25.1%.
-  * A column that names a node the template doesn't have stops the batch before the first frame: `Error: row 1: `chrat.values`: no node `chrat` (did you mean `chart`?)`. A misspelled param on a real node doesn't. In 0.2.1, `chart.valeus` rendered every video with the template's values and said nothing. Write the row documents with `--docs` and run `uf check` on one first: it warns ``block` has no param `valeus``.
+  * A column that names a node the template doesn't have stops the batch before the first frame: `Error: row 1: `chrat.values`: no node `chrat` (did you mean `chart`?)`. A misspelled param on a real node stops it too: `Error: row 1: `chart.valeus`: `block` has no param `valeus` (did you mean `values`?)`. (Before 0.2.2, it rendered every video with the template's values and said nothing.)
   * An empty cell keeps the template's value. More on templates, names and photos per row in [personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>).
 
 ## Check before you post
@@ -298,7 +298,7 @@ Wall clock from the command to the last file, warm, three runs each (five for th
   * **One series per chart.** `bar_chart` and `line_chart` take one list of values: no grouped or stacked bars and no second line. Build those from paths and shapes, as above.
   * **No bar chart race.** There's no block for bars that reorder over time.
   * **No y axis or gridlines.** Bars carry their own values and the line labels its highlighted point.
-  * **Up to about nine x labels.** With more values, the chart shows every second or third label and always the last. Blank labels count in that thinning, so pass every label and let the chart pick; a hand-thinned list like `2015,,,,,2020,,,,,2025` loses 2020.
+  * **Up to about nine x labels.** With more values, the chart shows every second or third label and always the last. Blank labels don't count, so a hand-thinned list like `2015,,,,,2020,,,,,2025` shows all three.
   * **Video, not a web chart.** For a chart people can hover and zoom on a page, use a charting library. ultrafast makes video files, and it needs a GPU: an Apple silicon Mac, or Linux or WSL2 with Vulkan.
 
 ## Questions

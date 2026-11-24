@@ -1269,7 +1269,7 @@ uf batch card.json --data rows.csv --out 'out/{name}.mp4' --docs docs/   # docs/
 for f in docs/*.json; do uf check "$f"; done
 ``` 
 
-`check` reports two levels. A missing file is an error (`"severity": "error"`) and stops a batch. A value of the wrong type, such as text in a number column, is a warning: the batch still runs, so read the warnings when a sheet comes from somewhere new.
+`check` reports two levels. A missing file is an error (`"severity": "error"`) and stops a batch. A value of the wrong type, such as text in a number column, is a warning: the batch still runs, so read the warnings when a sheet comes from somewhere new. `uf batch` prints them itself, once each with the first row that has it: `warning: row 1: node `line2`: param `size`: expected number, got "abc"`.
 
 ## Long names
 
@@ -2772,7 +2772,7 @@ Each moving layer is blurred on its own, by what its animated params do. Layers 
 $ uf beats loop.wav
 {
   "bpm": 120.0,
-  "beats": [ 0.499, 0.999, 1.498, 1.998, 2.498, 2.998, 3.498, 3.998, 4.498, ... 7.997 ],
+  "beats": [ 0.0, 0.499, 0.999, 1.499, 1.998, 2.498, 2.998, 3.498, 3.998, ... 7.997 ],
   "downbeats": [ ... ],
   "onsets": [ ... ],
   "duration": 8.0
@@ -2822,7 +2822,7 @@ exported 240 frames (1920x1080 @ 30 fps, mp4 h264, standard) in 0.34 s = 701 fps
 
   * Each shot's `timing` window puts it on screen from its beat to the next. Outside its window, an `over` passes the shot below it through and costs nothing.
   * `"offset": start` starts each word's own clock at its cut, so the same scale keys make every word pop as it lands.
-  * The loop was made for this page: kick, snare and hi-hats at 120 BPM, written by a short NumPy script. `uf beats` read it in 0.13 s. Its list starts at 0.5 s, without the first kick at 0 s, so the script adds the cut at 0.0 itself, and it drops the last entry, 7.997 s, which is the end of the loop.
+  * The loop was made for this page: kick, snare and hi-hats at 120 BPM, written by a short NumPy script. `uf beats` read it in 0.13 s. Its list starts at 0.0, on the first kick, and the script drops the last entry, 7.997 s, which is the end of the loop. (Before 0.2.2 the list started at 0.5 s; the script's set adds 0.0 once either way.)
   * To pulse a param with the music instead of cutting, use an `audio` driver; it follows one band of the soundtrack. `downbeats` and `onsets` are in the same output for cuts on the bar or on every hit.
 
 ## Render times
@@ -3100,7 +3100,7 @@ $ uf batch country.json --data rows.csv --out 'out/{name}.mp4'
 
   * A cell of numbers separated by commas becomes the list of values. Quote it in the CSV, as Python's `csv` module does, because it holds commas.
   * `"max": 30` in the template puts every country on the same scale. Without it, each chart scales to its own peak, and the world's 8.7% would look as tall as Chile's 25.1%.
-  * A column that names a node the template doesn't have stops the batch before the first frame: `Error: row 1: `chrat.values`: no node `chrat` (did you mean `chart`?)`. A misspelled param on a real node doesn't. In 0.2.1, `chart.valeus` rendered every video with the template's values and said nothing. Write the row documents with `--docs` and run `uf check` on one first: it warns ``block` has no param `valeus``.
+  * A column that names a node the template doesn't have stops the batch before the first frame: `Error: row 1: `chrat.values`: no node `chrat` (did you mean `chart`?)`. A misspelled param on a real node stops it too: `Error: row 1: `chart.valeus`: `block` has no param `valeus` (did you mean `values`?)`. (Before 0.2.2, it rendered every video with the template's values and said nothing.)
   * An empty cell keeps the template's value. More on templates, names and photos per row in [personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>).
 
 ## Check before you post
@@ -3170,7 +3170,7 @@ Wall clock from the command to the last file, warm, three runs each (five for th
   * **One series per chart.** `bar_chart` and `line_chart` take one list of values: no grouped or stacked bars and no second line. Build those from paths and shapes, as above.
   * **No bar chart race.** There's no block for bars that reorder over time.
   * **No y axis or gridlines.** Bars carry their own values and the line labels its highlighted point.
-  * **Up to about nine x labels.** With more values, the chart shows every second or third label and always the last. Blank labels count in that thinning, so pass every label and let the chart pick; a hand-thinned list like `2015,,,,,2020,,,,,2025` loses 2020.
+  * **Up to about nine x labels.** With more values, the chart shows every second or third label and always the last. Blank labels don't count, so a hand-thinned list like `2015,,,,,2020,,,,,2025` shows all three.
   * **Video, not a web chart.** For a chart people can hover and zoom on a page, use a charting library. ultrafast makes video files, and it needs a GPU: an Apple silicon Mac, or Linux or WSL2 with Vulkan.
 
 ## Questions
@@ -3427,7 +3427,7 @@ GIF, 960×540| `uf export reveal.json reveal.gif --size 960x540`| 1.0 s| 918 KB
 ## Prepare the SVG
 
   * **Name the parts you'll animate.** The nodes take their names from the SVG's `id` attributes, so `letter-f` beats `path12`. In Figma, turn on _Include "id" attribute_ in the SVG export settings; in Illustrator, choose _Object IDs: Layer Names_ in the SVG options; in Inkscape, set the ID in Object Properties.
-  * **Turn text into outlines.** SVG text imports only when its font is installed on the machine that renders. In 0.2.1, text in a font that isn't installed draws nothing, with no warning. Outline it before you export: _Outline text_ in Figma's SVG export settings, _Type > Create Outlines_ in Illustrator, _Path > Object to Path_ in Inkscape.
+  * **Turn text into outlines.** SVG text is set in the fonts the `text` op finds: installed ones, ultrafast's own, and Google Fonts, fetched the first time. A font none of them has is replaced, with a warning. For the exact letterforms, and to move letters one at a time, outline it before you export: _Outline text_ in Figma's SVG export settings, _Type > Create Outlines_ in Illustrator, _Path > Object to Path_ in Inkscape.
   * **One path per piece that moves.** Letters you want to move one at a time each need their own path. Outlined text is often grouped by word or line, so ungroup it before you export.
   * **Keep it flat.** Images, pattern fills and filter effects don't come through (next section). Leave the drop shadow or glow out of the SVG and add it in ultrafast with `drop_shadow` or `glow`, where it can be animated too.
 
@@ -6853,7 +6853,7 @@ Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud
 
 # Changelog · ultrafast release notes
 
-> Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.1, fixes found converting Lottie files.
+> Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.2, beats that keep to the music, SVGs as a browser shows them, and batches that catch typos.
 
 URL: https://ultrafast.mov/changelog/
 
@@ -6863,14 +6863,38 @@ Changelog
 
 What each ultrafast release changed, newest first, with the numbers measured. The same notes are on [GitHub releases](<https://github.com/ultrafastmov/ultrafast/releases>).
 
-  1. **0.2.1** Fixes found converting Lottie files
-  2. **0.2.0** Smaller files, sooner
-  3. **0.1.1** Every deliverable from one document
-  4. **0.1.0** The first release
+  1. **0.2.2** Beats that keep to the music, SVGs as a browser shows them, and batches that catch typos
+  2. **0.2.1** Fixes found converting Lottie files
+  3. **0.2.0** Smaller files, sooner
+  4. **0.1.1** Every deliverable from one document
+  5. **0.1.0** The first release
+
+0.2.2
+
+24 November 2026Latest
+
+  * [GitHub release](<https://github.com/ultrafastmov/ultrafast/releases/tag/v0.2.2>)
+  * [Every commit](<https://github.com/ultrafastmov/ultrafast/compare/v0.2.1...v0.2.2>)
+
+## Beats that keep to the music, SVGs as a browser shows them, and batches that catch typos
+
+Downbeats land on the one and the beat list starts at 0.0, SVG text, blend modes and translucency import as a browser shows them, `uf batch` stops on a misspelled param, end card titles wrap, `uf review` sees text that runs off the frame or sits under a card, and every `uf new` template reviews clean.
+
+  * **`uf beats` follows the music.** Downbeats now land on the one. On generated drum tracks they mostly fell on the snare, and 24 of 224 were right; now 210 are. Beats are tracked through the whole song, where before one grid was fitted to its start and drifted. On four-on-the-floor tracks they no longer sit on the off-beats. Against the beat_this tracker on 23 CC-BY songs, the beat F-measure went from 0.38 to 0.69 and the downbeat F-measure from 0.05 to 0.39. Downbeats still assume 4/4, and a song whose off-beats outweigh its beats (strummed, or heavy on hi-hats) can still lock to the off-beat.
+  * **A beat at 0.0.** When the music starts on a beat, the list now starts at 0.0. Before, a loop that opens on a kick listed its first beat at 0.5 s. **If your script adds 0.0 to the beats itself, stop:** with two cuts at 0.0, the first shot is empty and every later one comes a beat early. A set, like `sorted({0.0, *beats})`, is unaffected.
+  * **`uf batch` stops on a misspelled param.** A column like `chart.valeus` (a real node, with a param it doesn't have) rendered every video with the template's values and said nothing. It now stops before the first frame, as a misspelled node already did: `Error: row 1: `chart.valeus`: `block` has no param `valeus` (did you mean `values`?)`. The same goes for a `set_param` in a row's `edits`, and for `ultrafast_batch` over MCP. `uf batch` also prints the warnings a row brings that the template doesn't have, once each with the first row that has it. For example, text in a number column gives `warning: row 1: node `line2`: param `size`: expected number, got "abc"`.
+  * **Hand-thinned chart labels show.** With more than nine x labels, a chart shows every second or third one, and blank labels counted toward that. So `2015,,,,,2020,,,,,2025` (11 labels) lost 2020. Only labels with text count now, so that list shows all three. A full list thins as before.
+  * **SVG text, blend modes and translucency as a browser shows them.** `<text>` in a font that isn't installed (Inter, Manrope, even `sans-serif`) imported as nothing, with no warning. It's now set from the faces the `text` op uses: installed ones, ultrafast's own, and Google Fonts, fetched the first time. A font none of them has is replaced, with a warning that names the face used. `mix-blend-mode` was ignored; it now becomes a `blend` with the same mode. Opacity and translucent fills inside an SVG now composite in sRGB, as browsers do: a red circle at 50 % over white is (255, 128, 128), not linear light's (255, 188, 188). Over your film, the `over` that places the SVG decides; give it `"space": "srgb"` to match a browser there too.
+  * **End card titles wrap, and`uf review` sees a headline that doesn't fit.** The `end_card` block set its title and tagline on one line, so a 25-character title ran 330 px off each side of a vertical frame. They now wrap at the block's `width`, as the other blocks' text does. `review` had passed that title: text wider than the frame on both sides counted as texture (a marquee, a huge cropped word). Now only type that moves across the frame or is set huge counts as texture, and a still headline that runs off both edges is reported.
+  * **`uf inspect` and `uf review` skip text that a card covers.** A word under an opaque card that cuts in over it stayed on `inspect`'s list of what is on screen. `review` kept measuring it too, and warned that it was hard to read (down to 1.5:1). Text now counts as on screen only where no opaque layer covers all of it. A card that is translucent, faded, blended or only partly covering still lets the text show. `inspect` and `pick` also leave out text that a crop removes.
+  * **Starter templates start clean.** In `vertical`, the tops of the letters showed through the line masks for the first 0.4 s, and in `square` the word sat cut off at the bottom of the frame for 0.6 s before it rose. Both now enter from out of sight. `uf review` now passes all six templates: `product` sets its line and price in the name's ink (they read at 2.9:1 and 2.0:1 on the grey sweep), `square`'s blue is a shade deeper, and `promo`'s placeholder subtitle and quote are short enough to read while they're on screen. In `promo`, the stat and the end card now arrive with the push and the iris instead of after them, so neither transition opens onto an empty background. The usage line of `uf new` now lists `product`.
+  * **Better suggestions in`uf check`.** Two swapped letters count as one edit, so `valeus` suggests `values` rather than `value`, and a misspelled component param gets a suggestion too. `check` no longer wrongly warns about the end card's `title_font`, which is now in the schema. Nor does it warn about a param an instance sets that its component uses as `$name` without declaring it.
+
+The Python and TypeScript SDKs go to 0.1.3: their document types gain the end card's `title_font`.
 
 0.2.1
 
-24 November 2026Latest
+24 November 2026
 
   * [GitHub release](<https://github.com/ultrafastmov/ultrafast/releases/tag/v0.2.1>)
   * [Every commit](<https://github.com/ultrafastmov/ultrafast/compare/v0.2.0...v0.2.1>)
@@ -8318,7 +8342,7 @@ rotation| number| degrees, clockwise · default `0`
   
 ### svg
 
-an SVG file (logo, icon, illustration) as vector paths: fills, strokes, gradients, text as outlines; `ultrafast import-svg` gives the same as editable nodes
+an SVG file (logo, icon, illustration) as vector paths: fills, strokes, gradients, blend modes, and text as outlines in the fonts the text op finds; `ultrafast import-svg` gives the same as editable nodes. It composites in sRGB, like a browser: put it on the film with an `over` in `srgb` space to match one there too
 
 src| text| .svg file (relative to the document)  
 ---|---|---  
@@ -8903,6 +8927,7 @@ colors| text| donut: segment colors, comma separated · default `accent, then a 
 radius| number| donut: outer radius px · default `fits the plot`  
 thickness| number| donut: ring thickness px · default `30% of radius`  
 number_font| text| stat, donut: the big number's face · default `ultrafast:wide`  
+title_font| text| end_card: the title's face · default `ultrafast:wide`  
 duration| number| seconds before it exits (end_card stays) · default `3.5 (lower_third 4, quote 5, chapter 2.5, charts 5)`  
 ink| color| type color · default `#f6f3ee`  
 muted| color| secondary type · default `ink at 72%`  

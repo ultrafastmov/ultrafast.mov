@@ -19,22 +19,22 @@
   <url><loc>https://ultrafast.mov/docs/documents/</loc><lastmod>2026-11-21T21:10:04+00:00</lastmod><priority>0.8</priority></url>
   <url><loc>https://ultrafast.mov/templates/</loc><lastmod>2026-11-24T17:28:34+00:00</lastmod><priority>0.8</priority></url>
   <url><loc>https://ultrafast.mov/guides/render-video-from-json/</loc><lastmod>2026-11-24T06:54:20+00:00</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ultrafast.mov/guides/personalized-videos-from-csv/</loc><lastmod>2026-11-24T20:51:56+00:00</lastmod><priority>0.7</priority></url>
+  <url><loc>https://ultrafast.mov/guides/personalized-videos-from-csv/</loc><lastmod>2026-11-24T21:47:20+00:00</lastmod><priority>0.7</priority></url>
   <url><loc>https://ultrafast.mov/guides/n8n-video-automation/</loc><lastmod>2026-11-24T20:59:15+00:00</lastmod><priority>0.8</priority></url>
   <url><loc>https://ultrafast.mov/guides/claude-code/</loc><lastmod>2026-11-24T20:04:41+00:00</lastmod><priority>0.8</priority></url>
   <url><loc>https://ultrafast.mov/guides/codex/</loc><lastmod>2026-11-24T20:06:58+00:00</lastmod><priority>0.8</priority></url>
   <url><loc>https://ultrafast.mov/guides/lottie-to-mp4/</loc><lastmod>2026-11-24T05:04:37+00:00</lastmod><priority>0.8</priority></url>
   <url><loc>https://ultrafast.mov/guides/animated-captions/</loc><lastmod>2026-11-24T01:55:01+00:00</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ultrafast.mov/guides/motion-graphics-with-code/</loc><lastmod>2026-11-24T05:04:37+00:00</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ultrafast.mov/guides/animated-chart-video/</loc><lastmod>2026-11-24T06:54:20+00:00</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ultrafast.mov/guides/animate-svg-logo/</loc><lastmod>2026-11-24T05:05:24+00:00</lastmod><priority>0.8</priority></url>
+  <url><loc>https://ultrafast.mov/guides/motion-graphics-with-code/</loc><lastmod>2026-11-24T21:47:20+00:00</lastmod><priority>0.8</priority></url>
+  <url><loc>https://ultrafast.mov/guides/animated-chart-video/</loc><lastmod>2026-11-24T21:47:20+00:00</lastmod><priority>0.8</priority></url>
+  <url><loc>https://ultrafast.mov/guides/animate-svg-logo/</loc><lastmod>2026-11-24T21:47:20+00:00</lastmod><priority>0.8</priority></url>
   <url><loc>https://ultrafast.mov/guides/github-repo-video/</loc><lastmod>2026-11-24T16:35:05+00:00</lastmod><priority>0.8</priority></url>
   <url><loc>https://ultrafast.mov/learn/gpu-video-rendering/</loc><lastmod>2026-11-24T17:08:06+00:00</lastmod><priority>0.8</priority></url>
   <url><loc>https://ultrafast.mov/docs/ops/</loc><lastmod>2026-11-21T21:10:04+00:00</lastmod><priority>0.8</priority></url>
   <url><loc>https://ultrafast.mov/docs/cli/</loc><lastmod>2026-11-24T17:25:41+00:00</lastmod><priority>0.7</priority></url>
   <url><loc>https://ultrafast.mov/docs/mcp/</loc><lastmod>2026-11-21T23:59:13+00:00</lastmod><priority>0.8</priority></url>
   <url><loc>https://ultrafast.mov/docs/api/</loc><lastmod>2026-11-21T21:10:04+00:00</lastmod><priority>0.7</priority></url>
-  <url><loc>https://ultrafast.mov/changelog/</loc><lastmod>2026-11-24T01:16:06+00:00</lastmod><priority>0.7</priority></url>
+  <url><loc>https://ultrafast.mov/changelog/</loc><lastmod>2026-11-24T21:47:20+00:00</lastmod><priority>0.7</priority></url>
   <url><loc>https://ultrafast.mov/examples/liftoff/</loc><lastmod>2026-11-23T11:00:39+00:00</lastmod><priority>0.7</priority>
     <video:video><video:thumbnail_loc>https://ultrafast.mov/media/examples/liftoff.jpg</video:thumbnail_loc><video:title>Two launches, one count</video:title><video:description>Apollo 11 and Artemis I lift off in alternating shots, cut to the 1969 launch commentary, with each number in large type and both launches' clocks counting down to zero.</video:description><video:content_loc>https://ultrafast.mov/media/examples/liftoff.mp4</video:content_loc><video:duration>23</video:duration><video:publication_date>2026-11-21T21:10:04+00:00</video:publication_date><video:family_friendly>yes</video:family_friendly><video:requires_subscription>no</video:requires_subscription><video:uploader info="https://ultrafast.mov/">ultrafast</video:uploader><video:live>no</video:live></video:video>
   </url>

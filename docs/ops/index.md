@@ -243,7 +243,7 @@ rotation| number| degrees, clockwise · default `0`
   
 ### svg
 
-an SVG file (logo, icon, illustration) as vector paths: fills, strokes, gradients, text as outlines; `ultrafast import-svg` gives the same as editable nodes
+an SVG file (logo, icon, illustration) as vector paths: fills, strokes, gradients, blend modes, and text as outlines in the fonts the text op finds; `ultrafast import-svg` gives the same as editable nodes. It composites in sRGB, like a browser: put it on the film with an `over` in `srgb` space to match one there too
 
 src| text| .svg file (relative to the document)  
 ---|---|---  
@@ -828,6 +828,7 @@ colors| text| donut: segment colors, comma separated · default `accent, then a 
 radius| number| donut: outer radius px · default `fits the plot`  
 thickness| number| donut: ring thickness px · default `30% of radius`  
 number_font| text| stat, donut: the big number's face · default `ultrafast:wide`  
+title_font| text| end_card: the title's face · default `ultrafast:wide`  
 duration| number| seconds before it exits (end_card stays) · default `3.5 (lower_third 4, quote 5, chapter 2.5, charts 5)`  
 ink| color| type color · default `#f6f3ee`  
 muted| color| secondary type · default `ink at 72%`  

@@ -108,7 +108,7 @@ uf batch card.json --data rows.csv --out 'out/{name}.mp4' --docs docs/   # docs/
 for f in docs/*.json; do uf check "$f"; done
 ``` 
 
-`check` reports two levels. A missing file is an error (`"severity": "error"`) and stops a batch. A value of the wrong type, such as text in a number column, is a warning: the batch still runs, so read the warnings when a sheet comes from somewhere new.
+`check` reports two levels. A missing file is an error (`"severity": "error"`) and stops a batch. A value of the wrong type, such as text in a number column, is a warning: the batch still runs, so read the warnings when a sheet comes from somewhere new. `uf batch` prints them itself, once each with the first row that has it: `warning: row 1: node `line2`: param `size`: expected number, got "abc"`.
 
 ## Long names
 

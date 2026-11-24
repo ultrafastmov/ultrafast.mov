@@ -1,6 +1,6 @@
 # Changelog · ultrafast release notes
 
-> Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.1, fixes found converting Lottie files.
+> Every ultrafast release and what it changed, newest first, with the numbers measured. Latest: 0.2.2, beats that keep to the music, SVGs as a browser shows them, and batches that catch typos.
 
 URL: https://ultrafast.mov/changelog/
 
@@ -10,14 +10,38 @@ Changelog
 
 What each ultrafast release changed, newest first, with the numbers measured. The same notes are on [GitHub releases](<https://github.com/ultrafastmov/ultrafast/releases>).
 
-  1. **0.2.1** Fixes found converting Lottie files
-  2. **0.2.0** Smaller files, sooner
-  3. **0.1.1** Every deliverable from one document
-  4. **0.1.0** The first release
+  1. **0.2.2** Beats that keep to the music, SVGs as a browser shows them, and batches that catch typos
+  2. **0.2.1** Fixes found converting Lottie files
+  3. **0.2.0** Smaller files, sooner
+  4. **0.1.1** Every deliverable from one document
+  5. **0.1.0** The first release
+
+0.2.2
+
+24 November 2026Latest
+
+  * [GitHub release](<https://github.com/ultrafastmov/ultrafast/releases/tag/v0.2.2>)
+  * [Every commit](<https://github.com/ultrafastmov/ultrafast/compare/v0.2.1...v0.2.2>)
+
+## Beats that keep to the music, SVGs as a browser shows them, and batches that catch typos
+
+Downbeats land on the one and the beat list starts at 0.0, SVG text, blend modes and translucency import as a browser shows them, `uf batch` stops on a misspelled param, end card titles wrap, `uf review` sees text that runs off the frame or sits under a card, and every `uf new` template reviews clean.
+
+  * **`uf beats` follows the music.** Downbeats now land on the one. On generated drum tracks they mostly fell on the snare, and 24 of 224 were right; now 210 are. Beats are tracked through the whole song, where before one grid was fitted to its start and drifted. On four-on-the-floor tracks they no longer sit on the off-beats. Against the beat_this tracker on 23 CC-BY songs, the beat F-measure went from 0.38 to 0.69 and the downbeat F-measure from 0.05 to 0.39. Downbeats still assume 4/4, and a song whose off-beats outweigh its beats (strummed, or heavy on hi-hats) can still lock to the off-beat.
+  * **A beat at 0.0.** When the music starts on a beat, the list now starts at 0.0. Before, a loop that opens on a kick listed its first beat at 0.5 s. **If your script adds 0.0 to the beats itself, stop:** with two cuts at 0.0, the first shot is empty and every later one comes a beat early. A set, like `sorted({0.0, *beats})`, is unaffected.
+  * **`uf batch` stops on a misspelled param.** A column like `chart.valeus` (a real node, with a param it doesn't have) rendered every video with the template's values and said nothing. It now stops before the first frame, as a misspelled node already did: `Error: row 1: `chart.valeus`: `block` has no param `valeus` (did you mean `values`?)`. The same goes for a `set_param` in a row's `edits`, and for `ultrafast_batch` over MCP. `uf batch` also prints the warnings a row brings that the template doesn't have, once each with the first row that has it. For example, text in a number column gives `warning: row 1: node `line2`: param `size`: expected number, got "abc"`.
+  * **Hand-thinned chart labels show.** With more than nine x labels, a chart shows every second or third one, and blank labels counted toward that. So `2015,,,,,2020,,,,,2025` (11 labels) lost 2020. Only labels with text count now, so that list shows all three. A full list thins as before.
+  * **SVG text, blend modes and translucency as a browser shows them.** `<text>` in a font that isn't installed (Inter, Manrope, even `sans-serif`) imported as nothing, with no warning. It's now set from the faces the `text` op uses: installed ones, ultrafast's own, and Google Fonts, fetched the first time. A font none of them has is replaced, with a warning that names the face used. `mix-blend-mode` was ignored; it now becomes a `blend` with the same mode. Opacity and translucent fills inside an SVG now composite in sRGB, as browsers do: a red circle at 50 % over white is (255, 128, 128), not linear light's (255, 188, 188). Over your film, the `over` that places the SVG decides; give it `"space": "srgb"` to match a browser there too.
+  * **End card titles wrap, and`uf review` sees a headline that doesn't fit.** The `end_card` block set its title and tagline on one line, so a 25-character title ran 330 px off each side of a vertical frame. They now wrap at the block's `width`, as the other blocks' text does. `review` had passed that title: text wider than the frame on both sides counted as texture (a marquee, a huge cropped word). Now only type that moves across the frame or is set huge counts as texture, and a still headline that runs off both edges is reported.
+  * **`uf inspect` and `uf review` skip text that a card covers.** A word under an opaque card that cuts in over it stayed on `inspect`'s list of what is on screen. `review` kept measuring it too, and warned that it was hard to read (down to 1.5:1). Text now counts as on screen only where no opaque layer covers all of it. A card that is translucent, faded, blended or only partly covering still lets the text show. `inspect` and `pick` also leave out text that a crop removes.
+  * **Starter templates start clean.** In `vertical`, the tops of the letters showed through the line masks for the first 0.4 s, and in `square` the word sat cut off at the bottom of the frame for 0.6 s before it rose. Both now enter from out of sight. `uf review` now passes all six templates: `product` sets its line and price in the name's ink (they read at 2.9:1 and 2.0:1 on the grey sweep), `square`'s blue is a shade deeper, and `promo`'s placeholder subtitle and quote are short enough to read while they're on screen. In `promo`, the stat and the end card now arrive with the push and the iris instead of after them, so neither transition opens onto an empty background. The usage line of `uf new` now lists `product`.
+  * **Better suggestions in`uf check`.** Two swapped letters count as one edit, so `valeus` suggests `values` rather than `value`, and a misspelled component param gets a suggestion too. `check` no longer wrongly warns about the end card's `title_font`, which is now in the schema. Nor does it warn about a param an instance sets that its component uses as `$name` without declaring it.
+
+The Python and TypeScript SDKs go to 0.1.3: their document types gain the end card's `title_font`.
 
 0.2.1
 
-24 November 2026Latest
+24 November 2026
 
   * [GitHub release](<https://github.com/ultrafastmov/ultrafast/releases/tag/v0.2.1>)
   * [Every commit](<https://github.com/ultrafastmov/ultrafast/compare/v0.2.0...v0.2.1>)

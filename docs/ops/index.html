@@ -308,7 +308,7 @@
   </div>
   <div class="op" id="op-svg">
     <h3>svg</h3>
-    <p>an SVG file (logo, icon, illustration) as vector paths: fills, strokes, gradients, text as outlines; `ultrafast import-svg` gives the same as editable nodes</p>
+    <p>an SVG file (logo, icon, illustration) as vector paths: fills, strokes, gradients, blend modes, and text as outlines in the fonts the text op finds; `ultrafast import-svg` gives the same as editable nodes. It composites in sRGB, like a browser: put it on the film with an `over` in `srgb` space to match one there too</p>
     <table>
       <tbody>
         <tr><td>src</td><td>text</td><td>.svg file (relative to the document)</td></tr>
@@ -984,6 +984,7 @@
         <tr><td>radius</td><td>number</td><td>donut: outer radius px · <span class="def">default <code>fits the plot</code></span></td></tr>
         <tr><td>thickness</td><td>number</td><td>donut: ring thickness px · <span class="def">default <code>30% of radius</code></span></td></tr>
         <tr><td>number_font</td><td>text</td><td>stat, donut: the big number&#39;s face · <span class="def">default <code>ultrafast:wide</code></span></td></tr>
+        <tr><td>title_font</td><td>text</td><td>end_card: the title&#39;s face · <span class="def">default <code>ultrafast:wide</code></span></td></tr>
         <tr><td>duration</td><td>number</td><td>seconds before it exits (end_card stays) · <span class="def">default <code>3.5 (lower_third 4, quote 5, chapter 2.5, charts 5)</code></span></td></tr>
         <tr><td>ink</td><td>color</td><td>type color · <span class="def">default <code>#f6f3ee</code></span></td></tr>
         <tr><td>muted</td><td>color</td><td>secondary type · <span class="def">default <code>ink at 72%</code></span></td></tr>
