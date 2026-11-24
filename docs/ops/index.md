@@ -14,6 +14,7 @@ Every op with its ports, params, types and defaults. `uf ops` prints the same as
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+  * [Templates](<https://ultrafast.mov/templates/>)
 
 ## Guides
 

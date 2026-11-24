@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "format": { "width": 1080, "height": 1920, "fps": 30, "duration": 6, "motion_blur": { "samples": 6, "shutter": 0.5 } },
+  "output": "finish",
+  "nodes": {
+    "ground": { "op": "gradient", "params": { "kind": "radial", "center": [540, 900], "radius": 1300, "stops": "0:#1b1a24, 1:#070709" } },
+
+    "line1": { "op": "text", "params": { "text": "Say the", "font": "Instrument Serif", "size": 190, "color": "#f1eee8", "valign": "baseline", "tracking": -4,
+      "position": { "keys": [ { "t": 0.4, "v": [84, 1010], "ease": { "bezier": [0.16, 1, 0.3, 1] } }, { "t": 1.1, "v": [84, 820] } ] } } },
+    "line1_mask": { "op": "crop", "inputs": { "source": "line1" }, "params": { "rect": [0, 640, 1080, 250] } },
+    "line2": { "op": "text", "params": { "text": "one thing.", "font": "Instrument Serif", "style": "italic", "size": 190, "color": "#ffd7a8", "valign": "baseline", "tracking": -4,
+      "position": { "keys": [ { "t": 0.55, "v": [84, 1210], "ease": { "bezier": [0.16, 1, 0.3, 1] } }, { "t": 1.25, "v": [84, 1020] } ] } } },
+    "line2_mask": { "op": "crop", "inputs": { "source": "line2" }, "params": { "rect": [0, 840, 1080, 250] } },
+
+    "label": { "op": "text", "params": { "text": "CHAPTER 01", "font": "Geist Mono", "size": 26, "color": "#f1eee890", "valign": "baseline", "tracking": 3,
+      "position": [86, 600], "stagger": 0.04, "glyph_opacity": { "keys": [ { "t": 1.2, "v": 0 }, { "t": 1.25, "v": 1 } ] } } },
+    "rule": { "op": "shape", "params": { "kind": "rect", "color": "#f1eee840", "center": [540, 1120],
+      "size": { "keys": [ { "t": 1.0, "v": [0, 2], "ease": { "bezier": [0.16, 1, 0.3, 1] } }, { "t": 2.0, "v": [912, 2] } ] } } },
+
+    "l1": { "op": "over", "inputs": { "fg": "line1_mask", "bg": "ground" } },
+    "l2": { "op": "over", "inputs": { "fg": "line2_mask", "bg": "l1" } },
+    "l3": { "op": "over", "inputs": { "fg": "label", "bg": "l2" } },
+    "l4": { "op": "over", "inputs": { "fg": "rule", "bg": "l3" } },
+    "lit": { "op": "bloom", "inputs": { "source": "l4" }, "params": { "intensity": 0.4 } },
+    "vig": { "op": "vignette", "inputs": { "source": "lit" } },
+    "finish": { "op": "grain", "inputs": { "source": "vig" }, "params": { "amount": 0.07 } }
+  }
+}

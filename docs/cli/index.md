@@ -14,6 +14,7 @@ Docs
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+  * [Templates](<https://ultrafast.mov/templates/>)
 
 ## Guides
 
@@ -57,7 +58,7 @@ Docs
 
 ## Make
 
-`uf new <template> <out.json>`| Start from a template: `vertical`, `title`, `square`, `promo`, `explainer`, `product`.  
+`uf new <template> <out.json>`| Start from a template: `vertical`, `title`, `square`, `promo`, `explainer`, `product` ([all six](<https://ultrafast.mov/templates/>)).  
 ---|---  
 `uf check <doc.json>`| Problems without rendering: unknown ops, misspelled params, bad values, broken shaders, missing files.  
 `uf edit <doc.json> <edits.json>`| Apply an edit batch; prints what kind of change it was.  

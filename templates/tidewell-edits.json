@@ -1,0 +1,13 @@
+[
+  { "edit": "set_param", "node": "title", "param": "kicker",   "value": "NOW IN BETA" },
+  { "edit": "set_param", "node": "title", "param": "title",    "value": "Tidewell" },
+  { "edit": "set_param", "node": "title", "param": "subtitle", "value": "Notes that file themselves." },
+  { "edit": "set_param", "node": "stat",  "param": "value",    "value": 4 },
+  { "edit": "set_param", "node": "stat",  "param": "suffix",   "value": " apps" },
+  { "edit": "set_param", "node": "stat",  "param": "label",    "value": "REPLACED BY ONE" },
+  { "edit": "set_param", "node": "quote", "param": "quote",    "value": "I stopped losing things the first week I used it, and I haven't opened a folder since." },
+  { "edit": "set_param", "node": "quote", "param": "author",   "value": "Priya, product designer" },
+  { "edit": "set_param", "node": "end",   "param": "title",    "value": "tidewell" },
+  { "edit": "set_param", "node": "end",   "param": "tagline",  "value": "write first, sort later" },
+  { "edit": "set_param", "node": "end",   "param": "cta",      "value": "Join the beta" }
+]

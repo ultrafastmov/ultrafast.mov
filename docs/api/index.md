@@ -14,6 +14,7 @@ Render documents over HTTP from `uf serve` on your own GPU, with one API key and
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+  * [Templates](<https://ultrafast.mov/templates/>)
 
 ## Guides
 

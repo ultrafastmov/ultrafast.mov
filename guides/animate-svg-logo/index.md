@@ -14,6 +14,7 @@ Turn a static SVG logo into a logo reveal and export it as an MP4, a transparent
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+  * [Templates](<https://ultrafast.mov/templates/>)
 
 ## Guides
 

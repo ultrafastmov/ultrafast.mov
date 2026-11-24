@@ -14,6 +14,7 @@ Install it, make your first video, then hand the loop to your agent.
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+  * [Templates](<https://ultrafast.mov/templates/>)
 
 ## Guides
 
@@ -81,7 +82,7 @@ device:  NVIDIA GeForce RTX 5090
 
 ## Your first video
 
-Start from a template, look at it, then export it.
+Start from a template (there are [six](<https://ultrafast.mov/templates/>)), look at it, then export it.
 
 ```
 uf new vertical film.json                       # 1080×1920, 6 s, already looks finished

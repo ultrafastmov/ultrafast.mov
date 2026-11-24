@@ -14,6 +14,7 @@ A template and a spreadsheet make a finished video per row, each with its own cu
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+  * [Templates](<https://ultrafast.mov/templates/>)
 
 ## Guides
 

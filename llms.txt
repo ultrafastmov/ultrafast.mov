@@ -23,6 +23,7 @@ Facts an agent needs:
 
 - [Quickstart](https://ultrafast.mov/docs/index.md): install, first video, the loop, connecting an agent
 - [The document format](https://ultrafast.mov/docs/documents/index.md): the JSON document: format, nodes, animation, timing, components
+- [Free video templates as JSON: promo, explainer, 3D product](https://ultrafast.mov/templates/index.md): the six uf new templates (vertical, title, square, promo, explainer, product): what each contains, which nodes and params to change, export times, uf review notes, a worked edit of the promo with uf edit, changing the shape of a block template by its format alone, one video per CSV row, the JSON files to download
 - [Render video from JSON: a worked example](https://ultrafast.mov/guides/render-video-from-json/index.md): a worked example: a 21-line document, check and export, one video per CSV row, HTTP, Python and TypeScript, the schema, other JSON video formats
 - [Personalized videos from a CSV, open source](https://ultrafast.mov/guides/personalized-videos-from-csv/index.md): one video per row of a CSV or JSON file: the template, node.param columns, checking every row before rendering, long names, a photo per row, Python and HTTP
 - [Make a video with Claude Code: a real session](https://ultrafast.mov/guides/claude-code/index.md): a recorded Claude Code session from prompt to MP4: plugin install, the prompt, every tool call, the contact sheets, an edit by asking, time and tokens, troubleshooting

@@ -14,6 +14,7 @@ One JSON file in, a finished video out, rendered on your GPU. A worked example, 
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+  * [Templates](<https://ultrafast.mov/templates/>)
 
 ## Guides
 

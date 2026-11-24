@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "format": { "width": 1920, "height": 1080, "fps": 30, "duration": 6, "motion_blur": { "samples": 6, "shutter": 0.5 } },
+  "output": "finish",
+  "nodes": {
+    "world": { "op": "marble", "params": { "filaments": 0.6 } },
+    "dim": { "op": "adjust", "inputs": { "source": "world" }, "params": { "exposure": -1.2 } },
+    "title": { "op": "text", "params": { "text": "Your Title", "font": "Geist", "weight": 700, "size": 200, "align": "center", "valign": "middle",
+      "position": [960, 520], "color": "#ffffff", "tracking": -6,
+      "stagger": 0.05, "stagger_order": "center",
+      "glyph_offset": { "keys": [ { "t": 0.3, "v": [0, 80], "ease": { "bezier": [0.16, 1, 0.3, 1] } }, { "t": 1.1, "v": [0, 0] } ] },
+      "glyph_opacity": { "keys": [ { "t": 0.3, "v": 0 }, { "t": 0.6, "v": 1 } ] } } },
+    "sub": { "op": "text", "params": { "text": "a subtitle that breathes", "font": "Geist", "size": 44, "align": "center", "valign": "middle",
+      "position": { "wiggle": { "frequency": 0.4, "amplitude": [6, 4], "base": [960, 660] } }, "color": "#ffffffb0", "tracking": 2,
+      "reveal": { "keys": [ { "t": 1.0, "v": 0 }, { "t": 2.0, "v": 24 } ] } } },
+    "l1": { "op": "over", "inputs": { "fg": "title", "bg": "dim" } },
+    "l2": { "op": "over", "inputs": { "fg": "sub", "bg": "l1" } },
+    "lit": { "op": "bloom", "inputs": { "source": "l2" }, "params": { "intensity": 0.5 } },
+    "finish": { "op": "grain", "inputs": { "source": "lit" } }
+  }
+}

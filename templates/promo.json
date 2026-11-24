@@ -1,0 +1,181 @@
+{
+ "version": 1,
+ "format": {
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "duration": 13,
+  "motion_blur": {
+   "samples": 4,
+   "shutter": 0.5
+  }
+ },
+ "output": "finish",
+ "nodes": {
+  "backdrop": {
+   "op": "gradient",
+   "params": {
+    "kind": "radial",
+    "center": [
+     540,
+     760
+    ],
+    "radius": 1600,
+    "stops": "0:#2a1b3d, 0.55:#120d1e, 1:#07060c"
+   }
+  },
+  "silk": {
+   "op": "marble",
+   "params": {
+    "filaments": 0.35
+   }
+  },
+  "silk_dim": {
+   "op": "adjust",
+   "params": {
+    "exposure": -2.3,
+    "saturation": 0.6
+   },
+   "inputs": {
+    "source": "silk"
+   }
+  },
+  "ground": {
+   "op": "over",
+   "params": {
+    "opacity": 0.45
+   },
+   "inputs": {
+    "fg": "silk_dim",
+    "bg": "backdrop"
+   }
+  },
+  "title": {
+   "op": "block",
+   "params": {
+    "kind": "title",
+    "kicker": "INTRODUCING",
+    "title": "Your product, in one line",
+    "subtitle": "One sentence on what it does and who it is for.",
+    "duration": 3.2
+   },
+   "timing": {
+    "offset": 0.3
+   }
+  },
+  "s1": {
+   "op": "over",
+   "inputs": {
+    "fg": "title",
+    "bg": "ground"
+   }
+  },
+  "stat": {
+   "op": "block",
+   "params": {
+    "kind": "stat",
+    "value": 10,
+    "suffix": "x",
+    "label": "FASTER THAN BEFORE",
+    "accent": "#2ee6c5",
+    "duration": 2.6
+   },
+   "timing": {
+    "offset": 4.2
+   }
+  },
+  "s2": {
+   "op": "over",
+   "inputs": {
+    "fg": "stat",
+    "bg": "ground"
+   }
+  },
+  "quote": {
+   "op": "block",
+   "params": {
+    "kind": "quote",
+    "quote": "A short line from a happy customer goes here.",
+    "author": "Name, Company",
+    "duration": 2.6,
+    "width": 860
+   },
+   "timing": {
+    "offset": 7.6
+   }
+  },
+  "s3": {
+   "op": "over",
+   "inputs": {
+    "fg": "quote",
+    "bg": "ground"
+   }
+  },
+  "end": {
+   "op": "block",
+   "params": {
+    "kind": "end_card",
+    "title": "product",
+    "tagline": "the tagline goes here",
+    "cta": "Try it free"
+   },
+   "timing": {
+    "offset": 10.6
+   }
+  },
+  "s4": {
+   "op": "over",
+   "inputs": {
+    "fg": "end",
+    "bg": "ground"
+   }
+  },
+  "cut1": {
+   "op": "transition",
+   "params": {
+    "kind": "push",
+    "at": 3.7,
+    "duration": 0.6,
+    "direction": 0
+   },
+   "inputs": {
+    "a": "s1",
+    "b": "s2"
+   }
+  },
+  "cut2": {
+   "op": "transition",
+   "params": {
+    "kind": "dissolve",
+    "at": 7.0,
+    "duration": 0.8,
+    "color": "#ff5c7a"
+   },
+   "inputs": {
+    "a": "cut1",
+    "b": "s3"
+   }
+  },
+  "cut3": {
+   "op": "transition",
+   "params": {
+    "kind": "iris",
+    "at": 10.1,
+    "duration": 0.7
+   },
+   "inputs": {
+    "a": "cut2",
+    "b": "s4"
+   }
+  },
+  "finish": {
+   "op": "grain",
+   "params": {
+    "amount": 0.05
+   },
+   "inputs": {
+    "source": "cut3"
+   }
+  }
+ }
+}

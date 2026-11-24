@@ -14,6 +14,7 @@ Bar, line and donut charts that build themselves on screen, rendered to MP4 on y
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+  * [Templates](<https://ultrafast.mov/templates/>)
 
 ## Guides
 

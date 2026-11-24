@@ -14,6 +14,7 @@ Remotion and HyperFrames make a video by opening a web page in headless Chrome a
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+  * [Templates](<https://ultrafast.mov/templates/>)
 
 ## Guides
 

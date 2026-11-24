@@ -1,0 +1,227 @@
+{
+ "version": 1,
+ "format": {
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration": 8,
+  "motion_blur": {
+   "samples": 4,
+   "shutter": 0.5
+  }
+ },
+ "output": "finish",
+ "nodes": {
+  "product": {
+   "op": "raymarch",
+   "params": {
+    "scene": "// A product on a seamless studio sweep: a ceramic body, a fabric band,\n// a brushed gold top ring. knob(0) turns it (degrees).\n// Materials: 7 ceramic (preset), 20 fabric, 4 gold (preset), 21 sweep.\nfloat2 map(float3 p) {\n  float2 r = float2(p.y + 1.05, 21.0);\n  r = opU(r, float2(p.z + 6.0, 21.0));\n  float3 q = rotY(p, radians(knob(0)));\n  float body = sdCylinder(q, 0.9, 1.0, 0.25);\n  r = opU(r, float2(body, abs(q.y + 0.15) < 0.45 ? 20.0 : 7.0));\n  r = opU(r, float2(sdTorus(q - float3(0.0, 1.0, 0.0), 0.62, 0.035), 4.0));\n  return r;\n}\nvoid material(float id, float3 p, float3 n, inout float3 albedo, inout float metallic, inout float roughness) {\n  presetMaterial(id, albedo, metallic, roughness);\n  if (id > 19.5 && id < 20.5) {\n    // Woven fabric: a fine cross weave.\n    float3 q = rotY(p, radians(knob(0)));\n    float a = atan2(q.z, q.x) * 45.0;\n    float w = sin(a) * sin(q.y * 70.0);\n    albedo = float3(0.16, 0.17, 0.19) * (0.85 + 0.15 * w);\n    metallic = 0.0; roughness = 0.9;\n  } else if (id > 20.5) {\n    albedo = float3(0.82, 0.80, 0.77); metallic = 0.0; roughness = 0.6;\n  }\n}",
+    "environment": "studio",
+    "background": "environment",
+    "background_level": 0.9,
+    "orbit": {
+     "keys": [
+      {
+       "t": 0,
+       "v": [
+        -35,
+        14,
+        7.2
+       ],
+       "ease": "in_out_sine"
+      },
+      {
+       "t": 8,
+       "v": [
+        20,
+        9,
+        6.6
+       ]
+      }
+     ]
+    },
+    "target": [
+     -1.3,
+     0.1,
+     0
+    ],
+    "fov": 32,
+    "light": [
+     -3,
+     5,
+     4
+    ],
+    "light_intensity": 45,
+    "samples": 2,
+    "k0": {
+     "keys": [
+      {
+       "t": 0,
+       "v": [
+        0
+       ]
+      },
+      {
+       "t": 8,
+       "v": [
+        40
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "name": {
+   "op": "text",
+   "params": {
+    "text": "Aurora",
+    "font": "ultrafast:display",
+    "weight": 500,
+    "size": 150,
+    "color": "#1d1d1f",
+    "position": [
+     150,
+     470
+    ],
+    "valign": "baseline",
+    "tracking": -3,
+    "glyph_opacity": {
+     "keys": [
+      {
+       "t": 0.6,
+       "v": [
+        0
+       ]
+      },
+      {
+       "t": 1.2,
+       "v": [
+        1
+       ]
+      }
+     ]
+    },
+    "glyph_offset": {
+     "keys": [
+      {
+       "t": 0.6,
+       "v": [
+        0,
+        40
+       ],
+       "ease": "out_expo"
+      },
+      {
+       "t": 1.6,
+       "v": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    "stagger": 0.05
+   }
+  },
+  "line": {
+   "op": "text",
+   "params": {
+    "text": "Room-filling sound, in porcelain.",
+    "font": "ultrafast:sans",
+    "weight": 450,
+    "size": 40,
+    "color": "#3a3a3c",
+    "position": [
+     156,
+     545
+    ],
+    "valign": "baseline",
+    "glyph_opacity": {
+     "keys": [
+      {
+       "t": 1.4,
+       "v": [
+        0
+       ]
+      },
+      {
+       "t": 1.9,
+       "v": [
+        1
+       ]
+      }
+     ]
+    },
+    "stagger": 0.012
+   }
+  },
+  "price": {
+   "op": "text",
+   "params": {
+    "text": "From $349",
+    "font": "ultrafast:mono",
+    "size": 26,
+    "tracking": 3,
+    "color": "#6e6e73",
+    "position": [
+     156,
+     640
+    ],
+    "valign": "baseline",
+    "reveal": {
+     "keys": [
+      {
+       "t": 2.2,
+       "v": [
+        0
+       ]
+      },
+      {
+       "t": 2.8,
+       "v": [
+        9
+       ],
+       "ease": "linear"
+      }
+     ]
+    }
+   }
+  },
+  "a": {
+   "op": "over",
+   "inputs": {
+    "fg": "name",
+    "bg": "product"
+   }
+  },
+  "b": {
+   "op": "over",
+   "inputs": {
+    "fg": "line",
+    "bg": "a"
+   }
+  },
+  "c": {
+   "op": "over",
+   "inputs": {
+    "fg": "price",
+    "bg": "b"
+   }
+  },
+  "finish": {
+   "op": "film_look",
+   "params": {
+    "halation": 0.35,
+    "grit": 0.15,
+    "lift": 0.0,
+    "saturation": 0.95,
+    "grain": 0.04,
+    "vignette": "#00000040",
+    "aberration": 0.3
+   },
+   "inputs": {
+    "source": "c"
+   }
+  }
+ }
+}

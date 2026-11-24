@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "format": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30.0,
+    "duration": 13.0,
+    "motion_blur": {
+      "samples": 4,
+      "shutter": 0.5
+    }
+  },
+  "output": "finish",
+  "nodes": {
+    "backdrop": {
+      "op": "gradient",
+      "params": {
+        "center": [
+          540.0,
+          760.0
+        ],
+        "kind": "radial",
+        "radius": 1600.0,
+        "stops": "0:#2a1b3d, 0.55:#120d1e, 1:#07060c"
+      }
+    },
+    "cut1": {
+      "op": "transition",
+      "params": {
+        "at": 3.7,
+        "direction": 0.0,
+        "duration": 0.6,
+        "kind": "push"
+      },
+      "inputs": {
+        "a": "s1",
+        "b": "s2"
+      }
+    },
+    "cut2": {
+      "op": "transition",
+      "params": {
+        "at": 7.0,
+        "color": "#ff5c7a",
+        "duration": 0.8,
+        "kind": "dissolve"
+      },
+      "inputs": {
+        "a": "cut1",
+        "b": "s3"
+      }
+    },
+    "cut3": {
+      "op": "transition",
+      "params": {
+        "at": 10.1,
+        "duration": 0.7,
+        "kind": "iris"
+      },
+      "inputs": {
+        "a": "cut2",
+        "b": "s4"
+      }
+    },
+    "end": {
+      "op": "block",
+      "params": {
+        "cta": "Join the beta",
+        "kind": "end_card",
+        "tagline": "write first, sort later",
+        "title": "tidewell"
+      },
+      "timing": {
+        "offset": 10.6
+      }
+    },
+    "finish": {
+      "op": "grain",
+      "params": {
+        "amount": 0.05
+      },
+      "inputs": {
+        "source": "cut3"
+      }
+    },
+    "ground": {
+      "op": "over",
+      "params": {
+        "opacity": 0.45
+      },
+      "inputs": {
+        "bg": "backdrop",
+        "fg": "silk_dim"
+      }
+    },
+    "quote": {
+      "op": "block",
+      "params": {
+        "author": "Priya, product designer",
+        "duration": 2.6,
+        "kind": "quote",
+        "quote": "I haven't opened a folder since.",
+        "width": 860.0
+      },
+      "timing": {
+        "offset": 7.6
+      }
+    },
+    "s1": {
+      "op": "over",
+      "inputs": {
+        "bg": "ground",
+        "fg": "title"
+      }
+    },
+    "s2": {
+      "op": "over",
+      "inputs": {
+        "bg": "ground",
+        "fg": "stat"
+      }
+    },
+    "s3": {
+      "op": "over",
+      "inputs": {
+        "bg": "ground",
+        "fg": "quote"
+      }
+    },
+    "s4": {
+      "op": "over",
+      "inputs": {
+        "bg": "ground",
+        "fg": "end"
+      }
+    },
+    "silk": {
+      "op": "marble",
+      "params": {
+        "filaments": 0.35
+      }
+    },
+    "silk_dim": {
+      "op": "adjust",
+      "params": {
+        "exposure": -2.3,
+        "saturation": 0.6
+      },
+      "inputs": {
+        "source": "silk"
+      }
+    },
+    "stat": {
+      "op": "block",
+      "params": {
+        "accent": "#2ee6c5",
+        "duration": 2.6,
+        "kind": "stat",
+        "label": "REPLACED BY ONE",
+        "suffix": " apps",
+        "value": 4.0
+      },
+      "timing": {
+        "offset": 4.2
+      }
+    },
+    "title": {
+      "op": "block",
+      "params": {
+        "duration": 3.2,
+        "kicker": "NOW IN BETA",
+        "kind": "title",
+        "subtitle": "Notes that file themselves.",
+        "title": "Tidewell"
+      },
+      "timing": {
+        "offset": 0.3
+      }
+    }
+  }
+}

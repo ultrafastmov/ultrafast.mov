@@ -14,6 +14,7 @@ Claude Code can make real videos when it has a video engine to write for. Here i
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+  * [Templates](<https://ultrafast.mov/templates/>)
 
 ## Guides
 

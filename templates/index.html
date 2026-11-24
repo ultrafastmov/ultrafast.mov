@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free video templates as JSON: promo, explainer, 3D product · ultrafast</title>
+<meta name="description" content="Six free video templates you edit as JSON and render on your own GPU: a vertical title card, a 16:9 title, a square poster, a 13-second promo, an explainer and a 3D product shot, each exported in under half a second.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/templates/">
+<link rel="alternate" type="text/markdown" href="/templates/index.md" title="Free video templates as JSON: promo, explainer, 3D product · ultrafast (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="ultrafast blog"><meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="Video templates as JSON">
+<meta property="og:description" content="Six free video templates you edit as JSON and render on your own GPU: a vertical title card, a 16:9 title, a square poster, a 13-second promo, an explainer and a 3D product shot, each exported in under half a second.">
+<meta property="og:url" content="https://ultrafast.mov/templates/">
+<meta property="og:image" content="https://ultrafast.mov/og/templates.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Video templates as JSON · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Video templates as JSON">
+<meta name="twitter:description" content="Six free video templates you edit as JSON and render on your own GPU: a vertical title card, a 16:9 title, a square poster, a 13-second promo, an explainer and a 3D product shot, each exported in under half a second.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/templates.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=c898dbcc">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://ultrafast.mov/docs/"},{"@type":"ListItem","position":3,"name":"Templates","item":"https://ultrafast.mov/templates/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I use these templates in commercial videos?","acceptedAnswer":{"@type":"Answer","text":"Yes. They ship inside ultrafast, which is open source under Apache-2.0 or MIT, so you can change them and use what you render in paid work. The fonts they use ship with ultrafast too (Geist, Geist Mono, Instrument Serif, Fraunces and Unbounded), under the SIL Open Font License."}},{"@type":"Question","name":"Can I make my own template?","acceptedAnswer":{"@type":"Answer","text":"Any ultrafast document is a template. Nothing marks a field as a variable: save a document you like, then set any node's param per copy with uf edit, from a script, or per row of a CSV with uf batch."}},{"@type":"Question","name":"Do I need a GPU to render them?","acceptedAnswer":{"@type":"Answer","text":"A Mac with Apple silicon, or Linux with a Vulkan GPU; Windows through WSL2. Without one, the Docker image renders on the CPU through Mesa's software Vulkan driver, more slowly: about 17 s for a 6-second 1080×1920 export on 4 desktop cores."}},{"@type":"Question","name":"How do I make a template longer?","acceptedAnswer":{"@type":"Answer","text":"Raise format.duration, then move the parts: each block has a duration and a timing.offset, and each transition an at time. uf review tells you when a line ends up on screen too briefly to read."}},{"@type":"Question","name":"How are these different from Remotion templates?","acceptedAnswer":{"@type":"Answer","text":"Remotion's templates are React projects you start with npx create-video, and most are starters for apps and render servers. These are finished-looking films, one JSON file each, rendered by the engine without a browser. ultrafast vs Remotion covers the rest."}}]},{"@type":"TechArticle","@id":"https://ultrafast.mov/templates/#article","headline":"Free video templates as JSON: promo, explainer, 3D product","description":"Six free video templates you edit as JSON and render on your own GPU: a vertical title card, a 16:9 title, a square poster, a 13-second promo, an explainer and a 3D product shot, each exported in under half a second.","url":"https://ultrafast.mov/templates/","mainEntityOfPage":"https://ultrafast.mov/templates/","image":"https://ultrafast.mov/og/templates.jpg","datePublished":"2026-11-24T17:28:31+00:00","dateModified":"2026-11-24T17:28:31+00:00","inLanguage":"en","author":{"@id":"https://ultrafast.mov/#org"},"publisher":{"@id":"https://ultrafast.mov/#org"},"about":{"@id":"https://ultrafast.mov/#app"}}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/" aria-current="page">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="band stock-cotton phead" style="padding-bottom:56px">
+  <div class="sunburst" aria-hidden="true" style="--sx:92%;--sy:40%;--r2:520px"></div>
+  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+<li><a href="/docs/">Docs</a></li>  <li aria-current="page">Templates</li>
+</ol>
+
+    <p class="eyebrow"><i style="--c:var(--blue)"></i>Docs</p>
+    <h1 class="pr h1" data-plates="blue black"><span class="ln">Video templates</span> <span class="ln">you edit as JSON.</span></h1>
+    <p class="lede">Six free video templates built into ultrafast, an open-source video engine that renders on your own GPU: a vertical title card, a 16:9 title, a square poster, a 13-second promo, an explainer and a 3D product shot. Each one is a single JSON file. Change the words and colours, check it, and export it in under half a second.</p>
+  </div>
+</section>
+<section class="band stock-thermal" style="padding-top:72px">
+  <div class="wrap docs">
+    <nav class="side" aria-label="Docs">
+      <h2>Start</h2>
+      <ul><li><a href="/docs/">Quickstart</a></li><li><a href="/docs/documents/">The document</a></li><li><a href="/templates/" aria-current="page">Templates</a></li></ul>
+      <h2>Guides</h2>
+      <ul><li><a href="/guides/render-video-from-json/">Render video from JSON</a></li><li><a href="/guides/personalized-videos-from-csv/">Personalized videos from a CSV</a></li><li><a href="/guides/claude-code/">Make a video with Claude Code</a></li><li><a href="/guides/lottie-to-mp4/">Lottie to MP4, WebM or ProRes</a></li><li><a href="/guides/animated-captions/">Animated captions from Whisper or SRT</a></li><li><a href="/guides/motion-graphics-with-code/">Motion graphics with code</a></li><li><a href="/guides/animated-chart-video/">Animated chart videos from a CSV</a></li><li><a href="/guides/animate-svg-logo/">Animate an SVG logo</a></li><li><a href="/guides/github-repo-video/">A film of a GitHub repo</a></li></ul>
+      <h2>Learn</h2>
+      <ul><li><a href="/learn/gpu-video-rendering/">Video rendering without a browser</a></li></ul>
+      <h2>Reference</h2>
+      <ul><li><a href="/docs/ops/">Ops</a></li><li><a href="/docs/cli/">CLI</a></li><li><a href="/docs/mcp/">MCP server</a></li><li><a href="/docs/api/">HTTP API</a></li></ul>
+      <h2>For agents</h2>
+      <ul><li><a href="/llms.txt">llms.txt</a></li><li><a href="/templates/index.md">This page as Markdown</a></li></ul>
+    </nav>
+    <article class="prose">
+<figure class="clip"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/template-product.webp" width="1280" height="720" aria-label="A white ceramic speaker with a grey fabric band and a gold top ring turns slowly on a pale studio sweep as the camera drifts round it; on the left, the name Aurora fades up letter by letter, then the line Room-filling sound, in porcelain, and the price, From $349"><source data-src="/media/guides/template-product.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/template-product.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/template-product.mp4" type="video/mp4"></video>
+  <figcaption>The product template, as <code>uf new product</code> writes it: a 3D speaker on a studio sweep, 240 frames of 1080p exported in 0.24 s.</figcaption></figure>
+
+<nav class="toc" aria-label="On this page"><b>On this page</b><ol>
+  <li><a href="#six">The six templates</a></li><li><a href="#vertical">Vertical title card</a></li><li><a href="#title">16:9 title</a></li>
+  <li><a href="#square">Square poster</a></li><li><a href="#promo">Promo</a></li><li><a href="#explainer">Explainer</a></li>
+  <li><a href="#product">3D product shot</a></li><li><a href="#own">Make one your own</a></li><li><a href="#shapes">Another shape</a></li>
+  <li><a href="#agent">With an agent</a></li><li><a href="#batch">One video per row</a></li><li><a href="#elsewhere">Templates elsewhere</a></li>
+  <li><a href="#faq">Questions</a></li>
+</ol></nav>
+
+<h2 id="six">The six templates</h2>
+<p>Install <code>uf</code> (a Mac with Apple silicon, or Linux with a Vulkan GPU; Windows through WSL2), then ask for a template by name: <code>vertical</code>, <code>title</code>, <code>square</code>, <code>promo</code>, <code>explainer</code> or <code>product</code>.</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">curl<span class="w"> </span>-fsSL<span class="w"> </span>https://ultrafast.mov/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w">     </span><span class="c1"># or: brew install ultrafastmov/tap/ultrafast</span>
+uf<span class="w"> </span>new<span class="w"> </span>promo<span class="w"> </span>launch.json
+uf<span class="w"> </span><span class="nb">export</span><span class="w"> </span>launch.json<span class="w"> </span>launch.mp4</code></pre></div><div class="tablewrap"><table class="tbl">
+  <thead><tr><th scope="col">Template</th><th scope="col">Frame</th><th scope="col">Length</th><th scope="col">What's in it</th><th scope="col">Export</th></tr></thead>
+  <tbody>
+    <tr><th scope="row"><a href="#vertical"><code>vertical</code></a></th><td>1080×1920</td><td>6 s</td><td>Two lines of serif type rising through masks, a label, a rule drawing in, bloom, vignette, grain</td><td>0.16 s</td></tr>
+    <tr><th scope="row"><a href="#title"><code>title</code></a></th><td>1920×1080</td><td>6 s</td><td>A title rising letter by letter from the middle out over moving marble, a subtitle that types on</td><td>0.34 s</td></tr>
+    <tr><th scope="row"><a href="#square"><code>square</code></a></th><td>1080×1080</td><td>6 s</td><td>A disc and a word in two halftone inks, multiplied onto paper like a two-colour print</td><td>0.12 s</td></tr>
+    <tr><th scope="row"><a href="#promo"><code>promo</code></a></th><td>1080×1920</td><td>13 s</td><td>Title, stat, quote and end card with a button, joined by a push, a dissolve and an iris</td><td>0.43 s</td></tr>
+    <tr><th scope="row"><a href="#explainer"><code>explainer</code></a></th><td>1920×1080</td><td>12 s</td><td>Chapter card, key idea with a lower third, a stat that counts up, a wipe and a slide</td><td>0.27 s</td></tr>
+    <tr><th scope="row"><a href="#product"><code>product</code></a></th><td>1920×1080</td><td>8 s</td><td>A 3D speaker in a studio with the camera orbiting, a name, a line and a price, a film look</td><td>0.24 s</td></tr>
+  </tbody>
+</table></div>
+<p>All six are 30 fps, and all but the explainer have motion blur on. Export times are the median of five runs, 0.12 to 0.43 s, with the published 0.2.1 binary on one RTX 5090 workstation, each encoded on the GPU with no frame copied back to the CPU. From pressing Enter to a finished file took 0.51 to 0.84 s.</p>
+<p><code>uf check</code> passes all six as they come. <code>uf review</code>, which renders the film and looks for text a viewer would trip over, has nothing to say about three of them. For the other three it points at small grey type on the product shot, two placeholder lines in the promo that leave the screen too soon, and the square's word entering from below the frame. Run it again after every edit: it's the quickest way to find what your own words broke.</p>
+<p>Each section below shows the film and names the nodes to change. Every node has a name, so <code>line1</code>'s <code>text</code> is a param you can set by hand, from a script, from a spreadsheet or from an agent. The JSON files are also here to read without installing anything.</p>
+
+<h2 id="vertical">Vertical title card: <code>vertical</code></h2>
+<div style="display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap">
+<figure class="clip tall" style="margin:0 0 24px"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/template-vertical.webp" width="720" height="1280" aria-label="A tall dark frame: the words Say the, in pale serif type, rise into place, then one thing., in warm italic, rises beneath them; a small label CHAPTER 01 types on above and a thin rule draws across below"><source data-src="/media/guides/template-vertical.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/template-vertical.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/template-vertical.mp4" type="video/mp4"></video></figure>
+<div style="flex:1;min-width:260px">
+<p>A chapter card or a hook for a short: 6 seconds at 1080×1920, made for Reels, Shorts and TikTok.</p>
+<ul>
+  <li><code>line1</code> and <code>line2</code>: the two lines. Each rises into its own window (<code>line1_mask</code>, <code>line2_mask</code>, both <code>crop</code> nodes), so the type appears to come up from behind a line.</li>
+  <li><code>label</code>: <code>CHAPTER 01</code>, one glyph at a time.</li>
+  <li><code>line2</code>'s <code>color</code> is the warm italic; <code>ground</code>'s <code>stops</code> set the background.</li>
+  <li>The lines start 84 px from the left edge, which leaves about 1,000 px at 190 px type. <code>uf review</code> reports a line that runs off the frame; lower its <code>size</code>.</li>
+</ul>
+<p><a href="/templates/vertical.json">vertical.json</a> · 14 nodes · 0.16 s</p>
+</div></div>
+
+<h2 id="title">16:9 title: <code>title</code></h2>
+<figure class="clip"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/template-title.webp" width="1280" height="720" aria-label="Dark marble in dusky pink, blue and copper swirls and flows across a wide frame; the words Your Title rise into place letter by letter from the middle out, then a subtitle, a subtitle that breathes, types itself on underneath and drifts gently"><source data-src="/media/guides/template-title.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/template-title.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/template-title.mp4" type="video/mp4"></video></figure>
+<p>An opening title for a talk, a trailer or a YouTube video, over <code>marble</code>, a procedural fluid texture that never repeats.</p>
+<ul>
+  <li><code>title</code>: the text, rising from the middle letter outward (<code>stagger_order</code> is <code>center</code>).</li>
+  <li><code>sub</code>: the subtitle. It types on with a <code>reveal</code> that counts glyphs and stops at 24, the length of the placeholder. With longer words, <code>uf check</code> says so: <code>its `reveal` keys stop at 24, so the last 14 of its 38 glyphs never show in full: key it up to 38</code>.</li>
+  <li><code>world</code>'s <code>filaments</code> sets how much fine detail the marble has, and <code>dim</code>'s <code>exposure</code> how dark it sits behind the type.</li>
+</ul>
+<p><a href="/templates/title.json">title.json</a> · 8 nodes · 0.34 s</p>
+
+<h2 id="square">Square poster: <code>square</code></h2>
+<div style="display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap">
+<figure class="clip" style="margin:0 0 24px;width:min(400px,100%)"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/template-square.webp" width="720" height="720" aria-label="A cream square: a pink halftone disc grows in the upper right, then the word BOLD in blue halftone rises into place letter by letter, overlapping the disc where the two inks mix to purple"><source data-src="/media/guides/template-square.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/template-square.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/template-square.mp4" type="video/mp4"></video></figure>
+<div style="flex:1;min-width:260px">
+<p>A feed post or a cover in the look of a two-ink risograph print.</p>
+<ul>
+  <li><code>word</code>: the text, rising letter by letter.</li>
+  <li><code>disc</code>: a <code>shape</code>; its <code>center</code> and the last <code>size</code> key place it.</li>
+  <li><code>pink</code> and <code>blue</code>: <code>halftone</code> nodes, each an ink. <code>r</code>, <code>g</code> and <code>b</code> set the ink's colour, <code>cell</code> the dot size, <code>angle</code> the screen.</li>
+  <li>The inks <code>multiply</code> onto <code>paper</code>, so where they overlap they darken the way real ink does.</li>
+</ul>
+<p><a href="/templates/square.json">square.json</a> · 8 nodes · 0.12 s</p>
+</div></div>
+
+<h2 id="promo">Promo: <code>promo</code></h2>
+<div style="display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap">
+<figure class="clip tall" style="margin:0 0 24px"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/template-promo.webp" width="720" height="1280" aria-label="A tall frame over dark purple marble: a small pink kicker over Your product, in one line, and a sentence; a push to 10x FASTER THAN BEFORE with a teal rule; a dissolve in pink specks to a quote from a happy customer; an iris to an end card reading product, the tagline goes here, and a pink Try it free button"><source data-src="/media/guides/template-promo.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/template-promo.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/template-promo.mp4" type="video/mp4"></video></figure>
+<div style="flex:1;min-width:260px">
+<p>A 13-second vertical launch video in four parts. It's built from <a href="/docs/ops/">blocks</a>, designed parts with their own layout and motion, so the template's JSON stays short.</p>
+<ul>
+  <li><code>title</code>: <code>kicker</code>, <code>title</code>, <code>subtitle</code>.</li>
+  <li><code>stat</code>: <code>value</code> (it counts up), <code>suffix</code>, <code>label</code>, <code>accent</code>.</li>
+  <li><code>quote</code>: <code>quote</code> and <code>author</code>.</li>
+  <li><code>end</code>: <code>title</code>, <code>tagline</code> and <code>cta</code>, the button.</li>
+  <li><code>cut1</code>, <code>cut2</code> and <code>cut3</code> are the transitions; each has a <code>kind</code> and an <code>at</code> time.</li>
+</ul>
+<p>Keep the subtitle and the quote short. The quote is readable from 8.6 s until the iris closes on it at 10.3 s, and <code>uf review</code> wants about a quarter of a second per word.</p>
+<p><a href="/templates/promo.json">promo.json</a> · 16 nodes · 0.43 s</p>
+</div></div>
+
+<h2 id="explainer">Explainer: <code>explainer</code></h2>
+<figure class="clip"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/template-explainer.webp" width="1280" height="720" aria-label="A warm off-white wide frame: 01, The problem, with a red rule drawing beneath it; a wipe to a key-idea headline, a line of evidence and a lower third for Speaker Name; a slide to a large 42% counting up over OF TEAMS SAY SO"><source data-src="/media/guides/template-explainer.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/template-explainer.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/template-explainer.mp4" type="video/mp4"></video></figure>
+<p>A 12-second explainer in three beats on warm paper: a chapter card, a point with the speaker's name, and a number.</p>
+<ul>
+  <li><code>chapter</code>: <code>number</code> and <code>title</code>.</li>
+  <li><code>point</code>: <code>kicker</code>, <code>title</code>, <code>subtitle</code>; <code>who</code> is the lower third, with <code>name</code> and <code>role</code>.</li>
+  <li><code>stat</code>: <code>value</code>, <code>suffix</code>, <code>label</code>.</li>
+  <li>Every block takes an <code>ink</code> colour, and the stat an <code>accent</code>; <code>ground</code> is the paper.</li>
+</ul>
+<p><a href="/templates/explainer.json">explainer.json</a> · 12 nodes · 0.27 s</p>
+
+<h2 id="product">3D product shot: <code>product</code></h2>
+<p>The film at the top of this page. The speaker isn't a model file: a <code>raymarch</code> node draws it from 25 lines of signed-distance code in its <code>scene</code> param (a ceramic body, a woven band, a brushed gold ring), lit by a studio environment.</p>
+<ul>
+  <li><code>name</code>, <code>line</code> and <code>price</code>: the three lines of type. <code>price</code> types on with a <code>reveal</code> that stops at 9, the length of <code>From $349</code>.</li>
+  <li><code>product</code>'s <code>orbit</code> keys move the camera over the 8 seconds, and <code>k0</code> turns the speaker 40°.</li>
+  <li>The materials are numbered in the scene's first comment: 7 ceramic and 4 gold are presets, 20 the fabric and 21 the sweep.</li>
+  <li><code>finish</code> is a <code>film_look</code>: halation, grain, a vignette and a little chromatic aberration.</li>
+</ul>
+<p><code>uf review</code> rates the grey line at 2.9:1 against the sweep and the price at 2.0:1, under the 3:1 it wants. Setting both <code>color</code>s to <code>#1d1d1f</code>, the name's colour, clears it.</p>
+<p><a href="/templates/product.json">product.json</a> · 8 nodes · 0.24 s</p>
+
+<h2 id="own">Make one your own</h2>
+<p>Here's the promo turned into a launch video for Tidewell, a made-up notes app. Start from the template:</p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">$ uf new promo launch.json
+wrote launch.json (ultrafast check / sheet / live / export it)</code></pre></div><p>You can open <code>launch.json</code> and change the words in place. A list of edits does the same from a script, and keeps the change readable:</p>
+<div class="code"><div class="cbar"><span>edits.json</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set_param&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;title&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;param&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;kicker&quot;</span><span class="p">,</span><span class="w">   </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NOW IN BETA&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set_param&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;title&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;param&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;title&quot;</span><span class="p">,</span><span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tidewell&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set_param&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;title&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;param&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;subtitle&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Notes that file themselves.&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set_param&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stat&quot;</span><span class="p">,</span><span class="w">  </span><span class="nt">&quot;param&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;value&quot;</span><span class="p">,</span><span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set_param&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stat&quot;</span><span class="p">,</span><span class="w">  </span><span class="nt">&quot;param&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;suffix&quot;</span><span class="p">,</span><span class="w">   </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot; apps&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set_param&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stat&quot;</span><span class="p">,</span><span class="w">  </span><span class="nt">&quot;param&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;label&quot;</span><span class="p">,</span><span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;REPLACED BY ONE&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set_param&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;quote&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;param&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;quote&quot;</span><span class="p">,</span><span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;I stopped losing things the first week I used it, and I haven&#39;t opened a folder since.&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set_param&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;quote&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;param&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;author&quot;</span><span class="p">,</span><span class="w">   </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Priya, product designer&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set_param&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;end&quot;</span><span class="p">,</span><span class="w">   </span><span class="nt">&quot;param&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;title&quot;</span><span class="p">,</span><span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tidewell&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set_param&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;end&quot;</span><span class="p">,</span><span class="w">   </span><span class="nt">&quot;param&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tagline&quot;</span><span class="p">,</span><span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;write first, sort later&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set_param&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;end&quot;</span><span class="p">,</span><span class="w">   </span><span class="nt">&quot;param&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cta&quot;</span><span class="p">,</span><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Join the beta&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">]</span></code></pre></div><div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">$ uf edit launch.json edits.json --out launch.json
+Params
+$ uf review launch.json
+{
+  &quot;issues&quot;: [
+    {
+      &quot;severity&quot;: &quot;warning&quot;,
+      &quot;kind&quot;: &quot;too_brief&quot;,
+      &quot;node&quot;: &quot;quote/quote2&quot;,
+      &quot;from&quot;: 8.6,
+      &quot;to&quot;: 10.3,
+      &quot;message&quot;: &quot;\&quot;I stopped losing things the first week I…\&quot; is readable for 1.7 s; 17 word(s) need about 4.0 s&quot;
+    }
+  ],
+  &quot;frames&quot;: 390,
+  &quot;texts&quot;: 11,
+  &quot;seconds&quot;: 1.5153431
+}</code></pre></div><p><code>Params</code> means the edit only changed values, so nothing in the render plan has to be rebuilt. The review caught the quote: 17 words won't read in 1.7 s. Either cut it down or give it room by moving <code>cut3</code>'s <code>at</code>, the end card's <code>timing.offset</code> and the <code>format</code>'s <code>duration</code> later. Cutting is quicker. <code>shorter.json</code> sets the quote to <q>I haven't opened a folder since.</q></p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">$ uf edit launch.json shorter.json --out launch.json
+Params
+$ uf review launch.json            # &quot;issues&quot;: []
+$ uf export launch.json launch.mp4
+exported 390 frames (1080x1920 @ 30 fps, mp4 h264, standard) in 0.41 s = 953 fps, 0 readbacks -&gt; launch.mp4</code></pre></div><figure class="clip tall"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/template-promo-tidewell.webp" width="720" height="1280" aria-label="The promo template with new words over dark purple marble: NOW IN BETA, Tidewell, Notes that file themselves; 4 apps, REPLACED BY ONE; a quote, I haven&#39;t opened a folder since, from Priya, product designer; an end card reading tidewell, write first, sort later, with a pink Join the beta button"><source data-src="/media/guides/template-promo-tidewell.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/template-promo-tidewell.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/template-promo-tidewell.mp4" type="video/mp4"></video>
+  <figcaption>Tidewell, from the promo template and eleven edits, exported in 0.41 s.</figcaption></figure>
+<p>Both files are here: <a href="/templates/tidewell-edits.json">tidewell-edits.json</a> and the finished <a href="/templates/tidewell.json">tidewell.json</a>. To look at frames before you export, <code>uf sheet launch.json</code> writes a labelled contact sheet.</p>
+
+<h2 id="shapes">Another shape</h2>
+<p>The promo and the explainer are made of blocks, and blocks lay themselves out for the frame they're in. Change only the <code>format</code>'s <code>width</code> and <code>height</code>, and the same document becomes a 16:9 or a square video:</p>
+<div class="code"><div class="cbar"><span>json</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;fps&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;motion_blur&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;samples&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;shutter&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span></code></pre></div><figure class="clip"><img src="/img/guides/template-promo-shapes.webp" width="1440" height="421" loading="lazy" alt="The same moment of the Tidewell promo in three frames side by side: a tall 9:16, a square and a wide 16:9, each with 4 apps, REPLACED BY ONE and a teal rule, sized and placed to fit its own frame.">
+  <figcaption>The Tidewell document as a tall, a square and a wide video, with only the frame size changed. <code>uf review</code> finds nothing in any of them.</figcaption></figure>
+<p>The other four place their type at pixel positions, so they stay at the size they were made for. To change their shape, move the nodes yourself, or start from <code>promo</code> or <code>explainer</code>. Any template exports larger without changes: <code>uf export film.json film.mp4 --size 4k</code> draws every frame sharp at the new size.</p>
+
+<h2 id="agent">With an agent</h2>
+<p>With ultrafast's skill or MCP server installed, an agent can start from a template too. The MCP tool <code>ultrafast_new</code> takes the same six names. A prompt that gets a good result names the template, the words, and the check to run:</p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">Start from the promo template and make a 13-second vertical launch video for Tidewell,
+a notes app in beta: &quot;Notes that file themselves&quot;, 4 apps replaced by one, a short quote
+from a beta user, and an end card with a &quot;Join the beta&quot; button. Run uf review and fix
+anything it reports, then export launch.mp4.</code></pre></div><p>Setup for Claude Code, Codex, Cursor and Gemini CLI is on the <a href="/integrations/">Integrations</a> page, and a recorded session from prompt to MP4 is in <a href="/guides/claude-code/">Make a video with Claude Code</a>.</p>
+
+<h2 id="batch">One video per row</h2>
+<p>Any template can be filled from a spreadsheet. A column named <code>node.param</code>, such as <code>title.title</code> or <code>stat.value</code>, sets that param in each row's copy, and <code>uf batch</code> checks every row before it renders any of them:</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">uf<span class="w"> </span>batch<span class="w"> </span>launch.json<span class="w"> </span>--data<span class="w"> </span>rows.csv<span class="w"> </span>--out<span class="w"> </span><span class="s1">&#39;out/{name}.mp4&#39;</span></code></pre></div><p><a href="/guides/personalized-videos-from-csv/">Personalized videos from a CSV</a> walks through it with the vertical template: 100 thank-you videos from one sheet, exported in 18.0 s.</p>
+
+<h2 id="elsewhere">Templates elsewhere</h2>
+<ul>
+  <li><b>Remotion</b> lists 20 free templates and 3 paid ones. They're React projects you start with a command such as <code>npx create-video@latest --tiktok</code>: a blank canvas and Hello World, app and server starters (Next.js, React Router, Express, Electron), and visual ones such as TikTok captions, an audiogram and Code Hike code animations. Use them when you want a codebase to build on; ultrafast's are finished-looking films to change, one JSON file each.</li>
+  <li><b>ultrafast's examples:</b> the <a href="/examples/">example films</a> are longer and more ambitious, and each document can be downloaded. Most read footage or images you'd download first, so they aren't templates in the <code>uf new</code> sense.</li>
+  <li><b>After Effects templates</b> need After Effects to render. The <a href="/alternatives/after-effects/">After Effects alternative</a> page covers what carries over through Lottie and what doesn't.</li>
+</ul>
+
+<h2 id="faq">Questions</h2>
+<div class="faq">
+  <details open>
+    <summary>Can I use these templates in commercial videos?</summary>
+    <div class="ans"><p>Yes. They ship inside ultrafast, which is open source under Apache-2.0 or MIT, so you can change them and use what you render in paid work. The fonts they use ship with ultrafast too (Geist, Geist Mono, Instrument Serif, Fraunces and Unbounded), under the SIL Open Font License.</p></div>
+  </details>
+  <details>
+    <summary>Can I make my own template?</summary>
+    <div class="ans"><p>Any ultrafast document is a template. Nothing marks a field as a variable: save a document you like, then set any node's param per copy with <code>uf edit</code>, from a script, or per row of a CSV with <code>uf batch</code>.</p></div>
+  </details>
+  <details>
+    <summary>Do I need a GPU to render them?</summary>
+    <div class="ans"><p>A Mac with Apple silicon, or Linux with a Vulkan GPU; Windows through WSL2. Without one, the Docker image renders on the CPU through Mesa's software Vulkan driver, more slowly: about 17 s for a 6-second 1080×1920 export on 4 desktop cores.</p></div>
+  </details>
+  <details>
+    <summary>How do I make a template longer?</summary>
+    <div class="ans"><p>Raise <code>format.duration</code>, then move the parts: each block has a <code>duration</code> and a <code>timing.offset</code>, and each transition an <code>at</code> time. <code>uf review</code> tells you when a line ends up on screen too briefly to read.</p></div>
+  </details>
+  <details>
+    <summary>How are these different from Remotion templates?</summary>
+    <div class="ans"><p>Remotion's templates are React projects you start with <code>npx create-video</code>, and most are starters for apps and render servers. These are finished-looking films, one JSON file each, rendered by the engine without a browser. <a href="/compare/remotion/">ultrafast vs Remotion</a> covers the rest.</p></div>
+  </details>
+</div>
+
+
+<h2 id="sources">Sources</h2>
+<p>All read or run on 24 November 2026.</p>
+<ul>
+  <li><b>ultrafast:</b> the templates as the published 0.2.1 binary writes them (<code>uf new</code>), and their source in <a href="https://github.com/ultrafastmov/ultrafast/tree/main/crates/ultrafast-ops/templates">crates/ultrafast-ops/templates</a>.</li>
+  <li><b>Remotion:</b> <a href="https://www.remotion.dev/templates">Starter templates</a> and the <a href="https://www.remotion.dev/templates/tiktok">TikTok template</a> page.</li>
+</ul>
+    </article>
+  </div>
+</section>
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/learn/can-claude-make-videos/">Can Claude make videos?</a>
+<a href="/blog/">Blog</a>      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+<a href="/changelog/">Changelog</a>      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+      <a href="/alternatives/remotion/">Remotion alternatives</a>
+      <a href="/alternatives/hyperframes/">HyperFrames alternatives</a>
+      <a href="/alternatives/json-to-video-api/">vs JSON-to-video APIs</a>
+      <a href="/benchmarks/">Benchmarks</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code></span>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=c898dbcc"></script>
+</body>
+</html>

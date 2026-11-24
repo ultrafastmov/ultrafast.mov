@@ -14,6 +14,7 @@ Turn a Lottie JSON file into an MP4, a transparent WebM, ProRes 4444, a GIF or P
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+  * [Templates](<https://ultrafast.mov/templates/>)
 
 ## Guides
 

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "format": { "width": 1080, "height": 1080, "fps": 30, "duration": 6, "motion_blur": { "samples": 6, "shutter": 0.5 } },
+  "output": "finish",
+  "nodes": {
+    "paper": { "op": "solid", "params": { "color": "#ece8df" } },
+    "disc": { "op": "shape", "params": { "kind": "circle", "color": "#ffffff", "center": [700, 420],
+      "size": { "keys": [ { "t": 0.2, "v": [0, 0], "ease": { "bezier": [0.16, 1, 0.3, 1] } }, { "t": 1.2, "v": [620, 620] } ] } } },
+    "word": { "op": "text", "params": { "text": "BOLD", "font": "Geist", "weight": 800, "size": 300, "color": "#ffffff", "valign": "baseline",
+      "position": [80, 860], "stagger": 0.06, "glyph_offset": { "keys": [ { "t": 0.6, "v": [0, 260], "ease": { "bezier": [0.16, 1, 0.3, 1] } }, { "t": 1.3, "v": [0, 0] } ] } } },
+    "pink": { "op": "halftone", "inputs": { "source": "disc" }, "params": { "cell": 10, "angle": 15, "r": 1.0, "g": 0.28, "b": 0.69 } },
+    "blue": { "op": "halftone", "inputs": { "source": "word" }, "params": { "cell": 9, "angle": 75, "r": 0.0, "g": 0.47, "b": 0.75, "seed": 2 } },
+    "p1": { "op": "blend", "inputs": { "fg": "pink", "bg": "paper" }, "params": { "mode": "multiply" } },
+    "p2": { "op": "blend", "inputs": { "fg": "blue", "bg": "p1" }, "params": { "mode": "multiply" } },
+    "finish": { "op": "grain", "inputs": { "source": "p2" }, "params": { "amount": 0.05 } }
+  }
+}

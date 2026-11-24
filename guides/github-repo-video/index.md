@@ -14,6 +14,7 @@ Turn a public GitHub repository into a 17-second film: its name and description,
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+  * [Templates](<https://ultrafast.mov/templates/>)
 
 ## Guides
 

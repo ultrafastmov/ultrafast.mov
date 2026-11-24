@@ -14,6 +14,7 @@ Motion graphics written as code or data instead of keyframed by hand: the tools 
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+  * [Templates](<https://ultrafast.mov/templates/>)
 
 ## Guides
 

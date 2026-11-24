@@ -1,0 +1,157 @@
+{
+ "version": 1,
+ "format": {
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration": 12
+ },
+ "output": "finish",
+ "nodes": {
+  "ground": {
+   "op": "gradient",
+   "params": {
+    "kind": "linear",
+    "start": [
+     0,
+     0
+    ],
+    "end": [
+     1920,
+     1080
+    ],
+    "stops": "0:#f4efe6, 1:#e8e0d2"
+   }
+  },
+  "chapter": {
+   "op": "block",
+   "params": {
+    "kind": "chapter",
+    "number": "01",
+    "title": "The problem",
+    "ink": "#141824",
+    "duration": 3.0,
+    "position": [
+     160,
+     380
+    ]
+   },
+   "timing": {
+    "offset": 0.3
+   }
+  },
+  "s1": {
+   "op": "over",
+   "inputs": {
+    "fg": "chapter",
+    "bg": "ground"
+   }
+  },
+  "point": {
+   "op": "block",
+   "params": {
+    "kind": "title",
+    "kicker": "KEY IDEA",
+    "title": "Say the one thing that matters",
+    "subtitle": "Support it with one sentence of evidence.",
+    "ink": "#141824",
+    "duration": 4.0,
+    "width": 1300,
+    "position": [
+     160,
+     300
+    ]
+   },
+   "timing": {
+    "offset": 4.2
+   }
+  },
+  "who": {
+   "op": "block",
+   "params": {
+    "kind": "lower_third",
+    "name": "Speaker Name",
+    "role": "TITLE, COMPANY",
+    "ink": "#141824",
+    "duration": 3.4
+   },
+   "timing": {
+    "offset": 4.6
+   }
+  },
+  "s2a": {
+   "op": "over",
+   "inputs": {
+    "fg": "point",
+    "bg": "ground"
+   }
+  },
+  "s2": {
+   "op": "over",
+   "inputs": {
+    "fg": "who",
+    "bg": "s2a"
+   }
+  },
+  "stat": {
+   "op": "block",
+   "params": {
+    "kind": "stat",
+    "value": 42,
+    "suffix": "%",
+    "label": "OF TEAMS SAY SO",
+    "ink": "#141824",
+    "accent": "#ff5c7a",
+    "position": [
+     160,
+     330
+    ]
+   },
+   "timing": {
+    "offset": 8.9
+   }
+  },
+  "s3": {
+   "op": "over",
+   "inputs": {
+    "fg": "stat",
+    "bg": "ground"
+   }
+  },
+  "cut1": {
+   "op": "transition",
+   "params": {
+    "kind": "wipe",
+    "at": 3.7,
+    "duration": 0.6,
+    "direction": 0
+   },
+   "inputs": {
+    "a": "s1",
+    "b": "s2"
+   }
+  },
+  "cut2": {
+   "op": "transition",
+   "params": {
+    "kind": "slide",
+    "at": 8.4,
+    "duration": 0.6,
+    "direction": 90
+   },
+   "inputs": {
+    "a": "cut1",
+    "b": "s3"
+   }
+  },
+  "finish": {
+   "op": "grain",
+   "params": {
+    "amount": 0.04
+   },
+   "inputs": {
+    "source": "cut2"
+   }
+  }
+ }
+}

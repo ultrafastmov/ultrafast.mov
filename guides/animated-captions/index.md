@@ -14,6 +14,7 @@ Burn word-by-word captions into a video from a Whisper transcript, an SRT or a V
 
   * [Quickstart](<https://ultrafast.mov/docs/>)
   * [The document](<https://ultrafast.mov/docs/documents/>)
+  * [Templates](<https://ultrafast.mov/templates/>)
 
 ## Guides
 
