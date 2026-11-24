@@ -233,13 +233,12 @@ GIF, 960×540| `uf export reveal.json reveal.gif --size 960x540`| 1.0 s| 918 KB
 
 ## What imports
 
-These were tested one feature at a time with 0.2.1, each file rendered by ultrafast and by Chromium. Drawn the same as in the browser: paths and basic shapes; fills and strokes with dashes, caps and joins; linear and radial gradients on fills and strokes; even-odd fills; groups, transforms and `<use>`; CSS classes in a `<style>` block; clip paths and masks; Gaussian blur. The rest:
+These were tested one feature at a time with 0.2.2, each file rendered by ultrafast and by Chromium. Drawn the same as in the browser: paths and basic shapes; fills and strokes with dashes, caps and joins; linear and radial gradients on fills and strokes; even-odd fills; groups, transforms and `<use>`; CSS classes in a `<style>` block; clip paths and masks; Gaussian blur; `mix-blend-mode`, as a `blend` node. The rest:
 
-In the SVG| What 0.2.1 does| Warned  
+In the SVG| What 0.2.2 does| Warned  
 ---|---|---  
-Text| Drawn as outlines when its font is installed. A font that isn't installed, or a generic family such as `sans-serif`, draws nothing.| No  
-Opacity below 1| Blended in linear light, as everything in ultrafast is, so it comes out lighter than in a browser: a red circle at 50 % over white is (255, 188, 188) rather than (255, 126, 126).| No  
-`mix-blend-mode`| Ignored; the shape is drawn normally. A `blend` node does multiply, screen and the other modes.| No  
+Text| Drawn as outlines in the fonts the `text` op finds: installed, ultrafast's own, or fetched from Google Fonts. A font none of them has falls back to the list's generic family, or a serif.| Yes, when a font is replaced  
+Opacity below 1| Blended in sRGB inside the SVG, as in a browser. Over your film, the `over` that places it decides: with `"space": "srgb"`, a red circle at 50 % over white is (255, 127, 127), where Chromium gives (255, 126, 126); ultrafast's default, linear light, gives (255, 188, 188).| No  
 Radial gradient focal point| Drawn centred| Yes  
 Pattern fills| Skipped| Yes  
 Embedded images| Skipped; place the image with an `image` node| Yes  
