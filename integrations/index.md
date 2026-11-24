@@ -39,6 +39,7 @@ claude mcp add ultrafast -- uf mcp
 [mcp_servers.ultrafast]
 command = "uf"
 args = ["mcp"]
+default_tools_approval_mode = "approve"
 ``` 
 
 ### Cursor
@@ -61,7 +62,7 @@ args = ["mcp"]
 }
 ``` 
 
-Each agent also gets the ultrafast skill: `npx skills add ultrafastmov/ultrafast`. In Claude Code, the plugin brings both: `claude plugin marketplace add ultrafastmov/ultrafast`, then `claude plugin install ultrafast@ultrafast`.
+Each agent also gets the ultrafast skill: `npx skills add ultrafastmov/ultrafast`. In Claude Code, the plugin brings both: `claude plugin marketplace add ultrafastmov/ultrafast`, then `claude plugin install ultrafast@ultrafast`. Recorded sessions from prompt to MP4: [Claude Code](<https://ultrafast.mov/guides/claude-code/>) and [Codex](<https://ultrafast.mov/guides/codex/>).
 
 Remote MCP
 

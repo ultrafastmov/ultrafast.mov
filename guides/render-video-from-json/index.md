@@ -21,6 +21,7 @@ One JSON file in, a finished video out, rendered on your GPU. A worked example, 
   * [Render video from JSON](<https://ultrafast.mov/guides/render-video-from-json/>)
   * [Personalized videos from a CSV](<https://ultrafast.mov/guides/personalized-videos-from-csv/>)
   * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
+  * [Make a video with Codex](<https://ultrafast.mov/guides/codex/>)
   * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
   * [Animated captions from Whisper or SRT](<https://ultrafast.mov/guides/animated-captions/>)
   * [Motion graphics with code](<https://ultrafast.mov/guides/motion-graphics-with-code/>)
