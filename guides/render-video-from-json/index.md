@@ -22,6 +22,7 @@ One JSON file in, a finished video out, rendered on your GPU. A worked example, 
   * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
   * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
   * [Animated captions from Whisper or SRT](<https://ultrafast.mov/guides/animated-captions/>)
+  * [Motion graphics with code](<https://ultrafast.mov/guides/motion-graphics-with-code/>)
 
 ## Reference
 
