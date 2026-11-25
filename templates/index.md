@@ -255,7 +255,7 @@ from a beta user, and an end card with a "Join the beta" button. Run uf review a
 anything it reports, then export launch.mp4.
 ``` 
 
-Setup for Claude Code, Codex, Cursor and Gemini CLI is on the [Integrations](<https://ultrafast.mov/integrations/>) page, and a recorded session from prompt to MP4 is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>).
+Setup for Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI is on the [Integrations](<https://ultrafast.mov/integrations/>) page, and a recorded session from prompt to MP4 is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>).
 
 ## One video per row
 

@@ -1,6 +1,6 @@
 # Use cases · Make videos by asking · ultrafast
 
-> Social posts, podcast clips, documentaries, explainers, data stories, launch films and title sequences, made by asking an agent: Claude Code, Codex, Cursor or Gemini CLI with ultrafast.
+> Social posts, podcast clips, documentaries, explainers, data stories, launch films and title sequences, made by asking an agent: Claude Code, Codex, Cursor, Antigravity CLI or Gemini CLI with ultrafast.
 
 URL: https://ultrafast.mov/use-cases/
 
@@ -8,7 +8,7 @@ Use cases
 
 # Ask your agent for a video.
 
-Describe it to Claude Code, Codex, Cursor or Gemini CLI with ultrafast connected. The agent writes the document, ultrafast checks every frame, and the agent exports the file. No timeline, no editor.
+Describe it to Claude Code, Codex, Cursor, Antigravity CLI or Gemini CLI with ultrafast connected. The agent writes the document, ultrafast checks every frame, and the agent exports the file. No timeline, no editor.
 
 [Connect your agent](<https://ultrafast.mov/docs/#agents>) [See examples](<https://ultrafast.mov/examples/>)
 
@@ -183,7 +183,7 @@ No. Describe what you want to your agent in plain words, the way you'd brief a p
 
 Which agents can do this?
 
-Any agent that can run an MCP server or a shell: Claude Code, Codex, Cursor and Gemini CLI connect to `uf mcp` in one line. See [MCP](<https://ultrafast.mov/docs/mcp/>). The ChatGPT app and the Claude connector come with [ultrafast Cloud](<https://ultrafast.mov/cloud/>).
+Any agent that can run an MCP server or a shell: Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI connect to `uf mcp` in one line. See [MCP](<https://ultrafast.mov/docs/mcp/>). The ChatGPT app and the Claude connector come with [ultrafast Cloud](<https://ultrafast.mov/cloud/>).
 
 Can I use my own footage, photos and logo?
 

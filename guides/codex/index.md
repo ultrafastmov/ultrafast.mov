@@ -186,7 +186,7 @@ Codex CLI 0.169 with its default model, GPT-6-Luna, and ultrafast 0.2.1; every e
 
 Codex also makes video with Remotion (React rendered in headless Chrome), whose agent skills install with `npx skills add remotion-dev/skills`, and with HyperFrames (HTML and GSAP in headless Chrome). On one RTX 5090, the same three 10-second videos exported in 0.66–0.78 s with ultrafast; Remotion took 3.1–8.6 times as long at its fastest settings, and HyperFrames 4.6–5.7 times ([benchmark](<https://ultrafast.mov/benchmarks/>)). For the same 10-second short, the ultrafast document took about 1,234 output tokens against 1,868 for Remotion. Head-to-head pages: [ultrafast vs Remotion](<https://ultrafast.mov/compare/remotion/>), [ultrafast vs HyperFrames](<https://ultrafast.mov/compare/hyperframes/>).
 
-The same skill and MCP server work in Claude Code ([a recorded Claude Code session](<https://ultrafast.mov/guides/claude-code/>)), Cursor, Gemini CLI and any MCP client: setup for each is on [Integrations](<https://ultrafast.mov/integrations/>), and the tools are listed in [MCP server](<https://ultrafast.mov/docs/mcp/>).
+The same skill and MCP server work in Claude Code ([a recorded Claude Code session](<https://ultrafast.mov/guides/claude-code/>)), Cursor, Antigravity CLI, Gemini CLI and any MCP client: setup for each is on [Integrations](<https://ultrafast.mov/integrations/>), and the tools are listed in [MCP server](<https://ultrafast.mov/docs/mcp/>).
 
 ## Questions
 

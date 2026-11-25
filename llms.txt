@@ -44,7 +44,7 @@ Facts an agent needs:
 ## Product
 
 - [Use cases](https://ultrafast.mov/use-cases/index.md): what people make with it, with example prompts
-- [Integrations](https://ultrafast.mov/integrations/index.md): Claude Code, Codex, Cursor, Gemini CLI, SDKs, HTTP, self-hosting
+- [Integrations](https://ultrafast.mov/integrations/index.md): Claude Code, Codex, Cursor, Antigravity CLI, Gemini CLI, SDKs, HTTP, self-hosting
 - [Video MCP server for agents](https://ultrafast.mov/mcp/index.md): the video MCP server: what the agent sees, the 20 tools by group, setup per tested client, the MCP Registry name, limits
 - [Can Claude make videos? Every way, compared](https://ultrafast.mov/learn/can-claude-make-videos/index.md): can Claude make videos: Claude Motion on Team and Enterprise, Claude Code with ultrafast, Remotion or HyperFrames, and connectors, with plans, renderers, costs and what none of them can do
 - [ultrafast Cloud](https://ultrafast.mov/cloud/index.md): ultrafast Cloud, the ChatGPT app and the Claude connector: coming soon, with a waitlist

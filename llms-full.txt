@@ -181,7 +181,7 @@ Edits
 
 Your agent edits the document, not the pixels. One sentence changed one node: the pot's shape, its camera and its shader. The type, light and timing stayed as they were.
 
-This works today in Claude Code, Codex, Cursor and Gemini CLI with `uf mcp`.
+This works today in Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI with `uf mcp`.
 
 Coming soon The ChatGPT app and the Claude connector, for making videos in a chat. [Join the waitlist](<https://ultrafast.mov/cloud/#apps>)
 
@@ -224,7 +224,7 @@ Integrations
 [All integrations](<https://ultrafast.mov/integrations/>)
 
   * [**MCP server**`uf mcp`local · 20 tools _Available_](<https://ultrafast.mov/docs/mcp/>)
-  * [**Coding agents** Claude Code, Codex, Cursor, Gemini CLI _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
+  * [**Coding agents** Claude Code, Codex, Cursor, Antigravity CLI, Gemini CLI _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
   * [**Skill and plugin**`npx skills add``ultrafastmov/ultrafast` _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
   * [**Remote MCP**`uf serve`/mcp on your server, one key _Available_](<https://ultrafast.mov/integrations/#remote-mcp>)
   * [**SDKs**`pip install ultrafastmov``npm i ultrafastmov` _Available_](<https://ultrafast.mov/integrations/#sdks>)
@@ -460,7 +460,7 @@ This is how an agent works, and how you should too:
 claude mcp add ultrafast -- uf mcp
 ``` 
 
-Codex, Cursor, Gemini CLI and remote MCP over HTTP are on the [MCP page](<https://ultrafast.mov/docs/mcp/>). Agents can also read [llms.txt](<https://ultrafast.mov/llms.txt>) and every page of these docs as Markdown.
+Codex, Cursor, Antigravity CLI, Gemini CLI and remote MCP over HTTP are on the [MCP page](<https://ultrafast.mov/docs/mcp/>). Agents can also read [llms.txt](<https://ultrafast.mov/llms.txt>) and every page of these docs as Markdown.
 
 ## Run it as a service
 
@@ -882,7 +882,7 @@ from a beta user, and an end card with a "Join the beta" button. Run uf review a
 anything it reports, then export launch.mp4.
 ``` 
 
-Setup for Claude Code, Codex, Cursor and Gemini CLI is on the [Integrations](<https://ultrafast.mov/integrations/>) page, and a recorded session from prompt to MP4 is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>).
+Setup for Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI is on the [Integrations](<https://ultrafast.mov/integrations/>) page, and a recorded session from prompt to MP4 is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>).
 
 ## One video per row
 
@@ -1122,7 +1122,7 @@ A script can also write the document and hand it to `uf export`. [A film of a Gi
 
 ## From an agent
 
-A JSON document is a good thing for a coding agent to write: it is short, it can be checked before anything renders, and the agent can look at the frames it made. With the skill installed, Claude Code, Codex, Cursor and Gemini CLI know the format and the loop; the MCP server gives any MCP client the same tools without a shell.
+A JSON document is a good thing for a coding agent to write: it is short, it can be checked before anything renders, and the agent can look at the frames it made. With the skill installed, Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI know the format and the loop; the MCP server gives any MCP client the same tools without a shell.
 
 ```
 npx skills add ultrafastmov/ultrafast        # the skill
@@ -1799,7 +1799,7 @@ Say what it's for, how long, the size, and the words that must appear. Give Clau
 
 Claude Code also makes video with Remotion (React rendered in headless Chrome) and HyperFrames (HTML and GSAP in headless Chrome). On one RTX 5090, the same three 10-second videos exported in 0.66–0.78 s with ultrafast; Remotion took 3.1–8.6 times as long at its fastest settings, and HyperFrames 4.6–5.7 times ([benchmark](<https://ultrafast.mov/benchmarks/>)). For the same 10-second short, the ultrafast document took about 1,234 output tokens against 1,868 for Remotion. Head-to-head pages: [ultrafast vs Remotion](<https://ultrafast.mov/compare/remotion/>), [ultrafast vs HyperFrames](<https://ultrafast.mov/compare/hyperframes/>). For every way Claude can make video, including Claude Motion, see [Can Claude make videos?](<https://ultrafast.mov/learn/can-claude-make-videos/>)
 
-The same skill and MCP server work in Codex ([a recorded Codex session](<https://ultrafast.mov/guides/codex/>)), Cursor, Gemini CLI and any MCP client: setup for each is on [Integrations](<https://ultrafast.mov/integrations/>), and the tools are listed in [MCP server](<https://ultrafast.mov/docs/mcp/>).
+The same skill and MCP server work in Codex ([a recorded Codex session](<https://ultrafast.mov/guides/codex/>)), Cursor, Antigravity CLI, Gemini CLI and any MCP client: setup for each is on [Integrations](<https://ultrafast.mov/integrations/>), and the tools are listed in [MCP server](<https://ultrafast.mov/docs/mcp/>).
 
 ## Questions
 
@@ -2018,7 +2018,7 @@ Codex CLI 0.169 with its default model, GPT-6-Luna, and ultrafast 0.2.1; every e
 
 Codex also makes video with Remotion (React rendered in headless Chrome), whose agent skills install with `npx skills add remotion-dev/skills`, and with HyperFrames (HTML and GSAP in headless Chrome). On one RTX 5090, the same three 10-second videos exported in 0.66–0.78 s with ultrafast; Remotion took 3.1–8.6 times as long at its fastest settings, and HyperFrames 4.6–5.7 times ([benchmark](<https://ultrafast.mov/benchmarks/>)). For the same 10-second short, the ultrafast document took about 1,234 output tokens against 1,868 for Remotion. Head-to-head pages: [ultrafast vs Remotion](<https://ultrafast.mov/compare/remotion/>), [ultrafast vs HyperFrames](<https://ultrafast.mov/compare/hyperframes/>).
 
-The same skill and MCP server work in Claude Code ([a recorded Claude Code session](<https://ultrafast.mov/guides/claude-code/>)), Cursor, Gemini CLI and any MCP client: setup for each is on [Integrations](<https://ultrafast.mov/integrations/>), and the tools are listed in [MCP server](<https://ultrafast.mov/docs/mcp/>).
+The same skill and MCP server work in Claude Code ([a recorded Claude Code session](<https://ultrafast.mov/guides/claude-code/>)), Cursor, Antigravity CLI, Gemini CLI and any MCP client: setup for each is on [Integrations](<https://ultrafast.mov/integrations/>), and the tools are listed in [MCP server](<https://ultrafast.mov/docs/mcp/>).
 
 ## Questions
 
@@ -3457,7 +3457,7 @@ first, then the name rises in letter by letter. Check the timing with a contact 
 then export reveal.mp4 and a transparent ProRes 4444 reveal.mov.
 ``` 
 
-Setup for Claude Code, Codex, Cursor and Gemini CLI is on the [Integrations](<https://ultrafast.mov/integrations/>) page, and a recorded session from prompt to MP4 is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>).
+Setup for Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI is on the [Integrations](<https://ultrafast.mov/integrations/>) page, and a recorded session from prompt to MP4 is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>).
 
 ## Other ways to animate an SVG logo
 
@@ -3647,7 +3647,7 @@ accent), add a shot after the stars with the line "used in production at 40 team
 check it with a contact sheet and uf review, then export 16:9 and 9:16 versions.
 ``` 
 
-Setup for Claude Code, Codex, Cursor and Gemini CLI is on the [Integrations](<https://ultrafast.mov/integrations/>) page, and a recorded session from prompt to MP4 is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>).
+Setup for Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI is on the [Integrations](<https://ultrafast.mov/integrations/>) page, and a recorded session from prompt to MP4 is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>).
 
 ## Other ways to make a video of a repository
 
@@ -3939,7 +3939,7 @@ All read on 24 November 2026.
 
 # MCP server · 20 tools · ultrafast docs
 
-> ultrafast as MCP tools for Claude Code, Codex, Cursor, Gemini CLI and any MCP client: local over stdio with uf mcp, or remote over Streamable HTTP from your own uf serve with an API key.
+> ultrafast as MCP tools for Claude Code, Codex, Cursor, Antigravity CLI, Gemini CLI and any MCP client: local over stdio with uf mcp, or remote over Streamable HTTP from your own uf serve with an API key.
 
 URL: https://ultrafast.mov/docs/mcp/
 
@@ -4004,6 +4004,13 @@ claude mcp add ultrafast -- uf mcp
 [mcp_servers.ultrafast]
 command = "uf"
 args = ["mcp"]
+default_tools_approval_mode = "approve"   # or codex exec refuses edit and export
+``` 
+
+```
+agy mcp add ultrafast uf mcp
+# or the plugin, which adds the ultrafast skill too:
+agy plugin install https://github.com/ultrafastmov/ultrafast
 ``` 
 
 ```
@@ -4013,6 +4020,8 @@ args = ["mcp"]
   }
 }
 ``` 
+
+Since June 2026 Gemini CLI takes only paid Gemini API keys, Vertex AI and Code Assist Standard or Enterprise; personal Google accounts use Antigravity CLI.
 
 Documents stay plain JSON files. The server keeps a renderer per document, so repeated frames are fast, and reloads a file when it changes, whether the agent edits it with `ultrafast_edit` or writes it directly.
 
@@ -4392,7 +4401,7 @@ A few parts of the API wait for [ultrafast Cloud](<https://ultrafast.mov/cloud/>
 
 # Use cases · Make videos by asking · ultrafast
 
-> Social posts, podcast clips, documentaries, explainers, data stories, launch films and title sequences, made by asking an agent: Claude Code, Codex, Cursor or Gemini CLI with ultrafast.
+> Social posts, podcast clips, documentaries, explainers, data stories, launch films and title sequences, made by asking an agent: Claude Code, Codex, Cursor, Antigravity CLI or Gemini CLI with ultrafast.
 
 URL: https://ultrafast.mov/use-cases/
 
@@ -4400,7 +4409,7 @@ Use cases
 
 # Ask your agent for a video.
 
-Describe it to Claude Code, Codex, Cursor or Gemini CLI with ultrafast connected. The agent writes the document, ultrafast checks every frame, and the agent exports the file. No timeline, no editor.
+Describe it to Claude Code, Codex, Cursor, Antigravity CLI or Gemini CLI with ultrafast connected. The agent writes the document, ultrafast checks every frame, and the agent exports the file. No timeline, no editor.
 
 [Connect your agent](<https://ultrafast.mov/docs/#agents>) [See examples](<https://ultrafast.mov/examples/>)
 
@@ -4575,7 +4584,7 @@ No. Describe what you want to your agent in plain words, the way you'd brief a p
 
 Which agents can do this?
 
-Any agent that can run an MCP server or a shell: Claude Code, Codex, Cursor and Gemini CLI connect to `uf mcp` in one line. See [MCP](<https://ultrafast.mov/docs/mcp/>). The ChatGPT app and the Claude connector come with [ultrafast Cloud](<https://ultrafast.mov/cloud/>).
+Any agent that can run an MCP server or a shell: Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI connect to `uf mcp` in one line. See [MCP](<https://ultrafast.mov/docs/mcp/>). The ChatGPT app and the Claude connector come with [ultrafast Cloud](<https://ultrafast.mov/cloud/>).
 
 Can I use my own footage, photos and logo?
 
@@ -4602,7 +4611,7 @@ Want it hosted? [Join the ultrafast Cloud waitlist](<https://ultrafast.mov/cloud
 
 # Integrations · MCP, coding agents, SDKs · ultrafast
 
-> Use ultrafast from Claude Code, Codex, Cursor, Gemini CLI and any MCP client, from Python and TypeScript, over HTTP, or in Docker on your own GPU. The ChatGPT app and Claude connector are coming with ultrafast Cloud.
+> Use ultrafast from Claude Code, Codex, Cursor, Antigravity CLI, Gemini CLI and any MCP client, from Python and TypeScript, over HTTP, or in Docker on your own GPU. The ChatGPT app and Claude connector are coming with ultrafast Cloud.
 
 URL: https://ultrafast.mov/integrations/
 
@@ -4613,7 +4622,7 @@ Integrations
 Coding agents, any MCP client, Python and TypeScript, an HTTP API and Docker, all on your own GPU today. The ChatGPT app and the Claude connector come with ultrafast Cloud.
 
   * [**MCP server**`uf mcp`local · 20 tools _Available_](<https://ultrafast.mov/docs/mcp/>)
-  * [**Coding agents** Claude Code, Codex, Cursor, Gemini CLI _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
+  * [**Coding agents** Claude Code, Codex, Cursor, Antigravity CLI, Gemini CLI _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
   * [**Skill and plugin**`npx skills add``ultrafastmov/ultrafast` _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
   * [**Remote MCP**`uf serve`/mcp on your server, one key _Available_](<https://ultrafast.mov/integrations/#remote-mcp>)
   * [**SDKs**`pip install ultrafastmov``npm i ultrafastmov` _Available_](<https://ultrafast.mov/integrations/#sdks>)
@@ -4625,11 +4634,18 @@ Coding agents, any MCP client, Python and TypeScript, an HTTP API and Docker, al
 
 Coding agents
 
-## Claude Code, Codex, Cursor, Gemini CLI.
+## Claude Code, Codex, Cursor, Antigravity CLI, Gemini CLI.
 
 Run `uf mcp` on your machine and the agent gets 20 tools: it writes the document, looks at frames and contact sheets, fixes what `review` finds and exports. The [MCP server page](<https://ultrafast.mov/mcp/>) shows that loop on a real film.
 
-### Claude Code
+### Claude Code, with the plugin
+
+```
+claude plugin marketplace add ultrafastmov/ultrafast
+claude plugin install ultrafast@ultrafast
+``` 
+
+### Claude Code, the MCP server alone
 
 ```
 claude mcp add ultrafast -- uf mcp
@@ -4655,6 +4671,12 @@ default_tools_approval_mode = "approve"
 }
 ``` 
 
+### Antigravity CLI
+
+```
+agy plugin install https://github.com/ultrafastmov/ultrafast
+``` 
+
 ### Gemini CLI
 
 ```
@@ -4665,7 +4687,7 @@ default_tools_approval_mode = "approve"
 }
 ``` 
 
-Each agent also gets the ultrafast skill: `npx skills add ultrafastmov/ultrafast`. In Claude Code, the plugin brings both: `claude plugin marketplace add ultrafastmov/ultrafast`, then `claude plugin install ultrafast@ultrafast`. Recorded sessions from prompt to MP4: [Claude Code](<https://ultrafast.mov/guides/claude-code/>) and [Codex](<https://ultrafast.mov/guides/codex/>).
+Each agent also gets the ultrafast skill: `npx skills add ultrafastmov/ultrafast`. The Claude Code and Antigravity CLI plugins bring the skill and the server together. Since June 2026 Gemini CLI takes only paid Gemini API keys, Vertex AI and Code Assist Standard or Enterprise; personal Google accounts use Antigravity CLI. Recorded sessions from prompt to MP4: [Claude Code](<https://ultrafast.mov/guides/claude-code/>) and [Codex](<https://ultrafast.mov/guides/codex/>).
 
 Remote MCP
 
@@ -4957,6 +4979,18 @@ claude mcp add ultrafast -- uf mcp
 
 Tested with Claude Code 2.1.325: a model run used new, check, sheet (and saw the image), inspect, edit and export.
 
+### Codex
+
+```
+[mcp_servers.ultrafast]
+command = "uf"
+args = ["mcp"]
+tool_timeout_sec = 300
+default_tools_approval_mode = "approve"
+``` 
+
+Tested with Codex CLI 0.169 and the skill: from a one-line request, GPT-6-Luna used ops, check, sheet, review, inspect and export, then made a square cut in a second turn. Without the approval line, `codex exec` refuses edit and export. [The whole session, step by step](<https://ultrafast.mov/guides/codex/>).
+
 ### Cursor
 
 ```
@@ -4969,6 +5003,14 @@ Tested with Claude Code 2.1.325: a model run used new, check, sheet (and saw the
 
 Tested with Cursor CLI 2026.11.19: all 20 tools listed. No model run yet.
 
+### Antigravity CLI
+
+```
+agy plugin install https://github.com/ultrafastmov/ultrafast
+``` 
+
+The skill and `uf mcp` together; `agy mcp add ultrafast uf mcp` adds the server alone. Tested with Antigravity CLI 1.5.17: the plugin installs from the repo and all 20 tools listed. No video made yet.
+
 ### Gemini CLI
 
 ```
@@ -4979,7 +5021,7 @@ Tested with Cursor CLI 2026.11.19: all 20 tools listed. No model run yet.
 }
 ``` 
 
-Tested with Gemini CLI 0.70: connected over stdio, and over HTTP with `httpUrl` and a header. No model run yet.
+Tested with Gemini CLI 0.70: connected over stdio, and over HTTP with `httpUrl` and a header. No model run: since June 2026 Gemini CLI takes only paid Gemini API keys, Vertex AI and Code Assist Standard or Enterprise; personal Google accounts use Antigravity CLI.
 
 ### Remote, from your own uf serve
 
@@ -5004,7 +5046,7 @@ The name in the [official MCP Registry](<https://registry.modelcontextprotocol.i
 
 The server is also listed on [Glama](<https://glama.ai/mcp/servers/ultrafastmov/ultrafast>) and [mcpservers.org](<https://mcpservers.org/servers/ultrafastmov/ultrafast>).
 
-Codex and the JSON config for Claude Desktop are in the [MCP reference](<https://ultrafast.mov/docs/mcp/#local>); neither has been tested yet. Any other MCP client that runs a stdio server, or connects over Streamable HTTP with a header, takes the same settings.
+The JSON config for Claude Desktop is in the [MCP reference](<https://ultrafast.mov/docs/mcp/#local>); it hasn't been tested yet. Any other MCP client that runs a stdio server, or connects over Streamable HTTP with a header, takes the same settings.
 
 ## How it differs from other video MCP servers.
 
@@ -5052,7 +5094,7 @@ Yes. With ultrafast connected, Claude Code writes the video as a document, looks
 
 Which MCP clients does it work with?
 
-Any client that starts a local server over stdio or connects over Streamable HTTP. Tested: Claude Code used it over stdio and HTTP, Cursor CLI listed all 20 tools, and Gemini CLI connected over stdio and HTTP. The configs for Codex and Claude Desktop are in the [MCP reference](<https://ultrafast.mov/docs/mcp/>); they haven't been tested yet.
+Any client that starts a local server over stdio or connects over Streamable HTTP. Tested: Claude Code used it over stdio and HTTP, Codex made a video from a one-line request, Cursor CLI and Antigravity CLI listed all 20 tools, and Gemini CLI connected over stdio and HTTP. The config for Claude Desktop is in the [MCP reference](<https://ultrafast.mov/docs/mcp/>); it hasn't been tested yet.
 
 Can it edit videos I already have?
 
@@ -5172,7 +5214,7 @@ Claude writes one JSON document and runs `check`, which catches mistakes before 
 
 A 10-second export took under a second on an RTX 5090 in the [benchmark](<https://ultrafast.mov/benchmarks/>). Writing the same short took about a third fewer tokens than in Remotion ([token count](<https://ultrafast.mov/benchmarks/#tokens>)).
 
-A whole recorded session, with every tool call, the frames Claude looked at and the time each step took, is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>). Codex, Cursor and Gemini CLI work the same way: [setup for each](<https://ultrafast.mov/integrations/>). Other ways to install are in the [quickstart](<https://ultrafast.mov/docs/>).
+A whole recorded session, with every tool call, the frames Claude looked at and the time each step took, is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>). Codex, Cursor, Antigravity CLI and Gemini CLI work the same way: [setup for each](<https://ultrafast.mov/integrations/>). Other ways to install are in the [quickstart](<https://ultrafast.mov/docs/>).
 
 ### Where ultrafast doesn't fit
 
@@ -6253,7 +6295,7 @@ ultrafast doesn't run React, so a Remotion project is rebuilt, not imported. The
 
 ### Ask your coding agent
 
-Give it the composition and ask for the same video in ultrafast. With the ultrafast skill installed, the agent knows the document format and the loop: check, look at the frames, review, export. The skill works in Claude Code, Codex, Cursor and Gemini CLI.
+Give it the composition and ask for the same video in ultrafast. With the ultrafast skill installed, the agent knows the document format and the loop: check, look at the frames, review, export. The skill works in Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI.
 
 ### Reconstruct a render
 
@@ -6431,7 +6473,7 @@ ultrafast doesn't run HTML, so a HyperFrames composition is rebuilt, not importe
 
 ### Ask your coding agent
 
-Give it the composition and ask for the same video in ultrafast. With the ultrafast skill installed, the agent knows the document format and the loop: check, look at the frames, review, export. The skill works in Claude Code, Codex, Cursor and Gemini CLI.
+Give it the composition and ask for the same video in ultrafast. With the ultrafast skill installed, the agent knows the document format and the loop: check, look at the frames, review, export. The skill works in Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI.
 
 ### Reconstruct a render
 

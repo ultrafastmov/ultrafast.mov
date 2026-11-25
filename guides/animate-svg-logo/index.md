@@ -257,7 +257,7 @@ first, then the name rises in letter by letter. Check the timing with a contact 
 then export reveal.mp4 and a transparent ProRes 4444 reveal.mov.
 ``` 
 
-Setup for Claude Code, Codex, Cursor and Gemini CLI is on the [Integrations](<https://ultrafast.mov/integrations/>) page, and a recorded session from prompt to MP4 is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>).
+Setup for Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI is on the [Integrations](<https://ultrafast.mov/integrations/>) page, and a recorded session from prompt to MP4 is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>).
 
 ## Other ways to animate an SVG logo
 

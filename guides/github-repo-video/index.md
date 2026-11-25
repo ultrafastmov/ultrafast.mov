@@ -152,7 +152,7 @@ accent), add a shot after the stars with the line "used in production at 40 team
 check it with a contact sheet and uf review, then export 16:9 and 9:16 versions.
 ``` 
 
-Setup for Claude Code, Codex, Cursor and Gemini CLI is on the [Integrations](<https://ultrafast.mov/integrations/>) page, and a recorded session from prompt to MP4 is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>).
+Setup for Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI is on the [Integrations](<https://ultrafast.mov/integrations/>) page, and a recorded session from prompt to MP4 is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>).
 
 ## Other ways to make a video of a repository
 

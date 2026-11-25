@@ -177,7 +177,7 @@ Edits
 
 Your agent edits the document, not the pixels. One sentence changed one node: the pot's shape, its camera and its shader. The type, light and timing stayed as they were.
 
-This works today in Claude Code, Codex, Cursor and Gemini CLI with `uf mcp`.
+This works today in Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI with `uf mcp`.
 
 Coming soon The ChatGPT app and the Claude connector, for making videos in a chat. [Join the waitlist](<https://ultrafast.mov/cloud/#apps>)
 
@@ -220,7 +220,7 @@ Integrations
 [All integrations](<https://ultrafast.mov/integrations/>)
 
   * [**MCP server**`uf mcp`local · 20 tools _Available_](<https://ultrafast.mov/docs/mcp/>)
-  * [**Coding agents** Claude Code, Codex, Cursor, Gemini CLI _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
+  * [**Coding agents** Claude Code, Codex, Cursor, Antigravity CLI, Gemini CLI _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
   * [**Skill and plugin**`npx skills add``ultrafastmov/ultrafast` _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
   * [**Remote MCP**`uf serve`/mcp on your server, one key _Available_](<https://ultrafast.mov/integrations/#remote-mcp>)
   * [**SDKs**`pip install ultrafastmov``npm i ultrafastmov` _Available_](<https://ultrafast.mov/integrations/#sdks>)

@@ -159,7 +159,7 @@ ultrafast doesn't run React, so a Remotion project is rebuilt, not imported. The
 
 ### Ask your coding agent
 
-Give it the composition and ask for the same video in ultrafast. With the ultrafast skill installed, the agent knows the document format and the loop: check, look at the frames, review, export. The skill works in Claude Code, Codex, Cursor and Gemini CLI.
+Give it the composition and ask for the same video in ultrafast. With the ultrafast skill installed, the agent knows the document format and the loop: check, look at the frames, review, export. The skill works in Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI.
 
 ### Reconstruct a render
 

@@ -139,7 +139,7 @@ This is how an agent works, and how you should too:
 claude mcp add ultrafast -- uf mcp
 ``` 
 
-Codex, Cursor, Gemini CLI and remote MCP over HTTP are on the [MCP page](<https://ultrafast.mov/docs/mcp/>). Agents can also read [llms.txt](<https://ultrafast.mov/llms.txt>) and every page of these docs as Markdown.
+Codex, Cursor, Antigravity CLI, Gemini CLI and remote MCP over HTTP are on the [MCP page](<https://ultrafast.mov/docs/mcp/>). Agents can also read [llms.txt](<https://ultrafast.mov/llms.txt>) and every page of these docs as Markdown.
 
 ## Run it as a service
 

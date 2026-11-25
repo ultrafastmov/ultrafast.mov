@@ -93,7 +93,7 @@ Claude writes one JSON document and runs `check`, which catches mistakes before 
 
 A 10-second export took under a second on an RTX 5090 in the [benchmark](<https://ultrafast.mov/benchmarks/>). Writing the same short took about a third fewer tokens than in Remotion ([token count](<https://ultrafast.mov/benchmarks/#tokens>)).
 
-A whole recorded session, with every tool call, the frames Claude looked at and the time each step took, is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>). Codex, Cursor and Gemini CLI work the same way: [setup for each](<https://ultrafast.mov/integrations/>). Other ways to install are in the [quickstart](<https://ultrafast.mov/docs/>).
+A whole recorded session, with every tool call, the frames Claude looked at and the time each step took, is in [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>). Codex, Cursor, Antigravity CLI and Gemini CLI work the same way: [setup for each](<https://ultrafast.mov/integrations/>). Other ways to install are in the [quickstart](<https://ultrafast.mov/docs/>).
 
 ### Where ultrafast doesn't fit
 

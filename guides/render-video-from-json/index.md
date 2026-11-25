@@ -188,7 +188,7 @@ A script can also write the document and hand it to `uf export`. [A film of a Gi
 
 ## From an agent
 
-A JSON document is a good thing for a coding agent to write: it is short, it can be checked before anything renders, and the agent can look at the frames it made. With the skill installed, Claude Code, Codex, Cursor and Gemini CLI know the format and the loop; the MCP server gives any MCP client the same tools without a shell.
+A JSON document is a good thing for a coding agent to write: it is short, it can be checked before anything renders, and the agent can look at the frames it made. With the skill installed, Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI know the format and the loop; the MCP server gives any MCP client the same tools without a shell.
 
 ```
 npx skills add ultrafastmov/ultrafast        # the skill

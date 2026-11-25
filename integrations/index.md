@@ -1,6 +1,6 @@
 # Integrations · MCP, coding agents, SDKs · ultrafast
 
-> Use ultrafast from Claude Code, Codex, Cursor, Gemini CLI and any MCP client, from Python and TypeScript, over HTTP, or in Docker on your own GPU. The ChatGPT app and Claude connector are coming with ultrafast Cloud.
+> Use ultrafast from Claude Code, Codex, Cursor, Antigravity CLI, Gemini CLI and any MCP client, from Python and TypeScript, over HTTP, or in Docker on your own GPU. The ChatGPT app and Claude connector are coming with ultrafast Cloud.
 
 URL: https://ultrafast.mov/integrations/
 
@@ -11,7 +11,7 @@ Integrations
 Coding agents, any MCP client, Python and TypeScript, an HTTP API and Docker, all on your own GPU today. The ChatGPT app and the Claude connector come with ultrafast Cloud.
 
   * [**MCP server**`uf mcp`local · 20 tools _Available_](<https://ultrafast.mov/docs/mcp/>)
-  * [**Coding agents** Claude Code, Codex, Cursor, Gemini CLI _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
+  * [**Coding agents** Claude Code, Codex, Cursor, Antigravity CLI, Gemini CLI _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
   * [**Skill and plugin**`npx skills add``ultrafastmov/ultrafast` _Available_](<https://ultrafast.mov/integrations/#coding-agents>)
   * [**Remote MCP**`uf serve`/mcp on your server, one key _Available_](<https://ultrafast.mov/integrations/#remote-mcp>)
   * [**SDKs**`pip install ultrafastmov``npm i ultrafastmov` _Available_](<https://ultrafast.mov/integrations/#sdks>)
@@ -23,11 +23,18 @@ Coding agents, any MCP client, Python and TypeScript, an HTTP API and Docker, al
 
 Coding agents
 
-## Claude Code, Codex, Cursor, Gemini CLI.
+## Claude Code, Codex, Cursor, Antigravity CLI, Gemini CLI.
 
 Run `uf mcp` on your machine and the agent gets 20 tools: it writes the document, looks at frames and contact sheets, fixes what `review` finds and exports. The [MCP server page](<https://ultrafast.mov/mcp/>) shows that loop on a real film.
 
-### Claude Code
+### Claude Code, with the plugin
+
+```
+claude plugin marketplace add ultrafastmov/ultrafast
+claude plugin install ultrafast@ultrafast
+``` 
+
+### Claude Code, the MCP server alone
 
 ```
 claude mcp add ultrafast -- uf mcp
@@ -53,6 +60,12 @@ default_tools_approval_mode = "approve"
 }
 ``` 
 
+### Antigravity CLI
+
+```
+agy plugin install https://github.com/ultrafastmov/ultrafast
+``` 
+
 ### Gemini CLI
 
 ```
@@ -63,7 +76,7 @@ default_tools_approval_mode = "approve"
 }
 ``` 
 
-Each agent also gets the ultrafast skill: `npx skills add ultrafastmov/ultrafast`. In Claude Code, the plugin brings both: `claude plugin marketplace add ultrafastmov/ultrafast`, then `claude plugin install ultrafast@ultrafast`. Recorded sessions from prompt to MP4: [Claude Code](<https://ultrafast.mov/guides/claude-code/>) and [Codex](<https://ultrafast.mov/guides/codex/>).
+Each agent also gets the ultrafast skill: `npx skills add ultrafastmov/ultrafast`. The Claude Code and Antigravity CLI plugins bring the skill and the server together. Since June 2026 Gemini CLI takes only paid Gemini API keys, Vertex AI and Code Assist Standard or Enterprise; personal Google accounts use Antigravity CLI. Recorded sessions from prompt to MP4: [Claude Code](<https://ultrafast.mov/guides/claude-code/>) and [Codex](<https://ultrafast.mov/guides/codex/>).
 
 Remote MCP
 

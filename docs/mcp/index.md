@@ -1,6 +1,6 @@
 # MCP server · 20 tools · ultrafast docs
 
-> ultrafast as MCP tools for Claude Code, Codex, Cursor, Gemini CLI and any MCP client: local over stdio with uf mcp, or remote over Streamable HTTP from your own uf serve with an API key.
+> ultrafast as MCP tools for Claude Code, Codex, Cursor, Antigravity CLI, Gemini CLI and any MCP client: local over stdio with uf mcp, or remote over Streamable HTTP from your own uf serve with an API key.
 
 URL: https://ultrafast.mov/docs/mcp/
 
@@ -65,6 +65,13 @@ claude mcp add ultrafast -- uf mcp
 [mcp_servers.ultrafast]
 command = "uf"
 args = ["mcp"]
+default_tools_approval_mode = "approve"   # or codex exec refuses edit and export
+``` 
+
+```
+agy mcp add ultrafast uf mcp
+# or the plugin, which adds the ultrafast skill too:
+agy plugin install https://github.com/ultrafastmov/ultrafast
 ``` 
 
 ```
@@ -74,6 +81,8 @@ args = ["mcp"]
   }
 }
 ``` 
+
+Since June 2026 Gemini CLI takes only paid Gemini API keys, Vertex AI and Code Assist Standard or Enterprise; personal Google accounts use Antigravity CLI.
 
 Documents stay plain JSON files. The server keeps a renderer per document, so repeated frames are fast, and reloads a file when it changes, whether the agent edits it with `ultrafast_edit` or writes it directly.
 

@@ -129,6 +129,18 @@ claude mcp add ultrafast -- uf mcp
 
 Tested with Claude Code 2.1.325: a model run used new, check, sheet (and saw the image), inspect, edit and export.
 
+### Codex
+
+```
+[mcp_servers.ultrafast]
+command = "uf"
+args = ["mcp"]
+tool_timeout_sec = 300
+default_tools_approval_mode = "approve"
+``` 
+
+Tested with Codex CLI 0.169 and the skill: from a one-line request, GPT-6-Luna used ops, check, sheet, review, inspect and export, then made a square cut in a second turn. Without the approval line, `codex exec` refuses edit and export. [The whole session, step by step](<https://ultrafast.mov/guides/codex/>).
+
 ### Cursor
 
 ```
@@ -141,6 +153,14 @@ Tested with Claude Code 2.1.325: a model run used new, check, sheet (and saw the
 
 Tested with Cursor CLI 2026.11.19: all 20 tools listed. No model run yet.
 
+### Antigravity CLI
+
+```
+agy plugin install https://github.com/ultrafastmov/ultrafast
+``` 
+
+The skill and `uf mcp` together; `agy mcp add ultrafast uf mcp` adds the server alone. Tested with Antigravity CLI 1.5.17: the plugin installs from the repo and all 20 tools listed. No video made yet.
+
 ### Gemini CLI
 
 ```
@@ -151,7 +171,7 @@ Tested with Cursor CLI 2026.11.19: all 20 tools listed. No model run yet.
 }
 ``` 
 
-Tested with Gemini CLI 0.70: connected over stdio, and over HTTP with `httpUrl` and a header. No model run yet.
+Tested with Gemini CLI 0.70: connected over stdio, and over HTTP with `httpUrl` and a header. No model run: since June 2026 Gemini CLI takes only paid Gemini API keys, Vertex AI and Code Assist Standard or Enterprise; personal Google accounts use Antigravity CLI.
 
 ### Remote, from your own uf serve
 
@@ -176,7 +196,7 @@ The name in the [official MCP Registry](<https://registry.modelcontextprotocol.i
 
 The server is also listed on [Glama](<https://glama.ai/mcp/servers/ultrafastmov/ultrafast>) and [mcpservers.org](<https://mcpservers.org/servers/ultrafastmov/ultrafast>).
 
-Codex and the JSON config for Claude Desktop are in the [MCP reference](<https://ultrafast.mov/docs/mcp/#local>); neither has been tested yet. Any other MCP client that runs a stdio server, or connects over Streamable HTTP with a header, takes the same settings.
+The JSON config for Claude Desktop is in the [MCP reference](<https://ultrafast.mov/docs/mcp/#local>); it hasn't been tested yet. Any other MCP client that runs a stdio server, or connects over Streamable HTTP with a header, takes the same settings.
 
 ## How it differs from other video MCP servers.
 
@@ -224,7 +244,7 @@ Yes. With ultrafast connected, Claude Code writes the video as a document, looks
 
 Which MCP clients does it work with?
 
-Any client that starts a local server over stdio or connects over Streamable HTTP. Tested: Claude Code used it over stdio and HTTP, Cursor CLI listed all 20 tools, and Gemini CLI connected over stdio and HTTP. The configs for Codex and Claude Desktop are in the [MCP reference](<https://ultrafast.mov/docs/mcp/>); they haven't been tested yet.
+Any client that starts a local server over stdio or connects over Streamable HTTP. Tested: Claude Code used it over stdio and HTTP, Codex made a video from a one-line request, Cursor CLI and Antigravity CLI listed all 20 tools, and Gemini CLI connected over stdio and HTTP. The config for Claude Desktop is in the [MCP reference](<https://ultrafast.mov/docs/mcp/>); it hasn't been tested yet.
 
 Can it edit videos I already have?
 

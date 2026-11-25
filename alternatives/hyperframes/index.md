@@ -136,7 +136,7 @@ ultrafast doesn't run HTML, so a HyperFrames composition is rebuilt, not importe
 
 ### Ask your coding agent
 
-Give it the composition and ask for the same video in ultrafast. With the ultrafast skill installed, the agent knows the document format and the loop: check, look at the frames, review, export. The skill works in Claude Code, Codex, Cursor and Gemini CLI.
+Give it the composition and ask for the same video in ultrafast. With the ultrafast skill installed, the agent knows the document format and the loop: check, look at the frames, review, export. The skill works in Claude Code, Codex, Cursor, Antigravity CLI and Gemini CLI.
 
 ### Reconstruct a render
 
