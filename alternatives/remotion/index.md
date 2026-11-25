@@ -12,17 +12,17 @@ Updated 22 November 2026. ultrafast wrote this page and is one of the eight. Eve
 
 ## Why people look elsewhere.
 
-Three reasons come up, each in Remotion's own words. Its pages were read on 22 November 2026.
+Three reasons come up, each in Remotion's own words. Its pages were read on 22 November 2026, the licence and pricing quotes again on 26 November 2026.
 
 ### A company licence from 4 people
 
-The free licence is “for individuals and companies of up to 3 people.” The terms count everyone: “Headcount means all personnel, regardless of whether they use the Remotion Software.” So a company of 4 needs a company licence even if one person makes the videos.
+The free licence is “for individuals and companies of up to 3 people,” and it counts the whole company. Asked whether a 20-person company where one person uses Remotion needs a Company License, the FAQ answers: “Yes, unless a Free License exemption applies. Eligibility depends on your company's total headcount.”
 
-[Pricing](<https://www.remotion.dev/docs/license/pricing>) · [Terms](<https://www.remotion.dev/docs/terms#TeamSize>)
+[Pricing](<https://www.remotion.dev/docs/license/pricing>) · [FAQ](<https://www.remotion.dev/docs/license/faq#our-company-has-20-people-but-only-one-uses-remotion-do-we-need-a-company-license>) · [Remotion's licence, explained](<https://ultrafast.mov/learn/remotion-license/>)
 
 ### A fee for every render
 
-The licence for automated rendering is “$0.01 per render, charged in increments of 1000 renders ($10), with a minimum of $100 per month.” The per-seat licence is “$25 per month per seat.” On Lambda, “Teams of 4+ people also need to acquire a Remotion Company License in addition to the AWS cost.”
+Automated rendering costs “$0.01 per render, $100/mo minimum.” Making videos by hand costs “$25/mo per seat.” On Lambda, “Teams of 4+ people also need to acquire a Remotion Company License in addition to the AWS cost.”
 
 [Pricing](<https://www.remotion.dev/docs/license/pricing>) · [Lambda cost example](<https://www.remotion.dev/docs/lambda/cost-example>)
 
@@ -178,7 +178,7 @@ More in the [CLI reference](<https://ultrafast.mov/docs/cli/>) and [RECONSTRUCTI
 All read on 22 November 2026.
 
   * **GitHub API:** stars, licence and default branch from `gh api repos/OWNER/REPO`; releases from `/releases/latest` and `/tags`; last commits from `/commits` on the default branch. Package dates from [npm](<https://www.npmjs.com/>) and [PyPI](<https://pypi.org/project/manim/>).
-  * **Remotion:** [pricing](<https://www.remotion.dev/docs/license/pricing>), [terms (team size)](<https://www.remotion.dev/docs/terms#TeamSize>), [LICENSE.md](<https://github.com/remotion-dev/remotion/blob/main/LICENSE.md>), [Lambda cost example](<https://www.remotion.dev/docs/lambda/cost-example>), [Chrome Headless Shell](<https://www.remotion.dev/docs/miscellaneous/chrome-headless-shell>), [renderMedia](<https://www.remotion.dev/docs/renderer/render-media>) (FFmpeg), [Player](<https://www.remotion.dev/docs/player>), [concurrency](<https://www.remotion.dev/docs/terminology/concurrency>), [GPU](<https://www.remotion.dev/docs/gpu>), [skills](<https://www.remotion.dev/docs/ai/skills>), [plugins](<https://www.remotion.dev/docs/ai/plugins>), [MCP](<https://www.remotion.dev/docs/ai/mcp>).
+  * **Remotion:** [pricing](<https://www.remotion.dev/docs/license/pricing>), [licence FAQ (team size)](<https://www.remotion.dev/docs/license/faq#our-company-has-20-people-but-only-one-uses-remotion-do-we-need-a-company-license>), [Remotion's licence, explained](<https://ultrafast.mov/learn/remotion-license/>), [LICENSE.md](<https://github.com/remotion-dev/remotion/blob/main/LICENSE.md>), [Lambda cost example](<https://www.remotion.dev/docs/lambda/cost-example>), [Chrome Headless Shell](<https://www.remotion.dev/docs/miscellaneous/chrome-headless-shell>), [renderMedia](<https://www.remotion.dev/docs/renderer/render-media>) (FFmpeg), [Player](<https://www.remotion.dev/docs/player>), [concurrency](<https://www.remotion.dev/docs/terminology/concurrency>), [GPU](<https://www.remotion.dev/docs/gpu>), [skills](<https://www.remotion.dev/docs/ai/skills>), [plugins](<https://www.remotion.dev/docs/ai/plugins>), [MCP](<https://www.remotion.dev/docs/ai/mcp>).
   * **Editly:** [README](<https://github.com/mifi/editly#readme>) (features, requirements).
   * **Framefields:** [README](<https://github.com/gatewai-dev/framefields#readme>) (rendering, requirements, CPU fallback, 3D, vision, AI gateway, status), [Claude Code plugin](<https://github.com/gatewai-dev/framefields/tree/main/plugins/framefields>) (7 skills, cloud renders, a read-only MCP server).
   * **HyperFrames:** [README](<https://github.com/heygen-com/hyperframes#readme>) (rendering, 9 skills, `/remotion-to-hyperframes`), [CLI](<https://hyperframes.heygen.com/packages/cli>) (workers, `--gpu`, `--browser-gpu`, HLS, HDR), [plugins](<https://hyperframes.heygen.com/guides/plugins>), [MCP](<https://hyperframes.heygen.com/guides/mcp>).

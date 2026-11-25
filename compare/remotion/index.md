@@ -139,7 +139,7 @@ Licence and cost
 
 ## No company licence.
 
-Remotion is free for individuals and organisations of up to 3 people. At 4, counting everyone in the company whether they touch video or not, it needs a company licence. ultrafast is Apache-2.0 or MIT for everyone. Tokens at $20 per million output tokens.
+Remotion is free for individuals and organisations of up to 3 people. At 4, counting everyone in the company whether they touch video or not, it needs a company licence ([the rules in detail](<https://ultrafast.mov/learn/remotion-license/>)). ultrafast is Apache-2.0 or MIT for everyone. Tokens at $20 per million output tokens.
 
 10,000 ten-second shorts a month| to write them| to render them  
 ---|---|---  
@@ -203,7 +203,7 @@ How many tokens does an agent spend on a Remotion video?
 
 Measured on a 10-second vertical short (footage, a title, three lines, word-timed captions, a grade and grain): 1,868 output tokens for the composition, config and CLI commands. The same short as an ultrafast document is 1,234 (tiktoken o200k_base). Counting only what is typed after each tool's scaffold: 1,660 and 1,218.
 
-Remotion facts from its docs, checked 21 November 2026: [pricing](<https://www.remotion.dev/docs/license/pricing>), [team size](<https://www.remotion.dev/docs/terms#TeamSize>), [Lambda](<https://www.remotion.dev/lambda>), [cost example](<https://www.remotion.dev/docs/lambda/cost-example>), [MCP](<https://www.remotion.dev/docs/ai/mcp>), [skills](<https://www.remotion.dev/docs/ai/skills>), [plugins](<https://www.remotion.dev/docs/ai/plugins>). Remotion is a trademark of its owner.
+Remotion facts from its docs, checked 21 November 2026: [pricing](<https://www.remotion.dev/docs/license/pricing>), [team size](<https://www.remotion.dev/docs/license/faq#our-company-has-20-people-but-only-one-uses-remotion-do-we-need-a-company-license>), [Lambda](<https://www.remotion.dev/lambda>), [cost example](<https://www.remotion.dev/docs/lambda/cost-example>), [MCP](<https://www.remotion.dev/docs/ai/mcp>), [skills](<https://www.remotion.dev/docs/ai/skills>), [plugins](<https://www.remotion.dev/docs/ai/plugins>). Remotion is a trademark of its owner.
 
 ## Make one and time it.
 
