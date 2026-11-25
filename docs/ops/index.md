@@ -23,6 +23,7 @@ Every op with its ports, params, types and defaults. `uf ops` prints the same as
   * [Videos from n8n](<https://ultrafast.mov/guides/n8n-video-automation/>)
   * [Make a video with Claude Code](<https://ultrafast.mov/guides/claude-code/>)
   * [Make a video with Codex](<https://ultrafast.mov/guides/codex/>)
+  * [Make a video with Antigravity CLI](<https://ultrafast.mov/guides/antigravity/>)
   * [Lottie to MP4, WebM or ProRes](<https://ultrafast.mov/guides/lottie-to-mp4/>)
   * [Animated captions from Whisper or SRT](<https://ultrafast.mov/guides/animated-captions/>)
   * [Motion graphics with code](<https://ultrafast.mov/guides/motion-graphics-with-code/>)

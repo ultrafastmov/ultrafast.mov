@@ -159,7 +159,7 @@ Tested with Cursor CLI 2026.11.19: all 20 tools listed. No model run yet.
 agy plugin install https://github.com/ultrafastmov/ultrafast
 ``` 
 
-The skill and `uf mcp` together; `agy mcp add ultrafast uf mcp` adds the server alone. Tested with Antigravity CLI 1.5.17: the plugin installs from the repo and all 20 tools listed. No video made yet.
+The skill and `uf mcp` together; `agy mcp add ultrafast uf mcp` adds the server alone. Tested with Antigravity CLI 1.5.17: the plugin installs from the repo with all 20 tools, and from a one-line request Gemini 4 Hydrogen used ops, check, sheet, review, estimate, frame and export, then centred its slides and made a vertical copy in a second turn. `agy -p` needs an allow rule for the tools. [The whole session, step by step](<https://ultrafast.mov/guides/antigravity/>).
 
 ### Gemini CLI
 

@@ -76,7 +76,7 @@ agy plugin install https://github.com/ultrafastmov/ultrafast
 }
 ``` 
 
-Each agent also gets the ultrafast skill: `npx skills add ultrafastmov/ultrafast`. The Claude Code and Antigravity CLI plugins bring the skill and the server together. Since June 2026 Gemini CLI takes only paid Gemini API keys, Vertex AI and Code Assist Standard or Enterprise; personal Google accounts use Antigravity CLI. Recorded sessions from prompt to MP4: [Claude Code](<https://ultrafast.mov/guides/claude-code/>) and [Codex](<https://ultrafast.mov/guides/codex/>).
+Each agent also gets the ultrafast skill: `npx skills add ultrafastmov/ultrafast`. The Claude Code and Antigravity CLI plugins bring the skill and the server together. Since June 2026 Gemini CLI takes only paid Gemini API keys, Vertex AI and Code Assist Standard or Enterprise; personal Google accounts use Antigravity CLI. Recorded sessions from prompt to MP4: [Claude Code](<https://ultrafast.mov/guides/claude-code/>), [Codex](<https://ultrafast.mov/guides/codex/>) and [Antigravity CLI](<https://ultrafast.mov/guides/antigravity/>).
 
 Remote MCP
 

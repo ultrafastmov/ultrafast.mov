@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Make a video with Antigravity CLI: a real session · ultrafast</title>
+<meta name="description" content="Make videos with Antigravity CLI (agy) and ultrafast: install the plugin, the permission rule agy -p needs, the exact prompt, every tool call, what the review and the frames caught, a vertical copy, and the time and tokens it took.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ultrafast.mov/guides/antigravity/">
+<link rel="alternate" type="text/markdown" href="/guides/antigravity/index.md" title="Make a video with Antigravity CLI: a real session · ultrafast (Markdown)">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="ultrafast blog"><meta name="theme-color" content="#f4eee1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ultrafast">
+<meta property="og:title" content="Make a video with Antigravity CLI">
+<meta property="og:description" content="Make videos with Antigravity CLI (agy) and ultrafast: install the plugin, the permission rule agy -p needs, the exact prompt, every tool call, what the review and the frames caught, a vertical copy, and the time and tokens it took.">
+<meta property="og:url" content="https://ultrafast.mov/guides/antigravity/">
+<meta property="og:image" content="https://ultrafast.mov/og/guide-antigravity.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Make a video with Antigravity CLI · ultrafast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Make a video with Antigravity CLI">
+<meta name="twitter:description" content="Make videos with Antigravity CLI (agy) and ultrafast: install the plugin, the permission rule agy -p needs, the exact prompt, every tool call, what the review and the frames caught, a vertical copy, and the time and tokens it took.">
+<meta name="twitter:image" content="https://ultrafast.mov/og/guide-antigravity.jpg">
+<link rel="preload" href="/fonts/Anybody-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSans-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/CourierPrime-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=c898dbcc">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://ultrafast.mov/#org","name":"ultrafast","url":"https://ultrafast.mov/","logo":"https://ultrafast.mov/img/mark-512.png","sameAs":["https://github.com/ultrafastmov","https://www.reddit.com/user/ultrafastmov/","https://news.ycombinator.com/user?id=ultrafastmov","https://github.com/ultrafastmov/ultrafast","https://crates.io/crates/ultrafast","https://pypi.org/project/ultrafastmov/","https://www.npmjs.com/package/ultrafastmov"]},{"@type":"WebSite","@id":"https://ultrafast.mov/#site","name":"ultrafast","url":"https://ultrafast.mov/","description":"ultrafast is an open-source GPU video engine for agents. Shaders, 3D, motion type and camera optics, written by your agent and rendered on the GPU at hundreds of frames a second, with no browser in the loop. Your agent checks and reviews every frame before it exports.","publisher":{"@id":"https://ultrafast.mov/#org"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ultrafast","item":"https://ultrafast.mov/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://ultrafast.mov/docs/"},{"@type":"ListItem","position":3,"name":"Make a video with Antigravity CLI","item":"https://ultrafast.mov/guides/antigravity/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can Antigravity CLI make videos?","acceptedAnswer":{"@type":"Answer","text":"Yes, with a video engine to write for. With the ultrafast plugin, Antigravity CLI writes the video as a JSON document, checks it, looks at its frames, reviews every frame and exports an MP4 on your GPU. In the session on this page that took 246 s of work for a 12-second 1920×1080 MP4, and 159 s more for a fix and a vertical copy; each export took under a second."}},{"@type":"Question","name":"What do I need to install?","acceptedAnswer":{"@type":"Answer","text":"The uf engine (curl -fsSL https://ultrafast.mov/install.sh | sh or Homebrew) and the plugin: agy plugin install https://github.com/ultrafastmov/ultrafast, which adds the ultrafast skill and the uf mcp server. agy plugin list should show 1 skill, 1 MCP server. It renders on a Mac with Apple silicon or on Linux with a Vulkan GPU."}},{"@type":"Question","name":"Why does agy -p return nothing when it should call ultrafast?","acceptedAnswer":{"@type":"Answer","text":"Antigravity wants an approval before it runs an MCP tool, and agy -p can't ask, so it denies the call and ends with no output. Add \"mcp(ultrafast_ultrafast/*)\" to permissions.allow in ~/.gemini/antigravity-cli/settings.json (the plugin's server is named after the plugin and the server), or mcp(ultrafast/*) for a server added with agy mcp add ultrafast uf mcp."}},{"@type":"Question","name":"Does it still work with Gemini CLI?","acceptedAnswer":{"@type":"Answer","text":"Yes, where Gemini CLI still runs: with a paid Gemini API key, Vertex AI, or Code Assist Standard and Enterprise. Personal Google accounts moved from Gemini CLI to Antigravity CLI on 18 June 2026. In Gemini CLI, ultrafast installs with gemini extensions install https://github.com/ultrafastmov/ultrafast."}},{"@type":"Question","name":"Does Antigravity see the video it makes?","acceptedAnswer":{"@type":"Answer","text":"It sees frames. ultrafast_sheet returns several frames on one image and ultrafast_frame one at full size, and Antigravity looked at both. In this session the contact sheet showed two branch labels sitting across the branches they named, which the review doesn't check, and Antigravity moved them before exporting. ultrafast_review reads every frame for clipped, low-contrast, too-small or too-brief text."}},{"@type":"Question","name":"How many tokens does a video take?","acceptedAnswer":{"@type":"Answer","text":"In this session, 27,909 output tokens and 7,815 thinking tokens, as Antigravity reports them, for the first 12-second video, with Gemini 4 Hydrogen (High), Antigravity's default model, on a personal account's free quota. Most went into writing the document twice: 11,800 for the first draft and 9,668 for the fixed one. The second message, a fix plus a vertical copy, took 26,840 output and 7,356 thinking tokens. Measured on the same 10-second short, an ultrafast document was about 1,234 output tokens against 1,868 for Remotion."}}]},{"@type":"TechArticle","@id":"https://ultrafast.mov/guides/antigravity/#article","headline":"Make a video with Antigravity CLI: a real session","description":"Make videos with Antigravity CLI (agy) and ultrafast: install the plugin, the permission rule agy -p needs, the exact prompt, every tool call, what the review and the frames caught, a vertical copy, and the time and tokens it took.","url":"https://ultrafast.mov/guides/antigravity/","mainEntityOfPage":"https://ultrafast.mov/guides/antigravity/","image":"https://ultrafast.mov/og/guide-antigravity.jpg","datePublished":"2026-11-25T23:20:48+00:00","dateModified":"2026-11-25T23:20:48+00:00","inLanguage":"en","author":{"@id":"https://ultrafast.mov/#org"},"publisher":{"@id":"https://ultrafast.mov/#org"},"about":{"@id":"https://ultrafast.mov/#app"}}]}</script>
+</head>
+<body>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="mark" viewBox="0 0 256 256">
+      <rect x="8" y="8" width="240" height="240" rx="64" fill="#ff48b0"/>
+      <g transform="translate(128 128) skewX(-12) translate(-128 -128)" fill="none" stroke="#f4eee2" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke-width="26" d="M 114 78 L 114 136 C 114 166 132 182 156 182 C 180 182 198 166 198 136 L 198 78"/>
+        <path stroke-width="14" d="M 54 100 L 86 100"/>
+        <path stroke-width="14" d="M 42 132 L 86 132"/>
+        <path stroke-width="14" d="M 60 164 L 86 164"/>
+      </g>
+    </symbol>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="star" viewBox="-10 -10 20 20">
+      <path d="M0-9.5 2.6-3.1 9.5-3 4.1 1.4 5.9 8.1 0 4.4-5.9 8.1-4.1 1.4-9.5-3-2.6-3.1Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="nav">
+  <div class="wrap navrow">
+    <a class="brand" href="/" aria-label="ultrafast home"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+    <nav class="links" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/" aria-current="page">Docs</a><a href="/cloud/">Cloud</a>    </nav>
+    <div class="navcta">
+      <a class="textlink" href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+      <a class="btn" href="/docs/">Get started</a>
+      <details class="menu">
+        <summary aria-label="Menu"><i></i>Menu</summary>
+        <nav class="panel" aria-label="Main">
+<a href="/use-cases/">Use cases</a><a href="/examples/">Examples</a><a href="/integrations/">Integrations</a><a href="/compare/">Compare</a><a href="/docs/">Docs</a><a href="/cloud/">Cloud</a>          <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+          <a class="btn" href="/docs/">Get started</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="band stock-cotton phead" style="padding-bottom:56px">
+  <div class="sunburst" aria-hidden="true" style="--sx:92%;--sy:40%;--r2:520px"></div>
+  <div class="wrap">
+    <ol class="crumbs" aria-label="Breadcrumb">
+  <li><a href="/">ultrafast</a></li>
+<li><a href="/docs/">Docs</a></li>  <li aria-current="page">Make a video with Antigravity CLI</li>
+</ol>
+
+    <p class="eyebrow"><i style="--c:var(--blue)"></i>Docs</p>
+    <h1 class="pr h1" data-plates="blue black"><span class="ln">Make a video</span> <span class="ln">with Antigravity CLI.</span></h1>
+    <p class="lede">Antigravity CLI, Google's coding agent for the terminal, can make real videos when it has a video engine to write for. Here is one session from start to finish: a 12-second release video for a command-line tool, from the prompt to the MP4, with every tool call it made, what the review and the contact sheets caught, a vertical copy after, how long each part took, and the setting <code>agy -p</code> needs.</p>
+  </div>
+</section>
+<section class="band stock-thermal" style="padding-top:72px">
+  <div class="wrap docs">
+    <nav class="side" aria-label="Docs">
+      <h2>Start</h2>
+      <ul><li><a href="/docs/">Quickstart</a></li><li><a href="/docs/documents/">The document</a></li><li><a href="/templates/">Templates</a></li></ul>
+      <h2>Guides</h2>
+      <ul><li><a href="/guides/render-video-from-json/">Render video from JSON</a></li><li><a href="/guides/personalized-videos-from-csv/">Personalized videos from a CSV</a></li><li><a href="/guides/n8n-video-automation/">Videos from n8n</a></li><li><a href="/guides/claude-code/">Make a video with Claude Code</a></li><li><a href="/guides/codex/">Make a video with Codex</a></li><li><a href="/guides/antigravity/" aria-current="page">Make a video with Antigravity CLI</a></li><li><a href="/guides/lottie-to-mp4/">Lottie to MP4, WebM or ProRes</a></li><li><a href="/guides/animated-captions/">Animated captions from Whisper or SRT</a></li><li><a href="/guides/motion-graphics-with-code/">Motion graphics with code</a></li><li><a href="/guides/animated-chart-video/">Animated chart videos from a CSV</a></li><li><a href="/guides/animate-svg-logo/">Animate an SVG logo</a></li><li><a href="/guides/github-repo-video/">A film of a GitHub repo</a></li></ul>
+      <h2>Learn</h2>
+      <ul><li><a href="/learn/gpu-video-rendering/">Video rendering without a browser</a></li></ul>
+      <h2>Reference</h2>
+      <ul><li><a href="/docs/ops/">Ops</a></li><li><a href="/docs/cli/">CLI</a></li><li><a href="/docs/mcp/">MCP server</a></li><li><a href="/docs/api/">HTTP API</a></li></ul>
+      <h2>For agents</h2>
+      <ul><li><a href="/llms.txt">llms.txt</a></li><li><a href="/guides/antigravity/index.md">This page as Markdown</a></li></ul>
+    </nav>
+    <article class="prose">
+<figure class="clip"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/agy-gullwing.webp" width="1280" height="720" aria-label="A 12-second 16:9 video in monospace type on a dark navy background: gullwing, 2.0 is out, beside a git branch diagram whose two stale branches are pruned, then three slides, watch mode, plugins and a Windows build, each with a terminal typing its commands, ending on gullwing 2.0 is out"><source data-src="/media/guides/agy-gullwing.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/agy-gullwing.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/agy-gullwing.mp4" type="video/mp4"></video>
+  <figcaption>Made by Antigravity CLI with ultrafast from the two prompts on this page, and encoded again for the web from the documents it wrote.</figcaption></figure>
+
+<nav class="toc" aria-label="On this page"><b>On this page</b><ol>
+  <li><a href="#install">Install</a></li><li><a href="#permission">Running it with agy -p</a></li><li><a href="#prompt">The prompt</a></li><li><a href="#session">What Antigravity did</a></li>
+  <li><a href="#edit">Changing it by asking</a></li><li><a href="#numbers">Time and tokens</a></li>
+  <li><a href="#trouble">If it doesn't work</a></li><li><a href="#gemini">Gemini CLI</a></li><li><a href="#others">Remotion, HyperFrames and other agents</a></li><li><a href="#faq">Questions</a></li>
+</ol></nav>
+
+<h2 id="install">Install</h2>
+<p>Two parts: <code>uf</code>, the engine that renders on your GPU, and the ultrafast plugin, which gives Antigravity the ultrafast skill (how to write and check a video document) and the MCP server, <code>uf mcp</code>, with the tools it calls.</p>
+<div class="code"><div class="cbar"><span>shell</span><button class="copy" type="button">copy</button></div><pre><code class="hl">curl<span class="w"> </span>-fsSL<span class="w"> </span>https://ultrafast.mov/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w">        </span><span class="c1"># or: brew install ultrafastmov/tap/ultrafast</span>
+agy<span class="w"> </span>plugin<span class="w"> </span>install<span class="w"> </span>https://github.com/ultrafastmov/ultrafast</code></pre></div><p>It runs on a Mac with Apple silicon or on Linux with a Vulkan GPU. To confirm Antigravity has both parts:</p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">$ agy plugin list
+Installed plugins:
+- ultrafast (enabled, 0.2.2)
+    Source:     antigravity
+    Components: 1 skill, 1 MCP server</code></pre></div><p><code>agy mcp list</code> shows only servers you added yourself, so it says <code>No MCP servers configured.</code> even when the plugin's server is there. To add the server without the plugin, <code>agy mcp add ultrafast uf mcp</code> works too; the skill then comes from <code>npx skills add ultrafastmov/ultrafast</code>.</p>
+
+<h2 id="permission">Running it with agy -p</h2>
+<p>Antigravity wants an approval before it runs an MCP tool, and in an interactive session it asks you. <code>agy -p</code>, the one-shot mode for scripts, can't ask anyone, so it turns the call down. A run with ultrafast's tools and no permission set came back with an empty answer and this on stderr:</p>
+<div class="code"><div class="cbar"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="hl">jetski: no output produced — a tool required the &quot;mcp&quot; permission that headless mode cannot
+prompt for, so it was auto-denied. Add an allow-rule under permissions.allow in settings.json
+(e.g. mcp(&lt;target&gt;)). Alternatively, re-run with --dangerously-skip-permissions to auto-approve
+all tools.</code></pre></div><p>The rule that lets the plugin's tools run, in <code>~/.gemini/antigravity-cli/settings.json</code>:</p>
+<div class="code"><div class="cbar"><span>~/.gemini/antigravity-cli/settings.json</span><button class="copy" type="button">copy</button></div><pre><code class="hl"><span class="p">{</span><span class="w"> </span><span class="nt">&quot;permissions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;allow&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mcp(ultrafast_ultrafast/*)&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span></code></pre></div><p>Antigravity names a plugin's server after the plugin and the server, so ultrafast's is <code>ultrafast_ultrafast</code>; <code>mcp(ultrafast/*)</code> is the rule for a server added with <code>agy mcp add ultrafast</code>. The session on this page ran with <code>--dangerously-skip-permissions</code> instead, which approves every tool, shell commands included.</p>
+
+<h2 id="prompt">The prompt</h2>
+<p>One message, sent as written to <code>agy -p</code> in an empty git folder. It's the same prompt as <a href="/guides/codex/">the Codex session</a>, so the two can be compared:</p>
+<div class="code"><div class="cbar"><span>prompt</span><button class="copy" type="button">copy</button></div><pre><code class="hl">Make a 12-second 16:9 video (1920x1080) announcing version 2.0 of gullwing, a small
+command-line tool for tidying old git branches. Show the name, the line &quot;2.0 is out&quot;,
+and its three new features: watch mode, plugins, and a Windows build. Dark, crisp and
+quick, in a monospace face. Check it, look at the frames, fix anything the review finds,
+and export an MP4.</code></pre></div><p>gullwing is made up for this test. The last sentence names the loop the skill teaches: check the document, look at frames, review every frame, then export.</p>
+
+<h2 id="session">What Antigravity did</h2>
+<p>Every step below is from the session's log, in order, with what came back. Antigravity called ultrafast's tools 12 times, read 24 files and ran 3 shell commands.</p>
+<ol>
+  <li><b>Read the skill</b> from the plugin's <code>SKILL.md</code>, then its two references on the document format and recipes. Antigravity doesn't put every MCP tool in front of the model: it keeps each tool's description as a file, and the model reads the ones it needs. It read eleven of ultrafast's 20, from <code>ultrafast_ops</code> to <code>ultrafast_export</code>, then called the tools through one of its own, <code>call_mcp_tool</code>.</li>
+  <li><b>Asked <code>ultrafast_ops</code></b> for the whole op vocabulary, read two example documents from the skill, then asked again for the six ops it planned to use: <code>text</code>, <code>path</code>, <code>stack</code>, <code>code</code>, <code>transition</code> and <code>shape</code>.</li>
+  <li><b>Wrote <code>gullwing.json</code></b> in one go, 11,800 output tokens in one 53-second model turn: the name beside a git branch diagram whose two stale branches turn grey and fade, three feature slides with a terminal typing its commands, and a closing card, all in <code>ultrafast:mono</code>, the monospace face that ships with <code>uf</code>. Its notes say it picked the bundled face over downloading one so the render would work offline.</li>
+  <li><b><code>ultrafast_check</code></b>: no issues. Then a 12-frame <code>ultrafast_sheet</code> and <code>ultrafast_review</code> at the same time. The review read all 360 frames in 6.7 s and found three things:
+<div class="code"><div class="cbar"><span>ultrafast_review: the first draft</span><button class="copy" type="button">copy</button></div><pre><code class="hl">small text  &quot;feat/old-auth\nfix/stale-ci&quot; is set at 22 px; below about 24 px it is hard to read on a phone
+too brief   &quot;A small CLI tool for tidying old git bra…&quot; is readable for 2.2 s; 9 word(s) need about 2.2 s
+too brief   &quot;Native x64 &amp; ARM64 binaries.\nSame speed …&quot; is readable for 1.9 s; 11 word(s) need about 2.7 s</code></pre></div></li>
+  <li><b>Looked at the sheet</b> and found one more the review hadn't: both branch labels were one block of text sitting across the tips of the branches. Its notes: "Visual inspection of the frame layout also reveals an overlap between branch labels and path vectors, requiring coordinate shifts to maintain clean separation."</li>
+  <li><b>Rewrote the document</b> (9,668 output tokens): each label its own line at 24 px beside its own branch, the tagline cut to "Tidy old git branches from the CLI.", the Windows line to "Native x64 &amp; ARM64. PowerShell and CMD ready.", and wider terminals. The check came back empty, and the review read 360 frames and 25 texts in 7.9 s with no findings. It looked at a second sheet.</li>
+  <li><b><code>ultrafast_estimate</code></b> before exporting: <code>gpu 0.17 s on NVIDIA GeForce RTX 5090</code>. Then two frames at full size, at 1 s and 9.5 s, and <b><code>ultrafast_export</code></b>: <code>exported 360 frames (1920x1080 @ 30 fps, mp4 h264, high) in 0.88 s (407 fps)</code>. It looked at the two frames, listed the files and gave the paths to the MP4 and the document.</li>
+</ol>
+<p>Antigravity never called <code>ultrafast_edit</code>: it wrote the whole file again for the fixes. Either works: the document is a plain file, and every tool reads it again on the next call.</p>
+<figure class="clip"><img src="/img/guides/agy-sheet-1.webp" width="1400" height="601" loading="lazy" alt="Contact sheet of twelve frames of the first draft from 0.3 to 11.7 seconds: at 1 second the two branch labels feat/old-auth and fix/stale-ci sit on top of each other across the ends of the two pink branches.">
+  <figcaption>The first contact sheet Antigravity looked at. At 1.00 s the two branch labels sit across the branch tips. <code>uf review</code> compares text with text, not text with drawn paths, so the sheet is where this showed.</figcaption></figure>
+
+<h2 id="edit">Changing it by asking</h2>
+<p>The first export passed the review, but two things were off that a viewer would notice. The three feature slides sat in the top part of the frame and left the bottom empty, and in the watch-mode terminal "auth" and "nav" came out a different colour from the rest of their branch names. A second message, in the same session (<code>agy -p --conversation</code> with the first run's id):</p>
+<div class="code"><div class="cbar"><span>prompt</span><button class="copy" type="button">copy</button></div><pre><code class="hl">Two things. The feature slides sit in the top half and leave the bottom of the frame empty;
+centre them vertically. In the watch-mode terminal, &quot;auth&quot; and &quot;nav&quot; come out a different
+colour from the rest of each branch name; keep a branch name one colour. Then make a 1080x1920
+vertical copy for Shorts and Reels next to it, with the same words. Check, review and export both.</code></pre></div><p>Antigravity measured the two slides first with <code>ultrafast_inspect</code>, which returns the box of everything visible at a given moment, then wrote both documents in one 58-second model turn: the fixed <code>gullwing.json</code> and a new <code>gullwing-vertical.json</code>. It moved the feature slides down so the text and the terminal both centre on the middle of the frame, and nudged the opening and closing cards to match. The colour came from syntax highlighting: the terminal was set as <code>bash</code>, which reads <code>-auth</code> and <code>-nav</code> as command flags, so Antigravity set it to plain <code>text</code>.</p>
+<p>The vertical copy has the same words and timings, with each slide's text stacked above its diagram or terminal. Antigravity reviewed it with <code>safe: "social"</code>, which checks that no text runs into the bottom fifth or the right 12 % of the frame, where Shorts and Reels put their captions and buttons. Both checks and both reviews came back empty (360 frames and 25 texts each, 8.5 s and 7.2 s), it looked at a contact sheet of each and a full-size frame of the watch-mode slide, and the exports took 0.77 s for the wide video and 0.72 s for the vertical one. Again it wrote whole files rather than calling <code>ultrafast_edit</code>.</p>
+<figure class="clip tall"><video class="lazy" muted loop playsinline preload="none" poster="/media/guides/agy-gullwing-vertical.webp" width="720" height="1280" aria-label="The 1080 by 1920 vertical copy of the gullwing video: the same lines in the same order, with each slide&#39;s text above its branch diagram or terminal"><source data-src="/media/guides/agy-gullwing-vertical.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'><source data-src="/media/guides/agy-gullwing-vertical.hevc.mp4" type='video/mp4; codecs="hvc1.2.4.L120.B0"'><source data-src="/media/guides/agy-gullwing-vertical.mp4" type="video/mp4"></video>
+  <figcaption>The vertical copy, from the second message.</figcaption></figure>
+
+<h2 id="numbers">Time and tokens</h2>
+<p>Wall time runs from starting <code>agy -p</code> to its exit, so it includes start-up, every model turn and every tool call.</p>
+<div class="tablewrap"><table class="tbl">
+  <thead><tr><th scope="col"></th><th scope="col">First video</th><th scope="col">Fix and vertical copy</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">Wall time</th><td>246 s of work (850 s on the clock, see below)</td><td>159.3 s</td></tr>
+    <tr><th scope="row">ultrafast tool calls</th><td>12</td><td>11</td></tr>
+    <tr><th scope="row">Files read, shell commands</th><td>24, 3</td><td>3, 1</td></tr>
+    <tr><th scope="row">Output tokens</th><td>27,909, and 7,815 thinking</td><td>26,840, and 7,356 thinking</td></tr>
+    <tr><th scope="row">Final review</th><td>360 frames, 0 issues, 7.9 s</td><td>360 frames each, 0 issues, 8.5 s and 7.2 s</td></tr>
+    <tr><th scope="row">Export</th><td>0.88 s</td><td>0.77 s wide, 0.72 s vertical</td></tr>
+  </tbody>
+</table></div>
+<p>Antigravity CLI 1.5.17 with its default model, Gemini 4 Hydrogen (High), on a personal Google account's free quota, and ultrafast 0.2.2 on one RTX 5090 workstation, where every export took under a second with a game open on the same GPU through both turns (86 % and 96 % busy as each turn began). The first run's clock read 850 s: one model request hung for ten minutes while the test machine's network was down, until Antigravity's stream timeout retried it. The rest of that run took 246 s. Most of the time is the model thinking and writing: the second turn spent 58 s in the one model turn that wrote both documents. The engine's share was small: a review of all 360 frames took 6.7 to 8.5 s, an export 0.72 to 0.88 s.</p>
+
+<h2 id="trouble">If it doesn't work</h2>
+<ul>
+  <li><b><code>agy -p</code> answers with nothing</b>, and stderr says a tool required the "mcp" permission: add the allow rule (<a href="#permission">above</a>), or run Antigravity interactively and approve the calls.</li>
+  <li><b>A file the agent made isn't in your project.</b> Antigravity starts a plugin's MCP server in the plugin's own folder, so a relative path such as <code>./video.json</code> lands in <code>~/.gemini/config/plugins/ultrafast/</code>, while the agent reports it as written. In a test run the agent said <code>wrote ./t.json</code> and linked a file in the project that wasn't there. Ask for full paths, or add the server with <code>agy mcp add ultrafast uf mcp</code>, which starts it in the folder you run <code>agy</code> from. The session on this page used full paths throughout.</li>
+  <li><b>The plugin installs the skill but no tools.</b> <code>agy plugin list</code> should say <code>1 skill, 1 MCP server</code>. Antigravity reads a plugin's servers from <code>mcp_config.json</code>; plugins without one install only their skills. ultrafast's has one since 26 November 2026, so install again with <code>agy plugin install https://github.com/ultrafastmov/ultrafast</code>.</li>
+  <li><b>Which GPU will it use?</b> <code>uf info</code> names the GPU it will render on. ultrafast needs one: Apple silicon on a Mac, or a Vulkan GPU on Linux.</li>
+</ul>
+
+<h2 id="gemini">Gemini CLI</h2>
+<p>Gemini CLI stopped serving personal Google accounts (Code Assist for individuals, Google AI Pro and Ultra) on 18 June 2026; signing in with one now says the client "is no longer supported" and points to Antigravity. Gemini CLI still works with a paid Gemini API key, Vertex AI, or Code Assist Standard and Enterprise, and ultrafast installs there as an extension: <code>gemini extensions install https://github.com/ultrafastmov/ultrafast</code>. Setup for both is on <a href="/integrations/">Integrations</a>.</p>
+
+<h2 id="others">Remotion, HyperFrames and other agents</h2>
+<p>An agent can also make video with Remotion (React rendered in headless Chrome) or HyperFrames (HTML and GSAP in headless Chrome). On one RTX 5090, the same three 10-second videos exported in 0.66–0.78 s with ultrafast; Remotion took 3.1–8.6 times as long at its fastest settings, and HyperFrames 4.6–5.7 times (<a href="/benchmarks/">benchmark</a>). For the same 10-second short, the ultrafast document took about 1,234 output tokens against 1,868 for Remotion. Head-to-head pages: <a href="/compare/remotion/">ultrafast vs Remotion</a>, <a href="/compare/hyperframes/">ultrafast vs HyperFrames</a>.</p>
+<p>The same skill and MCP server work in Claude Code (<a href="/guides/claude-code/">a recorded Claude Code session</a>), Codex (<a href="/guides/codex/">a recorded Codex session</a>), Cursor and any MCP client: setup for each is on <a href="/integrations/">Integrations</a>, and the tools are listed in <a href="/docs/mcp/">MCP server</a>.</p>
+
+<h2 id="faq">Questions</h2>
+<div class="faq">
+  <details open>
+    <summary>Can Antigravity CLI make videos?</summary>
+    <div class="ans"><p>Yes, with a video engine to write for. With the ultrafast plugin, Antigravity CLI writes the video as a JSON document, checks it, looks at its frames, reviews every frame and exports an MP4 on your GPU. In the session on this page that took 246 s of work for a 12-second 1920×1080 MP4, and 159 s more for a fix and a vertical copy; each export took under a second.</p></div>
+  </details>
+  <details>
+    <summary>What do I need to install?</summary>
+    <div class="ans"><p>The <code>uf</code> engine (<code>curl -fsSL https://ultrafast.mov/install.sh | sh</code> or Homebrew) and the plugin: <code>agy plugin install https://github.com/ultrafastmov/ultrafast</code>, which adds the ultrafast skill and the <code>uf mcp</code> server. <code>agy plugin list</code> should show <code>1 skill, 1 MCP server</code>. It renders on a Mac with Apple silicon or on Linux with a Vulkan GPU.</p></div>
+  </details>
+  <details>
+    <summary>Why does agy -p return nothing when it should call ultrafast?</summary>
+    <div class="ans"><p>Antigravity wants an approval before it runs an MCP tool, and <code>agy -p</code> can't ask, so it denies the call and ends with no output. Add <code>"mcp(ultrafast_ultrafast/*)"</code> to <code>permissions.allow</code> in <code>~/.gemini/antigravity-cli/settings.json</code> (the plugin's server is named after the plugin and the server), or <code>mcp(ultrafast/*)</code> for a server added with <code>agy mcp add ultrafast uf mcp</code>.</p></div>
+  </details>
+  <details>
+    <summary>Does it still work with Gemini CLI?</summary>
+    <div class="ans"><p>Yes, where Gemini CLI still runs: with a paid Gemini API key, Vertex AI, or Code Assist Standard and Enterprise. Personal Google accounts moved from Gemini CLI to Antigravity CLI on 18 June 2026. In Gemini CLI, ultrafast installs with <code>gemini extensions install https://github.com/ultrafastmov/ultrafast</code>.</p></div>
+  </details>
+  <details>
+    <summary>Does Antigravity see the video it makes?</summary>
+    <div class="ans"><p>It sees frames. <code>ultrafast_sheet</code> returns several frames on one image and <code>ultrafast_frame</code> one at full size, and Antigravity looked at both. In this session the contact sheet showed two branch labels sitting across the branches they named, which the review doesn't check, and Antigravity moved them before exporting. <code>ultrafast_review</code> reads every frame for clipped, low-contrast, too-small or too-brief text.</p></div>
+  </details>
+  <details>
+    <summary>How many tokens does a video take?</summary>
+    <div class="ans"><p>In this session, 27,909 output tokens and 7,815 thinking tokens, as Antigravity reports them, for the first 12-second video, with Gemini 4 Hydrogen (High), Antigravity's default model, on a personal account's free quota. Most went into writing the document twice: 11,800 for the first draft and 9,668 for the fixed one. The second message, a fix plus a vertical copy, took 26,840 output and 7,356 thinking tokens. Measured on the same 10-second short, an ultrafast document was about 1,234 output tokens against 1,868 for Remotion.</p></div>
+  </details>
+</div>
+
+    </article>
+  </div>
+</section>
+</main>
+
+<footer id="foot">
+  <div class="wrap footgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mk" aria-hidden="true"><use href="#mark"/></svg><span>ultrafast</span></a>
+      <p>The open-source GPU video engine for agents.</p>
+      <span class="bars" aria-hidden="true"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--blue)"></i><i style="--c:var(--chalk)"></i><i style="--c:var(--violet)"></i><i style="--c:var(--orange)"></i><i style="--c:var(--green)"></i></span>
+    </div>
+    <nav class="fcol" aria-label="Product">
+      <h3>Product</h3>
+      <a href="/use-cases/">Use cases</a>
+      <a href="/examples/">Examples</a>
+      <a href="/integrations/">Integrations</a>
+      <a href="/learn/can-claude-make-videos/">Can Claude make videos?</a>
+<a href="/blog/">Blog</a>      <a href="/cloud/">Cloud waitlist</a>
+    </nav>
+    <nav class="fcol" aria-label="Developers">
+      <h3>Developers</h3>
+      <a href="/docs/">Quickstart</a>
+      <a href="/docs/documents/">The document</a>
+      <a href="/docs/ops/">Op reference</a>
+      <a href="/docs/mcp/">MCP server</a>
+      <a href="/docs/api/">HTTP API</a>
+<a href="/changelog/">Changelog</a>      <a href="/llms.txt">llms.txt</a>
+    </nav>
+    <nav class="fcol" aria-label="Compare">
+      <h3>Compare</h3>
+      <a href="/compare/">All comparisons</a>
+      <a href="/compare/remotion/">vs Remotion</a>
+      <a href="/compare/hyperframes/">vs HyperFrames</a>
+      <a href="/alternatives/remotion/">Remotion alternatives</a>
+      <a href="/alternatives/hyperframes/">HyperFrames alternatives</a>
+      <a href="/alternatives/json-to-video-api/">vs JSON-to-video APIs</a>
+      <a href="/benchmarks/">Benchmarks</a>
+    </nav>
+    <div class="fcol">
+      <h3>Install</h3>
+      <span><code>curl -fsSL https://ultrafast.mov/install.sh | sh</code></span>
+      <span><code>brew install ultrafastmov/tap/ultrafast</code></span>
+      <span><code>cargo install ultrafast</code></span>
+      <span><code>docker pull ghcr.io/ultrafastmov/ultrafast</code></span>
+      <a href="https://github.com/ultrafastmov/ultrafast/releases">Releases</a>
+      <a href="https://github.com/ultrafastmov/ultrafast">GitHub</a>
+    </div>
+  </div>
+  <div class="wrap colophon">
+    <span>© 2026 ultrafast · Apache-2.0 or MIT</span>
+    <span>Footage on this site: <a href="/examples/#credits">NASA, public domain</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/js/site.js?v=c898dbcc"></script>
+</body>
+</html>
